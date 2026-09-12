@@ -40,7 +40,7 @@ Stack All 0.2.0 需要房主及所有玩家安装同版本。卸载前必须按�
 
 ## 许可证
 
-仓库中的原创源码、测试、构建脚本及文档采用 [MIT License](LICENSE)，版权声明为 `Copyright (c) 2026 martin-lzh`。各 Mod 目录均附有独立许可证，便于单独使用和分发：
+仓库中的原创源码、测试、构建脚本及文档采用 [MIT License](LICENSE)，版权声明为 `Copyright (c) 2026 Zhaohan Liu`。各 Mod 目录均附有独立许可证，便于单独使用和分发：
 
 | Mod | 许可证 |
 | --- | --- |
@@ -58,7 +58,7 @@ MIT 允许使用、修改和再分发（包括商业使用），但复制软件�
 
 可使用以下格式，将版本或提交号替换为实际使用的值：
 
-> martin-lzh. Old Market Simulator Mods — Mod 名称，版本或提交号. https://github.com/martin-lzh/old-market-simulator-mods
+> Zhaohan Liu. Old Market Simulator Mods — Mod 名称，版本或提交号. https://github.com/martin-lzh/old-market-simulator-mods
 
 在其他项目的 README 或致谢中也可写：
 
