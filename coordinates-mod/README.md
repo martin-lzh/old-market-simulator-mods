@@ -25,3 +25,9 @@
 0.1.1：用户确认 0.1.0 被界面遮挡。改为金钱栏下方的原生 TMP 文本，使用独立 Canvas 排序避免被其他 HUD 面板遮住，保留 F8 开关；只在实际收到切换时记日志。已编译通过，实际位置和显示仍待更新后验证。
 
 0.1.2：移除 0.1 秒刷新间隔，优先读取本地 ExampleCharacterSetup 的 customCharacterController 世界位置，每帧在 LateUpdate 更新；显示保留一位小数，数值未变时不重写文字。忽略旧版保存的隐藏状态，每次启动默认打开。已编译通过，移动显示仍需游戏内确认。
+
+## 许可证与引用
+
+本目录的原创源码、测试及文档采用 [MIT License](LICENSE)。复制软件或其重要部分时须保留版权声明和许可声明；游戏及第三方组件不受此授权覆盖。
+
+如果本 Mod 帮助了你的项目、文章或视频，请注明 Mod 名称并链接到 [Old Market Simulator Mods](https://github.com/martin-lzh/old-market-simulator-mods)。引用格式见[仓库首页](../README.md#引用项目)。这是一项引用请求，不是 MIT 的附加许可条件。

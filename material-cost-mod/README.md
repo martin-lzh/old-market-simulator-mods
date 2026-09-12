@@ -88,3 +88,9 @@
 0.4.1 另外用 API 替身执行生产用 `RuntimeRules.cs` 的 27 项检查，覆盖按需取数、重复回调零额外报价、跨日/季节/地图缓存失效、空日报不扫描、生产来源复用、仅给销售商品报价及冲突配方回退。这些是代码层验证，不代替 Unity 中的 UI 与性能实测。
 
 实现参考：[BepInEx 插件文档](https://docs.bepinex.dev/articles/dev_guide/plugin_tutorial/2_plugin_start.html)、[Harmony Postfix 文档](https://harmony.pardeike.net/v2/articles/patching-postfix.html)。
+
+## 许可证与引用
+
+本目录的原创源码、测试及文档采用 [MIT License](LICENSE)。复制软件或其重要部分时须保留版权声明和许可声明；游戏及第三方组件不受此授权覆盖。
+
+如果本 Mod 帮助了你的项目、文章或视频，请注明 Mod 名称并链接到 [Old Market Simulator Mods](https://github.com/martin-lzh/old-market-simulator-mods)。引用格式见[仓库首页](../README.md#引用项目)。这是一项引用请求，不是 MIT 的附加许可条件。

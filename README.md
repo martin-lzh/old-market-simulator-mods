@@ -37,3 +37,33 @@ Stack All 0.2.0 需要房主及所有玩家安装同版本。卸载前必须按�
 ## 仓库范围
 
 仅发布原创 Mod 源码、测试替身及构建说明。不包含反编译游戏源码、游戏资源、存档、个人配置、本机分析数据或第三方二进制文件。游戏及第三方组件的权利归各自权利人所有。
+
+## 许可证
+
+仓库中的原创源码、测试、构建脚本及文档采用 [MIT License](LICENSE)，版权声明为 `Copyright (c) 2026 martin-lzh`。各 Mod 目录均附有独立许可证，便于单独使用和分发：
+
+| Mod | 许可证 |
+| --- | --- |
+| Material Cost | [MIT](material-cost-mod/LICENSE) |
+| Coordinates | [MIT](coordinates-mod/LICENSE) |
+| Checkout All | [MIT](checkout-all-mod/LICENSE) |
+| Stack All | [MIT](stack-all-mod/LICENSE) |
+| Price Probability | [MIT](price-probability-mod/LICENSE) |
+
+MIT 允许使用、修改和再分发（包括商业使用），但复制软件或其重要部分时必须保留版权声明和许可声明。构建包附带对应 Mod 的 LICENSE。原始游戏、加载器和第三方依赖不属于本项目的 MIT 授权范围，继续适用各自许可证。
+
+## 引用项目
+
+如果你参考了本项目的实现、将代码用于其他 Mod，或在文章、视频和研究中介绍相关功能，请注明来源并链接本仓库。建议同时注明具体 Mod、版本或提交号，方便读者追溯。
+
+可使用以下格式，将版本或提交号替换为实际使用的值：
+
+> martin-lzh. Old Market Simulator Mods — Mod 名称，版本或提交号. https://github.com/martin-lzh/old-market-simulator-mods
+
+在其他项目的 README 或致谢中也可写：
+
+```markdown
+本项目参考了 [martin-lzh/old-market-simulator-mods](https://github.com/martin-lzh/old-market-simulator-mods) 的相关实现。
+```
+
+此处的项目引用是一项请求，不是 MIT 的附加许可条件。仅添加项目链接不能替代 MIT 要求保留的版权声明与许可声明；仅参考思路而未复制代码，也不会因此被本项目额外要求承担引用义务。

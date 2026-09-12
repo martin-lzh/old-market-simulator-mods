@@ -18,7 +18,8 @@ try {
     # Explicit allowlist: do not package reference assemblies or local game data.
     foreach ($taskEntry in @(
         @{ Source = $taskDll; Entry = 'BepInEx/plugins/OldMarket.PriceProbability/OldMarket.PriceProbability.dll' },
-        @{ Source = (Join-Path $PSScriptRoot 'README.md'); Entry = 'README.md' }
+        @{ Source = (Join-Path $PSScriptRoot 'README.md'); Entry = 'README.md' },
+        @{ Source = (Join-Path $PSScriptRoot 'LICENSE'); Entry = 'LICENSE' }
     )) {
         $taskTarget = $taskArchive.CreateEntry($taskEntry.Entry).Open()
         $taskSource = [IO.File]::OpenRead($taskEntry.Source)
