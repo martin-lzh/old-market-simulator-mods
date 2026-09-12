@@ -1,0 +1,66 @@
+[
+  {
+    "tag": "material-cost-v0.5.1",
+    "title": "Material Cost 0.5.1",
+    "source": "01685796bc9953122c33c240e92547bedc0edb79",
+    "prerelease": true,
+    "assets": [
+      {
+        "name": "OldMarket.MaterialCost-0.5.1-BepInEx.zip",
+        "sha256": "76fe454cfe1c448491fff62dcb15801814c87656545fc01d8c23061d01257bc7"
+      },
+      {
+        "name": "OldMarket.MaterialCost-0.5.1-MelonLoader.zip",
+        "sha256": "98bc4131c68fd3a5705f5769bbae9df87e66ed6d60023cb04028d6073d40c39d"
+      }
+    ]
+  },
+  {
+    "tag": "coordinates-v0.1.3",
+    "title": "Coordinates 0.1.3",
+    "source": "01685796bc9953122c33c240e92547bedc0edb79",
+    "prerelease": true,
+    "assets": [
+      {
+        "name": "OldMarket.Coordinates-0.1.3.zip",
+        "sha256": "293dac15ed69b0601173a89918edddfcee34ad4bd0affcf2ebbecd9741b75484"
+      }
+    ]
+  },
+  {
+    "tag": "checkout-all-v0.1.4",
+    "title": "Checkout All 0.1.4",
+    "source": "01685796bc9953122c33c240e92547bedc0edb79",
+    "prerelease": true,
+    "assets": [
+      {
+        "name": "OldMarket.CheckoutAll-0.1.4.zip",
+        "sha256": "4e1db143c08467d53fa10801da86aeb5d21eba378ab45b912845f677cb11525f"
+      }
+    ]
+  },
+  {
+    "tag": "stack-all-v0.2.1",
+    "title": "Stack All 0.2.1",
+    "source": "01685796bc9953122c33c240e92547bedc0edb79",
+    "prerelease": true,
+    "assets": [
+      {
+        "name": "OldMarket.StackAll-0.2.1.zip",
+        "sha256": "c9a9f18c884efe03316a79672a9142348d3f788a11fa3a773194e53af7d8fe23"
+      }
+    ]
+  },
+  {
+    "tag": "price-probability-v0.1.1",
+    "title": "Price Probability 0.1.1",
+    "source": "01685796bc9953122c33c240e92547bedc0edb79",
+    "prerelease": true,
+    "assets": [
+      {
+        "name": "OldMarket.PriceProbability-0.1.1.zip",
+        "sha256": "38469d8cedf6730a8361fb3c956bf346a6024ae57abc71d6fc81a92e756d3f09"
+      }
+    ]
+  }
+]
