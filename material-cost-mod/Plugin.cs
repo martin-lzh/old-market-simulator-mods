@@ -11,7 +11,7 @@ namespace OldMarket.MaterialCost
 #if MELONLOADER || STANDALONE
     public sealed class Plugin : MonoBehaviour
 #else
-    [BepInPlugin(Id, "Old Market Material Cost", "0.5.0")]
+    [BepInPlugin(Id, "Old Market Material Cost", "0.5.1")]
     public sealed class Plugin : BaseUnityPlugin
 #endif
     {

@@ -1,3 +1,4 @@
+using OldMarket.Localization;
 using System;
 using System.Globalization;
 using TMPro;
@@ -25,6 +26,7 @@ namespace OldMarket.MaterialCost
         private Vector2 originalOffset;
         private TextMeshProUGUI text;
         private bool subscribed;
+        private string language;
 
         internal void Bind(UIManager manager, ProductSO product)
         {
@@ -70,6 +72,14 @@ namespace OldMarket.MaterialCost
             Refresh();
         }
 
+        private void LateUpdate()
+        {
+            if (text == null || !text.gameObject.activeInHierarchy || ui == null) return;
+            if (language != GameText.Stamp) Refresh();
+            if (text == null || ui == null) return;
+            text.font = ui.textDockOrderTotal.font;
+            text.fontSharedMaterial = ui.textDockOrderTotal.fontSharedMaterial;
+        }
         private void OnEnable() => Refresh();
         private void LocaleChanged(UnityEngine.Localization.Locale locale) => Refresh();
         private void Refresh()
@@ -77,13 +87,9 @@ namespace OldMarket.MaterialCost
             if (text == null || selected == null || game == null || !isActiveAndEnabled) return;
             try
             {
-                string locale = LocalizationSettings.SelectedLocale?.Identifier.Code ?? "en";
-                bool zh = locale.StartsWith("zh", StringComparison.OrdinalIgnoreCase);
-                bool traditional = locale.IndexOf("Hant", StringComparison.OrdinalIgnoreCase) >= 0;
-                var table = LocalizationSettings.StringDatabase.GetTable("Translations");
-                string Native(string key, string fallback) => table?.GetEntry(key)?.GetLocalizedString() ?? fallback;
-                string suggested = Native("recommended", "RECOMMENDED");
-                string profit = Native("profit", "PROFIT");
+                string suggested = GameText.Native("recommended");
+                string profit = GameText.Native("profit");
+                language = GameText.Stamp;
                 string Money(decimal value) => value.ToString("0.##", CultureInfo.CurrentCulture);
                 int wholesale = game.GetWholesalePrice(selected);
                 int selling = game.GetRecommendedPrice(selected);
@@ -96,17 +102,10 @@ namespace OldMarket.MaterialCost
                 string rate = estimate.ProfitPercent.HasValue ? Money(estimate.ProfitPercent.Value) + "%" : "—";
                 text.font = ui.textDockOrderTotal.font;
                 text.color = ui.textDockOrderTotal.color;
-                string content;
-                if (zh)
-                {
-                    const string pack = "箱";
-                    content = $"{selected.GetLocalizedName()}（{selected.amount} / {pack}）　{suggested}：{Money(selling)} C / 件\n" +
-                        $"{(traditional ? "進貨" : "进货")}：{Money(estimate.Costs.BatchCost)} C / {pack}　{profit}：{Money(estimate.BatchProfit)} C / {pack}　成本{profit}率：{rate}\n" +
-                        (traditional ? "按當日建議價全部售出估算；利潤 ÷ 進貨成本，不含其他費用。" : "按当日建议价全部售出估算；利润 ÷ 进货成本，不含其他费用。");
-                }
-                else content = $"{selected.GetLocalizedName()} ({selected.amount}/pack) | {suggested}: {Money(selling)} C/unit\n" +
-                    $"Purchase: {Money(estimate.Costs.BatchCost)} C/pack | {profit}: {Money(estimate.BatchProfit)} C/pack | Return on cost: {rate}\n" +
-                    "Assumes all units sell at today's recommended price; profit / purchase cost, before other expenses.";
+                string pack = GameText.Get("pack"), unit = GameText.Get("unit");
+                string content = $"{selected.GetLocalizedName()} ({selected.amount}/{pack}) | {suggested}: {Money(selling)} C/{unit}\n" +
+                    $"{GameText.Get("purchase_cost")}: {Money(estimate.Costs.BatchCost)} C/{pack} | {profit}: {Money(estimate.BatchProfit)} C/{pack}\n" +
+                    $"{GameText.Get("return_cost")}: {rate}\n" + GameText.Get("purchase_basis");
                 if (text.text != content) text.text = content;
             }
             catch (Exception error) { Plugin.Trace("Order price display failed: " + error); Restore(); }

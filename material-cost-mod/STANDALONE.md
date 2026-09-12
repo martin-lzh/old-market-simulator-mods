@@ -1,6 +1,6 @@
 # Old Market Material Cost 独立加载版
 
-启动入口 0.1.0，成本 UI 0.5.0。适用于本机 Old Market Simulator 2.1.6 / Unity 2022.3.62f3 Windows x64 Mono。
+启动入口 0.1.0，成本 UI 0.5.1。适用于本机 Old Market Simulator 2.1.6 / Unity 2022.3.62f3 Windows x64 Mono。
 
 本项目编写 managed 启动入口，借助未修改的 Unity Doorstop 4.5.0 进入游戏原生 Mono。独立包不运行 BepInEx 或 MelonLoader；底层 Doorstop 也是 BepInEx 使用的引导工具，因此不是完全独立重写的原生加载器，不能凭此保证修复覆盖层卡顿。
 

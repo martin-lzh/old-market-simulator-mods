@@ -1,6 +1,13 @@
 # Old Market Stack All
 
-版本：0.2.0。BepInEx 5 插件，ID：`local.oldmarket.stackall`。
+## 0.2.1 本地化
+
+界面跟随游戏配置的 13 种语言，区分简体与繁体中文。原生名词和动作从游戏 `Translations` 表读取；Mod 补充说明内嵌在 DLL 中，无需额外语言包或共用 DLL。语言表异步就绪和切换语言后刷新文字，字体跟随原生界面。
+
+构建需保留仓库根目录的 `localization/`，构建前自动执行语言与占位符检查。详情见[本地化说明](../localization/README.md)。配置键名、插件 ID、日志及开发文档不随游戏语言改名。此版本只更新显示与本地化，不自动安装；游戏内布局、字形及实时切换仍需验证。
+
+
+版本：0.2.1。BepInEx 5 插件，ID：`local.oldmarket.stackall`。
 
 ## 数量显示
 
@@ -61,7 +68,7 @@
 ./stack-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
-只读引用本机游戏程序集和已安装的 BepInEx 核心，运行测试后生成 `outputs/OldMarket.StackAll-0.2.0.zip`。包内仅有原创 DLL 和本说明，不自动安装。退出游戏并备份原插件后，将 DLL 放到 `BepInEx/plugins/OldMarket.StackAll/OldMarket.StackAll.dll`。
+只读引用本机游戏程序集和已安装的 BepInEx 核心，运行测试后生成 `outputs/OldMarket.StackAll-0.2.1.zip`。包内仅有原创 DLL 和本说明，不自动安装。退出游戏并备份原插件后，将 DLL 放到 `BepInEx/plugins/OldMarket.StackAll/OldMarket.StackAll.dll`。
 
 已核查游戏程序集 SHA-256：`FA6CE6B89AEBDF50DD46FF9C857650DB0E9CC618B1CE939F58501E0DC59C6296`。游戏版本或补丁接口不匹配时拒绝启用；若保存含额外容器记录，应先取得兼容插件再读取，不能依靠禁用插件回退读取。
 

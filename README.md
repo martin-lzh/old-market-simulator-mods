@@ -4,11 +4,17 @@ Old Market Simulator 的五个原创 Mod，包含源码、测试和构建脚本�
 
 | Mod | 版本 | 功能 |
 | --- | --- | --- |
-| [Material Cost](material-cost-mod/README.md) | 0.5.0 | 日报原料成本、配方与订购页成本和利润 |
-| [Coordinates](coordinates-mod/README.md) | 0.1.2 | 角色世界坐标，F8 切换 |
-| [Checkout All](checkout-all-mod/README.md) | 0.1.3 | 长按 E 或 F9 连续结账 |
-| [Stack All](stack-all-mod/README.md) | 0.2.0 | 每格最多 64 个容器、数量显示和长按丢弃/投掷 |
-| [Price Probability](price-probability-mod/README.md) | 0.1.0 | 定价接受率预览、固定售价或概率及自动调价 |
+| [Material Cost](material-cost-mod/README.md) | 0.5.1 | 日报原料成本、配方与订购页成本和利润 |
+| [Coordinates](coordinates-mod/README.md) | 0.1.3 | 角色世界坐标，F8 切换 |
+| [Checkout All](checkout-all-mod/README.md) | 0.1.4 | 长按 E 或 F9 连续结账 |
+| [Stack All](stack-all-mod/README.md) | 0.2.1 | 每格最多 64 个容器、数量显示和长按丢弃/投掷 |
+| [Price Probability](price-probability-mod/README.md) | 0.1.1 | 定价接受率预览、固定售价或概率及自动调价 |
+
+## 语言支持
+
+界面跟随游戏的 13 种语言：简体中文、繁体中文、英语、法语、德语、意大利语、西班牙语、葡萄牙语、日语、韩语、俄语、土耳其语和乌克兰语。游戏已有词条直接读取当前 `Translations` 表，例如“建议”“放下”“扔出”；Mod 独有说明采用补充译文。坐标轴和数量保持通用标记。
+
+语言资源在构建时嵌入各插件，无需安装额外语言包。请保留仓库内 `localization/` 后构建；其源码及译文同样使用 MIT 许可证。未知语言的 Mod 补充文案回退到英语，不改变游戏语言、配置键名或系统区域设置。译文尚未经各语言母语者审校，Unity 内的字形、换行和切换效果也仍待实机验证。详见[本地化与验证](localization/README.md)。
 
 ## 构建
 
@@ -30,7 +36,7 @@ Old Market Simulator 的五个原创 Mod，包含源码、测试和构建脚本�
 
 退出游戏后备份旧插件，再按各 Mod 说明安装生成的 DLL。源码仓库不附带游戏、加载器或依赖 DLL。测试依据为 Old Market Simulator 2.1.6；部分插件检查游戏程序集哈希，其他版本可能拒绝启用。
 
-Stack All 0.2.0 需要房主及所有玩家安装同版本。卸载前必须按其说明清理额外容器记录并在游戏内保存。其他插件的多人限制见各自说明。
+Stack All 0.2.1 需要房主及所有玩家安装同版本。卸载前必须按其说明清理额外容器记录并在游戏内保存。其他插件的多人限制见各自说明。
 
 自动化测试和编译成功不等于游戏内界面、存档流程或多人联机验收完成，具体待验证项目见各 Mod 文档。
 

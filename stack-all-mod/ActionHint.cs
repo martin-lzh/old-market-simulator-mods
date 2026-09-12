@@ -1,3 +1,4 @@
+using OldMarket.Localization;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace OldMarket.StackAll
         private RectTransform parent;
         private readonly Vector3[] corners = new Vector3[4];
         private float nextBindings;
+        private TextMeshProUGUI native;
+        private string language;
 
         internal void Show(PlayerInventory inventory)
         {
@@ -25,7 +28,7 @@ namespace OldMarket.StackAll
             {
                 Destroy();
                 parent = root;
-                var native = panel.GetComponentsInChildren<TextMeshProUGUI>().FirstOrDefault(t => t.GetComponentInParent<ControlSlot>() == null);
+                native = panel.GetComponentsInChildren<TextMeshProUGUI>().FirstOrDefault(t => t.GetComponentInParent<ControlSlot>() == null);
                 if (native == null) return;
                 var host = new GameObject("StackAllHoldHints", typeof(RectTransform), typeof(TextMeshProUGUI), typeof(LayoutElement));
                 host.transform.SetParent(root, false);
@@ -43,10 +46,24 @@ namespace OldMarket.StackAll
                 nextBindings = 0;
             }
             text.gameObject.SetActive(true);
-            if (Time.unscaledTime >= nextBindings)
+            // Native CheckHint can replace its TMP child without replacing the parent panel.
+            if (native == null)
+                native = panel.GetComponentsInChildren<TextMeshProUGUI>().FirstOrDefault(t => t.GetComponentInParent<ControlSlot>() == null);
+            if (native != null)
+            {
+                text.font = native.font;
+                text.fontSharedMaterial = native.fontSharedMaterial;
+                text.fontSize = native.fontSize;
+                text.fontStyle = native.fontStyle;
+                text.fontWeight = native.fontWeight;
+                text.color = native.color;
+            }
+            if (Time.unscaledTime >= nextBindings || language != GameText.Stamp)
             {
                 var actions = InputManager.Instance.inputMaster.Player;
-                string message = $"长按 {Binding(actions.Drop)}：连续丢下\n长按 {Binding(actions.Throw)}：连续投掷";
+                string message = GameText.Get("hold_repeat", Binding(actions.Drop), GameText.Native("drop")) + "\n" +
+                    GameText.Get("hold_repeat", Binding(actions.Throw), GameText.Native("throw"));
+                language = GameText.Stamp;
                 if (text.text != message) text.text = message;
                 nextBindings = Time.unscaledTime + .25f;
             }
@@ -75,7 +92,7 @@ namespace OldMarket.StackAll
         internal void Destroy()
         {
             if (text != null) { text.gameObject.SetActive(false); Object.Destroy(text.gameObject); }
-            text = null; parent = null;
+            text = null; parent = null; native = null; language = null;
         }
     }
 }

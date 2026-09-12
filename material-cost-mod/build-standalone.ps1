@@ -1,5 +1,7 @@
 param([string]$GameDir = 'F:\SteamLibrary\steamapps\common\Old Market Simulator')
 $ErrorActionPreference = 'Stop'
+dotnet run --project (Join-Path $PSScriptRoot '../localization/tests/Localization.Tests.csproj') -c Release
+if ($LASTEXITCODE) { throw 'Localization checks failed.' }
 $taskRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $taskBep = Join-Path $taskRoot 'work/bepinex'
 $taskCore = Join-Path $taskBep 'BepInEx/core'
@@ -47,7 +49,7 @@ dotnet run --project (Join-Path $PSScriptRoot 'tests/BootstrapChecks.csproj') -c
 if ($LASTEXITCODE) { throw 'Bootstrap checks failed.' }
 $taskOutput = Join-Path $taskRoot 'outputs'
 New-Item -ItemType Directory $taskOutput -Force | Out-Null
-$taskZip = Join-Path $taskOutput 'OldMarket.MaterialCost-0.5.0-Standalone-0.1.0.zip'
+$taskZip = Join-Path $taskOutput 'OldMarket.MaterialCost-0.5.1-Standalone-0.1.0.zip'
 Compress-Archive -Path (Join-Path $taskStage '*') -DestinationPath $taskZip -Force
 Write-Output "Package: $taskZip"
 Write-Output "Stage: $taskStage"

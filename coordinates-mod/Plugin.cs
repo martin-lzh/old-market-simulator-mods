@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace OldMarket.Coordinates
 {
-    [BepInPlugin("local.oldmarket.coordinates", "Old Market Coordinates", "0.1.2")]
+    [BepInPlugin("local.oldmarket.coordinates", "Old Market Coordinates", "0.1.3")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {
@@ -27,7 +27,7 @@ namespace OldMarket.Coordinates
             toggleKey = Config.Bind("Display", "ToggleKey", Key.F8, "Unity Input System key; None disables the hotkey.");
             gameObject.hideFlags |= HideFlags.HideAndDontSave;
             DontDestroyOnLoad(gameObject);
-            Logger.LogInfo("Coordinates 0.1.2 loaded; visible on launch, position sampled every LateUpdate.");
+            Logger.LogInfo("Coordinates 0.1.3 loaded; visible on launch, position sampled every LateUpdate.");
         }
 
         private void Update()
@@ -74,7 +74,7 @@ namespace OldMarket.Coordinates
                     ? setup.customCharacterController.transform : player.transform;
             }
             Vector3 position = positionSource.position;
-            string value = string.Format(CultureInfo.InvariantCulture, "X {0:F1}  Y {1:F1}  Z {2:F1}", position.x, position.y, position.z);
+            string value = string.Format(CultureInfo.CurrentCulture, "X {0:F1}  Y {1:F1}  Z {2:F1}", position.x, position.y, position.z);
             if (label.text != value)
             {
                 label.text = value;

@@ -1,3 +1,4 @@
+using OldMarket.Localization;
 using System;
 using TMPro;
 using UnityEngine;
@@ -11,7 +12,13 @@ namespace OldMarket.PriceProbability
         private PricePanel panel;
         private ProductSO product;
         private RectTransform root;
-        private TextMeshProUGUI summary, modeText;
+        private TextMeshProUGUI summary, modeText, explanation, endpoints;
+        private string language;
+        private string displayedInput;
+        private double displayedTarget = double.NaN;
+        private int displayedMode = -1;
+        private bool displayedHost;
+        private TextMeshProUGUI[] labels;
         private Slider slider;
         private Button modeButton;
         private int mode;
@@ -33,6 +40,7 @@ namespace OldMarket.PriceProbability
             target = rule != null && rule.Probability ? rule.Target : Probability();
             changing = false;
             wholesale = -1;
+            displayedInput = null;
             Refresh();
         }
 
@@ -53,6 +61,8 @@ namespace OldMarket.PriceProbability
             text.font = panel.textRecommendedPrice.font;
             text.fontSharedMaterial = panel.textRecommendedPrice.fontSharedMaterial;
             text.fontSize = size;
+            text.enableAutoSizing = true; text.fontSizeMin = 11; text.fontSizeMax = size;
+            text.textWrappingMode = TextWrappingModes.Normal;
             text.color = Color.white;
             text.alignment = TextAlignmentOptions.Center;
             text.raycastTarget = false;
@@ -62,14 +72,14 @@ namespace OldMarket.PriceProbability
 
         private void Build()
         {
-            root = Rect("PriceProbability", transform, 0, 0, 360, 235);
+            root = Rect("PriceProbability", transform, 0, 0, 360, 275);
             root.anchorMin = root.anchorMax = new Vector2(1, .5f);
             root.pivot = new Vector2(0, .5f);
             root.anchoredPosition = new Vector2(12, 0);
             root.gameObject.AddComponent<LayoutElement>().ignoreLayout = true;
             root.gameObject.AddComponent<Image>().color = new Color(.09f, .12f, .15f, .98f);
             summary = Label("Probability", Rect("Probability", root, 0, 12, 340, 60), "", 19);
-            Label("Endpoints", Rect("Endpoints", root, 0, 75, 320, 24), "100%                                  0%", 17);
+            endpoints = Label("Endpoints", Rect("Endpoints", root, 0, 75, 320, 24), "100%                                  0%", 17);
             var track = Rect("ProbabilitySlider", root, 0, 106, 310, 28);
             var background = track.gameObject.AddComponent<Image>();
             background.color = new Color(.27f, .32f, .37f);
@@ -93,8 +103,8 @@ namespace OldMarket.PriceProbability
                 if (mode == 2) { target = Probability(); SetPriceFromTarget(); }
                 Refresh();
             });
-            Label("Explanation", Rect("Explanation", root, 0, 187, 340, 46),
-                "价格接受率估算，不等于每日售罄率\n房主锚定优先于其他玩家改价\n使用原页面确认按钮保存", 14);
+            explanation = Label("Explanation", Rect("Explanation", root, 0, 187, 340, 76), "", 14);
+            labels = new[] { summary, modeText, explanation, endpoints };
             listener = _ =>
             {
                 if (changing) return;
@@ -134,33 +144,57 @@ namespace OldMarket.PriceProbability
             var game = GameManager.Instance;
             int currentWholesale = game.GetWholesalePrice(product);
             int currentRecommended = game.GetRecommendedPrice(product);
-            if (wholesale != currentWholesale || recommended != currentRecommended || multiplier != game.maxProfitMultiplier)
+            bool pricesChanged = wholesale != currentWholesale || recommended != currentRecommended || multiplier != game.maxProfitMultiplier;
+            if (pricesChanged)
             {
                 wholesale = currentWholesale; recommended = currentRecommended; multiplier = game.maxProfitMultiplier;
                 if (mode == 2) SetPriceFromTarget();
                 // Retain the game's localized labels.
-                ReplaceAmount(panel.textRecommendedPrice, recommended);
-                ReplaceAmount(panel.textAdjustedPrice, wholesale);
+                ReplaceAmount(panel.textRecommendedPrice, "recommended", recommended);
+                ReplaceAmount(panel.textAdjustedPrice, "wholesale", wholesale);
             }
+            string stamp = GameText.Stamp;
+            bool host = Plugin.Host;
+            if (!pricesChanged && displayedInput == panel.inputFieldPrice.text && displayedTarget == target &&
+                displayedMode == mode && displayedHost == host && language == stamp) return;
+            displayedInput = panel.inputFieldPrice.text; displayedTarget = target;
+            displayedMode = mode; displayedHost = host;
             bool valid = int.TryParse(panel.inputFieldPrice.text, out int price) && price > 0;
             double actual = valid ? Probability() : 0;
             changing = true;
             slider.SetValueWithoutNotify((float)((mode == 2 ? target : actual) * 100));
             changing = false;
-            summary.text = valid ? $"价格接受率 ≈ {actual * 100:0.00}%\n目标 {target * 100:0.##}% · 建议 {recommended} C" : "请输入有效的正整数售价";
+            string content = valid ? GameText.Get("price_summary", (actual * 100).ToString("0.00"),
+                (target * 100).ToString("0.##"), recommended) : GameText.Get("invalid_price");
+            if (summary.text != content) summary.text = content;
             modeButton.interactable = Plugin.Host;
-            modeText.text = !Plugin.Host ? "自动锚定由房主设置" : mode == 0 ? "锚定：关闭（点击切换）" :
-                mode == 1 ? "锚定：固定售价（点击切换）" : "锚定：固定概率（点击切换）";
+            content = GameText.Get(!Plugin.Host ? "host_only" : mode == 0 ? "anchor_off" : mode == 1 ? "anchor_price" : "anchor_probability");
+            if (modeText.text != content) modeText.text = content;
+            content = GameText.Get("price_explanation");
+            if (explanation.text != content) explanation.text = content;
+            if (language != GameText.Stamp)
+            {
+                language = GameText.Stamp;
+                panel.textTitle.text = product.GetLocalizedName();
+                ReplaceAmount(panel.textRecommendedPrice, "recommended", recommended);
+                ReplaceAmount(panel.textAdjustedPrice, "wholesale", wholesale);
+            }
         }
-        private static void ReplaceAmount(TextMeshProUGUI text, int value)
+        private static void ReplaceAmount(TextMeshProUGUI text, string key, int value)
         {
-            int colon = text.text.LastIndexOf(':');
-            if (colon >= 0) text.text = text.text.Substring(0, colon + 1) + " " + value + " C";
+            string content = GameText.Native(key) + ": " + value + " C";
+            if (text.text != content) text.text = content;
         }
+
         private void Update() { if (panel != null && product != null) Refresh(); }
         private void LateUpdate()
         {
-            if (root == null) return;
+            if (root == null || panel == null) return;
+            foreach (var label in labels)
+            {
+                label.font = panel.textRecommendedPrice.font;
+                label.fontSharedMaterial = panel.textRecommendedPrice.fontSharedMaterial;
+            }
             // Clamp the extension into the actual canvas, including small windows / UI scaling.
             var canvas = GetComponentInParent<Canvas>()?.rootCanvas;
             if (canvas == null) return;

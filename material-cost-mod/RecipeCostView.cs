@@ -1,3 +1,4 @@
+using OldMarket.Localization;
 using System;
 using System.Globalization;
 using TMPro;
@@ -28,7 +29,7 @@ namespace OldMarket.MaterialCost
             var game = GameManager.Instance;
             var quote = RuntimeRules.QuoteRecipe(game, recipe);
             var profit = RuntimeRules.QuoteRecipeProfit(game, recipe);
-            string locale = LocalizationSettings.SelectedLocale?.Identifier.Code ?? "en";
+            string locale = GameText.Stamp;
             // Native selection + click often invoke this twice. Avoid text allocation,
             // localization lookup and TMP/layout dirties when the displayed data is unchanged.
             if (footer != null && boundUi == ui && boundRecipe == recipe && boundGame == game &&
@@ -37,15 +38,11 @@ namespace OldMarket.MaterialCost
                 costs.font == ui.textRecipeOutput.font && costs.color == ui.textRecipeOutput.color)
                 return;
             if (footer == null) Create(ui);
-            bool chinese = locale.StartsWith("zh", StringComparison.OrdinalIgnoreCase);
-            bool traditional = locale.IndexOf("Hant", StringComparison.OrdinalIgnoreCase) >= 0;
             if (labelsLocale != locale)
             {
-                var table = LocalizationSettings.StringDatabase.GetTable("Translations");
-                string Native(string key, string fallback) => table?.GetEntry(key)?.GetLocalizedString() ?? fallback;
-                amount = Native("amount", "AMOUNT"); averageCost = Native("avg_cost", "AVG COST");
-                recommended = Native("recommended", "RECOMMENDED"); profitLabel = Native("profit", "PROFIT");
-                labelsLocale = table == null ? null : locale;
+                amount = GameText.Native("amount"); averageCost = GameText.Native("avg_cost");
+                recommended = GameText.Native("recommended"); profitLabel = GameText.Native("profit");
+                labelsLocale = locale;
             }
             costs.font = note.font = ui.textRecipeOutput.font;
             costs.color = note.color = ui.textRecipeOutput.color;
@@ -55,20 +52,12 @@ namespace OldMarket.MaterialCost
             string batchProfit = profit == null ? "—" : Money(profit.BatchProfit);
             string unitProfit = profit == null ? "—" : Money(profit.UnitProfit);
             string rate = profit?.ProfitPercent is decimal percent ? Money(percent) + "%" : "—";
-            var costText = chinese
-                ? $"{amount}：{quote.OutputUnits}　本批材料成本：{batch} C\n" +
-                  $"{averageCost}：{unit} C　{recommended}：{price} C / 件\n" +
-                  $"{profitLabel}：{batchProfit} C / 批（{unitProfit} C / 件）\n成本{profitLabel}率：{rate}"
-                : $"{amount}: {quote.OutputUnits} | Batch material cost: {batch} C\n" +
-                  $"{averageCost}: {unit} C | {recommended}: {price} C / unit\n" +
-                  $"{profitLabel}: {batchProfit} C / batch ({unitProfit} C / unit)\nReturn on material cost: {rate}";
-            var noteText = chinese
-                ? (profit == null
-                    ? (traditional ? "非銷售商品，無遊戲建議售價。" : "非销售商品，无游戏建议售价。")
-                    : (traditional ? $"按當日「{recommended}」全部售出估算。" : $"按当日「{recommended}」全部售出估算。")) +
-                  (traditional ? $"\n僅計材料；成本{profitLabel}率 = {profitLabel} ÷ 材料成本。" : $"\n仅计材料；成本{profitLabel}率 = {profitLabel} ÷ 材料成本。")
-                : (profit == null ? "No native selling price for this output." : $"Assumes all output sells at today's {recommended} price.") +
-                  "\nMaterials only; return = profit / material cost.";
+            string unitLabel = GameText.Get("unit"), batchLabel = GameText.Get("batch");
+            var costText = $"{amount}: {quote.OutputUnits} | {GameText.Get("batch_cost")}: {batch} C\n" +
+                $"{averageCost}: {unit} C | {recommended}: {price} C / {unitLabel}\n" +
+                $"{profitLabel}: {batchProfit} C / {batchLabel} ({unitProfit} C / {unitLabel})\n" +
+                $"{GameText.Get("return_cost")}: {rate}";
+            var noteText = GameText.Get(profit == null ? "no_price" : "sale_assumption") + "\n" + GameText.Get("material_basis");
             if (costs.text != costText) costs.text = costText;
             if (note.text != noteText) note.text = noteText;
             displayedQuote = quote; displayedProfit = profit; displayedLocale = locale;
@@ -87,6 +76,14 @@ namespace OldMarket.MaterialCost
             }
         }
 
+        private void LateUpdate()
+        {
+            if (footer == null || !footer.activeInHierarchy || boundUi == null) return;
+            if (displayedLocale != GameText.Stamp) Refresh();
+            if (footer == null || boundUi == null) return;
+            costs.font = note.font = boundUi.textRecipeOutput.font;
+            costs.fontSharedMaterial = note.fontSharedMaterial = boundUi.textRecipeOutput.fontSharedMaterial;
+        }
         private void LocaleChanged(UnityEngine.Localization.Locale locale) => Refresh();
         private void Refresh()
         {

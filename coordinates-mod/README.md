@@ -1,5 +1,12 @@
 # Old Market Coordinates
 
+## 0.1.3 本地化
+
+坐标 X/Y/Z 为通用轴标识，无需翻译。数字使用与游戏一致的当前系统数字格式；字体及材质继续跟随原生金钱栏。
+
+构建需保留仓库根目录的 `localization/`，构建前自动执行语言与占位符检查。详情见[本地化说明](../localization/README.md)。配置键名、插件 ID、日志及开发文档不随游戏语言改名。此版本只更新显示与本地化，不自动安装；游戏内布局、字形及实时切换仍需验证。
+
+
 进入地图后在金钱显示栏下方显示本地角色的世界坐标，每次启动默认开启，F8 仅切换本次运行的显示状态。X、Z 是水平位置，Y 是高度，保留一位小数，每帧 LateUpdate 读取角色实际移动对象的位置；不是地图格子编号，也未将轴向标成未经验证的东南西北。
 
 这是独立 DLL 插件，通过当前安装的 BepInEx 5 加载，在游戏画面内显示；不是另开的桌面窗口。无需成本插件、CraftSupport 或 Harmony 补丁。只读取本地玩家的位置，不调用传送、网络 RPC 或存档写入。菜单、断线或尚未生成角色时不显示上次的坐标。显示框不接收鼠标点击、不更改光标，也不扫描场景对象。
@@ -16,7 +23,7 @@
 
 ## 构建与验证
 
-运行 `./coordinates-mod/build.ps1`。使用本机游戏安装和 BepInEx 核心作为只读引用，输出 `outputs/OldMarket.Coordinates-0.1.2.zip`，仅包含原创 DLL 和本说明，不打包游戏组件，不自动安装。
+运行 `./coordinates-mod/build.ps1`。使用本机游戏安装和 BepInEx 核心作为只读引用，输出 `outputs/OldMarket.Coordinates-0.1.3.zip`，仅包含原创 DLL 和本说明，不打包游戏组件，不自动安装。
 
 本机依据：Old Market Simulator 的 `ExampleCharacterSetup.OnNetworkSpawn` 按 IsLocalPlayer 初始化本地角色，游戏 UI 通过 `NetworkManager.Singleton.LocalClient.PlayerObject` 访问自己的玩家对象。本插件使用同一路径，取 `transform.position` 世界坐标，在船上也不改用相对船体的位置。输入使用游戏现有 Unity Input System。
 

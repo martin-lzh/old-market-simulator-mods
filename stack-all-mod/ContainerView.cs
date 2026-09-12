@@ -56,6 +56,8 @@ namespace OldMarket.StackAll
             }
             Place(__instance.textAmount, true, view.FontSize);
             Place(view.Right, false, view.FontSize);
+            view.Right.font = __instance.textAmount.font;
+            view.Right.fontSharedMaterial = __instance.textAmount.fontSharedMaterial;
             __instance.textAmount.text = total.ToString();
             view.Right.text = count.ToString();
             __instance.textAmount.gameObject.SetActive(true);

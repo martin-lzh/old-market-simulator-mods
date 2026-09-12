@@ -1,3 +1,4 @@
+using OldMarket.Localization;
 using System;
 using System.Collections.Generic;
 using BepInEx;
@@ -8,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace OldMarket.CheckoutAll
 {
-    [BepInPlugin(Id, "Old Market Checkout All", "0.1.3")]
+    [BepInPlugin(Id, "Old Market Checkout All", "0.1.4")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {
@@ -115,9 +116,12 @@ namespace OldMarket.CheckoutAll
                 confirmation.Reset();
             }
             hintPlayer = player;
-            string shortcut = toggleKey.Value == Key.None ? "" : $" / {toggleKey.Value}：开关连续结账";
-            hintMessage = target == null ? null : checkout == null ? "长按 E：连续装袋并收款" + shortcut :
-                session.Toggled ? $"连续结账已开启 · {toggleKey.Value}：关闭" : "连续结账中… 松开 E 停止" + shortcut;
+            string shortcut = toggleKey.Value == Key.None ? "" :
+                $" / {toggleKey.Value}: {GameText.Native("turn_on")} / {GameText.Native("turn_off")}";
+            hintMessage = target == null ? null : checkout == null
+                ? GameText.Get("hold_repeat", "E", GameText.Native("put_to_bag") + " / " + GameText.Native("take_pouch")) + shortcut
+                : session.Toggled ? GameText.Get("checkout_toggle", toggleKey.Value)
+                : GameText.Get("checkout_hold") + shortcut;
             if (checkout == null || Time.unscaledTime < nextAction) return;
             bool pending = (pendingItem != null && pendingItem.IsSpawned) ||
                 (pendingPayment != null && pendingPayment.IsSpawned);

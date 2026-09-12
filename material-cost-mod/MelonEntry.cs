@@ -4,7 +4,7 @@ using MelonLoader;
 using MelonLoader.Utils;
 using UnityEngine;
 
-[assembly: MelonInfo(typeof(OldMarket.MaterialCost.MelonEntry), "Old Market Material Cost", "0.5.0", "Local Mod")]
+[assembly: MelonInfo(typeof(OldMarket.MaterialCost.MelonEntry), "Old Market Material Cost", "0.5.1", "Local Mod")]
 [assembly: MelonGame("Alcedo Games", "Old Market Simulator")]
 
 namespace OldMarket.MaterialCost

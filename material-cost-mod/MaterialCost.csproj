@@ -3,7 +3,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <LangVersion>latest</LangVersion>
     <AssemblyName>OldMarket.MaterialCost</AssemblyName>
-    <Version>0.5.0</Version>
+    <Version>0.5.1</Version>
     <Loader Condition="'$(Loader)' == ''">BepInEx</Loader>
     <DefineConstants Condition="'$(Loader)' == 'MelonLoader'">$(DefineConstants);MELONLOADER</DefineConstants>
     <DefineConstants Condition="'$(Loader)' == 'Standalone'">$(DefineConstants);STANDALONE</DefineConstants>
@@ -38,4 +38,5 @@
     <Error Condition="'$(Loader)' == 'BepInEx' And !Exists('$(BepInExDir)\BepInEx.dll')" Text="Run build.ps1 or supply BepInExDir (BepInEx 5 core)." />
     <Error Condition="'$(Loader)' == 'MelonLoader' And !Exists('$(MelonLoaderDir)\MelonLoader.dll')" Text="Run build.ps1 -Loader MelonLoader or supply MelonLoaderDir." />
   </Target>
+  <Import Project="../localization/Localization.props" />
 </Project>

@@ -1,3 +1,4 @@
+using OldMarket.Localization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -26,14 +27,15 @@ namespace OldMarket.MaterialCost
         private Toggle toggle;
         private Image track;
         private TextMeshProUGUI label, detail;
-        private bool chinese;
+        private UIManager boundUi;
+        private string language;
         private int fallbackCount;
         private bool materialsReady;
         private GameManager boundGame;
 
         public void Bind(UIManager ui, Sale[] sales)
         {
-            chinese = LocalizationSettings.SelectedLocale?.Identifier.Code.StartsWith("zh", StringComparison.OrdinalIgnoreCase) == true;
+            boundUi = ui;
             boundGame = GameManager.Instance;
             var groups = sales.GroupBy(x => x.ItemId).ToArray();
             // Original code schedules old rows for Destroy at frame end, then appends new ones.
@@ -51,7 +53,7 @@ namespace OldMarket.MaterialCost
             }
             if (footer == null) CreateControls(ui);
             label.font = detail.font = ui.textTotal.font;
-            label.text = chinese ? "仅计原料" : "Materials only";
+            label.text = GameText.Get("materials_only");
             toggle.SetIsOnWithoutNotify(Plugin.Instance.MaterialsOnly);
             Apply(toggle.isOn);
         }
@@ -134,6 +136,7 @@ namespace OldMarket.MaterialCost
             var text = new GameObject("Label", typeof(RectTransform), typeof(TextMeshProUGUI)).GetComponent<TextMeshProUGUI>();
             text.transform.SetParent(parent, false);
             text.font = source.font; text.fontSize = size; text.color = source.color;
+            text.enableAutoSizing = true; text.fontSizeMin = 12; text.fontSizeMax = size;
             text.alignment = TextAlignmentOptions.MidlineLeft; text.raycastTarget = false;
             text.textWrappingMode = TextWrappingModes.Normal;
             return text;
@@ -166,11 +169,22 @@ namespace OldMarket.MaterialCost
             if (footer == null) return;
             knob.anchoredPosition = new Vector2(materials ? 29 : 3, 0);
             track.color = materials ? new Color(.32f, .49f, .29f) : new Color(.38f, .35f, .29f);
-            detail.text = materials
-                ? (chinese ? "配方原料按当日价格估算；实际收支不变。" : "Recipe inputs at today's prices; cash flow unchanged.")
-                : (chinese ? "显示游戏原有成本与利润。" : "Showing original game costs and profits.");
-            if (materials && fallbackCount > 0)
-                detail.text += chinese ? $"\n{fallbackCount} 项无明确配方，保留原成本。" : $"\n{fallbackCount} rows without a unique rule retain original cost.";
+            RefreshText(materials);
+        }
+
+        private void RefreshText(bool materials)
+        {
+            label.text = GameText.Get("materials_only");
+            detail.text = GameText.Get(materials ? "report_estimate" : "report_original");
+            if (materials && fallbackCount > 0) detail.text += "\n" + GameText.Get("report_fallback", fallbackCount);
+            language = GameText.Stamp;
+        }
+        private void LateUpdate()
+        {
+            if (footer == null || !footer.activeInHierarchy || boundUi == null) return;
+            label.font = detail.font = boundUi.textTotal.font;
+            label.fontSharedMaterial = detail.fontSharedMaterial = boundUi.textTotal.fontSharedMaterial;
+            if (language != GameText.Stamp) RefreshText(toggle.isOn);
         }
 
         public void Restore()

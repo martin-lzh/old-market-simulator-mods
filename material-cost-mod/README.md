@@ -1,12 +1,19 @@
 # Old Market Material Cost
 
+## 0.5.1 本地化
+
+界面跟随游戏配置的 13 种语言，区分简体与繁体中文。原生名词和动作从游戏 `Translations` 表读取；Mod 补充说明内嵌在 DLL 中，无需额外语言包或共用 DLL。语言表异步就绪和切换语言后刷新文字，字体跟随原生界面。
+
+构建需保留仓库根目录的 `localization/`，构建前自动执行语言与占位符检查。详情见[本地化说明](../localization/README.md)。配置键名、插件 ID、日志及开发文档不随游戏语言改名。此版本只更新显示与本地化，不自动安装；游戏内布局、字形及实时切换仍需验证。
+
+
 ## 0.5.0 订购页价格详情
 
 东方小镇使用的码头订购页新增底部商品详情。鼠标指向商品或手柄/键盘选中商品（含加减按钮）时，显示当天单件「建议」售价、整箱进货成本、整箱预计利润和成本利润率。首次打开默认显示首项；调整订购数量后保留当前查看商品。此功能也适用于使用同一订购界面的其他地图。
 
 订购页使用游戏实际 `GetWholesalePrice` 和 `GetRecommendedPrice`，按商品实际每箱数量换算；不使用配方材料成本或字段默认加价率。成本利润率 =（建议价销售收入 − 进货成本）÷ 进货成本。零成本时利润率显示「—」。这是全部按当天建议价售出的估算，不包含其他费用，也不预测到货日或未来售价。日报「仅计原料」开关不影响订购页。
 
-实现只新增 `DockOrderTile.SetData` 的 UI Postfix 和选择事件；不改订购回调、金额、存档或网络操作。底部详情从商品滚动区留出 120 个 UI 单位，保留订购控制区；卸载组件时恢复滚动区。界面打开、商品选择、换日及语言变化时更新，没有新增逐帧扫描。当前 BepInEx 包为 `OldMarket.MaterialCost-0.5.0-BepInEx.zip`。
+实现只新增 `DockOrderTile.SetData` 的 UI Postfix 和选择事件；不改订购回调、金额、存档或网络操作。底部详情从商品滚动区留出 120 个 UI 单位，保留订购控制区；卸载组件时恢复滚动区。界面打开、商品选择、换日及语言变化时更新，没有新增逐帧扫描。当前 BepInEx 包为 `OldMarket.MaterialCost-0.5.1-BepInEx.zip`。
 
 0.5.0 已通过编译、40 项会计和 27 项缓存检查。尚未完成东方小镇实机布局、中文换行、手柄选择及换日显示验证，不能把代码检查视为 UI 验收。
 
@@ -38,13 +45,13 @@
 
 1. 退出游戏。若已有 BepInEx，先备份并停用其 `winhttp.dll` 入口，避免两种加载器同时注入。
 2. 按 [MelonLoader 官方说明](https://github.com/LavaGang/MelonLoader/tree/v0.7.3#how-to-manually-use-melonloader) 安装 0.7.3 Windows x64。安装包中的文件只能覆盖已知加载器文件；遇到原有同名文件先核查并备份。
-3. 解压 `OldMarket.MaterialCost-0.5.0-MelonLoader.zip`，插件路径为 `Mods/OldMarket.MaterialCost.dll`。
+3. 解压 `OldMarket.MaterialCost-0.5.1-MelonLoader.zip`，插件路径为 `Mods/OldMarket.MaterialCost.dll`。
 4. 插件设置为 `UserData/OldMarket.MaterialCost.cfg`，类别 `OldMarketMaterialCost`、键 `MaterialsOnly`。加载器日志在 `MelonLoader/Logs`。日报默认使用原版显示，可在界面切换；配方成本始终显示。
 
 ### BepInEx 安装
 
 1. 退出游戏。如果尚未安装 BepInEx，从[官方发布页](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.5)下载 `BepInEx_win_x64_5.4.23.5.zip`，按其说明解压至游戏 EXE 所在目录。已有 BepInEx 5 时不要重复覆盖配置。
-2. 将 `OldMarket.MaterialCost-0.5.0-BepInEx.zip` 解压至同一目录，最终文件为 `BepInEx/plugins/OldMarket.MaterialCost/OldMarket.MaterialCost.dll`。
+2. 将 `OldMarket.MaterialCost-0.5.1-BepInEx.zip` 解压至同一目录，最终文件为 `BepInEx/plugins/OldMarket.MaterialCost/OldMarket.MaterialCost.dll`。
 3. 启动游戏，完成一天，在销售表下方打开「仅计原料」。不需要新存档，旧库存销售记录也可重算。
 4. 退出游戏后删除该 Mod DLL 即可卸载。配置位于 `BepInEx/config/local.oldmarket.materialcost.cfg`。
 
@@ -77,7 +84,7 @@
 ./material-cost-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
-首次构建会从所选加载器的官方 GitHub 下载固定版本至项目 `work/`，校验固定 SHA-256。引用本机游戏程序集但不复制到交付包。成品分别为 `outputs/OldMarket.MaterialCost-0.5.0-BepInEx.zip` 与 `outputs/OldMarket.MaterialCost-0.5.0-MelonLoader.zip`，每个包仅含原创插件 DLL 和本说明。
+首次构建会从所选加载器的官方 GitHub 下载固定版本至项目 `work/`，校验固定 SHA-256。引用本机游戏程序集但不复制到交付包。成品分别为 `outputs/OldMarket.MaterialCost-0.5.1-BepInEx.zip` 与 `outputs/OldMarket.MaterialCost-0.5.1-MelonLoader.zip`，每个包仅含原创插件 DLL 和本说明。
 
 独立会计测试覆盖蜂蜜零成本、实际奶酪配方、箱/件换算、多箱产出、小数、季节价格输入、亏损、零分母、空日报和未知/冲突规则。资源核验属于本机分析项目，不包含在此源码仓库中；构建所需的自动化测试已随各 Mod 提供。
 

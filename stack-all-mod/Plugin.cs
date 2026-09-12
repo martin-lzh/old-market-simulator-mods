@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace OldMarket.StackAll
 {
-    [BepInPlugin(Id, "Old Market Stack All", "0.2.0")]
+    [BepInPlugin(Id, "Old Market Stack All", "0.2.1")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {
@@ -62,7 +62,7 @@ namespace OldMarket.StackAll
                 foreach (var type in new[] { typeof(Aquarium), typeof(OrigamiStand), typeof(BlockBeeHive) })
                     Patch(type, "Interact", transpiler: nameof(ConsumeCalls));
                 Patch(typeof(ItemCrate), "EnableDummyItems", prefix: nameof(CapPreview));
-                Logger.LogInfo("Stack All 0.2.0 ready: goods on left, physical containers on right; 64 containers per product slot. All peers need 0.2.0.");
+                Logger.LogInfo("Stack All 0.2.1 ready: goods on left, physical containers on right; 64 containers per product slot. All peers need 0.2.1.");
             }
             catch (Exception error)
             {
