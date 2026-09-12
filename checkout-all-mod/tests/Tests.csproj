@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework></PropertyGroup>
+  <ItemGroup><Compile Include="../HoldGate.cs" Link="HoldGate.cs" /><Compile Include="../ConfirmationWait.cs" Link="ConfirmationWait.cs" /><Compile Include="../CheckoutSession.cs" Link="CheckoutSession.cs" /></ItemGroup>
+</Project>

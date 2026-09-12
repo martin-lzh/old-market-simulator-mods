@@ -1,0 +1,17 @@
+**/bin/
+**/obj/
+/work/
+/outputs/
+*.dll
+*.exe
+*.zip
+*.pdb
+*.assets
+*.bundle
+*.resS
+*.resource
+*.save
+*.log
+.env*
+.vs/
+.idea/

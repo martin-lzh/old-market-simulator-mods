@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings></PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="ContractChecks.cs" />
+    <Compile Include="../StackRules.cs" Link="StackRules.cs" />
+    <Compile Include="../ContainerPlan.cs" Link="ContainerPlan.cs" />
+    <Compile Include="../RepeatGate.cs" Link="RepeatGate.cs" />
+    <Compile Include="../StackPlan.cs" Link="StackPlan.cs" />
+  </ItemGroup>
+</Project>

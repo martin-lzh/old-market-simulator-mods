@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>OldMarket.MaterialCost</AssemblyName>
+    <Version>0.5.0</Version>
+    <Loader Condition="'$(Loader)' == ''">BepInEx</Loader>
+    <DefineConstants Condition="'$(Loader)' == 'MelonLoader'">$(DefineConstants);MELONLOADER</DefineConstants>
+    <DefineConstants Condition="'$(Loader)' == 'Standalone'">$(DefineConstants);STANDALONE</DefineConstants>
+    <OutputPath>bin\$(Loader)\$(Configuration)\</OutputPath>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GameDir Condition="'$(GameDir)' == ''">F:\SteamLibrary\steamapps\common\Old Market Simulator</GameDir>
+    <ManagedDir>$(GameDir)\Old Market Simulator_Data\Managed</ManagedDir>
+    <BepInExDir Condition="'$(BepInExDir)' == ''">$(MSBuildThisFileDirectory)..\work\bepinex\BepInEx\core</BepInExDir>
+    <MelonLoaderDir Condition="'$(MelonLoaderDir)' == ''">$(MSBuildThisFileDirectory)..\work\melonloader-0.7.3\MelonLoader\net35</MelonLoaderDir>
+    <LoaderDir Condition="'$(Loader)' == 'BepInEx'">$(BepInExDir)</LoaderDir>
+    <LoaderDir Condition="'$(Loader)' == 'MelonLoader'">$(MelonLoaderDir)</LoaderDir>
+    <LoaderDir Condition="'$(Loader)' == 'Standalone'">$(BepInExDir)</LoaderDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="*.cs" Exclude="Bootstrap.cs" />
+    <Reference Include="BepInEx" Condition="'$(Loader)' == 'BepInEx'"><HintPath>$(BepInExDir)\BepInEx.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="MelonLoader" Condition="'$(Loader)' == 'MelonLoader'"><HintPath>$(MelonLoaderDir)\MelonLoader.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>$(LoaderDir)\0Harmony.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Assembly-CSharp"><HintPath>$(ManagedDir)\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine"><HintPath>$(ManagedDir)\UnityEngine.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(ManagedDir)\UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.UI"><HintPath>$(ManagedDir)\UnityEngine.UI.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.TextRenderingModule"><HintPath>$(ManagedDir)\UnityEngine.TextRenderingModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.UIModule"><HintPath>$(ManagedDir)\UnityEngine.UIModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.TextMeshPro"><HintPath>$(ManagedDir)\Unity.TextMeshPro.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.Netcode.Runtime"><HintPath>$(ManagedDir)\Unity.Netcode.Runtime.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.Localization"><HintPath>$(ManagedDir)\Unity.Localization.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+  <Target Name="ValidateReferences" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(ManagedDir)\Assembly-CSharp.dll')" Text="Set GameDir to the read-only game installation." />
+    <Error Condition="'$(Loader)' != 'BepInEx' And '$(Loader)' != 'MelonLoader' And '$(Loader)' != 'Standalone'" Text="Loader must be BepInEx, MelonLoader or Standalone." />
+    <Error Condition="'$(Loader)' == 'BepInEx' And !Exists('$(BepInExDir)\BepInEx.dll')" Text="Run build.ps1 or supply BepInExDir (BepInEx 5 core)." />
+    <Error Condition="'$(Loader)' == 'MelonLoader' And !Exists('$(MelonLoaderDir)\MelonLoader.dll')" Text="Run build.ps1 -Loader MelonLoader or supply MelonLoaderDir." />
+  </Target>
+</Project>
