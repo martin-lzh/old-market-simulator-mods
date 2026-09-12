@@ -4,7 +4,7 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace OldMarket.Localization
+namespace OldMarket.CheckoutAll.Localization
 {
     internal static class GameText
     {
@@ -13,9 +13,7 @@ namespace OldMarket.Localization
         private static readonly Dictionary<string, string> NativeCache = new Dictionary<string, string>();
         private static readonly Dictionary<string, string> Fallback = new Dictionary<string, string>
         {
-            ["amount"] = "Amount", ["avg_cost"] = "Average cost", ["profit"] = "Profit",
-            ["recommended"] = "Recommended", ["wholesale"] = "Wholesale",
-            ["drop"] = "Drop", ["throw"] = "Throw", ["put_to_bag"] = "Put in bag",
+            ["put_to_bag"] = "Put in bag",
             ["take_pouch"] = "Take pouch", ["turn_on"] = "On", ["turn_off"] = "Off"
         };
         internal static string Code

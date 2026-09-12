@@ -5,7 +5,7 @@ param(
     [string]$MelonLoaderDir
 )
 $ErrorActionPreference = 'Stop'
-dotnet run --project (Join-Path $PSScriptRoot '../localization/tests/Localization.Tests.csproj') -c Release
+dotnet run --project (Join-Path $PSScriptRoot 'localization/tests/Localization.Tests.csproj') -c Release
 if ($LASTEXITCODE) { throw 'Localization checks failed.' }
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $workDir = Join-Path $projectRoot 'work'

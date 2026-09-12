@@ -5,7 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace OldMarket.Localization
+namespace OldMarket.PriceProbability.Localization
 {
     // Original Mod messages only. Native game translations are resolved at runtime.
     internal static class Catalog

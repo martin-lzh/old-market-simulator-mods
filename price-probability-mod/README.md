@@ -1,76 +1,93 @@
-# 商品价格与接受率
+# Old Market Price Probability
 
-## 0.1.1 本地化
+English | [中文](#中文说明)
 
-界面跟随游戏配置的 13 种语言，区分简体与繁体中文。原生名词和动作从游戏 `Translations` 表读取；Mod 补充说明内嵌在 DLL 中，无需额外语言包或共用 DLL。语言表异步就绪和切换语言后刷新文字，字体跟随原生界面。
+Version 0.1.1 adds price-acceptance preview and host-owned automatic anchors to the native price panel. It targets Old Market Simulator 2.1.6 for Windows/Mono and requires BepInEx 5. Download this prerelease from the [release page](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.1); in-game acceptance is not yet complete.
 
-构建需保留仓库根目录的 `localization/`，构建前自动执行语言与占位符检查。详情见[本地化说明](../localization/README.md)。配置键名、插件 ID、日志及开发文档不随游戏语言改名。此版本只更新显示与本地化，不自动安装；游戏内布局、字形及实时切换仍需验证。
+## Features and meaning
 
+- A 100% → 0% slider updates with entered price and converts a target back to the nearest positive integer price.
+- Shows target and actual estimates because integer prices create discrete steps.
+- Modes: off, fixed price, and fixed probability. Probability anchors recalculate when wholesale inputs change.
+- 100% always uses the game's current recommended price.
+- Uses the original confirmation button and original price-update RPC.
+- Supports the game's 13 configured languages, including Simplified and Traditional Chinese.
 
-在原生设置价格页面旁添加 100% → 0% 滑条。输入售价会刷新价格接受率，拖动滑条会反算整数售价，仍由原页面确认按钮提交；直接关闭页面会丢弃本次锚定编辑。
+Acceptance is the chance that a customer who already found the product does not reject it as too expensive. It is not daily sell-through. Stock, expiration, restrictions, demand, and traffic still control sales. The estimate uses current wholesale price, `recommendedProfitPercentage`, and scene `maxProfitMultiplier`, including integer half-unit boundaries. Low-priced products can have large probability steps; 0% chooses a positive integer above the accepted range.
 
-点击锚定按钮循环切换：
-- 关闭：只做本次改价，之后沿用原版行为。
-- 固定售价：保持确认时的金额。
-- 固定概率：保存目标接受率，季节、节日等导致当天批发价改变时自动改价。100% 始终调用游戏的当天建议售价。
+Use the native confirmation button to submit the price and save the selected anchor. Closing the panel discards that unsaved anchor edit.
 
-自动锚定由房主执行，规则按存档槽位和商品 ID 保存在本插件 BepInEx 配置中，重新进入存档继续使用。联机客人可以预览、拖动和提交普通售价，不能修改房主锚定；房主已锚定的商品在服务器处理请求时直接采用锚定价格。关闭锚定并确认后可解除。原生售价通过原版改价 RPC 更新，并由游戏自己的正常保存流程保存，插件不读写存档文件。
+## Multiplayer
 
-## 概率口径
+Clients may preview, move the slider, and submit ordinary prices. Only the host stores and executes anchors. An active host anchor normalizes client requests during server processing.
 
-这是顾客已经找到商品、准备拿货时不因价格过高而拒绝的概率，不代表每天售罄率。缺货、过期、活动禁售、顾客需求等仍由原版决定。
+Updates use the original `UpdatePriceServerRpc(long, int)` and native networked price. No new NetworkBehaviour, RPC, NetworkVariable, or protocol is added, so clients are not structurally required to install the Mod. Installed clients get preview UI; vanilla clients retain the native panel. Vanilla clients cannot see anchor status, and an open panel does not live-update another player's change. Rules remain on the host machine. Mismatched resources or other automatic pricing Mods can produce conflicts.
 
-计算读取当天 GetWholesalePrice、商品 recommendedProfitPercentage 和场景实际 maxProfitMultiplier，不固定写死倍率。已核对本机三个场景实际倍率为 3，原始代码默认值 1.5 不作为实际配置。
+## Install
 
-设原版随机接受价的取整前上下界为 L、H，整数售价为 S，显示值为 clamp((H - S + 0.5)/(H - L), 0, 1)。这包含整数阈值的半单位偏移，但浮点随机抽样及端点仍存在细小误差，因此显示为估算。中间目标选择最接近的可用整数售价，界面同时显示目标和实际估算率；0% 选择超过最高可能接受价的正整数。100% 特别选择游戏建议售价。低价商品的概率可能大幅跳变。
+1. Install BepInEx 5 and close the game.
+2. Download [`OldMarket.PriceProbability-0.1.1.zip`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/price-probability-v0.1.1/OldMarket.PriceProbability-0.1.1.zip) and verify [`SHA256SUMS.txt`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/price-probability-v0.1.1/SHA256SUMS.txt).
+3. Extract into the game directory. The DLL should be at `BepInEx/plugins/OldMarket.PriceProbability/OldMarket.PriceProbability.dll`.
+4. Start the game and look for `Price Probability ready` in the BepInEx log.
 
-自动检查每 0.5 秒执行一次，并在顾客读取售价之前针对该商品再检查。只在金额不同的时候发送原版改价 RPC，价格页面关闭时仍工作。固定概率编辑期间跨天会更新草稿售价，固定售价保持金额。
+To uninstall, close the game and remove that plugin directory. Current native prices remain; automatic adjustment stops.
+
+## Configuration
+
+Rules are stored by save slot and product ID in `BepInEx/config/local.oldmarket.priceprobability.cfg`. Generated `Rule` values are empty, `price:<positive integer>`, or `probability:<0..1>`. The UI manages them. If a save is replaced externally, remove that slot's old anchor sections first.
+
+## Build and validation
+
+```powershell
+./price-probability-mod/build.ps1
+./price-probability-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
+```
+
+The build requires the .NET 8 SDK and uses local assemblies as read-only references, runs checks, and produces `outputs/OldMarket.PriceProbability-0.1.1.zip`; it does not install. Original pricing/math and multiplayer-policy tests, IL contract checks, and all 11 localization suites pass. In-game UI, native save behavior, and real multiplayer have not been verified.
+
+## License and attribution
+
+Original work here is under the [MIT License](LICENSE); game and third-party components are excluded. Citation is voluntary, not a license condition: **Old Market Price Probability by Zhaohan Liu**, with a link to the [repository](https://github.com/martin-lzh/old-market-simulator-mods).
+
+---
+
+## 中文说明
+
+0.1.1 在原生定价页面增加价格接受概率预览和房主自动锚定，适用于 Windows/Mono 版 Old Market Simulator 2.1.6，需要 BepInEx 5。此预发布版可从[发布页面](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.1)下载，游戏内验收尚未完成。
+
+## 功能与概率含义
+
+- 100% → 0% 滑条随输入售价更新，也可将目标反算为最接近的正整数售价。
+- 同时显示目标和实际估算值，因为整数售价会产生离散台阶。
+- 提供关闭、固定售价、固定概率；批发参数变化时重新计算概率锚定。
+- 100% 始终使用游戏当天建议售价。
+- 使用原确认按钮和原改价 RPC，支持游戏配置的 13 种语言。
+
+接受概率指顾客已经找到商品后，不因价格过高而拒绝拿货的概率，不是每日售罄率。库存、过期、限制、需求和客流仍决定销量。估算使用当天批发价、`recommendedProfitPercentage` 和场景 `maxProfitMultiplier`，包含整数半单位边界。低价商品可能出现较大概率台阶；0% 使用高于接受范围的正整数。
+
+请使用原生确认按钮提交售价并保存所选锚定；直接关闭页面会丢弃尚未保存的锚定编辑。
+
+## 多人游戏
+
+客人可以预览、拖动并提交普通售价；只有房主保存和执行锚定。服务器处理请求时会对已锚定商品应用房主规则。
+
+插件只使用原 `UpdatePriceServerRpc(long, int)` 和原生网络价格，不新增 NetworkBehaviour、RPC、NetworkVariable 或协议。因此客人从网络结构上无需安装：安装者有预览 UI，未安装者保留原版页面。原版客人看不到锚定状态，已打开页面也不会实时刷新其他玩家改价。规则保留在房主本机；资源不一致或其他自动定价 Mod 可能冲突。
+
+## 安装与配置
+
+安装 BepInEx 5 并退出游戏。下载 [`OldMarket.PriceProbability-0.1.1.zip`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/price-probability-v0.1.1/OldMarket.PriceProbability-0.1.1.zip)，用 [`SHA256SUMS.txt`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/price-probability-v0.1.1/SHA256SUMS.txt) 校验，解压后确认 DLL 位于 `BepInEx/plugins/OldMarket.PriceProbability/OldMarket.PriceProbability.dll`。卸载时退出游戏并移除该目录；当前售价保留，自动调整停止。
+
+规则按存档槽和商品 ID 保存在 `BepInEx/config/local.oldmarket.priceprobability.cfg`，`Rule` 为留空、`price:<正整数>` 或 `probability:<0..1>`。通常由 UI 管理；在游戏外替换存档后应先删除该槽位的旧锚定段。
 
 ## 构建与验证
 
-在仓库根目录运行：
+```powershell
+./price-probability-mod/build.ps1
+./price-probability-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
+```
 
-    powershell -ExecutionPolicy Bypass -File price-probability-mod/build.ps1
+构建需要 .NET 8 SDK，只读引用本机程序集，运行检查并生成 `outputs/OldMarket.PriceProbability-0.1.1.zip`，不会安装。原有定价/数学、多人权限、IL 契约检查和 11 项本地化测试均通过；尚未验证游戏内 UI、原生保存行为和真实多人联机。
 
-需要本机 .NET SDK 和已安装的 BepInEx 5。游戏和加载器程序集仅作为只读引用，不包含在分发包中。输出 outputs/OldMarket.PriceProbability-0.1.1.zip，仅含原创 DLL 和本说明。
+## 许可与引用
 
-验证包括定价边界、单调性、整数反算误差、零加价、退化倍率、换季/活动示例，以及本机游戏程序集哈希、补丁入口和价格计算调用链检查。
-
-2026-09-12 已按用户授权安装 0.1.0，安装时游戏未运行。安装 DLL 与项目构建产物 SHA256 均为 FE78EDC391DC8D16816AFC3435D11F3E83D12B6A101A90AFC0EB41897AD4D2C1；安装前无同名插件。安装后原始 Assembly-CSharp.dll 哈希保持不变。尚未在 Unity 中实测。待游戏内确认：打开页面、鼠标/手柄滑条、输入框和小键盘双向更新、确认/取消、切换商品、不同窗口尺寸、跨天/季节/节日、退出重进、不同存档和房主/客人行为。构建与静态检查不代表游戏内布局和联机验证通过。
-
-## 安装与卸载
-
-构建脚本只在项目内构建和打包，不自动安装。经用户授权后，在游戏退出时备份并将包内 BepInEx/plugins/OldMarket.PriceProbability 放入对应目录。卸载时移除该新增目录；当前售价保留，自动跟随停止。配置文件 local.oldmarket.priceprobability.cfg 可单独备份或删除。
-
-不要把旧存档槽位的配置直接用于在游戏外替换的新存档；此时先删除该槽位的 Anchor 配置。游戏自身删除槽位时插件会清除已加载的相应配置。
-
-
-## 多人兼容性核查
-
-| 安装情况 | 概率条与手动改价 | 自动锚定 |
-| --- | --- | --- |
-| 仅房主安装 | 房主有概率条，客人使用原版界面 | 房主执行，所有玩家通过原版价签同步看到结果 |
-| 仅一个客人安装 | 该客人有概率条，可提交普通整数售价 | 不启用；客人不能代替房主持续控制价格 |
-| 房主和部分或全部客人安装 | 安装者均有概率条 | 只有房主保存与执行规则，不出现多个自动定价循环 |
-| 房主未安装、多个客人安装 | 各客人可普通改价 | 全部关闭，沿用原版最后处理的有效改价请求 |
-
-这些结论来自本机程序集和插件逻辑核查，尚未进行真实双端联机测试。
-
-本插件没有新增 NetworkBehaviour、NetworkVariable、自定义 RPC 或网络物体；只使用原版 UpdatePriceServerRpc(long, int) 与 sellingPriceForTag 同步。因此从本插件的网络结构看，不要求全员安装，也没有引入消息格式不匹配的因素。这不代表其他 Mod 或不同游戏版本也兼容。
-
-已处理的冲突：未安装插件的客人也有原版改价权限。如果商品已被房主锚定，服务器接收其改价时直接将参数换成当前锚定价，然后完整执行原版 RPC。不会先把错误价格写入再通过第二条 RPC 改回，不会跳过原版 RPC 的执行阶段重置或价签同步。房主关闭锚定并确认后恢复普通改价。
-
-仍需了解：
-- 原版客人不会看到“房主已锚定”的提示；提交被锚定商品的其他价格不会生效，重新打开页面能读取房主售价。
-- 已打开的原版改价窗口是编辑草稿，不会随另一位玩家改价自动刷新。提交时以服务器锚定规则为准；无锚定时维持原版后处理请求覆盖前请求的行为。
-- 客人的概率估算使用本机相同游戏资源和同步日期；双方游戏资源或其他定价 Mod 不一致时，客人的预览不能保证等于房主实际概率。
-- 未兼容其他持续控制同一商品售价的 Mod。此时可能争夺价格，应只保留一套自动定价控制。
-- 主持人退出后不进行跨机器规则迁移。规则留在主持人的本地配置。
-
-新增验证覆盖服务器/客人、已生成/未生成、锚定开启/关闭、有效/无效请求的权限组合，以及请求发送/执行重复经过同一规则的幂等性、多客人覆盖锚定场景。静态检查确认原版改价不要求物体所有权、价签使用原生网络变量、顾客逻辑由服务器运行，并检查本插件没有新增网络协议。
-
-## 许可证与引用
-
-本目录的原创源码、测试及文档采用 [MIT License](LICENSE)。复制软件或其重要部分时须保留版权声明和许可声明；游戏及第三方组件不受此授权覆盖。
-
-如果本 Mod 帮助了你的项目、文章或视频，请注明 Mod 名称并链接到 [Old Market Simulator Mods](https://github.com/martin-lzh/old-market-simulator-mods)。引用格式见[仓库首页](../README.md#引用项目)。这是一项引用请求，不是 MIT 的附加许可条件。
+原创内容采用 [MIT License](LICENSE)，不涵盖游戏及第三方组件。引用完全自愿，不是许可条件：**Old Market Price Probability，作者 Zhaohan Liu**，并链接[项目仓库](https://github.com/martin-lzh/old-market-simulator-mods)。

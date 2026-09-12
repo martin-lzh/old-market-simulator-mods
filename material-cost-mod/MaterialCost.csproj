@@ -38,5 +38,5 @@
     <Error Condition="'$(Loader)' == 'BepInEx' And !Exists('$(BepInExDir)\BepInEx.dll')" Text="Run build.ps1 or supply BepInExDir (BepInEx 5 core)." />
     <Error Condition="'$(Loader)' == 'MelonLoader' And !Exists('$(MelonLoaderDir)\MelonLoader.dll')" Text="Run build.ps1 -Loader MelonLoader or supply MelonLoaderDir." />
   </Target>
-  <Import Project="../localization/Localization.props" />
+  <Import Project="localization/Localization.props" />
 </Project>

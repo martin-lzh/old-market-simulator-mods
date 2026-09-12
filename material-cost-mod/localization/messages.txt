@@ -1,0 +1,207 @@
+[en]
+materials_only=Materials only
+batch_cost=Material cost per batch
+unit=unit
+batch=batch
+pack=pack
+purchase_cost=Purchase cost
+return_cost=Profit-to-cost ratio
+no_price=No selling price is available for the output
+sale_assumption=Assumes all output sells at today's {#recommended} price
+material_basis=Materials only; {#profit} / material cost
+purchase_basis=At today's {#recommended} price; {#profit} / purchase cost, excluding other expenses
+report_estimate=Recipe inputs valued at today's prices; cash flow is unchanged
+report_original=Original costs and profits
+report_fallback={0} rows without a unique recipe retain their original cost
+
+[zh]
+materials_only=仅计原料
+batch_cost=每批原料成本
+unit=件
+batch=批
+pack=箱
+purchase_cost=进货成本
+return_cost=成本利润率
+no_price=产出没有可用售价
+sale_assumption=假设全部产出均按今日{#recommended}售价售出
+material_basis=仅计原料；{#profit} / 原料成本
+purchase_basis=按今日{#recommended}售价；{#profit} / 进货成本，不含其他支出
+report_estimate=按今日价格计算配方原料；现金流不变
+report_original=原始成本与利润
+report_fallback={0} 行因没有唯一配方而保留原始成本
+
+[zh-Hant]
+materials_only=僅計原料
+batch_cost=每批原料成本
+unit=件
+batch=批
+pack=箱
+purchase_cost=進貨成本
+return_cost=成本利潤率
+no_price=產出沒有可用售價
+sale_assumption=假設全部產出均按今日{#recommended}售價售出
+material_basis=僅計原料；{#profit} / 原料成本
+purchase_basis=按今日{#recommended}售價；{#profit} / 進貨成本，不含其他支出
+report_estimate=按今日價格計算配方原料；現金流不變
+report_original=原始成本與利潤
+report_fallback={0} 行因沒有唯一配方而保留原始成本
+
+[fr]
+materials_only=Matières premières uniquement
+batch_cost=Coût des matières par lot
+unit=Unité
+batch=Lot
+pack=Paquet
+purchase_cost=Coût d'achat
+return_cost=Ratio bénéfice/coût
+no_price=Aucun prix de vente n'est disponible pour la production
+sale_assumption=Suppose que toute la production est vendue au prix {#recommended} du jour
+material_basis=Matières premières uniquement ; {#profit} / coût des matières
+purchase_basis=Au prix {#recommended} du jour ; {#profit} / coût d'achat, hors autres dépenses
+report_estimate=Ingrédients des recettes valorisés aux prix du jour ; trésorerie inchangée
+report_original=Coûts et profits d'origine
+report_fallback={0} lignes sans recette unique conservent leur coût d'origine
+
+[de]
+materials_only=Nur Materialien
+batch_cost=Materialkosten pro Charge
+unit=Einheit
+batch=Charge
+pack=Packung
+purchase_cost=Einkaufskosten
+return_cost=Gewinn-Kosten-Verhältnis
+no_price=Für das Ergebnis ist kein Verkaufspreis verfügbar
+sale_assumption=Es wird angenommen, dass der gesamte Ertrag zum heutigen {#recommended} Preis verkauft wird
+material_basis=Nur Materialien; {#profit} / Materialkosten
+purchase_basis=Zum heutigen {#recommended} Preis; {#profit} / Einkaufskosten, ohne sonstige Ausgaben
+report_estimate=Rezeptzutaten zu heutigen Preisen bewertet; der Geldfluss bleibt unverändert
+report_original=Ursprüngliche Kosten und Gewinne
+report_fallback={0} Zeilen ohne eindeutiges Rezept behalten ihre ursprünglichen Kosten
+
+[it]
+materials_only=Solo materiali
+batch_cost=Costo dei materiali per lotto
+unit=Unità
+batch=Lotto
+pack=Confezione
+purchase_cost=Costo d'acquisto
+return_cost=Rapporto profitto/costo
+no_price=Nessun prezzo di vendita disponibile per il prodotto
+sale_assumption=Presuppone che tutto il prodotto sia venduto al prezzo {#recommended} di oggi
+material_basis=Solo materiali; {#profit} / costo dei materiali
+purchase_basis=Al prezzo {#recommended} di oggi; {#profit} / costo d'acquisto, escluse le altre spese
+report_estimate=Ingredienti delle ricette valutati ai prezzi odierni; flusso di cassa invariato
+report_original=Costi e profitti originali
+report_fallback={0} righe senza una ricetta univoca mantengono il costo originale
+
+[es]
+materials_only=Solo materiales
+batch_cost=Coste de materiales por lote
+unit=Unidad
+batch=Lote
+pack=Paquete
+purchase_cost=Coste de compra
+return_cost=Relación beneficio/coste
+no_price=No hay precio de venta disponible para el producto
+sale_assumption=Supone que todo el producto se vende al precio {#recommended} de hoy
+material_basis=Solo materiales; {#profit} / coste de materiales
+purchase_basis=Al precio {#recommended} de hoy; {#profit} / coste de compra, sin incluir otros gastos
+report_estimate=Ingredientes de recetas valorados a precios de hoy; el flujo de caja no cambia
+report_original=Costes y beneficios originales
+report_fallback={0} filas sin una receta única conservan su coste original
+
+[pt]
+materials_only=Apenas materiais
+batch_cost=Custo dos materiais por lote
+unit=Unidade
+batch=Lote
+pack=Pacote
+purchase_cost=Custo de compra
+return_cost=Relação lucro/custo
+no_price=Não há preço de venda disponível para o produto
+sale_assumption=Pressupõe que todo o produto é vendido ao preço {#recommended} de hoje
+material_basis=Apenas materiais; {#profit} / custo dos materiais
+purchase_basis=Ao preço {#recommended} de hoje; {#profit} / custo de compra, sem outras despesas
+report_estimate=Ingredientes das receitas avaliados aos preços de hoje; fluxo de caixa inalterado
+report_original=Custos e lucros originais
+report_fallback={0} linhas sem receita única mantêm o custo original
+
+[ja]
+materials_only=材料のみ
+batch_cost=1バッチ当たりの材料原価
+unit=単位
+batch=バッチ
+pack=パック
+purchase_cost=仕入原価
+return_cost=利益・原価比率
+no_price=完成品に利用可能な販売価格がありません
+sale_assumption=完成品をすべて本日の{#recommended}価格で販売するものとして計算
+material_basis=材料のみ；{#profit} / 材料原価
+purchase_basis=本日の{#recommended}価格；{#profit} / 仕入原価（その他の経費を除く）
+report_estimate=レシピの材料を本日の価格で評価；キャッシュフローは変わりません
+report_original=元の原価と利益
+report_fallback=固有のレシピがない{0}行は元の原価を維持
+
+[ko]
+materials_only=재료만
+batch_cost=묶음당 재료 원가
+unit=단위
+batch=묶음
+pack=포장
+purchase_cost=구매 원가
+return_cost=원가 대비 이익률
+no_price=결과물에 사용할 수 있는 판매 가격이 없습니다
+sale_assumption=모든 결과물을 오늘의 {#recommended} 가격에 판매하는 것으로 계산
+material_basis=재료만; {#profit} / 재료 원가
+purchase_basis=오늘의 {#recommended} 가격; {#profit} / 구매 원가, 기타 비용 제외
+report_estimate=레시피 재료를 오늘 가격으로 계산; 현금 흐름은 바뀌지 않음
+report_original=기존 원가 및 이익
+report_fallback=고유한 레시피가 없는 {0}개 행은 기존 원가를 유지합니다
+
+[ru]
+materials_only=Только материалы
+batch_cost=Стоимость материалов на партию
+unit=Единица
+batch=Партия
+pack=Упаковка
+purchase_cost=Закупочная стоимость
+return_cost=Отношение прибыли к затратам
+no_price=Для готового продукта нет доступной цены продажи
+sale_assumption=Предполагается, что весь продукт продан по сегодняшней цене «{#recommended}»
+material_basis=Только материалы; {#profit} / стоимость материалов
+purchase_basis=По сегодняшней цене «{#recommended}»; {#profit} / закупочная стоимость, без прочих расходов
+report_estimate=Ингредиенты рецептов оценены по сегодняшним ценам; денежный поток не изменён
+report_original=Исходные затраты и прибыль
+report_fallback={0} строк без однозначного рецепта сохраняют исходную стоимость
+
+[tr]
+materials_only=Yalnızca malzemeler
+batch_cost=Parti başına malzeme maliyeti
+unit=Birim
+batch=Parti
+pack=Paket
+purchase_cost=Satın alma maliyeti
+return_cost=Kâr/maliyet oranı
+no_price=Çıktı için kullanılabilir satış fiyatı yok
+sale_assumption=Tüm çıktının bugünkü {#recommended} fiyattan satıldığı varsayılır
+material_basis=Yalnızca malzemeler; {#profit} / malzeme maliyeti
+purchase_basis=Bugünkü {#recommended} fiyattan; {#profit} / satın alma maliyeti, diğer giderler hariç
+report_estimate=Tarif girdileri bugünkü fiyatlarla hesaplanır; nakit akışı değişmez
+report_original=Özgün maliyetler ve kârlar
+report_fallback=Benzersiz tarifi olmayan {0} satır özgün maliyetini korur
+
+[uk]
+materials_only=Лише матеріали
+batch_cost=Вартість матеріалів на партію
+unit=Одиниця
+batch=Партія
+pack=Упаковка
+purchase_cost=Закупівельна вартість
+return_cost=Співвідношення прибутку до витрат
+no_price=Для готового продукту немає доступної ціни продажу
+sale_assumption=Передбачається, що весь продукт продано за сьогоднішньою ціною «{#recommended}»
+material_basis=Лише матеріали; {#profit} / вартість матеріалів
+purchase_basis=За сьогоднішньою ціною «{#recommended}»; {#profit} / закупівельна вартість, без інших витрат
+report_estimate=Інгредієнти рецептів оцінено за сьогоднішніми цінами; грошовий потік не змінено
+report_original=Початкові витрати та прибутки
+report_fallback={0} рядків без однозначного рецепта зберігають початкову вартість

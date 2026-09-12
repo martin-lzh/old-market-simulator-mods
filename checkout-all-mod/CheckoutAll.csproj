@@ -7,7 +7,7 @@
     <ManagedDir>$(GameDir)\Old Market Simulator_Data\Managed</ManagedDir>
     <BepInExDir Condition="'$(BepInExDir)' == ''">$(GameDir)\BepInEx\core</BepInExDir>
   </PropertyGroup>
-  <ItemGroup><Compile Remove="tests/**/*.cs" /><Reference Include="0Harmony"><HintPath>$(BepInExDir)\0Harmony.dll</HintPath><Private>false</Private></Reference><Reference Include="UnityEngine.PhysicsModule"><HintPath>$(ManagedDir)\UnityEngine.PhysicsModule.dll</HintPath><Private>false</Private></Reference>
+  <ItemGroup><Compile Remove="tests/**/*.cs;localization/**/*.cs" /><Reference Include="0Harmony"><HintPath>$(BepInExDir)\0Harmony.dll</HintPath><Private>false</Private></Reference><Reference Include="UnityEngine.PhysicsModule"><HintPath>$(ManagedDir)\UnityEngine.PhysicsModule.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="Assembly-CSharp"><HintPath>$(ManagedDir)\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="Unity.TextMeshPro"><HintPath>$(ManagedDir)\Unity.TextMeshPro.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine.UIModule"><HintPath>$(ManagedDir)\UnityEngine.UIModule.dll</HintPath><Private>false</Private></Reference>
@@ -19,5 +19,5 @@
     <Reference Include="Unity.InputSystem"><HintPath>$(ManagedDir)\Unity.InputSystem.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="Unity.Netcode.Runtime"><HintPath>$(ManagedDir)\Unity.Netcode.Runtime.dll</HintPath><Private>false</Private></Reference>
   </ItemGroup>
-  <Import Project="../localization/Localization.props" />
+  <Import Project="localization/Localization.props" />
 </Project>

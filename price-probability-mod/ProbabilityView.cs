@@ -1,4 +1,4 @@
-using OldMarket.Localization;
+using OldMarket.PriceProbability.Localization;
 using System;
 using TMPro;
 using UnityEngine;

@@ -1,0 +1,116 @@
+[en]
+price_summary=Price acceptance ≈ {0}%\nTarget {1}% · {#recommended}: {2} C
+invalid_price=Enter a positive integer selling price
+host_only=Automatic anchors are set by the host
+anchor_off=Anchor: {#turn_off} [click to change]
+anchor_price=Anchor: fixed price [click to change]
+anchor_probability=Anchor: fixed probability [click to change]
+price_explanation=Price acceptance is an estimate, not daily sell-through\nThe host's anchor overrides other players' prices\nUse the original confirmation button to save
+
+[zh]
+price_summary=价格接受概率 ≈ {0}%\n目标 {1}% · {#recommended}：{2} C
+invalid_price=请输入正整数售价
+host_only=自动锚定由房主设置
+anchor_off=锚定：{#turn_off} [点击切换]
+anchor_price=锚定：固定价格 [点击切换]
+anchor_probability=锚定：固定概率 [点击切换]
+price_explanation=价格接受概率为估算值，并非每日售出率\n房主的锚定设置会覆盖其他玩家的价格\n请使用原有确认按钮保存
+
+[zh-Hant]
+price_summary=價格接受機率 ≈ {0}%\n目標 {1}% · {#recommended}：{2} C
+invalid_price=請輸入正整數售價
+host_only=自動錨定由房主設定
+anchor_off=錨定：{#turn_off} [點擊切換]
+anchor_price=錨定：固定價格 [點擊切換]
+anchor_probability=錨定：固定機率 [點擊切換]
+price_explanation=價格接受機率為估算值，並非每日售出率\n房主的錨定設定會覆蓋其他玩家的價格\n請使用原有確認按鈕儲存
+
+[fr]
+price_summary=Acceptation du prix ≈ {0}%\nObjectif {1}% · {#recommended} : {2} C
+invalid_price=Saisissez un prix de vente entier positif
+host_only=Les ancrages automatiques sont définis par l'hôte
+anchor_off=Ancrage : {#turn_off} [cliquer pour changer]
+anchor_price=Ancrage : prix fixe [cliquer pour changer]
+anchor_probability=Ancrage : probabilité fixe [cliquer pour changer]
+price_explanation=L'acceptation du prix est une estimation, pas le taux de vente quotidien\nL'ancrage de l'hôte remplace les prix des autres joueurs\nUtilisez le bouton de confirmation d'origine pour enregistrer
+
+[de]
+price_summary=Preisakzeptanz ≈ {0}%\nZiel {1}% · {#recommended}: {2} C
+invalid_price=Gib einen positiven ganzzahligen Verkaufspreis ein
+host_only=Automatische Anker werden vom Host festgelegt
+anchor_off=Anker: {#turn_off} [zum Ändern klicken]
+anchor_price=Anker: fester Preis [zum Ändern klicken]
+anchor_probability=Anker: feste Wahrscheinlichkeit [zum Ändern klicken]
+price_explanation=Die Preisakzeptanz ist eine Schätzung, nicht die tägliche Verkaufsrate\nDer Anker des Hosts überschreibt die Preise anderer Spieler\nZum Speichern die ursprüngliche Bestätigungsschaltfläche verwenden
+
+[it]
+price_summary=Accettazione del prezzo ≈ {0}%\nObiettivo {1}% · {#recommended}: {2} C
+invalid_price=Inserisci un prezzo di vendita intero positivo
+host_only=Gli ancoraggi automatici sono impostati dall'host
+anchor_off=Ancoraggio: {#turn_off} [clicca per cambiare]
+anchor_price=Ancoraggio: prezzo fisso [clicca per cambiare]
+anchor_probability=Ancoraggio: probabilità fissa [clicca per cambiare]
+price_explanation=L'accettazione del prezzo è una stima, non il tasso di vendita giornaliero\nL'ancoraggio dell'host sostituisce i prezzi degli altri giocatori\nUsa il pulsante di conferma originale per salvare
+
+[es]
+price_summary=Aceptación del precio ≈ {0}%\nObjetivo {1}% · {#recommended}: {2} C
+invalid_price=Introduce un precio de venta entero positivo
+host_only=El anfitrión establece los anclajes automáticos
+anchor_off=Anclaje: {#turn_off} [haz clic para cambiar]
+anchor_price=Anclaje: precio fijo [haz clic para cambiar]
+anchor_probability=Anclaje: probabilidad fija [haz clic para cambiar]
+price_explanation=La aceptación del precio es una estimación, no la tasa de venta diaria\nEl anclaje del anfitrión sustituye los precios de otros jugadores\nUsa el botón de confirmación original para guardar
+
+[pt]
+price_summary=Aceitação do preço ≈ {0}%\nMeta {1}% · {#recommended}: {2} C
+invalid_price=Insira um preço de venda inteiro positivo
+host_only=As âncoras automáticas são definidas pelo anfitrião
+anchor_off=Âncora: {#turn_off} [clique para alterar]
+anchor_price=Âncora: preço fixo [clique para alterar]
+anchor_probability=Âncora: probabilidade fixa [clique para alterar]
+price_explanation=A aceitação do preço é uma estimativa, não a taxa diária de vendas\nA âncora do anfitrião substitui os preços dos outros jogadores\nUse o botão de confirmação original para salvar
+
+[ja]
+price_summary=価格受容率 ≈ {0}%\n目標 {1}% · {#recommended}：{2} C
+invalid_price=正の整数で販売価格を入力してください
+host_only=自動アンカーはホストが設定します
+anchor_off=アンカー：{#turn_off} [クリックで変更]
+anchor_price=アンカー：固定価格 [クリックで変更]
+anchor_probability=アンカー：固定確率 [クリックで変更]
+price_explanation=価格受容率は推定値であり、1日の販売率ではありません\nホストのアンカーが他のプレイヤーの価格より優先されます\n保存には元の確定ボタンを使用してください
+
+[ko]
+price_summary=가격 수용률 ≈ {0}%\n목표 {1}% · {#recommended}: {2} C
+invalid_price=양의 정수 판매 가격을 입력하세요
+host_only=자동 앵커는 호스트가 설정합니다
+anchor_off=앵커: {#turn_off} [클릭하여 변경]
+anchor_price=앵커: 고정 가격 [클릭하여 변경]
+anchor_probability=앵커: 고정 확률 [클릭하여 변경]
+price_explanation=가격 수용률은 추정치이며 일일 판매율이 아닙니다\n호스트의 앵커가 다른 플레이어의 가격보다 우선합니다\n저장하려면 기존 확인 버튼을 사용하세요
+
+[ru]
+price_summary=Принятие цены ≈ {0}%\nЦель {1}% · {#recommended}: {2} C
+invalid_price=Введите положительную целую цену продажи
+host_only=Автоматические привязки задаёт хост
+anchor_off=Привязка: {#turn_off} [нажмите, чтобы изменить]
+anchor_price=Привязка: фиксированная цена [нажмите, чтобы изменить]
+anchor_probability=Привязка: фиксированная вероятность [нажмите, чтобы изменить]
+price_explanation=Принятие цены — это оценка, а не доля продаж за день\nПривязка хоста заменяет цены других игроков\nДля сохранения используйте исходную кнопку подтверждения
+
+[tr]
+price_summary=Fiyat kabulü ≈ {0}%\nHedef {1}% · {#recommended}: {2} C
+invalid_price=Pozitif bir tam sayı satış fiyatı girin
+host_only=Otomatik sabitlemeleri sunucu belirler
+anchor_off=Sabitleme: {#turn_off} [değiştirmek için tıklayın]
+anchor_price=Sabitleme: sabit fiyat [değiştirmek için tıklayın]
+anchor_probability=Sabitleme: sabit olasılık [değiştirmek için tıklayın]
+price_explanation=Fiyat kabulü bir tahmindir, günlük satış oranı değildir\nSunucunun sabitlemesi diğer oyuncuların fiyatlarını geçersiz kılar\nKaydetmek için özgün onay düğmesini kullanın
+
+[uk]
+price_summary=Прийняття ціни ≈ {0}%\nЦіль {1}% · {#recommended}: {2} C
+invalid_price=Введіть додатну цілу ціну продажу
+host_only=Автоматичні прив’язки задає хост
+anchor_off=Прив’язка: {#turn_off} [натисніть, щоб змінити]
+anchor_price=Прив’язка: фіксована ціна [натисніть, щоб змінити]
+anchor_probability=Прив’язка: фіксована ймовірність [натисніть, щоб змінити]
+price_explanation=Прийняття ціни — це оцінка, а не частка продажів за день\nПрив’язка хоста замінює ціни інших гравців\nДля збереження скористайтеся початковою кнопкою підтвердження

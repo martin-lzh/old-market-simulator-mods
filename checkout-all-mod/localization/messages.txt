@@ -1,0 +1,64 @@
+[en]
+hold_repeat=Hold {0}: repeat {1}
+checkout_toggle=Continuous checkout on; {0}: {#turn_off}
+checkout_hold=Continuous checkout… release E to stop
+
+[zh]
+hold_repeat=按住 {0}：重复{1}
+checkout_toggle=连续结账已开启；{0}：{#turn_off}
+checkout_hold=正在连续结账……松开 E 停止
+
+[zh-Hant]
+hold_repeat=按住 {0}：重複{1}
+checkout_toggle=連續結賬已開啟；{0}：{#turn_off}
+checkout_hold=正在連續結賬……放開 E 停止
+
+[fr]
+hold_repeat=Maintenir {0} : répéter {1}
+checkout_toggle=Encaissement continu activé ; {0} : {#turn_off}
+checkout_hold=Encaissement continu… relâchez E pour arrêter
+
+[de]
+hold_repeat={0} gedrückt halten: {1} wiederholen
+checkout_toggle=Fortlaufende Abrechnung aktiv; {0}: {#turn_off}
+checkout_hold=Fortlaufende Abrechnung… E loslassen zum Beenden
+
+[it]
+hold_repeat=Tieni premuto {0}: ripeti {1}
+checkout_toggle=Cassa continua attiva; {0}: {#turn_off}
+checkout_hold=Cassa continua… rilascia E per interrompere
+
+[es]
+hold_repeat=Mantén {0}: repetir {1}
+checkout_toggle=Cobro continuo activado; {0}: {#turn_off}
+checkout_hold=Cobro continuo… suelta E para detenerlo
+
+[pt]
+hold_repeat=Segure {0}: repetir {1}
+checkout_toggle=Caixa contínuo ativado; {0}: {#turn_off}
+checkout_hold=Caixa contínuo… solte E para parar
+
+[ja]
+hold_repeat={0}長押し：{1}を繰り返す
+checkout_toggle=連続会計オン；{0}：{#turn_off}
+checkout_hold=連続会計中… Eを離すと停止
+
+[ko]
+hold_repeat={0} 길게 누르기: {1} 반복
+checkout_toggle=연속 계산 켜짐; {0}: {#turn_off}
+checkout_hold=연속 계산 중… E를 놓으면 중지
+
+[ru]
+hold_repeat=Удерживайте {0}: повторять {1}
+checkout_toggle=Непрерывный расчёт включён; {0}: {#turn_off}
+checkout_hold=Идёт непрерывный расчёт… отпустите E, чтобы остановить
+
+[tr]
+hold_repeat={0} tuşunu basılı tut: {1} eylemini tekrarla
+checkout_toggle=Sürekli ödeme açık; {0}: {#turn_off}
+checkout_hold=Sürekli ödeme… durdurmak için E tuşunu bırak
+
+[uk]
+hold_repeat=Утримуйте {0}: повторювати {1}
+checkout_toggle=Безперервний розрахунок увімкнено; {0}: {#turn_off}
+checkout_hold=Триває безперервний розрахунок… відпустіть E, щоб зупинити

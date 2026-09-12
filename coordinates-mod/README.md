@@ -1,40 +1,149 @@
 # Old Market Coordinates
 
-## 0.1.3 本地化
+Displays the local player's world coordinates below the money HUD in Old Market Simulator.
 
-坐标 X/Y/Z 为通用轴标识，无需翻译。数字使用与游戏一致的当前系统数字格式；字体及材质继续跟随原生金钱栏。
+Version 0.1.3 is a prerelease for Old Market Simulator 2.1.6, Unity 2022.3, and BepInEx 5.
 
-构建需保留仓库根目录的 `localization/`，构建前自动执行语言与占位符检查。详情见[本地化说明](../localization/README.md)。配置键名、插件 ID、日志及开发文档不随游戏语言改名。此版本只更新显示与本地化，不自动安装；游戏内布局、字形及实时切换仍需验证。
+## Features
 
+- Shows `X`, `Y`, and `Z` world coordinates with one decimal place.
+- Reads the local player's active movement transform every `LateUpdate`, including aboard a ship.
+- Formats numbers with the current game/system culture.
+- Reuses the native money HUD's TextMesh Pro font, material, size, weight, color, spacing, position, and scale.
+- Appears below the money display and does not receive pointer input or change the cursor.
+- Starts visible on every launch. Press `F8` to hide or show it for the current session.
+- Hides when the local player is unavailable, including in menus, during a disconnect, or before spawning.
+- Only reads position data. It does not teleport, call network RPCs, or write to saves.
 
-进入地图后在金钱显示栏下方显示本地角色的世界坐标，每次启动默认开启，F8 仅切换本次运行的显示状态。X、Z 是水平位置，Y 是高度，保留一位小数，每帧 LateUpdate 读取角色实际移动对象的位置；不是地图格子编号，也未将轴向标成未经验证的东南西北。
+These are world-space positions, not map grid numbers. The axes remain `X`, `Y`, and `Z` because their compass directions have not been verified.
 
-这是独立 DLL 插件，通过当前安装的 BepInEx 5 加载，在游戏画面内显示；不是另开的桌面窗口。无需成本插件、CraftSupport 或 Harmony 补丁。只读取本地玩家的位置，不调用传送、网络 RPC 或存档写入。菜单、断线或尚未生成角色时不显示上次的坐标。显示框不接收鼠标点击、不更改光标，也不扫描场景对象。
+## Download
 
-## 安装与使用
+Download [`OldMarket.Coordinates-0.1.3.zip`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/coordinates-v0.1.3/OldMarket.Coordinates-0.1.3.zip) from the [`coordinates-v0.1.3` prerelease](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.3).
+
+The release also includes [`SHA256SUMS.txt`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/coordinates-v0.1.3/SHA256SUMS.txt) for package verification.
+
+## Installation
+
+1. Exit the game completely.
+2. Make sure BepInEx 5 is installed and working.
+3. Extract the archive into the game directory. The DLL should be at `BepInEx/plugins/OldMarket.Coordinates/OldMarket.Coordinates.dll`.
+4. Start the game and enter a map. Coordinates should appear below the money display.
+
+To update, exit the game and replace only this mod's DLL. To uninstall, exit the game and remove `OldMarket.Coordinates.dll`; do not remove BepInEx or unrelated plugins.
+
+## Configuration
+
+The first launch creates `BepInEx/config/local.oldmarket.coordinates.cfg`.
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `Display.ToggleKey` | `F8` | Unity Input System keyboard key used to toggle the display. `None` disables the hotkey. |
+| `Display.Visible` | `true` | Legacy compatibility setting. Version 0.1.3 resets it to `true` at launch, so visibility is not preserved between sessions. |
+
+Edit configuration while the game is closed. Legacy `Left`, `Top`, and `FontSize` settings are no longer used because the display follows the native money HUD.
+
+## Build
+
+Requirements: Windows, the .NET 8 SDK or a compatible newer SDK, a local game installation with BepInEx 5.
+
+From the repository root, run:
+
+```powershell
+./coordinates-mod/build.ps1
+```
+
+For a nondefault game location:
+
+```powershell
+./coordinates-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
+```
+
+The project targets `netstandard2.1` and uses local game and BepInEx assemblies as read-only references. The script builds this mod independently and creates `outputs/OldMarket.Coordinates-0.1.3.zip`. The package contains only the original DLL, README, and MIT license; it includes no game or loader files and installs nothing.
+
+## Validation and known limits
+
+The source builds and packaging checks pass against Old Market Simulator 2.1.6. Actual in-game UI placement, glyph rendering, live culture changes, movement and jumping updates, pause and relaunch behavior, and multiplayer-client display have not yet been verified for this prerelease.
+
+Other game versions may change the player or HUD APIs. Coordinate orientation has no compass labels. The hotkey is keyboard-only.
+
+## License and attribution
+
+Copyright © 2026 Zhaohan Liu. Original source, tests, and documentation in this directory are available under the [MIT License](LICENSE). Copies or substantial portions must retain the copyright and license notice. Old Market Simulator and third-party components are not covered.
+
+If this mod helps your project, article, or video, please credit **Old Market Coordinates** and link to the [Old Market Simulator Mods repository](https://github.com/martin-lzh/old-market-simulator-mods). This is a voluntary request, not an additional license condition.
+
+---
+
+# Old Market Coordinates（中文）
+
+在 Old Market Simulator 的金钱栏下方显示本地玩家的世界坐标。
+
+0.1.3 是面向 Old Market Simulator 2.1.6、Unity 2022.3 和 BepInEx 5 的预发布版本。
+
+## 功能
+
+- 显示保留一位小数的 `X`、`Y`、`Z` 世界坐标。
+- 每帧在 `LateUpdate` 读取本地玩家实际移动对象的位置，在船上也使用世界坐标。
+- 数字格式跟随游戏当前使用的系统区域格式。
+- 复用原生金钱栏的 TextMesh Pro 字体、材质、字号、字重、颜色、字间距、位置和缩放。
+- 显示在金钱栏下方，不接收鼠标输入，也不改变光标。
+- 每次启动默认显示。按 `F8` 可在本次运行中隐藏或重新显示。
+- 菜单中、断线时或本地角色尚未生成时自动隐藏。
+- 只读取位置，不传送角色、不调用网络 RPC，也不写入存档。
+
+这里显示的是世界空间位置，不是地图格子编号。由于尚未确认各轴对应的罗盘方向，因此只标记为 `X`、`Y`、`Z`。
+
+## 下载
+
+从 [`coordinates-v0.1.3` 预发布页面](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.3)下载 [`OldMarket.Coordinates-0.1.3.zip`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/coordinates-v0.1.3/OldMarket.Coordinates-0.1.3.zip)。发布页同时提供 [`SHA256SUMS.txt`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/coordinates-v0.1.3/SHA256SUMS.txt) 用于校验压缩包。
+
+## 安装
 
 1. 完全退出游戏。
-2. 将压缩包中的 `BepInEx/plugins/OldMarket.Coordinates/OldMarket.Coordinates.dll` 按目录放到游戏根目录。依赖已经启用的 BepInEx 5；无需更换加载器。若已有本插件，先备份旧 DLL。
-3. 启动并进入地图，查看金钱栏下方的坐标。按 F8 切换显示。
+2. 确认 BepInEx 5 已安装并能正常加载插件。
+3. 将压缩包解压到游戏目录。DLL 的最终路径应为 `BepInEx/plugins/OldMarket.Coordinates/OldMarket.Coordinates.dll`。
+4. 启动游戏并进入地图，坐标应显示在金钱栏下方。
 
-首次运行生成 `BepInEx/config/local.oldmarket.coordinates.cfg`，仅保存插件设置。退出游戏后可编辑 ToggleKey（例如 F9）；Visible 在启动时重置为 true。0.1.1 跟随原生金钱栏定位，在其下方留出 6 个 UI 单位；直接复用 textCoins 的字体资源、字体材质、字号、字重、颜色和字间距，随 HUD 缩放。旧配置中的 Left、Top、FontSize 不再使用。
+更新时先退出游戏，只替换本 Mod 的 DLL。卸载时退出游戏并移除 `OldMarket.Coordinates.dll`；不要删除 BepInEx 或其他插件。
 
-卸载：退出游戏，将本插件 DLL 移出 `BepInEx/plugins` 即可；不要删除整个 BepInEx 或其他插件。
+## 配置
 
-## 构建与验证
+首次运行会生成 `BepInEx/config/local.oldmarket.coordinates.cfg`。
 
-运行 `./coordinates-mod/build.ps1`。使用本机游戏安装和 BepInEx 核心作为只读引用，输出 `outputs/OldMarket.Coordinates-0.1.3.zip`，仅包含原创 DLL 和本说明，不打包游戏组件，不自动安装。
+| 设置 | 默认值 | 说明 |
+| --- | --- | --- |
+| `Display.ToggleKey` | `F8` | 用于切换显示的 Unity Input System 键盘按键。设为 `None` 可禁用快捷键。 |
+| `Display.Visible` | `true` | 兼容旧版本的设置。0.1.3 每次启动都会重置为 `true`，因此不会跨运行保存隐藏状态。 |
 
-本机依据：Old Market Simulator 的 `ExampleCharacterSetup.OnNetworkSpawn` 按 IsLocalPlayer 初始化本地角色，游戏 UI 通过 `NetworkManager.Singleton.LocalClient.PlayerObject` 访问自己的玩家对象。本插件使用同一路径，取 `transform.position` 世界坐标，在船上也不改用相对船体的位置。输入使用游戏现有 Unity Input System。
+请在游戏退出后编辑配置。旧版的 `Left`、`Top` 和 `FontSize` 已不再使用，因为显示位置和样式现在跟随原生金钱栏。
 
-目标环境：本机 Old Market Simulator 2.1.6、Unity 2022.3、BepInEx 5.4.23.4。编译和打包检查不能代替实机测试；安装后仍需验证移动、跳跃、F8、暂停菜单、退出重进和联机客户端的显示是否正常，以及是否遮挡现有 HUD。
+## 构建
 
-0.1.1：用户确认 0.1.0 被界面遮挡。改为金钱栏下方的原生 TMP 文本，使用独立 Canvas 排序避免被其他 HUD 面板遮住，保留 F8 开关；只在实际收到切换时记日志。已编译通过，实际位置和显示仍待更新后验证。
+需要 Windows、.NET 8 SDK 或兼容的新版本 SDK、本机游戏安装及 BepInEx 5。
 
-0.1.2：移除 0.1 秒刷新间隔，优先读取本地 ExampleCharacterSetup 的 customCharacterController 世界位置，每帧在 LateUpdate 更新；显示保留一位小数，数值未变时不重写文字。忽略旧版保存的隐藏状态，每次启动默认打开。已编译通过，移动显示仍需游戏内确认。
+在仓库根目录运行：
+
+```powershell
+./coordinates-mod/build.ps1
+```
+
+游戏不在默认位置时：
+
+```powershell
+./coordinates-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
+```
+
+项目以 `netstandard2.1` 为目标框架，将本机游戏和 BepInEx 程序集作为只读引用。脚本独立构建插件并生成 `outputs/OldMarket.Coordinates-0.1.3.zip`。压缩包只包含原创 DLL、本说明和 MIT 许可证，不包含游戏或加载器文件，也不会自动安装。
+
+## 验证与已知限制
+
+当前源码可以构建，面向 Old Market Simulator 2.1.6 的构建和打包检查均已通过。此预发布版本尚未实机验证游戏内布局、字形、运行中区域格式变化、移动和跳跃刷新、暂停与退出重进，以及联机客户端显示。
+
+其他游戏版本可能改变本插件依赖的玩家或 HUD API。坐标轴未标注罗盘方向。快捷键仅支持键盘。
 
 ## 许可证与引用
 
-本目录的原创源码、测试及文档采用 [MIT License](LICENSE)。复制软件或其重要部分时须保留版权声明和许可声明；游戏及第三方组件不受此授权覆盖。
+Copyright © 2026 Zhaohan Liu。本目录的原创源码、测试和文档采用 [MIT License](LICENSE)。复制软件或其重要部分时必须保留版权和许可声明；Old Market Simulator 及第三方组件不受此许可证覆盖。
 
-如果本 Mod 帮助了你的项目、文章或视频，请注明 Mod 名称并链接到 [Old Market Simulator Mods](https://github.com/martin-lzh/old-market-simulator-mods)。引用格式见[仓库首页](../README.md#引用项目)。这是一项引用请求，不是 MIT 的附加许可条件。
+如果本 Mod 帮助了你的项目、文章或视频，欢迎注明 **Old Market Coordinates** 并链接到 [Old Market Simulator Mods 仓库](https://github.com/martin-lzh/old-market-simulator-mods)。这是自愿引用请求，不是附加许可条件。

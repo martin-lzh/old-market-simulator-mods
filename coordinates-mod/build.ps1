@@ -1,7 +1,5 @@
 param([string]$GameDir = 'F:\SteamLibrary\steamapps\common\Old Market Simulator')
 $ErrorActionPreference = 'Stop'
-dotnet run --project (Join-Path $PSScriptRoot '../localization/tests/Localization.Tests.csproj') -c Release
-if ($LASTEXITCODE) { throw 'Localization checks failed.' }
 $taskRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 dotnet build (Join-Path $PSScriptRoot 'Coordinates.csproj') -c Release --nologo "-p:GameDir=$GameDir"
 if ($LASTEXITCODE) { throw 'Coordinates build failed.' }

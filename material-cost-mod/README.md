@@ -1,103 +1,167 @@
 # Old Market Material Cost
 
-## 0.5.1 本地化
+Old Market Material Cost adds cost and profit estimates to three Old Market Simulator screens:
 
-界面跟随游戏配置的 13 种语言，区分简体与繁体中文。原生名词和动作从游戏 `Translations` 表读取；Mod 补充说明内嵌在 DLL 中，无需额外语言包或共用 DLL。语言表异步就绪和切换语言后刷新文字，字体跟随原生界面。
+- The end-of-day sales report gets a **Materials only** switch. Enabled rows use estimated recipe-material costs and recomputed profit; disabling it restores the native cost and profit text.
+- Recipe details show batch and unit material cost, output quantity, the current day's recommended price, estimated batch and unit profit, and profit divided by material cost.
+- The dock order screen shows recommended unit price, wholesale case cost, estimated case profit, and profit divided by purchase cost for the selected product.
 
-构建需保留仓库根目录的 `localization/`，构建前自动执行语言与占位符检查。详情见[本地化说明](../localization/README.md)。配置键名、插件 ID、日志及开发文档不随游戏语言改名。此版本只更新显示与本地化，不自动安装；游戏内布局、字形及实时切换仍需验证。
+The Mod changes displayed text only. It does not change cash, prices, inventory, recipes, customers, saves, network messages, or game assemblies. It can estimate old inventory because it reconstructs cost from current recipe and price data rather than purchase history.
 
+## Download
 
-## 0.5.0 订购页价格详情
+Version 0.5.1 is a prerelease on the [Material Cost 0.5.1 release page](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1):
 
-东方小镇使用的码头订购页新增底部商品详情。鼠标指向商品或手柄/键盘选中商品（含加减按钮）时，显示当天单件「建议」售价、整箱进货成本、整箱预计利润和成本利润率。首次打开默认显示首项；调整订购数量后保留当前查看商品。此功能也适用于使用同一订购界面的其他地图。
+- `OldMarket.MaterialCost-0.5.1-BepInEx.zip`
+- `OldMarket.MaterialCost-0.5.1-MelonLoader.zip`
+- `SHA256SUMS.txt`
 
-订购页使用游戏实际 `GetWholesalePrice` 和 `GetRecommendedPrice`，按商品实际每箱数量换算；不使用配方材料成本或字段默认加价率。成本利润率 =（建议价销售收入 − 进货成本）÷ 进货成本。零成本时利润率显示「—」。这是全部按当天建议价售出的估算，不包含其他费用，也不预测到货日或未来售价。日报「仅计原料」开关不影响订购页。
+GitHub's automatically generated **Source code** archives are repository snapshots, not installable packages. Choose one loader package; never run BepInEx and MelonLoader together. The standalone bootstrap remains available as source for local investigation but is not publicly distributed; see [Standalone bootstrap](STANDALONE.md).
 
-实现只新增 `DockOrderTile.SetData` 的 UI Postfix 和选择事件；不改订购回调、金额、存档或网络操作。底部详情从商品滚动区留出 120 个 UI 单位，保留订购控制区；卸载组件时恢复滚动区。界面打开、商品选择、换日及语言变化时更新，没有新增逐帧扫描。当前 BepInEx 包为 `OldMarket.MaterialCost-0.5.1-BepInEx.zip`。
+## Requirements and installation
 
-0.5.0 已通过编译、40 项会计和 27 项缓存检查。尚未完成东方小镇实机布局、中文换行、手柄选择及换日显示验证，不能把代码检查视为 UI 验收。
+Development and automated checks target Old Market Simulator 2.1.6, Windows x64, Unity Mono. Other game or loader versions may require a compatibility review.
 
-新增独立启动构建：参见 [独立加载版说明](STANDALONE.md)。自写 managed 入口使用 Unity Doorstop 引导，不加载 BepInEx/MelonLoader，保留 0.4.1 成本与利润 UI；不更改数字文化格式。运行期效果及覆盖层卡顿仍待验证。
+### BepInEx 5
 
-在每日结算销售表下方加入「仅计原料」开关。关闭时恢复原版成本、利润文字；开启时按生产配方和原料价格估算成本，再计算利润。开关默认关闭，记住上次选择。
+1. Exit the game and install BepInEx 5 x64 if needed, following the [official guide](https://docs.bepinex.dev/articles/user_guide/installation/index.html).
+2. Extract `OldMarket.MaterialCost-0.5.1-BepInEx.zip` into the game directory. The plugin should be at `BepInEx/plugins/OldMarket.MaterialCost/OldMarket.MaterialCost.dll`.
+3. Start the game and confirm the load message in the BepInEx log.
 
-0.2.0 同时在制作配方详情的原料列表下方显示本批原料成本、单件原料成本和本批产量。该信息始终显示，不依赖日报开关；选择配方或重新打开配方页时，按当前地图及当日价格重新计算。原料列表仍可滚动。日报与配方页调用同一个配方报价函数；若同一商品存在多种不同成本配方，配方页显示当前选中配方，日报仍按原有规则回退。
+Settings are in `BepInEx/config/local.oldmarket.materialcost.cfg`. `[Report] MaterialsOnly` remembers the report switch and defaults to `false`. `[Diagnostics] Enabled` controls optional frame sampling, defaults to `false`, and requires a restart after editing.
 
-0.2.2 修复启动第 0 帧管理对象被销毁、首次打开隐藏面板时找不到 ScrollRect，以及同一帧失败后重试复用待销毁组件的问题。插件为管理对象设置 `HideAndDontSave`；本机也已将 BepInEx 的 `HideManagerGameObject` 设为 `true`。此诊断版本每 10 秒记录一次帧耗时汇总和少量界面回调信息，用于排查卡顿；不修改帧率、画质、GC 模式或存档。
+### MelonLoader 0.7.3
 
-0.3.0 增加 MelonLoader 版本。两种加载器共用成本计算、UI 及诊断代码，只切换启动入口、日志和开关设置保存方式。诊断增加 UTC 时间、焦点切换和独立时钟的最长帧间隔，便于区分游戏帧计时与暂停。此版本用于进一步隔离加载器问题，不代表卡顿已经解决。
+1. Exit the game, disable the BepInEx `winhttp.dll` entry point, and install Windows x64 MelonLoader from its [0.7.3 release](https://github.com/LavaGang/MelonLoader/releases/tag/v0.7.3).
+2. Extract `OldMarket.MaterialCost-0.5.1-MelonLoader.zip` into the game directory. The plugin should be at `Mods/OldMarket.MaterialCost.dll`.
+3. Start the game and confirm the load message in `MelonLoader/Logs`.
 
-0.4.0 在配方页同时显示当天的「建议」价、每批/每件利润及成本利润率。成品售价直接调用游戏 `GetRecommendedPrice`，包含当前季节和活动的价格变化；利润假设本批产出全部按此价售出。利润率 = 利润 ÷ 材料成本，与日报保持相同分母；材料成本为 0 时显示「—」。非销售商品没有游戏建议价时，保留材料成本，售价与利润显示「—」。
+Settings are in `UserData/OldMarket.MaterialCost.cfg`, category `OldMarketMaterialCost`. `MaterialsOnly` remembers the report switch; `Diagnostics` controls optional diagnostic sampling. Both default to `false`, and changing diagnostics requires a restart.
 
-标签直接读取游戏 `Translations` 表的 `amount`、`avg_cost`、`recommended`、`profit`，简体中文分别为「数额」「平均成本」「建议」「利润」，繁体及其他语言使用游戏各自的译文。材料成本、每批/每件及公式说明为 Mod 补充文字。打开/切换配方、换日和切换语言时刷新，不逐帧重算。底部新增信息采用原生 Canvas 缩放和纵向布局，保留原料滚动区。
+To uninstall either edition, exit the game and remove only its `OldMarket.MaterialCost.dll`. Existing saves need no conversion.
 
-0.4.1 改为按需读取和缓存：只为当前选中配方查找原料及成品，不再每次把整张物品库分组建字典。同一天点过的配方复用成本与利润；重复“选中/点击”回调不重复查价格、读译文或写入相同 UI 文字。换日清除价格结果，切换地图、替换物品库或场景加载时清除相应缓存；隐藏配方页不在换日时预计算。缓存以原生游戏的每日价格与静态配方为依据，不监视其他 Mod 在同一天内直接改写资源。
+## Calculation scope
 
-日报关闭“仅计原料”时不查生产规则、不重算成本；开启后才发现当前地图的生产来源，并且仅计算当天销售商品涉及的配方。没有销售时不扫描；首次启用的生产来源发现仍需遍历地图物品预制体及钓鱼区，因为原生游戏没有商品到生产来源的反向索引。此元数据在同一场景复用，保留未知商品及不同成本配方的原版回退。
+This is a standard production-material estimate, not historical acquisition accounting. One production rule applies to every unit of a product, so purchased and crafted stock cannot be distinguished.
 
-0.4.1 默认关闭诊断：没有 Mod 每帧采样或十秒定时日志。需要排查时，退出游戏后将 MelonLoader 的 `UserData/OldMarket.MaterialCost.cfg` 中 `[OldMarketMaterialCost]` 的 `Diagnostics` 改为 `true`；BepInEx 对应 `[Diagnostics]` 的 `Enabled=true`，重启生效。正常使用保持 `false`。启动、退出及异常日志仍保留。
+- Honey, orchard output, repeatable animal output such as milk and eggs, and caught fish have zero material cost. Beehives, trees, reusable animals, fishing equipment, durability, labor, and other operating costs are outside this scope.
+- Seed-crop cost is seed-pack price divided by seeds per pack and yield per plant.
+- Meat includes the consumed animal's base price, allocated across the game's output cases and units.
+- Processed-product unit cost is `sum(ingredient unit price × units per case × recipe cases) ÷ (output cases × units per case)`. Direct ingredients use the current day's wholesale price, including seasonal and event adjustments. Ingredient costs are not recursively expanded into their own production chains.
+- Non-product inputs use base pack price divided by pack size. Seed and animal prices are resource base prices, not historical transactions or shop-specific quotes.
 
-## 安装与使用
+Recipe and order profit is `recommended-price revenue − estimated cost`. The percentage is `profit ÷ cost × 100`, using the game's cost denominator rather than revenue. Calculations retain full precision and display up to two decimals. Zero cost makes the percentage undefined, so it displays `—`. If a product has no recommended price, recipe cost remains visible while price and profit display `—`.
 
-适用：Windows x64、Unity Mono。提供 **BepInEx 5** 和 **MelonLoader 0.7.3** 两种独立构建，必须只启用一种加载器，DLL 不能互换。本机参考游戏程序集 SHA-256：`FA6CE6B89AEBDF50DD46FF9C857650DB0E9CC618B1CE939F58501E0DC59C6296`。
+An unrecognized product, or one with multiple different-cost production rules, keeps the game's original cost and profit in the report instead of assuming zero. The report shows the number of fallback rows. Average selling price, quantity, cash transactions, rent, taxes, and maintenance remain native values.
 
-### MelonLoader 安装
+## Languages
 
-1. 退出游戏。若已有 BepInEx，先备份并停用其 `winhttp.dll` 入口，避免两种加载器同时注入。
-2. 按 [MelonLoader 官方说明](https://github.com/LavaGang/MelonLoader/tree/v0.7.3#how-to-manually-use-melonloader) 安装 0.7.3 Windows x64。安装包中的文件只能覆盖已知加载器文件；遇到原有同名文件先核查并备份。
-3. 解压 `OldMarket.MaterialCost-0.5.1-MelonLoader.zip`，插件路径为 `Mods/OldMarket.MaterialCost.dll`。
-4. 插件设置为 `UserData/OldMarket.MaterialCost.cfg`，类别 `OldMarketMaterialCost`、键 `MaterialsOnly`。加载器日志在 `MelonLoader/Logs`。日报默认使用原版显示，可在界面切换；配方成本始终显示。
+The UI follows the game's active locale in English, Simplified Chinese, Traditional Chinese, French, German, Italian, Spanish, Portuguese, Japanese, Korean, Russian, Turkish, and Ukrainian. Native terms such as **Recommended** and **Profit** come from the game's `Translations` table; Mod-specific text is embedded in each DLL. Unsupported locales fall back to English. No language pack is required.
 
-### BepInEx 安装
+See the Mod's [localization documentation](localization/README.md). Supplemental translations have not been reviewed by native speakers of every language; in-game glyphs, wrapping, and live switching still require runtime verification.
 
-1. 退出游戏。如果尚未安装 BepInEx，从[官方发布页](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.5)下载 `BepInEx_win_x64_5.4.23.5.zip`，按其说明解压至游戏 EXE 所在目录。已有 BepInEx 5 时不要重复覆盖配置。
-2. 将 `OldMarket.MaterialCost-0.5.1-BepInEx.zip` 解压至同一目录，最终文件为 `BepInEx/plugins/OldMarket.MaterialCost/OldMarket.MaterialCost.dll`。
-3. 启动游戏，完成一天，在销售表下方打开「仅计原料」。不需要新存档，旧库存销售记录也可重算。
-4. 退出游戏后删除该 Mod DLL 即可卸载。配置位于 `BepInEx/config/local.oldmarket.materialcost.cfg`。
+## Build and verification
 
-构建脚本仅生成项目内的 DLL/ZIP，不会自动安装、启动游戏或写入游戏目录。0.2.2 已由用户确认配方成本信息显示；日报完整交互、手柄及联机仍待验证。本机对照发现：禁用加载器后持续卡顿消失，仅加载 BepInEx 5.4.23.5、零插件时持续卡顿仍出现；降至 5.4.23.4、改用 MelonLoader 0.7.3 后，用户仍反馈持续卡顿。0.4.0 日志证实长帧发生时没有新的配方/日报回调，不能声称懒加载已修复持续卡顿。0.4.1 需要运行验收。
-
-## 成本口径
-
-这是用户选择的**标准生产原料成本估算**，不是逐批历史进货账。相同商品使用同一生产规则，因此可处理旧库存，但不能据此区分买入的蜂蜜与自产蜂蜜。
-
-- 蜂蜜：排除蜂箱与长期使用的蜜蜂投入，每次采收无消耗性原料，成本为 0。
-- 果树产出、重复收获的动物产出（奶、蛋等）、捕获鱼类：排除树木、动物和捕捞设备投入，按 0 计算。捕捞设备耐久/更换支出也不计入这一原料口径。
-- 种子作物：种子包价格 ÷ 包内种子数 ÷ 每株产量，保留种子消耗。
-- 屠宰肉类：保留被消耗动物的基础价格，按原游戏的产出箱分摊，再除以每箱数量。
-- 加工品：`Σ(配方原料单件价 × 每箱件数 × 配方箱数) ÷ (产出箱数 × 每箱件数)`。配方中的直接原料按当日批发价计入，包含游戏季节、活动调价；不进一步把原料递归视作免费自产。例如奶酪仍计入牛奶/羊奶、鸡蛋等原料价格。
-- 非商品类原料：基础包价除以包内数量。种子、动物价格采用资源基础价，不伪装成历史成交价或具体售卖点报价。
-- 未识别商品或存在不同成本的多种配方：保留该行原版成本与利润，并在开关下显示回退条目数。不会默认清零。
-
-读取当前地图物品库及其预制体中的真实字段，不使用名称猜测或 C# 默认值。利润 = 销售收入 − 估算原料成本；显示最多两位小数，计算中保留精度；零成本的利润率显示「—」。平均售价、销量保持原样。
-
-开关只修改本机日报的显示文字，不修改金币、税费、租金、维护费、顾客逻辑、物品成本、存档、网络消息或游戏 DLL。原始现金收支栏保持原样；这不表示租金等支出被免除。联机时每位查看者需要各自加载此显示 Mod；联机尚未实测。
-
-## 构建和验证
-
-安装 .NET SDK 后，在本项目运行：
+Building requires Windows, .NET 8 SDK or newer, a local game installation, and loader references. From the repository root:
 
 ```powershell
-./material-cost-mod/build.ps1
-./material-cost-mod/build.ps1 -Loader MelonLoader
-# 其他安装位置：
 ./material-cost-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
+./material-cost-mod/build.ps1 -Loader MelonLoader -GameDir 'D:\Games\Old Market Simulator'
 ```
 
-首次构建会从所选加载器的官方 GitHub 下载固定版本至项目 `work/`，校验固定 SHA-256。引用本机游戏程序集但不复制到交付包。成品分别为 `outputs/OldMarket.MaterialCost-0.5.1-BepInEx.zip` 与 `outputs/OldMarket.MaterialCost-0.5.1-MelonLoader.zip`，每个包仅含原创插件 DLL 和本说明。
+The scripts run checks, download pinned loader references when needed, verify their checksums, and write packages to `outputs/`. They read local game assemblies for compilation but neither package them nor modify the game. All localization sources required by this Mod live under `material-cost-mod/localization/`.
 
-独立会计测试覆盖蜂蜜零成本、实际奶酪配方、箱/件换算、多箱产出、小数、季节价格输入、亏损、零分母、空日报和未知/冲突规则。资源核验属于本机分析项目，不包含在此源码仓库中；构建所需的自动化测试已随各 Mod 提供。
+Version 0.5.1 compiles for BepInEx, MelonLoader, and the source-retained standalone target. Automated verification passes 40 accounting checks, 27 runtime cache and rule checks, and 11 localization suites. Coverage includes recipe and case conversion, current-day prices, losses, zero-cost and unknown-rule behavior, on-demand caching and invalidation, native-term lookup, locale fallback, and placeholder parity.
 
-游戏内验收：加载后查看 BepInEx 日志；出售蜂蜜和加工品；换日后连续开关并核对原版恢复、金币不变、滚动及下一天按钮；测试空销售日、不同分辨率、中文/英文、跨地图与联机。游戏更新或其他日报 Mod 可能改变布局/接口，需要重新核查。
+Automated checks are not in-game acceptance. Layout across resolutions, controller selection, all-language fonts and wrapping, day changes, multiplayer, and runtime performance have not been fully validated. Game updates and Mods that patch the same screens may require renewed testing.
 
-配方页验收：连续切换配方、关闭后重开、切换制作设备、检查多箱产出的单位换算和跨季节价格变化，确认底部信息不遮挡原料或关闭按钮。0.4.0 的 37 项会计检查覆盖全批利润、小数精度、当天售价变化、亏损、零成本及利润率分母；已核对游戏三种语言的原始标签。较早版本已由用户确认成本显示；0.4.0 的利润布局、语言切换和换日刷新尚待游戏内验收。
+## License and citation
 
-0.4.1 另外用 API 替身执行生产用 `RuntimeRules.cs` 的 27 项检查，覆盖按需取数、重复回调零额外报价、跨日/季节/地图缓存失效、空日报不扫描、生产来源复用、仅给销售商品报价及冲突配方回退。这些是代码层验证，不代替 Unity 中的 UI 与性能实测。
+Original source, tests, build scripts, and documentation use the [MIT License](LICENSE), Copyright (c) 2026 Zhaohan Liu. The game and third-party components retain their own licenses.
 
-实现参考：[BepInEx 插件文档](https://docs.bepinex.dev/articles/dev_guide/plugin_tutorial/2_plugin_start.html)、[Harmony Postfix 文档](https://harmony.pardeike.net/v2/articles/patching-postfix.html)。
+If this work helps a Mod, article, video, or research project, linking to [martin-lzh/old-market-simulator-mods](https://github.com/martin-lzh/old-market-simulator-mods) and naming the Mod and version is appreciated. Citation is voluntary and is not an additional MIT condition.
+
+---
+
+# Old Market Material Cost（中文）
+
+Old Market Material Cost 在 Old Market Simulator 的三个界面中加入成本与利润估算：
+
+- 每日结算销售表增加“仅计原料”开关。开启后按配方原料成本估算并重算利润；关闭后恢复游戏原有文字。
+- 配方详情显示本批及每件原料成本、本批产量、当天建议售价、本批及每件预计利润，以及利润与原料成本之比。
+- 码头订购页显示当前商品的建议单件售价、整箱进货成本、整箱预计利润，以及利润与进货成本之比。
+
+这些估算只改变显示文字，不会修改金币、价格、库存、配方、顾客、存档、网络消息或游戏程序集。成本由当前配方和价格数据重建，因此也可估算旧库存，不依赖历史进货记录。
+
+## 下载
+
+0.5.1 以预发布形式提供，下载见 [Material Cost 0.5.1 发布页](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1)：
+
+- `OldMarket.MaterialCost-0.5.1-BepInEx.zip`
+- `OldMarket.MaterialCost-0.5.1-MelonLoader.zip`
+- `SHA256SUMS.txt`
+
+GitHub 自动生成的 **Source code** 压缩包是源码快照，不是可安装包。请选择一种加载器，绝不能同时运行 BepInEx 和 MelonLoader。独立启动入口只保留源码供本机调查，不公开分发，详情见[独立启动入口](STANDALONE.md)。
+
+## 运行要求与安装
+
+开发和自动化检查基于 Windows x64、Unity Mono 的 Old Market Simulator 2.1.6。其他游戏或加载器版本可能需要重新核查兼容性。
+
+### BepInEx 5
+
+1. 退出游戏。如有需要，按[官方说明](https://docs.bepinex.dev/articles/user_guide/installation/index.html)安装 BepInEx 5 x64。
+2. 将 `OldMarket.MaterialCost-0.5.1-BepInEx.zip` 解压到游戏目录。插件路径应为 `BepInEx/plugins/OldMarket.MaterialCost/OldMarket.MaterialCost.dll`。
+3. 启动游戏，在 BepInEx 日志中确认加载信息。
+
+设置位于 `BepInEx/config/local.oldmarket.materialcost.cfg`。`[Report] MaterialsOnly` 记忆日报开关，默认 `false`；`[Diagnostics] Enabled` 控制可选帧采样，默认 `false`，修改后需重启。
+
+### MelonLoader 0.7.3
+
+1. 退出游戏，停用 BepInEx 的 `winhttp.dll` 入口，再从 [0.7.3 官方发布页](https://github.com/LavaGang/MelonLoader/releases/tag/v0.7.3)安装 Windows x64 MelonLoader。
+2. 将 `OldMarket.MaterialCost-0.5.1-MelonLoader.zip` 解压到游戏目录。插件路径应为 `Mods/OldMarket.MaterialCost.dll`。
+3. 启动游戏，在 `MelonLoader/Logs` 中确认加载信息。
+
+设置位于 `UserData/OldMarket.MaterialCost.cfg`，类别是 `OldMarketMaterialCost`。`MaterialsOnly` 记忆日报开关；`Diagnostics` 控制可选诊断采样。两者默认均为 `false`，修改诊断设置后需重启。
+
+卸载时请退出游戏，只删除相应目录中的 `OldMarket.MaterialCost.dll`。现有存档无需转换。
+
+## 计算口径
+
+本 Mod 估算标准生产原料成本，并非逐批历史取得成本。同种商品统一使用一条生产规则，因此不能区分买入库存和自产库存。
+
+- 蜂蜜、果树产出、奶和蛋等可重复取得的动物产出，以及捕获鱼类，原料成本按零计算。蜂箱、树木、可重复使用的动物、捕捞设备、耐久、人工及其他经营成本不在此口径内。
+- 种子作物成本为种子包价格除以包内种子数，再除以每株产量。
+- 屠宰肉类计入被消耗动物的基础价格，并按游戏中的产出箱数和每箱件数分摊。
+- 加工品单件成本为 `Σ（原料单件价 × 每箱件数 × 配方箱数）÷（产出箱数 × 每箱件数）`。直接原料使用当天批发价，包含季节和活动调价；不会递归展开原料自身的生产链。
+- 非商品投入使用基础包价除以包内数量。种子和动物价格是资源基础价，不代表历史成交价或特定商店报价。
+
+配方和订购页利润为“按建议价计算的收入 − 估算成本”。百分比为 `利润 ÷ 成本 × 100`，使用游戏的成本分母，并非销售收入。计算保留完整精度，显示最多两位小数。成本为零时百分比无定义，显示“—”。商品没有建议售价时，仍显示配方成本，售价和利润显示“—”。
+
+如果商品没有可识别的生产规则，或存在成本不同的多条规则，日报会保留游戏原有成本和利润，不会假定为零，并显示回退行数。平均售价、销量、现金收支、租金、税费和维护费仍使用游戏原值。
+
+## 语言
+
+界面跟随游戏当前语言，支持英语、简体中文、繁体中文、法语、德语、意大利语、西班牙语、葡萄牙语、日语、韩语、俄语、土耳其语和乌克兰语。“建议”“利润”等游戏词条直接读取当前 `Translations` 表；Mod 专有文字内嵌在各 DLL 中。不支持的语言回退到英语，无需另装语言包。
+
+详情见本 Mod 的[本地化说明](localization/README.md)。补充译文尚未全部经过对应语言母语者审校；游戏内字形、换行和实时切换仍需验证。
+
+## 构建与验证
+
+构建需要 Windows、.NET 8 SDK 或更新版本、本机游戏和加载器引用。在仓库根目录运行：
+
+```powershell
+./material-cost-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
+./material-cost-mod/build.ps1 -Loader MelonLoader -GameDir 'D:\Games\Old Market Simulator'
+```
+
+脚本会运行检查，在需要时下载固定版本的加载器引用并校验哈希，然后将安装包写入 `outputs/`。脚本只读取本机游戏程序集用于编译，不会打包或修改它们。本 Mod 所需的全部本地化源码均位于 `material-cost-mod/localization/`。
+
+0.5.1 已为 BepInEx、MelonLoader 和保留源码的独立目标完成编译。自动化验证通过 40 项会计检查、27 项运行时缓存与规则检查，以及 11 组本地化测试，覆盖配方与箱件换算、当天价格、亏损、零成本、未知规则、按需缓存与失效、原生词条、语言回退和占位符一致性。
+
+自动化检查不等同于游戏内验收。不同分辨率的布局、手柄选择、所有语言的字体与换行、换日、多人和运行时性能尚未完整验证。游戏更新或其他修改相同界面的 Mod 可能需要重新测试。
 
 ## 许可证与引用
 
-本目录的原创源码、测试及文档采用 [MIT License](LICENSE)。复制软件或其重要部分时须保留版权声明和许可声明；游戏及第三方组件不受此授权覆盖。
+本目录原创源码、测试、构建脚本和文档采用 [MIT License](LICENSE)，Copyright (c) 2026 Zhaohan Liu。游戏和第三方组件继续适用各自许可证。
 
-如果本 Mod 帮助了你的项目、文章或视频，请注明 Mod 名称并链接到 [Old Market Simulator Mods](https://github.com/martin-lzh/old-market-simulator-mods)。引用格式见[仓库首页](../README.md#引用项目)。这是一项引用请求，不是 MIT 的附加许可条件。
+如果本项目帮助了其他 Mod、文章、视频或研究，欢迎链接到 [martin-lzh/old-market-simulator-mods](https://github.com/martin-lzh/old-market-simulator-mods)，并注明 Mod 名称和版本。引用完全自愿，不是 MIT 许可证的附加条件。

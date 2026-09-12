@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 using System.Reflection;
-using OldMarket.Localization;
+using OldMarket.MaterialCost.Localization;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;

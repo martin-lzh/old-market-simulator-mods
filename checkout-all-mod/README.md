@@ -1,36 +1,167 @@
 # Old Market Checkout All
 
-## 0.1.4 本地化
+Continuously bags products and collects payment at one checkout while you hold a key or enable a toggle.
 
-界面跟随游戏配置的 13 种语言，区分简体与繁体中文。原生名词和动作从游戏 `Translations` 表读取；Mod 补充说明内嵌在 DLL 中，无需额外语言包或共用 DLL。语言表异步就绪和切换语言后刷新文字，字体跟随原生界面。
+Version 0.1.4 is a prerelease for Old Market Simulator 2.1.6, Unity 2022.3, and BepInEx 5.
 
-构建需保留仓库根目录的 `localization/`，构建前自动执行语言与占位符检查。详情见[本地化说明](../localization/README.md)。配置键名、插件 ID、日志及开发文档不随游戏语言改名。此版本只更新显示与本地化，不自动安装；游戏内布局、字形及实时切换仍需验证。
+## Features
 
+- Hold keyboard `E` for the configured delay to process checkout products in order and collect the resulting coin pouch.
+- Press `F9` while aiming at a checkout to toggle continuous checkout without holding `E`.
+- Waits at the same empty checkout for later customers with no idle timeout.
+- Uses the game's original `CheckoutItem.Interact` and `CoinPouch.Interact` paths and server RPCs. Prices, money, saves, customer queues, and pouch creation remain under game logic.
+- Sends each locally observed product or pouch interaction at most once, then waits for server confirmation before continuing.
+- Shows a localized hint below the native interaction prompt in all 13 game locales. Native action terms, font, and font size come from the current game localization and UI.
+- Works as a standalone BepInEx 5 plugin; Coordinates and Material Cost are not required.
 
-独立 BepInEx 5 插件，不依赖成本或坐标 Mod。
+Short presses retain the original game interaction. The first `E` press may therefore bag one product, ring the bell, or collect money before continuous mode begins. Reaching the hold threshold starts continuous processing. Pressing `F9` during a hold converts that session to toggle mode, so releasing `E` no longer stops it.
 
-0.1.3 新增 F9 连续结账开关，作为长按 E 的补充。默认避开坐标 Mod 的 F8；快捷键可配置，提示跟随配置显示。沿用原生交互提示下方的独立文本，继承游戏字体和字号。
+Both modes remain locked to their starting checkout. Looking away, leaving interaction range, opening a menu, losing application focus, changing checkout, disconnecting, or encountering an error cancels pending automation. Completed interactions are not undone. Restart with `F9`, or release and hold `E` again. Turning toggle mode off while `E` remains held blocks a new hold session until `E` is released.
 
-准星对着柜台时按一次 F9，开启跨顾客自动装袋、收款，无需持续按住 E；再按 F9 关闭。长按 E 结账期间按 F9 可转为开关模式，之后松开 E 仍继续。关闭开关时即使 E 尚未松开也会停止，须松开重新长按才能重新启动。开关不保存到下次启动，不会在未对准柜台时预先开启。
+## Download
 
-站在原版可交互距离内，准星对着结账台、桌上的商品、铃或钱袋，长按键盘 E 约 0.6 秒，按顺序装袋桌上的商品，并收取最后出现的钱袋。一直按住并看着同一张桌子即可连续处理后续顾客，无需每位重新按键。空柜台等待下一位顾客不限时；准星建议对着柜台本体，避免商品或钱袋消失后视线落在柜台外而中止。
+Download [`OldMarket.CheckoutAll-0.1.4.zip`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/checkout-all-v0.1.4/OldMarket.CheckoutAll-0.1.4.zip) from the [`checkout-all-v0.1.4` prerelease](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4).
 
-短按沿用原版操作，因此按下 E 的最初一刻仍可能装袋一件商品、响铃或收钱。继续按住达到阈值后才启动连续结账。长按模式松开 E 即停止，开关模式松开 E 不停止。两种模式都会在看向别处、走出距离、打开菜单或失去焦点时停止尚未发送的操作；已经完成的装袋不会撤回。启动后若中止，须重新按 F9 或松开重新长按 E，不会自动转到另一张柜台。长按使用固定键盘 E，暂不跟随重绑定或手柄按键。
+The release also includes [`SHA256SUMS.txt`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/checkout-all-v0.1.4/SHA256SUMS.txt) for package verification.
 
-插件调用原版 CheckoutItem.Interact 和 CoinPouch.Interact，通过游戏原有服务器 RPC 执行。没有直接修改金币、售价、存档、客户队列或自行生成钱袋；付款金额沿用该顾客实际购物车价格。每个本地商品/钱袋最多发送一次交互；发送后等待服务器确认该对象消失，再处理下一个对象，商品全部消失后才收款。单次交互确认最多等待 10 秒，超时中止且不重发，需要重新按 F9 或松开重新长按。没有商品或钱袋时只等待，不模拟响铃。
+## Installation
 
-联机客户端的钱袋没有同步所属柜台字段，因此按原生 coinPouchPoint 的世界位置匹配（1 厘米容差），必须唯一对应该台；重叠柜台或多个同位置钱袋时放弃自动收款，可手动收取。不要求服务器安装本插件的设计仍需联机验证；员工或其他玩家同时结账的竞争也需实测，不能仅凭本地防重复断言网络层绝不会重复。
+1. Exit the game completely.
+2. Make sure BepInEx 5 is installed and working.
+3. Extract the archive into the game directory. The DLL should be at `BepInEx/plugins/OldMarket.CheckoutAll/OldMarket.CheckoutAll.dll`.
+4. Start the game, aim at a checkout within normal interaction distance, and hold `E` or press `F9`.
+
+To update, exit the game and replace only this mod's DLL. To uninstall, exit the game and remove `OldMarket.CheckoutAll.dll`; do not remove BepInEx or unrelated plugins.
+
+## Controls and configuration
+
+The first launch creates `BepInEx/config/local.oldmarket.checkoutall.cfg`.
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `Checkout.HoldSeconds` | `0.6` | Seconds keyboard `E` must remain held before continuous checkout starts. Range: `0.3`–`2.0`. |
+| `Checkout.ToggleKey` | `F9` | Unity Input System keyboard key that toggles the checkout currently under the crosshair. `None` disables it. |
+
+Edit configuration while the game is closed. Hold input is fixed to keyboard `E`; it does not follow game rebinding and does not support a controller. Toggle state is not saved between launches and cannot be enabled in advance without aiming at a checkout.
+
+Keep the crosshair on the checkout body for reliable targeting. A product or pouch may disappear after interaction and leave the crosshair outside the checkout, which cancels the session.
+
+## Processing and safeguards
+
+The mod handles one product at a time, waits for its network despawn, and only collects payment after every product has disappeared. Each confirmation may take up to 10 seconds. A timeout cancels the session without resending; restart with `F9` or by releasing and holding `E` again. Waiting for the next customer at an empty checkout has no timeout, and the mod does not simulate ringing the bell.
+
+On multiplayer clients, a coin pouch does not expose its checkout association. The mod matches it to the native checkout spawn point by world position with a one-centimeter tolerance and proceeds only when the match is unique. It declines automatic collection for overlapping checkouts or multiple pouches at the same position, leaving manual collection available.
+
+## Build
+
+Requirements: Windows, the .NET 8 SDK or a compatible newer SDK, and a local game installation with BepInEx 5. All required localization source, resources, and tests are contained in `checkout-all-mod/localization/`, so this Mod directory builds independently.
+
+From the repository root, run:
+
+```powershell
+./checkout-all-mod/build.ps1
+```
+
+For a nondefault game location:
+
+```powershell
+./checkout-all-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
+```
+
+The plugin targets `netstandard2.1`; state tests target `net8.0`. Local game and BepInEx assemblies are read-only references. The script runs localization and checkout-state tests, builds the plugin, and creates `outputs/OldMarket.CheckoutAll-0.1.4.zip`. The package contains only the original DLL, README, and MIT license; it includes no game or loader files and installs nothing.
+
+## Validation and known limits
+
+All current automated tests pass. They cover short presses, hold start and release, toggle start and stop, hold-to-toggle conversion, suppression until `E` is released, refusal to pre-enable without a target, cancellation on checkout changes, menus, focus loss and errors, indefinite empty-checkout waiting, confirmation timeout, and timer reset after confirmation. Builds and checks use Old Market Simulator 2.1.6.
+
+Actual UI and multiplayer behavior have not yet been verified for this prerelease. In-game testing is still needed for the `F9` prompt and toggle, three or more consecutive customers, an initial direct payment followed by a continued hold, idle waits longer than 10 seconds, adjacent checkouts, simultaneous employee or player checkout, menu cancellation, disconnects, and confirmation that money and sales increase exactly once. Client-only installation does not require the host by design, but remains unverified. Other game versions may change interaction APIs.
+
+## License and attribution
+
+Copyright © 2026 Zhaohan Liu. Original source, tests, and documentation in this directory are available under the [MIT License](LICENSE). Copies or substantial portions must retain the copyright and license notice. Old Market Simulator and third-party components are not covered.
+
+If this mod helps your project, article, or video, please credit **Old Market Checkout All** and link to the [Old Market Simulator Mods repository](https://github.com/martin-lzh/old-market-simulator-mods). This is a voluntary request, not an additional license condition.
+
+---
+
+# Old Market Checkout All（中文）
+
+长按按键或开启切换模式后，在同一张结账台持续装袋商品并收取钱袋。
+
+0.1.4 是面向 Old Market Simulator 2.1.6、Unity 2022.3 和 BepInEx 5 的预发布版本。
+
+## 功能
+
+- 按住键盘 `E` 达到设定时间后，依次装袋结账台上的商品并收取随后出现的钱袋。
+- 准星对着结账台时按 `F9`，可在无需持续按住 `E` 的情况下开启或关闭连续结账。
+- 同一张空结账台可以不限时等待后续顾客。
+- 调用游戏原有的 `CheckoutItem.Interact`、`CoinPouch.Interact` 及服务器 RPC。商品价格、金币、存档、顾客队列和钱袋生成仍由游戏原逻辑处理。
+- 本地观察到的每件商品或钱袋最多发送一次交互，等待服务器确认对象消失后才继续。
+- 在原生交互提示下方显示支持游戏全部 13 种语言的提示。原生动作词、字体和字号来自游戏当前的本地化与界面。
+- 是独立的 BepInEx 5 插件，不依赖 Coordinates 或 Material Cost Mod。
+
+短按仍使用游戏原有操作。因此按下 `E` 的第一刻可能先装袋一件商品、响铃或收钱；达到长按阈值后才由 Mod 继续处理。长按期间按 `F9` 会把当前会话转为切换模式，之后松开 `E` 也不会停止。
+
+两种模式都锁定在启动时对准的结账台。看向别处、走出交互距离、打开菜单、游戏失去焦点、切换结账台、断线或发生错误，都会取消尚未完成的自动操作；已经完成的交互不会撤回。取消后需要再次按 `F9`，或松开并重新长按 `E`。如果在 `E` 仍按住时关闭切换模式，必须先松开 `E` 才能开始新的长按会话。
+
+## 下载
+
+从 [`checkout-all-v0.1.4` 预发布页面](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4)下载 [`OldMarket.CheckoutAll-0.1.4.zip`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/checkout-all-v0.1.4/OldMarket.CheckoutAll-0.1.4.zip)。发布页同时提供 [`SHA256SUMS.txt`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/checkout-all-v0.1.4/SHA256SUMS.txt) 用于校验压缩包。
 
 ## 安装
 
-退出游戏后，把包内 `BepInEx/plugins/OldMarket.CheckoutAll/OldMarket.CheckoutAll.dll` 放入游戏目录。已有 BepInEx 5 即可，勿替换加载器。首次运行生成 `BepInEx/config/local.oldmarket.checkoutall.cfg`，HoldSeconds 可调整为 0.3–2 秒。`[Checkout]` 下的 `ToggleKey = F9` 可改为其他 Unity Input System 键名，`None` 禁用快捷键；退出游戏后修改，下次启动生效。移出此 DLL 可卸载。
+1. 完全退出游戏。
+2. 确认 BepInEx 5 已安装并能正常加载插件。
+3. 将压缩包解压到游戏目录。DLL 的最终路径应为 `BepInEx/plugins/OldMarket.CheckoutAll/OldMarket.CheckoutAll.dll`。
+4. 启动游戏，在原版交互距离内将准星对准结账台，然后长按 `E` 或按 `F9`。
 
-构建：`./checkout-all-mod/build.ps1`。只读引用游戏和现有 BepInEx，包内仅有原创 DLL 和说明，不自动安装。原始游戏组件和反编译快照不改动。
+更新时先退出游戏，只替换本 Mod 的 DLL。卸载时退出游戏并移除 `OldMarket.CheckoutAll.dll`；不要删除 BepInEx 或其他插件。
 
-验证范围：状态测试覆盖短按、长按启动和松手停止、开关启停、长按转开关、关闭开关后抑制仍按住的 E、未对准柜台禁止预开启、切换柜台/菜单/焦点/错误取消，以及空台长时间等待、交互确认超时和确认后重新计时。编译不代表游戏内验收完成。需实测 F9 启停及提示、单机/房主/客户端下连续至少三位顾客、首按直接收钱后继续长按、空台等待超过 10 秒、相邻柜台、员工同时结账、菜单取消、断线和金币/销量只增加一次。
+## 操作与配置
 
-## 许可证与引用
+首次运行会生成 `BepInEx/config/local.oldmarket.checkoutall.cfg`。
 
-本目录的原创源码、测试及文档采用 [MIT License](LICENSE)。复制软件或其重要部分时须保留版权声明和许可声明；游戏及第三方组件不受此授权覆盖。
+| 设置 | 默认值 | 说明 |
+| --- | --- | --- |
+| `Checkout.HoldSeconds` | `0.6` | 键盘 `E` 需要持续按住多少秒才启动连续结账。有效范围为 `0.3`–`2.0`。 |
+| `Checkout.ToggleKey` | `F9` | 在准星当前指向的结账台切换连续结账的 Unity Input System 键盘按键。设为 `None` 可禁用。 |
 
-如果本 Mod 帮助了你的项目、文章或视频，请注明 Mod 名称并链接到 [Old Market Simulator Mods](https://github.com/martin-lzh/old-market-simulator-mods)。引用格式见[仓库首页](../README.md#引用项目)。这是一项引用请求，不是 MIT 的附加许可条件。
+请在游戏退出后编辑配置。长按输入固定为键盘 `E`，不会跟随游戏按键重绑定，也不支持手柄。切换状态不会保存到下次启动，未对准结账台时也不能预先开启。
+
+为提高目标识别的稳定性，建议让准星一直对着结账台本体。商品或钱袋在交互后会消失，如果此时准星落到结账台外，会话就会取消。
+
+## 处理方式与保护措施
+
+Mod 每次处理一件商品，等待它从网络中消失，并在所有商品都消失后才收取钱袋。每次交互确认最多等待 10 秒；超时会取消会话且不会重发，需要按 `F9` 或松开并重新长按 `E`。空结账台等待下一位顾客没有超时，Mod 也不会模拟响铃。
+
+联机客户端的钱袋不公开所属结账台。Mod 会用原生钱袋生成点的世界位置匹配结账台，容差为 1 厘米，并且只在结果唯一时继续。结账台重叠或同一位置存在多个钱袋时不会自动收钱，仍可手动收取。
+
+## 构建
+
+需要 Windows、.NET 8 SDK 或兼容的新版本 SDK，以及装有 BepInEx 5 的本机游戏。所需本地化源码、资源和测试均位于 `checkout-all-mod/localization/`，因此本 Mod 目录可以独立构建。
+
+在仓库根目录运行：
+
+```powershell
+./checkout-all-mod/build.ps1
+```
+
+游戏不在默认位置时：
+
+```powershell
+./checkout-all-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
+```
+
+插件以 `netstandard2.1` 为目标框架，状态测试以 `net8.0` 为目标框架。本机游戏和 BepInEx 程序集仅作为只读引用。脚本运行本地化和结账状态测试，再构建插件并生成 `outputs/OldMarket.CheckoutAll-0.1.4.zip`。压缩包只包含原创 DLL、本说明和 MIT 许可证，不包含游戏或加载器文件，也不会自动安装。
+
+## 验证与已知限制
+
+当前所有自动化测试均已通过，覆盖短按、长按启动与松手停止、切换模式启停、长按转切换、关闭后等待 `E` 松开、未对准目标时拒绝预开启、切换结账台、菜单、失去焦点和错误取消，以及空台无限等待、交互确认超时和确认后重新计时。构建和检查以 Old Market Simulator 2.1.6 为依据。
+
+此预发布版本尚未实机验证界面和联机行为。仍需测试 `F9` 提示与启停、连续处理至少三位顾客、首次按键直接收钱后继续长按、空台等待超过 10 秒、相邻结账台、员工或其他玩家同时结账、菜单取消、断线，以及金币和销量是否只增加一次。设计上仅客户端安装不要求房主安装，但尚未验证。其他游戏版本可能改变本插件使用的交互 API。
+
+## 许可与引用
+
+Copyright © 2026 Zhaohan Liu。本目录的原创源码、测试和文档采用 [MIT License](LICENSE)。复制软件或其重要部分时必须保留版权和许可声明；Old Market Simulator 及第三方组件不受此许可证覆盖。
+
+如果本 Mod 帮助了你的项目、文章或视频，欢迎注明 **Old Market Checkout All** 并链接到 [Old Market Simulator Mods 仓库](https://github.com/martin-lzh/old-market-simulator-mods)。这是自愿引用请求，不是附加许可条件。

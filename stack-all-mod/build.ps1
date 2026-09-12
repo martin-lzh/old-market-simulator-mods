@@ -1,6 +1,6 @@
 param([string]$GameDir = 'F:\SteamLibrary\steamapps\common\Old Market Simulator')
 $ErrorActionPreference = 'Stop'
-dotnet run --project (Join-Path $PSScriptRoot '../localization/tests/Localization.Tests.csproj') -c Release
+dotnet run --project (Join-Path $PSScriptRoot 'localization/tests/Localization.Tests.csproj') -c Release
 if ($LASTEXITCODE) { throw 'Localization checks failed.' }
 $taskRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 dotnet run --project (Join-Path $PSScriptRoot 'tests/Tests.csproj') -c Release

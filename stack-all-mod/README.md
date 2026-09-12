@@ -1,85 +1,113 @@
 # Old Market Stack All
 
-## 0.2.1 本地化
+English | [中文](#中文说明)
 
-界面跟随游戏配置的 13 种语言，区分简体与繁体中文。原生名词和动作从游戏 `Translations` 表读取；Mod 补充说明内嵌在 DLL 中，无需额外语言包或共用 DLL。语言表异步就绪和切换语言后刷新文字，字体跟随原生界面。
+Version 0.2.1 expands the inventory while preserving physical product containers. It targets Old Market Simulator 2.1.6 for Windows/Mono and requires BepInEx 5.
 
-构建需保留仓库根目录的 `localization/`，构建前自动执行语言与占位符检查。详情见[本地化说明](../localization/README.md)。配置键名、插件 ID、日志及开发文档不随游戏语言改名。此版本只更新显示与本地化，不自动安装；游戏内布局、字形及实时切换仍需验证。
+## Features
 
+- Slot lower-left: total goods. Lower-right: physical containers.
+- Up to 64 containers per product slot; total goods may exceed 64. Empty containers count as containers with zero goods.
+- Each container retains its product ID, contents, cost, and freshness. Compatible contents use the game's weighted integer merge and expiration rules.
+- Non-product, non-tool items stack to 64. Tools remain separate with their own durability.
+- Short Q/F and mouse placement handle one item or one complete container. Holding Q/F processes the current slot one unit at a time after the hold delay. Hints follow bindings, language, and native fonts.
+- 13 game-configured languages, including Simplified and Traditional Chinese. Mod text is embedded; native terms come from the game's `Translations` table.
 
-版本：0.2.1。BepInEx 5 插件，ID：`local.oldmarket.stackall`。
-
-## 数量显示
-
-商品格左下角显示商品总数，右下角显示实际容器数。
-
-| 内容 | 左侧商品总数 | 右侧容器数 |
+| Contents | Goods | Containers |
 | --- | ---: | ---: |
-| 两篮各 24 个商品 | 48 | 2 |
-| 三个空篮子 | 0 | 3 |
-| 64 个各装 85 个商品的容器 | 5440 | 64 |
+| Two baskets of 24 | 48 | 2 |
+| Three empty baskets | 0 | 3 |
+| 64 containers of 85 | 5440 | 64 |
 
-每格最多 **64 个容器**，商品总数可以超过 64。非商品的非工具物品仍每格最多 64 件；工具不堆叠，保留各自耐久及原有显示。
+A 65th container uses another unlocked empty slot. With no space, the complete container remains near the player rather than replacing inventory data.
 
-## 合并与空容器
+## Install
 
-- 每个商品容器分别保留商品 ID、内容数量、成本和保鲜天数。相同商品 ID 才能分组，外观相同而商品 ID 不同的篮子不混为一组。
-- 拾取时自动整理同组容器的内容，沿用 V 键的数量加权、整数截断和过期限制。每个容器保持原商品的容量，移空的源容器仍保留。过期与新鲜商品可占同一格，但不互相混合内容。
-- 空篮子按一个真实容器计数，不把零数量改为一单位商品。有内容的容器优先手持，取完后可继续取出空容器。
-- 每格第 65 个容器进入另一已解锁空格；没有空间时，将这个完整容器留在玩家脚边，不挤掉其他格，不丢弃内容或容器。工具满包时也留在脚边，防止覆盖整个容器组。
-- 收获直接补入物品栏、V 转移、物品消耗均按具体容器处理。可复用容器内容耗尽后保留空容器。
-- 0.1.0 已合并为一个实体的商品没有历史容器数量。升级按现存实体计数，例如旧的一篮 48 个仍是 `48 / 1`，不会推算或补造第二个篮子。
-- 非商品若携带不同动物年龄、鱼笼使用次数等状态，仍分格保留，不对这些状态作保鲜加权。
+1. Install BepInEx 5, then close the game.
+2. Download [`OldMarket.StackAll-0.2.1.zip`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/stack-all-v0.2.1/OldMarket.StackAll-0.2.1.zip) and verify [`SHA256SUMS.txt`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/stack-all-v0.2.1/SHA256SUMS.txt).
+3. Extract into the game directory. The DLL should be at `BepInEx/plugins/OldMarket.StackAll/OldMarket.StackAll.dll`.
+4. Start the game and look for `Stack All 0.2.1 ready` in the BepInEx log.
 
-## 丢弃、投掷和摆放
+Every multiplayer participant must run 0.2.1. There is no automatic peer-version check; coordinate versions yourself. Do not mix it with vanilla, 0.1.0, or incompatible inventory Mods.
 
-以下为默认键位；读取游戏输入动作，支持游戏内重新绑定。
+## Controls
 
-| 操作 | 行为 |
-| --- | --- |
-| 短按 Q | 丢下一个物品或一个完整容器 |
-| 短按 F | 投掷一个物品或一个完整容器 |
-| 右键预览、左键确认 | 按原版摆放一个物品/建筑或一个完整容器 |
-| 长按 Q / F | 首件立即处理，约 0.6 秒后每隔约 0.12 秒单独处理一个，直到当前格取完或松开 |
+Defaults follow the game's rebindable actions. Short Q drops one unit; short F throws one; placement handles one unit. A product unit is one whole container, so a basket of 24 is one action. Holding Q/F acts immediately, then about every 0.12 seconds after an approximately 0.6-second delay. Switching slots/items, opening UI, pausing, losing focus, or pressing both actions cancels the sequence.
 
-一篮 24 个商品的一次动作就是这一篮 24 个，不拆成 24 次动作，也不把当前格的多篮生成成一个物体。空篮子同样一次取一个；鼠标放置不增加连发。
+## Saves, upgrades, and removal
 
-长按期间切格、物品改变、打开界面、失去窗口焦点或暂停会取消批次；同时按住 Q/F 不执行。数量因新拾取或其他操作改变也会取消，防止顺带处理新加入的物品。低帧率时不会一次补发多个动作；工具不按耐久值重复。
+Extra containers are stored in additional inventory records written by the game's normal save flow. Saves containing them require Stack All 0.2.0 or a later compatible plugin.
 
-右下角原生操作提示上方，在当前格有多个可处理单位时显示“长按 Q：连续丢下”“长按 F：连续投掷”。按键文字跟随实际绑定及键鼠/手柄切换，字体沿用原生提示，打开界面时隐藏。
+Before removing or downgrading: take out extra containers until each product slot contains at most one; split other stacks to vanilla limits; then save normally and exit. The compatible save hook trims unused extra records. Do not disable or hot-unload while extra containers remain.
 
-马匹货物转移和垃圾桶操作处理当前手持的一个商品容器，剩余容器保留。背包缩容时，锁定格中的容器逐个回到世界，空容器也保留。
+A legacy 0.1.0 overfull bag remains one bag because no historical container count exists. For example, 48 goods in one old basket display as `48 / 1`. Drain it or use V transfer to restore normal capacity before removal.
 
-## 保存、联机与回退
+## Configuration and build
 
-复用原生 `InventorySlot` 与 `NetworkList`，把每格额外容器的记录放在物品栏记录数组尾部；界面、滚轮和快捷键仍使用原有格数。插件不直接操作 `.save` 文件，游戏正常保存时会保存这些额外记录。
-
-**含额外容器记录的保存需要 0.2.0 或后续兼容版本读取。房主及所有玩家都需同版本，不能混用原版或 0.1.0；当前没有自动检查其他玩家版本。**
-
-停用/降级前，将每格额外容器逐个取出，确保每格最多一个容器，非商品堆叠也拆回原版上限，再在游戏内正常保存并退出。保存钩子会裁掉尾部空记录，使物品栏恢复原版长度。未处理额外记录时不要停用、热卸载或换回 0.1.0。旧版合并得到的超容量单篮也应先用 V 分装回正常容量。
-
-## 构建与安装
-
-在仓库根目录运行：
+There are no user options; capacity and save representation are compatibility rules.
 
 ```powershell
 ./stack-all-mod/build.ps1
-# 其他游戏安装位置：
 ./stack-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
-只读引用本机游戏程序集和已安装的 BepInEx 核心，运行测试后生成 `outputs/OldMarket.StackAll-0.2.1.zip`。包内仅有原创 DLL 和本说明，不自动安装。退出游戏并备份原插件后，将 DLL 放到 `BepInEx/plugins/OldMarket.StackAll/OldMarket.StackAll.dll`。
+The build uses local game/BepInEx assemblies as read-only references, runs checks, and creates `outputs/OldMarket.StackAll-0.2.1.zip`; it does not install. All required localization source, resources, and tests are contained in `stack-all-mod/localization/`, so this Mod directory builds independently. Startup rejects an unreviewed game assembly or patch surface.
 
-已核查游戏程序集 SHA-256：`FA6CE6B89AEBDF50DD46FF9C857650DB0E9CC618B1CE939F58501E0DC59C6296`。游戏版本或补丁接口不匹配时拒绝启用；若保存含额外容器记录，应先取得兼容插件再读取，不能依靠禁用插件回退读取。
+## Validation and limitations
 
-## 验证范围
+The original stack/container/input tests, game IL contract checks, and the Mod-local localization checks pass. They cover conservation, empty containers, merges, 64-container overflow, removal, save-array reload, tool durability, hold cancellation, translations, formatting, and native action lookup.
 
-已通过构建、89,116 项数量/容器/输入检查和 47 项游戏 IL 契约检查，覆盖空篮子、加权合并、64 个容器、溢出、单个取出、数组保存重载、工具耐久和长按取消。尚未执行 0.2.0 游戏内验收，自动检查不等于实际 UI、保存流程或联机已验证。
+In-game UI, normal save/load, and real multiplayer have not been verified for this release. Back up important saves. Inventory Mods patching the same operations may conflict.
 
-游戏内需验收左右数字、右下角提示、Q/F 短按及长按、鼠标摆放、V 转移、背包缩容、马匹转移、正常保存重载和多人同步。资源核验脚本及其提取数据留在本机分析项目，不随本仓库分发。
+## License and attribution
 
-## 许可证与引用
+Original work here is under the [MIT License](LICENSE); game and third-party components are excluded. Citation is voluntary, not a license condition: **Old Market Stack All by Zhaohan Liu**, with a link to the [repository](https://github.com/martin-lzh/old-market-simulator-mods).
 
-本目录的原创源码、测试及文档采用 [MIT License](LICENSE)。复制软件或其重要部分时须保留版权声明和许可声明；游戏及第三方组件不受此授权覆盖。
+---
 
-如果本 Mod 帮助了你的项目、文章或视频，请注明 Mod 名称并链接到 [Old Market Simulator Mods](https://github.com/martin-lzh/old-market-simulator-mods)。引用格式见[仓库首页](../README.md#引用项目)。这是一项引用请求，不是 MIT 的附加许可条件。
+## 中文说明
+
+0.2.1 在保留实体商品容器的前提下扩展物品栏，适用于 Windows/Mono 版 Old Market Simulator 2.1.6，需要 BepInEx 5。
+
+## 功能
+
+- 格子左下显示商品总数，右下显示实体容器数。
+- 每个商品格最多 64 个容器；商品总数可超过 64。空容器按 0 件商品、1 个容器记录。
+- 分别保留商品 ID、内容、成本和保鲜数据；兼容内容沿用游戏的加权整数合并及过期规则。
+- 非商品、非工具每格最多 64 件；工具独立保留耐久。
+- 短按 Q/F 和鼠标摆放每次处理一件或一个完整容器；长按逐个处理。提示跟随键位、语言和原生字体。
+- 支持游戏配置的 13 种语言，包括简繁中文。
+
+第 65 个容器会进入另一个已解锁空格；没有空间时，完整容器留在玩家附近，不覆盖物品栏数据。
+
+## 安装
+
+1. 安装 BepInEx 5 并退出游戏。
+2. 下载 [`OldMarket.StackAll-0.2.1.zip`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/stack-all-v0.2.1/OldMarket.StackAll-0.2.1.zip)，用 [`SHA256SUMS.txt`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/stack-all-v0.2.1/SHA256SUMS.txt) 校验。
+3. 解压到游戏目录，确认 DLL 位于 `BepInEx/plugins/OldMarket.StackAll/OldMarket.StackAll.dll`。
+4. 启动后在 BepInEx 日志确认 `Stack All 0.2.1 ready`。
+
+联机所有玩家必须使用 0.2.1。Mod 不自动检查对方版本，请自行确认一致；不能与原版、0.1.0 或不兼容物品栏 Mod 混用。
+
+## 操作与存档
+
+默认键位读取游戏可重绑定动作。短按 Q 丢下、F 投掷、鼠标摆放均处理一个单位；一篮 24 件商品是一个完整容器单位。长按立即处理首个单位，约 0.6 秒后约每 0.12 秒处理一个。切格、物品变化、打开界面、暂停、失焦或同时按 Q/F 会取消。
+
+额外容器记录由游戏正常保存。含这些记录的存档需要 Stack All 0.2.0 或后续兼容插件。停用或降级前，逐个取出额外容器至每个商品格最多一个，将其他堆叠拆回原版上限，然后正常保存并退出。额外容器仍存在时不要停用或热卸载。
+
+旧 0.1.0 超容量篮子没有历史容器数，升级后仍算一个，例如 `48 / 1`。卸载前请消耗或用 V 转移恢复正常容量。
+
+## 配置、构建与验证
+
+没有用户配置项。在仓库根目录运行：
+
+```powershell
+./stack-all-mod/build.ps1
+./stack-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
+```
+
+构建只读引用本机程序集，运行检查并生成 `outputs/OldMarket.StackAll-0.2.1.zip`，不会安装。所需本地化源码、资源和测试均位于 `stack-all-mod/localization/`，因此本 Mod 目录可以独立构建。原有功能测试、IL 契约检查和 Mod 自带本地化检查均通过；尚未验证游戏内 UI、正常保存/读取和真实多人联机。首次使用前请备份重要存档。
+
+## 许可与引用
+
+原创内容采用 [MIT License](LICENSE)，不涵盖游戏及第三方组件。引用完全自愿，不是许可条件：**Old Market Stack All，作者 Zhaohan Liu**，并链接[项目仓库](https://github.com/martin-lzh/old-market-simulator-mods)。
