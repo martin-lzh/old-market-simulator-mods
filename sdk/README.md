@@ -12,6 +12,7 @@
 | --- | --- | --- | --- |
 | 2.1.6 | [2.1.6/r1](2.1.6/r1/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | 原有五个 Mod 的六种发行构建；实机 UI、存档及双端联机验收未完成 |
 | 2.1.6 | [2.1.6/r2](2.1.6/r2/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.0 固定此修订；增加地图 UI、物理投影、输入、区域与反射依赖，实机验收未完成 |
+| 2.1.6 | [2.1.6/r3](2.1.6/r3/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.1 固定此修订；增加原生 HUD 容器、补间端点与跨画布屏幕坐标接口，实机验收未完成 |
 
 每个 Mod 在自己的 `release.json` 中固定 SDK，例如 `"sdk": "2.1.6/r1"`。不自动选择“最新”SDK。目录 `sdk/<游戏版本>/r<修订号>/` 一旦合并就保留原样；同一游戏版本补充接口时新建 `r2`，游戏升级时新建对应游戏版本目录。旧 Mod 发布、SDK 和 CHANGELOG 都保留，下载前仍须确认存档、加载器与联机要求。
 
@@ -54,6 +55,8 @@ SDK 随维护者确认的游戏版本更新，不会监测到一次游戏更新�
 
 2026-09-13：r2 从源码提交 `135eb89` 导出，共 15 个程序集、255 个类型、641 个方法、469 个字段，仅含声明。原 r1 全部类型/方法/字段保留，原 13 个程序集身份与哈希不变；r1 文件及旧 Mod pin 未修改。六个 Mod 的七个构建均通过 SDK 编译与真实引用符号 IL/嵌入资源比对；Navigation 511 项逻辑/本地化检查、318 项只读原生契约、22 项 CI 工具测试通过。实机验收未执行，Navigation 保持预发布。
 
+2026-09-13：r3 从源码提交 `b038bf0` 导出，共 15 个程序集、257 个类型、652 个方法、476 个字段，仅含声明。全部 r2 声明及 15 个程序集身份/哈希保留；新增 `Screen` 的 UnityEngine 类型转发与真实组件一致。仅 Navigation 0.1.1 改用 r3，旧快照与其他 Mod pin 不变。左下默认布局使用相同 API；最终版本通过七个构建的 SDK/真实引用符号 IL 和资源比对、564 项导航检查、400 项只读原生契约及 22 项 CI 工具测试。实机 UI 与动画验收未执行。
+
 ## English
 
 This SDK lets GitHub-hosted runners compile Mods without a game installation. The standard .NET compiler consumes references reconstructed from `api.json`: the types, fields, method signatures, generic constraints, enum values and compiler metadata used by these Mods. No original game DLLs, game method implementations, resources, saves or decompiled source are included.
@@ -62,7 +65,7 @@ This SDK lets GitHub-hosted runners compile Mods without a game installation. Th
 
 ### Versioning and compatibility
 
-The table records game 2.1.6 on Windows x64 / Unity Mono 2022.3.62f3. The original five Mods retain SDK r1; Navigation 0.1.0 pins r2, adding map UI, physics projection, input, region and reflection declarations. CI builds six Mods and seven loader variants. In-game UI, save and multiplayer acceptance remains incomplete.
+The table records game 2.1.6 on Windows x64 / Unity Mono 2022.3.62f3. The original five Mods retain SDK r1; Navigation 0.1.0 pins r2, adding map UI, physics projection, input, region and reflection declarations. Navigation 0.1.1 pins r3, adding native HUD containers, tween endpoints and screen-coordinate conversion across canvases. CI builds six Mods and seven loader variants. In-game UI, save and multiplayer acceptance remains incomplete.
 
 Each Mod pins an SDK in its own `release.json`, for example `"sdk": "2.1.6/r1"`. There is no implicit latest SDK. Merged `sdk/<game-version>/r<revision>/` snapshots are immutable. Add a new revision to extend the same game baseline, or a new game-version directory after a game update. Preserve old SDKs, Mod releases and CHANGELOG records; users must still check save, loader and multiplayer requirements.
 
@@ -84,3 +87,5 @@ After a game update:
 SDK updates follow maintainer-verified game versions; they do not automatically overwrite a reviewed snapshot whenever the game updates.
 
 Validation on 2026-09-13: r2 was exported from source `135eb89` and contains 15 assemblies, 255 types, 641 methods and 469 fields, declarations only. All r1 declarations are retained; the original 13 identities/hashes and old SDK pins are unchanged. All seven builds passed SDK compilation and real-reference symbolic IL/resource comparison. Navigation passed 511 logic/localization checks and 318 read-only game contracts; the CI tools passed 22 tests. In-game acceptance is not performed; Navigation remains a prerelease.
+
+Validation on 2026-09-13: r3 was exported from source `b038bf0` and contains 15 assemblies, 257 types, 652 methods and 476 fields, declarations only. All r2 declarations and all 15 assembly identities/hashes remain intact; the additional UnityEngine `Screen` forwarder matches the real assemblies. Only Navigation 0.1.1 moves to r3; old snapshots and other Mod pins are unchanged. The bottom-left layout uses the same API. The final version passed all seven SDK/real-reference symbolic IL and resource comparisons, 564 navigation checks, 400 read-only game contracts and 22 CI tooling tests. In-game UI and animation acceptance was not performed.
