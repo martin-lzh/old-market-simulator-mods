@@ -10,9 +10,9 @@ Identify the Mod, tool, or documentation; state any changes to configuration, sa
 
 ## Mod 版本归属 / Mod version assignment
 
-<!-- 检查所有 Mod 的 CHANGELOG 并对照 PR 差异，逐项列出涉及的 Mod：维护者明确指定的目标版本，或 Unreleased（待维护者指定版本）。
+<!-- 检查所有 Mod 的 CHANGELOG 并对照 PR 差异，逐项列出涉及的 Mod：维护者明确指定的目标版本；尚未指定时，目标版本栏必须填写 **UNASSIGNED**，不能填旧版本或现有源码版本。Unreleased 属于改动状态，可在说明栏注明。
 同时列出其他仍有 Unreleased 内容、尚未规定版本的 Mod；没有则写“无”。已有旧版本号不代表本轮改动已指定版本，勿自动升级。
-Inspect every Mod CHANGELOG against the PR diff. For each affected Mod, record the maintainer-authorized target version or Unreleased (awaiting assignment).
+Inspect every Mod CHANGELOG against the PR diff. For each affected Mod, record the maintainer-authorized target version. If none is assigned, the target version cell must read **UNASSIGNED**, never an old release or current source version. Describe Unreleased changes separately in the scope/status column.
 Also list other Mods with pending Unreleased changes and no assigned version; write “none” when empty. An existing old version does not assign new changes. Do not bump automatically. -->
 
 ## 验证 / Validation

@@ -28,6 +28,8 @@
 
 ### 分支与交付
 
+PR 版本表中，尚未明确指定的目标版本必须醒目标为 `**UNASSIGNED**`；不得用旧版本、当前源码版本或 Unreleased 代替目标版本。Unreleased 状态放在改动说明中。
+
 PR 标题和正文使用英语，以维护者的口吻面向其他开发者撰写。说明最终问题、行为变化、验证和发布状态；不写 Agent 向用户汇报的语气，不叙述对话、用户指令或执行过程。版本推进由维护者决定，终端用户不需要创建 PR。
 
 在当前 `dev` 分支维护，通过 PR 合并受保护的 `main`；不创建临时工作树，不直接推送 main 或绕过保护。按用户约定提交并推送本次相关改动。先检查工作区，保留其他任务的修改，不将其混入提交。报告是否更新 SDK、所用基线和实际验证结果；文档修改只需检查内容、链接与差异。
@@ -59,6 +61,8 @@ Bind release authorization to exact source inputs using the [release record work
 8. SDK snapshots contain compilation declarations, not game implementations or resources. Never commit or upload original game DLLs/EXEs, resources, decompiled snapshots, saves or credentials. Generated SDK DLLs remain in ignored build directories and must never be installed or packaged with Mods. Preserve explicit package allowlists. Game installations are read-only; building does not authorize game installation changes or save modifications.
 
 ### Branches and delivery
+
+In PR version tables, display an unassigned target version as `**UNASSIGNED**`. Never substitute an old release, current source version or Unreleased for a target version; describe Unreleased changes in the scope/status column.
 
 Write PR titles and bodies in English, in the maintainer's voice for other developers. Explain the final problem, behavior changes, validation and release status. Do not frame the PR as an agent's report to a user or recount conversation history, user instructions or execution steps. Maintainers decide version advancement; end users are not required to open PRs.
 
