@@ -330,9 +330,9 @@ def mod_changed_since_release(slug, commit, releases):
 def pending_changes(c):
     text = (c["directory"] / "CHANGELOG.md").read_text(encoding="utf-8")
     for heading in ("Unreleased", "未发布"):
-        match = re.search(rf"^### {heading}\s*\n(.*?)(?=^## |^### |\Z)", text, re.M | re.S)
-        if match and re.sub(r"<!--.*?-->", "", match[1], flags=re.S).strip():
-            return True
+        for match in re.finditer(rf"^### {heading}\s*\n(.*?)(?=^## |^### |\Z)", text, re.M | re.S):
+            if re.sub(r"<!--.*?-->", "", match[1], flags=re.S).strip():
+                return True
     return False
 
 

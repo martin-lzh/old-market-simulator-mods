@@ -105,3 +105,8 @@ class ApprovalTests(unittest.TestCase):
     def test_record_requires_nonempty_authorization(self):
         with self.assertRaises(ValueError):
             ci.record_approval("coordinates", " ")
+
+    def test_duplicate_unreleased_cannot_hide_pending_changes(self):
+        p = self.c["directory"] / "CHANGELOG.md"
+        p.write_text(p.read_text(encoding="utf-8").replace("### Unreleased\n", "### Unreleased\n\n### Unreleased\n- Pending\n"), encoding="utf-8")
+        self.assertTrue(ci.pending_changes(self.c))
