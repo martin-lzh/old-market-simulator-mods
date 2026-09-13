@@ -2,6 +2,10 @@
 
 ## Automatic CI releases / CI 自动发布
 
+New numbered versions additionally require a [source-bound authorization record](approvals/README.md). Without a record they are skipped; a stale record or pending Unreleased content blocks publication. A version number alone is not release authorization.
+
+新编号版本还必须有[绑定源码的授权记录](approvals/README.md)。没有记录则跳过；记录失效或仍有未发布内容时阻止发布。单独存在版本号不代表获准发布。
+
 See [SDK maintenance](../sdk/README.md) for game-free builds and game-version updates. The workflow below replaces the manual upload steps in the historical procedure later in this document.
 
 无游戏构建和游戏版本更新见 [SDK 维护](../sdk/README.md)。下述工作流接管本文后方历史流程中的手动上传步骤。

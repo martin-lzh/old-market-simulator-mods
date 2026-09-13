@@ -221,7 +221,8 @@ class PublishTests(unittest.TestCase):
         self.package = self.output / ci.archive_name(self.c, "BepInEx")
         self.zip()
         self.patches = [patch.object(ci, "ROOT", self.root), patch.object(ci, "MODS", {"coordinates": "Coordinates"}),
-                        patch.object(ci, "config", return_value=self.c), patch.object(ci.subprocess, "check_output", return_value="a" * 40)]
+                        patch.object(ci, "config", return_value=self.c), patch.object(ci.subprocess, "check_output", return_value="a" * 40),
+                        patch.object(ci, "release_authorized", return_value=True)]
         for p in self.patches:
             p.start()
         ci.write_evidence(self.c, self.output)
@@ -242,6 +243,13 @@ class PublishTests(unittest.TestCase):
     def test_existing_public_release_is_never_modified(self):
         api = FakeGitHub([dict(tag_name="coordinates-v1.0.0", draft=False)])
         ci.publish("owner/repo", "a" * 40, api)
+        self.assertEqual(api.calls, [])
+
+    def test_no_approval_skips_artifacts_and_network_writes(self):
+        self.package.unlink()
+        api = FakeGitHub()
+        with patch.object(ci, "release_authorized", return_value=False):
+            ci.publish("owner/repo", "a" * 40, api)
         self.assertEqual(api.calls, [])
 
     def test_unchanged_mod_skips_artifact_reads_and_all_network_writes(self):

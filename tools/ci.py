@@ -327,6 +327,71 @@ def mod_changed_since_release(slug, commit, releases):
     return result.returncode == 1
 
 
+def pending_changes(c):
+    text = (c["directory"] / "CHANGELOG.md").read_text(encoding="utf-8")
+    for heading in ("Unreleased", "未发布"):
+        match = re.search(rf"^### {heading}\s*\n(.*?)(?=^## |^### |\Z)", text, re.M | re.S)
+        if match and re.sub(r"<!--.*?-->", "", match[1], flags=re.S).strip():
+            return True
+    return False
+
+
+def release_inputs(c, commit):
+    """Bind tracked source and build inputs, independently of merge/squash commit IDs."""
+    if not re.fullmatch(r"[0-9a-f]{40}", commit):
+        raise ValueError("Release inputs require an exact source commit")
+    paths = [f'{c["slug"]}-mod/', f'sdk/{c["sdk"]}/', 'tools/', '.github/workflows/',
+             'Directory.Build.props', 'Directory.Build.targets', 'global.json', 'NuGet.config', '.gitattributes']
+    tree = subprocess.check_output(["git", "ls-tree", "-r", "-z", commit, "--", *paths], cwd=ROOT)
+    if not tree:
+        raise ValueError("No tracked release inputs")
+    return sha(tree)
+
+
+def approval_path(c):
+    return ROOT / "releases/approvals" / f'{c["slug"]}-v{c["version"]}.json'
+
+
+def release_authorized(c, commit):
+    path = approval_path(c)
+    if not path.exists():
+        return False
+    approval = json.loads(path.read_text(encoding="utf-8"))
+    expected = {"schema", "mod", "version", "sdk", "prerelease", "sourceCommit", "inputsSha256", "authorization"}
+    if (set(approval) != expected or type(approval["schema"]) is not int or approval["schema"] != 1
+            or type(approval["prerelease"]) is not bool
+            or any(approval[key] != c[key] for key in ("version", "sdk", "prerelease"))
+            or approval["mod"] != c["slug"] or not isinstance(approval["authorization"], str)
+            or not approval["authorization"].strip()
+            or not re.fullmatch(r"[0-9a-f]{40}", approval["sourceCommit"])
+            or not re.fullmatch(r"[0-9a-f]{64}", approval["inputsSha256"])):
+        raise ValueError("Invalid release approval record")
+    if pending_changes(c):
+        raise ValueError(f'{c["slug"]}: approved release still contains Unreleased changes')
+    if release_inputs(c, commit) != approval["inputsSha256"]:
+        raise ValueError(f'{c["slug"]}: release inputs changed after approval; review and renew authorization')
+    return True
+
+
+def record_approval(slug, authorization):
+    if slug not in MODS or not authorization or not authorization.strip():
+        raise ValueError("Provide a known --mod and the explicit user --authorization")
+    if subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip():
+        raise ValueError("Commit source changes before recording approval")
+    c = config(slug)
+    if pending_changes(c):
+        raise ValueError("Move only the user-authorized changes into a numbered release before approval")
+    path = approval_path(c)
+    if path.exists():
+        raise ValueError("Approval already exists; review/remove the stale record in a separate commit first")
+    commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+    record = dict(schema=1, mod=slug, version=c["version"], sdk=c["sdk"], prerelease=c["prerelease"],
+                  sourceCommit=commit, inputsSha256=release_inputs(c, commit), authorization=authorization.strip())
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+    print(f"Review and commit {path.relative_to(ROOT)}. This command does not publish or grant authorization.")
+
+
 def publish(repository, commit, api=None):
     if not re.fullmatch(r"[0-9a-f]{40}", commit):
         raise ValueError("Publish requires an exact commit SHA")
@@ -341,6 +406,9 @@ def publish(repository, commit, api=None):
         existing = published.get(tag)
         if existing and not existing["draft"]:
             print(f"Skip published {tag}; assets and tag remain unchanged.")
+            continue
+        if not release_authorized(c, commit):
+            print(f"Skip {tag}; no explicit release approval record.")
             continue
         newer = [r for t, r in published.items() if t.startswith(slug + "-v") and not r["draft"]
                  and re.fullmatch(VERSION, t[len(slug) + 2:])
@@ -393,7 +461,7 @@ def publish(repository, commit, api=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=["validate", "build", "publish", "verify-game", "export-sdk"])
+    parser.add_argument("command", choices=["validate", "build", "publish", "verify-game", "export-sdk", "record-approval"])
     parser.add_argument("--base")
     parser.add_argument("--repository")
     parser.add_argument("--commit")
@@ -401,6 +469,8 @@ if __name__ == "__main__":
     parser.add_argument("--game-version")
     parser.add_argument("--revision", type=int)
     parser.add_argument("--supplemental")
+    parser.add_argument("--mod")
+    parser.add_argument("--authorization")
     args = parser.parse_args()
     if args.command == "validate":
         for slug in MODS:
@@ -416,5 +486,7 @@ if __name__ == "__main__":
         local_verify(args.game_dir)
     elif args.command == "export-sdk":
         export_sdk(args.game_dir, args.game_version, args.revision, args.supplemental)
+    elif args.command == "record-approval":
+        record_approval(args.mod, args.authorization)
     else:
         publish(args.repository, args.commit)

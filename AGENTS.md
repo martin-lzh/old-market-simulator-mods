@@ -15,6 +15,8 @@
 
 ### SDK 维护是 Mod 开发的一部分
 
+发布授权必须按 [发布记录流程](releases/approvals/README.md)绑定到确定的源码输入。只有用户明确推进对应版本后才记录授权；已获授权无需重复询问。没有记录的版本默认不发布；有记录但构建输入变化或仍有 Unreleased 内容时停止发布，不自动更新记录绕过检查。记录通过受保护 PR 审查，不能将它宣称为对话授权的自动证明。
+
 1. 每次新增或修改 Mod，都检查其 `release.json` 所固定的 SDK 是否覆盖实际使用的游戏、Unity 和网络接口。新增类型/成员调用、修改方法签名或泛型用法、增加 `nameof`/反射/Harmony 目标、适配游戏更新时，必须重新评估 SDK 和本地游戏契约检查。纯文档、翻译或不改变接口依赖的逻辑修改无需机械增加 SDK 修订。
 2. 新增 Mod 时，将它及需要公开发行的加载器变体接入 `tools/ci.py` 的构建、SDK 导出、验证和发布范围，并提供独立 `release.json`。检查脚本当前枚举哪些 Mod，不得假定新目录会被自动发现；新 Mod 必须实际通过 SDK 编译。
 3. SDK 必须跟随已确认的游戏版本维护。`sdk/<游戏版本>/r<修订号>/` 一旦合并就不可修改、删除或覆盖。同一游戏版本扩展接口时新增修订；游戏升级时新增游戏版本目录。保留历史 SDK、Mod 标签和发布附件，以支持旧版用户。
@@ -42,6 +44,8 @@ This is the public repository for original Mod source, the compilation SDK and r
 5. Publishing additionally requires a net change in the corresponding `<mod>-mod/` directory since that Mod's latest published version tag. Skip unchanged directories. Shared SDK, CI and root documentation changes may trigger validation, but cannot alone trigger a Release for an unchanged Mod. A first release requires tracked Mod files; directory changes do not replace explicit version-advancement authorization.
 
 ### SDK maintenance is part of Mod development
+
+Bind release authorization to exact source inputs using the [release record workflow](releases/approvals/README.md). Record it only after explicit user version advancement; do not ask again for an already-granted instruction. Versions without records do not publish. Changed build inputs or remaining Unreleased content invalidate readiness; never auto-refresh records to bypass checks. Records are reviewed attestations in protected PRs, not automatic proof of conversation consent.
 
 1. For every new or modified Mod, check whether its pinned SDK covers the game, Unity and networking APIs it actually uses. New types/members, signature or generic changes, new `nameof`/reflection/Harmony targets and game updates require reassessing the SDK and local game contracts. Documentation, translations and logic changes without new interface dependencies do not automatically require a new SDK revision.
 2. Register each new Mod and its public loader variants in the build, SDK export, validation and release scope of `tools/ci.py`, and provide its own `release.json`. Inspect the current Mod enumeration; do not assume directory discovery. The new Mod must actually compile against the SDK.
