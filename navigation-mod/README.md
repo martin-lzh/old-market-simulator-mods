@@ -2,17 +2,17 @@
 
 Version **0.2.0 — experimental**. An independent navigation HUD for Old Market Simulator: compass, minimap, map window, personal markers and target bearings. It does not require Coordinates or replace that plugin.
 
-**Build and automated checks are available. Version 0.1.2 was installed locally; user screenshots exposed layout defects and M-key failure. This repair still requires in-game appearance, input, performance and multiplayer acceptance.** The public package does not include game-derived map images or geometry. Without a local map companion, the compass and optional coordinates work, the map reports that no map is available, and map marker creation is disabled.
+**The maintainer confirmed local in-game testing on 2026-09-14 for the Navigation changes carried into 0.2.0.** See [validation scope](../releases/validation.md) for the tested build and limits. The public package does not include game-derived map images or geometry. Without a local map companion, the compass and optional coordinates work, the map reports that no map is available, and map marker creation is disabled.
 
 ## Features and controls
 
-Version 0.2.0: the wheel compensates for the active UI module scroll multiplier while keeping fractional input. Optional `Pois` arrays in local map manifests contain `Id`, `Name`, `NameKey`, `Category` (shop/home/dock/other), `X` and `Z`. Up to 256 validated points per map are supported. POI icons stay visible; names open above 1.5x zoom and close below 1.35x or when blocked. Left- or right-click a POI icon or visible label to target it. Personal labels also collapse when space is limited. POIs are companion data, not automatically discovered moving player buildings. Accuracy depends on the local manifest: prefer verified NPC transforms for shops; regional origins are not verified entrances. The native licenses key uses an identification-card icon; a home-shaped rest icon does not imply player ownership. Old maps without Pois still work. Built-in POIs use distinct Phosphor fill symbols, with color determined by category. Both map views render POIs; minimap icons and labels stay upright in either rotation mode, with labels expanding below about 67 m range where space permits. Select a POI on the large map to use compass guidance. Map-load logs include POI counts; opening the large map logs data, node and visible-node counts for diagnosis. The metadata reader is tested against nested arrays, but in-game visual acceptance is still pending.
+Version 0.2.0: the wheel compensates for the active UI module scroll multiplier while keeping fractional input. Optional `Pois` arrays in local map manifests contain `Id`, `Name`, `NameKey`, `Category` (shop/home/dock/other), `X` and `Z`. Up to 256 validated points per map are supported. POI icons stay visible; names open above 1.5x zoom and close below 1.35x or when blocked. Left- or right-click a POI icon or visible label to target it. Personal labels also collapse when space is limited. POIs are companion data, not automatically discovered moving player buildings. Accuracy depends on the local manifest: prefer verified NPC transforms for shops; regional origins are not verified entrances. The native licenses key uses an identification-card icon; a home-shaped rest icon does not imply player ownership. Old maps without Pois still work. Built-in POIs use distinct Phosphor fill symbols, with color determined by category. Both map views render POIs; minimap icons and labels stay upright in either rotation mode, with labels expanding below about 67 m range where space permits. Select a POI on the large map to use compass guidance. Map-load logs include POI counts; opening the large map logs data, node and visible-node counts for diagnosis. The metadata reader is tested against nested arrays; local in-game testing is recorded below.
 
 POI categories use shop #ad7568, home/rest #829278, dock/order #77929d and other #978190 icons, all with 3 px outlines on the 32 px source texture and transparent backgrounds. The player uses a narrow #c1ccd0 direction arrow at the same canvas size as POIs (25 px minimap, 25 px large map) without a nameplate. Built-in place labels come from the native game localization table; unverified or unavailable labels remain hidden.
 
 The map window uses a dark brown frame with gold borders, a map viewport and a separate marker sidebar. The sidebar shows the current target at the top and the selected personal marker editor below; there is no marker overview list. Wheel zoom and the on-map +/- buttons transition smoothly; wheel zoom follows the pointer where map boundaries allow. The map covers its viewport and panning stops at its edges. Map geography still comes from the same local companion files.
 
-Press main-row **-** to zoom the minimap out and **=** to zoom in. The map frame stays the same size. Its native-style hint pairs each action with its keycap: Zoom out [-], Zoom in [=]; it sits above the map and participates in HUD avoidance. Typing, native menus, the large map and hidden minimaps suppress these shortcuts; numpad +/- are unchanged. Range steps are 20–1000 world units. Shortcut zoom lasts for this session; editing MinimapRange resets it, while moving/resizing the HUD preserves it.
+Press main-row **-** to zoom the minimap out and **=** to zoom in. The map frame stays the same size. Its native-style hint pairs each action with its keycap: Zoom out [-], Zoom in [=]; it sits above the map and participates in HUD avoidance. Typing, native menus, the large map and hidden minimaps suppress these shortcuts; numpad +/- are unchanged. The default radius is 75 world units; range steps are 20–1000. Shortcut zoom lasts for this session; editing MinimapRange resets it, while moving/resizing the HUD preserves it.
 
 - Compass follows camera yaw with 5° short, 15° medium and 45° long ticks, a fixed graphical pointer and a separate degree readout. This mod defines **+Z as north and +X as east**; this is a navigation convention, not a verified native geographic definition.
 - Circular minimap defaults to north up. Switch to camera up in the map window or configuration; the choice persists. Big map always stays north up.
@@ -50,7 +50,7 @@ The first load creates `BepInEx/config/local.oldmarket.navigation.cfg`. Edit thi
 
 ### Layout hot reload
 
-The minimap defaults to the lower-left corner. Native HUD reflow uses its rendered bounds, including the compass's visible coordinate and target rows. Notifications (including player-join messages) move above the minimap and align to the same side; the upper-right task card stays in place unless it conflicts. Top hints appear below the compass. The Mod retains native fonts, content and animation-controlled positions. Disabling the corresponding navigation area, disabling reflow or leaving gameplay restores owned anchor changes. Full-screen menus and external Steam/performance overlays are not moved. In-game animation, long-message and unusual-resolution acceptance remains outstanding.
+The minimap defaults to the lower-left corner. Native HUD reflow uses its rendered bounds, including the compass and its optional coordinate row. Notifications (including player-join messages) move above the minimap and align to the same side; the upper-right task card stays in place unless it conflicts. Top hints appear below the compass. The Mod retains native fonts, content and animation-controlled positions. Disabling the corresponding navigation area, disabling reflow or leaving gameplay restores owned anchor changes. Full-screen menus and external Steam/performance overlays are not moved. In-game animation, long-message and unusual-resolution acceptance remains outstanding.
 
 Edit `BepInEx/config/OldMarket.Navigation/layout.json` while playing. Changes are checked every 0.5 seconds on the main thread. Malformed, oversized or out-of-range files retain the previous valid layout. UI position/size changes do not require a DLL rebuild. This does not hot-reload C# logic, map files or game data.
 
@@ -92,7 +92,7 @@ For a remote client, leave `RemoteProfile` empty for connection-only markers. Th
 
 UI text follows the game's selected locale and native money-HUD TextMesh Pro font. Original translations cover `zh`, `zh-Hant`, `en`, `de`, `fr`, `it`, `ja`, `ko`, `pt`, `ru`, `es`, `tr`, `uk`; unknown locales fall back to English. These translations have not been reviewed by native speakers or verified for all font glyphs/long labels in game. Marker names and companion-provided place names are not translated automatically.
 
-Targets Old Market Simulator **2.1.6**, Unity Mono **2022.3.62f3**, and compiler SDK **2.1.6/r7** pinned in `release.json`; the earlier Mods keep r1. CI uses the official SHA256-pinned BepInEx 5.4.23.5 reference, while in-game acceptance remains outstanding. Reflection-only save/region/expansion members are included in the metadata SDK and checked against real assemblies. Future game updates can change player, input, locale, save-identity or expansion APIs. Menu/HUD mods and bindings may conflict. A successful build does not establish compatibility for single-player, host or remote clients, nor a frame-rate guarantee.
+Targets Old Market Simulator **2.1.6**, Unity Mono **2022.3.62f3**, and compiler SDK **2.1.6/r7** pinned in `release.json`; the earlier Mods keep r1. CI uses the official SHA256-pinned BepInEx 5.4.23.5 reference; the local installation uses BepInEx 5.4.23.4. Reflection-only save/region/expansion members are included in the metadata SDK and checked against real assemblies. Future game updates can change player, input, locale, save-identity or expansion APIs. Menu/HUD mods and bindings may conflict. A successful build does not establish compatibility for single-player, host or remote clients, nor a frame-rate guarantee.
 
 ## Build and validation
 
@@ -108,9 +108,9 @@ dotnet run --project navigation-mod/tests/Navigation.Tests.csproj
 
 Build output: `outputs/OldMarket.Navigation-0.2.0.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist is exactly the plugin DLL, this README, CHANGELOG and LICENSE. It excludes game assemblies, loader files, map companions, saves, logs and backups.
 
-Verified on the 2.1.6 baseline: SDK r7 and real-reference Release builds match in symbolic IL, assembly references and embedded resources; 1397 pure checks, 553 read-only installed-assembly contracts and 31 CI tooling tests pass. No Unity game code was executed by these checks.
+Verified on the 2.1.6 baseline: SDK r7 and real-reference Release builds match in symbolic IL, assembly references and embedded resources; The 0.2.0 build passes 1225 navigation checks, 19 native-name checks, 635 read-only installed-assembly contracts and 48 CI tooling tests. No Unity game code was executed by these checks.
 
-Automated coverage exercises coordinate conversion/rotation boundaries, marker serialization/isolation/error handling and locale fallback. Static review checked camera-up rotation, expansion event invalidation and Esc action handling. **Still required in game:** native font/overlap, both map modes, dragging/zoom/marker editing, Esc without Pause leakage, disconnect/region travel, each market unlock transition, frame time and host/client behavior. Check those in a backed-up test setup before relying on the experimental build.
+Automated coverage exercises coordinate conversion/rotation boundaries, marker serialization/isolation/error handling and locale fallback. Static review checked camera-up rotation, expansion event invalidation and Esc action handling. The maintainer has confirmed local in-game testing. A per-scenario record for all locales/resolutions, disconnect/region travel, each unlock transition, measured frame time and host/client combinations was not supplied; do not infer complete coverage from that confirmation. See [validation scope](../releases/validation.md).
 
 ## License and provenance
 
@@ -122,17 +122,17 @@ Original code, documentation and original UI decorations are provided under [MIT
 
 **0.2.0 是实验版**：独立导航 Mod，包含顶部罗盘、圆形小地图、M 键大地图、个人标记和目标方位指示，不依赖也不替换 Coordinates。
 
-已提供构建及自动检查。0.1.2 已在本机安装，用户截图暴露了布局缺陷和 M 键失效；**本次修复仍需游戏内视觉、输入恢复、性能及联机验收**。公开包不含游戏派生地图。没有本地地图配套文件时仍可显示罗盘和可选 XYZ，地图提示无数据，不能在地图上新增标记。
+**维护者于 2026-09-14 确认已对纳入 0.2.0 的 Navigation 改动完成本地实机测试。**测试构建与范围见[验证记录](../releases/validation.md)。公开包不含游戏派生地图。没有本地地图配套文件时仍可显示罗盘和可选 XYZ，地图提示无数据，不能在地图上新增标记。
 
 ### 功能与操作
 
-本地待发布构建（版本号不变）：滚轮按当前 UI 模块的实际倍率归一化，保留小数输入。本地地图 manifest 可选 `Pois` 数组，每项含 `Id`、`Name`、`NameKey`、`Category`（shop/home/dock/other）、`X`、`Z`，每幅图最多 256 个经校验地点。POI 保留语义图标，缩放达到 1.5 倍且空间足够时展开名称，低于 1.35 倍或发生遮挡时收起；左键或右键点击 POI 图标或可见名称可设为导航目标。个人标记的名称也会按空间收起。地点来自本地配套数据，不会自动追踪玩家移动的建筑；定位精度取决于本地清单，店铺宜采用经核实的 NPC Transform；区域原点不保证是入口。原生 licenses 词条使用证件图标，房屋形休息图标不代表玩家所有权。旧地图没有 Pois 时仍正常使用。内置 POI 使用不同 Phosphor 实心图形，同类别同颜色。大小地图均绘制 POI；小地图两种朝向下图标与名称保持正立，范围缩小到约 67 米以下且空间足够时展开名称。在大地图选择 POI 可使用罗盘指引。加载日志记录 POI 数量，打开大地图时记录数据、节点及视野内节点数量，便于定位显示问题。元数据读取已验证嵌套数组，实机视觉效果仍待验收。
+0.2.0：滚轮按当前 UI 模块的实际倍率归一化，保留小数输入。本地地图 manifest 可选 `Pois` 数组，每项含 `Id`、`Name`、`NameKey`、`Category`（shop/home/dock/other）、`X`、`Z`，每幅图最多 256 个经校验地点。POI 保留语义图标，缩放达到 1.5 倍且空间足够时展开名称，低于 1.35 倍或发生遮挡时收起；左键或右键点击 POI 图标或可见名称可设为导航目标。个人标记的名称也会按空间收起。地点来自本地配套数据，不会自动追踪玩家移动的建筑；定位精度取决于本地清单，店铺宜采用经核实的 NPC Transform；区域原点不保证是入口。原生 licenses 词条使用证件图标，房屋形休息图标不代表玩家所有权。旧地图没有 Pois 时仍正常使用。内置 POI 使用不同 Phosphor 实心图形，同类别同颜色。大小地图均绘制 POI；小地图两种朝向下图标与名称保持正立，范围缩小到约 67 米以下且空间足够时展开名称。在大地图选择 POI 可使用罗盘指引。加载日志记录 POI 数量，打开大地图时记录数据、节点及视野内节点数量，便于定位显示问题。元数据读取已验证嵌套数组，本地实机测试记录见下文。
 
 POI 按类别使用商店 #ad7568、房屋/休息点 #829278、码头/订购点 #77929d 及其他地点 #978190，均有 32 px 源纹理上的 3 px 描边和透明背景。玩家位置使用细长 #c1ccd0 方向箭头，画布尺寸与 POI 一致（小地图 25 px、大地图 25 px），不带名称底板。内置地点标签读取游戏原生本地化表，未核实或暂不可用的文字隐藏。
 
 地图窗口采用深棕金边外框、地图主区与独立标记侧栏。右侧顶部显示当前目标，下方编辑选中的个人标记，不再显示标记总览；滚轮与地图内加减按钮平滑缩放，边界允许时以鼠标位置为中心。地图铺满视口，拖动限制在地图边缘。地图地形继续使用原有本地配套文件。
 
-主键盘 **-** 缩小小地图、**=** 放大，地图框大小不变。地图上方按“缩小 [-]　放大 [=]”分别配对动作与原生键帽，并纳入 HUD 避让。输入文字、原生菜单、大地图打开或小地图隐藏时不响应，不占用数字小键盘加减。显示半径在 20–1000 世界单位间分档切换，快捷键缩放保留本次会话；修改 MinimapRange 会重置范围，挪动/调整 HUD 大小则保留缩放。
+主键盘 **-** 缩小小地图、**=** 放大，地图框大小不变。地图上方按“缩小 [-]　放大 [=]”分别配对动作与原生键帽，并纳入 HUD 避让。输入文字、原生菜单、大地图打开或小地图隐藏时不响应，不占用数字小键盘加减。默认显示半径为 75 世界单位，在 20–1000 间分档切换，快捷键缩放保留本次会话；修改 MinimapRange 会重置范围，挪动/调整 HUD 大小则保留缩放。
 
 - 约定 **+Z 为北、+X 为东**，并非已确认的原生地理北向。罗盘跟随镜头方向，显示 5° 短刻度、15° 中刻度和 45° 长刻度，使用固定图形指针与独立角度读数。
 - 小地图默认固定正北，可在大地图按钮或配置切换随视角转动并保存选择；大地图始终固定正北。
@@ -151,7 +151,7 @@ POI 按类别使用商店 #ad7568、房屋/休息点 #829278、码头/订购点 
 
 ### 配置与热更新
 
-小地图默认位于左下角。原生 HUD 避让使用导航组件的实际屏幕范围，也计算可见的坐标和目标行。玩家加入等通知移到小地图上方并左对齐；右上任务卡无冲突时留在原位，顶部提示放在罗盘下方。保留游戏原有字体、内容与位置动画。关闭对应导航组件、关闭 `ReflowNativeHud` 或离开游戏场景后，恢复本插件修改的锚点。不会移动全屏菜单或 Steam、性能监控等外部覆盖层；长消息、原生动画及特殊分辨率仍需实机验收。
+小地图默认位于左下角。原生 HUD 避让使用导航组件的实际屏幕范围，也计算罗盘及可选坐标行。玩家加入等通知移到小地图上方并左对齐；右上任务卡无冲突时留在原位，顶部提示放在罗盘下方。保留游戏原有字体、内容与位置动画。关闭对应导航组件、关闭 `ReflowNativeHud` 或离开游戏场景后，恢复本插件修改的锚点。不会移动全屏菜单或 Steam、性能监控等外部覆盖层；长消息、原生动画及特殊分辨率仍需实机验收。
 
 `MinimapBottomLeft=true` 使用 `MinimapLeft`/`MinimapBottom`，底部默认留出模式标签的空间；改成 `false` 可用旧的 `MinimapRight`/`MinimapTop` 切回右上角。旧布局文件没有这些新增字段时，也采用新的左下默认位置。每 0.1 秒最多检查一次原生内容，导航范围或屏幕尺寸改变时立即重排；极多通知无法找到完整空位时保留原位，不隐藏或缩小消息。
 
@@ -177,9 +177,9 @@ POI 按类别使用商店 #ad7568、房屋/休息点 #829278、码头/订购点 
 
 构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.2.0.zip`，打印 SHA256，不自动安装，严格只含 DLL、README、CHANGELOG、LICENSE。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
 
-2.1.6 基线验证：SDK r7 与真实引用 Release 构建的符号 IL、程序集引用及内嵌资源一致；1397 项纯逻辑/本地化检查、553 项只读原生契约和 31 项 CI 工具测试通过，检查不执行 Unity 游戏代码。
+2.1.6 基线验证：SDK r7 与真实引用 Release 构建的符号 IL、程序集引用及内嵌资源一致；0.2.0 通过 1225 项导航检查、19 项原生名称检查、635 项只读原生契约和 48 项 CI 工具测试，检查不执行 Unity 游戏代码。
 
-实机待检查：字体遮挡、两种旋转模式、缩放拖动和标记编辑、Esc 不穿透暂停菜单、断线与区域旅行、市场各解锁阶段、帧耗时、单机/主机/客户端。游戏更新及其他 HUD/按键插件可能产生冲突，应在备份后的测试环境验收。
+维护者已确认本地实机测试。尚未提供所有语言/分辨率、断线与区域旅行、各解锁阶段、量化帧耗时及房主/客户端组合的逐项记录，因此不将本次确认扩大为全部场景覆盖。详见[验证记录](../releases/validation.md)。
 
 原创代码、文档与原创 UI 装饰素材采用 [MIT](LICENSE)，版本记录见 [CHANGELOG](CHANGELOG.md)。许可不覆盖游戏组件、原始资源、派生本地地图、商标或其他 Mod。未打包游戏或第三方运行库。
 

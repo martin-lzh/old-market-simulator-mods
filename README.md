@@ -16,7 +16,7 @@ Five released unofficial mods and an experimental Navigation mod for **Old Marke
 | [Stack All](stack-all-mod/README.md) | 0.2.2 pending; [0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) | Up to 64 containers per inventory slot, separate item/container counts, repeated drop/throw |
 | [Price Probability](price-probability-mod/README.md) | 0.1.2 pending; [0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.1) | Price-acceptance estimates and host-controlled fixed-price/probability rules |
 
-Get installable ZIPs from the linked [GitHub Releases](https://github.com/martin-lzh/old-market-simulator-mods/releases). GitHub's **Source code** archives contain source, not ready-to-install plugins. Each release includes installation notes and `SHA256SUMS.txt`. Current versions are **prereleases**: automated checks passed, but in-game acceptance is incomplete.
+Get installable ZIPs from the linked [GitHub Releases](https://github.com/martin-lzh/old-market-simulator-mods/releases). GitHub's **Source code** archives contain source, not ready-to-install plugins. Each release includes installation notes and `SHA256SUMS.txt`. Current versions are **prereleases**: validation varies by Mod; Navigation local in-game testing is confirmed. See the [validation record](releases/validation.md).
 
 ### Installation and compatibility
 
@@ -24,7 +24,7 @@ Get installable ZIPs from the linked [GitHub Releases](https://github.com/martin
 
 The build/reference environment is Old Market Simulator **2.1.6**, Windows x64, Unity Mono. Most packages require an existing **BepInEx 5** installation. Material Cost also provides a **MelonLoader 0.7.3** package; choose one loader variant. The experimental standalone entry remains available as source for local testing and has no public release package.
 
-Exit the game and back up the old plugin before installing. Follow the individual mod's README and preserve other plugins and loader settings. Plugin ZIPs include only the original plugin DLL, README, and MIT LICENSE; game files and loaders are not bundled.
+Exit the game and back up the old plugin before installing. Follow the individual mod's README and preserve other plugins and loader settings. New plugin ZIPs include only the original plugin DLL, README, CHANGELOG, and LICENSE; game files and loaders are not bundled.
 
 **Stack All requires the host and all players to use the same version.** Its extra container records are saved through the game's normal save process. Before disabling or downgrading it, follow the [removal procedure](stack-all-mod/README.md); loading such a save without a compatible plugin is unsafe. Other multiplayer restrictions are documented per mod.
 
@@ -50,6 +50,7 @@ Exit before installation/upgrades/removal and test backup copies first. Follow e
 - [Checkout All Change Log](checkout-all-mod/CHANGELOG.md)
 - [Stack All Change Log](stack-all-mod/CHANGELOG.md)
 - [Price Probability Change Log](price-probability-mod/CHANGELOG.md)
+- [Navigation Change Log](navigation-mod/CHANGELOG.md)
 
 ### Languages
 
@@ -69,6 +70,7 @@ Run from the repository root, replacing the example game path:
 ./checkout-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ./stack-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ./price-probability-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
+./navigation-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
 ZIPs appear in `outputs/`. Each mod with translatable UI runs its own localization checks and applicable feature tests. Coordinates has no translatable messages and no localization-project dependency. Passing builds and tests do not establish in-game UI, save, or multiplayer correctness. See [release management](releases/README.md) for independent tags, release notes, and artifact checks.
@@ -103,13 +105,13 @@ Citation is requested, not an additional MIT condition. A project link does not 
 | [Stack All](stack-all-mod/README.md) | 0.2.2 待发布；[0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) | 每格最多 64 个容器，分别显示商品与容器数，支持连续放下/扔出 |
 | [Price Probability](price-probability-mod/README.md) | 0.1.2 待发布；[0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.1) | 定价接受概率，以及房主控制的固定售价/概率规则 |
 
-从上表对应的 [GitHub Release](https://github.com/martin-lzh/old-market-simulator-mods/releases) 下载安装 ZIP。GitHub 的 **Source code** 压缩包是源码，不是可直接安装的插件。每次发布附安装说明和 `SHA256SUMS.txt`。当前版本均为**预发布**：自动检查已通过，游戏内验收尚未完成。
+从上表对应的 [GitHub Release](https://github.com/martin-lzh/old-market-simulator-mods/releases) 下载安装 ZIP。GitHub 的 **Source code** 压缩包是源码，不是可直接安装的插件。每次发布附安装说明和 `SHA256SUMS.txt`。当前版本均为**预发布**：各 Mod 验证范围不同，Navigation 已确认本地实机测试，见[验证记录](releases/validation.md)。
 
 ### 安装与兼容性
 
 构建和引用环境为 Old Market Simulator **2.1.6**、Windows x64、Unity Mono。多数包依赖已安装的 **BepInEx 5**。成本插件另有 **MelonLoader 0.7.3** 包，两种加载版本择一使用。实验性独立启动入口保留源码用于本机测试，目前没有公开安装包。
 
-安装前退出游戏并备份旧插件，按各 Mod README 操作，保留其他插件和加载器设置。插件 ZIP 仅包含原创 DLL、README 和 MIT LICENSE，不附游戏组件或加载器。
+安装前退出游戏并备份旧插件，按各 Mod README 操作，保留其他插件和加载器设置。新插件 ZIP 仅包含原创 DLL、README、CHANGELOG 和 LICENSE，不附游戏组件或加载器。
 
 **Stack All 要求房主及所有玩家安装同版本。** 额外容器记录通过游戏正常保存流程写入。停用或降级前必须按其[卸载说明](stack-all-mod/README.md)处理；不能直接在缺少兼容插件的情况下读取含额外记录的存档。其他联机限制见各 Mod 说明。
 
@@ -135,6 +137,7 @@ Citation is requested, not an additional MIT condition. A project link does not 
 - [Checkout All Change Log](checkout-all-mod/CHANGELOG.md)
 - [Stack All Change Log](stack-all-mod/CHANGELOG.md)
 - [Price Probability Change Log](price-probability-mod/CHANGELOG.md)
+- [Navigation Change Log](navigation-mod/CHANGELOG.md)
 
 ### 语言
 

@@ -28,11 +28,11 @@
 
 - Remove the player position nameplate and use a narrow, outlined direction arrow in both maps. Color POI sprites by category with dark outlines and transparent backgrounds, including the large map. Resolve built-in POI labels from native game text instead of Mod translations.
 
-- Add the missing minimap POI layer with upright semantic icons and collision-aware labels in both rotation modes; resolve POI targets for compass guidance. Share icons with the large map. Verify nested POI metadata with the same .NET reader used by the plugin and log loaded/rendered counts for diagnosis. Large-map in-game acceptance remains pending.
+- Add the missing minimap POI layer with upright semantic icons and collision-aware labels in both rotation modes; resolve POI targets for compass guidance. Share icons with the large map. Verify nested POI metadata with the same .NET reader used by the plugin and log loaded/rendered counts for diagnosis. Local in-game testing is confirmed; see [validation scope](../releases/validation.md).
 
 - Right-click a personal marker icon or label to remove it; left-click to edit. Remove the icon backdrop and overview list; place current target above the marker editor. Pair minimap action labels individually with their minus/equals keycaps.
 
-- Pin game 2.1.6 SDK r7 for the actual UI scroll multiplier, runtime input range and platform APIs. Version 0.2.0 passes 1225 navigation checks, 19 native-name checks, 635 metadata/IL contracts, 48 CI tooling tests and real-reference/SDK builds; in-game acceptance remains pending.
+- Pin game 2.1.6 SDK r7 for the actual UI scroll multiplier, runtime input range and platform APIs. Version 0.2.0 passes 1225 navigation checks, 19 native-name checks, 635 metadata/IL contracts, 48 CI tooling tests and real-reference/SDK builds; local in-game testing is confirmed, with scenario limits recorded in [validation scope](../releases/validation.md).
 
 - Normalize wheel input by the active UI module scale, preserve fractional movement and cancel pending opposite zoom; +/- button behavior is unchanged.
 - Read optional validated local POIs and render semantic shop/home/dock icons. Labels expand with zoom when space permits, avoid overlaps and prioritize the selected target; POIs can be navigation targets without entering personal marker files.
@@ -115,11 +115,11 @@ Experimental initial build; not installed or verified in game.
 
 - 移除玩家位置文字，两张地图改用细长描边方向箭头。POI 图标按类别着色并加深色描边，大地图也去除图标底板。内置地点标签改从游戏原生文本读取，不再使用 Mod 自译名称。
 
-- 补齐小地图 POI 图层，两种朝向模式下语义图标和名称保持正立并按空间避让；罗盘指引支持 POI 目标。大小地图共用图标，通过插件实际使用的 .NET 读取器验证嵌套 POI 数据，并记录读取与绘制数量用于排查。大地图仍待实机验收。
+- 补齐小地图 POI 图层，两种朝向模式下语义图标和名称保持正立并按空间避让；罗盘指引支持 POI 目标。大小地图共用图标，通过插件实际使用的 .NET 读取器验证嵌套 POI 数据，并记录读取与绘制数量用于排查。本地实机测试已确认，范围见[验证记录](../releases/validation.md)。
 
 - 右键个人标记图标或名称即可删除，左键选中编辑；去掉图标底色和标记总览，将当前目标放在编辑区上方。小地图缩放提示改为“缩小 [-]　放大 [=]”两组动作与键帽。
 
-- 固定游戏 2.1.6 SDK r7，覆盖实际 UI 滚轮倍率、运行时输入范围与平台接口。0.2.0 通过 1225 项导航检查、19 项原生名称检查、635 项元数据/IL 契约、48 项 CI 工具测试及真实引用/SDK 构建；实机验收仍待完成。
+- 固定游戏 2.1.6 SDK r7，覆盖实际 UI 滚轮倍率、运行时输入范围与平台接口。0.2.0 通过 1225 项导航检查、19 项原生名称检查、635 项元数据/IL 契约、48 项 CI 工具测试及真实引用/SDK 构建；本地实机测试已确认，场景覆盖限制见[验证记录](../releases/validation.md)。
 
 - 按当前 UI 模块系数还原滚轮输入，保留小数滚动并取消反方向的剩余缩放；加减按钮行为不变。
 - 读取经校验的本地 POI，绘制商店、房屋、码头等语义图标；放大且空间足够时展开名称，避让重叠并优先显示目标。POI 可设为导航目标，不写入个人标记文件。

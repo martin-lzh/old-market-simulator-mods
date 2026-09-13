@@ -68,13 +68,14 @@ Each mod has its own version and tag. Releases share this repository; they do no
 | Checkout All | `checkout-all-vMAJOR.MINOR.PATCH` |
 | Stack All | `stack-all-vMAJOR.MINOR.PATCH` |
 | Price Probability | `price-probability-vMAJOR.MINOR.PATCH` |
+| Navigation | `navigation-vMAJOR.MINOR.PATCH` |
 
 1. After the maintainer explicitly authorizes version advancement, update the affected mod's assembly/plugin version, package name, and English/Chinese README. Until then, keep changes in Unreleased. Localization belongs to each mod. Test the mod whose own code or messages changed, and advance its version only with that explicit authorization; no shared localization project is required.
 2. Run its build script and tests against the supported local game installation. Original game assemblies must not be uploaded to Git or CI; the reviewed API-only SDK is maintained separately.
 3. Verify the ZIP's explicit file list, version, README, license, and embedded messages. Future public plugin ZIPs must include the original DLL, README, CHANGELOG.md, and LICENSE; existing releases retain their original three-file contents. Create `SHA256SUMS.txt` for the exact bytes to upload.
 4. Commit and push the source. Tag the exact commit used for the release; do not tag an unrelated later implementation. Save release notes as `<tag>.md` here and record the source commit and asset hashes in `catalog.json`.
 5. Create the GitHub Release as a draft, upload the named ZIPs and checksum file, then verify the uploaded assets before publishing. Use a prerelease while in-game acceptance is incomplete. Material Cost may have separate BepInEx and MelonLoader assets under the same mod version.
-6. Link the release from the root and mod READMEs. Use per-mod release links: a repository-wide “latest release” cannot represent the latest version of all five mods.
+6. Link the release from the root and mod READMEs. Use per-mod release links: a repository-wide “latest release” cannot represent the latest version of all six Mods.
 
 Never replace published binaries or move a published tag to different source. Publish a new version for fixes. Preserve earlier releases for reproducibility. The current standalone loading bundle is for local validation and is not a public release asset.
 
@@ -89,7 +90,7 @@ Never replace published binaries or move a published tag to different source. Pu
 3. 检查 ZIP 文件清单、版本、README、许可证和内嵌语言资源。后续公开插件 ZIP 须含原创 DLL、README、CHANGELOG.md 和 LICENSE，既有发布保持原三文件内容；为将上传的准确文件生成 `SHA256SUMS.txt`。
 4. 提交并推送源码，标签指向实际发布所用的提交，不指向后来无关的实现。发布说明保存在此目录 `<tag>.md`，源码提交与安装包哈希记入 `catalog.json`。
 5. 先创建 GitHub Release 草稿，上传明确指定的 ZIP 和校验文件，验证远程附件后公开。实机验收未完成时标记预发布。成本插件的 BepInEx 与 MelonLoader 包可放在同一 Mod 版本下。
-6. 更新仓库首页及对应 Mod 的发布链接。使用各 Mod 的链接，仓库级“最新发布”不能代表五个 Mod 各自的最新版本。
+6. 更新仓库首页及对应 Mod 的发布链接。使用各 Mod 的链接，仓库级“最新发布”不能代表六个 Mod 各自的最新版本。
 
 已公开的二进制文件不覆盖，标签不改指向；修复通过新版本发布，历史版本保留以便追溯。当前独立启动包仅用于本机验证，不作为公开发布附件。
 

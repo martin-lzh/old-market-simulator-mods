@@ -16,7 +16,7 @@
 | 2.1.6 | [2.1.6/r4](2.1.6/r4/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.2 固定此修订；增加原生按键提示预制体与布局接口，实机验收未完成 |
 | 2.1.6 | [2.1.6/r5](2.1.6/r5/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.3 固定此修订；增加输入框焦点、原生提示子控件与独立布局接口，实机验收未完成 |
 | 2.1.6 | [2.1.6/r6](2.1.6/r6/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.4 固定此修订；增加地图控件查找与输入编辑结束接口，实机验收未完成 |
-| 2.1.6 | [2.1.6/r7](2.1.6/r7/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 未发布修改固定此修订，Mod 仍为 0.1.4；增加滚轮事件倍率、输入范围与平台接口，实机验收未完成 |
+| 2.1.6 | [2.1.6/r7](2.1.6/r7/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.2.0 固定此修订；增加滚轮事件倍率、输入范围与平台接口。本地实机测试见 [验证记录](../releases/validation.md) |
 
 每个 Mod 在自己的 `release.json` 中固定 SDK，例如 `"sdk": "2.1.6/r1"`。不自动选择“最新”SDK。目录 `sdk/<游戏版本>/r<修订号>/` 一旦合并就保留原样；同一游戏版本补充接口时新建 `r2`，游戏升级时新建对应游戏版本目录。旧 Mod 发布、SDK 和 CHANGELOG 都保留，下载前仍须确认存档、加载器与联机要求。
 
@@ -69,7 +69,7 @@ This SDK lets GitHub-hosted runners compile Mods without a game installation. Th
 
 ### Versioning and compatibility
 
-The table records game 2.1.6 on Windows x64 / Unity Mono 2022.3.62f3. The original five Mods retain SDK r1; Navigation 0.1.0 pins r2, adding map UI, physics projection, input, region and reflection declarations. Navigation 0.1.1 pins r3, adding native HUD containers, tween endpoints and screen-coordinate conversion across canvases. CI builds six Mods and seven loader variants. In-game UI, save and multiplayer acceptance remains incomplete.
+The table records game 2.1.6 on Windows x64 / Unity Mono 2022.3.62f3. The original five Mods retain SDK r1; Navigation 0.2.0 pins r7; r2–r6 remain historical snapshots. The current pin covers map UI, native HUD reflow, input focus, wheel scaling and platform interfaces. CI builds six Mods and seven loader variants. In-game UI, save and multiplayer acceptance remains incomplete.
 
 Each Mod pins an SDK in its own `release.json`, for example `"sdk": "2.1.6/r1"`. There is no implicit latest SDK. Merged `sdk/<game-version>/r<revision>/` snapshots are immutable. Add a new revision to extend the same game baseline, or a new game-version directory after a game update. Preserve old SDKs, Mod releases and CHANGELOG records; users must still check save, loader and multiplayer requirements.
 

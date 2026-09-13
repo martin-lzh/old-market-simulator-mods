@@ -79,6 +79,10 @@ dotnet run --project checkout-all-mod/tests/Tests.csproj -c Release
 
 版本与发布 PR 由维护者管理。终端用户反馈问题或请求功能不需要创建 PR；希望贡献代码的贡献者仍可按下述流程提交 PR。
 
+### 标签分类
+
+按实际范围选择 `mod:` 和 `area:` 标签，保留 bug、enhancement、documentation 等类型。`status:` 表示当前待办条件，解决后移除；实机测试按具体 Mod 与场景记录，不把自动检查当作实机测试。标签列表见[仓库标签页](https://github.com/martin-lzh/old-market-simulator-mods/labels)。
+
 ### 提交 Pull Request
 
 一次 PR 解决一个明确问题，使用 `fix:`、`feat:`、`docs:` 等提交前缀。按 PR 模板说明问题、行为变化、验证命令和结果，以及旧档/联机影响；UI 修改可附不含隐私的截图，禁止附完整游戏资源或存档。
@@ -211,3 +215,7 @@ ShellCheck/Pyflakes integrations are disabled for consistent local/CI results; P
 For game-free builds, run `python tools/ci.py build` with Python 3.12 and .NET 8/10 SDKs. See [SDK maintenance](sdk/README.md) and [automatic releases](releases/README.md). Pin each Mod to a reviewed SDK in its own `release.json`. Preserve old SDK revisions. Use `dev` for maintainer work and PRs into protected `main`.
 
 无游戏编译运行 `python tools/ci.py build`，需要 Python 3.12 和 .NET 8/10 SDK。见 [SDK 维护](sdk/README.md)和[自动发布](releases/README.md)。每个 Mod 在自己的 `release.json` 固定已审查 SDK，保留旧修订。维护工作使用 `dev`，通过 PR 合并受保护的 `main`。
+
+### Label classification
+
+Choose `mod:` and `area:` labels for the actual scope, alongside bug, enhancement or documentation. Use `status:` for outstanding conditions and remove it when resolved. Record in-game tests by Mod and scenario separately from automated checks. See the [repository labels](https://github.com/martin-lzh/old-market-simulator-mods/labels).
