@@ -8,6 +8,7 @@ sealed class Export
     readonly HashSet<TypeDefinition> types = [];
     readonly HashSet<MethodDefinition> methods = [];
     readonly HashSet<FieldDefinition> fields = [];
+    readonly HashSet<FieldDefinition> reviewedConstants = [];
     readonly HashSet<string> visited = [];
 
     public Export(string managed, IEnumerable<string> dependencies) {
@@ -69,13 +70,25 @@ sealed class Export
             }
         }
         foreach (var (name, members) in supplemental) {
-            var type = resolver.Resolve(assemblies.Values.Single(a => a.Name.Name == "Assembly-CSharp").Name).MainModule.GetType(name)
+            // Optional assembly qualification permits explicit Unity metadata without searching arbitrary types.
+            var parts = name.Split("::", StringSplitOptions.None);
+            if (parts.Length > 2) throw new InvalidOperationException($"Invalid supplemental type: {name}");
+            var assemblyName = parts.Length == 2 ? parts[0] : "Assembly-CSharp";
+            var typeName = parts.Length == 2 ? parts[1] : name;
+            var type = assemblies.Values.Single(a => a.Name.Name == assemblyName).MainModule.GetType(typeName)
                 ?? throw new InvalidOperationException($"Supplemental type missing: {name}");
             foreach (var member in members) {
                 // Explicit field seeds cover reflection-only dependencies, while historical bare names remain methods.
-                if (member.StartsWith("field:", StringComparison.Ordinal)) {
-                    var field = type.Fields.SingleOrDefault(f => f.Name == member[6..])
-                        ?? throw new InvalidOperationException($"Supplemental field missing: {name}.{member[6..]}");
+                bool constant = member.StartsWith("constant:", StringComparison.Ordinal);
+                if (constant || member.StartsWith("field:", StringComparison.Ordinal)) {
+                    string fieldName = member[(constant ? 9 : 6)..];
+                    var field = type.Fields.SingleOrDefault(f => f.Name == fieldName)
+                        ?? throw new InvalidOperationException($"Supplemental field missing: {name}.{fieldName}");
+                    if (constant) {
+                        if (!field.IsLiteral || !field.HasConstant || field.Constant is not (byte or sbyte or short or ushort or int or uint or long or ulong or float or double or bool))
+                            throw new InvalidOperationException($"Only explicitly reviewed numeric/boolean constants may be exported: {name}.{fieldName}");
+                        reviewedConstants.Add(field);
+                    }
                     Add(field);
                     continue;
                 }
@@ -94,7 +107,7 @@ sealed class Export
                     m.Parameters.Select(Metadata.Param).ToList(), Metadata.Generics(m), Metadata.Extension(m))).ToList(),
                 t.Fields.Where(fields.Contains).OrderBy(f => f.Name, StringComparer.Ordinal).Select(f => {
                     // Only enum constants and parameter defaults are needed for source compilation.
-                    if (f.HasConstant && !t.IsEnum) throw new InvalidOperationException($"Review constant explicitly: {f.FullName}");
+                    if (f.HasConstant && !t.IsEnum && !reviewedConstants.Contains(f)) throw new InvalidOperationException($"Review constant explicitly: {f.FullName}");
                     var (value, type) = Metadata.Constant(f.HasConstant ? f.Constant : null);
                     return new Field(f.Name, (int)f.Attributes, Metadata.Type(f.FieldType), value, type);
                 }).ToList(),

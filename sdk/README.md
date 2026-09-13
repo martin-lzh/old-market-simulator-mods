@@ -32,7 +32,7 @@ python tools/ci.py build
 ### 游戏更新后的维护
 
 1. 在本机合法取得新版游戏，只读检查版本和接口。用真实游戏引用调整 Mod；记录未验证的玩法、UI、存档及网络变化。先提交源码，SDK 导出要求工作区干净，以记录准确源码提交。
-2. 准备 `supplemental.json`：列出只出现在 `nameof` 中、不会生成成员引用的游戏方法。可在 `work/` 下复制旧文件再调整。反射方法同样列出；反射字段使用显式 `field:字段名`，如 `field:currentSlot` 和 `field:activeExpansions`。所有名称必须来自真实程序集。导出工具自动从已注册六个 Mod 的七个发行构建读取其他依赖声明，不读取游戏方法体或资源。
+2. 准备 `supplemental.json`：列出只出现在 `nameof` 中、不会生成成员引用的游戏方法。可在 `work/` 下复制旧文件再调整。反射方法同样列出；反射字段使用显式 `field:字段名`，如 `field:currentSlot` 和 `field:activeExpansions`。跨程序集类型使用 `程序集简单名::类型全名`；编译内联的数值/布尔常量使用 `constant:字段名`，显式审核真实值，拒绝字符串或非字面量。所有名称必须来自真实程序集。导出工具自动从已注册六个 Mod 的七个发行构建读取其他依赖声明，不读取游戏方法体或资源。
 3. 用实际确认的游戏版本导出新目录。例如同一 2.1.6 基线新增接口时：
 
 ```powershell
@@ -73,7 +73,7 @@ Install Python 3.12 plus .NET 8 and 10 SDKs. Run the three validation/build comm
 After a game update:
 
 1. Read the legally obtained game installation, adapt the original Mod source and commit it. Export requires a clean worktree to record the exact source commit.
-2. Review supplemental method names used only in `nameof` expressions. Copy the previous `supplemental.json` into ignored `work/` if it needs editing. Reflection method names are also listed; reflection fields use the explicit `field:name` syntax (for example `field:currentSlot` and `field:activeExpansions`). All declarations must resolve from real assemblies. Other declarations are discovered from the seven registered loader builds compiled against actual game references; game method bodies/resources are not exported.
+2. Review supplemental method names used only in `nameof` expressions. Copy the previous `supplemental.json` into ignored `work/` if it needs editing. Reflection method names are also listed; reflection fields use the explicit `field:name` syntax (for example `field:currentSlot` and `field:activeExpansions`). Use `AssemblySimpleName::Type.FullName` for non-game assembly types. Explicit `constant:name` seeds cover reviewed, compiler-inlined numeric/boolean literals; string and nonliteral seeds are rejected. All declarations must resolve from real assemblies. Other declarations are discovered from the seven registered loader builds compiled against actual game references; game method bodies/resources are not exported.
 3. Run `export-sdk` as shown above, using the actual verified game version and a new revision. Existing snapshots cannot be overwritten.
 4. Review metadata/hash changes, migrate selected `release.json` pins, update Mod versions, bilingual CHANGELOG entries with game/SDK versions, compatibility/risk notes, root supported baseline and the table above. Mods not migrated keep their previous SDK.
 5. Run the SDK build followed by `verify-game` above. This verifies dependency hashes, compares symbolic Mod IL and embedded resources against a real-reference build, and runs the existing Stack All/Price Probability game contracts. It never executes or modifies the game. The command currently verifies every Mod; when pins span multiple game baselines, retain matching installations and verify each Mod using its build/contract commands. Do not bypass hash failures.
