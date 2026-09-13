@@ -28,6 +28,7 @@ namespace OldMarket.Navigation
                 case "gardener":name="plant";break;
                 case "clothing_store":name="t-shirt";break;
                 case "orders":name="boat";break;
+                case "licenses":name="identification-card";break;
                 default:return Get(poi.Category);
             }
             return GetIcon(name,poi.Category);

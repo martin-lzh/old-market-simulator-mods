@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Add a filled identification-card symbol for local POIs using the native licenses key. Shop companion coordinates can be anchored to verified NPC transforms; scene-derived coordinates remain outside the public package.
+
 - Replace personal marker font symbols with centered sprites in both maps. Keep Set target as text, place color/icon/delete actions in one icon row, and expand explicit color or shape slots below it. Clicking a slot saves immediately and highlights the selection; existing marker IDs and save format remain compatible.
 
 - Give built-in POIs distinct filled Phosphor symbols while retaining category colors. Left/right-click a POI icon or visible label to set it as the navigation target; large-map gestures continue through POI nodes. Include upstream icon notices in the packaged license.
@@ -74,6 +76,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 原生 licenses 词条对应的本地 POI 增加实心证件图标；店铺配套坐标可依据经核实的 NPC Transform 定位，场景派生坐标不进入公开安装包。
 
 - 个人标记在两张地图中改用居中精灵图标，避免字体符号被裁切或缺失。保留“设为目标”文字按钮，颜色、图标、删除合并为一排图标操作，下方展开颜色或形状格子；点选立即保存并突出选中项，保持现有标记 ID 与存储格式兼容。
 

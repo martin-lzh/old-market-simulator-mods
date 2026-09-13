@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "assets" / "phosphor"
 COMMIT = "2b75f3ad12b420c9504ef05df8d2564a28f8500e"
 ICONS = ["barn", "bank", "hammer", "wrench", "armchair", "axe", "cow",
-         "plant", "t-shirt", "bed", "boat", "storefront", "house", "map-pin"]
+         "plant", "t-shirt", "bed", "boat", "storefront", "house", "map-pin", "identification-card"]
 PALETTE = {"shop": "#ad7568", "home": "#829278", "dock": "#77929d", "other": "#978190"}
 SCALE = 4
 
