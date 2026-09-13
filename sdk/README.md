@@ -14,6 +14,7 @@
 | 2.1.6 | [2.1.6/r2](2.1.6/r2/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.0 固定此修订；增加地图 UI、物理投影、输入、区域与反射依赖，实机验收未完成 |
 | 2.1.6 | [2.1.6/r3](2.1.6/r3/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.1 固定此修订；增加原生 HUD 容器、补间端点与跨画布屏幕坐标接口，实机验收未完成 |
 | 2.1.6 | [2.1.6/r4](2.1.6/r4/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.2 固定此修订；增加原生按键提示预制体与布局接口，实机验收未完成 |
+| 2.1.6 | [2.1.6/r5](2.1.6/r5/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.3 固定此修订；增加输入框焦点、原生提示子控件与独立布局接口，实机验收未完成 |
 
 每个 Mod 在自己的 `release.json` 中固定 SDK，例如 `"sdk": "2.1.6/r1"`。不自动选择“最新”SDK。目录 `sdk/<游戏版本>/r<修订号>/` 一旦合并就保留原样；同一游戏版本补充接口时新建 `r2`，游戏升级时新建对应游戏版本目录。旧 Mod 发布、SDK 和 CHANGELOG 都保留，下载前仍须确认存档、加载器与联机要求。
 
@@ -94,3 +95,7 @@ Validation on 2026-09-13: r3 was exported from source `b038bf0` and contains 15 
 2026-09-13：r4 从源码提交 `b242768` 导出，共 15 个程序集、258 个类型、655 个方法、481 个字段，仅含声明。Navigation 0.1.2 使用原生按键提示预制体与布局接口；其他 Mod 固定版本不变。七个构建通过 SDK/真实引用符号 IL 与资源比对，606 项导航检查、424 项只读原生契约和 22 项 CI 工具测试通过。实机显示验收未执行。
 
 Validation on 2026-09-13: r4 was exported from source `b242768`, with 15 assemblies, 258 types, 655 methods and 481 fields, declarations only. Navigation 0.1.2 uses native key-hint prefab and layout APIs; other Mod pins are unchanged. All seven builds passed SDK/real-reference symbolic IL and resource comparison, with 606 navigation checks, 424 read-only game contracts and 22 CI tooling tests passing. In-game visual acceptance remains outstanding.
+
+2026-09-13：r5 从源码提交 `907b196` 导出，共 15 个程序集、259 个类型、656 个方法、484 个字段，仅含声明。新增 TMP/UGUI 输入框焦点、包含隐藏子控件的查找、ContentSizeFitter 与颜色字段；不再引用 LayoutRebuilder 和无参子控件查找。15 个程序集身份与哈希同 r4，历史快照保留原样，仅 Navigation 0.1.3 改用 r5。七个构建通过 SDK/真实引用符号 IL 与资源比对，606 项导航检查、440 项只读原生契约及 22 项 CI 工具测试通过。空按键槽回归契约对已安装 0.1.2 正确失败，对修复版通过；不执行游戏代码，实机显示及输入验收仍待完成。
+
+Validation on 2026-09-13: r5 was exported from source `907b196` with 15 assemblies, 259 types, 656 methods and 484 fields, declarations only. It adds TMP/UGUI editing focus, inactive-child lookup, ContentSizeFitter and color fields; unused LayoutRebuilder and parameterless child lookup are no longer referenced. All 15 assembly identities/hashes match r4. Historical snapshots remain unchanged, and only Navigation 0.1.3 moves to r5. All seven builds passed SDK/real-reference symbolic IL and resource comparison; 606 navigation checks, 440 read-only game contracts and 22 CI tooling tests passed. The null-key-slot regression correctly rejects the installed 0.1.2 DLL and passes the repaired build. No game code executes in these checks; in-game layout and input acceptance remain outstanding.

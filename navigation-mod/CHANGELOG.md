@@ -4,6 +4,8 @@
 
 ### 0.1.3 — 2026-09-13
 
+- Pin game 2.1.6 SDK r5 for verified text focus and UI layout APIs; pass 606 navigation checks, 440 installed-assembly contracts and all seven SDK/real-reference comparisons.
+
 - Replace the compass's missing-font arrow with a generated triangle, add scrolling 5/15/45-degree ticks, and separate direction labels from the heading readout.
 - Fix narrow inherited prefab layout turning minimap zoom descriptions into vertical text; use an explicitly sized horizontal native-style keycap row.
 - Skip null entries in keyboard.allKeys: the installed 0.1.2 DLL and Unity log identify a per-frame null reference before the M-key handler. Check actual input-field focus and log blocked map presses, preserving native modal/loading protections and Escape restoration.
@@ -43,6 +45,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 0.1.3 — 2026-09-13
+
+- 固定游戏 2.1.6 SDK r5，覆盖已核对的文字焦点及布局接口；通过 606 项导航检查、440 项原生程序集契约和全部七个 SDK/真实引用构建对比。
 
 - 罗盘缺字箭头改为程序三角图形，新增随视角移动的 5/15/45 度刻度，将方位文字与角度读数分行排列。
 - 修复继承原生预制体窄布局导致缩放说明竖排的问题，改为明确尺寸的横向原生风格键帽行。
