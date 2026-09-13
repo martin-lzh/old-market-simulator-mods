@@ -6,6 +6,13 @@ namespace OldMarket.Navigation
     {
         private static readonly string[] Languages={"en","zh","zh-Hant","de","fr","it","ja","ko","pt","ru","es","tr","uk"};
         private static readonly Dictionary<string,string[]> Values=new Dictionary<string,string[]> {
+            ["Markers"]=new[]{"Markers","标记列表","標記列表","Markierungen","Repères","Segnaposti","マーカー","마커 목록","Marcadores","Метки","Marcadores","İşaretler","Мітки"},
+            ["NoMarkers"]=new[]{"No markers yet","暂无标记","尚無標記","Noch keine Markierungen","Aucun repère","Nessun segnaposto","マーカーはありません","아직 마커가 없습니다","Nenhum marcador","Пока нет меток","Sin marcadores","Henüz işaret yok","Міток поки немає"},
+            ["SelectMarker"]=new[]{"Select a marker to edit","选择标记以编辑","選擇標記以編輯","Markierung zum Bearbeiten wählen","Sélectionnez un repère à modifier","Seleziona un segnaposto da modificare","編集するマーカーを選択","편집할 마커를 선택하세요","Selecione um marcador para editar","Выберите метку для изменения","Selecciona un marcador para editar","Düzenlemek için işaret seçin","Виберіть мітку для редагування"},
+            ["CurrentTarget"]=new[]{"Current target","当前目标","目前目標","Aktuelles Ziel","Destination actuelle","Destinazione attuale","現在の目標","현재 목표","Destino atual","Текущая цель","Destino actual","Mevcut hedef","Поточна ціль"},
+            ["SetTarget"]=new[]{"Set as target","设为目标","設為目標","Als Ziel setzen","Définir comme destination","Imposta destinazione","目標に設定","목표로 설정","Definir como destino","Назначить целью","Fijar como destino","Hedef olarak belirle","Призначити ціллю"},
+            ["NoTarget"]=new[]{"No target selected","尚未选择目标","尚未選擇目標","Kein Ziel ausgewählt","Aucune destination sélectionnée","Nessuna destinazione selezionata","目標が選択されていません","선택한 목표가 없습니다","Nenhum destino selecionado","Цель не выбрана","Ningún destino seleccionado","Hedef seçilmedi","Ціль не вибрано"},
+            ["YourPosition"]=new[]{"Your position","你的位置","你的位置","Deine Position","Votre position","La tua posizione","現在地","내 위치","Sua posição","Вы здесь","Tu posición","Konumun","Ваше розташування"},
             ["ZoomHint"]=new[]{"Zoom out / in","缩小 / 放大","縮小 / 放大","Verkleinern / Vergrößern","Dézoomer / Zoomer","Riduci / Ingrandisci","縮小 / 拡大","축소 / 확대","Diminuir / Ampliar","Отдалить / Приблизить","Alejar / Acercar","Uzaklaştır / Yakınlaştır","Віддалити / Наблизити"},
             ["NE"]=new[]{"NE","东北","東北","NO","NE","NE","北東","북동","NE","СВ","NE","KD","ПнСх"},
             ["SE"]=new[]{"SE","东南","東南","SO","SE","SE","南東","남동","SE","ЮВ","SE","GD","ПдСх"},

@@ -2,6 +2,12 @@
 
 ## English
 
+### 0.1.4 — 2026-09-13
+
+- Rework the map window around a dark brown and gold frame, centered title, map controls and a separate marker list and target sidebar.
+- Cover the map viewport and clamp panning to map edges; smooth wheel/button zoom around the pointer where boundaries allow.
+- Preserve local map geometry, unlock layers and personal marker storage. In-game visual and interaction acceptance remains pending.
+
 ### 0.1.3 — 2026-09-13
 
 - Pin game 2.1.6 SDK r5 for verified text focus and UI layout APIs; pass 606 navigation checks, 440 installed-assembly contracts and all seven SDK/real-reference comparisons.
@@ -43,6 +49,12 @@ Experimental initial build; not installed or verified in game.
 - Supply coordinate, persistence and localization checks. In-game appearance, input, performance and multiplayer testing remain outstanding.
 
 ## 中文
+
+### 0.1.4 — 2026-09-13
+
+- 重排大地图弹窗：深棕金边外框、居中标题、地图内操作按钮，以及独立的标记列表与当前目标侧栏。
+- 地图铺满视口，拖动限制在边缘；滚轮及按钮平滑缩放，边界允许时保持鼠标指向的地图位置。
+- 保留本地地形、解锁叠层和个人标记存储，游戏内视觉与交互仍待验收。
 
 ### 0.1.3 — 2026-09-13
 

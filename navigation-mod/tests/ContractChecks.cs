@@ -69,6 +69,13 @@ var ellipsis = All(tmp).Single(x => x.FullName == "TMPro.TextOverflowModes").Fie
 Check(Convert.ToInt32(ellipsis.Constant) == 1, "TMP Ellipsis value used by bounded single-line hints");
 foreach (var fieldType in new[] { All(tmp).Single(x => x.FullName == "TMPro.TMP_InputField"), All(ugui).Single(x => x.FullName == "UnityEngine.UI.InputField") })
     Check(fieldType.Properties.Any(x => x.Name == "isFocused" && x.PropertyType.FullName == "System.Boolean" && x.GetMethod.IsPublic), "actual text-edit focus getter: " + fieldType.FullName);
+var deactivate = All(tmp).Single(x => x.FullName == "TMPro.TMP_InputField").Methods.Single(x => x.Name == "DeactivateInputField");
+Check(deactivate.IsPublic && deactivate.Parameters.Count == 1 && deactivate.Parameters[0].ParameterType.FullName == "System.Boolean"
+    && deactivate.Parameters[0].IsOptional && Equals(deactivate.Parameters[0].Constant, false), "map editor can finish input without clearing native selection");
+var component = All(core).Single(x => x.FullName == "UnityEngine.Component");
+Check(component.Methods.Any(x => x.Name == "GetComponentInChildren" && x.HasGenericParameters && x.Parameters.Count == 0), "map button component lookup generic overload");
+var transform = All(core).Single(x => x.FullName == "UnityEngine.Transform");
+Check(transform.Methods.Any(x => x.Name == "Find" && x.IsPublic && x.Parameters.Count == 1 && x.Parameters[0].ParameterType.FullName == "System.String" && x.ReturnType.FullName == "UnityEngine.Transform"), "map header child lookup signature");
 var keys = All(input).Single(x => x.FullName == "UnityEngine.InputSystem.Key");
 Check(Convert.ToInt32(keys.Fields.Single(x => x.Name == "M").Constant) == 27, "native M key enum matches compiled default");
 bool UsesField(MethodDefinition method, string type, string name) => method.HasBody && method.Body.Instructions.Any(i => i.Operand is FieldReference f && f.DeclaringType.Name == type && f.Name == name);

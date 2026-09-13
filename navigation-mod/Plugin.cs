@@ -14,7 +14,7 @@ using UnityEngine.UI;
 
 namespace OldMarket.Navigation
 {
-    [BepInPlugin("local.oldmarket.navigation", "Old Market Navigation", "0.1.3")]
+    [BepInPlugin("local.oldmarket.navigation", "Old Market Navigation", "0.1.4")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {
@@ -64,7 +64,7 @@ namespace OldMarket.Navigation
             layout = new LayoutHotReload(Path.Combine(settings,"layout.json"), message=>Logger.LogWarning(message));
             gameObject.hideFlags |= HideFlags.HideAndDontSave;
             DontDestroyOnLoad(gameObject);
-            Logger.LogInfo("Navigation 0.1.3 loaded. Map texture is optional; no scene cameras or additional regions are created.");
+            Logger.LogInfo("Navigation 0.1.4 loaded. Map texture is optional; no scene cameras or additional regions are created.");
         }
 
         private void CreateUi()

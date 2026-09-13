@@ -17,6 +17,49 @@ static class Program
   var east=NavMath.RotateForCamera(1,0,90);Near(east.X,0,"east x");Near(east.Y,1,"east forward");
   foreach(float angle in new[]{0f,45f,90f,180f,270f}){var a=NavMath.RotateForCamera(3,4,angle);Near(a.X*a.X+a.Y*a.Y,25,"rotation length");}
   Near(NavMath.Bearing(0,1),0,"north bearing");Near(NavMath.Bearing(1,0),90,"east bearing");Near(NavMath.RelativeBearing(5,355),10,"wrap bearing");
+  // A cover map fills both axes, even when its world aspect differs from the viewport.
+  var tallMap=new MapViewportGeometry(900,600,1,1);
+  Near(tallMap.Width,900,"cover square width");Near(tallMap.Height,900,"cover square height avoids side gutters");
+  var wideMap=new MapViewportGeometry(600,900,2,1);
+  Near(wideMap.Width,1800,"portrait viewport wide map cover");Near(wideMap.Height,900,"portrait viewport filled height");
+  foreach(var size in new[]{new MapPoint(900,600),new MapPoint(600,900),new MapPoint(720,720)})
+  foreach(float aspect in new[]{.5f,1f,2f})
+  foreach(float level in new[]{1f,2.7f,8f})
+  {
+   var geometry=new MapViewportGeometry(size.X,size.Y,aspect,level);
+   Check(geometry.Width>=size.X&&geometry.Height>=size.Y,"cover contains viewport at each aspect and zoom");
+   Near(geometry.Width/geometry.Height,aspect,"cover preserves world aspect");
+   foreach(float direction in new[]{-1f,1f})
+   {
+    var edge=geometry.ClampPan(new MapPoint(direction*1e6f,direction*1e6f));
+    Check(edge.X-geometry.Width/2<=-size.X/2+.001f&&edge.X+geometry.Width/2>=size.X/2-.001f,"drag limits expose no horizontal blank space");
+    Check(edge.Y-geometry.Height/2<=-size.Y/2+.001f&&edge.Y+geometry.Height/2>=size.Y/2-.001f,"drag limits expose no vertical blank space");
+   }
+  }
+  var centered=tallMap.Center(new MapPoint(.5f,.5f));Near(centered.X,0,"center player x");Near(centered.Y,0,"center player y");
+  var nearCenter=tallMap.Center(new MapPoint(.5f,.6f));Near(nearCenter.Y,-90,"interior player centers exactly");
+  var edgeCenter=tallMap.Center(new MapPoint(1,1));Near(edgeCenter.X,0,"edge player cannot expose horizontal blank space");Near(edgeCenter.Y,-150,"edge player stops at vertical cover boundary");
+  var outsideCenter=tallMap.Center(new MapPoint(-100,100));Near(outsideCenter.X,0,"out-of-map player clamp x");Near(outsideCenter.Y,-150,"out-of-map player clamp y");
+  var lowZoom=new MapViewportGeometry(900,600,1,.1f);Near(lowZoom.Width,tallMap.Width,"zoom-out cannot undershoot cover");
+  var zoomStart=new MapViewportGeometry(800,500,1.5f,2);
+  var zoomEnd=new MapViewportGeometry(800,500,1.5f,5);
+  var oldPan=new MapPoint(60,-40);var anchor=new MapPoint(175,-90);
+  var newPan=zoomEnd.ZoomAt(zoomStart,oldPan,anchor);
+  Near((anchor.X-oldPan.X)/zoomStart.Width,(anchor.X-newPan.X)/zoomEnd.Width,"cursor anchor world x retained while zooming");
+  Near((anchor.Y-oldPan.Y)/zoomStart.Height,(anchor.Y-newPan.Y)/zoomEnd.Height,"cursor anchor world z retained while zooming");
+  var roundPan=zoomStart.ZoomAt(zoomEnd,newPan,anchor);Near(roundPan.X,oldPan.X,"zoom roundtrip x");Near(roundPan.Y,oldPan.Y,"zoom roundtrip y");
+  var centerZoom=zoomEnd.ZoomAt(zoomStart,oldPan,new MapPoint(0,0));Near(centerZoom.X,150,"button zoom preserves viewport center x");Near(centerZoom.Y,-100,"button zoom preserves viewport center y");
+  var smoothPan=oldPan;var previous=zoomStart;
+  foreach(float level in new[]{2.1f,2.5f,3.2f,4.7f,5f})
+  {var next=new MapViewportGeometry(800,500,1.5f,level);smoothPan=next.ZoomAt(previous,smoothPan,anchor);previous=next;}
+  Near(smoothPan.X,newPan.X,"smooth zoom matches direct anchored x");Near(smoothPan.Y,newPan.Y,"smooth zoom matches direct anchored y");
+  var zoomBase=new MapViewportGeometry(800,500,1.5f,1);
+  var clampedZoom=zoomBase.ZoomAt(zoomEnd,zoomEnd.ClampPan(new MapPoint(1e6f,-1e6f)),anchor);
+  Check(Math.Abs(clampedZoom.X)<.001f&&Math.Abs(clampedZoom.Y)<= (zoomBase.Height-500)/2+.001f,"zoom out clamps edges without gutters");
+  foreach(float bad in new[]{0f,-1f,float.NaN,float.PositiveInfinity})Reject(()=>new MapViewportGeometry(bad,600,1,1),"invalid viewport rejected");
+  Reject(()=>new MapViewportGeometry(800,500,float.Epsilon,8),"unrepresentable aspect rejected");
+  Reject(()=>tallMap.ClampPan(new MapPoint(float.NaN,0)),"nonfinite pan rejected");
+  Reject(()=>tallMap.ZoomAt(default,new MapPoint(0,0),new MapPoint(0,0)),"uninitialized zoom origin rejected");
   var directory=Path.Combine(Path.GetTempPath(),"navigation-tests-"+Guid.NewGuid().ToString("N"));
   try {
    var store=new MarkerStore(directory);var markers=new List<NavMarker>{new NavMarker{Name="港口 🧭",X=12.5f,Z=-6,Color=2,Icon=1}};
