@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+### 0.2.0 — 2026-09-14
+
 - Reuse the same colored, outlined POI/personal sprite on the compass and in world guidance; keep the entire 25 px compass icon within its strip.
 
 - Remove the separate top target name/distance/bearing panel; retain the compass target marker and projected world guidance.
@@ -22,7 +24,7 @@
 
 - Give built-in POIs distinct filled Phosphor symbols while retaining category colors. Left/right-click a POI icon or visible label to set it as the navigation target; large-map gestures continue through POI nodes. Include upstream icon notices in the packaged license.
 
-- Apply the selected muted POI palette: shop #ad7568, home #829278, orders #77929d, other #978190 and player #c1ccd0. Use two-pixel source outlines and match player/POI canvas sizes (22 px minimap, 25 px large map).
+- Apply the selected muted POI palette: shop #ad7568, home #829278, orders #77929d, other #978190 and player #c1ccd0. Use 3 px source outlines and 25 px player/POI canvases in both maps.
 
 - Remove the player position nameplate and use a narrow, outlined direction arrow in both maps. Color POI sprites by category with dark outlines and transparent backgrounds, including the large map. Resolve built-in POI labels from native game text instead of Mod translations.
 
@@ -30,12 +32,12 @@
 
 - Right-click a personal marker icon or label to remove it; left-click to edit. Remove the icon backdrop and overview list; place current target above the marker editor. Pair minimap action labels individually with their minus/equals keycaps.
 
-- Pin game 2.1.6 SDK r7 for the actual UI scroll multiplier, runtime input range and platform APIs. Pass 1397 navigation checks, 553 native contracts, 31 CI tooling tests and all seven SDK/real-reference comparisons; in-game acceptance remains pending.
+- Pin game 2.1.6 SDK r7 for the actual UI scroll multiplier, runtime input range and platform APIs. Version 0.2.0 passes 1225 navigation checks, 19 native-name checks, 635 metadata/IL contracts, 48 CI tooling tests and real-reference/SDK builds; in-game acceptance remains pending.
 
 - Normalize wheel input by the active UI module scale, preserve fractional movement and cancel pending opposite zoom; +/- button behavior is unchanged.
 - Read optional validated local POIs and render semantic shop/home/dock icons. Labels expand with zoom when space permits, avoid overlaps and prioritize the selected target; POIs can be navigation targets without entering personal marker files.
 
-- Keep the map north label above its arrow in a taller, non-ellipsized text box for native CJK font metrics. The Mod version remains unchanged.
+- Keep the map north label above its arrow in a taller, non-ellipsized text box for native CJK font metrics.
 
 ### 0.1.4 — 2026-09-13
 
@@ -89,6 +91,8 @@ Experimental initial build; not installed or verified in game.
 
 ### 未发布
 
+### 0.2.0 — 2026-09-14
+
 - 罗盘目标标记与 3D 指引复用同一 POI/个人标记图标、颜色和描边，25 px 图标完整限制在罗盘条内。
 
 - 移除顶部独立的目标名称、距离与方位提示栏，保留罗盘目标标记和 3D 场景指引。
@@ -107,7 +111,7 @@ Experimental initial build; not installed or verified in game.
 
 - 内置 POI 使用不同 Phosphor 实心图形，同类别保持同颜色。左右键点击 POI 图标或可见名称均可设为导航目标，大地图图标节点继续转发拖动与滚轮；发行包许可包含上游图标声明。
 
-- 应用选定 POI 配色：商店 #ad7568、房屋 #829278、订购 #77929d、其他 #978190、玩家 #c1ccd0。源纹理描边加至 2 px，玩家与 POI 画布尺寸统一为小地图 22 px、大地图 25 px。
+- 应用选定 POI 配色：商店 #ad7568、房屋 #829278、订购 #77929d、其他 #978190、玩家 #c1ccd0。源纹理使用 3 px 描边，两张地图中的玩家与 POI 画布尺寸统一为 25 px。
 
 - 移除玩家位置文字，两张地图改用细长描边方向箭头。POI 图标按类别着色并加深色描边，大地图也去除图标底板。内置地点标签改从游戏原生文本读取，不再使用 Mod 自译名称。
 
@@ -115,12 +119,12 @@ Experimental initial build; not installed or verified in game.
 
 - 右键个人标记图标或名称即可删除，左键选中编辑；去掉图标底色和标记总览，将当前目标放在编辑区上方。小地图缩放提示改为“缩小 [-]　放大 [=]”两组动作与键帽。
 
-- 固定游戏 2.1.6 SDK r7，覆盖实际 UI 滚轮倍率、运行时输入范围与平台接口。通过 1397 项导航检查、553 项原生契约、31 项 CI 工具测试及全部七个 SDK/真实引用对比；实机验收仍待完成。
+- 固定游戏 2.1.6 SDK r7，覆盖实际 UI 滚轮倍率、运行时输入范围与平台接口。0.2.0 通过 1225 项导航检查、19 项原生名称检查、635 项元数据/IL 契约、48 项 CI 工具测试及真实引用/SDK 构建；实机验收仍待完成。
 
 - 按当前 UI 模块系数还原滚轮输入，保留小数滚动并取消反方向的剩余缩放；加减按钮行为不变。
 - 读取经校验的本地 POI，绘制商店、房屋、码头等语义图标；放大且空间足够时展开名称，避让重叠并优先显示目标。POI 可设为导航目标，不写入个人标记文件。
 
-- 调整大地图北向标识的文字区域高度，禁用省略裁切，在箭头上方显示“北”等本地化方位文字，兼容原生中文字体行高。保持现有 Mod 版本。
+- 调整大地图北向标识的文字区域高度，禁用省略裁切，在箭头上方显示“北”等本地化方位文字，兼容原生中文字体行高。
 
 ### 0.1.4 — 2026-09-13
 

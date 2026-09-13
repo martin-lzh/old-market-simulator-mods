@@ -1,12 +1,12 @@
 # Old Market Navigation
 
-Version **0.1.4 — experimental**. An independent navigation HUD for Old Market Simulator: compass, minimap, map window, personal markers and target bearings. It does not require Coordinates or replace that plugin.
+Version **0.2.0 — experimental**. An independent navigation HUD for Old Market Simulator: compass, minimap, map window, personal markers and target bearings. It does not require Coordinates or replace that plugin.
 
 **Build and automated checks are available. Version 0.1.2 was installed locally; user screenshots exposed layout defects and M-key failure. This repair still requires in-game appearance, input, performance and multiplayer acceptance.** The public package does not include game-derived map images or geometry. Without a local map companion, the compass and optional coordinates work, the map reports that no map is available, and map marker creation is disabled.
 
 ## Features and controls
 
-Pending local build (Unreleased, version unchanged): the wheel compensates for the active UI module scroll multiplier while keeping fractional input. Optional `Pois` arrays in local map manifests contain `Id`, `Name`, `NameKey`, `Category` (shop/home/dock/other), `X` and `Z`. Up to 256 validated points per map are supported. POI icons stay visible; names open above 1.5x zoom and close below 1.35x or when blocked. Left- or right-click a POI icon or visible label to target it. Personal labels also collapse when space is limited. POIs are companion data, not automatically discovered moving player buildings. Accuracy depends on the local manifest: prefer verified NPC transforms for shops; regional origins are not verified entrances. The native licenses key uses an identification-card icon; a home-shaped rest icon does not imply player ownership. Old maps without Pois still work. Built-in POIs use distinct Phosphor fill symbols, with color determined by category. Both map views render POIs; minimap icons and labels stay upright in either rotation mode, with labels expanding below about 67 m range where space permits. Select a POI on the large map to use compass guidance. Map-load logs include POI counts; opening the large map logs data, node and visible-node counts for diagnosis. The metadata reader is tested against nested arrays, but in-game visual acceptance is still pending.
+Version 0.2.0: the wheel compensates for the active UI module scroll multiplier while keeping fractional input. Optional `Pois` arrays in local map manifests contain `Id`, `Name`, `NameKey`, `Category` (shop/home/dock/other), `X` and `Z`. Up to 256 validated points per map are supported. POI icons stay visible; names open above 1.5x zoom and close below 1.35x or when blocked. Left- or right-click a POI icon or visible label to target it. Personal labels also collapse when space is limited. POIs are companion data, not automatically discovered moving player buildings. Accuracy depends on the local manifest: prefer verified NPC transforms for shops; regional origins are not verified entrances. The native licenses key uses an identification-card icon; a home-shaped rest icon does not imply player ownership. Old maps without Pois still work. Built-in POIs use distinct Phosphor fill symbols, with color determined by category. Both map views render POIs; minimap icons and labels stay upright in either rotation mode, with labels expanding below about 67 m range where space permits. Select a POI on the large map to use compass guidance. Map-load logs include POI counts; opening the large map logs data, node and visible-node counts for diagnosis. The metadata reader is tested against nested arrays, but in-game visual acceptance is still pending.
 
 POI categories use shop #ad7568, home/rest #829278, dock/order #77929d and other #978190 icons, all with 3 px outlines on the 32 px source texture and transparent backgrounds. The player uses a narrow #c1ccd0 direction arrow at the same canvas size as POIs (25 px minimap, 25 px large map) without a nameplate. Built-in place labels come from the native game localization table; unverified or unavailable labels remain hidden.
 
@@ -106,7 +106,7 @@ Requirements for the local build below: Windows, .NET SDK (tests target .NET 8),
 dotnet run --project navigation-mod/tests/Navigation.Tests.csproj
 ```
 
-Build output: `outputs/OldMarket.Navigation-0.1.4.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist is exactly the plugin DLL, this README, CHANGELOG and LICENSE. It excludes game assemblies, loader files, map companions, saves, logs and backups.
+Build output: `outputs/OldMarket.Navigation-0.2.0.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist is exactly the plugin DLL, this README, CHANGELOG and LICENSE. It excludes game assemblies, loader files, map companions, saves, logs and backups.
 
 Verified on the 2.1.6 baseline: SDK r7 and real-reference Release builds match in symbolic IL, assembly references and embedded resources; 1397 pure checks, 553 read-only installed-assembly contracts and 31 CI tooling tests pass. No Unity game code was executed by these checks.
 
@@ -120,7 +120,7 @@ Original code, documentation and original UI decorations are provided under [MIT
 
 ## 中文说明
 
-**0.1.4 是实验版**：独立导航 Mod，包含顶部罗盘、圆形小地图、M 键大地图、个人标记和目标方位指示，不依赖也不替换 Coordinates。
+**0.2.0 是实验版**：独立导航 Mod，包含顶部罗盘、圆形小地图、M 键大地图、个人标记和目标方位指示，不依赖也不替换 Coordinates。
 
 已提供构建及自动检查。0.1.2 已在本机安装，用户截图暴露了布局缺陷和 M 键失效；**本次修复仍需游戏内视觉、输入恢复、性能及联机验收**。公开包不含游戏派生地图。没有本地地图配套文件时仍可显示罗盘和可选 XYZ，地图提示无数据，不能在地图上新增标记。
 
@@ -175,7 +175,7 @@ POI 按类别使用商店 #ad7568、房屋/休息点 #829278、码头/订购点 
 
 固定游戏 **2.1.6**、Unity Mono **2022.3.62f3** 与编译 SDK **2.1.6/r7**，既有 Mod 保留 r1。CI 使用官方固定哈希的 BepInEx 5.4.23.5 引用；反射使用的存档槽、区域与扩建成员纳入 SDK 和真实程序集契约检查。无游戏环境可运行上文 `ci.py validate`、CI 工具测试和 `ci.py build`；匹配的本机安装可用 `ci.py verify-game --game-dir <path>` 核对真实引用符号 IL/资源与契约，不启动游戏。
 
-构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.1.4.zip`，打印 SHA256，不自动安装，严格只含 DLL、README、CHANGELOG、LICENSE。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
+构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.2.0.zip`，打印 SHA256，不自动安装，严格只含 DLL、README、CHANGELOG、LICENSE。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
 
 2.1.6 基线验证：SDK r7 与真实引用 Release 构建的符号 IL、程序集引用及内嵌资源一致；1397 项纯逻辑/本地化检查、553 项只读原生契约和 31 项 CI 工具测试通过，检查不执行 Unity 游戏代码。
 

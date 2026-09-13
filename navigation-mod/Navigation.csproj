@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>OldMarket.Navigation</AssemblyName>
-    <Version>0.1.4</Version>
+    <Version>0.2.0</Version>
     <GameDir Condition="'$(GameDir)' == ''">F:\SteamLibrary\steamapps\common\Old Market Simulator</GameDir>
     <ManagedDir Condition="'$(ManagedDir)' == ''">$(GameDir)\Old Market Simulator_Data\Managed</ManagedDir>
     <BepInExDir Condition="'$(BepInExDir)' == ''">$(GameDir)\BepInEx\core</BepInExDir>
