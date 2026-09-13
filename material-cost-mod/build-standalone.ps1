@@ -50,7 +50,7 @@ dotnet run --project (Join-Path $PSScriptRoot 'tests/BootstrapChecks.csproj') -c
 if ($LASTEXITCODE) { throw 'Bootstrap checks failed.' }
 $taskOutput = Join-Path $taskRoot 'outputs'
 New-Item -ItemType Directory $taskOutput -Force | Out-Null
-$taskZip = Join-Path $taskOutput 'OldMarket.MaterialCost-0.5.1-Standalone-0.1.0.zip'
+$taskZip = Join-Path $taskOutput 'OldMarket.MaterialCost-0.5.2-Standalone-0.1.0.zip'
 Compress-Archive -Path (Join-Path $taskStage '*') -DestinationPath $taskZip -Force
 Write-Output "Package: $taskZip"
 Write-Output "Stage: $taskStage"

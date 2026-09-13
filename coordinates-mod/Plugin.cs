@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace OldMarket.Coordinates
 {
-    [BepInPlugin("local.oldmarket.coordinates", "Old Market Coordinates", "0.1.3")]
+    [BepInPlugin("local.oldmarket.coordinates", "Old Market Coordinates", "0.1.4")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {
@@ -27,7 +27,7 @@ namespace OldMarket.Coordinates
             toggleKey = Config.Bind("Display", "ToggleKey", Key.F8, "Unity Input System key; None disables the hotkey.");
             gameObject.hideFlags |= HideFlags.HideAndDontSave;
             DontDestroyOnLoad(gameObject);
-            Logger.LogInfo("Coordinates 0.1.3 loaded; visible on launch, position sampled every LateUpdate.");
+            Logger.LogInfo("Coordinates 0.1.4 loaded; visible on launch, position sampled every LateUpdate.");
         }
 
         private void Update()

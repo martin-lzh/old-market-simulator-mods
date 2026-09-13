@@ -1,10 +1,10 @@
-# Price Probability 0.1.1 Change Log / 版本记录
+# Price Probability 0.1.2 Change Log / 版本记录
 
 [English](#english) · [中文](#中文)
 
 ## English
 
-### Unreleased
+### 0.1.2 — prerelease (pending publication)
 
 - Add game-versioned SDK compilation and CHANGELOG-driven CI releases; pin this Mod to SDK 2.1.6/r1. Existing published versions are not rebuilt or replaced.
 
@@ -25,7 +25,7 @@ Older development versions mentioned in the README are not verified downloadable
 
 ## 中文
 
-### 未发布
+### 0.1.2 — 预发布（待发布）
 
 - 增加随游戏版本维护的 SDK 编译和 CHANGELOG 驱动的 CI 发布，本 Mod 固定 SDK 2.1.6/r1；不重建或替换既有公开版本。
 

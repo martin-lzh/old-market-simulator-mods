@@ -10,11 +10,11 @@ Five released unofficial mods and an experimental Navigation mod for **Old Marke
 
 | Mod | Release | Features |
 | --- | --- | --- |
-| [Material Cost](material-cost-mod/README.md) | [0.5.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1) | Material-cost estimates in daily reports, recipes, and purchase-profit details in orders |
-| [Coordinates](coordinates-mod/README.md) | [0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.3) | World coordinates beneath the money HUD; F8 toggle |
+| [Material Cost](material-cost-mod/README.md) | 0.5.2 pending; [0.5.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1) | Material-cost estimates in daily reports, recipes, and purchase-profit details in orders |
+| [Coordinates](coordinates-mod/README.md) | 0.1.4 pending; [0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.3) | World coordinates beneath the money HUD; F8 toggle |
 | [Checkout All](checkout-all-mod/README.md) | 0.1.5 pending; [0.1.4 download](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4) | Continuous checkout by holding E or toggling F9 |
-| [Stack All](stack-all-mod/README.md) | [0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) | Up to 64 containers per inventory slot, separate item/container counts, repeated drop/throw |
-| [Price Probability](price-probability-mod/README.md) | [0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.1) | Price-acceptance estimates and host-controlled fixed-price/probability rules |
+| [Stack All](stack-all-mod/README.md) | 0.2.2 pending; [0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) | Up to 64 containers per inventory slot, separate item/container counts, repeated drop/throw |
+| [Price Probability](price-probability-mod/README.md) | 0.1.2 pending; [0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.1) | Price-acceptance estimates and host-controlled fixed-price/probability rules |
 
 Get installable ZIPs from the linked [GitHub Releases](https://github.com/martin-lzh/old-market-simulator-mods/releases). GitHub's **Source code** archives contain source, not ready-to-install plugins. Each release includes installation notes and `SHA256SUMS.txt`. Current versions are **prereleases**: automated checks passed, but in-game acceptance is incomplete.
 
@@ -97,11 +97,11 @@ Citation is requested, not an additional MIT condition. A project link does not 
 
 | Mod | 发布版本 | 功能 |
 | --- | --- | --- |
-| [Material Cost](material-cost-mod/README.md) | [0.5.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1) | 日报与配方原料成本、订购页进货成本和预计利润 |
-| [Coordinates](coordinates-mod/README.md) | [0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.3) | 金钱栏下方显示世界坐标，F8 切换 |
+| [Material Cost](material-cost-mod/README.md) | 0.5.2 待发布；[0.5.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1) | 日报与配方原料成本、订购页进货成本和预计利润 |
+| [Coordinates](coordinates-mod/README.md) | 0.1.4 待发布；[0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.3) | 金钱栏下方显示世界坐标，F8 切换 |
 | [Checkout All](checkout-all-mod/README.md) | 0.1.5 待发布；[0.1.4 下载](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4) | 长按 E 或按 F9 开关连续结账 |
-| [Stack All](stack-all-mod/README.md) | [0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) | 每格最多 64 个容器，分别显示商品与容器数，支持连续放下/扔出 |
-| [Price Probability](price-probability-mod/README.md) | [0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.1) | 定价接受概率，以及房主控制的固定售价/概率规则 |
+| [Stack All](stack-all-mod/README.md) | 0.2.2 待发布；[0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) | 每格最多 64 个容器，分别显示商品与容器数，支持连续放下/扔出 |
+| [Price Probability](price-probability-mod/README.md) | 0.1.2 待发布；[0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.1) | 定价接受概率，以及房主控制的固定售价/概率规则 |
 
 从上表对应的 [GitHub Release](https://github.com/martin-lzh/old-market-simulator-mods/releases) 下载安装 ZIP。GitHub 的 **Source code** 压缩包是源码，不是可直接安装的插件。每次发布附安装说明和 `SHA256SUMS.txt`。当前版本均为**预发布**：自动检查已通过，游戏内验收尚未完成。
 

@@ -1,5 +1,10 @@
 # Old Market Price Probability
 
+Current source version: **0.1.2**, authorized as a patch for SDK/build/documentation changes; publication is pending. Download links below still refer to the published 0.1.1 release. New local builds use 0.1.2; gameplay behavior and SDK 2.1.6/r1 remain unchanged.
+
+当前源码版本：**0.1.2**，本次已授权将 SDK、构建及文档改动推进一个 patch，尚待发布。下方下载链接仍指向已公开的 0.1.1；本地新构建使用 0.1.2，游戏逻辑及 SDK 2.1.6/r1 不变。
+
+
 [Risk notes / 风险提示](#risk-notes--风险提示) · [Change Log / 版本记录](CHANGELOG.md)
 
 English | [中文](#中文说明)
@@ -45,7 +50,7 @@ Rules are stored by save slot and product ID in `BepInEx/config/local.oldmarket.
 ./price-probability-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
-The build requires the .NET 8 SDK and uses local assemblies as read-only references, runs checks, and produces `outputs/OldMarket.PriceProbability-0.1.1.zip`; it does not install. Original pricing/math and multiplayer-policy tests, IL contract checks, and all 11 localization suites pass. In-game UI, native save behavior, and real multiplayer have not been verified.
+The build requires the .NET 8 SDK and uses local assemblies as read-only references, runs checks, and produces `outputs/OldMarket.PriceProbability-0.1.2.zip`; it does not install. Original pricing/math and multiplayer-policy tests, IL contract checks, and all 11 localization suites pass. In-game UI, native save behavior, and real multiplayer have not been verified.
 
 ## License and attribution
 
@@ -88,7 +93,7 @@ Original work here is under the [MIT License](LICENSE); game and third-party com
 ./price-probability-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
-构建需要 .NET 8 SDK，只读引用本机程序集，运行检查并生成 `outputs/OldMarket.PriceProbability-0.1.1.zip`，不会安装。原有定价/数学、多人权限、IL 契约检查和 11 项本地化测试均通过；尚未验证游戏内 UI、原生保存行为和真实多人联机。
+构建需要 .NET 8 SDK，只读引用本机程序集，运行检查并生成 `outputs/OldMarket.PriceProbability-0.1.2.zip`，不会安装。原有定价/数学、多人权限、IL 契约检查和 11 项本地化测试均通过；尚未验证游戏内 UI、原生保存行为和真实多人联机。
 
 ## 许可与引用
 

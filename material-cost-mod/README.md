@@ -1,5 +1,10 @@
 # Old Market Material Cost
 
+Current source version: **0.5.2**, authorized as a patch for SDK/build/documentation changes; publication is pending. Download links below still refer to the published 0.5.1 release. New local builds use 0.5.2; gameplay behavior and SDK 2.1.6/r1 remain unchanged.
+
+当前源码版本：**0.5.2**，本次已授权将 SDK、构建及文档改动推进一个 patch，尚待发布。下方下载链接仍指向已公开的 0.5.1；本地新构建使用 0.5.2，游戏逻辑及 SDK 2.1.6/r1 不变。
+
+
 [Risk notes / 风险提示](#risk-notes--风险提示) · [Change Log / 版本记录](CHANGELOG.md)
 
 Old Market Material Cost adds cost and profit estimates to three Old Market Simulator screens:
@@ -12,10 +17,10 @@ The Mod changes displayed text only. It does not change cash, prices, inventory,
 
 ## Download
 
-Version 0.5.1 is a prerelease on the [Material Cost 0.5.1 release page](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1):
+The latest published build is on the [Material Cost 0.5.1 release page](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1). Pending 0.5.2 builds use these package names:
 
-- `OldMarket.MaterialCost-0.5.1-BepInEx.zip`
-- `OldMarket.MaterialCost-0.5.1-MelonLoader.zip`
+- `OldMarket.MaterialCost-0.5.2-BepInEx.zip`
+- `OldMarket.MaterialCost-0.5.2-MelonLoader.zip`
 - `SHA256SUMS.txt`
 
 GitHub's automatically generated **Source code** archives are repository snapshots, not installable packages. Choose one loader package; never run BepInEx and MelonLoader together. The standalone bootstrap remains available as source for local investigation but is not publicly distributed; see [Standalone bootstrap](STANDALONE.md).
@@ -27,7 +32,7 @@ Development and automated checks target Old Market Simulator 2.1.6, Windows x64,
 ### BepInEx 5
 
 1. Exit the game and install BepInEx 5 x64 if needed, following the [official guide](https://docs.bepinex.dev/articles/user_guide/installation/index.html).
-2. Extract `OldMarket.MaterialCost-0.5.1-BepInEx.zip` into the game directory. The plugin should be at `BepInEx/plugins/OldMarket.MaterialCost/OldMarket.MaterialCost.dll`.
+2. Extract `OldMarket.MaterialCost-0.5.2-BepInEx.zip` into the game directory. The plugin should be at `BepInEx/plugins/OldMarket.MaterialCost/OldMarket.MaterialCost.dll`.
 3. Start the game and confirm the load message in the BepInEx log.
 
 Settings are in `BepInEx/config/local.oldmarket.materialcost.cfg`. `[Report] MaterialsOnly` remembers the report switch and defaults to `false`. `[Diagnostics] Enabled` controls optional frame sampling, defaults to `false`, and requires a restart after editing.
@@ -35,7 +40,7 @@ Settings are in `BepInEx/config/local.oldmarket.materialcost.cfg`. `[Report] Mat
 ### MelonLoader 0.7.3
 
 1. Exit the game, disable the BepInEx `winhttp.dll` entry point, and install Windows x64 MelonLoader from its [0.7.3 release](https://github.com/LavaGang/MelonLoader/releases/tag/v0.7.3).
-2. Extract `OldMarket.MaterialCost-0.5.1-MelonLoader.zip` into the game directory. The plugin should be at `Mods/OldMarket.MaterialCost.dll`.
+2. Extract `OldMarket.MaterialCost-0.5.2-MelonLoader.zip` into the game directory. The plugin should be at `Mods/OldMarket.MaterialCost.dll`.
 3. Start the game and confirm the load message in `MelonLoader/Logs`.
 
 Settings are in `UserData/OldMarket.MaterialCost.cfg`, category `OldMarketMaterialCost`. `MaterialsOnly` remembers the report switch; `Diagnostics` controls optional diagnostic sampling. Both default to `false`, and changing diagnostics requires a restart.
@@ -73,7 +78,7 @@ Building requires Windows, .NET 8 SDK or newer, a local game installation, and l
 
 The scripts run checks, download pinned loader references when needed, verify their checksums, and write packages to `outputs/`. They read local game assemblies for compilation but neither package them nor modify the game. All localization sources required by this Mod live under `material-cost-mod/localization/`.
 
-Version 0.5.1 compiles for BepInEx, MelonLoader, and the source-retained standalone target. Automated verification passes 40 accounting checks, 27 runtime cache and rule checks, and 11 localization suites. Coverage includes recipe and case conversion, current-day prices, losses, zero-cost and unknown-rule behavior, on-demand caching and invalidation, native-term lookup, locale fallback, and placeholder parity.
+Version 0.5.2 compiles for BepInEx, MelonLoader, and the source-retained standalone target. Automated verification passes 40 accounting checks, 27 runtime cache and rule checks, and 11 localization suites. Coverage includes recipe and case conversion, current-day prices, losses, zero-cost and unknown-rule behavior, on-demand caching and invalidation, native-term lookup, locale fallback, and placeholder parity.
 
 Automated checks are not in-game acceptance. Layout across resolutions, controller selection, all-language fonts and wrapping, day changes, multiplayer, and runtime performance have not been fully validated. Game updates and Mods that patch the same screens may require renewed testing.
 
@@ -97,10 +102,10 @@ Old Market Material Cost 在 Old Market Simulator 的三个界面中加入成本
 
 ## 下载
 
-0.5.1 以预发布形式提供，下载见 [Material Cost 0.5.1 发布页](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1)：
+当前已公开版本见 [Material Cost 0.5.1 发布页](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1)。待发布的 0.5.2 构建使用以下包名：
 
-- `OldMarket.MaterialCost-0.5.1-BepInEx.zip`
-- `OldMarket.MaterialCost-0.5.1-MelonLoader.zip`
+- `OldMarket.MaterialCost-0.5.2-BepInEx.zip`
+- `OldMarket.MaterialCost-0.5.2-MelonLoader.zip`
 - `SHA256SUMS.txt`
 
 GitHub 自动生成的 **Source code** 压缩包是源码快照，不是可安装包。请选择一种加载器，绝不能同时运行 BepInEx 和 MelonLoader。独立启动入口只保留源码供本机调查，不公开分发，详情见[独立启动入口](STANDALONE.md)。
@@ -112,7 +117,7 @@ GitHub 自动生成的 **Source code** 压缩包是源码快照，不是可安�
 ### BepInEx 5
 
 1. 退出游戏。如有需要，按[官方说明](https://docs.bepinex.dev/articles/user_guide/installation/index.html)安装 BepInEx 5 x64。
-2. 将 `OldMarket.MaterialCost-0.5.1-BepInEx.zip` 解压到游戏目录。插件路径应为 `BepInEx/plugins/OldMarket.MaterialCost/OldMarket.MaterialCost.dll`。
+2. 将 `OldMarket.MaterialCost-0.5.2-BepInEx.zip` 解压到游戏目录。插件路径应为 `BepInEx/plugins/OldMarket.MaterialCost/OldMarket.MaterialCost.dll`。
 3. 启动游戏，在 BepInEx 日志中确认加载信息。
 
 设置位于 `BepInEx/config/local.oldmarket.materialcost.cfg`。`[Report] MaterialsOnly` 记忆日报开关，默认 `false`；`[Diagnostics] Enabled` 控制可选帧采样，默认 `false`，修改后需重启。
@@ -120,7 +125,7 @@ GitHub 自动生成的 **Source code** 压缩包是源码快照，不是可安�
 ### MelonLoader 0.7.3
 
 1. 退出游戏，停用 BepInEx 的 `winhttp.dll` 入口，再从 [0.7.3 官方发布页](https://github.com/LavaGang/MelonLoader/releases/tag/v0.7.3)安装 Windows x64 MelonLoader。
-2. 将 `OldMarket.MaterialCost-0.5.1-MelonLoader.zip` 解压到游戏目录。插件路径应为 `Mods/OldMarket.MaterialCost.dll`。
+2. 将 `OldMarket.MaterialCost-0.5.2-MelonLoader.zip` 解压到游戏目录。插件路径应为 `Mods/OldMarket.MaterialCost.dll`。
 3. 启动游戏，在 `MelonLoader/Logs` 中确认加载信息。
 
 设置位于 `UserData/OldMarket.MaterialCost.cfg`，类别是 `OldMarketMaterialCost`。`MaterialsOnly` 记忆日报开关；`Diagnostics` 控制可选诊断采样。两者默认均为 `false`，修改诊断设置后需重启。
@@ -158,7 +163,7 @@ GitHub 自动生成的 **Source code** 压缩包是源码快照，不是可安�
 
 脚本会运行检查，在需要时下载固定版本的加载器引用并校验哈希，然后将安装包写入 `outputs/`。脚本只读取本机游戏程序集用于编译，不会打包或修改它们。本 Mod 所需的全部本地化源码均位于 `material-cost-mod/localization/`。
 
-0.5.1 已为 BepInEx、MelonLoader 和保留源码的独立目标完成编译。自动化验证通过 40 项会计检查、27 项运行时缓存与规则检查，以及 11 组本地化测试，覆盖配方与箱件换算、当天价格、亏损、零成本、未知规则、按需缓存与失效、原生词条、语言回退和占位符一致性。
+0.5.2 已为 BepInEx、MelonLoader 和保留源码的独立目标完成编译。自动化验证通过 40 项会计检查、27 项运行时缓存与规则检查，以及 11 组本地化测试，覆盖配方与箱件换算、当天价格、亏损、零成本、未知规则、按需缓存与失效、原生词条、语言回退和占位符一致性。
 
 自动化检查不等同于游戏内验收。不同分辨率的布局、手柄选择、所有语言的字体与换行、换日、多人和运行时性能尚未完整验证。游戏更新或其他修改相同界面的 Mod 可能需要重新测试。
 

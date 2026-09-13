@@ -1,10 +1,15 @@
 # Old Market Coordinates
 
+Current source version: **0.1.4**, authorized as a patch for SDK/build/documentation changes; publication is pending. Download links below still refer to the published 0.1.3 release. New local builds use 0.1.4; gameplay behavior and SDK 2.1.6/r1 remain unchanged.
+
+当前源码版本：**0.1.4**，本次已授权将 SDK、构建及文档改动推进一个 patch，尚待发布。下方下载链接仍指向已公开的 0.1.3；本地新构建使用 0.1.4，游戏逻辑及 SDK 2.1.6/r1 不变。
+
+
 [Risk notes / 风险提示](#risk-notes--风险提示) · [Change Log / 版本记录](CHANGELOG.md)
 
 Displays the local player's world coordinates below the money HUD in Old Market Simulator.
 
-Version 0.1.3 is a prerelease for Old Market Simulator 2.1.6, Unity 2022.3, and BepInEx 5.
+Version 0.1.4 is a prerelease for Old Market Simulator 2.1.6, Unity 2022.3, and BepInEx 5.
 
 ## Features
 
@@ -41,7 +46,7 @@ The first launch creates `BepInEx/config/local.oldmarket.coordinates.cfg`.
 | Setting | Default | Description |
 | --- | --- | --- |
 | `Display.ToggleKey` | `F8` | Unity Input System keyboard key used to toggle the display. `None` disables the hotkey. |
-| `Display.Visible` | `true` | Legacy compatibility setting. Version 0.1.3 resets it to `true` at launch, so visibility is not preserved between sessions. |
+| `Display.Visible` | `true` | Legacy compatibility setting. Version 0.1.4 resets it to `true` at launch, so visibility is not preserved between sessions. |
 
 Edit configuration while the game is closed. Legacy `Left`, `Top`, and `FontSize` settings are no longer used because the display follows the native money HUD.
 
@@ -61,7 +66,7 @@ For a nondefault game location:
 ./coordinates-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
 ```
 
-The project targets `netstandard2.1` and uses local game and BepInEx assemblies as read-only references. The script builds this mod independently and creates `outputs/OldMarket.Coordinates-0.1.3.zip`. The package contains only the original DLL, README, and MIT license; it includes no game or loader files and installs nothing.
+The project targets `netstandard2.1` and uses local game and BepInEx assemblies as read-only references. The script builds this mod independently and creates `outputs/OldMarket.Coordinates-0.1.4.zip`. The package contains only the original DLL, README, and MIT license; it includes no game or loader files and installs nothing.
 
 ## Validation and known limits
 
@@ -81,7 +86,7 @@ If this mod helps your project, article, or video, please credit **Old Market Co
 
 在 Old Market Simulator 的金钱栏下方显示本地玩家的世界坐标。
 
-0.1.3 是面向 Old Market Simulator 2.1.6、Unity 2022.3 和 BepInEx 5 的预发布版本。
+0.1.4 是面向 Old Market Simulator 2.1.6、Unity 2022.3 和 BepInEx 5 的预发布版本。
 
 ## 功能
 
@@ -116,7 +121,7 @@ If this mod helps your project, article, or video, please credit **Old Market Co
 | 设置 | 默认值 | 说明 |
 | --- | --- | --- |
 | `Display.ToggleKey` | `F8` | 用于切换显示的 Unity Input System 键盘按键。设为 `None` 可禁用快捷键。 |
-| `Display.Visible` | `true` | 兼容旧版本的设置。0.1.3 每次启动都会重置为 `true`，因此不会跨运行保存隐藏状态。 |
+| `Display.Visible` | `true` | 兼容旧版本的设置。0.1.4 每次启动都会重置为 `true`，因此不会跨运行保存隐藏状态。 |
 
 请在游戏退出后编辑配置。旧版的 `Left`、`Top` 和 `FontSize` 已不再使用，因为显示位置和样式现在跟随原生金钱栏。
 
@@ -136,7 +141,7 @@ If this mod helps your project, article, or video, please credit **Old Market Co
 ./coordinates-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
 ```
 
-项目以 `netstandard2.1` 为目标框架，将本机游戏和 BepInEx 程序集作为只读引用。脚本独立构建插件并生成 `outputs/OldMarket.Coordinates-0.1.3.zip`。压缩包只包含原创 DLL、本说明和 MIT 许可证，不包含游戏或加载器文件，也不会自动安装。
+项目以 `netstandard2.1` 为目标框架，将本机游戏和 BepInEx 程序集作为只读引用。脚本独立构建插件并生成 `outputs/OldMarket.Coordinates-0.1.4.zip`。压缩包只包含原创 DLL、本说明和 MIT 许可证，不包含游戏或加载器文件，也不会自动安装。
 
 ## 验证与已知限制
 

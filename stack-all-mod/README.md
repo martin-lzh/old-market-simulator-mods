@@ -1,10 +1,15 @@
 # Old Market Stack All
 
+Current source version: **0.2.2**, authorized as a patch for SDK/build/documentation changes; publication is pending. Download links below still refer to the published 0.2.1 release. New local builds use 0.2.2; gameplay behavior and SDK 2.1.6/r1 remain unchanged.
+
+当前源码版本：**0.2.2**，本次已授权将 SDK、构建及文档改动推进一个 patch，尚待发布。下方下载链接仍指向已公开的 0.2.1；本地新构建使用 0.2.2，游戏逻辑及 SDK 2.1.6/r1 不变。
+
+
 [Risk notes / 风险提示](#risk-notes--风险提示) · [Change Log / 版本记录](CHANGELOG.md)
 
 English | [中文](#中文说明)
 
-Version 0.2.1 expands the inventory while preserving physical product containers. It targets Old Market Simulator 2.1.6 for Windows/Mono and requires BepInEx 5.
+Version 0.2.2 expands the inventory while preserving physical product containers. It targets Old Market Simulator 2.1.6 for Windows/Mono and requires BepInEx 5.
 
 ## Features
 
@@ -28,9 +33,9 @@ A 65th container uses another unlocked empty slot. With no space, the complete c
 1. Install BepInEx 5, then close the game.
 2. Download [`OldMarket.StackAll-0.2.1.zip`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/stack-all-v0.2.1/OldMarket.StackAll-0.2.1.zip) and verify [`SHA256SUMS.txt`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/stack-all-v0.2.1/SHA256SUMS.txt).
 3. Extract into the game directory. The DLL should be at `BepInEx/plugins/OldMarket.StackAll/OldMarket.StackAll.dll`.
-4. Start the game and look for `Stack All 0.2.1 ready` in the BepInEx log.
+4. Start the game and look for `Stack All 0.2.2 ready` in the BepInEx log.
 
-Every multiplayer participant must run 0.2.1. There is no automatic peer-version check; coordinate versions yourself. Do not mix it with vanilla, 0.1.0, or incompatible inventory Mods.
+Every multiplayer participant must run 0.2.2. There is no automatic peer-version check; coordinate versions yourself. Do not mix it with vanilla, 0.1.0, or incompatible inventory Mods.
 
 ## Controls
 
@@ -53,7 +58,7 @@ There are no user options; capacity and save representation are compatibility ru
 ./stack-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
-The build uses local game/BepInEx assemblies as read-only references, runs checks, and creates `outputs/OldMarket.StackAll-0.2.1.zip`; it does not install. All required localization source, resources, and tests are contained in `stack-all-mod/localization/`, so this Mod directory builds independently. Startup rejects an unreviewed game assembly or patch surface.
+The build uses local game/BepInEx assemblies as read-only references, runs checks, and creates `outputs/OldMarket.StackAll-0.2.2.zip`; it does not install. All required localization source, resources, and tests are contained in `stack-all-mod/localization/`, so this Mod directory builds independently. Startup rejects an unreviewed game assembly or patch surface.
 
 ## Validation and limitations
 
@@ -69,7 +74,7 @@ Original work here is under the [MIT License](LICENSE); game and third-party com
 
 ## 中文说明
 
-0.2.1 在保留实体商品容器的前提下扩展物品栏，适用于 Windows/Mono 版 Old Market Simulator 2.1.6，需要 BepInEx 5。
+0.2.2 在保留实体商品容器的前提下扩展物品栏，适用于 Windows/Mono 版 Old Market Simulator 2.1.6，需要 BepInEx 5。
 
 ## 功能
 
@@ -87,9 +92,9 @@ Original work here is under the [MIT License](LICENSE); game and third-party com
 1. 安装 BepInEx 5 并退出游戏。
 2. 下载 [`OldMarket.StackAll-0.2.1.zip`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/stack-all-v0.2.1/OldMarket.StackAll-0.2.1.zip)，用 [`SHA256SUMS.txt`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/stack-all-v0.2.1/SHA256SUMS.txt) 校验。
 3. 解压到游戏目录，确认 DLL 位于 `BepInEx/plugins/OldMarket.StackAll/OldMarket.StackAll.dll`。
-4. 启动后在 BepInEx 日志确认 `Stack All 0.2.1 ready`。
+4. 启动后在 BepInEx 日志确认 `Stack All 0.2.2 ready`。
 
-联机所有玩家必须使用 0.2.1。Mod 不自动检查对方版本，请自行确认一致；不能与原版、0.1.0 或不兼容物品栏 Mod 混用。
+联机所有玩家必须使用 0.2.2。Mod 不自动检查对方版本，请自行确认一致；不能与原版、0.1.0 或不兼容物品栏 Mod 混用。
 
 ## 操作与存档
 
@@ -108,7 +113,7 @@ Original work here is under the [MIT License](LICENSE); game and third-party com
 ./stack-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
-构建只读引用本机程序集，运行检查并生成 `outputs/OldMarket.StackAll-0.2.1.zip`，不会安装。所需本地化源码、资源和测试均位于 `stack-all-mod/localization/`，因此本 Mod 目录可以独立构建。原有功能测试、IL 契约检查和 Mod 自带本地化检查均通过；尚未验证游戏内 UI、正常保存/读取和真实多人联机。首次使用前请备份重要存档。
+构建只读引用本机程序集，运行检查并生成 `outputs/OldMarket.StackAll-0.2.2.zip`，不会安装。所需本地化源码、资源和测试均位于 `stack-all-mod/localization/`，因此本 Mod 目录可以独立构建。原有功能测试、IL 契约检查和 Mod 自带本地化检查均通过；尚未验证游戏内 UI、正常保存/读取和真实多人联机。首次使用前请备份重要存档。
 
 ## 许可与引用
 
