@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Add the missing minimap POI layer with upright semantic icons and collision-aware labels in both rotation modes; resolve POI targets for compass guidance. Share icons with the large map. Verify nested POI metadata with the same .NET reader used by the plugin and log loaded/rendered counts for diagnosis. Large-map in-game acceptance remains pending.
+
 - Right-click a personal marker icon or label to remove it; left-click to edit. Remove the icon backdrop and overview list; place current target above the marker editor. Pair minimap action labels individually with their minus/equals keycaps.
 
 - Pin game 2.1.6 SDK r7 for the actual UI scroll multiplier, runtime input range and platform APIs. Pass 1397 navigation checks, 553 native contracts, 31 CI tooling tests and all seven SDK/real-reference comparisons; in-game acceptance remains pending.
@@ -64,6 +66,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 补齐小地图 POI 图层，两种朝向模式下语义图标和名称保持正立并按空间避让；罗盘指引支持 POI 目标。大小地图共用图标，通过插件实际使用的 .NET 读取器验证嵌套 POI 数据，并记录读取与绘制数量用于排查。大地图仍待实机验收。
 
 - 右键个人标记图标或名称即可删除，左键选中编辑；去掉图标底色和标记总览，将当前目标放在编辑区上方。小地图缩放提示改为“缩小 [-]　放大 [=]”两组动作与键帽。
 

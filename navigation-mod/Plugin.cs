@@ -131,7 +131,7 @@ namespace OldMarket.Navigation
                 SuppressEscapeActions();
                 player.DisablePlayerControl(true);
                 window.Toggle();
-                Logger.LogInfo("Map opened by configured key.");
+                Logger.LogInfo("Map opened by configured key. POI: "+window.PoiDiagnostics+"; "+hud.PoiDiagnostics);
             }
         }
 

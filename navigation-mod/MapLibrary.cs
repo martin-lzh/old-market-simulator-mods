@@ -5,17 +5,6 @@ using UnityEngine;
 
 namespace OldMarket.Navigation
 {
-    [Serializable]
-    public sealed class LocalMapManifest
-    {
-        public string Id, Name, SceneName, Region = "", Texture, OverlayTexture;
-        public int MapId;
-        public float MinX, MaxX, MinZ, MaxZ;
-        public string North = "+Z";
-        public long[] RequiredExpansions = new long[0], ExcludedExpansions = new long[0];
-        public MapPoi[] Pois = new MapPoi[0];
-    }
-
     // Local generated maps remain outside the public DLL and public art assets.
     public sealed class MapLibrary : IDisposable
     {
@@ -45,7 +34,7 @@ namespace OldMarket.Navigation
                 try
                 {
                     if (new FileInfo(file).Length > 32768) throw new InvalidDataException("Map metadata too large");
-                    var m = JsonUtility.FromJson<LocalMapManifest>(File.ReadAllText(file));
+                    var m = MapManifestReader.Read(File.ReadAllText(file));
                     if (m == null || !NavMath.ValidBounds(m.MinX,m.MaxX,m.MinZ,m.MaxZ) || string.IsNullOrWhiteSpace(m.Id)
                         || string.IsNullOrWhiteSpace(m.Texture) || Path.GetFileName(m.Texture) != m.Texture || m.North != "+Z")
                         throw new InvalidDataException("Map metadata invalid");
@@ -53,7 +42,7 @@ namespace OldMarket.Navigation
                     var overlay=string.IsNullOrWhiteSpace(m.OverlayTexture)?null:LoadTexture(directory,m.OverlayTexture);
                     var pois=MapPoi.Validate(m.Pois,m.MinX,m.MaxX,m.MinZ,m.MaxZ);
                     maps.Add((m,new MapDefinition { Id=m.Id,Name=m.Name,Texture=image,OverlayTexture=overlay,MinX=m.MinX,MaxX=m.MaxX,MinZ=m.MinZ,MaxZ=m.MaxZ,Pois=pois }));
-                    log("Local map loaded: " + m.Id);
+                    log("Local map loaded: " + m.Id + "; POIs=" + pois.Count);
                 }
                 catch (Exception error) { log("Local map rejected: " + Path.GetFileName(file) + ": " + error.Message); }
             }

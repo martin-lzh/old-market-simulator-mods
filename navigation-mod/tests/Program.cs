@@ -8,8 +8,10 @@ static class Program
  static void Check(bool ok,string message){count++;if(!ok)throw new Exception(message);}
  static void Near(float actual,float expected,string name)=>Check(Math.Abs(actual-expected)<.001,name);
  static void Reject(Action action,string name){try{action();}catch{count++;return;}throw new Exception(name);}
- static void Main()
+ static void Main(string[] args)
  {
+  MapManifestChecks.Run(Check,Reject);
+  foreach(string path in args){var map=MapManifestReader.Read(File.ReadAllText(path));Check(map.Pois.Length>0,"local map contains POIs");Console.WriteLine(Path.GetFileName(path)+": "+map.Pois.Length+" POIs");}
   MapWheelZoomChecks.Run(Check);
   PoiLabelChecks.Check(Check);
   var validPoi=new MapPoi {Id="shop",Name="Shop",Category="shop",X=5,Z=5};

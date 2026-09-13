@@ -24,6 +24,7 @@ namespace OldMarket.Navigation
         private NavigationLayout layout = new NavigationLayout();
         private readonly Vector3[] boundsCorners = new Vector3[4];
         private readonly MinimapZoomHint zoomHint;
+        private readonly MiniMapPoiLayer poiLayer;
         private float configuredRange=float.NaN;
         public bool MinimapVisible = true, CompassVisible = true, GuidanceVisible = true, CoordinatesVisible;
         public float MinimapRange = 100;
@@ -49,6 +50,7 @@ namespace OldMarket.Navigation
             overlayRect.anchorMin=Vector2.zero;overlayRect.anchorMax=Vector2.one;overlayRect.offsetMin=overlayRect.offsetMax=Vector2.zero;
             mapOverlay=overlayRect.gameObject.AddComponent<RawImage>();mapOverlay.raycastTarget=false;mapOverlay.gameObject.SetActive(false);
             noMap = Text("NoTerrain", disk, 14); noMap.rectTransform.sizeDelta=new Vector2(175,54); noMap.rectTransform.anchoredPosition=new Vector2(0,-52); noMap.textWrappingMode=TextWrappingModes.Normal;
+            poiLayer=new MiniMapPoiLayer(state,disk);
             playerArrow = Text("Player", disk, 27); playerArrow.text = "▲"; playerArrow.color = Color.white;
             north = Text("North", mini, 19);
             mode = Text("Mode", mini, 17); mode.rectTransform.anchoredPosition = new Vector2(0,-138); mode.rectTransform.sizeDelta = new Vector2(330,28);
@@ -165,11 +167,11 @@ namespace OldMarket.Navigation
                 map.rectTransform.sizeDelta=new Vector2((state.Map.MaxX-state.Map.MinX)*scale,(state.Map.MaxZ-state.Map.MinZ)*scale);
                 map.rectTransform.anchoredPosition=new Vector2(((state.Map.MinX+state.Map.MaxX)/2-state.PlayerPosition.x)*scale,((state.Map.MinZ+state.Map.MaxZ)/2-state.PlayerPosition.z)*scale);
             }
-            NavMarker target=null;
+            if(MinimapVisible)poiLayer.Refresh(layout.MinimapSize,MinimapRange,rotation);
+            NavMarker target=state.Target;
             for(int i=0;i<state.Markers.Count;i++)
             {
                 var marker=state.Markers[i];
-                if(marker.Id==state.TargetId)target=marker;
                 if(i>=marks.Count) marks.Add(Text("Marker"+i,content,18));
                 var mark=marks[i]; mark.gameObject.SetActive(true); mark.text=MapWindow.MarkerSymbol(marker.Icon);
                 mark.color=MapWindow.MarkerColors[Mathf.Clamp(marker.Color,0,MapWindow.MarkerColors.Length-1)];
@@ -261,6 +263,7 @@ namespace OldMarket.Navigation
             catch(IOException){return null;}
         }
         public void ChangeZoom(bool zoomIn) {MinimapRange=MinimapZoom.Step(MinimapRange,zoomIn);}
-        public void Dispose() { zoomHint.Dispose();if(root!=null)UnityEngine.Object.Destroy(root.gameObject);foreach(var item in owned)UnityEngine.Object.Destroy(item); }
+        public string PoiDiagnostics => "mini nodes="+poiLayer.NodeCount+"; in view="+poiLayer.InViewCount;
+        public void Dispose() { zoomHint.Dispose();poiLayer.Dispose();if(root!=null)UnityEngine.Object.Destroy(root.gameObject);foreach(var item in owned)UnityEngine.Object.Destroy(item); }
     }
 }

@@ -118,6 +118,7 @@ namespace OldMarket.Navigation
             return r;
         }
         private static void SetButtonSymbol(RectTransform button,string symbol){var label=button.GetComponentInChildren<TMP_Text>();label.text=symbol;label.fontSizeMax=25;}
+        public string PoiDiagnostics => "map="+(state.Map?.Id??"none")+"; data="+(state.Map?.Pois.Count??0)+"; large nodes="+poiLayer.NodeCount+"; in view="+poiLayer.InViewCount;
         public void Toggle(){if(IsOpen)Close();else{root.gameObject.SetActive(true);lastZoomTime=Time.unscaledTime;Refresh();RebuildSidebar();Center();}}
         public void Close(){if(root!=null)root.gameObject.SetActive(false);}
         public void Refresh()

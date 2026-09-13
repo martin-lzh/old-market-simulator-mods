@@ -1,13 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace OldMarket.Navigation
 {
-    [Serializable]
+    [Serializable, DataContract]
     public sealed class MapPoi
     {
-        public string Id="", Name="", NameKey="", Category="other";
-        public float X, Z;
+        [DataMember] public string Id="";
+        [DataMember] public string Name="";
+        [DataMember] public string NameKey="";
+        [DataMember] public string Category="other";
+        [DataMember] public float X;
+        [DataMember] public float Z;
+        [OnDeserializing]
+        private void SetDefaults(StreamingContext context){Category="other";}
         public string DisplayName(string locale)
         {
             string translated=string.IsNullOrEmpty(NameKey)?"":Texts.Get(locale,NameKey);
