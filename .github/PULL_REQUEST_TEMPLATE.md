@@ -10,9 +10,9 @@ Identify the Mod, tool, or documentation; state any changes to configuration, sa
 
 ## Mod 版本归属 / Mod version assignment
 
-<!-- 检查所有 Mod 的 CHANGELOG 并对照 PR 差异，逐项列出涉及的 Mod：用户明确指定的目标版本，或 Unreleased（待用户指定版本）。
+<!-- 检查所有 Mod 的 CHANGELOG 并对照 PR 差异，逐项列出涉及的 Mod：维护者明确指定的目标版本，或 Unreleased（待维护者指定版本）。
 同时列出其他仍有 Unreleased 内容、尚未规定版本的 Mod；没有则写“无”。已有旧版本号不代表本轮改动已指定版本，勿自动升级。
-Inspect every Mod CHANGELOG against the PR diff. For each affected Mod, record the user-authorized target version or Unreleased (awaiting assignment).
+Inspect every Mod CHANGELOG against the PR diff. For each affected Mod, record the maintainer-authorized target version or Unreleased (awaiting assignment).
 Also list other Mods with pending Unreleased changes and no assigned version; write “none” when empty. An existing old version does not assign new changes. Do not bump automatically. -->
 
 ## 验证 / Validation
@@ -34,7 +34,7 @@ Cover old/new saves, old configuration, multiplayer version requirements, and pe
 - [ ] 功能变化已更新 README 风险/用法及 CHANGELOG 未发布条目，或说明不适用。 / Behavior changes are covered in README risks/usage and the CHANGELOG Unreleased section, or marked not applicable.
 - [ ] 新文案已处理本地化、占位符和回退，或说明不适用。 / New text handles localization, placeholders, and fallback, or is marked not applicable.
 - [ ] 已检查差异和相关验证；未执行的实机检查已明确记录。 / Diffs and relevant validation have been reviewed; in-game checks not run are documented.
-- [ ] 已检查并列出尚未指定版本的 Mod；版本推进均有用户明确指令，其余改动保留在 Unreleased。 / Mods awaiting version assignment are listed; each version bump has an explicit user instruction and all other changes remain Unreleased.
+- [ ] 已检查并列出尚未指定版本的 Mod；版本推进均有维护者明确指令，其余改动保留在 Unreleased。 / Mods awaiting version assignment are listed; each version bump has an explicit maintainer instruction and all other changes remain Unreleased.
 
 <!-- 本地构建不等于安装授权。不要把编译通过写成联机、存档或性能验收通过。
 A local build does not authorize installation. Do not describe successful compilation as multiplayer, save, or performance acceptance testing. -->

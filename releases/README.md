@@ -12,13 +12,13 @@ See [SDK maintenance](../sdk/README.md) for game-free builds and game-version up
 
 ### English
 
-1. Work on `dev` and open a PR into protected `main`. Only after the user explicitly requests version advancement, update the affected Mod’s assembly/plugin version and move its pending changes into matching numbered entries in both CHANGELOG languages. Otherwise retain the existing version and record changes under Unreleased. During PR review, inspect every Mod CHANGELOG against the diff and list all Mods still awaiting version assignment; do not assign versions automatically. Record game/SDK versions, loader, risks, save/multiplayer constraints and actual validation. Unreleased entries are ignored.
+1. Work on `dev` and open a PR into protected `main`. Only after the maintainer explicitly requests version advancement, update the affected Mod’s assembly/plugin version and move its pending changes into matching numbered entries in both CHANGELOG languages. Otherwise retain the existing version and record changes under Unreleased. During PR review, inspect every Mod CHANGELOG against the diff and list all Mods still awaiting version assignment; do not assign versions automatically. Record game/SDK versions, loader, risks, save/multiplayer constraints and actual validation. Unreleased entries are ignored.
 2. Each Mod pins an SDK and prerelease status in its own `release.json`. Keep `prerelease: true` until in-game acceptance is complete. Existing SDK revisions remain immutable.
 3. PR CI compiles all six Mods (seven loader variants), runs pure logic/localization tests and verifies package allowlists on a GitHub-hosted Windows runner. It uses compiler-only API declarations; original game files and self-hosted runners are unnecessary.
 4. A push to `main` after merge automatically publishes new CHANGELOG versions at that exact commit. Already-public versions are skipped without replacing assets or moving tags. Documentation/SDK changes without a new Mod version never republish old binaries.
 5. The publishing job creates a draft, uploads ZIPs, SHA256SUMS.txt and build-info.json, downloads and verifies every asset byte, then publishes. Evidence records source commit, game version/hash, SDK revision and API snapshot hash. Release notes contain the current numbered English and Chinese entries. No workflow writes back to protected main.
 
-Release selection also compares the committed `<mod>-mod/` directory with the tag of that Mod's highest already-published semantic version (including published prereleases, excluding drafts and other Mods). An unchanged directory is skipped before reading artifacts or writing to GitHub. The comparison covers all commits since that release, not just the latest push; fully reverted changes do not count. Files within the Mod directory, including its documentation, count as changes. Shared SDK, CI and root documentation alone do not. First releases require tracked files in the Mod directory. Missing baseline tags or Git comparison errors stop publication rather than guessing. Release checkout fetches complete history and tags. This gate supplements explicit user version authorization and the new numbered CHANGELOG requirement; it does not replace either.
+Release selection also compares the committed `<mod>-mod/` directory with the tag of that Mod's highest already-published semantic version (including published prereleases, excluding drafts and other Mods). An unchanged directory is skipped before reading artifacts or writing to GitHub. The comparison covers all commits since that release, not just the latest push; fully reverted changes do not count. Files within the Mod directory, including its documentation, count as changes. Shared SDK, CI and root documentation alone do not. First releases require tracked files in the Mod directory. Missing baseline tags or Git comparison errors stop publication rather than guessing. Release checkout fetches complete history and tags. This gate supplements explicit maintainer version authorization and the new numbered CHANGELOG requirement; it does not replace either.
 
 Packages allow exactly the original Mod DLL under its installation path, README.md, CHANGELOG.md and LICENSE. Never package loaders, SDK references or game files. Existing three-file releases remain untouched.
 
@@ -28,13 +28,13 @@ The existing catalog.json and tag markdown files remain the historical manual re
 
 ### 中文
 
-1. 在 `dev` 开发，通过 PR 合并受保护的 `main`。只有用户明确要求推进版本后，才更新对应 Mod 的程序集/插件版本，并将待发布改动移入 CHANGELOG 中英文区段对应的新编号条目；否则保持现有版本，改动暂归 Unreleased / 未发布。PR 检查须对照差异检查所有 Mod 的 CHANGELOG，列出尚未指定版本的 Mod，不自行补定版本。注明游戏/SDK 版本、加载器、风险、存档/联机约束和实际验证。“未发布”不参与版本选择。
+1. 在 `dev` 开发，通过 PR 合并受保护的 `main`。只有维护者明确要求推进版本后，才更新对应 Mod 的程序集/插件版本，并将待发布改动移入 CHANGELOG 中英文区段对应的新编号条目；否则保持现有版本，改动暂归 Unreleased / 未发布。PR 检查须对照差异检查所有 Mod 的 CHANGELOG，列出尚未指定版本的 Mod，不自行补定版本。注明游戏/SDK 版本、加载器、风险、存档/联机约束和实际验证。“未发布”不参与版本选择。
 2. 各 Mod 在自己的 `release.json` 固定 SDK 并选择预发布状态。未完成实机验收时保留 `prerelease: true`；已有 SDK 修订保持不变。
 3. PR CI 在 GitHub 托管 Windows Runner 上编译六个 Mod（七个加载器变体），运行纯逻辑/本地化测试并检查包清单。引用来自仅含接口声明的 SDK，无需原始游戏文件或自托管 Runner。
 4. PR 合并后 main 的 push 自动按 CHANGELOG 新版本发布，标签指向此次准确提交。已公开版本直接跳过，不覆盖附件、不移动标签；仅修改文档/SDK 而不增加 Mod 编号，不会重新发布旧包。
 5. 发布任务创建草稿，上传 ZIP、SHA256SUMS.txt、build-info.json，下载逐字节校验所有附件后公开。记录源码提交、游戏版本/哈希、SDK 修订和接口快照哈希；说明提取当前编号的中英文条目。工作流不回写受保护的 main。
 
-发布筛选还会将已提交的 `<mod>-mod/` 目录与该 Mod 最高已公开语义版本的标签比较（包括已公开预发布，排除草稿及其他 Mod）。目录无净变化时，在读取附件和写入 GitHub 前跳过。比较覆盖上次发布以来的所有提交，不只检查最近一次 push；完全还原的改动不计。目录内文档也属于改动，共享 SDK、CI 和根目录文档单独变化则不计。首次发布须有已跟踪的 Mod 文件。缺少基准标签或 Git 比较失败时停止，不猜测结果；发布任务获取完整历史与标签。此条件与用户明确授权推进版本、新编号 CHANGELOG 同时适用，不能相互替代。
+发布筛选还会将已提交的 `<mod>-mod/` 目录与该 Mod 最高已公开语义版本的标签比较（包括已公开预发布，排除草稿及其他 Mod）。目录无净变化时，在读取附件和写入 GitHub 前跳过。比较覆盖上次发布以来的所有提交，不只检查最近一次 push；完全还原的改动不计。目录内文档也属于改动，共享 SDK、CI 和根目录文档单独变化则不计。首次发布须有已跟踪的 Mod 文件。缺少基准标签或 Git 比较失败时停止，不猜测结果；发布任务获取完整历史与标签。此条件与维护者明确授权推进版本、新编号 CHANGELOG 同时适用，不能相互替代。
 
 包内只允许原创 Mod DLL（保留安装目录）、README.md、CHANGELOG.md、LICENSE。加载器、SDK 引用、原始游戏文件不得入包；已有三文件发布保持原样。
 
@@ -69,7 +69,7 @@ Each mod has its own version and tag. Releases share this repository; they do no
 | Stack All | `stack-all-vMAJOR.MINOR.PATCH` |
 | Price Probability | `price-probability-vMAJOR.MINOR.PATCH` |
 
-1. After the user explicitly authorizes version advancement, update the affected mod's assembly/plugin version, package name, and English/Chinese README. Until then, keep changes in Unreleased. Localization belongs to each mod. Test the mod whose own code or messages changed, and advance its version only with that explicit authorization; no shared localization project is required.
+1. After the maintainer explicitly authorizes version advancement, update the affected mod's assembly/plugin version, package name, and English/Chinese README. Until then, keep changes in Unreleased. Localization belongs to each mod. Test the mod whose own code or messages changed, and advance its version only with that explicit authorization; no shared localization project is required.
 2. Run its build script and tests against the supported local game installation. Original game assemblies must not be uploaded to Git or CI; the reviewed API-only SDK is maintained separately.
 3. Verify the ZIP's explicit file list, version, README, license, and embedded messages. Future public plugin ZIPs must include the original DLL, README, CHANGELOG.md, and LICENSE; existing releases retain their original three-file contents. Create `SHA256SUMS.txt` for the exact bytes to upload.
 4. Commit and push the source. Tag the exact commit used for the release; do not tag an unrelated later implementation. Save release notes as `<tag>.md` here and record the source commit and asset hashes in `catalog.json`.
@@ -84,7 +84,7 @@ Never replace published binaries or move a published tag to different source. Pu
 
 每个 Mod 使用独立版本号和标签；它们共用仓库，不共用一个全局版本号。标签前缀见上表。
 
-1. 用户明确要求推进版本后，才更新对应 Mod 的程序集/插件版本、包名及英文/中文 README；此前改动保留在 Unreleased / 未发布。本地化在各 Mod 内独立维护，修改哪个 Mod 的源码或译文，就验证该 Mod，版本升级仍须用户明确指令，无需仓库级本地化工程。
+1. 维护者明确要求推进版本后，才更新对应 Mod 的程序集/插件版本、包名及英文/中文 README；此前改动保留在 Unreleased / 未发布。本地化在各 Mod 内独立维护，修改哪个 Mod 的源码或译文，就验证该 Mod，版本升级仍须维护者明确指令，无需仓库级本地化工程。
 2. 对受支持的本机游戏运行构建及测试，不将原始游戏程序集上传到 Git 或 CI；经审查的纯接口 SDK 独立维护。
 3. 检查 ZIP 文件清单、版本、README、许可证和内嵌语言资源。后续公开插件 ZIP 须含原创 DLL、README、CHANGELOG.md 和 LICENSE，既有发布保持原三文件内容；为将上传的准确文件生成 `SHA256SUMS.txt`。
 4. 提交并推送源码，标签指向实际发布所用的提交，不指向后来无关的实现。发布说明保存在此目录 `<tag>.md`，源码提交与安装包哈希记入 `catalog.json`。
