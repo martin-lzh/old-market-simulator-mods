@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "mod": "navigation",
+  "version": "0.2.0",
+  "sdk": "2.1.6/r7",
+  "prerelease": true,
+  "sourceCommit": "f7d48914a9dd160529ab22ebaf8b911bd030f910",
+  "inputsSha256": "a20399deb52a7baba61fe4696fd0855875c45fe56120cab9f243b6a4cdbc5549",
+  "authorization": "Maintainer explicitly requested advancing Navigation by one minor version, from 0.1.4 to 0.2.0, and recording the pending changes in CHANGELOG."
+}
