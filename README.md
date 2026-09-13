@@ -20,7 +20,7 @@ Get installable ZIPs from the linked [GitHub Releases](https://github.com/martin
 
 ### Installation and compatibility
 
-[Navigation 0.1.3](navigation-mod/README.md) is a local-build experiment with a default bottom-left minimap, M-key map, compass, personal target markers and native HUD reflow. It is included in SDK r5 CI builds and the automated prerelease scope, but no Navigation GitHub release has been published yet. Its original UI artwork is embedded in the DLL; scene-derived maps remain local and are not distributed here. See its README for build commands, unlock-state map layers and validation limits.
+[Navigation 0.1.4](navigation-mod/README.md) is a local-build experiment with a default bottom-left minimap, M-key map, compass, personal target markers and native HUD reflow. It is included in SDK r6 CI builds and the automated prerelease scope, but no Navigation GitHub release has been published yet. Its original UI artwork is embedded in the DLL; scene-derived maps remain local and are not distributed here. See its README for build commands, unlock-state map layers and validation limits.
 
 The build/reference environment is Old Market Simulator **2.1.6**, Windows x64, Unity Mono. Most packages require an existing **BepInEx 5** installation. Material Cost also provides a **MelonLoader 0.7.3** package; choose one loader variant. The experimental standalone entry remains available as source for local testing and has no public release package.
 
@@ -93,7 +93,7 @@ Citation is requested, not an additional MIT condition. A project link does not 
 
 ### 下载
 
-[Navigation 0.1.3](navigation-mod/README.md) 为本地构建实验版，提供默认左下小地图、M 键大地图、罗盘、个人目标标记与原生 HUD 避让，已接入 SDK r5 的 CI 构建与自动预发布范围，但尚无 Navigation GitHub Release。原创 UI 美术资源嵌入 DLL；场景派生地图仅留本机，不在此分发。构建方式、解锁状态叠层和验证范围见其说明。
+[Navigation 0.1.4](navigation-mod/README.md) 为本地构建实验版，提供默认左下小地图、M 键大地图、罗盘、个人目标标记与原生 HUD 避让，已接入 SDK r6 的 CI 构建与自动预发布范围，但尚无 Navigation GitHub Release。原创 UI 美术资源嵌入 DLL；场景派生地图仅留本机，不在此分发。构建方式、解锁状态叠层和验证范围见其说明。
 
 | Mod | 发布版本 | 功能 |
 | --- | --- | --- |

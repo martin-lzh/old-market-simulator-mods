@@ -4,6 +4,8 @@
 
 ### 0.1.4 — 2026-09-13
 
+- Pin game 2.1.6 SDK r6 for verified map control APIs; pass 894 navigation checks, 489 installed-assembly contracts and all seven SDK/real-reference comparisons. Isolate the two test projects' restore, intermediate and output directories to prevent executable apphost cache collisions.
+
 - Rework the map window around a dark brown and gold frame, centered title, map controls and a separate marker list and target sidebar.
 - Cover the map viewport and clamp panning to map edges; smooth wheel/button zoom around the pointer where boundaries allow.
 - Preserve local map geometry, unlock layers and personal marker storage. In-game visual and interaction acceptance remains pending.
@@ -51,6 +53,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 0.1.4 — 2026-09-13
+
+- 固定游戏 2.1.6 SDK r6，覆盖已核对的地图控件接口；通过 894 项导航检查、489 项原生程序集契约和全部七个 SDK/真实引用构建对比。将两个测试项目的还原、中间及输出目录隔离，修复 apphost 缓存相互覆盖。
 
 - 重排大地图弹窗：深棕金边外框、居中标题、地图内操作按钮，以及独立的标记列表与当前目标侧栏。
 - 地图铺满视口，拖动限制在边缘；滚轮及按钮平滑缩放，边界允许时保持鼠标指向的地图位置。

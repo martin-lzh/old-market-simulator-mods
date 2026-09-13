@@ -15,6 +15,7 @@
 | 2.1.6 | [2.1.6/r3](2.1.6/r3/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.1 固定此修订；增加原生 HUD 容器、补间端点与跨画布屏幕坐标接口，实机验收未完成 |
 | 2.1.6 | [2.1.6/r4](2.1.6/r4/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.2 固定此修订；增加原生按键提示预制体与布局接口，实机验收未完成 |
 | 2.1.6 | [2.1.6/r5](2.1.6/r5/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.3 固定此修订；增加输入框焦点、原生提示子控件与独立布局接口，实机验收未完成 |
+| 2.1.6 | [2.1.6/r6](2.1.6/r6/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.4 固定此修订；增加地图控件查找与输入编辑结束接口，实机验收未完成 |
 
 每个 Mod 在自己的 `release.json` 中固定 SDK，例如 `"sdk": "2.1.6/r1"`。不自动选择“最新”SDK。目录 `sdk/<游戏版本>/r<修订号>/` 一旦合并就保留原样；同一游戏版本补充接口时新建 `r2`，游戏升级时新建对应游戏版本目录。旧 Mod 发布、SDK 和 CHANGELOG 都保留，下载前仍须确认存档、加载器与联机要求。
 
@@ -99,3 +100,7 @@ Validation on 2026-09-13: r4 was exported from source `b242768`, with 15 assembl
 2026-09-13：r5 从源码提交 `907b196` 导出，共 15 个程序集、259 个类型、656 个方法、484 个字段，仅含声明。新增 TMP/UGUI 输入框焦点、包含隐藏子控件的查找、ContentSizeFitter 与颜色字段；不再引用 LayoutRebuilder 和无参子控件查找。15 个程序集身份与哈希同 r4，历史快照保留原样，仅 Navigation 0.1.3 改用 r5。七个构建通过 SDK/真实引用符号 IL 与资源比对，606 项导航检查、440 项只读原生契约及 22 项 CI 工具测试通过。空按键槽回归契约对已安装 0.1.2 正确失败，对修复版通过；不执行游戏代码，实机显示及输入验收仍待完成。
 
 Validation on 2026-09-13: r5 was exported from source `907b196` with 15 assemblies, 259 types, 656 methods and 484 fields, declarations only. It adds TMP/UGUI editing focus, inactive-child lookup, ContentSizeFitter and color fields; unused LayoutRebuilder and parameterless child lookup are no longer referenced. All 15 assembly identities/hashes match r4. Historical snapshots remain unchanged, and only Navigation 0.1.3 moves to r5. All seven builds passed SDK/real-reference symbolic IL and resource comparison; 606 navigation checks, 440 read-only game contracts and 22 CI tooling tests passed. The null-key-slot regression correctly rejects the installed 0.1.2 DLL and passes the repaired build. No game code executes in these checks; in-game layout and input acceptance remain outstanding.
+
+2026-09-13：r6 从源码提交 `dbd4960` 导出，共 15 个程序集、259 个类型、658 个方法、484 个字段，仅含声明。新增 Component 泛型子控件查找、Transform.Find 与 TMP_InputField.DeactivateInputField（可选 clearSelection=false），移除不再引用的 Vector2 一元负号；15 个程序集身份和哈希同 r5，历史 SDK 保留原样，仅 Navigation 0.1.4 改用 r6。七个构建通过 SDK/真实引用符号 IL 与资源比对，894 项导航检查、489 项只读原生契约、22 项 CI 工具测试通过。新增检查覆盖地图填满视口、拖动边界、居中、鼠标锚点及分步平滑缩放。测试项目缓存与输出按项目隔离；实机外观、输入及帧耗时尚未验收。
+
+Validation on 2026-09-13: r6 was exported from source `dbd4960` with 15 assemblies, 259 types, 658 methods and 484 fields, declarations only. It adds Component generic child lookup, Transform.Find and TMP_InputField.DeactivateInputField with optional clearSelection=false; unused Vector2 unary negation is no longer referenced. All 15 assembly identities/hashes match r5. Historical SDKs remain unchanged; only Navigation 0.1.4 moves to r6. All seven SDK/real-reference symbolic IL and resource comparisons pass, along with 894 navigation checks, 489 read-only game contracts and 22 CI tooling tests. Added geometry checks cover viewport filling, drag limits, centering, mouse anchors and incremental smooth zoom. Test project caches and outputs are isolated. In-game appearance, input and frame time remain unverified.
