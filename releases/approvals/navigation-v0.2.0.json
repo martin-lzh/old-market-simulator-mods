@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "mod": "navigation",
+  "version": "0.2.0",
+  "sdk": "2.1.6/r7",
+  "prerelease": true,
+  "sourceCommit": "c3eeff1f8571ab44e18da14e4f6b4d88a6a5d477",
+  "inputsSha256": "c95b6c1ba9c454a7fa9c53c43798d21c488b7e39118b6d5c1a69be7c4cbbcf47",
+  "authorization": "Maintainer authorized Navigation 0.2.0 and requested a player-facing note that only Eastern Town is currently supported and more maps will follow. Renewal covers this bilingual documentation clarification only; gameplay, version and prerelease scope remain unchanged."
+}
