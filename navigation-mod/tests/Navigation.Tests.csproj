@@ -1,0 +1,3 @@
+<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><TargetFramework>net8.0</TargetFramework><OutputType>Exe</OutputType></PropertyGroup><ItemGroup><Compile Include="../NavMath.cs" Link="NavMath.cs"/><Compile Include="../MarkerStore.cs" Link="MarkerStore.cs"/><Compile Include="../Texts.cs" Link="Texts.cs"/><Compile Include="../NavigationLayout.cs" Link="NavigationLayout.cs"/><Compile Include="../ExpansionRules.cs" Link="ExpansionRules.cs"/></ItemGroup></Project>
+
+

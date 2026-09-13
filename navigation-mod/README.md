@@ -1,0 +1,150 @@
+# Old Market Navigation
+
+Version **0.1.0 — experimental**. An independent navigation HUD for Old Market Simulator: compass, minimap, map window, personal markers and target bearings. It does not require Coordinates or replace that plugin.
+
+**Build and automated checks are available; installation, in-game appearance, performance, input restoration and multiplayer compatibility have not been verified.** The public package does not include game-derived map images or geometry. Without a local map companion, the compass and optional coordinates work, the map reports that no map is available, and map marker creation is disabled.
+
+## Features and controls
+
+- Compass follows camera yaw. This mod defines **+Z as north and +X as east**; this is a navigation convention, not a verified native geographic definition.
+- Circular minimap defaults to north up. Switch to camera up in the map window or configuration; the choice persists. Big map always stays north up.
+- Press **M** to open/close the map, or **Esc** / the Close button to close it. Keyboard input inside a marker name does not trigger M. The default matches the game's `UI.Map` default binding, but this version uses its own configurable keyboard key and does not automatically follow game rebinding.
+- Scroll to zoom, drag with the left mouse button to pan, right-click mapped terrain to add a marker, then click its symbol to rename, select a color/icon, choose a target or delete it. Up to 512 markers per scope, with names up to 80 characters.
+- The target panel below the compass displays left/right bearing, horizontal distance and the absolute angle from your camera direction. Distance uses X/Z world units displayed as metres. This bearing panel is not an elevation measurement, route or obstacle-aware path.
+- When a loaded non-trigger collision surface is found below the target, a separate diamond and name/distance label use the actual camera projection. The probe runs at most once per second while a target exists and the map is closed; target/scene changes invalidate its cache. No hit, a point behind the camera or a label near screen edges leaves only the bearing panel. There is no line-of-sight/occlusion check: a hit may be a roof or object rather than walkable ground, and the cached height may lag moving surfaces. No unloaded terrain is generated.
+- Opening the map releases the cursor and suppresses character controls. It temporarily suppresses the game's Settings/Close actions to prevent Esc from also opening Pause. It does not pause the world or other players. Native windows/loading take priority.
+- UI decorations are embedded in the DLL. The map reuses static textures; it does not create a scene-rendering camera, load extra game regions or send gameplay RPCs.
+
+## Installation, update and removal
+
+1. Exit the game normally. Back up an older Navigation DLL and any Navigation configuration/markers before updating.
+2. Use an existing working **BepInEx 5** installation; the local development baseline is 5.4.23.4 with the Mono game assemblies. Loader compatibility beyond the local build is unverified.
+3. Extract the package into the game directory. The plugin path is `BepInEx/plugins/OldMarket.Navigation/OldMarket.Navigation.dll`.
+4. If you have a locally generated map companion, place its JSON/PNG files in `BepInEx/plugins/OldMarket.Navigation/maps/`, beside the DLL. The public package intentionally contains no such companion.
+5. Start the game and enter a map. Test M/Esc and native menus before regular play.
+
+Updating replaces only this plugin's files. To uninstall, exit and remove `OldMarket.Navigation.dll`; remove its `maps/` directory only if no longer wanted. Optional settings and personal markers are under `BepInEx/config/OldMarket.Navigation/` and `BepInEx/config/local.oldmarket.navigation.cfg`. Keep those files to preserve markers. To roll back, restore the backed-up DLL and matching configuration. Do not remove unrelated plugins or the loader. No original game component or game save is rewritten by this plugin.
+
+## Configuration
+
+The first load creates `BepInEx/config/local.oldmarket.navigation.cfg`. Edit this file with the game closed; BepInEx configuration descriptions are English because they cannot follow live game locale changes.
+
+| Setting | Default | Meaning |
+| --- | --- | --- |
+| `Display.Minimap` | `true` | Show minimap. |
+| `Display.Compass` | `true` | Show compass. |
+| `Display.TargetGuidance` | `true` | Show target bearing panel. |
+| `Display.Coordinates` | `false` | Show XYZ below compass; leave off when using Coordinates to avoid duplication. |
+| `Display.CameraUp` | `false` | Rotate minimap with camera; the map-window button saves this choice. |
+| `Input.MapKey` | `M` | Unity Input System `Key` value; `None` disables the keyboard toggle. Avoid keys used by other actions. |
+| `Markers.RemoteProfile` | empty | Explicit unique identity for a remote host's save. Empty means session-only remote markers. |
+
+### Layout hot reload
+
+Edit `BepInEx/config/OldMarket.Navigation/layout.json` while playing. Changes are checked every 0.5 seconds on the main thread. Malformed, oversized or out-of-range files retain the previous valid layout. UI position/size changes do not require a DLL rebuild. This does not hot-reload C# logic, map files or game data.
+
+```json
+{
+  "MinimapSize": 240,
+  "MinimapRight": 24,
+  "MinimapTop": 150,
+  "MinimapRange": 100,
+  "CompassWidth": 520,
+  "CompassTop": 22,
+  "WorldMarkerSize": 28,
+  "MapWidth": 1080,
+  "MapHeight": 720,
+  "Opacity": 0.92
+}
+```
+
+Layout units use a 1920×1080 reference canvas. `MinimapRange` is the radius in world units. The historical field name `WorldMarkerSize` controls target-panel and projected-marker text size. Very small layouts and long translated text still require visual testing.
+
+## Map data and expansion states
+
+Local companion metadata matches map ID, scene, region and expansion IDs; each image includes explicit X/Z bounds and `North: "+Z"`. Unlock variants can share one painted base image and supply exact obstacle overlays; they are not four independently invented terrain layouts. Ambiguous matching metadata is rejected instead of choosing an arbitrary map. Map geometry is never inferred from decorative artwork alone. Game-derived map textures, geometry and metadata stay outside the public source/release. The optional local companion currently has evidence only for Eastern Town and the central market's four unlock states; other areas or changes in game content must be independently checked.
+
+The runtime reads the replicated unlock set and selects matching variants after unlock or scene events, with a short delay for game activation. This supports removal of market clutter when the corresponding companion variant exists. It does not redraw arbitrary player buildings, items, vegetation or every expansion automatically. Map files load at plugin startup; restart after changing them. Expansion changes do not change marker storage scope.
+
+## Marker storage and multiplayer
+
+Markers are stored in the mod's own XML files, separated by local save identity, map and region. The host identity includes the slot and its directory creation timestamp; recreating/copying a save directory can change that identity. No game save is deserialized or written.
+
+For a remote client, leave `RemoteProfile` empty for connection-only markers. They survive region round trips within that connection but disappear after disconnect/restart. Setting a unique `RemoteProfile` opts into persistent remote markers; reusing it for different host saves mixes those markers, so choose distinct values. Unknown/corrupt marker files are not silently replaced; failed loading disables writes for that scope during the connection. Targets are session selections and are not persisted. Markers are personal, with no network sharing.
+
+## Languages and compatibility
+
+UI text follows the game's selected locale and native money-HUD TextMesh Pro font. Original translations cover `zh`, `zh-Hant`, `en`, `de`, `fr`, `it`, `ja`, `ko`, `pt`, `ru`, `es`, `tr`, `uk`; unknown locales fall back to English. These translations have not been reviewed by native speakers or verified for all font glyphs/long labels in game. Marker names and companion-provided place names are not translated automatically.
+
+Built against local Old Market Simulator assemblies and Unity 2022.3-era uGUI/TextMesh Pro APIs. Future game updates can change player, input, locale, save-identity or expansion APIs. Menu/HUD mods and bindings may conflict. A successful build does not establish compatibility for single-player, host or remote clients, nor a frame-rate guarantee.
+
+## Build and validation
+
+Requirements: Windows, .NET SDK (tests target .NET 8), local game assemblies (including the read-only `UnityEngine.PhysicsModule.dll` reference) and BepInEx 5. From the repository root:
+
+```powershell
+./navigation-mod/build.ps1
+./navigation-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
+dotnet run --project navigation-mod/tests/Navigation.Tests.csproj
+```
+
+Build output: `outputs/OldMarket.Navigation-0.1.0.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist is exactly the plugin DLL, this README, CHANGELOG and LICENSE. It excludes game assemblies, loader files, map companions, saves, logs and backups.
+
+Automated coverage exercises coordinate conversion/rotation boundaries, marker serialization/isolation/error handling and locale fallback. Static review checked camera-up rotation, expansion event invalidation and Esc action handling. **Still required in game:** native font/overlap, both map modes, dragging/zoom/marker editing, Esc without Pause leakage, disconnect/region travel, each market unlock transition, frame time and host/client behavior. Check those in a backed-up test setup before relying on the experimental build.
+
+## License and provenance
+
+Original code, documentation and UI decorations are provided under [MIT](LICENSE); see [CHANGELOG](CHANGELOG.md). UI decorations were generated with image generation tools and embedded as original decorative assets. Game assemblies are read-only build references, not redistributed. The MIT grant does not cover game resources, derived local map companions, trademarks or unrelated mods. No third-party runtime dependency is bundled.
+
+---
+
+## 中文说明
+
+**0.1.0 是实验版**：独立导航 Mod，包含顶部罗盘、圆形小地图、M 键大地图、个人标记和目标方位栏，不依赖也不替换 Coordinates。
+
+已提供构建及自动检查；**尚未安装，也未完成游戏内视觉、性能、输入恢复及联机验证**。公开包不含游戏派生地图。没有本地地图配套文件时仍可显示罗盘和可选 XYZ，地图提示无数据，不能在地图上新增标记。
+
+### 功能与操作
+
+- 约定 **+Z 为北、+X 为东**，并非已确认的原生地理北向。罗盘跟随镜头方向。
+- 小地图默认固定正北，可在大地图按钮或配置切换随视角转动并保存选择；大地图始终固定正北。
+- **M** 开关地图，**Esc** 或关闭按钮关图。输入标记名时 M 不触发开关。默认键与游戏 `UI.Map` 默认相同，但当前版本使用独立配置键，不自动跟随游戏改键。
+- 滚轮缩放、左键拖动、右键添加标记；点击标记后可改名、颜色、图标、设为目标或删除。每个存储范围最多 512 个标记，名称最多 80 字符。
+- 罗盘下方目标栏显示左右方向、水平距离及相对镜头的角差。距离按 X/Z 世界单位显示为米；**方位栏本身不提供高度、寻路或绕障路线**。
+- 若从目标上方向下射线命中已加载的非触发碰撞体，另显示实际摄像机投影的菱形、名称和距离。仅有目标且大地图关闭时每秒最多采样一次；目标或场景变化清除缓存。未命中、位于镜头后方或靠近屏幕边缘时，仅保留方位栏。没有视线遮挡判断，命中可能落在屋顶或物体表面，并不保证是可行走地面；移动表面的缓存高度可能有延迟。不生成未加载地形。
+- 开图释放鼠标并抑制角色操作；暂时停用原生 Settings/Close 操作以避免 Esc 同时打开暂停菜单，不暂停整个世界。原生窗口及加载画面优先。
+- 只使用静态底图，不新建场景渲染相机、不额外加载区域、不发送游戏操作 RPC。
+
+### 安装、升级、回退
+
+正常退出游戏，备份旧 Navigation DLL、配置与标记。使用现有可工作的 BepInEx 5；本地开发基线为 5.4.23.4。解压后 DLL 应位于 `BepInEx/plugins/OldMarket.Navigation/OldMarket.Navigation.dll`。如持有本地生成的地图配套文件，把 JSON/PNG 放在同级 `maps/` 文件夹。公开包不提供这些派生文件。
+
+升级仅替换本插件文件。卸载时退出游戏并移除 DLL，可按需删除该插件地图文件夹；保留 `BepInEx/config/OldMarket.Navigation/` 可保留个人标记，配置主文件为 `BepInEx/config/local.oldmarket.navigation.cfg`。回退恢复备份 DLL 和对应配置，不移除其他插件或加载器。插件不改写原始游戏组件或游戏存档。
+
+### 配置与热更新
+
+上方配置表列出了所有项目。小地图、罗盘、目标指引默认开启；导航内 XYZ 默认关闭，避免与独立坐标 Mod 重复。`CameraUp=false` 为固定正北，`MapKey=None` 禁用键盘开关。主 CFG 建议退出游戏后编辑，其说明为英语。
+
+运行时可以编辑 `BepInEx/config/OldMarket.Navigation/layout.json`，上方 JSON 为默认值。每 0.5 秒检查一次；无效配置保留上一版布局。数值以 1920×1080 参考画布计算；`MinimapRange` 为世界单位半径，`WorldMarkerSize` 是沿用的字段名，实际控制目标栏及投影标记的文字大小。布局热更新不包含 C#、底图文件或游戏数据，替换底图后需重启。
+
+### 地图状态与存储
+
+本地地图按地图 ID、场景、区域和解锁集合匹配，显式保存 X/Z 边界及北向。解锁变体可共用同一绘画底图，并叠加准确障碍层，并非四幅各自编造地形的地图；匹配条件有歧义时拒绝选图。不能仅凭装饰画推断几何。地图图像及其游戏派生几何/元数据不进入公开仓库或发行包。目前本地证据范围为东方小镇及中央市场四个解锁状态，其余区域尚未验证。
+
+读取原生同步的解锁集合，在解锁或场景事件后切换匹配底图；有对应变体时可反映市场垃圾消失。不会自动重绘任意玩家建筑、物品、植被或全部扩建。解锁变化不改变个人标记的存储范围。
+
+标记写入 Mod 自己的 XML，按本机存档、地图、区域隔离，不读取序列化存档内容或写回游戏存档。本机身份包含槽位及目录创建时间，复制或重建存档目录可能改变身份。目标选择不持久化。
+
+远程客户端的 `Markers.RemoteProfile` 默认留空，标记只保留本次连接；同次连接往返区域仍保留，断开或重启后清除。填写独立名称可启用远程持久化；不同主机存档不要使用同一个名称，否则会混用标记。标记不会共享给其他玩家。文件读取失败会禁止本连接该范围的写入，避免覆盖原文件。
+
+### 语言、风险与验证
+
+跟随游戏选定语言及金钱栏 TMP 字体，提供 13 种原创翻译：简中、繁中、英语、德语、法语、意大利语、日语、韩语、葡萄牙语、俄语、西班牙语、土耳其语、乌克兰语；未知语言回退英语。尚未经母语审校和所有字体实机检查。个人标记名与地图文件地名不会自动翻译。
+
+构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.1.0.zip`，打印 SHA256，不自动安装，严格只含 DLL、README、CHANGELOG、LICENSE。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
+
+实机待检查：字体遮挡、两种旋转模式、缩放拖动和标记编辑、Esc 不穿透暂停菜单、断线与区域旅行、市场各解锁阶段、帧耗时、单机/主机/客户端。游戏更新及其他 HUD/按键插件可能产生冲突，应在备份后的测试环境验收。
+
+原创代码、文档与生成的 UI 装饰素材采用 [MIT](LICENSE)，版本记录见 [CHANGELOG](CHANGELOG.md)。许可不覆盖游戏组件、原始资源、派生本地地图、商标或其他 Mod。未打包游戏或第三方运行库。
+
+

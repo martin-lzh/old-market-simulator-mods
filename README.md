@@ -4,7 +4,7 @@
 
 ## English
 
-Five unofficial mods for **Old Market Simulator**, with source code, tests, and build scripts. Each mod is versioned and released independently.
+Five released unofficial mods and an experimental Navigation mod for **Old Market Simulator**, with source code, tests, and build scripts. Each mod is versioned independently.
 
 ### Downloads
 
@@ -19,6 +19,8 @@ Five unofficial mods for **Old Market Simulator**, with source code, tests, and 
 Get installable ZIPs from the linked [GitHub Releases](https://github.com/martin-lzh/old-market-simulator-mods/releases). GitHub's **Source code** archives contain source, not ready-to-install plugins. Each release includes installation notes and `SHA256SUMS.txt`. Current versions are **prereleases**: automated checks passed, but in-game acceptance is incomplete.
 
 ### Installation and compatibility
+
+[Navigation 0.1.0](navigation-mod/README.md) is a local-build experiment with a minimap, M-key map, compass and personal target markers. It is not yet in the release catalog or automated release pipeline. Its original UI artwork is embedded in the DLL; scene-derived maps remain local and are not distributed here. See its README for build commands, unlock-state map layers and validation limits.
 
 The build/reference environment is Old Market Simulator **2.1.6**, Windows x64, Unity Mono. Most packages require an existing **BepInEx 5** installation. Material Cost also provides a **MelonLoader 0.7.3** package; choose one loader variant. The experimental standalone entry remains available as source for local testing and has no public release package.
 
@@ -87,9 +89,11 @@ Citation is requested, not an additional MIT condition. A project link does not 
 
 ## 中文
 
-本仓库提供 **Old Market Simulator** 的五个非官方 Mod，以及源码、测试和构建脚本。各 Mod 独立管理版本与发布。
+本仓库提供 **Old Market Simulator** 的五个已发布非官方 Mod，以及实验中的 Navigation Mod，包含源码、测试和构建脚本。各 Mod 独立管理版本。
 
 ### 下载
+
+[Navigation 0.1.0](navigation-mod/README.md) 为本地构建实验版，提供小地图、M 键大地图、罗盘与个人目标标记，尚未加入发行目录或自动发行流程。原创 UI 美术资源嵌入 DLL；场景派生地图仅留本机，不在此分发。构建方式、解锁状态叠层和验证范围见其说明。
 
 | Mod | 发布版本 | 功能 |
 | --- | --- | --- |
