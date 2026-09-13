@@ -75,7 +75,7 @@ sealed class Export
             if (parts.Length > 2) throw new InvalidOperationException($"Invalid supplemental type: {name}");
             var assemblyName = parts.Length == 2 ? parts[0] : "Assembly-CSharp";
             var typeName = parts.Length == 2 ? parts[1] : name;
-            var type = assemblies.Values.Single(a => a.Name.Name == assemblyName).MainModule.GetType(typeName)
+            var type = resolver.Resolve(assemblies.Values.Single(a => a.Name.Name == assemblyName).Name).MainModule.GetType(typeName)
                 ?? throw new InvalidOperationException($"Supplemental type missing: {name}");
             foreach (var member in members) {
                 // Explicit field seeds cover reflection-only dependencies, while historical bare names remain methods.

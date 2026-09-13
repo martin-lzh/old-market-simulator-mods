@@ -116,7 +116,7 @@ namespace OldMarket.Navigation
         private static bool Typing()
         {
             var selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
-            return selected != null && (selected.GetComponentInParent<TMP_InputField>() != null || selected.GetComponentInParent<InputField>() != null);
+            return selected != null && selected.activeInHierarchy && (selected.GetComponentInParent<TMP_InputField>() != null || selected.GetComponentInParent<InputField>() != null);
         }
 
         private void CloseMap()
