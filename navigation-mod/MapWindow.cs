@@ -76,9 +76,11 @@ namespace OldMarket.Navigation
             playerNamePlate=Rect("PlayerName",mapRect);playerNamePlate.sizeDelta=new Vector2(132,27);playerNamePlate.gameObject.AddComponent<Image>().color=new Color(.08f,.085f,.07f,.88f);
             playerNamePlate.GetComponent<Image>().raycastTarget=false;
             var playerName=Label(playerNamePlate,"YourPosition",new Vector2(4,-3),new Vector2(124,22),15);playerName.alignment=TextAlignmentOptions.Center;
-            var northPlate=Box("NorthPlate",viewport,new Vector2(14,-14),new Vector2(48,68),Dark);
-            north=Label(northPlate,"North",new Vector2(0,-5),new Vector2(48,26),20);north.alignment=TextAlignmentOptions.Center;
-            var northArrow=Label(northPlate,"",new Vector2(0,-28),new Vector2(48,34),27);northArrow.text="▲";northArrow.alignment=TextAlignmentOptions.Center;northArrow.color=Gold;
+            var northPlate=Box("NorthPlate",viewport,new Vector2(14,-14),new Vector2(64,88),Dark);
+            // Native CJK fonts can have line metrics taller than the glyph: do not ellipsize the direction away.
+            north=Label(northPlate,"North",new Vector2(4,-4),new Vector2(56,44),22);north.alignment=TextAlignmentOptions.Center;
+            north.textWrappingMode=TextWrappingModes.NoWrap;north.overflowMode=TextOverflowModes.Overflow;north.color=Gold;
+            var northArrow=Label(northPlate,"",new Vector2(4,-45),new Vector2(56,38),27);northArrow.text="▲";northArrow.alignment=TextAlignmentOptions.Center;northArrow.color=Gold;
             var plus=Button(viewport,"",new Vector2(-104,16),new Vector2(38,36),()=>Zoom(1.25f,Vector2.zero),true,false);SetButtonSymbol(plus,"+");
             var minus=Button(viewport,"",new Vector2(-56,16),new Vector2(38,36),()=>Zoom(.8f,Vector2.zero),true,false);SetButtonSymbol(minus,"-");
             Button(viewport,"center",new Vector2(16,16),new Vector2(164,36),Center,false,false);

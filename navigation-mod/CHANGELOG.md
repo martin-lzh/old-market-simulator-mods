@@ -2,6 +2,10 @@
 
 ## English
 
+### Unreleased
+
+- Keep the map north label above its arrow in a taller, non-ellipsized text box for native CJK font metrics. Existing Mod version and SDK r6 are unchanged.
+
 ### 0.1.4 — 2026-09-13
 
 - Pin game 2.1.6 SDK r6 for verified map control APIs; pass 894 navigation checks, 489 installed-assembly contracts and all seven SDK/real-reference comparisons. Isolate the two test projects' restore, intermediate and output directories to prevent executable apphost cache collisions.
@@ -51,6 +55,10 @@ Experimental initial build; not installed or verified in game.
 - Supply coordinate, persistence and localization checks. In-game appearance, input, performance and multiplayer testing remain outstanding.
 
 ## 中文
+
+### 未发布
+
+- 调整大地图北向标识的文字区域高度，禁用省略裁切，在箭头上方显示“北”等本地化方位文字，兼容原生中文字体行高。保持现有 Mod 版本和 SDK r6。
 
 ### 0.1.4 — 2026-09-13
 
