@@ -186,6 +186,24 @@ See [security reporting](SECURITY.md#english) for vulnerabilities and [support](
 
 ## CI and SDK contributions / CI 与 SDK 贡献
 
+CI runs on pushes to `dev`/`main`, PRs targeting `main`, and manual dispatch. The syntax job parses tracked Python, PowerShell, JSON and XML/MSBuild files without executing scripts; ignored dependencies and build outputs are excluded. GitHub Actions YAML, expressions and job dependencies are checked with [actionlint](https://github.com/rhysd/actionlint) 1.7.12 (SHA256-verified download). C# compilation remains covered by the SDK build job. Both jobs must pass before publication. No formatter is applied.
+
+CI 在推送到 `dev`/`main`、面向 `main` 的 PR 及手动触发时运行。语法任务只解析 Git 已跟踪的 Python、PowerShell、JSON 和 XML/MSBuild 文件，不执行脚本；忽略目录中的依赖和构建产物不参与检查。GitHub Actions YAML、表达式和任务依赖使用 actionlint 1.7.12 检查，下载包校验 SHA256。C# 继续由 SDK 构建任务编译检查；发布前两项任务都必须通过，不自动格式化源码。
+
+Local syntax checks require Python 3.12, Git and PowerShell 7 (`pwsh` on PATH). Stage new files first so they are included. Run actionlint 1.7.12 separately for workflows:
+
+本地语法检查需要 Python 3.12、Git 和 PowerShell 7（`pwsh` 在 PATH 中）。新增文件先暂存才会纳入检查；工作流另行使用 actionlint 1.7.12：
+
+```powershell
+python tools/check_syntax.py
+python -m unittest discover -s tools/tests -p test_syntax.py -v
+actionlint -shellcheck= -pyflakes=
+```
+
+ShellCheck/Pyflakes integrations are disabled for consistent local/CI results; PowerShell and Python syntax use their own parsers above.
+
+关闭 ShellCheck/Pyflakes 集成以保持本地与 CI 一致；PowerShell 和 Python 语法使用上述各自解析器检查。
+
 For game-free builds, run `python tools/ci.py build` with Python 3.12 and .NET 8/10 SDKs. See [SDK maintenance](sdk/README.md) and [automatic releases](releases/README.md). Pin each Mod to a reviewed SDK in its own `release.json`. Preserve old SDK revisions. Use `dev` for maintainer work and PRs into protected `main`.
 
 无游戏编译运行 `python tools/ci.py build`，需要 Python 3.12 和 .NET 8/10 SDK。见 [SDK 维护](sdk/README.md)和[自动发布](releases/README.md)。每个 Mod 在自己的 `release.json` 固定已审查 SDK，保留旧修订。维护工作使用 `dev`，通过 PR 合并受保护的 `main`。

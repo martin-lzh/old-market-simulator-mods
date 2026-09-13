@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [main]
+    branches: [main, dev]
   workflow_dispatch:
 
 permissions:
@@ -15,6 +15,34 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  syntax:
+    name: Script, data and workflow syntax
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Check Python, PowerShell, JSON and XML syntax
+        run: python tools/check_syntax.py
+      - name: Test syntax checker
+        run: python -m unittest discover -s tools/tests -p test_syntax.py -v
+      - name: Check GitHub Actions workflows
+        shell: pwsh
+        run: |
+          $archive = Join-Path $env:RUNNER_TEMP 'actionlint.zip'
+          $destination = Join-Path $env:RUNNER_TEMP 'actionlint'
+          Invoke-WebRequest 'https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_windows_amd64.zip' -OutFile $archive
+          if ((Get-FileHash $archive -Algorithm SHA256).Hash.ToLowerInvariant() -ne '6e7241b51e6817ea6a047693d8e6fed13b31819c9a0dd6c5a726e1592d22f6e9') {
+            throw 'actionlint archive checksum mismatch'
+          }
+          Expand-Archive -LiteralPath $archive -DestinationPath $destination
+          & (Join-Path $destination 'actionlint.exe') -color -shellcheck= -pyflakes=
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+
   build:
     name: SDK build and tests
     runs-on: windows-latest
@@ -56,7 +84,7 @@ jobs:
 
   release:
     name: Publish new CHANGELOG versions
-    needs: build
+    needs: [syntax, build]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
