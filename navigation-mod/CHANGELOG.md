@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Reuse the same colored, outlined POI/personal sprite on the compass and in world guidance; keep the entire 25 px compass icon within its strip.
+
 - Remove the separate top target name/distance/bearing panel; retain the compass target marker and projected world guidance.
 
 - Reuse the selected POI or personal marker sprite for 3D target guidance, preserving its semantic shape, color and outline instead of a generic diamond.
@@ -86,6 +88,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 罗盘目标标记与 3D 指引复用同一 POI/个人标记图标、颜色和描边，25 px 图标完整限制在罗盘条内。
 
 - 移除顶部独立的目标名称、距离与方位提示栏，保留罗盘目标标记和 3D 场景指引。
 

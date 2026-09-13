@@ -191,6 +191,6 @@ World and bearing target guidance hides while native modal or loading panels are
 
 原生弹窗或加载面板打开时，世界目标与方位目标提示隐藏，关闭后自动恢复，所选目标保留。
 
-3D target guidance reuses the selected POI icon or personal marker shape and color, including its outline.
+Compass and 3D target guidance reuse the selected POI icon or personal marker shape and color, including its outline.
 
-3D 目标指引复用所选 POI 图标或个人标记的形状、颜色和描边。
+罗盘和 3D 目标指引复用所选 POI 图标或个人标记的形状、颜色和描边。

@@ -14,8 +14,8 @@ namespace OldMarket.Navigation
         private readonly NavigationState state;
         private readonly RectTransform root, mini, disk, content, compass, worldTargetRoot;
         private readonly RawImage map, mapOverlay;
-        private readonly TextMeshProUGUI north, mode, location, compassTarget, center, noMap, worldTargetText;
-        private readonly Image playerArrow, worldTargetIcon;
+        private readonly TextMeshProUGUI north, mode, location, center, noMap, worldTargetText;
+        private readonly Image playerArrow, worldTargetIcon, compassTarget;
         private readonly PoiIconSet playerIcons=new PoiIconSet();
         private RectTransform ringArt;
         private readonly List<TextMeshProUGUI> cardinals = new List<TextMeshProUGUI>();
@@ -79,7 +79,8 @@ namespace OldMarket.Navigation
             pointer.anchoredPosition=new Vector2(0,-9);
             var pointerImage=pointer.gameObject.AddComponent<Image>();pointerImage.sprite=TriangleSprite();pointerImage.color=Gold;pointerImage.raycastTarget=false;
             center = Text("Heading",compass,16); center.rectTransform.anchoredPosition = new Vector2(0,-24);
-            compassTarget = Text("TargetBearing",compass,22); compassTarget.text="◆";
+            var compassIconRect=Rect("TargetBearing",compass,new Vector2(.5f,.5f),new Vector2(25,25));
+            compassTarget=compassIconRect.gameObject.AddComponent<Image>();compassTarget.color=Color.white;compassTarget.raycastTarget=false;
             location = Text("Coordinates",compass,18); location.rectTransform.anchoredPosition=new Vector2(0,-62); location.rectTransform.sizeDelta=new Vector2(550,28);
             worldTargetRoot=Rect("WorldTarget",root,new Vector2(.5f,.5f),new Vector2(300,80));
             var worldIconRect=Rect("WorldTargetIcon",worldTargetRoot,new Vector2(.5f,.5f),new Vector2(28,28));
@@ -181,16 +182,18 @@ namespace OldMarket.Navigation
             compassTarget.gameObject.SetActive(targetVisible);
             worldTargetRoot.gameObject.SetActive(false);
             if(!targetVisible)return;
+            var targetPoi=state.Markers.Contains(target)?null:state.Map?.Pois.Find(p=>"poi:"+p.Id==state.TargetId);
+            var targetSprite=targetPoi!=null?playerIcons.Get(targetPoi):markerSprites.Get(target.Icon,target.Color);
+            compassTarget.sprite=targetSprite;
             float dx=target.X-state.PlayerPosition.x,dz=target.Z-state.PlayerPosition.z;
             float bearing=Mathf.Atan2(dx,dz)*Mathf.Rad2Deg;
             float difference=Mathf.DeltaAngle(state.CameraYaw,bearing);
-            compassTarget.rectTransform.anchoredPosition=new Vector2(Mathf.Clamp(difference,-83,83)/170*layout.CompassWidth,-7);
+            compassTarget.rectTransform.anchoredPosition=new Vector2(Mathf.Clamp(difference/170*layout.CompassWidth,-layout.CompassWidth/2+14,layout.CompassWidth/2-14),-7);
             if(state.WorldTargetVisible && RectTransformUtility.ScreenPointToLocalPointInRectangle(root,state.WorldTargetScreen,null,out var local)
                 && Mathf.Abs(local.x)<root.rect.width/2-160 && Mathf.Abs(local.y)<root.rect.height/2-60)
             {
                 worldTargetRoot.anchoredPosition=local;
-                var targetPoi=state.Markers.Contains(target)?null:state.Map?.Pois.Find(p=>"poi:"+p.Id==state.TargetId);
-                worldTargetIcon.sprite=targetPoi!=null?playerIcons.Get(targetPoi):markerSprites.Get(target.Icon,target.Color);
+                worldTargetIcon.sprite=targetSprite;
                 worldTargetText.text=target.Name+"  "+Mathf.Sqrt(dx*dx+dz*dz).ToString("F0",CultureInfo.CurrentCulture)+" m";
                 worldTargetRoot.gameObject.SetActive(true);
             }
