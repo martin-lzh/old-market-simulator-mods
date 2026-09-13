@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Hide world and bearing target guidance while native modal/loading panels are open, using the same native panel gate as map input. Closing the panel restores guidance without clearing the selected target.
+
 - Increase source icon outlines to 3 px and minimap POI, personal marker and player canvases to 25 px; adjust circular bounds and label collision spacing. Preserve the approved palette and 25 px large-map icons.
 
 - Add a filled identification-card symbol for local POIs using the native licenses key. Shop companion coordinates can be anchored to verified NPC transforms; scene-derived coordinates remain outside the public package.
@@ -78,6 +80,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 原生弹窗及加载面板打开时隐藏世界目标与方位目标提示，复用地图输入的原生面板判定；关闭面板后恢复指引，不清除所选目标。
 
 - 图标源纹理描边加至 3 px，小地图 POI、个人标记与玩家图标统一为 25 px，并调整圆形边界和名称避让间距。保持已选配色及大地图 25 px 图标。
 

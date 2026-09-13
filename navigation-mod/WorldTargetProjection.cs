@@ -22,7 +22,7 @@ namespace OldMarket.Navigation
         private void SceneUnloaded(Scene scene) => Invalidate();
         private void Invalidate() { hasPoint = false; surface = null; targetId = ""; }
 
-        public void Refresh(NavigationState state, Camera camera, float now, bool mapOpen, bool enabled)
+        public void Refresh(NavigationState state, Camera camera, float now, bool uiObscured, bool enabled)
         {
             state.WorldTargetVisible = false;
             var target = enabled && state.Available ? state.Target : null;
@@ -31,7 +31,9 @@ namespace OldMarket.Navigation
             {
                 Invalidate(); targetId = target.Id; scope = state.ScopeId; x = target.X; z = target.Z;
             }
-            if (mapOpen || camera == null) return;
+            // Native modal/loading panels and the map temporarily obscure world guidance.
+            // Preserve the target and cached surface so closing a panel restores it.
+            if (uiObscured || camera == null) return;
             if (now >= nextProbe)
             {
                 nextProbe = now + 1f;

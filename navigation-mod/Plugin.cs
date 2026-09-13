@@ -235,10 +235,11 @@ namespace OldMarket.Navigation
             RefreshContext(manager);
             if (canvas == null) CreateUi();
             canvas.SetActive(true);
-            worldTarget.Refresh(state,camera,Time.unscaledTime,window.IsOpen,guidance.Value);
+            bool nativeModal=NativePanelOpen();
+            worldTarget.Refresh(state,camera,Time.unscaledTime,window.IsOpen||nativeModal,guidance.Value);
             hud.MinimapVisible = minimap.Value;
             hud.CompassVisible = compass.Value;
-            hud.GuidanceVisible = guidance.Value;
+            hud.GuidanceVisible = guidance.Value&&!nativeModal;
             hud.CoordinatesVisible = coordinates.Value;
             hud.Refresh();
             if(reflowNativeHud.Value)

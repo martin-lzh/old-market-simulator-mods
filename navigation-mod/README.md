@@ -186,3 +186,7 @@ POI 按类别使用商店 #ad7568、房屋/休息点 #829278、码头/订购点 
 Phosphor POI icons: upstream MIT notices are included in [LICENSE](LICENSE); sources and regeneration instructions are included alongside the icon assets. No game artwork is included in these icon sources.
 
 Phosphor POI 图标的上游 MIT 声明见 [LICENSE](LICENSE)，源文件与重建说明随图标素材保存，不包含游戏美术资源。
+
+World and bearing target guidance hides while native modal or loading panels are open, and resumes when they close without clearing the selected target.
+
+原生弹窗或加载面板打开时，世界目标与方位目标提示隐藏，关闭后自动恢复，所选目标保留。
