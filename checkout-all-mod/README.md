@@ -37,6 +37,8 @@ To update, exit the game and replace only this mod's DLL. To uninstall, exit the
 
 ## Controls and configuration
 
+In the development build, hold instructions always use the game's default white. Only the toggle status is red when off and white when on; holding E does not enable the toggle. With `ToggleKey = None`, the toggle status is omitted. Native interaction availability no longer colors these instructions. This UI fix is not included in the published 0.1.4 download; in-game color and layout verification is pending.
+
 The first launch creates `BepInEx/config/local.oldmarket.checkoutall.cfg`.
 
 | Setting | Default | Description |
@@ -120,6 +122,8 @@ If this mod helps your project, article, or video, please credit **Old Market Ch
 更新时先退出游戏，只替换本 Mod 的 DLL。卸载时退出游戏并移除 `OldMarket.CheckoutAll.dll`；不要删除 BepInEx 或其他插件。
 
 ## 操作与配置
+
+开发版本中，长按说明始终使用游戏默认白色。只有切换状态在停用时为红色、启用时为白色；长按 E 不等于开启切换模式。`ToggleKey = None` 时不显示切换状态。提示颜色不再受原生交互可用性影响。已发布的 0.1.4 下载包尚不包含此修复，颜色与排版仍待实机验证。
 
 首次运行会生成 `BepInEx/config/local.oldmarket.checkoutall.cfg`。
 

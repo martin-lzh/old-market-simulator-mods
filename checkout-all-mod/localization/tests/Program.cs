@@ -12,7 +12,7 @@ internal static class Program
 {
     private static readonly string[] Locales =
         ["en", "zh", "zh-Hant", "fr", "de", "it", "es", "pt", "ja", "ko", "ru", "tr", "uk"];
-    private static readonly string[] Keys = ["checkout_hold", "checkout_toggle", "hold_repeat"];
+    private static readonly string[] Keys = ["checkout_hold", "checkout_toggle", "checkout_toggle_off", "hold_repeat"];
     private static readonly Regex Placeholder = new(@"\{(?:#([a-z_]+)|(\d+))\}", RegexOptions.Compiled);
 
     private static void Main()

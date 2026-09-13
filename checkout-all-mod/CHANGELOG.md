@@ -6,6 +6,8 @@
 
 ### Unreleased
 
+- Keep hold instructions white even when the native interaction is red. Only toggle status uses red when off and white when on; add an explicit localized off state in all 13 locales. No checkout, save or network behavior changes. Game 2.1.6 / SDK r1 / BepInEx 5 remain unchanged; in-game color/layout acceptance is pending.
+
 - Add game-versioned SDK compilation and CHANGELOG-driven CI releases; pin this Mod to SDK 2.1.6/r1. Existing published versions are not rebuilt or replaced.
 
 - Add code-specific risks, compatibility guidance and this independent change log. Future builds include CHANGELOG.md. Gameplay code and existing public assets/tags are unchanged.
@@ -26,6 +28,8 @@ Older development versions mentioned in the README are not verified downloadable
 ## 中文
 
 ### 未发布
+
+- 长按说明固定为白色，不再继承原生交互的红色。仅切换状态在停用时为红色、启用时为白色；13 种语言均补充明确的停用状态。不改变结账、存档或网络行为，保留游戏 2.1.6 / SDK r1 / BepInEx 5 基线；颜色与排版仍待实机验收。
 
 - 增加随游戏版本维护的 SDK 编译和 CHANGELOG 驱动的 CI 发布，本 Mod 固定 SDK 2.1.6/r1；不重建或替换既有公开版本。
 
