@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace OldMarket.Navigation
 {
@@ -23,6 +24,7 @@ namespace OldMarket.Navigation
         private readonly NavigationState state;
         private readonly RectTransform mapRect, viewport;
         private readonly Action<string> selectTarget;
+        private readonly Action<PointerEventData> drag,scroll;
         private readonly List<Node> nodes=new List<Node>();
         private readonly List<HudBox> occupied=new List<HudBox>();
         private readonly PoiIconSet icons=new PoiIconSet();
@@ -32,9 +34,9 @@ namespace OldMarket.Navigation
         private MapDefinition definition;
         private static readonly Color Gold=new Color(.96f,.78f,.42f,1), Cream=new Color(.96f,.90f,.73f,1);
 
-        public MapPoiLayer(NavigationState state,RectTransform mapRect,RectTransform viewport,Action<string> selectTarget)
+        public MapPoiLayer(NavigationState state,RectTransform mapRect,RectTransform viewport,Action<string> selectTarget,Action<PointerEventData> drag=null,Action<PointerEventData> scroll=null)
         {
-            this.state=state;this.mapRect=mapRect;this.viewport=viewport;this.selectTarget=selectTarget;
+            this.state=state;this.mapRect=mapRect;this.viewport=viewport;this.selectTarget=selectTarget;this.drag=drag;this.scroll=scroll;
         }
 
         // Rectangles use viewport-local coordinates, centered on the viewport. The caller may provide
@@ -63,18 +65,25 @@ namespace OldMarket.Navigation
                 var node=new Node{Poi=poi};node.Root=Rect("POI_"+poi.Id,mapRect,new Vector2(32,32));
                 node.Face=node.Root.gameObject.AddComponent<Image>();
                 var icon=Rect("PlaceIcon",node.Root,new Vector2(25,25));node.Icon=icon.gameObject.AddComponent<Image>();
-                node.Icon.sprite=icons.Get(poi.Category);
+                node.Icon.sprite=icons.Get(poi);
                 node.Icon.raycastTarget=false;
-                var button=node.Root.gameObject.AddComponent<Button>();string id="poi:"+poi.Id;button.onClick.AddListener(()=>selectTarget?.Invoke(id));
+                string id="poi:"+poi.Id;BindPointer(node.Root,id);
                 node.Plate=Rect("PlaceLabel",node.Root,new Vector2(140,30));node.Plate.gameObject.AddComponent<Image>().color=new Color(.105f,.088f,.065f,.96f);
                 var labelRect=Rect("Text",node.Plate,new Vector2(126,30));node.Label=labelRect.gameObject.AddComponent<TextMeshProUGUI>();
                 node.Label.fontSize=16;node.Label.color=Cream;node.Label.alignment=TextAlignmentOptions.Center;
                 node.Label.enableAutoSizing=true;node.Label.fontSizeMin=12;node.Label.fontSizeMax=16;
                 node.Label.textWrappingMode=TextWrappingModes.NoWrap;node.Label.overflowMode=TextOverflowModes.Ellipsis;
                 node.Label.richText=false;node.Label.raycastTarget=false;
-                var labelButton=node.Plate.gameObject.AddComponent<Button>();labelButton.onClick.AddListener(()=>selectTarget?.Invoke(id));
+                BindPointer(node.Plate,id);
                 node.Plate.gameObject.SetActive(false);nodes.Add(node);
             }
+        }
+
+        private void BindPointer(RectTransform node,string id)
+        {
+            var gesture=node.gameObject.AddComponent<MapGesture>();
+            gesture.Click=e=>{if(e.button==PointerEventData.InputButton.Left||e.button==PointerEventData.InputButton.Right)selectTarget?.Invoke(id);};
+            gesture.Drag=drag;gesture.Scroll=scroll;
         }
 
         public void Refresh(float zoom)

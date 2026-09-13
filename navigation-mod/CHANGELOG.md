@@ -4,6 +4,10 @@
 
 ### Unreleased
 
+- Give built-in POIs distinct Lucide symbols while retaining category colors. Left/right-click a POI icon or visible label to set it as the navigation target; large-map gestures continue through POI nodes. Include upstream icon notices in the packaged license.
+
+- Apply the selected muted POI palette: shop #ad7568, home #829278, orders #77929d, other #978190 and player #c1ccd0. Use two-pixel source outlines and match player/POI canvas sizes (22 px minimap, 25 px large map).
+
 - Remove the player position nameplate and use a narrow, outlined direction arrow in both maps. Color POI sprites by category with dark outlines and transparent backgrounds, including the large map. Resolve built-in POI labels from native game text instead of Mod translations.
 
 - Add the missing minimap POI layer with upright semantic icons and collision-aware labels in both rotation modes; resolve POI targets for compass guidance. Share icons with the large map. Verify nested POI metadata with the same .NET reader used by the plugin and log loaded/rendered counts for diagnosis. Large-map in-game acceptance remains pending.
@@ -68,6 +72,10 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 内置 POI 使用不同 Lucide 图形，同类别保持同颜色。左右键点击 POI 图标或可见名称均可设为导航目标，大地图图标节点继续转发拖动与滚轮；发行包许可包含上游图标声明。
+
+- 应用选定 POI 配色：商店 #ad7568、房屋 #829278、订购 #77929d、其他 #978190、玩家 #c1ccd0。源纹理描边加至 2 px，玩家与 POI 画布尺寸统一为小地图 22 px、大地图 25 px。
 
 - 移除玩家位置文字，两张地图改用细长描边方向箭头。POI 图标按类别着色并加深色描边，大地图也去除图标底板。内置地点标签改从游戏原生文本读取，不再使用 Mod 自译名称。
 

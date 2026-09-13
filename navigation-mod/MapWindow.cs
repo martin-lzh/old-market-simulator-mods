@@ -75,7 +75,7 @@ namespace OldMarket.Navigation
             var gesture=viewport.gameObject.AddComponent<MapGesture>();gesture.Click=ClickMap;
             gesture.Drag=e=>{targetZoom=zoom;pan+=e.delta/CanvasScale();ApplyMapGeometry();};
             gesture.Scroll=e=>{if(RectTransformUtility.ScreenPointToLocalPointInRectangle(viewport,e.position,e.pressEventCamera,out var anchor))WheelZoom(e,anchor);};
-            player=Rect("Player",mapRect);player.sizeDelta=new Vector2(36,40);
+            player=Rect("Player",mapRect);player.sizeDelta=new Vector2(25,25);
             var arrow=player.gameObject.AddComponent<Image>();arrow.sprite=playerIcons.Get("player");arrow.color=Color.white;arrow.raycastTarget=false;
             var northPlate=Box("NorthPlate",viewport,new Vector2(14,-14),new Vector2(64,88),Dark);
             // Native CJK fonts can have line metrics taller than the glyph: do not ellipsize the direction away.
@@ -92,7 +92,7 @@ namespace OldMarket.Navigation
             status=Label(root,"",new Vector2(24,31),new Vector2(800,23),14,false);status.color=new Color(1,.77f,.5f,1);
             Button(root,"NorthUp",new Vector2(-264,23),new Vector2(242,35),()=>{state.RotateWithCamera=!state.RotateWithCamera;state.RotationChanged?.Invoke(state.RotateWithCamera);},true,false);
             rotationLabel=labels[labels.Count-1].Item1;
-            poiLayer=new MapPoiLayer(state,mapRect,viewport,id=>{state.TargetId=id;RebuildSidebar();});
+            poiLayer=new MapPoiLayer(state,mapRect,viewport,id=>{state.TargetId=id;RebuildSidebar();},gesture.Drag,gesture.Scroll);
             ApplyLayout(new NavigationLayout());root.gameObject.SetActive(false);
         }
         private float CanvasScale(){var canvas=root.GetComponentInParent<Canvas>();return canvas==null?1:Mathf.Max(.1f,canvas.scaleFactor*root.localScale.x);}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace OldMarket.Navigation
 {
@@ -50,15 +51,21 @@ namespace OldMarket.Navigation
             foreach(var poi in definition.Pois)
             {
                 var node=new Node{Poi=poi};node.Root=Rect("MiniPOI_"+poi.Id,root,new Vector2(22,22));
-                node.Icon=node.Root.gameObject.AddComponent<Image>();node.Icon.sprite=icons.Get(poi.Category);node.Icon.raycastTarget=false;
+                node.Icon=node.Root.gameObject.AddComponent<Image>();node.Icon.sprite=icons.Get(poi);node.Icon.raycastTarget=true;
+                BindPointer(node.Root,"poi:"+poi.Id);
                 node.Plate=Rect("Name",node.Root,new Vector2(90,24));
-                var plate=node.Plate.gameObject.AddComponent<Image>();plate.color=new Color(.10f,.075f,.04f,.85f);plate.raycastTarget=false;
+                var plate=node.Plate.gameObject.AddComponent<Image>();plate.color=new Color(.10f,.075f,.04f,.85f);plate.raycastTarget=true;BindPointer(node.Plate,"poi:"+poi.Id);
                 var labelRect=Rect("Text",node.Plate,new Vector2(80,24));node.Label=labelRect.gameObject.AddComponent<TextMeshProUGUI>();
                 node.Label.fontSize=14;node.Label.fontSizeMax=14;node.Label.fontSizeMin=10;node.Label.enableAutoSizing=true;
                 node.Label.alignment=TextAlignmentOptions.Center;node.Label.textWrappingMode=TextWrappingModes.NoWrap;
                 node.Label.overflowMode=TextOverflowModes.Ellipsis;node.Label.richText=false;node.Label.raycastTarget=false;
                 node.Plate.gameObject.SetActive(false);nodes.Add(node);
             }
+        }
+        private void BindPointer(RectTransform node,string id)
+        {
+            var gesture=node.gameObject.AddComponent<MapGesture>();
+            gesture.Click=e=>{if(e.button==PointerEventData.InputButton.Left||e.button==PointerEventData.InputButton.Right)state.TargetId=id;};
         }
         private Vector2 Project(float x,float z,float scale,float cos,float sin)
         {

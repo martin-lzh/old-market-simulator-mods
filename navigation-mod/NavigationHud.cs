@@ -53,7 +53,7 @@ namespace OldMarket.Navigation
             mapOverlay=overlayRect.gameObject.AddComponent<RawImage>();mapOverlay.raycastTarget=false;mapOverlay.gameObject.SetActive(false);
             noMap = Text("NoTerrain", disk, 14); noMap.rectTransform.sizeDelta=new Vector2(175,54); noMap.rectTransform.anchoredPosition=new Vector2(0,-52); noMap.textWrappingMode=TextWrappingModes.Normal;
             poiLayer=new MiniMapPoiLayer(state,disk);
-            var playerRect=Rect("Player",disk,new Vector2(.5f,.5f),new Vector2(32,36));
+            var playerRect=Rect("Player",disk,new Vector2(.5f,.5f),new Vector2(22,22));
             playerArrow=playerRect.gameObject.AddComponent<Image>();playerArrow.sprite=playerIcons.Get("player");playerArrow.color=Color.white;playerArrow.raycastTarget=false;
             north = Text("North", mini, 19);
             mode = Text("Mode", mini, 17); mode.rectTransform.anchoredPosition = new Vector2(0,-138); mode.rectTransform.sizeDelta = new Vector2(330,28);
