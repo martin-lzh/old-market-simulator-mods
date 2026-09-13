@@ -25,4 +25,3 @@ Experimental initial build; not installed or verified in game.
 - 限定角色/鼠标控制权恢复，关图后延迟恢复原生 Esc 操作。
 - 游戏派生底图配套文件不进入公开 DLL 或发行包；包内不含地图数据。
 - 提供坐标、存储及本地化检查；视觉、输入、性能和联机仍待实机验收。
-

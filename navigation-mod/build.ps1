@@ -31,4 +31,3 @@ try {
 } finally { $taskArchive.Dispose(); $taskStream.Dispose() }
 Get-FileHash -LiteralPath $taskZip -Algorithm SHA256
 Write-Output "Package: $taskZip (game installation only read)"
-

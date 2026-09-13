@@ -72,4 +72,3 @@ namespace OldMarket.Navigation
         public void Dispose() { foreach(var texture in textures.Values) if(texture!=null) UnityEngine.Object.Destroy(texture); textures.Clear();maps.Clear(); }
     }
 }
-

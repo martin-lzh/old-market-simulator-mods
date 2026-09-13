@@ -193,4 +193,3 @@ namespace OldMarket.Navigation
         public void Dispose() { if(root!=null)UnityEngine.Object.Destroy(root.gameObject);foreach(var item in owned)UnityEngine.Object.Destroy(item); }
     }
 }
-

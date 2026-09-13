@@ -56,5 +56,3 @@ static class Program
   Console.WriteLine($"Passed {count} navigation checks.");
  }
 }
-
-

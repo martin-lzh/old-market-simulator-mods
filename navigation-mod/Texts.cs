@@ -43,4 +43,3 @@ namespace OldMarket.Navigation
         { return Values.TryGetValue(key,out var row)?row[Array.IndexOf(Languages,Normalize(locale))]:key; }
     }
 }
-

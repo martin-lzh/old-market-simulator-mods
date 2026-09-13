@@ -36,6 +36,3 @@ namespace OldMarket.Navigation
         }
     }
 }
-
-
-

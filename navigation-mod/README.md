@@ -146,5 +146,3 @@ Original code, documentation and UI decorations are provided under [MIT](LICENSE
 实机待检查：字体遮挡、两种旋转模式、缩放拖动和标记编辑、Esc 不穿透暂停菜单、断线与区域旅行、市场各解锁阶段、帧耗时、单机/主机/客户端。游戏更新及其他 HUD/按键插件可能产生冲突，应在备份后的测试环境验收。
 
 原创代码、文档与生成的 UI 装饰素材采用 [MIT](LICENSE)，版本记录见 [CHANGELOG](CHANGELOG.md)。许可不覆盖游戏组件、原始资源、派生本地地图、商标或其他 Mod。未打包游戏或第三方运行库。
-
-

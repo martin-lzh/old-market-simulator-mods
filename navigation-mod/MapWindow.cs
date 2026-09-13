@@ -172,12 +172,3 @@ namespace OldMarket.Navigation
         public void Dispose() { if(root!=null)UnityEngine.Object.Destroy(root.gameObject);if(frameSprite!=null)UnityEngine.Object.Destroy(frameSprite);if(frameTexture!=null)UnityEngine.Object.Destroy(frameTexture);if(paperTexture!=null)UnityEngine.Object.Destroy(paperTexture); }
     }
 }
-
-
-
-
-
-
-
-
-
