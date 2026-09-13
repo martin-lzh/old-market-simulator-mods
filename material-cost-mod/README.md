@@ -189,3 +189,9 @@ GitHub 自动生成的 **Source code** 压缩包是源码快照，不是可安�
 - 性能/冲突：首次资源查询和 UI 增加开销，零插件加载器对照也曾卡顿，未证明任何变体已修复。只启用一种变体/一个副本，其他日报/配方/订购 UI Mod 可能冲突遮挡。
 
 - 估算排除设备等费用，利润假设全部按当天建议价售出；其他 Mod 同日改资源可能使缓存过时。关闭日报开关可对照（配方/订购仍启用），或退出后卸载。
+
+## SDK and automated builds / SDK 与自动构建
+
+This Mod pins its compilation SDK in [release.json](release.json). Current baseline: game 2.1.6 / SDK r1. Run `python tools/ci.py build` from the repository root for a game-free build. See [SDK maintenance](../sdk/README.md) and [CI releases](../releases/README.md). Compilation does not replace in-game compatibility checks.
+
+本 Mod 在 [release.json](release.json) 固定编译 SDK，当前基线为游戏 2.1.6 / SDK r1。从仓库根目录运行 `python tools/ci.py build` 可无游戏文件构建。见 [SDK 维护](../sdk/README.md)和 [CI 发布](../releases/README.md)；编译不能代替实机兼容验证。

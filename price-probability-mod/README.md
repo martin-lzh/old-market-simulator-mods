@@ -115,3 +115,9 @@ Original work here is under the [MIT License](LICENSE); game and third-party com
 - 自动改价可能降低收入/接受率，接受率不等于日销量，整数价格可能偏离目标。关面板只取消草稿，不停止已存锚定，确认前检查售价/模式。
 
 - 定时/购买前检查增加处理/同步工作，其他自动定价 Mod 可能争价，更新可能破坏接口/前提，UI 遮挡可能误操作。保留一套控制，关闭锚定确认、核对价签并退出回退。
+
+## SDK and automated builds / SDK 与自动构建
+
+This Mod pins its compilation SDK in [release.json](release.json). Current baseline: game 2.1.6 / SDK r1. Run `python tools/ci.py build` from the repository root for a game-free build. See [SDK maintenance](../sdk/README.md) and [CI releases](../releases/README.md). Compilation does not replace in-game compatibility checks.
+
+本 Mod 在 [release.json](release.json) 固定编译 SDK，当前基线为游戏 2.1.6 / SDK r1。从仓库根目录运行 `python tools/ci.py build` 可无游戏文件构建。见 [SDK 维护](../sdk/README.md)和 [CI 发布](../releases/README.md)；编译不能代替实机兼容验证。

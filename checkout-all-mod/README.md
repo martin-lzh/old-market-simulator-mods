@@ -189,3 +189,9 @@ Copyright © 2026 Zhaohan Liu。本目录的原创源码、测试和文档采用
 - 首按可立即装袋/响铃/收款；F9 模式松手仍继续，需再次关闭或移开视线。已发送动作不可撤回，热键可能冲突。
 
 - 更新或结账 Mod 可能破坏交互/确认补丁；连续检查增加开销，提示可能遮挡。异常时停止自动操作、退出回退并核对收入/数量/销量。
+
+## SDK and automated builds / SDK 与自动构建
+
+This Mod pins its compilation SDK in [release.json](release.json). Current baseline: game 2.1.6 / SDK r1. Run `python tools/ci.py build` from the repository root for a game-free build. See [SDK maintenance](../sdk/README.md) and [CI releases](../releases/README.md). Compilation does not replace in-game compatibility checks.
+
+本 Mod 在 [release.json](release.json) 固定编译 SDK，当前基线为游戏 2.1.6 / SDK r1。从仓库根目录运行 `python tools/ci.py build` 可无游戏文件构建。见 [SDK 维护](../sdk/README.md)和 [CI 发布](../releases/README.md)；编译不能代替实机兼容验证。

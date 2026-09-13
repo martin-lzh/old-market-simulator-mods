@@ -1,0 +1,81 @@
+name: Mod CI and releases
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mods-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: SDK build and tests
+    runs-on: windows-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Validate versions and SDK snapshots
+        shell: pwsh
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          python tools/ci.py validate
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          if ($env:BASE_SHA -and $env:BASE_SHA -notmatch '^0+$') {
+            python tools/ci.py validate --base $env:BASE_SHA
+            if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          }
+          python -m unittest discover -s tools/tests -v
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Build all six variants and run logic/localization tests
+        run: python tools/ci.py build
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: mod-packages
+          path: outputs/ci/
+          if-no-files-found: error
+          retention-days: 14
+
+  release:
+    name: Publish new CHANGELOG versions
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: mod-packages
+          path: outputs/ci/
+      - name: Verify assets and publish (existing releases are skipped)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_REPOSITORY: ${{ github.repository }}
+          RELEASE_COMMIT: ${{ github.sha }}
+        run: python tools/ci.py publish --repository "$RELEASE_REPOSITORY" --commit "$RELEASE_COMMIT"

@@ -135,3 +135,9 @@ Original work here is under the [MIT License](LICENSE); game and third-party com
 - 长按释放完整容器，溢出/背包缩容将物品放回世界，可能不便拾取。成本/保鲜加权截断不能还原原始批次；先在副本测试消耗、放置及重载。
 
 - 扩展记录增加处理/网络/存档负担，连续丢弃生成物体，库存 Mod 可能冲突。未核对程序集/接口会拒绝启用；更新后若失效，不用原版读取扩展存档，应恢复兼容环境或备份。
+
+## SDK and automated builds / SDK 与自动构建
+
+This Mod pins its compilation SDK in [release.json](release.json). Current baseline: game 2.1.6 / SDK r1. Run `python tools/ci.py build` from the repository root for a game-free build. See [SDK maintenance](../sdk/README.md) and [CI releases](../releases/README.md). Compilation does not replace in-game compatibility checks.
+
+本 Mod 在 [release.json](release.json) 固定编译 SDK，当前基线为游戏 2.1.6 / SDK r1。从仓库根目录运行 `python tools/ci.py build` 可无游戏文件构建。见 [SDK 维护](../sdk/README.md)和 [CI 发布](../releases/README.md)；编译不能代替实机兼容验证。

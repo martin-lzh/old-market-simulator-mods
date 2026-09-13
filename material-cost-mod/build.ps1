@@ -5,6 +5,7 @@ param(
     [string]$MelonLoaderDir
 )
 $ErrorActionPreference = 'Stop'
+$modVersion = ([xml](Get-Content -LiteralPath (Join-Path $PSScriptRoot 'MaterialCost.csproj') -Raw)).Project.PropertyGroup.Version
 dotnet run --project (Join-Path $PSScriptRoot 'localization/tests/Localization.Tests.csproj') -c Release
 if ($LASTEXITCODE) { throw 'Localization checks failed.' }
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
@@ -46,7 +47,7 @@ Copy-Item -LiteralPath $dll -Destination $pluginDir
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'README.md') -Destination (Join-Path $package 'README.md')
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'CHANGELOG.md') -Destination (Join-Path $package 'CHANGELOG.md')
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'LICENSE') -Destination (Join-Path $package 'LICENSE')
-$zip = Join-Path $outputDir "OldMarket.MaterialCost-0.5.1-$Loader.zip"
+$zip = Join-Path $outputDir "OldMarket.MaterialCost-$modVersion-$Loader.zip"
 # Pass file paths, not a recursive staging directory, to prevent stale file inclusion.
 # ZipFile preserves the installation directory structure with an explicit entry list.
 Add-Type -AssemblyName System.IO.Compression

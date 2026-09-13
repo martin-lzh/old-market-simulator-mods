@@ -171,3 +171,9 @@ Copyright © 2026 Zhaohan Liu。本目录的原创源码、测试和文档采用
 - 游戏更新/HUD Mod 可能破坏锚点或遮挡文字；F8 可能冲突，可改 ToggleKey 或设 None。取整世界坐标不是地图格号。
 
 - 每帧格式化/UI 增加开销，无性能保证；退出后移除本 DLL 做对照。
+
+## SDK and automated builds / SDK 与自动构建
+
+This Mod pins its compilation SDK in [release.json](release.json). Current baseline: game 2.1.6 / SDK r1. Run `python tools/ci.py build` from the repository root for a game-free build. See [SDK maintenance](../sdk/README.md) and [CI releases](../releases/README.md). Compilation does not replace in-game compatibility checks.
+
+本 Mod 在 [release.json](release.json) 固定编译 SDK，当前基线为游戏 2.1.6 / SDK r1。从仓库根目录运行 `python tools/ci.py build` 可无游戏文件构建。见 [SDK 维护](../sdk/README.md)和 [CI 发布](../releases/README.md)；编译不能代替实机兼容验证。

@@ -1,11 +1,12 @@
 param([string]$GameDir = 'F:\SteamLibrary\steamapps\common\Old Market Simulator')
 $ErrorActionPreference = 'Stop'
+$modVersion = ([xml](Get-Content -LiteralPath (Join-Path $PSScriptRoot 'Coordinates.csproj') -Raw)).Project.PropertyGroup.Version
 $taskRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 dotnet build (Join-Path $PSScriptRoot 'Coordinates.csproj') -c Release --nologo "-p:GameDir=$GameDir"
 if ($LASTEXITCODE) { throw 'Coordinates build failed.' }
 $taskOutput = Join-Path $taskRoot 'outputs'
 New-Item -ItemType Directory -Force $taskOutput | Out-Null
-$taskZip = Join-Path $taskOutput 'OldMarket.Coordinates-0.1.3.zip'
+$taskZip = Join-Path $taskOutput "OldMarket.Coordinates-$modVersion.zip"
 $taskDll = Join-Path $PSScriptRoot 'bin/Release/netstandard2.1/OldMarket.Coordinates.dll'
 Add-Type -AssemblyName System.IO.Compression
 $taskStream = [IO.File]::Open($taskZip, [IO.FileMode]::Create)
