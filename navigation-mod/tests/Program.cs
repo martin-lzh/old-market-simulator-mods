@@ -46,7 +46,9 @@ static class Program
   Check(!ExpansionRules.Matches(new long[]{11},new long[]{11},new long[]{11}),"contradictory constraints do not match");
   Check(ExpansionRules.Matches(new long[]{11,11},new long[]{11,11},null),"duplicate IDs treated as a set");
   Check(new NavigationLayout().IsValid(),"default layout valid");
-  var bounds=new Dictionary<string,(float min,float max)>{["MinimapSize"]=(120,480),["MinimapRight"]=(0,1200),["MinimapTop"]=(0,800),["MinimapRange"]=(20,1000),["CompassWidth"]=(240,1000),["CompassTop"]=(0,800),["WorldMarkerSize"]=(12,80),["MapWidth"]=(600,1800),["MapHeight"]=(400,1000),["Opacity"]=(.2f,1)};
+  Check(new NavigationLayout().MinimapBottomLeft,"minimap defaults to bottom left");
+  Check(new NavigationLayout{MinimapBottomLeft=false}.IsValid(),"legacy top-right anchoring remains supported");
+  var bounds=new Dictionary<string,(float min,float max)>{["MinimapSize"]=(120,480),["MinimapRight"]=(0,1200),["MinimapTop"]=(0,800),["MinimapLeft"]=(0,1200),["MinimapBottom"]=(0,800),["MinimapRange"]=(20,1000),["CompassWidth"]=(240,1000),["CompassTop"]=(0,800),["WorldMarkerSize"]=(12,80),["MapWidth"]=(600,1800),["MapHeight"]=(400,1000),["Opacity"]=(.2f,1)};
   foreach(var bound in bounds)
   {
    var field=typeof(NavigationLayout).GetField(bound.Key);
@@ -74,6 +76,21 @@ static class Program
   var free=new HudBox(110,210,300,60);
   Check(HudPlacement.TryPlace(free,viewport,Array.Empty<HudBox>(),12,out var untouched),"free original location accepted");
   Near(untouched.X,free.X,"free original x preserved");Near(untouched.Y,free.Y,"free original y preserved");
+  var leftMini=new HudBox(18,24,252,282);
+  var desiredAboveLeft=HudPlacement.AboveMap(leftMini,600,60,1920,12);
+  var leftOccupied=new List<HudBox>{leftMini,compass,new HudBox(16,1020,500,48)};
+  Check(HudPlacement.TryPlace(desiredAboveLeft,viewport,leftOccupied,12,out var leftMessage),"left minimap notification fits");
+  Near(leftMessage.X,leftMini.X,"left minimap notifications align to left edge");Near(leftMessage.Y,leftMini.Top+12,"left minimap notifications above map");
+  leftOccupied.Add(leftMessage);
+  var originalTutorial=new HudBox(1544,960,360,98);
+  Check(HudPlacement.TryPlace(originalTutorial,viewport,leftOccupied,12,out var retainedTutorial),"right task is unobstructed with left minimap");
+  Near(retainedTutorial.X,originalTutorial.X,"right task keeps original x");Near(retainedTutorial.Y,originalTutorial.Y,"right task keeps original y");
+  leftOccupied.Add(retainedTutorial);
+  Check(HudPlacement.TryPlace(new HudBox(660,804,600,104),belowCompass,leftOccupied,12,out var leftToast),"toast fits below compass with left minimap");
+  Check(leftToast.Top<=compass.Y-12&&!leftToast.Overlaps(leftMessage,12)&&!leftToast.Overlaps(leftMini,12),"toast avoids lower-left elements");
+  Near(HudPlacement.AboveMap(mini,600,60,1920,12).X,mini.Right-600,"right minimap notifications retain right alignment");
+  Check(HudPlacement.TryPlace(new HudBox(leftMini.Right-360,leftMini.Y-110,360,98),viewport,leftOccupied,12,out var lowFallback),"lower-left conflicting card has safe fallback");
+  Check(lowFallback.X>=viewport.X&&lowFallback.Y>=viewport.Y&&lowFallback.Right<=viewport.Right&&lowFallback.Top<=viewport.Top,"lower-left fallback stays inside screen");
   // Scaling both canvases to physical pixels must preserve the chosen logical slot.
   foreach(float scale in new[]{.5f,.75f,1.5f,2f})
   {

@@ -42,13 +42,16 @@ The first load creates `BepInEx/config/local.oldmarket.navigation.cfg`. Edit thi
 
 ### Layout hot reload
 
-Native HUD reflow uses the rendered navigation bounds, including visible coordinate and target rows. Notifications (including player-join messages, normally in the lower-left list) move above the minimap; task cards and top hints avoid the reserved navigation area. The Mod retains native fonts, content and animation-controlled positions. Disabling the corresponding navigation area, disabling reflow or leaving gameplay restores owned anchor changes. Full-screen menus and external Steam/performance overlays are not moved. In-game animation, long-message and unusual-resolution acceptance remains outstanding.
+The minimap defaults to the lower-left corner. Native HUD reflow uses its rendered bounds, including the compass's visible coordinate and target rows. Notifications (including player-join messages) move above the minimap and align to the same side; the upper-right task card stays in place unless it conflicts. Top hints appear below the compass. The Mod retains native fonts, content and animation-controlled positions. Disabling the corresponding navigation area, disabling reflow or leaving gameplay restores owned anchor changes. Full-screen menus and external Steam/performance overlays are not moved. In-game animation, long-message and unusual-resolution acceptance remains outstanding.
 
 Edit `BepInEx/config/OldMarket.Navigation/layout.json` while playing. Changes are checked every 0.5 seconds on the main thread. Malformed, oversized or out-of-range files retain the previous valid layout. UI position/size changes do not require a DLL rebuild. This does not hot-reload C# logic, map files or game data.
 
 ```json
 {
   "MinimapSize": 240,
+  "MinimapBottomLeft": true,
+  "MinimapLeft": 24,
+  "MinimapBottom": 48,
   "MinimapRight": 24,
   "MinimapTop": 150,
   "MinimapRange": 100,
@@ -62,6 +65,8 @@ Edit `BepInEx/config/OldMarket.Navigation/layout.json` while playing. Changes ar
 ```
 
 Layout units use a 1920×1080 reference canvas. `MinimapRange` is the radius in world units. The historical field name `WorldMarkerSize` controls target-panel and projected-marker text size. Very small layouts and long translated text still require visual testing.
+
+`MinimapBottomLeft=true` uses `MinimapLeft`/`MinimapBottom`; the default bottom margin leaves room for the mode label. Set it to `false` to use the legacy `MinimapRight`/`MinimapTop` upper-right placement. Existing layout files without the new fields use the new lower-left defaults. HUD content is remeasured at most every 0.1 seconds, with immediate reflow for navigation-bound or screen-size changes. If a message burst cannot fit anywhere without overlap, its original position is retained rather than hiding or shrinking it.
 
 ## Map data and expansion states
 
@@ -130,7 +135,9 @@ Original code, documentation and UI decorations are provided under [MIT](LICENSE
 
 ### 配置与热更新
 
-原生 HUD 避让使用导航组件的实际屏幕范围，也计算可见的坐标和目标行。玩家加入等原本出现在左下列表的通知移到小地图上方；任务卡及顶部提示避让导航区域，保留游戏原有字体、内容与位置动画。关闭对应导航组件、关闭 `ReflowNativeHud` 或离开游戏场景后，恢复本插件修改的锚点。不会移动全屏菜单或 Steam、性能监控等外部覆盖层；长消息、原生动画及特殊分辨率仍需实机验收。
+小地图默认位于左下角。原生 HUD 避让使用导航组件的实际屏幕范围，也计算可见的坐标和目标行。玩家加入等通知移到小地图上方并左对齐；右上任务卡无冲突时留在原位，顶部提示放在罗盘下方。保留游戏原有字体、内容与位置动画。关闭对应导航组件、关闭 `ReflowNativeHud` 或离开游戏场景后，恢复本插件修改的锚点。不会移动全屏菜单或 Steam、性能监控等外部覆盖层；长消息、原生动画及特殊分辨率仍需实机验收。
+
+`MinimapBottomLeft=true` 使用 `MinimapLeft`/`MinimapBottom`，底部默认留出模式标签的空间；改成 `false` 可用旧的 `MinimapRight`/`MinimapTop` 切回右上角。旧布局文件没有这些新增字段时，也采用新的左下默认位置。每 0.1 秒最多检查一次原生内容，导航范围或屏幕尺寸改变时立即重排；极多通知无法找到完整空位时保留原位，不隐藏或缩小消息。
 
 上方配置表列出了所有项目。小地图、罗盘、目标指引默认开启；导航内 XYZ 默认关闭，避免与独立坐标 Mod 重复。`CameraUp=false` 为固定正北，`MapKey=None` 禁用键盘开关。主 CFG 建议退出游戏后编辑，其说明为英语。
 

@@ -80,7 +80,8 @@ namespace OldMarket.Navigation
             layout=value ?? new NavigationLayout();
             MinimapRange=layout.MinimapRange;
             mini.sizeDelta=Vector2.one*layout.MinimapSize;
-            mini.anchoredPosition=new Vector2(-layout.MinimapRight,-layout.MinimapTop);
+            mini.anchorMin=mini.anchorMax=mini.pivot=layout.MinimapBottomLeft?Vector2.zero:Vector2.one;
+            mini.anchoredPosition=layout.MinimapBottomLeft?new Vector2(layout.MinimapLeft,layout.MinimapBottom):new Vector2(-layout.MinimapRight,-layout.MinimapTop);
             disk.sizeDelta=Vector2.one*(layout.MinimapSize-12);
             if(ringArt!=null)ringArt.sizeDelta=Vector2.one*(layout.MinimapSize+12);
             compass.sizeDelta=new Vector2(layout.CompassWidth,70);

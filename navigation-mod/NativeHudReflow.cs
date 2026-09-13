@@ -72,7 +72,7 @@ namespace OldMarket.Navigation
             if(minimapBounds.HasValue && TryOriginal(notifications,true,false,out var note))
             {
                 var mini=minimapBounds.Value;
-                Place(notifications,note,new HudBox(mini.xMax-note.width,mini.yMax+gap,note.width,note.height),screen,gap);
+                Place(notifications,note,HudPlacement.AboveMap(Box(mini),note.width,note.height,Screen.width,gap),screen,gap);
             }
             else {notifications?.Restore();Reserve(notifications,true,false);}
 

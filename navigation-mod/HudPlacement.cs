@@ -15,6 +15,12 @@ namespace OldMarket.Navigation
 
     public static class HudPlacement
     {
+        public static HudBox AboveMap(HudBox minimap,float width,float height,float screenWidth,float gap)
+        {
+            float x=minimap.X+minimap.Width/2 < screenWidth/2 ? minimap.X : minimap.Right-width;
+            return new HudBox(x,minimap.Top+gap,width,height);
+        }
+
         // Prefer the requested slot, then the closest free edge of another occupied rectangle.
         // If no complete slot exists, return false instead of placing content on top of another HUD.
         public static bool TryPlace(HudBox desired, HudBox screen, IReadOnlyList<HudBox> occupied, float gap, out HudBox result)
