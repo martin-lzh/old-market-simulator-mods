@@ -75,7 +75,7 @@ dotnet run --project checkout-all-mod/tests/Tests.csproj -c Release
 
 用户可见文本集中在 Texts/Localization 或语言资源中，跟随游戏语言，未知语言回退英语。优先复用原生词条；翻译贡献说明语言代码、原文、修改理由和是否实机检查，保留格式占位符。字体和长文本未测时如实记录。
 
-功能变化同时更新 README 的操作、风险及卸载说明，并在独立 CHANGELOG 的“未发布”记录变化与兼容影响。不要自行声称发布日期、旧游戏支持或升级安全。发行版本号由维护者在准备发行时统一核对。涉及额外库存记录的改动必须提供旧档加载、正常保存重载、多人版本要求和回退方案。
+功能变化同时更新 README 的操作、风险及卸载说明，并在独立 CHANGELOG 的“未发布”记录变化与兼容影响。不要自行声称发布日期、旧游戏支持或升级安全。只有用户明确要求推进版本时才升级版本号；否则全部保留在 Unreleased / 未发布。开发、修复、安装及创建或合并 PR 均不自动授权版本升级。PR 检查须检查所有 Mod 的 CHANGELOG 并对照差异，明确列出尚未指定版本的 Mod，不自行补定版本。涉及额外库存记录的改动必须提供旧档加载、正常保存重载、多人版本要求和回退方案。
 
 ### 提交 Pull Request
 
@@ -166,7 +166,7 @@ Follow the target directory's C# style, namespace, and structure; avoid unrelate
 
 Centralize user-facing text in Texts/Localization or language resources, follow the game locale, and fall back to English for unknown languages. Reuse native translation keys where possible. Translation contributions should identify the locale, original text, reason for the change, and in-game verification status. Preserve format placeholders and report untested fonts or long text.
 
-For behavior changes, update README usage, risks, and uninstall instructions, plus the independent CHANGELOG's “Unreleased” section with compatibility effects. Do not invent release dates, older-game support, or upgrade safety claims. Maintainers coordinate release version numbers. Changes involving extra inventory records need an old-save loading plan, normal save/reload verification, multiplayer version requirements, and rollback instructions.
+For behavior changes, update README usage, risks, and uninstall instructions, plus the independent CHANGELOG's “Unreleased” section with compatibility effects. Do not invent release dates, older-game support, or upgrade safety claims. Advance a version only on an explicit user request; otherwise keep all changes in Unreleased. Development, fixes, installation, and creating or merging PRs do not authorize a bump. PR review must inspect every Mod CHANGELOG against the diff and explicitly list Mods awaiting version assignment, without assigning versions automatically. Changes involving extra inventory records need an old-save loading plan, normal save/reload verification, multiplayer version requirements, and rollback instructions.
 
 ### Pull requests
 

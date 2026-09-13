@@ -4,6 +4,13 @@
 
 本目录是公开 Mod 源码、SDK 和发行工具的维护仓库。开始修改 Mod、构建或发布流程前，必须阅读 [贡献指南](CONTRIBUTING.md)、[SDK 维护说明](sdk/README.md)、[发行规则](releases/README.md)，以及目标 Mod 的 README、CHANGELOG 和 `release.json`。公开 Mod 改动应留在本仓库，不写到相邻的 analysis 仓库。
 
+### Mod 版本推进与 PR 检查
+
+1. 只有用户明确要求“推进版本”或明确指定本次版本升级时，才推进对应 Mod 的版本。开发、修复、构建、安装、提交、推送或创建/合并 PR 本身均不代表版本推进授权。
+2. 未获明确指令的改动，全部暂记入对应 Mod CHANGELOG 的 `Unreleased` / `未发布` 中英文区段；保持现有程序集、插件和包版本号，不擅自新增编号版本条目，也不把新改动补写进已有编号的历史记录。本地构建用提交号和 SHA256 区分，不能因安装测试需要自行加版本。
+3. 用户明确要求推进后，按其指定范围统一落实版本号、插件声明、包名、README 与中英文 CHANGELOG，将相应 Unreleased 内容移入编号版本。必要的不可变 SDK 接口快照修订按下文维护，但不自动推进 Mod 版本。
+4. 创建、更新或审查 PR 时，必须检查所有 Mod 的 CHANGELOG，并对照 PR 差异，列出有改动但尚未指定版本的 Mod（包括仍有 Unreleased 内容者）。PR 中逐项记录“已明确指定的目标版本”或“Unreleased，待用户指定版本”；没有则明确写“无”。不得为了让检查通过自行分配版本，也不得仅凭已有旧版本号认定本轮改动已指定版本。
+
 ### SDK 维护是 Mod 开发的一部分
 
 1. 每次新增或修改 Mod，都检查其 `release.json` 所固定的 SDK 是否覆盖实际使用的游戏、Unity 和网络接口。新增类型/成员调用、修改方法签名或泛型用法、增加 `nameof`/反射/Harmony 目标、适配游戏更新时，必须重新评估 SDK 和本地游戏契约检查。纯文档、翻译或不改变接口依赖的逻辑修改无需机械增加 SDK 修订。
@@ -22,6 +29,13 @@
 ## English
 
 This is the public repository for original Mod source, the compilation SDK and release tooling. Before changing a Mod, build or release workflow, read [CONTRIBUTING](CONTRIBUTING.md), [SDK maintenance](sdk/README.md), [release rules](releases/README.md), and the target Mod's README, CHANGELOG and `release.json`. Keep public Mod changes here, not in the adjacent analysis repository.
+
+### Mod version advancement and PR review
+
+1. Advance a Mod version only when the user explicitly requests version advancement or explicitly specifies the version upgrade. Development, fixes, builds, installation, commits, pushes, and creating or merging a PR do not themselves authorize a version bump.
+2. Otherwise, record all pending changes in that Mod's bilingual `Unreleased` / `未发布` CHANGELOG sections. Preserve existing assembly, plugin and package versions; do not create numbered entries or append new changes to numbered historical entries. Identify local builds by commit and SHA256 instead of inventing a version for installation tests.
+3. After an explicit request, synchronize the authorized version scope across assembly/plugin declarations, package names, README and both CHANGELOG languages, moving the relevant Unreleased entries into the numbered release. Maintain required immutable SDK API revisions under the rules below; this does not automatically advance any Mod version.
+4. When creating, updating or reviewing a PR, inspect every Mod CHANGELOG and compare the PR diff. List Mods with changes that have not yet been assigned a version, including those with pending Unreleased entries. Record each as an explicitly assigned target version or “Unreleased, awaiting a user-assigned version”; state “none” if there are none. Never assign versions just to pass this check or treat an existing old version number as an assignment for the new changes.
 
 ### SDK maintenance is part of Mod development
 

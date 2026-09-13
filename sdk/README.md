@@ -43,7 +43,7 @@ python tools/ci.py build
 python tools/ci.py export-sdk --game-dir 'F:\SteamLibrary\steamapps\common\Old Market Simulator' --game-version 2.1.6 --revision 2 --supplemental sdk/2.1.6/r1/supplemental.json
 ```
 
-4. 审查声明差异和哈希，将需要迁移的 Mod 的 `release.json` 指向新 SDK。更新 Mod 版本、双语 CHANGELOG（包含游戏/SDK 版本）、README 兼容与风险说明、总 README 支持版本和本表。未迁移的 Mod 保留自己的旧 SDK。
+4. 审查声明差异和哈希，将需要迁移的 Mod 的 `release.json` 指向新 SDK。更新双语 CHANGELOG 的 Unreleased / 未发布条目（包含游戏/SDK 版本）、README 兼容与风险说明、总 README 支持版本和本表；只有用户明确要求推进版本时才升级 Mod 版本并将相应内容移入编号条目。未迁移的 Mod 保留自己的旧 SDK。
 5. 重新执行 SDK 构建，再在持有匹配游戏版本的电脑执行：
 
 ```powershell
@@ -83,7 +83,7 @@ After a game update:
 1. Read the legally obtained game installation, adapt the original Mod source and commit it. Export requires a clean worktree to record the exact source commit.
 2. Review supplemental method names used only in `nameof` expressions. Copy the previous `supplemental.json` into ignored `work/` if it needs editing. Reflection method names are also listed; reflection fields use the explicit `field:name` syntax (for example `field:currentSlot` and `field:activeExpansions`). Use `AssemblySimpleName::Type.FullName` for non-game assembly types. Explicit `constant:name` seeds cover reviewed, compiler-inlined numeric/boolean literals; string and nonliteral seeds are rejected. All declarations must resolve from real assemblies. Other declarations are discovered from the seven registered loader builds compiled against actual game references; game method bodies/resources are not exported.
 3. Run `export-sdk` as shown above, using the actual verified game version and a new revision. Existing snapshots cannot be overwritten.
-4. Review metadata/hash changes, migrate selected `release.json` pins, update Mod versions, bilingual CHANGELOG entries with game/SDK versions, compatibility/risk notes, root supported baseline and the table above. Mods not migrated keep their previous SDK.
+4. Review metadata/hash changes, migrate selected `release.json` pins, and update bilingual Unreleased CHANGELOG entries with game/SDK versions, compatibility/risk notes, root supported baseline and the table above. Only advance Mod versions and move pending entries into numbered releases when the user explicitly requests version advancement. Mods not migrated keep their previous SDK.
 5. Run the SDK build followed by `verify-game` above. This verifies dependency hashes, compares symbolic Mod IL and embedded resources against a real-reference build, and runs the existing Stack All/Price Probability game contracts. It never executes or modifies the game. The command currently verifies every Mod; when pins span multiple game baselines, retain matching installations and verify each Mod using its build/contract commands. Do not bypass hash failures.
 6. Review Harmony targets, RPC/save behavior and IL assumptions even if API signatures did not change. Perform in-game checks appropriate to the risks. Keep `"prerelease": true` until acceptance is complete. Commit on `dev` and merge through a PR into `main`.
 
