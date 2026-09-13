@@ -92,7 +92,6 @@ namespace OldMarket.Navigation
             {
                 var player=Project(state.PlayerPosition.x,state.PlayerPosition.z)+mapRect.anchoredPosition;
                 occupied.Add(new HudBox(player.x-21,player.y-21,42,42));
-                occupied.Add(new HudBox(player.x-70,player.y-48,140,30));
             }
             if(externalOccupied!=null)for(int i=0;i<externalOccupied.Count;i++)occupied.Add(externalOccupied[i]);
             else foreach(var marker in state.Markers)
@@ -116,8 +115,8 @@ namespace OldMarket.Navigation
                 }
                 if(state.Font!=null&&node.Label.font!=state.Font)node.Label.font=state.Font;
                 bool target=state.TargetId=="poi:"+node.Poi.Id;
-                node.Face.color=target?new Color(.53f,.35f,.09f,.98f):new Color(.11f,.09f,.065f,.94f);
-                node.Icon.color=target?Gold:Cream;node.Label.color=target?Gold:Cream;
+                node.Face.color=Color.clear;
+                node.Icon.color=Color.white;node.Label.color=target?Gold:Cream;
             }
             // A target gets the first free label slot; remaining places keep deterministic ID order.
             nodes.Sort((a,b)=>
@@ -130,7 +129,7 @@ namespace OldMarket.Navigation
                 bool target=state.TargetId=="poi:"+node.Poi.Id;
                 bool onScreen=node.Position.x>=bounds.X&&node.Position.x<=bounds.Right&&node.Position.y>=bounds.Y&&node.Position.y<=bounds.Top;
                 if(onScreen)InViewCount++;
-                bool show=onScreen&&PoiLabelLayout.WantsLabel(zoom,node.LabelVisible,target);
+                bool show=onScreen&&!string.IsNullOrEmpty(node.Label.text)&&PoiLabelLayout.WantsLabel(zoom,node.LabelVisible,target);
                 if(show&&PoiLabelLayout.TryPlace(node.Position.x,node.Position.y,node.Width,bounds,occupied,node.LabelVisible,ref node.Side,out var placed))
                 {
                     node.Plate.anchoredPosition=new Vector2(placed.X+placed.Width/2-node.Position.x,placed.Y+placed.Height/2-node.Position.y);

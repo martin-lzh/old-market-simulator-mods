@@ -48,6 +48,7 @@ namespace OldMarket.Navigation
 
         private void Awake()
         {
+            MapPoi.NativeNameResolver=NativePoiText.Get;
             minimap = Config.Bind("Display", "Minimap", true, "Show the minimap.");
             compass = Config.Bind("Display", "Compass", true, "Show the compass.");
             guidance = Config.Bind("Display", "TargetGuidance", true, "Show target direction and distance.");
@@ -301,6 +302,7 @@ namespace OldMarket.Navigation
         }
         private void OnDestroy()
         {
+            MapPoi.NativeNameResolver=null;
             nativeHud.Dispose();
             CloseMap();
             RestoreEscapeActions(true);

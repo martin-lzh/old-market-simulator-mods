@@ -92,7 +92,7 @@ namespace OldMarket.Navigation
                 if(!node.Visible){node.LabelVisible=false;node.Plate.gameObject.SetActive(false);continue;}
                 InViewCount++;
                 occupied.Add(new HudBox(node.Position.x-11,node.Position.y-11,22,22));
-                bool target=state.TargetId=="poi:"+node.Poi.Id;node.Icon.color=target?Gold:Cream;node.Label.color=target?Gold:Cream;
+                bool target=state.TargetId=="poi:"+node.Poi.Id;node.Icon.color=Color.white;node.Label.color=target?Gold:Cream;
                 string name=node.Poi.DisplayName(state.Locale);
                 if(node.Label.text!=name)
                 {
@@ -111,7 +111,7 @@ namespace OldMarket.Navigation
             {
                 if(!node.Visible)continue;
                 bool show=false,target=state.TargetId=="poi:"+node.Poi.Id;
-                if(PoiLabelLayout.WantsLabel(100/range,node.LabelVisible,target))
+                if(!string.IsNullOrEmpty(node.Label.text)&&PoiLabelLayout.WantsLabel(100/range,node.LabelVisible,target))
                 {
                     for(int attempt=0;attempt<4;attempt++)
                     {

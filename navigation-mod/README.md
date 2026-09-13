@@ -8,6 +8,8 @@ Version **0.1.4 — experimental**. An independent navigation HUD for Old Market
 
 Pending local build (Unreleased, version unchanged): the wheel compensates for the active UI module scroll multiplier while keeping fractional input. Optional `Pois` arrays in local map manifests contain `Id`, `Name`, `NameKey`, `Category` (shop/home/dock/other), `X` and `Z`. Up to 256 validated points per map are supported. POI icons stay visible; names open above 1.5x zoom and close below 1.35x or when blocked. Click an icon or label to target it. Personal labels also collapse when space is limited. POIs are companion data, not automatically discovered moving player buildings. Shop origins are representative locations, not verified entrances; a home-shaped rest icon does not imply player ownership. Old maps without Pois still work. Both map views render POIs; minimap icons and labels stay upright in either rotation mode, with labels expanding below about 67 m range where space permits. Select a POI on the large map to use compass guidance. Map-load logs include POI counts; opening the large map logs data, node and visible-node counts for diagnosis. The metadata reader is tested against nested arrays, but in-game visual acceptance is still pending.
 
+POI categories use orange shop, green home/rest, blue dock/order and purple other icons, all outlined with transparent backgrounds. The player uses a narrow gold direction arrow without a nameplate. Built-in place labels come from the native game localization table; unverified or unavailable labels remain hidden.
+
 The map window uses a dark brown frame with gold borders, a map viewport and a separate marker sidebar. The sidebar shows the current target at the top and the selected personal marker editor below; there is no marker overview list. Wheel zoom and the on-map +/- buttons transition smoothly; wheel zoom follows the pointer where map boundaries allow. The map covers its viewport and panning stops at its edges. Map geography still comes from the same local companion files.
 
 Press main-row **-** to zoom the minimap out and **=** to zoom in. The map frame stays the same size. Its native-style hint pairs each action with its keycap: Zoom out [-], Zoom in [=]; it sits above the map and participates in HUD avoidance. Typing, native menus, the large map and hidden minimaps suppress these shortcuts; numpad +/- are unchanged. Range steps are 20–1000 world units. Shortcut zoom lasts for this session; editing MinimapRange resets it, while moving/resizing the HUD preserves it.
@@ -125,6 +127,8 @@ Original code, documentation and UI decorations are provided under [MIT](LICENSE
 ### 功能与操作
 
 本地待发布构建（版本号不变）：滚轮按当前 UI 模块的实际倍率归一化，保留小数输入。本地地图 manifest 可选 `Pois` 数组，每项含 `Id`、`Name`、`NameKey`、`Category`（shop/home/dock/other）、`X`、`Z`，每幅图最多 256 个经校验地点。POI 保留语义图标，缩放达到 1.5 倍且空间足够时展开名称，低于 1.35 倍或发生遮挡时收起；点击图标或名称可设为目标。个人标记的名称也会按空间收起。地点来自本地配套数据，不会自动追踪玩家移动的建筑；店铺原点仅代表地点，不保证是入口，房屋形休息图标不代表玩家所有权。旧地图没有 Pois 时仍正常使用。大小地图均绘制 POI；小地图两种朝向下图标与名称保持正立，范围缩小到约 67 米以下且空间足够时展开名称。在大地图选择 POI 可使用罗盘指引。加载日志记录 POI 数量，打开大地图时记录数据、节点及视野内节点数量，便于定位显示问题。元数据读取已验证嵌套数组，实机视觉效果仍待验收。
+
+POI 按类别使用商店橙色、房屋/休息点绿色、码头/订购点蓝色及其他地点紫色，均有描边和透明背景。玩家位置使用细长金色方向箭头，不带名称底板。内置地点标签读取游戏原生本地化表，未核实或暂不可用的文字隐藏。
 
 地图窗口采用深棕金边外框、地图主区与独立标记侧栏。右侧顶部显示当前目标，下方编辑选中的个人标记，不再显示标记总览；滚轮与地图内加减按钮平滑缩放，边界允许时以鼠标位置为中心。地图铺满视口，拖动限制在地图边缘。地图地形继续使用原有本地配套文件。
 

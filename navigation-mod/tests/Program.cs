@@ -10,6 +10,7 @@ static class Program
  static void Reject(Action action,string name){try{action();}catch{count++;return;}throw new Exception(name);}
  static void Main(string[] args)
  {
+  PoiNativeNameChecks.Run();
   MapManifestChecks.Run(Check,Reject);
   foreach(string path in args){var map=MapManifestReader.Read(File.ReadAllText(path));Check(map.Pois.Length>0,"local map contains POIs");Console.WriteLine(Path.GetFileName(path)+": "+map.Pois.Length+" POIs");}
   MapWheelZoomChecks.Run(Check);

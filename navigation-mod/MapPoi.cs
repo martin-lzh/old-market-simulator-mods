@@ -17,9 +17,24 @@ namespace OldMarket.Navigation
         private void SetDefaults(StreamingContext context){Category="other";}
         public string DisplayName(string locale)
         {
-            string translated=string.IsNullOrEmpty(NameKey)?"":Texts.Get(locale,NameKey);
-            return translated!=""&&translated!=NameKey?translated:Name;
+            if (string.IsNullOrEmpty(NameKey)) return Name;
+            string key=NativeKey(NameKey);
+            // Known game POIs stay icon-only until their native text is available.
+            // Do not substitute an action or a made-up place name for an unnamed location.
+            return key.Length==0 ? "" : NativeNameResolver?.Invoke(locale,key) ?? "";
         }
+        // The runtime supplies an asynchronous game-table reader; metadata stays Unity-independent.
+        public static Func<string,string,string> NativeNameResolver;
+        private static readonly Dictionary<string,string> NativeAliases=new Dictionary<string,string> {
+            ["poi_engineer"]="engineer", ["poi_decorations"]="decoration_store",
+            ["poi_carpenter"]="lumberjack", ["poi_animals"]="animal_market",
+            ["poi_garden"]="gardener", ["poi_clothing"]="clothing_store",
+            ["poi_orders"]="orders", ["poi_workshop"]="workshop",
+            ["poi_farm"]="farm", ["poi_museum"]="museum",
+            ["poi_rest"]="", ["poi_market"]=""
+        };
+        public static string NativeKey(string key)
+        { return NativeAliases.TryGetValue(key??"",out var native)?native:key??""; }
         public static List<MapPoi> Validate(MapPoi[] points,float minX,float maxX,float minZ,float maxZ)
         {
             var result=new List<MapPoi>();var ids=new HashSet<string>();

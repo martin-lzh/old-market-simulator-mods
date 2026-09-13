@@ -16,7 +16,7 @@ namespace OldMarket.Navigation
     public sealed class MapWindow : IDisposable
     {
         private readonly NavigationState state;
-        private readonly RectTransform root, viewport, mapRect, player, playerNamePlate, sidebar, sidebarContent;
+        private readonly RectTransform root, viewport, mapRect, player, sidebar, sidebarContent;
         private readonly RawImage mapImage, mapOverlay;
         private readonly MapPoiLayer poiLayer;
         private readonly TMP_Text title, help, status, north;
@@ -36,6 +36,7 @@ namespace OldMarket.Navigation
         private TMP_InputField nameInput;
         private Texture2D frameTexture, paperTexture;
         private Sprite frameSprite;
+        private readonly PoiIconSet playerIcons=new PoiIconSet();
         public bool IsOpen => root!=null && root.gameObject.activeSelf;
         private static readonly Color Gold=new Color(.86f,.71f,.43f,1), Cream=new Color(.94f,.88f,.72f,1);
         private static readonly Color Dark=new Color(.115f,.092f,.071f,.98f), Panel=new Color(.17f,.135f,.095f,.98f);
@@ -74,11 +75,8 @@ namespace OldMarket.Navigation
             var gesture=viewport.gameObject.AddComponent<MapGesture>();gesture.Click=ClickMap;
             gesture.Drag=e=>{targetZoom=zoom;pan+=e.delta/CanvasScale();ApplyMapGeometry();};
             gesture.Scroll=e=>{if(RectTransformUtility.ScreenPointToLocalPointInRectangle(viewport,e.position,e.pressEventCamera,out var anchor))WheelZoom(e,anchor);};
-            player=Rect("Player",mapRect);player.sizeDelta=new Vector2(34,34);
-            var arrow=player.gameObject.AddComponent<TextMeshProUGUI>();arrow.text="▲";arrow.color=Color.white;arrow.fontSize=32;arrow.alignment=TextAlignmentOptions.Center;arrow.raycastTarget=false;allText.Add(arrow);if(state.Font!=null)arrow.font=state.Font;
-            playerNamePlate=Rect("PlayerName",mapRect);playerNamePlate.sizeDelta=new Vector2(132,27);playerNamePlate.gameObject.AddComponent<Image>().color=new Color(.08f,.085f,.07f,.88f);
-            playerNamePlate.GetComponent<Image>().raycastTarget=false;
-            var playerName=Label(playerNamePlate,"YourPosition",new Vector2(4,-3),new Vector2(124,22),15);playerName.alignment=TextAlignmentOptions.Center;
+            player=Rect("Player",mapRect);player.sizeDelta=new Vector2(36,40);
+            var arrow=player.gameObject.AddComponent<Image>();arrow.sprite=playerIcons.Get("player");arrow.color=Color.white;arrow.raycastTarget=false;
             var northPlate=Box("NorthPlate",viewport,new Vector2(14,-14),new Vector2(64,88),Dark);
             // Native CJK fonts can have line metrics taller than the glyph: do not ellipsize the direction away.
             north=Label(northPlate,"North",new Vector2(4,-4),new Vector2(56,44),22);north.alignment=TextAlignmentOptions.Center;
@@ -135,7 +133,7 @@ namespace OldMarket.Navigation
             mapOverlay.texture=state.Map?.OverlayTexture;mapOverlay.uvRect=mapImage.uvRect;mapOverlay.gameObject.SetActive(valid&&mapOverlay.texture!=null);
             status.text=state.ErrorKey!=""?Texts.Get(state.Locale,state.ErrorKey):!valid?Texts.Get(state.Locale,"NoMap"):(string.IsNullOrEmpty(state.ScopeId)||state.Store==null)?Texts.Get(state.Locale,"temporary"):"";
             AnimateZoom();ApplyMapGeometry();
-            if(valid){var uv=state.Map.Project(state.PlayerPosition.x,state.PlayerPosition.z);player.anchoredPosition=new Vector2((uv.X-.5f)*mapRect.sizeDelta.x,(uv.Y-.5f)*mapRect.sizeDelta.y);player.localEulerAngles=new Vector3(0,0,-state.CameraYaw);player.gameObject.SetActive(state.Available);playerNamePlate.gameObject.SetActive(state.Available);playerNamePlate.anchoredPosition=player.anchoredPosition+new Vector2(0,-32);player.SetAsLastSibling();playerNamePlate.SetAsLastSibling();}
+            if(valid){var uv=state.Map.Project(state.PlayerPosition.x,state.PlayerPosition.z);player.anchoredPosition=new Vector2((uv.X-.5f)*mapRect.sizeDelta.x,(uv.Y-.5f)*mapRect.sizeDelta.y);player.localEulerAngles=new Vector3(0,0,-state.CameraYaw);player.gameObject.SetActive(state.Available);player.SetAsLastSibling();}
             foreach(var entry in markerNames)if(entry.Item2!=null)entry.Item2.text=entry.Item3+entry.Item1.Name;
             UpdateMarkerLabelVisibility();poiLayer.SetOccupied(visibleMarkerLabels);poiLayer.Refresh(zoom);
             if(targetInfo!=null){var target=state.Target;if(target==null)targetInfo.text=Texts.Get(state.Locale,"NoTarget");else{float dx=target.X-state.PlayerPosition.x,dz=target.Z-state.PlayerPosition.z;targetInfo.text=MarkerSymbol(target.Icon)+" "+target.Name+"\n"+Mathf.Sqrt(dx*dx+dz*dz).ToString("F0")+" m";}}
@@ -265,6 +263,6 @@ namespace OldMarket.Navigation
             help.rectTransform.sizeDelta=new Vector2(root.sizeDelta.x-310,32);status.rectTransform.sizeDelta=new Vector2(root.sizeDelta.x-310,28);
             if(IsOpen)RebuildSidebar();ApplyMapGeometry();
         }
-        public void Dispose(){poiLayer.Dispose();if(root!=null)UnityEngine.Object.Destroy(root.gameObject);if(frameSprite!=null)UnityEngine.Object.Destroy(frameSprite);if(frameTexture!=null)UnityEngine.Object.Destroy(frameTexture);if(paperTexture!=null)UnityEngine.Object.Destroy(paperTexture);}
+        public void Dispose(){playerIcons.Dispose();poiLayer.Dispose();if(root!=null)UnityEngine.Object.Destroy(root.gameObject);if(frameSprite!=null)UnityEngine.Object.Destroy(frameSprite);if(frameTexture!=null)UnityEngine.Object.Destroy(frameTexture);if(paperTexture!=null)UnityEngine.Object.Destroy(paperTexture);}
     }
 }

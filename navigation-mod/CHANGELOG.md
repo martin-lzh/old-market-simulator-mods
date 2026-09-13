@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Remove the player position nameplate and use a narrow, outlined direction arrow in both maps. Color POI sprites by category with dark outlines and transparent backgrounds, including the large map. Resolve built-in POI labels from native game text instead of Mod translations.
+
 - Add the missing minimap POI layer with upright semantic icons and collision-aware labels in both rotation modes; resolve POI targets for compass guidance. Share icons with the large map. Verify nested POI metadata with the same .NET reader used by the plugin and log loaded/rendered counts for diagnosis. Large-map in-game acceptance remains pending.
 
 - Right-click a personal marker icon or label to remove it; left-click to edit. Remove the icon backdrop and overview list; place current target above the marker editor. Pair minimap action labels individually with their minus/equals keycaps.
@@ -66,6 +68,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 移除玩家位置文字，两张地图改用细长描边方向箭头。POI 图标按类别着色并加深色描边，大地图也去除图标底板。内置地点标签改从游戏原生文本读取，不再使用 Mod 自译名称。
 
 - 补齐小地图 POI 图层，两种朝向模式下语义图标和名称保持正立并按空间避让；罗盘指引支持 POI 目标。大小地图共用图标，通过插件实际使用的 .NET 读取器验证嵌套 POI 数据，并记录读取与绘制数量用于排查。大地图仍待实机验收。
 

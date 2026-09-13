@@ -9,18 +9,32 @@ namespace OldMarket.Navigation
     {
         private readonly List<UnityEngine.Object> owned=new List<UnityEngine.Object>();
         private readonly Dictionary<string,Sprite> icons=new Dictionary<string,Sprite>();
-        public PoiIconSet()
+        public Sprite Get(string category)
         {
-            foreach(string category in new[]{"home","shop","dock","other"})icons[category]=CreateIcon(category);
+            category=category??"other";
+            if(!icons.TryGetValue(category,out var sprite)){sprite=CreateIcon(category);icons.Add(category,sprite);}
+            return sprite;
         }
-        public Sprite Get(string category) => icons.TryGetValue(category??"",out var sprite)?sprite:icons["other"];
+        private static Color32 FillColor(string category)
+        {
+            if(category=="shop")return new Color32(245,170,65,255);
+            if(category=="home")return new Color32(125,216,125,255);
+            if(category=="dock")return new Color32(90,199,238,255);
+            if(category=="player")return new Color32(255,231,152,255);
+            return new Color32(205,151,236,255);
+        }
         private Sprite CreateIcon(string category)
         {
-            const int size=32;var pixels=new Color32[size*size];
+            const int size=32;var pixels=new Color32[size*size];var mask=new bool[size*size];
             for(int y=0;y<size;y++)for(int x=0;x<size;x++)
             {
                 bool ink;
-                if(category=="home")
+                if(category=="player")
+                {
+                    float dx=Math.Abs(x-15.5f);
+                    ink=y>=3&&y<=29&&dx<=(29-y)*.32f&&y>=9-dx*.65f;
+                }
+                else if(category=="home")
                 {
                     bool roof=y>=17&&y<=28&&Math.Abs(x-15.5f)<=29-y;
                     bool walls=x>=7&&x<=24&&y>=5&&y<=18;
@@ -46,7 +60,17 @@ namespace OldMarket.Navigation
                     float dx=x-15.5f,dy=y-19;
                     ink=(dx*dx+dy*dy<=74&&dx*dx+dy*dy>=16)||(y>=4&&y<14&&Math.Abs(dx)<(y-2)*.55f);
                 }
-                pixels[y*size+x]=new Color32(255,255,255,(byte)(ink?255:0));
+                mask[y*size+x]=ink;
+            }
+            var fill=FillColor(category);
+            for(int y=0;y<size;y++)for(int x=0;x<size;x++)
+            {
+                int index=y*size+x;
+                if(mask[index]){pixels[index]=fill;continue;}
+                bool edge=false;
+                for(int dy=-1;dy<=1;dy++)for(int dx=-1;dx<=1;dx++)
+                {int px=x+dx,py=y+dy;if(px>=0&&py>=0&&px<size&&py<size&&mask[py*size+px])edge=true;}
+                pixels[index]=new Color32(15,12,9,(byte)(edge?255:0));
             }
             var texture=new Texture2D(size,size,TextureFormat.RGBA32,false);texture.SetPixels32(pixels);texture.Apply(false,true);owned.Add(texture);
             var sprite=Sprite.Create(texture,new Rect(0,0,size,size),new Vector2(.5f,.5f));owned.Add(sprite);return sprite;
