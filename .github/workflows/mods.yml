@@ -75,6 +75,11 @@ jobs:
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
       - name: Build all seven variants and run logic/localization tests
         run: python tools/ci.py build
+      - name: Check release eligibility without publishing
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_REPOSITORY: ${{ github.repository }}
+        run: python tools/ci.py check-releases --repository "$env:RELEASE_REPOSITORY"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: mod-packages

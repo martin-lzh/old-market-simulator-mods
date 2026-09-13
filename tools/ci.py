@@ -392,14 +392,7 @@ def record_approval(slug, authorization):
     print(f"Review and commit {path.relative_to(ROOT)}. This command does not publish or grant authorization.")
 
 
-def publish(repository, commit, api=None):
-    if not re.fullmatch(r"[0-9a-f]{40}", commit):
-        raise ValueError("Publish requires an exact commit SHA")
-    actual = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
-    if actual != commit:
-        raise ValueError("Checkout differs from release commit")
-    api = api or GitHub(repository)
-    published = {r["tag_name"]: r for r in api.releases()}
+def release_candidates(commit, published):
     for slug in MODS:
         c = config(slug)
         tag = f'{slug}-v{c["version"]}'
@@ -418,6 +411,20 @@ def publish(repository, commit, api=None):
         if not mod_changed_since_release(slug, commit, published.values()):
             print(f"Skip {tag}; {slug}-mod/ is unchanged since its last published version (or has no tracked files).")
             continue
+        yield c, existing
+
+
+def publish(repository, commit, api=None):
+    if not re.fullmatch(r"[0-9a-f]{40}", commit):
+        raise ValueError("Publish requires an exact commit SHA")
+    actual = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+    if actual != commit:
+        raise ValueError("Checkout differs from release commit")
+    api = api or GitHub(repository)
+    published = {r["tag_name"]: r for r in api.releases()}
+    for c, existing in release_candidates(commit, published):
+        slug = c["slug"]
+        tag = f'{slug}-v{c["version"]}'
         directory = ROOT / "outputs/ci" / slug
         names = [archive_name(c, v) for v in variants(slug)] + ["build-info.json", "SHA256SUMS.txt"]
         files = {name: (directory / name).read_bytes() for name in names}
@@ -461,7 +468,7 @@ def publish(repository, commit, api=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=["validate", "build", "publish", "verify-game", "export-sdk", "record-approval"])
+    parser.add_argument("command", choices=["validate", "build", "publish", "verify-game", "export-sdk", "record-approval", "check-releases"])
     parser.add_argument("--base")
     parser.add_argument("--repository")
     parser.add_argument("--commit")
@@ -486,6 +493,11 @@ if __name__ == "__main__":
         local_verify(args.game_dir)
     elif args.command == "export-sdk":
         export_sdk(args.game_dir, args.game_version, args.revision, args.supplemental)
+    elif args.command == "check-releases":
+        commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+        published = {r["tag_name"]: r for r in GitHub(args.repository).releases()}
+        for c, _ in release_candidates(commit, published):
+            print(f'Ready: {c["slug"]} {c["version"]} at {commit} (read-only check)')
     elif args.command == "record-approval":
         record_approval(args.mod, args.authorization)
     else:
