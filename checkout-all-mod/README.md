@@ -4,7 +4,7 @@
 
 Continuously bags products and collects payment at one checkout while you hold a key or enable a toggle.
 
-Version 0.1.4 is a prerelease for Old Market Simulator 2.1.6, Unity 2022.3, and BepInEx 5.
+Version 0.1.5 is prepared as a prerelease for Old Market Simulator 2.1.6, Unity 2022.3, and BepInEx 5; publication is pending.
 
 ## Features
 
@@ -21,6 +21,8 @@ Short presses retain the original game interaction. The first `E` press may ther
 Both modes remain locked to their starting checkout. Looking away, leaving interaction range, opening a menu, losing application focus, changing checkout, disconnecting, or encountering an error cancels pending automation. Completed interactions are not undone. Restart with `F9`, or release and hold `E` again. Turning toggle mode off while `E` remains held blocks a new hold session until `E` is released.
 
 ## Download
+
+0.1.5 is not published yet. The links below refer to the previous 0.1.4 release.
 
 Download [`OldMarket.CheckoutAll-0.1.4.zip`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/checkout-all-v0.1.4/OldMarket.CheckoutAll-0.1.4.zip) from the [`checkout-all-v0.1.4` prerelease](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4).
 
@@ -72,7 +74,7 @@ For a nondefault game location:
 ./checkout-all-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
 ```
 
-The plugin targets `netstandard2.1`; state tests target `net8.0`. Local game and BepInEx assemblies are read-only references. The script runs localization and checkout-state tests, builds the plugin, and creates `outputs/OldMarket.CheckoutAll-0.1.4.zip`. The package contains only the original DLL, README, and MIT license; it includes no game or loader files and installs nothing.
+The plugin targets `netstandard2.1`; state tests target `net8.0`. Local game and BepInEx assemblies are read-only references. The script runs localization and checkout-state tests, builds the plugin, and creates `outputs/OldMarket.CheckoutAll-0.1.5.zip`. The package contains only the original DLL, README, CHANGELOG, and MIT license; it includes no game or loader files and installs nothing.
 
 ## Validation and known limits
 
@@ -92,7 +94,7 @@ If this mod helps your project, article, or video, please credit **Old Market Ch
 
 长按按键或开启切换模式后，在同一张结账台持续装袋商品并收取钱袋。
 
-0.1.4 是面向 Old Market Simulator 2.1.6、Unity 2022.3 和 BepInEx 5 的预发布版本。
+0.1.5 是面向 Old Market Simulator 2.1.6、Unity 2022.3 和 BepInEx 5 准备的预发布版本，尚未发布。
 
 ## 功能
 
@@ -109,6 +111,8 @@ If this mod helps your project, article, or video, please credit **Old Market Ch
 两种模式都锁定在启动时对准的结账台。看向别处、走出交互距离、打开菜单、游戏失去焦点、切换结账台、断线或发生错误，都会取消尚未完成的自动操作；已经完成的交互不会撤回。取消后需要再次按 `F9`，或松开并重新长按 `E`。如果在 `E` 仍按住时关闭切换模式，必须先松开 `E` 才能开始新的长按会话。
 
 ## 下载
+
+0.1.5 尚未发布，以下链接保留指向上一版 0.1.4。
 
 从 [`checkout-all-v0.1.4` 预发布页面](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4)下载 [`OldMarket.CheckoutAll-0.1.4.zip`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/checkout-all-v0.1.4/OldMarket.CheckoutAll-0.1.4.zip)。发布页同时提供 [`SHA256SUMS.txt`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/checkout-all-v0.1.4/SHA256SUMS.txt) 用于校验压缩包。
 
@@ -158,7 +162,7 @@ Mod 每次处理一件商品，等待它从网络中消失，并在所有商品�
 ./checkout-all-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
 ```
 
-插件以 `netstandard2.1` 为目标框架，状态测试以 `net8.0` 为目标框架。本机游戏和 BepInEx 程序集仅作为只读引用。脚本运行本地化和结账状态测试，再构建插件并生成 `outputs/OldMarket.CheckoutAll-0.1.4.zip`。压缩包只包含原创 DLL、本说明和 MIT 许可证，不包含游戏或加载器文件，也不会自动安装。
+插件以 `netstandard2.1` 为目标框架，状态测试以 `net8.0` 为目标框架。本机游戏和 BepInEx 程序集仅作为只读引用。脚本运行本地化和结账状态测试，再构建插件并生成 `outputs/OldMarket.CheckoutAll-0.1.5.zip`。压缩包只包含原创 DLL、本说明、CHANGELOG 和 MIT 许可证，不包含游戏或加载器文件，也不会自动安装。
 
 ## 验证与已知限制
 
