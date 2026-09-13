@@ -34,7 +34,7 @@ There are no settings to adjust before playing.
 
 ## Multiplayer
 
-**Everyone in the room, including the host, needs the same Stack All version.** Please compare versions before joining; the Mod does not check this for you. Avoid combining it with other Mods that change inventory stacking. Full multiplayer and save/load testing is not complete.
+**Everyone in the room, including the host, needs the same Stack All version.** Please compare versions before joining; the Mod does not check this for you. Avoid combining it with other Mods that change inventory stacking. Visual and other local in-game testing is complete; multiplayer testing is the only remaining test area.
 
 ## Backups and removal
 
@@ -86,7 +86,7 @@ For a compatible update, close the game and back up your save and old DLL before
 
 ## 和朋友一起玩
 
-**房主和所有玩家都需要安装相同版本的 Stack All。**加入房间前请互相确认，Mod 不会自动检查版本。尽量不要同时使用其他修改库存堆叠的 Mod。完整联机和保存重载测试仍未完成。
+**房主和所有玩家都需要安装相同版本的 Stack All。**加入房间前请互相确认，Mod 不会自动检查版本。尽量不要同时使用其他修改库存堆叠的 Mod。视觉及其他本地实机测试已完成，目前只剩多人游戏测试。
 
 ## 备份与卸载
 

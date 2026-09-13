@@ -1,8 +1,12 @@
 # Development notes / 开发说明
 
-Player instructions: [README](README.md). Repository workflow: [CONTRIBUTING](../CONTRIBUTING.md), [SDK](../sdk/README.md), [releases](../releases/README.md). Current test scope: [validation record](../releases/validation.md).
+**2026-09-14 — maintainer confirmation:** Visual and other local in-game testing is complete; multiplayer testing is the only remaining test area. This records manual testing feedback; it is not an automated test result.
 
-玩家用法见 [README](README.md)。本文保留构建、接口与测试资料；当前实机范围以[验证记录](../releases/validation.md)为准。
+**2026-09-14 — 维护者确认：**视觉及其他本地实机测试已完成，目前只剩多人游戏测试。这是人工测试反馈，不是自动测试结果。
+
+Player instructions: [README](README.md). Repository workflow: [CONTRIBUTING](../CONTRIBUTING.md), [SDK](../sdk/README.md), [releases](../releases/README.md). Earlier unchecked-scenario descriptions below are superseded by the confirmation above. Current test scope: [validation record](../releases/validation.md).
+
+玩家用法见 [README](README.md)。本文保留构建、接口与历史测试资料；下方早期待测列表已由上述最新确认更新，当前实机范围以[验证记录](../releases/validation.md)为准。
 
 ## Processing and safeguards
 
@@ -28,7 +32,7 @@ For a nondefault game location:
 
 The plugin targets `netstandard2.1`; state tests target `net8.0`. Local game and BepInEx assemblies are read-only references. The script runs localization and checkout-state tests, builds the plugin, and creates `outputs/OldMarket.CheckoutAll-0.1.5.zip`. The package contains only the original DLL, README, CHANGELOG, and MIT license; it includes no game or loader files and installs nothing.
 
-## Validation and known limits
+## Earlier validation notes
 
 All current automated tests pass. They cover short presses, hold start and release, toggle start and stop, hold-to-toggle conversion, suppression until `E` is released, refusal to pre-enable without a target, cancellation on checkout changes, menus, focus loss and errors, indefinite empty-checkout waiting, confirmation timeout, and timer reset after confirmation. Builds and checks use Old Market Simulator 2.1.6.
 
@@ -52,7 +56,7 @@ Actual UI and multiplayer behavior have not yet been verified for this prereleas
 
 插件以 `netstandard2.1` 为目标框架，状态测试以 `net8.0` 为目标框架。本机游戏和 BepInEx 程序集仅作为只读引用。脚本运行本地化和结账状态测试，再构建插件并生成 `outputs/OldMarket.CheckoutAll-0.1.5.zip`。压缩包只包含原创 DLL、本说明、CHANGELOG 和 MIT 许可证，不包含游戏或加载器文件，也不会自动安装。
 
-## 验证与已知限制
+## 早期验证记录
 
 当前所有自动化测试均已通过，覆盖短按、长按启动与松手停止、切换模式启停、长按转切换、关闭后等待 `E` 松开、未对准目标时拒绝预开启、切换结账台、菜单、失去焦点和错误取消，以及空台无限等待、交互确认超时和确认后重新计时。构建和检查以 Old Market Simulator 2.1.6 为依据。
 

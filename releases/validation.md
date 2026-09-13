@@ -2,6 +2,25 @@
 
 ## English
 
+### Current status — 2026-09-14
+
+The maintainer confirmed that visual testing and all other local in-game testing for the current PR's Mods are complete. **Only multiplayer testing remains.** This supersedes the narrower initial confirmation below. It records maintainer-reported manual testing; no new automated checks or measurements are implied. The supported game baseline remains 2.1.6, and prerelease status is retained while multiplayer testing is pending.
+
+| Mod | Version | Visual and local in-game tests | Multiplayer |
+| --- | --- | --- | --- |
+| Navigation | 0.2.0 | Complete | Pending |
+| Coordinates | 0.1.4 | Complete | Pending |
+| Checkout All | 0.1.5 | Complete | Pending |
+| Material Cost | 0.5.2 | Complete | Pending |
+| Stack All | 0.2.2 | Complete | Pending |
+| Price Probability | 0.1.2 | Complete | Pending |
+
+The version column identifies the PR's target versions; this confirmation does not create new installation or binary-hash records. Multiplayer follow-up should cover host/client installation combinations, synchronized actions, reconnects and concurrent interactions. Existing same-version requirements and save rollback instructions remain in effect.
+
+### Earlier evidence
+
+The following initial report is retained for provenance; its open non-multiplayer items are superseded by the current confirmation.
+
 ### Local in-game confirmation — 2026-09-14
 
 The maintainer confirmed actual in-game testing of the Navigation work discussed in PR #1. The latest installed build was source `f571d75`, version 0.1.4, on Old Market Simulator 2.1.6 / Windows x64 / Unity Mono with BepInEx 5.4.23.4. Its functionality is carried into 0.2.0; the version-number change itself was built but has not been recorded as installed. This is a user-reported local test, not an automated Unity run.
@@ -24,6 +43,25 @@ The CI tooling suite passed 48 tests during Navigation 0.2.0 preparation. See ea
 Reviewed all six Mod READMEs, CHANGELOG/version metadata and build/package declarations, plus repository setup, support, security, conduct, templates, SDK and release documentation. Corrected Navigation's obsolete test status and source-version wording, current SDK indexing, root build/CHANGELOG links and package contents, and the Navigation release-tag catalog. Existing published download links still resolve to the five previously published prereleases; 0.2.0 is not presented as an already published Navigation download. Other Mod safety and rollback notes remain applicable.
 
 ## 中文
+
+### 当前状态 — 2026-09-14
+
+维护者确认当前 PR 各 Mod 的视觉测试及其他本地实机测试均已完成，**目前只剩多人游戏测试**。此确认更新了下方最初较窄的记录；它属于维护者反馈的人工测试，不表示本次新增了自动检查或性能测量。支持的游戏基线仍为 2.1.6，多人测试完成前保留预发布状态。
+
+| Mod | 版本 | 视觉及本地实机测试 | 多人游戏 |
+| --- | --- | --- | --- |
+| Navigation | 0.2.0 | 已完成 | 待完成 |
+| Coordinates | 0.1.4 | 已完成 | 待完成 |
+| Checkout All | 0.1.5 | 已完成 | 待完成 |
+| Material Cost | 0.5.2 | 已完成 | 待完成 |
+| Stack All | 0.2.2 | 已完成 | 待完成 |
+| Price Probability | 0.1.2 | 已完成 | 待完成 |
+
+版本栏表示本 PR 的目标版本，本次确认不新增安装或二进制哈希记录。后续多人测试重点为房主/客人安装组合、动作同步、断线重连与同时交互；既有同版本要求及存档回退步骤继续适用。
+
+### 早期证据
+
+下方保留最初报告以便追溯，其中未完成的非多人项目已由上述最新确认更新。
 
 ### 本地实机确认 — 2026-09-14
 

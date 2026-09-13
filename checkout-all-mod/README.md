@@ -4,6 +4,8 @@
 
 ## English
 
+Visual and other local in-game testing is complete; multiplayer testing is the only remaining test area.
+
 Let checkout handle the whole table while you hold a key—or keep it running with a toggle. Products are processed one by one, followed by the payment pouch.
 
 [Download 0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4) · 0.1.5 is being prepared and is not on the release page yet.
@@ -58,6 +60,8 @@ Close the game, back up the old DLL and replace it to update. Delete `OldMarket.
 
 ## 中文
 
+视觉及其他本地实机测试已完成，目前只剩多人游戏测试。
+
 长按一个键，就能依次结算桌上的商品并收取钱袋；也可以打开连续结账，不用一直按住。
 
 [下载 0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4) · 0.1.5 正在准备，发布页暂时仍是 0.1.4。
@@ -101,7 +105,7 @@ Close the game, back up the old DLL and replace it to update. Delete `OldMarket.
 
 重新对准结账台，松开后再次长按 E，或按 F9 即可。联机响应过慢时，等待约 10 秒后可能停止，不会反复重试同一件商品。附近结账台或钱袋挤在一起、无法确认归属时，请手动收取钱袋。
 
-自动结账完成的交易和金币收入会照常保留，停止或卸载不会撤销。商品价格和顾客行为保持游戏原有规则，各种联机组合尚未逐一检查。
+自动结账完成的交易和金币收入会照常保留，停止或卸载不会撤销。商品价格和顾客行为保持游戏原有规则，多人游戏测试仍待完成。
 
 ## 更新与卸载
 

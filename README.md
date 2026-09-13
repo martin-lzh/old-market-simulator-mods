@@ -30,7 +30,7 @@ These Mods are for **Old Market Simulator 2.1.6 on Windows**. Most use **BepInEx
 
 **Using Stack All with friends? Everyone needs the same version.** Before removing it, follow its [save and removal instructions](stack-all-mod/README.md). Other Mods have their own multiplayer notes.
 
-Current downloads are prereleases. Navigation has been tried in game locally; not every game version, language, screen size or multiplayer combination has been checked. Keep a backup, especially before game updates or changing inventory Mods.
+Current downloads are prereleases. Visual and other local in-game testing is complete; multiplayer testing is the only remaining test area. Keep a backup, especially before game updates or changing inventory Mods.
 
 ### Help and languages
 
@@ -72,7 +72,7 @@ Want to contribute? Start with [CONTRIBUTING](CONTRIBUTING.md) or the [developme
 
 **和朋友一起用 Stack All 时，所有人都需要相同版本。**卸载前请按它的[存档与卸载说明](stack-all-mod/README.md)整理库存。其他 Mod 的联机要求见各自页面。
 
-目前下载均为预发布版。Navigation 已进行本地实机测试，但全部游戏版本、语言、屏幕尺寸和联机组合尚未逐一检查。请留好备份，尤其是在游戏更新或更换库存 Mod 前。
+目前下载均为预发布版。视觉及其他本地实机测试已完成，目前只剩多人游戏测试。请留好备份，尤其是在游戏更新或更换库存 Mod 前。
 
 ### 语言与反馈
 

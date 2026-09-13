@@ -65,7 +65,7 @@ To adjust size or position, edit `BepInEx/config/OldMarket.Navigation/layout.jso
 
 ## A few things to know
 
-Local in-game testing has been confirmed. Maps for other towns, every language/screen size and all multiplayer combinations have not been checked. Place names follow the game's language; your own marker names stay as you wrote them.
+Visual and other local in-game testing is complete; multiplayer testing is the only remaining test area. Place names follow the game's language; your own marker names stay as you wrote them.
 
 Target icons show a direction, not a walking route. They may appear through buildings or over a roof. Map north is a consistent Mod convention and may differ from other maps. Overlays from Steam or performance tools may still cover the display.
 
@@ -139,7 +139,7 @@ Close the game and back up the plugin before replacing its DLL. Keep `BepInEx/co
 
 ## 使用时留意
 
-本地实机测试已确认完成，其他城镇、全部语言和屏幕尺寸、各种联机组合尚未逐一检查。地点名称跟随游戏语言，你自己填写的标记名称保持原样。
+视觉及其他本地实机测试已完成，目前只剩多人游戏测试。地点名称跟随游戏语言，你自己填写的标记名称保持原样。
 
 目标图标提供方向，不是可行走路线；可能透过建筑显示，也可能落在屋顶上。地图北向使用本 Mod 的统一约定，可能与其他地图不同。Steam 或性能工具的覆盖层仍可能挡住界面。
 
