@@ -1,148 +1,107 @@
 # Old Market Stack All
 
-Current source version: **0.2.2**, authorized as a patch for SDK/build/documentation changes; publication is pending. Download links below still refer to the published 0.2.1 release. New local builds use 0.2.2; gameplay behavior and SDK 2.1.6/r1 remain unchanged.
+[English](#english) · [中文](#中文)
 
-当前源码版本：**0.2.2**，本次已授权将 SDK、构建及文档改动推进一个 patch，尚待发布。下方下载链接仍指向已公开的 0.2.1；本地新构建使用 0.2.2，游戏逻辑及 SDK 2.1.6/r1 不变。
+## English
 
+Carry more without losing track of your baskets and boxes. Each product slot can hold up to 64 containers; tools stay separate.
 
-[Risk notes / 风险提示](#risk-notes--风险提示) · [Change Log / 版本记录](CHANGELOG.md)
-
-English | [中文](#中文说明)
-
-Version 0.2.2 expands the inventory while preserving physical product containers. It targets Old Market Simulator 2.1.6 for Windows/Mono and requires BepInEx 5.
-
-## Features
-
-- Slot lower-left: total goods. Lower-right: physical containers.
-- Up to 64 containers per product slot; total goods may exceed 64. Empty containers count as containers with zero goods.
-- Each container retains its product ID, contents, cost, and freshness. Compatible contents use the game's weighted integer merge and expiration rules.
-- Non-product, non-tool items stack to 64. Tools remain separate with their own durability.
-- Short Q/F and mouse placement handle one item or one complete container. Holding Q/F processes the current slot one unit at a time after the hold delay. Hints follow bindings, language, and native fonts.
-- 13 game-configured languages, including Simplified and Traditional Chinese. Mod text is embedded; native terms come from the game's `Translations` table.
-
-| Contents | Goods | Containers |
-| --- | ---: | ---: |
-| Two baskets of 24 | 48 | 2 |
-| Three empty baskets | 0 | 3 |
-| 64 containers of 85 | 5440 | 64 |
-
-A 65th container uses another unlocked empty slot. With no space, the complete container remains near the player rather than replacing inventory data.
+[Download 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) · 0.2.2 is being prepared and is not on the release page yet.
 
 ## Install
 
-1. Install BepInEx 5, then close the game.
-2. Download [`OldMarket.StackAll-0.2.1.zip`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/stack-all-v0.2.1/OldMarket.StackAll-0.2.1.zip) and verify [`SHA256SUMS.txt`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/stack-all-v0.2.1/SHA256SUMS.txt).
-3. Extract into the game directory. The DLL should be at `BepInEx/plugins/OldMarket.StackAll/OldMarket.StackAll.dll`.
-4. Start the game and look for `Stack All 0.2.2 ready` in the BepInEx log.
+For Old Market Simulator **2.1.6 on Windows**, with **BepInEx 5** installed.
 
-Every multiplayer participant must run 0.2.2. There is no automatic peer-version check; coordinate versions yourself. Do not mix it with vanilla, 0.1.0, or incompatible inventory Mods.
+1. Close the game and back up your save and any older plugin.
+2. Extract the Mod ZIP into the game folder. The plugin belongs at `BepInEx/plugins/OldMarket.StackAll/OldMarket.StackAll.dll`.
+3. Start the game and enter your town.
+
+Choose the Mod ZIP on the release page, not GitHub's **Source code** download. The loader is not included.
+
+## How stacks work
+
+The bottom-left number is the amount of goods; the bottom-right is the number of containers. Two baskets with 24 goods each show **48 goods / 2 containers**. Empty baskets still count as containers.
+
+Each container keeps its contents, cost and freshness. Compatible goods use the game's usual merging and expiry rules. Other non-tool items stack up to 64. A 65th container goes into another available slot; if there is no room, it stays near you.
 
 ## Controls
 
-Defaults follow the game's rebindable actions. Short Q drops one unit; short F throws one; placement handles one unit. A product unit is one whole container, so a basket of 24 is one action. Holding Q/F acts immediately, then about every 0.12 seconds after an approximately 0.6-second delay. Switching slots/items, opening UI, pausing, losing focus, or pressing both actions cancels the sequence.
+- Tap Q to drop one item or one complete container; tap F to throw one. Mouse placement also handles one at a time.
+- Hold Q or F to continue through the selected slot, starting after about 0.6 seconds.
+- These actions follow your game key bindings. Switching slots/items, opening a menu, pausing, switching windows or pressing both actions stops the sequence.
 
-## Saves, upgrades, and removal
+There are no settings to adjust before playing.
 
-Extra containers are stored in additional inventory records written by the game's normal save flow. Saves containing them require Stack All 0.2.0 or a later compatible plugin.
+## Multiplayer
 
-Before removing or downgrading: take out extra containers until each product slot contains at most one; split other stacks to vanilla limits; then save normally and exit. The compatible save hook trims unused extra records. Do not disable or hot-unload while extra containers remain.
+**Everyone in the room, including the host, needs the same Stack All version.** Please compare versions before joining; the Mod does not check this for you. Avoid combining it with other Mods that change inventory stacking. Full multiplayer and save/load testing is not complete.
 
-A legacy 0.1.0 overfull bag remains one bag because no historical container count exists. For example, 48 goods in one old basket display as `48 / 1`. Drain it or use V transfer to restore normal capacity before removal.
+## Backups and removal
 
-## Configuration and build
+**Back up your save before installing. Saves containing extra containers need Stack All 0.2.0 or a later compatible version. Do not simply remove the Mod while those containers remain.**
 
-There are no user options; capacity and save representation are compatibility rules.
+To remove it or return to an incompatible older version:
 
-```powershell
-./stack-all-mod/build.ps1
-./stack-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
-```
+1. With Stack All still installed, take out extra containers until each product slot has at most one.
+2. Split other stacks to the game's normal limits.
+3. Save normally, then exit the game.
+4. Back up that save and remove the plugin DLL. Keep the previous backup until you have checked the result.
 
-The build uses local game/BepInEx assemblies as read-only references, runs checks, and creates `outputs/OldMarket.StackAll-0.2.2.zip`; it does not install. All required localization source, resources, and tests are contained in `stack-all-mod/localization/`, so this Mod directory builds independently. Startup rejects an unreviewed game assembly or patch surface.
+Old 0.1.0 overfilled baskets still count as one basket. Empty them or use the game's V transfer to bring them back within normal capacity before removing the Mod. Removing a DLL does not undo inventory changes already saved.
 
-## Validation and limitations
+For a compatible update, close the game and back up your save and old DLL before replacing the plugin. Leave your loader and other plugins in place.
 
-The original stack/container/input tests, game IL contract checks, and the Mod-local localization checks pass. They cover conservation, empty containers, merges, 64-container overflow, removal, save-array reload, tool durability, hold cancellation, translations, formatting, and native action lookup.
 
-In-game UI, normal save/load, and real multiplayer have not been verified for this release. Back up important saves. Inventory Mods patching the same operations may conflict.
+[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [License](LICENSE)
 
-## License and attribution
+## 中文
 
-Original work here is under the [MIT License](LICENSE); game and third-party components are excluded. Citation is voluntary, not a license condition: **Old Market Stack All by Zhaohan Liu**, with a link to the [repository](https://github.com/martin-lzh/old-market-simulator-mods).
+让一个格子装下更多篮子和箱子，又能清楚看见实际数量。每个商品格最多容纳 64 个容器，工具仍然单独放置。
 
----
-
-## 中文说明
-
-0.2.2 在保留实体商品容器的前提下扩展物品栏，适用于 Windows/Mono 版 Old Market Simulator 2.1.6，需要 BepInEx 5。
-
-## 功能
-
-- 格子左下显示商品总数，右下显示实体容器数。
-- 每个商品格最多 64 个容器；商品总数可超过 64。空容器按 0 件商品、1 个容器记录。
-- 分别保留商品 ID、内容、成本和保鲜数据；兼容内容沿用游戏的加权整数合并及过期规则。
-- 非商品、非工具每格最多 64 件；工具独立保留耐久。
-- 短按 Q/F 和鼠标摆放每次处理一件或一个完整容器；长按逐个处理。提示跟随键位、语言和原生字体。
-- 支持游戏配置的 13 种语言，包括简繁中文。
-
-第 65 个容器会进入另一个已解锁空格；没有空间时，完整容器留在玩家附近，不覆盖物品栏数据。
+[下载 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) · 0.2.2 正在准备，发布页暂时仍是 0.2.1。
 
 ## 安装
 
-1. 安装 BepInEx 5 并退出游戏。
-2. 下载 [`OldMarket.StackAll-0.2.1.zip`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/stack-all-v0.2.1/OldMarket.StackAll-0.2.1.zip)，用 [`SHA256SUMS.txt`](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/stack-all-v0.2.1/SHA256SUMS.txt) 校验。
-3. 解压到游戏目录，确认 DLL 位于 `BepInEx/plugins/OldMarket.StackAll/OldMarket.StackAll.dll`。
-4. 启动后在 BepInEx 日志确认 `Stack All 0.2.2 ready`。
+适用于 **Windows 版 Old Market Simulator 2.1.6**，需要先安装 **BepInEx 5**。
 
-联机所有玩家必须使用 0.2.2。Mod 不自动检查对方版本，请自行确认一致；不能与原版、0.1.0 或不兼容物品栏 Mod 混用。
+1. 退出游戏，备份存档和已有的旧插件。
+2. 将 Mod ZIP 解压到游戏目录，确认插件位于 `BepInEx/plugins/OldMarket.StackAll/OldMarket.StackAll.dll`。
+3. 启动游戏并进入小镇。
 
-## 操作与存档
+请选发布页里的 Mod ZIP，不要下载 **Source code** 当作插件安装。安装包不含加载器。
 
-默认键位读取游戏可重绑定动作。短按 Q 丢下、F 投掷、鼠标摆放均处理一个单位；一篮 24 件商品是一个完整容器单位。长按立即处理首个单位，约 0.6 秒后约每 0.12 秒处理一个。切格、物品变化、打开界面、暂停、失焦或同时按 Q/F 会取消。
+## 数量怎么看
 
-额外容器记录由游戏正常保存。含这些记录的存档需要 Stack All 0.2.0 或后续兼容插件。停用或降级前，逐个取出额外容器至每个商品格最多一个，将其他堆叠拆回原版上限，然后正常保存并退出。额外容器仍存在时不要停用或热卸载。
+格子左下角是商品总数，右下角是容器数。例如两个各装 24 件商品的篮子，会显示 **48 件商品 / 2 个容器**。空篮子也会计入容器数。
 
-旧 0.1.0 超容量篮子没有历史容器数，升级后仍算一个，例如 `48 / 1`。卸载前请消耗或用 V 转移恢复正常容量。
+每个容器保留自己的内容、成本和保鲜信息，兼容商品按游戏原有的合并与过期规则处理。其他非工具物品最多堆叠 64 个。第 65 个容器会放到其他空格；没有空间时会留在玩家附近。
 
-## 配置、构建与验证
+## 怎么操作
 
-没有用户配置项。在仓库根目录运行：
+- 短按 Q 丢下一个物品或一个完整容器，短按 F 投掷一个；鼠标放置也是一次一个。
+- 长按 Q 或 F，约 0.6 秒后会继续逐个处理当前格。
+- 按键跟随游戏设置。切换格子或物品、打开菜单、暂停、切换窗口或同时按两个动作都会停止。
 
-```powershell
-./stack-all-mod/build.ps1
-./stack-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
-```
+不用额外调整设置，安装后即可使用。
 
-构建只读引用本机程序集，运行检查并生成 `outputs/OldMarket.StackAll-0.2.2.zip`，不会安装。所需本地化源码、资源和测试均位于 `stack-all-mod/localization/`，因此本 Mod 目录可以独立构建。原有功能测试、IL 契约检查和 Mod 自带本地化检查均通过；尚未验证游戏内 UI、正常保存/读取和真实多人联机。首次使用前请备份重要存档。
+## 和朋友一起玩
 
-## 许可与引用
+**房主和所有玩家都需要安装相同版本的 Stack All。**加入房间前请互相确认，Mod 不会自动检查版本。尽量不要同时使用其他修改库存堆叠的 Mod。完整联机和保存重载测试仍未完成。
 
-原创内容采用 [MIT License](LICENSE)，不涵盖游戏及第三方组件。引用完全自愿，不是许可条件：**Old Market Stack All，作者 Zhaohan Liu**，并链接[项目仓库](https://github.com/martin-lzh/old-market-simulator-mods)。
+## 备份与卸载
 
-## Risk notes / 风险提示
+**安装前请备份存档。含额外容器的存档需要 Stack All 0.2.0 或更新的兼容版本，不能在额外容器还留着时直接卸载。**
 
-### English
+如果想卸载，或退回不兼容的旧版：
 
-- Extra container records persist through normal saves and need 0.2.0 or a compatible later plugin. Direct disabling/downgrading may fail loading or lose/miscount items. Unpack to vanilla limits and save first; deleting DLLs does not convert saves. Old 0.1.0 merged containers cannot be reconstructed.
+1. 先保持 Stack All 安装着，把每个商品格的额外容器取出，直到每格最多一个。
+2. 将其他堆叠拆分到游戏原有上限以内。
+3. 正常保存并退出游戏。
+4. 备份整理后的存档，再移除插件 DLL；确认结果前保留原来的备份。
 
-- NetworkList/RPC handling changes: host and every player need the same version; no automatic check exists. Mixed versions may fail joining either way or desynchronize inventory. Matching versions still needs real multiplayer tests.
+旧版 0.1.0 的超量篮子仍算一个篮子，卸载前请先用完内容，或用游戏的 V 转移功能恢复正常容量。删除 DLL 不会撤销已保存的库存变化。
 
-- Holds release whole containers; overflow/shrinking backpacks place objects in the world, possibly out of convenient reach. Weighted/truncated cost/freshness merges cannot restore original batches. Test consumption, placement and reload on a copy.
+更新到兼容版本时，也请退出游戏，备份存档和旧 DLL 后再替换插件，保留加载器及其他插件。
 
-- Larger records increase processing/network/save load; repeated drops spawn objects. Inventory Mods may conflict. Unreviewed assemblies/patches are rejected: do not load an extended save in vanilla after an update disables the plugin; restore compatible files or a backup.
 
-### 中文
-
-- 额外容器记录由正常存档保留，需要 0.2.0 或后续兼容插件；直接停用/降级可能读档失败、丢物或计数错误。先拆回原版上限并保存，删 DLL 不会转换存档；0.1.0 已合并容器无法重建。
-
-- 修改 NetworkList/RPC 处理，房主及全员须同版本且无自动检查；混版可能双方无法加入或库存不同步。同版本仍需实测。
-
-- 长按释放完整容器，溢出/背包缩容将物品放回世界，可能不便拾取。成本/保鲜加权截断不能还原原始批次；先在副本测试消耗、放置及重载。
-
-- 扩展记录增加处理/网络/存档负担，连续丢弃生成物体，库存 Mod 可能冲突。未核对程序集/接口会拒绝启用；更新后若失效，不用原版读取扩展存档，应恢复兼容环境或备份。
-
-## SDK and automated builds / SDK 与自动构建
-
-This Mod pins its compilation SDK in [release.json](release.json). Current baseline: game 2.1.6 / SDK r1. Run `python tools/ci.py build` from the repository root for a game-free build. See [SDK maintenance](../sdk/README.md) and [CI releases](../releases/README.md). Compilation does not replace in-game compatibility checks.
-
-本 Mod 在 [release.json](release.json) 固定编译 SDK，当前基线为游戏 2.1.6 / SDK r1。从仓库根目录运行 `python tools/ci.py build` 可无游戏文件构建。见 [SDK 维护](../sdk/README.md)和 [CI 发布](../releases/README.md)；编译不能代替实机兼容验证。
+[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [许可证](LICENSE)

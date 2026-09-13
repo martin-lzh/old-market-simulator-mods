@@ -45,9 +45,11 @@ dotnet --list-runtimes
 uv --version
 ```
 
-无游戏的完整编译可使用 [版本化 SDK](sdk/README.md)：运行 `python tools/ci.py build`，需要 Python 3.12 及 .NET 8/10 SDK。实机契约验证及 SDK 更新仍需自行准备合法取得的游戏安装和对应加载器引用。当前支持基线、程序集哈希和各加载器版本见总 README。仓库不提供游戏程序集；克隆后看不到根目录反编译快照或本地证据文件是正常情况。缺少依赖时不要从其他 Issue 下载不明 DLL，也不要绕过哈希或接口检查。
+无游戏的完整编译可使用 [版本化 SDK](sdk/README.md)：运行 `python tools/ci.py build`，需要 Python 3.12 及 .NET 8/10 SDK。实机契约验证及 SDK 更新仍需自行准备合法取得的游戏安装和对应加载器引用。当前支持基线、程序集哈希和各加载器版本见 [开发说明](DEVELOPMENT.md)。仓库不提供游戏程序集；克隆后看不到根目录反编译快照或本地证据文件是正常情况。缺少依赖时不要从其他 Issue 下载不明 DLL，也不要绕过哈希或接口检查。
 
 多数 Mod 默认从 `GameDir/BepInEx/core` 读取已有加载器引用；成本 Mod 的构建脚本可下载固定版本的官方加载器依赖到项目 `work/`，并校验哈希。构建不启动或安装游戏。
+
+各 Mod 的构建命令与测试资料集中在 [开发说明](DEVELOPMENT.md)，README 面向玩家，只介绍功能、安装、操作、设置及必要的兼容与回退事项。
 
 ### 构建与验证
 
@@ -142,7 +144,7 @@ dotnet --list-runtimes
 uv --version
 ```
 
-For game-free compilation, use the [versioned SDK](sdk/README.md) and `python tools/ci.py build` with Python 3.12 and .NET 8/10 SDKs. Real game contract validation and SDK updates still require a legally obtained game installation and appropriate loader references. The main README lists the game baseline, assembly hash, and loader versions. Game assemblies are not included: missing root-level decompiled snapshots and local evidence after cloning are expected. Do not obtain unknown DLLs from Issues or bypass hash/interface checks to resolve missing dependencies.
+For game-free compilation, use the [versioned SDK](sdk/README.md) and `python tools/ci.py build` with Python 3.12 and .NET 8/10 SDKs. Real game contract validation and SDK updates still require a legally obtained game installation and appropriate loader references. The [development guide](DEVELOPMENT.md) lists the game baseline, assembly hash, and loader versions. Game assemblies are not included: missing root-level decompiled snapshots and local evidence after cloning are expected. Do not obtain unknown DLLs from Issues or bypass hash/interface checks to resolve missing dependencies.
 
 Most Mods read existing loader references from `GameDir/BepInEx/core`. Material Cost's build script can download pinned official loader dependencies into `work/` and verify their hashes. Builds do not launch or install the game.
 
@@ -219,3 +221,5 @@ For game-free builds, run `python tools/ci.py build` with Python 3.12 and .NET 8
 ### Label classification
 
 Choose `mod:` and `area:` labels for the actual scope, alongside bug, enhancement or documentation. Use `status:` for outstanding conditions and remove it when resolved. Record in-game tests by Mod and scenario separately from automated checks. See the [repository labels](https://github.com/martin-lzh/old-market-simulator-mods/labels).
+
+Player-facing Mod READMEs cover features, installation, controls, settings and practical compatibility/rollback guidance. Keep build commands, SDK details and test evidence in the linked [development notes](DEVELOPMENT.md).
