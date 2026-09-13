@@ -2,6 +2,13 @@
 
 ## English
 
+### 0.1.3 — 2026-09-13
+
+- Replace the compass's missing-font arrow with a generated triangle, add scrolling 5/15/45-degree ticks, and separate direction labels from the heading readout.
+- Fix narrow inherited prefab layout turning minimap zoom descriptions into vertical text; use an explicitly sized horizontal native-style keycap row.
+- Skip null entries in keyboard.allKeys: the installed 0.1.2 DLL and Unity log identify a per-frame null reference before the M-key handler. Check actual input-field focus and log blocked map presses, preserving native modal/loading protections and Escape restoration.
+- Follow up on user-provided 0.1.2 screenshots; the repaired build still requires in-game visual and M-key acceptance.
+
 ### 0.1.2 — 2026-09-13
 
 - Add main-row minus/equals minimap zoom shortcuts with bounded range steps; ignore typing, native menus, the large map and hidden minimaps. Numpad add/remove bindings remain separate.
@@ -34,6 +41,13 @@ Experimental initial build; not installed or verified in game.
 - Supply coordinate, persistence and localization checks. In-game appearance, input, performance and multiplayer testing remain outstanding.
 
 ## 中文
+
+### 0.1.3 — 2026-09-13
+
+- 罗盘缺字箭头改为程序三角图形，新增随视角移动的 5/15/45 度刻度，将方位文字与角度读数分行排列。
+- 修复继承原生预制体窄布局导致缩放说明竖排的问题，改为明确尺寸的横向原生风格键帽行。
+- 跳过 keyboard.allKeys 中的空项：已安装 0.1.2 DLL 与 Unity 日志对应确认，每帧空引用导致 M 键处理前中断。改用输入框实际焦点判断，记录按键拦截原因，保留原生窗口、加载保护与 Esc 恢复逻辑。
+- 根据用户提供的 0.1.2 实机截图修复；新版仍需验证游戏内布局及 M 键操作。
 
 ### 0.1.2 — 2026-09-13
 

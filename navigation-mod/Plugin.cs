@@ -14,7 +14,7 @@ using UnityEngine.UI;
 
 namespace OldMarket.Navigation
 {
-    [BepInPlugin("local.oldmarket.navigation", "Old Market Navigation", "0.1.2")]
+    [BepInPlugin("local.oldmarket.navigation", "Old Market Navigation", "0.1.3")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {
@@ -64,7 +64,7 @@ namespace OldMarket.Navigation
             layout = new LayoutHotReload(Path.Combine(settings,"layout.json"), message=>Logger.LogWarning(message));
             gameObject.hideFlags |= HideFlags.HideAndDontSave;
             DontDestroyOnLoad(gameObject);
-            Logger.LogInfo("Navigation 0.1.2 loaded. Map texture is optional; no scene cameras or additional regions are created.");
+            Logger.LogInfo("Navigation 0.1.3 loaded. Map texture is optional; no scene cameras or additional regions are created.");
         }
 
         private void CreateUi()
@@ -88,16 +88,22 @@ namespace OldMarket.Navigation
             RestoreEscapeActions(false);
             if (window == null) return;
             if (layout.Poll(Time.unscaledTime)) { hud.ApplyLayout(layout.Current); window.ApplyLayout(layout.Current); }
-            if (window.IsOpen && (!state.Available || NativePanelOpen())) CloseMap();
+            if (window.IsOpen && (!state.Available || NativePanelOpen()))
+            {
+                Logger.LogInfo("Map closed: " + (!state.Available ? "local player unavailable" : NativePanelBlockReason()));
+                CloseMap();
+            }
             var keyboard = Keyboard.current;
             if (keyboard == null) return;
-            if (window.IsOpen && keyboard.escapeKey.wasPressedThisFrame) { CloseMap(); return; }
+            if (window.IsOpen && keyboard.escapeKey != null && keyboard.escapeKey.wasPressedThisFrame) { CloseMap(); return; }
             if(state.Available && minimap.Value && !window.IsOpen && !Typing() && !NativePanelOpen()
                 && InputManager.Instance!=null && InputManager.Instance.inputMaster.Player.enabled)
             {
                 bool zoomIn=false,zoomOut=false;
                 foreach(var key in keyboard.allKeys)
                 {
+                    // Some keyboard layouts expose empty control slots in allKeys.
+                    if (key == null) continue;
                     if(key.keyCode==Key.Equals && key.wasPressedThisFrame)zoomIn=true;
                     if(key.keyCode==Key.Minus && key.wasPressedThisFrame)zoomOut=true;
                 }
@@ -105,11 +111,17 @@ namespace OldMarket.Navigation
             }
             bool pressed = false;
             foreach (var key in keyboard.allKeys)
-                if (key.keyCode == mapKey.Value && key.wasPressedThisFrame) { pressed = true; break; }
-            if (!pressed || Typing()) return;
+                if (key != null && mapKey.Value != Key.None && key.keyCode == mapKey.Value && key.wasPressedThisFrame) { pressed = true; break; }
+            if (!pressed) return;
+            if (Typing()) { Logger.LogInfo("Map key ignored: text input focused."); return; }
             if (window.IsOpen) CloseMap();
-            else if (state.Available && player != null && !NativePanelOpen() && InputManager.Instance != null && InputManager.Instance.inputMaster.Player.enabled)
+            else
             {
+                string blocked = !state.Available || player == null ? "local player unavailable"
+                    : NativePanelBlockReason();
+                if (blocked == null && InputManager.Instance == null) blocked = "input manager unavailable";
+                if (blocked == null && !InputManager.Instance.inputMaster.Player.enabled) blocked = "native player controls disabled";
+                if (blocked != null) { Logger.LogInfo("Map key ignored: " + blocked + "."); return; }
                 previousPlayerEnabled = InputManager.Instance.inputMaster.Player.enabled;
                 inputPlayer=player;
                 inputManager=InputManager.Instance;
@@ -119,17 +131,31 @@ namespace OldMarket.Navigation
                 SuppressEscapeActions();
                 player.DisablePlayerControl(true);
                 window.Toggle();
+                Logger.LogInfo("Map opened by configured key.");
             }
         }
 
-        private bool NativePanelOpen() => (UIManager.Instance != null && UIManager.Instance.IsAnyPanelActive())
-            || (SceneSettings.Instance!=null && ((SceneSettings.Instance.panelLoading!=null && SceneSettings.Instance.panelLoading.activeInHierarchy)
-                || (SceneSettings.Instance.panelMultiplayerLoading!=null && SceneSettings.Instance.panelMultiplayerLoading.activeInHierarchy)))
-            || (player != null && player.overlayRegionLoading != null && player.overlayRegionLoading.activeInHierarchy);
+        private bool NativePanelOpen() => NativePanelBlockReason() != null;
+        private string NativePanelBlockReason()
+        {
+            if (UIManager.Instance != null && UIManager.Instance.IsAnyPanelActive()) return "native modal panel active";
+            if (SceneSettings.Instance != null)
+            {
+                if (SceneSettings.Instance.panelLoading != null && SceneSettings.Instance.panelLoading.activeInHierarchy) return "scene loading panel active";
+                if (SceneSettings.Instance.panelMultiplayerLoading != null && SceneSettings.Instance.panelMultiplayerLoading.activeInHierarchy) return "multiplayer loading panel active";
+            }
+            if (player != null && player.overlayRegionLoading != null && player.overlayRegionLoading.activeInHierarchy) return "player region overlay active";
+            return null;
+        }
         private static bool Typing()
         {
             var selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
-            return selected != null && selected.activeInHierarchy && (selected.GetComponentInParent<TMP_InputField>() != null || selected.GetComponentInParent<InputField>() != null);
+            if (selected == null || !selected.activeInHierarchy) return false;
+            // EventSystem selection can outlive editing after a field loses input focus.
+            // Only an actually focused field owns typed hotkeys, not a stale selection.
+            var tmp = selected.GetComponentInParent<TMP_InputField>();
+            var legacy = selected.GetComponentInParent<InputField>();
+            return (tmp != null && tmp.isFocused) || (legacy != null && legacy.isFocused);
         }
 
         private void CloseMap()
@@ -169,7 +195,7 @@ namespace OldMarket.Navigation
         {
             if (suppressedSettings == null && suppressedClose == null) return;
             if (!immediate && (restoreEscapeAfterFrame < 0 || Time.frameCount <= restoreEscapeAfterFrame
-                || (Keyboard.current != null && Keyboard.current.escapeKey.isPressed))) return;
+                || (Keyboard.current != null && Keyboard.current.escapeKey != null && Keyboard.current.escapeKey.isPressed))) return;
             // A replacement scene's InputManager owns its own actions. Never enable those by accident.
             if (escapeInputManager != null && InputManager.Instance == escapeInputManager)
             {

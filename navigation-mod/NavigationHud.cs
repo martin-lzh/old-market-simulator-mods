@@ -17,6 +17,7 @@ namespace OldMarket.Navigation
         private readonly TextMeshProUGUI playerArrow, north, mode, location, targetText, compassTarget, center, noMap, worldTargetText, worldTargetDiamond;
         private RectTransform ringArt;
         private readonly List<TextMeshProUGUI> cardinals = new List<TextMeshProUGUI>();
+        private readonly List<Image> ticks = new List<Image>();
         private readonly List<TextMeshProUGUI> marks = new List<TextMeshProUGUI>();
         private readonly List<TextMeshProUGUI> labels = new List<TextMeshProUGUI>();
         private readonly List<UnityEngine.Object> owned = new List<UnityEngine.Object>();
@@ -60,7 +61,17 @@ namespace OldMarket.Navigation
             }
             compass = Rect("Compass", root, new Vector2(.5f,1), new Vector2(520,70)); compass.pivot=new Vector2(.5f,1);
             var shade = compass.gameObject.AddComponent<Image>(); shade.color = new Color(.07f,.1f,.12f,.62f); shade.raycastTarget=false;
+            for(int i=0;i<72;i++)
+            {
+                float height=i%9==0?12:i%3==0?8:4;
+                var tick=Rect("Tick"+i,compass,new Vector2(.5f,.5f),new Vector2(i%9==0?2:1,height));
+                tick.pivot=new Vector2(.5f,0);
+                var ink=tick.gameObject.AddComponent<Image>();ink.color=Gold;ink.raycastTarget=false;ticks.Add(ink);
+            }
             for (int i=0; i<8; i++) cardinals.Add(Text("Bearing"+i,compass,21));
+            var pointer=Rect("HeadingPointer",compass,new Vector2(.5f,.5f),new Vector2(12,8));
+            pointer.anchoredPosition=new Vector2(0,-9);
+            var pointerImage=pointer.gameObject.AddComponent<Image>();pointerImage.sprite=TriangleSprite();pointerImage.color=Gold;pointerImage.raycastTarget=false;
             center = Text("Heading",compass,16); center.rectTransform.anchoredPosition = new Vector2(0,-24);
             compassTarget = Text("TargetBearing",compass,22); compassTarget.text="◆";
             location = Text("Coordinates",compass,18); location.rectTransform.anchoredPosition=new Vector2(0,-62); location.rectTransform.sizeDelta=new Vector2(550,28);
@@ -113,14 +124,28 @@ namespace OldMarket.Navigation
             compass.gameObject.SetActive(CompassVisible);
             location.gameObject.SetActive(CoordinatesVisible);
             location.text=string.Format(CultureInfo.CurrentCulture,"X {0:F1}   Y {1:F1}   Z {2:F1}",state.PlayerPosition.x,state.PlayerPosition.y,state.PlayerPosition.z);
+            for(int i=0;i<ticks.Count;i++)
+            {
+                float delta=Mathf.DeltaAngle(state.CameraYaw,i*5);
+                float x=delta/170*layout.CompassWidth;
+                float edge=layout.CompassWidth/2-Mathf.Abs(x);
+                ticks[i].gameObject.SetActive(edge>=2);
+                ticks[i].rectTransform.anchoredPosition=new Vector2(x,-5);
+                ticks[i].color=new Color(Gold.r,Gold.g,Gold.b,Mathf.Clamp01((edge-2)/20));
+            }
             for(int i=0;i<8;i++)
             {
                 float delta=Mathf.DeltaAngle(state.CameraYaw,i*45);
-                cardinals[i].gameObject.SetActive(Mathf.Abs(delta)<85);
+                float x=delta/170*layout.CompassWidth;
+                // Keep the whole label inside the strip instead of allowing edge glyphs to spill out.
+                float labelWidth=Mathf.Min(100,layout.CompassWidth/3);
+                cardinals[i].gameObject.SetActive(Mathf.Abs(x)<=layout.CompassWidth/2-labelWidth/2-8);
                 cardinals[i].text=Texts.Get(state.Locale,Directions[i]);
-                cardinals[i].rectTransform.anchoredPosition=new Vector2(delta/170*layout.CompassWidth,9);
+                cardinals[i].rectTransform.sizeDelta=new Vector2(labelWidth,28);
+                cardinals[i].enableAutoSizing=true;cardinals[i].fontSizeMin=12;cardinals[i].fontSizeMax=21;
+                cardinals[i].rectTransform.anchoredPosition=new Vector2(x,21);
             }
-            center.text="▾  "+Mathf.RoundToInt(Mathf.Repeat(state.CameraYaw,360))+"°";
+            center.text=(Mathf.RoundToInt(Mathf.Repeat(state.CameraYaw,360))%360)+"°";
             float rotation=state.RotateWithCamera?state.CameraYaw:0;
             content.localRotation=Quaternion.Euler(0,0,rotation);
             playerArrow.rectTransform.localRotation=Quaternion.Euler(0,0,state.RotateWithCamera?0:-state.CameraYaw);
@@ -214,6 +239,19 @@ namespace OldMarket.Navigation
         {
             const int size=128;var texture=new Texture2D(size,size,TextureFormat.RGBA32,false);var pixels=new Color32[size*size];
             for(int y=0;y<size;y++)for(int x=0;x<size;x++) { float d=Vector2.Distance(new Vector2(x+.5f,y+.5f),new Vector2(size/2f,size/2f)); pixels[y*size+x]=new Color(1,1,1,Mathf.Clamp01(size/2f-d)); }
+            texture.SetPixels32(pixels);texture.Apply(false,true);owned.Add(texture);
+            var sprite=Sprite.Create(texture,new Rect(0,0,size,size),new Vector2(.5f,.5f));owned.Add(sprite);return sprite;
+        }
+        private Sprite TriangleSprite()
+        {
+            const int size=32;var texture=new Texture2D(size,size,TextureFormat.RGBA32,false);var pixels=new Color32[size*size];
+            // Downward pointer is geometry, so native fonts need no triangle glyph.
+            for(int y=0;y<size;y++)for(int x=0;x<size;x++)
+            {
+                float halfWidth=(y+.5f)/2;
+                float alpha=Mathf.Clamp01(halfWidth-Mathf.Abs(x+.5f-size/2f));
+                pixels[y*size+x]=new Color(1,1,1,alpha);
+            }
             texture.SetPixels32(pixels);texture.Apply(false,true);owned.Add(texture);
             var sprite=Sprite.Create(texture,new Rect(0,0,size,size),new Vector2(.5f,.5f));owned.Add(sprite);return sprite;
         }

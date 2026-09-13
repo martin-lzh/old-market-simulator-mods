@@ -9,6 +9,9 @@ using var game = AssemblyDefinition.ReadAssembly(gamePath);
 using var plugin = AssemblyDefinition.ReadAssembly(args[1]);
 using var input = AssemblyDefinition.ReadAssembly(Path.Combine(managed, "Unity.InputSystem.dll"));
 using var physics = AssemblyDefinition.ReadAssembly(Path.Combine(managed, "UnityEngine.PhysicsModule.dll"));
+using var core = AssemblyDefinition.ReadAssembly(Path.Combine(managed, "UnityEngine.CoreModule.dll"));
+using var ugui = AssemblyDefinition.ReadAssembly(Path.Combine(managed, "UnityEngine.UI.dll"));
+using var tmp = AssemblyDefinition.ReadAssembly(Path.Combine(managed, "Unity.TextMeshPro.dll"));
 int checks = 0;
 void Check(bool pass, string label) { if (!pass) throw new Exception("Navigation contract: " + label); checks++; }
 IEnumerable<TypeDefinition> Types(TypeDefinition type) { yield return type; foreach (var nested in type.NestedTypes) foreach (var item in Types(nested)) yield return item; }
@@ -58,6 +61,16 @@ foreach(string name in new[]{"prefabControlHintDesc","prefabControlHintSlot"})Pu
 PublicField("ControlSlot","textBinding","TextMeshProUGUI");
 foreach(string name in new[]{"imageBinding","imageBackground"})PublicField("ControlSlot",name,"Image");
 Check(Calls(Method("UIManager","CheckPanelHints"),"Instantiate"),"native key hints use cloneable UI prefabs");
+var gameObject = All(core).Single(x => x.FullName == "UnityEngine.GameObject");
+Check(gameObject.Methods.Any(x => x.Name == "GetComponentInChildren" && x.HasGenericParameters && x.Parameters.Count == 1 && x.Parameters[0].ParameterType.FullName == "System.Boolean"), "inactive native description lookup supports bool overload");
+var fitter = All(ugui).Single(x => x.FullName == "UnityEngine.UI.ContentSizeFitter");
+Check(fitter.BaseType.FullName == "UnityEngine.EventSystems.UIBehaviour", "native content fitter is a disableable UI behaviour");
+var ellipsis = All(tmp).Single(x => x.FullName == "TMPro.TextOverflowModes").Fields.Single(x => x.Name == "Ellipsis");
+Check(Convert.ToInt32(ellipsis.Constant) == 1, "TMP Ellipsis value used by bounded single-line hints");
+foreach (var fieldType in new[] { All(tmp).Single(x => x.FullName == "TMPro.TMP_InputField"), All(ugui).Single(x => x.FullName == "UnityEngine.UI.InputField") })
+    Check(fieldType.Properties.Any(x => x.Name == "isFocused" && x.PropertyType.FullName == "System.Boolean" && x.GetMethod.IsPublic), "actual text-edit focus getter: " + fieldType.FullName);
+var keys = All(input).Single(x => x.FullName == "UnityEngine.InputSystem.Key");
+Check(Convert.ToInt32(keys.Fields.Single(x => x.Name == "M").Constant) == 27, "native M key enum matches compiled default");
 bool UsesField(MethodDefinition method, string type, string name) => method.HasBody && method.Body.Instructions.Any(i => i.Operand is FieldReference f && f.DeclaringType.Name == type && f.Name == name);
 MethodDefinition Coroutine(string name) => Type("UIManager").NestedTypes.Single(t => t.Name.StartsWith("<" + name + ">d__", StringComparison.Ordinal)).Methods.Single(m => m.Name == "MoveNext");
 var notifications = Coroutine("ShowNotificationEnum");
@@ -113,6 +126,32 @@ foreach (var method in pluginMethods)
 var projection = All(plugin).Single(x => x.Name == "WorldTargetProjection").Methods.Single(x => x.Name == "Refresh");
 Check(Calls(projection, "Raycast") && Calls(projection, "WorldToViewportPoint"), "loaded-surface projection API");
 var pluginType = All(plugin).Single(x => x.Name == "Plugin");
+// Regression for the installed 0.1.2 Update crash: Keyboard.allKeys can expose null slots.
+// Check the generated control flow at every KeyControl dereference, including both zoom comparisons.
+int LoadedLocal(Mono.Cecil.Cil.Instruction i) => i.OpCode.Code switch
+{
+    Mono.Cecil.Cil.Code.Ldloc_0 => 0, Mono.Cecil.Cil.Code.Ldloc_1 => 1,
+    Mono.Cecil.Cil.Code.Ldloc_2 => 2, Mono.Cecil.Cil.Code.Ldloc_3 => 3,
+    Mono.Cecil.Cil.Code.Ldloc or Mono.Cecil.Cil.Code.Ldloc_S => ((Mono.Cecil.Cil.VariableDefinition)i.Operand).Index,
+    _ => -1
+};
+var updateInstructions = pluginType.Methods.Single(x => x.Name == "Update").Body.Instructions;
+var keyReads = updateInstructions.Where(i => i.Operand is MethodReference m && m.Name == "get_keyCode" && m.DeclaringType.Name == "KeyControl").ToArray();
+Check(keyReads.Length > 0, "keyboard scan regression covers compiled KeyControl reads");
+foreach (var read in keyReads)
+{
+    int local = LoadedLocal(read.Previous);
+    var guards = updateInstructions.Where(i => i.Offset < read.Offset && i.Previous != null
+        && i.OpCode.Code is Mono.Cecil.Cil.Code.Brfalse or Mono.Cecil.Cil.Code.Brfalse_S
+        && LoadedLocal(i.Previous) == local && i.Operand is Mono.Cecil.Cil.Instruction target && target.Offset > read.Offset).ToArray();
+    bool guarded = local >= 0 && guards.Any(guard =>
+        !updateInstructions.Any(i => i.Offset > guard.Offset && i.Offset < read.Offset
+            && i.Operand is Mono.Cecil.Cil.VariableDefinition v && v.Index == local
+            && i.OpCode.Code is Mono.Cecil.Cil.Code.Stloc or Mono.Cecil.Cil.Code.Stloc_S)
+        && !updateInstructions.Any(i => (i.Offset < guard.Offset || i.Offset > read.Offset)
+            && i.Operand is Mono.Cecil.Cil.Instruction target && target.Offset > guard.Offset && target.Offset <= read.Offset));
+    Check(guarded, "null keyboard slot branches around KeyControl read at IL_" + read.Offset.ToString("x4"));
+}
 Check(Calls(pluginType.Methods.Single(x => x.Name == "SuppressEscapeActions"), "Disable"), "plugin suppresses native escape actions");
 Check(Calls(pluginType.Methods.Single(x => x.Name == "RestoreEscapeActions"), "get_frameCount"), "escape restoration uses frame boundary");
 Check(pluginMethods.Any(x => x.Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "add_OnListChanged")), "plugin subscribes unlock event");
