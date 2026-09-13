@@ -30,7 +30,7 @@ namespace OldMarket.Navigation
         private readonly MiniMapPoiLayer poiLayer;
         private float configuredRange=float.NaN;
         public bool MinimapVisible = true, CompassVisible = true, GuidanceVisible = true, CoordinatesVisible;
-        public float MinimapRange = 100;
+        public float MinimapRange = 75;
         private static readonly Color Gold = new Color(.92f, .79f, .53f, 1);
         private static readonly string[] Directions={"North","NE","East","SE","South","SW","West","NW"};
 

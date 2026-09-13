@@ -62,7 +62,7 @@ Edit `BepInEx/config/OldMarket.Navigation/layout.json` while playing. Changes ar
   "MinimapBottom": 48,
   "MinimapRight": 24,
   "MinimapTop": 150,
-  "MinimapRange": 100,
+  "MinimapRange": 75,
   "CompassWidth": 520,
   "CompassTop": 22,
   "WorldMarkerSize": 28,

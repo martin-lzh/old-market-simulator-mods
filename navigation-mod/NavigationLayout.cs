@@ -11,7 +11,7 @@ namespace OldMarket.Navigation
         public float MinimapBottom = 48;
         public float MinimapRight = 24;
         public float MinimapTop = 150;
-        public float MinimapRange = 100;
+        public float MinimapRange = 75;
         public float CompassWidth = 520;
         public float CompassTop = 22;
         public float WorldMarkerSize = 28;

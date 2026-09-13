@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Start the minimap at a 75-unit radius, one zoom-in step from the previous 100-unit default.
+
 - Hide world and bearing target guidance while native modal/loading panels are open, using the same native panel gate as map input. Closing the panel restores guidance without clearing the selected target.
 
 - Increase source icon outlines to 3 px and minimap POI, personal marker and player canvases to 25 px; adjust circular bounds and label collision spacing. Preserve the approved palette and 25 px large-map icons.
@@ -80,6 +82,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 小地图默认显示半径改为 75 世界单位，相当于原先 100 默认值按一次放大。
 
 - 原生弹窗及加载面板打开时隐藏世界目标与方位目标提示，复用地图输入的原生面板判定；关闭面板后恢复指引，不清除所选目标。
 
