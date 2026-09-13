@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "mod": "navigation",
+  "version": "0.2.0",
+  "sdk": "2.1.6/r7",
+  "prerelease": true,
+  "sourceCommit": "e9c8e967ec560b6dc5e6f14fa0081160c094516c",
+  "inputsSha256": "8c21014087efdca65adc5fd3c367f6f154f305575a04bf65a2e17f652a4f882f",
+  "authorization": "Maintainer explicitly advanced Navigation to 0.2.0 and subsequently confirmed local in-game testing and requested a documentation audit; the renewal covers documentation corrections only, with unchanged gameplay and prerelease scope."
+}
