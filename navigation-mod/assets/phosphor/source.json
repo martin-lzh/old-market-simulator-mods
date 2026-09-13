@@ -1,0 +1,22 @@
+{
+  "project": "https://github.com/phosphor-icons/core",
+  "weight": "fill",
+  "commit": "2b75f3ad12b420c9504ef05df8d2564a28f8500e",
+  "sha256": {
+    "barn.svg": "feeb921724b2cd7156887e409f9d7668580b866eba60258ffd3875965b317672",
+    "bank.svg": "2c223fc8f62ed7df0f45cdfe47808dda2833a01c23402b134684a3de3857b85f",
+    "hammer.svg": "e1f85a791f0c18b239c2f7597dca64b4e8b55975af8c26f5364fab9278a18ec6",
+    "wrench.svg": "a04703c10ffb2adaae16d1e434c76cd013938027d74adc5d80c66ab8eae9c61d",
+    "armchair.svg": "6574e020ec65dd629865953e6d49b9287e57a18e6e769d66ebfd4e78290c99f0",
+    "axe.svg": "ce23e9f81c1b92be1e289c71a68212b47cdb7bb833c2ef8e74405c17694c18cc",
+    "cow.svg": "57564c39e939010fdac49db1f486b0f3e24f3ff1489156703c03e4e6c3ef710e",
+    "plant.svg": "5e01035baffa94fd79f61bc5862623adf2eca12acec37d69ad1ef465e646f12c",
+    "t-shirt.svg": "c28c7d081d1a42d0ea748dc75ddab0b0278096c827a9250a04c12e7d286e7a31",
+    "bed.svg": "5bac7832afd8a5386383f2b47df86f59fbd3a4b2a9f33f3539be7b653ad19429",
+    "boat.svg": "6ba5d06831d41cbdd951feb5e85387a3ad99ebe8afebaf8d58021a9fb886747e",
+    "storefront.svg": "c4f89c48138eb0e7269cd8286bb5774135cd5cfd6ea10c588c8c62591353dd83",
+    "house.svg": "4783cdf0ae5f5ec363df6f77167a41642aac42fe8d73251b9a61232ab43f355d",
+    "map-pin.svg": "0480a057e6ae95fc2176e33564b1ea6d6b6e31e2398bd9e789f7097baf3315df",
+    "LICENSE": "b5b1f1da112d18ea2147decfd48ddc1bf2b5aeb6c265381579340e95b15a2bb2"
+  }
+}

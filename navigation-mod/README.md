@@ -6,7 +6,7 @@ Version **0.1.4 — experimental**. An independent navigation HUD for Old Market
 
 ## Features and controls
 
-Pending local build (Unreleased, version unchanged): the wheel compensates for the active UI module scroll multiplier while keeping fractional input. Optional `Pois` arrays in local map manifests contain `Id`, `Name`, `NameKey`, `Category` (shop/home/dock/other), `X` and `Z`. Up to 256 validated points per map are supported. POI icons stay visible; names open above 1.5x zoom and close below 1.35x or when blocked. Left- or right-click a POI icon or visible label to target it. Personal labels also collapse when space is limited. POIs are companion data, not automatically discovered moving player buildings. Shop origins are representative locations, not verified entrances; a home-shaped rest icon does not imply player ownership. Old maps without Pois still work. Built-in POIs use distinct Lucide symbols, with color determined by category. Both map views render POIs; minimap icons and labels stay upright in either rotation mode, with labels expanding below about 67 m range where space permits. Select a POI on the large map to use compass guidance. Map-load logs include POI counts; opening the large map logs data, node and visible-node counts for diagnosis. The metadata reader is tested against nested arrays, but in-game visual acceptance is still pending.
+Pending local build (Unreleased, version unchanged): the wheel compensates for the active UI module scroll multiplier while keeping fractional input. Optional `Pois` arrays in local map manifests contain `Id`, `Name`, `NameKey`, `Category` (shop/home/dock/other), `X` and `Z`. Up to 256 validated points per map are supported. POI icons stay visible; names open above 1.5x zoom and close below 1.35x or when blocked. Left- or right-click a POI icon or visible label to target it. Personal labels also collapse when space is limited. POIs are companion data, not automatically discovered moving player buildings. Shop origins are representative locations, not verified entrances; a home-shaped rest icon does not imply player ownership. Old maps without Pois still work. Built-in POIs use distinct Phosphor fill symbols, with color determined by category. Both map views render POIs; minimap icons and labels stay upright in either rotation mode, with labels expanding below about 67 m range where space permits. Select a POI on the large map to use compass guidance. Map-load logs include POI counts; opening the large map logs data, node and visible-node counts for diagnosis. The metadata reader is tested against nested arrays, but in-game visual acceptance is still pending.
 
 POI categories use shop #ad7568, home/rest #829278, dock/order #77929d and other #978190 icons, all with 2 px outlines on the 32 px source texture and transparent backgrounds. The player uses a narrow #c1ccd0 direction arrow at the same canvas size as POIs (22 px minimap, 25 px large map) without a nameplate. Built-in place labels come from the native game localization table; unverified or unavailable labels remain hidden.
 
@@ -17,7 +17,7 @@ Press main-row **-** to zoom the minimap out and **=** to zoom in. The map frame
 - Compass follows camera yaw with 5° short, 15° medium and 45° long ticks, a fixed graphical pointer and a separate degree readout. This mod defines **+Z as north and +X as east**; this is a navigation convention, not a verified native geographic definition.
 - Circular minimap defaults to north up. Switch to camera up in the map window or configuration; the choice persists. Big map always stays north up.
 - Press **M** to open/close the map, or **Esc** / the Close button to close it. Keyboard input inside a marker name does not trigger M. The default matches the game's `UI.Map` default binding, but this version uses its own configurable keyboard key and does not automatically follow game rebinding.
-- Scroll to zoom, drag with the left mouse button to pan, right-click empty mapped terrain to add a marker. Right-click a personal marker icon or its visible name to remove it; left-click either to edit its text, color and icon below the current target in the sidebar. Fixed POIs remain read-only. Up to 512 markers per scope, with names up to 80 characters.
+- Scroll to zoom, drag with the left mouse button to pan, right-click empty mapped terrain to add a marker. Right-click a personal marker icon or its visible name to remove it; left-click either to edit its text, color and icon below the current target in the sidebar. Color, shape and delete actions share one icon row below Set target. Color and shape buttons expand a slot grid below; select a slot to apply and save. Personal marker sprites stay visible without native font symbols. Fixed POIs remain read-only. Up to 512 markers per scope, with names up to 80 characters.
 - The target panel below the compass displays left/right bearing, horizontal distance and the absolute angle from your camera direction. Distance uses X/Z world units displayed as metres. This bearing panel is not an elevation measurement, route or obstacle-aware path.
 - When a loaded non-trigger collision surface is found below the target, a separate diamond and name/distance label use the actual camera projection. The probe runs at most once per second while a target exists and the map is closed; target/scene changes invalidate its cache. No hit, a point behind the camera or a label near screen edges leaves only the bearing panel. There is no line-of-sight/occlusion check: a hit may be a roof or object rather than walkable ground, and the cached height may lag moving surfaces. No unloaded terrain is generated.
 - Opening the map releases the cursor and suppresses character controls. It temporarily suppresses the game's Settings/Close actions to prevent Esc from also opening Pause. It does not pause the world or other players. Native windows/loading take priority.
@@ -126,7 +126,7 @@ Original code, documentation and original UI decorations are provided under [MIT
 
 ### 功能与操作
 
-本地待发布构建（版本号不变）：滚轮按当前 UI 模块的实际倍率归一化，保留小数输入。本地地图 manifest 可选 `Pois` 数组，每项含 `Id`、`Name`、`NameKey`、`Category`（shop/home/dock/other）、`X`、`Z`，每幅图最多 256 个经校验地点。POI 保留语义图标，缩放达到 1.5 倍且空间足够时展开名称，低于 1.35 倍或发生遮挡时收起；左键或右键点击 POI 图标或可见名称可设为导航目标。个人标记的名称也会按空间收起。地点来自本地配套数据，不会自动追踪玩家移动的建筑；店铺原点仅代表地点，不保证是入口，房屋形休息图标不代表玩家所有权。旧地图没有 Pois 时仍正常使用。内置 POI 使用不同 Lucide 图形，同类别同颜色。大小地图均绘制 POI；小地图两种朝向下图标与名称保持正立，范围缩小到约 67 米以下且空间足够时展开名称。在大地图选择 POI 可使用罗盘指引。加载日志记录 POI 数量，打开大地图时记录数据、节点及视野内节点数量，便于定位显示问题。元数据读取已验证嵌套数组，实机视觉效果仍待验收。
+本地待发布构建（版本号不变）：滚轮按当前 UI 模块的实际倍率归一化，保留小数输入。本地地图 manifest 可选 `Pois` 数组，每项含 `Id`、`Name`、`NameKey`、`Category`（shop/home/dock/other）、`X`、`Z`，每幅图最多 256 个经校验地点。POI 保留语义图标，缩放达到 1.5 倍且空间足够时展开名称，低于 1.35 倍或发生遮挡时收起；左键或右键点击 POI 图标或可见名称可设为导航目标。个人标记的名称也会按空间收起。地点来自本地配套数据，不会自动追踪玩家移动的建筑；店铺原点仅代表地点，不保证是入口，房屋形休息图标不代表玩家所有权。旧地图没有 Pois 时仍正常使用。内置 POI 使用不同 Phosphor 实心图形，同类别同颜色。大小地图均绘制 POI；小地图两种朝向下图标与名称保持正立，范围缩小到约 67 米以下且空间足够时展开名称。在大地图选择 POI 可使用罗盘指引。加载日志记录 POI 数量，打开大地图时记录数据、节点及视野内节点数量，便于定位显示问题。元数据读取已验证嵌套数组，实机视觉效果仍待验收。
 
 POI 按类别使用商店 #ad7568、房屋/休息点 #829278、码头/订购点 #77929d 及其他地点 #978190，均有 32 px 源纹理上的 2 px 描边和透明背景。玩家位置使用细长 #c1ccd0 方向箭头，画布尺寸与 POI 一致（小地图 22 px、大地图 25 px），不带名称底板。内置地点标签读取游戏原生本地化表，未核实或暂不可用的文字隐藏。
 
@@ -137,7 +137,7 @@ POI 按类别使用商店 #ad7568、房屋/休息点 #829278、码头/订购点 
 - 约定 **+Z 为北、+X 为东**，并非已确认的原生地理北向。罗盘跟随镜头方向，显示 5° 短刻度、15° 中刻度和 45° 长刻度，使用固定图形指针与独立角度读数。
 - 小地图默认固定正北，可在大地图按钮或配置切换随视角转动并保存选择；大地图始终固定正北。
 - **M** 开关地图，**Esc** 或关闭按钮关图。输入标记名时 M 不触发开关。默认键与游戏 `UI.Map` 默认相同，但当前版本使用独立配置键，不自动跟随游戏改键。
-- 滚轮缩放、左键拖动；空白地图处右键添加个人标记，再次右键其图标或可见名称即可删除。左键其图标或名称后在右栏编辑文字、颜色、图标和目标。固定 POI 不受右键删除影响。每个存储范围最多 512 个标记，名称最多 80 字符。
+- 滚轮缩放、左键拖动；空白地图处右键添加个人标记，再次右键其图标或可见名称即可删除。左键其图标或名称后在右栏编辑文字、颜色、图标和目标。“设为目标”下方的颜色、形状、删除使用一排图标；颜色与形状按钮展开下方格子，点击即应用保存。个人标记使用精灵图标，不依赖原生字体符号。固定 POI 不受右键删除影响。每个存储范围最多 512 个标记，名称最多 80 字符。
 - 罗盘下方目标栏显示左右方向、水平距离及相对镜头的角差。距离按 X/Z 世界单位显示为米；**方位栏本身不提供高度、寻路或绕障路线**。
 - 若从目标上方向下射线命中已加载的非触发碰撞体，另显示实际摄像机投影的菱形、名称和距离。仅有目标且大地图关闭时每秒最多采样一次；目标或场景变化清除缓存。未命中、位于镜头后方或靠近屏幕边缘时，仅保留方位栏。没有视线遮挡判断，命中可能落在屋顶或物体表面，并不保证是可行走地面；移动表面的缓存高度可能有延迟。不生成未加载地形。
 - 开图释放鼠标并抑制角色操作；暂时停用原生 Settings/Close 操作以避免 Esc 同时打开暂停菜单，不暂停整个世界。原生窗口及加载画面优先。
@@ -183,6 +183,6 @@ POI 按类别使用商店 #ad7568、房屋/休息点 #829278、码头/订购点 
 
 原创代码、文档与原创 UI 装饰素材采用 [MIT](LICENSE)，版本记录见 [CHANGELOG](CHANGELOG.md)。许可不覆盖游戏组件、原始资源、派生本地地图、商标或其他 Mod。未打包游戏或第三方运行库。
 
-Lucide POI icons: upstream ISC/MIT notices are included in [LICENSE](LICENSE); sources and regeneration instructions are included alongside the icon assets. No game artwork is included in these icon sources.
+Phosphor POI icons: upstream MIT notices are included in [LICENSE](LICENSE); sources and regeneration instructions are included alongside the icon assets. No game artwork is included in these icon sources.
 
-Lucide POI 图标的上游 ISC/MIT 声明见 [LICENSE](LICENSE)，源文件与重建说明随图标素材保存，不包含游戏美术资源。
+Phosphor POI 图标的上游 MIT 声明见 [LICENSE](LICENSE)，源文件与重建说明随图标素材保存，不包含游戏美术资源。

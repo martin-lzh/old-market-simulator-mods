@@ -36,6 +36,8 @@ namespace OldMarket.Navigation
         private TMP_InputField nameInput;
         private Texture2D frameTexture, paperTexture;
         private Sprite frameSprite;
+        private readonly MarkerSprites markerSprites=new MarkerSprites();
+        private int markerPicker;
         private readonly PoiIconSet playerIcons=new PoiIconSet();
         public bool IsOpen => root!=null && root.gameObject.activeSelf;
         private static readonly Color Gold=new Color(.86f,.71f,.43f,1), Cream=new Color(.94f,.88f,.72f,1);
@@ -114,6 +116,15 @@ namespace OldMarket.Navigation
             r.gameObject.AddComponent<Image>().color=new Color(.58f,.45f,.26f,1);var inset=Fill("ButtonFace",r,1);inset.gameObject.AddComponent<Image>().color=new Color(.20f,.16f,.11f,.98f);inset.GetComponent<Image>().raycastTarget=false;var b=r.gameObject.AddComponent<UnityEngine.UI.Button>();b.onClick.AddListener(()=>action());
             var label=Label(r,key,new Vector2(5,-3),size-new Vector2(10,6),17);label.alignment=TextAlignmentOptions.Center;label.enableAutoSizing=true;label.fontSizeMin=12;label.fontSizeMax=17;label.color=Gold;
             return r;
+        }
+        private RectTransform IconButton(RectTransform parent,Vector2 position,Vector2 size,Sprite sprite,Action action,bool active=false)
+        {
+            var button=Button(parent,"",position,size,action);
+            button.GetComponent<Image>().color=active?Cream:Gold;
+            if(active){var face=(RectTransform)button.Find("ButtonFace");face.offsetMin=new Vector2(3,3);face.offsetMax=new Vector2(-3,-3);}
+            var imageRect=Rect("ActionIcon",button);imageRect.anchorMin=imageRect.anchorMax=imageRect.pivot=new Vector2(.5f,.5f);imageRect.sizeDelta=new Vector2(28,28);
+            var image=imageRect.gameObject.AddComponent<Image>();image.sprite=sprite;image.raycastTarget=false;
+            return button;
         }
         private static void SetButtonSymbol(RectTransform button,string symbol){var label=button.GetComponentInChildren<TMP_Text>();label.text=symbol;label.fontSizeMax=25;}
         public string PoiDiagnostics => "map="+(state.Map?.Id??"none")+"; data="+(state.Map?.Pois.Count??0)+"; large nodes="+poiLayer.NodeCount+"; in view="+poiLayer.InViewCount;
@@ -200,7 +211,7 @@ namespace OldMarket.Navigation
             var world=NavMath.UvToWorld(u,v,state.Map.MinX,state.Map.MaxX,state.Map.MinZ,state.Map.MaxZ);
             var marker=new NavMarker{Name=Texts.Get(state.Locale,"marker")+" "+(state.Markers.Count+1),X=world.X,Z=world.Y};state.Markers.Add(marker);Select(marker.Id);state.SaveMarkers();
         }
-        private void Select(string id){selected=id;RebuildSidebar();}
+        private void Select(string id){if(selected!=id)markerPicker=0;selected=id;RebuildSidebar();}
         private void RemoveMarker(NavMarker marker)
         {
             if(!state.Markers.Remove(marker))return;
@@ -217,7 +228,8 @@ namespace OldMarket.Navigation
             labels.RemoveAll(x=>x.Item1==null);allText.RemoveAll(x=>x==null);lastCount=state.Markers.Count;nameInput=null;targetInfo=null;
             foreach(var marker in state.Markers)
             {
-                var node=Rect(marker.Id,mapRect);node.sizeDelta=new Vector2(36,36);var icon=Label(node,"",new Vector2(0,0),new Vector2(36,36),30);icon.text=MarkerSymbol(marker.Icon);icon.alignment=TextAlignmentOptions.Center;icon.color=MarkerColors[marker.Color];
+                var node=Rect(marker.Id,mapRect);node.anchorMin=node.anchorMax=node.pivot=new Vector2(.5f,.5f);node.sizeDelta=new Vector2(36,36);
+                var iconRect=Rect("MarkerIcon",node);iconRect.anchorMin=iconRect.anchorMax=iconRect.pivot=new Vector2(.5f,.5f);iconRect.sizeDelta=new Vector2(25,25);var icon=iconRect.gameObject.AddComponent<Image>();icon.sprite=markerSprites.Get(marker.Icon,marker.Color);icon.raycastTarget=false;
                 bool emphasized=marker.Id==selected||marker.Id==state.TargetId;
                 // Keep a transparent hit area so right-click works on the icon without a dark square.
                 node.gameObject.AddComponent<Image>().color=new Color(0,0,0,0);
@@ -244,9 +256,22 @@ namespace OldMarket.Navigation
                 string scope=state.ScopeId;nameInput.onEndEdit.AddListener(value=>{if(state.ScopeId==scope&&state.Markers.Contains(chosen)&&!string.IsNullOrWhiteSpace(value)){chosen.Name=value.Trim();state.SaveMarkers();}});
                 y+=43;var coords=Label(sidebarContent,"",new Vector2(0,-y),new Vector2(width,23),14);coords.text=$"X {chosen.X:F1}  Z {chosen.Z:F1}";coords.color=new Color(.71f,.65f,.53f,1);y+=30;
                 Button(sidebarContent,"SetTarget",new Vector2(0,-y),new Vector2(width,34),()=>{state.TargetId=chosen.Id;RebuildSidebar();});y+=43;
-                Button(sidebarContent,"color",new Vector2(0,-y),new Vector2((width-8)/2,32),()=>{chosen.Color=(chosen.Color+1)%4;state.SaveMarkers();RebuildSidebar();});
-                Button(sidebarContent,"icon",new Vector2((width+8)/2,-y),new Vector2((width-8)/2,32),()=>{chosen.Icon=(chosen.Icon+1)%3;state.SaveMarkers();RebuildSidebar();});y+=41;
-                Button(sidebarContent,"delete",new Vector2(0,-y),new Vector2(width,30),()=>RemoveMarker(chosen));y+=43;
+                float cell=(width-16)/3;
+                IconButton(sidebarContent,new Vector2(0,-y),new Vector2(cell,36),markerSprites.Action("color"),()=>{markerPicker=markerPicker==1?0:1;RebuildSidebar();},markerPicker==1);
+                IconButton(sidebarContent,new Vector2(cell+8,-y),new Vector2(cell,36),markerSprites.Action("icon"),()=>{markerPicker=markerPicker==2?0:2;RebuildSidebar();},markerPicker==2);
+                IconButton(sidebarContent,new Vector2(2*(cell+8),-y),new Vector2(cell,36),markerSprites.Action("delete"),()=>RemoveMarker(chosen));y+=44;
+                if(markerPicker!=0)
+                {
+                    Label(sidebarContent,markerPicker==1?"color":"icon",new Vector2(0,-y),new Vector2(width,24),16);y+=28;
+                    int count=markerPicker==1?4:3;float slot=(width-24)/4;
+                    for(int i=0;i<count;i++)
+                    {
+                        int choice=i;bool colorPicker=markerPicker==1;
+                        var sprite=markerSprites.Get(colorPicker?2:i,colorPicker?i:chosen.Color);
+                        IconButton(sidebarContent,new Vector2(i*(slot+8),-y),new Vector2(slot,40),sprite,()=>{if(colorPicker)chosen.Color=choice;else chosen.Icon=choice;state.SaveMarkers();RebuildSidebar();},colorPicker?chosen.Color==i:chosen.Icon==i);
+                    }
+                    y+=48;
+                }
             }
             else{Label(sidebarContent,"SelectMarker",new Vector2(0,-y),new Vector2(width,52),16);y+=66;}
             ApplyMapGeometry();
@@ -263,6 +288,6 @@ namespace OldMarket.Navigation
             help.rectTransform.sizeDelta=new Vector2(root.sizeDelta.x-310,32);status.rectTransform.sizeDelta=new Vector2(root.sizeDelta.x-310,28);
             if(IsOpen)RebuildSidebar();ApplyMapGeometry();
         }
-        public void Dispose(){playerIcons.Dispose();poiLayer.Dispose();if(root!=null)UnityEngine.Object.Destroy(root.gameObject);if(frameSprite!=null)UnityEngine.Object.Destroy(frameSprite);if(frameTexture!=null)UnityEngine.Object.Destroy(frameTexture);if(paperTexture!=null)UnityEngine.Object.Destroy(paperTexture);}
+        public void Dispose(){markerSprites.Dispose();playerIcons.Dispose();poiLayer.Dispose();if(root!=null)UnityEngine.Object.Destroy(root.gameObject);if(frameSprite!=null)UnityEngine.Object.Destroy(frameSprite);if(frameTexture!=null)UnityEngine.Object.Destroy(frameTexture);if(paperTexture!=null)UnityEngine.Object.Destroy(paperTexture);}
     }
 }

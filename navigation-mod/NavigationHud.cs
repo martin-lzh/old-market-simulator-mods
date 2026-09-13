@@ -20,7 +20,8 @@ namespace OldMarket.Navigation
         private RectTransform ringArt;
         private readonly List<TextMeshProUGUI> cardinals = new List<TextMeshProUGUI>();
         private readonly List<Image> ticks = new List<Image>();
-        private readonly List<TextMeshProUGUI> marks = new List<TextMeshProUGUI>();
+        private readonly List<Image> marks = new List<Image>();
+        private readonly MarkerSprites markerSprites=new MarkerSprites();
         private readonly List<TextMeshProUGUI> labels = new List<TextMeshProUGUI>();
         private readonly List<UnityEngine.Object> owned = new List<UnityEngine.Object>();
         private NavigationLayout layout = new NavigationLayout();
@@ -175,9 +176,8 @@ namespace OldMarket.Navigation
             for(int i=0;i<state.Markers.Count;i++)
             {
                 var marker=state.Markers[i];
-                if(i>=marks.Count) marks.Add(Text("Marker"+i,content,18));
-                var mark=marks[i]; mark.gameObject.SetActive(true); mark.text=MapWindow.MarkerSymbol(marker.Icon);
-                mark.color=MapWindow.MarkerColors[Mathf.Clamp(marker.Color,0,MapWindow.MarkerColors.Length-1)];
+                if(i>=marks.Count){var markerRect=Rect("Marker"+i,content,new Vector2(.5f,.5f),new Vector2(22,22));var image=markerRect.gameObject.AddComponent<Image>();image.raycastTarget=false;marks.Add(image);}
+                var mark=marks[i];mark.gameObject.SetActive(true);mark.sprite=markerSprites.Get(marker.Icon,marker.Color);mark.color=Color.white;
                 mark.rectTransform.anchoredPosition=new Vector2((marker.X-state.PlayerPosition.x)*scale,(marker.Z-state.PlayerPosition.z)*scale);
                 mark.rectTransform.localRotation=Quaternion.Euler(0,0,-rotation);
             }
@@ -267,6 +267,6 @@ namespace OldMarket.Navigation
         }
         public void ChangeZoom(bool zoomIn) {MinimapRange=MinimapZoom.Step(MinimapRange,zoomIn);}
         public string PoiDiagnostics => "mini nodes="+poiLayer.NodeCount+"; in view="+poiLayer.InViewCount;
-        public void Dispose() { zoomHint.Dispose();playerIcons.Dispose();poiLayer.Dispose();if(root!=null)UnityEngine.Object.Destroy(root.gameObject);foreach(var item in owned)UnityEngine.Object.Destroy(item); }
+        public void Dispose() { zoomHint.Dispose();markerSprites.Dispose();playerIcons.Dispose();poiLayer.Dispose();if(root!=null)UnityEngine.Object.Destroy(root.gameObject);foreach(var item in owned)UnityEngine.Object.Destroy(item); }
     }
 }

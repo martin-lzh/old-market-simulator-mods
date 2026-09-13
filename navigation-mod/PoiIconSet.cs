@@ -4,30 +4,30 @@ using UnityEngine;
 
 namespace OldMarket.Navigation
 {
-    /// <summary>Lucide semantic place sprites and the original player arrow; no font glyph dependencies.</summary>
+    /// <summary>Phosphor filled semantic place sprites and the original player arrow; no font glyph dependencies.</summary>
     public sealed class PoiIconSet : IDisposable
     {
         private readonly List<UnityEngine.Object> owned=new List<UnityEngine.Object>();
         private readonly Dictionary<string,Sprite> icons=new Dictionary<string,Sprite>();
-        public Sprite Get(string category) => GetIcon(category=="home"?"house":category=="shop"?"store":category=="dock"?"ship":"map-pin",category);
+        public Sprite Get(string category) => GetIcon(category=="home"?"house":category=="shop"?"storefront":category=="dock"?"boat":"map-pin",category);
         public Sprite Get(MapPoi poi)
         {
             if(poi==null)return Get("other");
             string key=poi.NameKey??"", native=MapPoi.NativeKey(key), name;
             if(key=="poi_rest"||native=="rest")name="bed";
-            else if(key=="poi_market"||native=="market")name="store";
+            else if(key=="poi_market"||native=="market")name="storefront";
             else switch(native)
             {
-                case "farm":name="wheat";break;
-                case "museum":name="landmark";break;
+                case "farm":name="barn";break;
+                case "museum":name="bank";break;
                 case "workshop":name="hammer";break;
                 case "engineer":name="wrench";break;
-                case "decoration_store":name="lamp";break;
+                case "decoration_store":name="armchair";break;
                 case "lumberjack":name="axe";break;
-                case "animal_market":name="rabbit";break;
-                case "gardener":name="sprout";break;
-                case "clothing_store":name="shirt";break;
-                case "orders":name="ship";break;
+                case "animal_market":name="cow";break;
+                case "gardener":name="plant";break;
+                case "clothing_store":name="t-shirt";break;
+                case "orders":name="boat";break;
                 default:return Get(poi.Category);
             }
             return GetIcon(name,poi.Category);

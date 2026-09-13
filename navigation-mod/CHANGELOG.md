@@ -4,7 +4,9 @@
 
 ### Unreleased
 
-- Give built-in POIs distinct Lucide symbols while retaining category colors. Left/right-click a POI icon or visible label to set it as the navigation target; large-map gestures continue through POI nodes. Include upstream icon notices in the packaged license.
+- Replace personal marker font symbols with centered sprites in both maps. Keep Set target as text, place color/icon/delete actions in one icon row, and expand explicit color or shape slots below it. Clicking a slot saves immediately and highlights the selection; existing marker IDs and save format remain compatible.
+
+- Give built-in POIs distinct filled Phosphor symbols while retaining category colors. Left/right-click a POI icon or visible label to set it as the navigation target; large-map gestures continue through POI nodes. Include upstream icon notices in the packaged license.
 
 - Apply the selected muted POI palette: shop #ad7568, home #829278, orders #77929d, other #978190 and player #c1ccd0. Use two-pixel source outlines and match player/POI canvas sizes (22 px minimap, 25 px large map).
 
@@ -73,7 +75,9 @@ Experimental initial build; not installed or verified in game.
 
 ### 未发布
 
-- 内置 POI 使用不同 Lucide 图形，同类别保持同颜色。左右键点击 POI 图标或可见名称均可设为导航目标，大地图图标节点继续转发拖动与滚轮；发行包许可包含上游图标声明。
+- 个人标记在两张地图中改用居中精灵图标，避免字体符号被裁切或缺失。保留“设为目标”文字按钮，颜色、图标、删除合并为一排图标操作，下方展开颜色或形状格子；点选立即保存并突出选中项，保持现有标记 ID 与存储格式兼容。
+
+- 内置 POI 使用不同 Phosphor 实心图形，同类别保持同颜色。左右键点击 POI 图标或可见名称均可设为导航目标，大地图图标节点继续转发拖动与滚轮；发行包许可包含上游图标声明。
 
 - 应用选定 POI 配色：商店 #ad7568、房屋 #829278、订购 #77929d、其他 #978190、玩家 #c1ccd0。源纹理描边加至 2 px，玩家与 POI 画布尺寸统一为小地图 22 px、大地图 25 px。
 
