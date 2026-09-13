@@ -4,6 +4,9 @@
 
 ### Unreleased
 
+- Normalize wheel input by the active UI module scale, preserve fractional movement and cancel pending opposite zoom; +/- button behavior is unchanged.
+- Read optional validated local POIs and render semantic shop/home/dock icons. Labels expand with zoom when space permits, avoid overlaps and prioritize the selected target; POIs can be navigation targets without entering personal marker files.
+
 - Keep the map north label above its arrow in a taller, non-ellipsized text box for native CJK font metrics. Existing Mod version and SDK r6 are unchanged.
 
 ### 0.1.4 — 2026-09-13
@@ -57,6 +60,9 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 按当前 UI 模块系数还原滚轮输入，保留小数滚动并取消反方向的剩余缩放；加减按钮行为不变。
+- 读取经校验的本地 POI，绘制商店、房屋、码头等语义图标；放大且空间足够时展开名称，避让重叠并优先显示目标。POI 可设为导航目标，不写入个人标记文件。
 
 - 调整大地图北向标识的文字区域高度，禁用省略裁切，在箭头上方显示“北”等本地化方位文字，兼容原生中文字体行高。保持现有 Mod 版本和 SDK r6。
 

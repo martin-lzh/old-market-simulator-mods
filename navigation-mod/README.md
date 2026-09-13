@@ -6,6 +6,8 @@ Version **0.1.4 — experimental**. An independent navigation HUD for Old Market
 
 ## Features and controls
 
+Pending local build (Unreleased, version unchanged): the wheel compensates for the active UI module scroll multiplier while keeping fractional input. Optional `Pois` arrays in local map manifests contain `Id`, `Name`, `NameKey`, `Category` (shop/home/dock/other), `X` and `Z`. Up to 256 validated points per map are supported. POI icons stay visible; names open above 1.5x zoom and close below 1.35x or when blocked. Click an icon or label to target it. Personal labels also collapse when space is limited. POIs are companion data, not automatically discovered moving player buildings. Shop origins are representative locations, not verified entrances; a home-shaped rest icon does not imply player ownership. Old maps without Pois still work.
+
 The map window uses a dark brown frame with gold borders, a map viewport and a separate marker sidebar. The sidebar lists your saved markers and shows the current target. Wheel zoom and the on-map +/- buttons transition smoothly; wheel zoom follows the pointer where map boundaries allow. The map covers its viewport and panning stops at its edges. Map geography still comes from the same local companion files.
 
 Press main-row **-** to zoom the minimap out and **=** to zoom in. The map frame stays the same size. Its native-style key hint sits above the map and participates in HUD avoidance. Typing, native menus, the large map and hidden minimaps suppress these shortcuts; numpad +/- are unchanged. Range steps are 20–1000 world units. Shortcut zoom lasts for this session; editing MinimapRange resets it, while moving/resizing the HUD preserves it.
@@ -121,6 +123,8 @@ Original code, documentation and UI decorations are provided under [MIT](LICENSE
 已提供构建及自动检查。0.1.2 已在本机安装，用户截图暴露了布局缺陷和 M 键失效；**本次修复仍需游戏内视觉、输入恢复、性能及联机验收**。公开包不含游戏派生地图。没有本地地图配套文件时仍可显示罗盘和可选 XYZ，地图提示无数据，不能在地图上新增标记。
 
 ### 功能与操作
+
+本地待发布构建（版本号不变）：滚轮按当前 UI 模块的实际倍率归一化，保留小数输入。本地地图 manifest 可选 `Pois` 数组，每项含 `Id`、`Name`、`NameKey`、`Category`（shop/home/dock/other）、`X`、`Z`，每幅图最多 256 个经校验地点。POI 保留语义图标，缩放达到 1.5 倍且空间足够时展开名称，低于 1.35 倍或发生遮挡时收起；点击图标或名称可设为目标。个人标记的名称也会按空间收起。地点来自本地配套数据，不会自动追踪玩家移动的建筑；店铺原点仅代表地点，不保证是入口，房屋形休息图标不代表玩家所有权。旧地图没有 Pois 时仍正常使用。
 
 地图窗口采用深棕金边外框、地图主区与独立标记侧栏。右侧列出现有个人标记及当前目标；滚轮与地图内加减按钮平滑缩放，边界允许时以鼠标位置为中心。地图铺满视口，拖动限制在地图边缘。地图地形继续使用原有本地配套文件。
 

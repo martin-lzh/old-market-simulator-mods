@@ -175,4 +175,18 @@ foreach (string name in new[] { "Apply", "Restore" })
     Check(Calls(anchorEntry.Methods.Single(x => x.Name == name), "CheckOwnership"), "HUD anchor ownership is checked before " + name);
 var ownership = anchorEntry.Methods.Single(x => x.Name == "CheckOwnership");
 Check(Calls(ownership, "get_anchorMin") && Calls(ownership, "get_anchorMax") && UsesField(ownership, "Entry", "Conflicted"), "HUD reflow detects another writer and relinquishes anchors");
+var inputUi = All(input).Single(x => x.FullName == "UnityEngine.InputSystem.UI.InputSystemUIInputModule");
+var wheelCallback = inputUi.Methods.Single(x => x.Name == "OnScrollCallback");
+Check(Calls(wheelCallback,"get_scrollDeltaPerTick") && wheelCallback.Body.Instructions.Any(i=>i.OpCode.Code==Mono.Cecil.Cil.Code.Call && i.Operand is MethodReference m && m.Name=="op_Multiply" && m.DeclaringType.FullName=="UnityEngine.Vector2"), "native UI wheel callback applies scrollDeltaPerTick multiplier");
+var scrollScale=inputUi.Properties.Single(x=>x.Name=="scrollDeltaPerTick");
+Check(scrollScale.GetMethod.IsPublic && scrollScale.PropertyType.FullName=="System.Single", "native UI wheel scale is readable float");
+var inputSettings=All(input).Single(x=>x.FullName=="UnityEngine.InputSystem.InputSettings");
+Check(inputSettings.Properties.Single(x=>x.Name=="scrollDeltaBehavior").GetMethod.IsPublic,"actual input scroll range can be read");
+var rangeEnum=inputSettings.NestedTypes.Single(x=>x.Name=="ScrollDeltaBehavior");
+Check(Convert.ToInt32(rangeEnum.Fields.Single(x=>x.Name=="UniformAcrossAllPlatforms").Constant)==0 && Convert.ToInt32(rangeEnum.Fields.Single(x=>x.Name=="KeepPlatformSpecificInputRange").Constant)==1,"verified uniform and platform scroll range enum values");
+var baseEvent=All(ugui).Single(x=>x.FullName=="UnityEngine.EventSystems.BaseEventData");
+Check(baseEvent.Properties.Single(x=>x.Name=="currentInputModule").GetMethod.IsPublic,"event identifies its actual input module");
+var mapWindow=All(plugin).Single(x=>x.Name=="MapWindow");
+var wheelZoom=mapWindow.Methods.Single(x=>x.Name=="WheelZoom");
+Check(Calls(wheelZoom,"get_currentInputModule") && Calls(wheelZoom,"get_scrollDeltaPerTick") && Calls(wheelZoom,"Factor"),"map wheel normalizes the emitting UI module scale");
 Console.WriteLine($"Passed {checks} Navigation installed-assembly contract checks; metadata/IL only, no Unity execution.");

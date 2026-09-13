@@ -6,6 +6,18 @@ namespace OldMarket.Navigation
     {
         private static readonly string[] Languages={"en","zh","zh-Hant","de","fr","it","ja","ko","pt","ru","es","tr","uk"};
         private static readonly Dictionary<string,string[]> Values=new Dictionary<string,string[]> {
+            ["poi_engineer"]=new[]{"Engineer","工程师","工程師","Ingenieur","Ingénieur","Ingegnere","技師","기술자","Engenheiro","Инженер","Ingeniero","Mühendis","Інженер"},
+            ["poi_decorations"]=new[]{"Decorations","装饰品店","裝飾品店","Dekorationen","Décorations","Decorazioni","装飾品店","장식품점","Decorações","Декорации","Decoraciones","Dekorasyon","Декорації"},
+            ["poi_carpenter"]=new[]{"Carpenter","木匠","木匠","Tischler","Menuisier","Falegname","大工","목수","Carpinteiro","Плотник","Carpintero","Marangoz","Тесля"},
+            ["poi_animals"]=new[]{"Animal market","动物市场","動物市場","Tiermarkt","Marché aux animaux","Mercato degli animali","動物市場","동물 시장","Mercado de animais","Рынок животных","Mercado de animales","Hayvan pazarı","Ринок тварин"},
+            ["poi_garden"]=new[]{"Garden supplies","园艺用品店","園藝用品店","Gartenbedarf","Jardinerie","Articoli da giardino","園芸用品店","원예용품점","Artigos de jardim","Садовые товары","Artículos de jardín","Bahçe malzemeleri","Садові товари"},
+            ["poi_clothing"]=new[]{"Clothing store","服装店","服裝店","Bekleidung","Vêtements","Abbigliamento","衣料品店","옷가게","Roupas","Одежда","Ropa","Giyim mağazası","Одяг"},
+            ["poi_rest"]=new[]{"Rest point","休息点","休息點","Ruheplatz","Lieu de repos","Punto di riposo","休憩所","휴식 지점","Local de descanso","Место отдыха","Lugar de descanso","Dinlenme noktası","Місце відпочинку"},
+            ["poi_orders"]=new[]{"Orders","订购处","訂購處","Bestellungen","Commandes","Ordini","注文所","주문소","Encomendas","Заказы","Pedidos","Siparişler","Замовлення"},
+            ["poi_market"]=new[]{"Market","市场","市場","Markt","Marché","Mercato","市場","시장","Mercado","Рынок","Mercado","Pazar","Ринок"},
+            ["poi_workshop"]=new[]{"Workshop","工坊","工坊","Werkstatt","Atelier","Officina","工房","작업장","Oficina","Мастерская","Taller","Atölye","Майстерня"},
+            ["poi_farm"]=new[]{"Farm","农场","農場","Bauernhof","Ferme","Fattoria","農場","농장","Fazenda","Ферма","Granja","Çiftlik","Ферма"},
+            ["poi_museum"]=new[]{"Museum","博物馆","博物館","Museum","Musée","Museo","博物館","박물관","Museu","Музей","Museo","Müze","Музей"},
             ["Markers"]=new[]{"Markers","标记列表","標記列表","Markierungen","Repères","Segnaposti","マーカー","마커 목록","Marcadores","Метки","Marcadores","İşaretler","Мітки"},
             ["NoMarkers"]=new[]{"No markers yet","暂无标记","尚無標記","Noch keine Markierungen","Aucun repère","Nessun segnaposto","マーカーはありません","아직 마커가 없습니다","Nenhum marcador","Пока нет меток","Sin marcadores","Henüz işaret yok","Міток поки немає"},
             ["SelectMarker"]=new[]{"Select a marker to edit","选择标记以编辑","選擇標記以編輯","Markierung zum Bearbeiten wählen","Sélectionnez un repère à modifier","Seleziona un segnaposto da modificare","編集するマーカーを選択","편집할 마커를 선택하세요","Selecione um marcador para editar","Выберите метку для изменения","Selecciona un marcador para editar","Düzenlemek için işaret seçin","Виберіть мітку для редагування"},

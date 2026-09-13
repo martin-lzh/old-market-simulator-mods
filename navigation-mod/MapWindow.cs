@@ -18,10 +18,13 @@ namespace OldMarket.Navigation
         private readonly NavigationState state;
         private readonly RectTransform root, viewport, mapRect, player, playerNamePlate, sidebar, sidebarContent;
         private readonly RawImage mapImage, mapOverlay;
+        private readonly MapPoiLayer poiLayer;
         private readonly TMP_Text title, help, status, north;
         private TMP_Text rotationLabel, targetInfo;
         private readonly List<Tuple<NavMarker,RectTransform>> markerNodes=new List<Tuple<NavMarker,RectTransform>>();
         private readonly List<Tuple<NavMarker,TMP_Text,string>> markerNames=new List<Tuple<NavMarker,TMP_Text,string>>();
+        private readonly List<HudBox> visibleMarkerLabels=new List<HudBox>();
+        private bool detailedMarkerLabels;
         private readonly List<Tuple<TMP_Text,string>> labels=new List<Tuple<TMP_Text,string>>();
         private readonly List<TMP_Text> allText=new List<TMP_Text>();
         private NavigationLayout appliedLayout=new NavigationLayout();
@@ -70,7 +73,7 @@ namespace OldMarket.Navigation
             var overlay=Fill("MapObstacles",mapRect,0);mapOverlay=overlay.gameObject.AddComponent<RawImage>();mapOverlay.raycastTarget=false;mapOverlay.gameObject.SetActive(false);
             var gesture=viewport.gameObject.AddComponent<MapGesture>();gesture.Click=ClickMap;
             gesture.Drag=e=>{targetZoom=zoom;pan+=e.delta/CanvasScale();ApplyMapGeometry();};
-            gesture.Scroll=e=>{if(RectTransformUtility.ScreenPointToLocalPointInRectangle(viewport,e.position,e.pressEventCamera,out var anchor))Zoom(Mathf.Pow(1.15f,e.scrollDelta.y),anchor);};
+            gesture.Scroll=e=>{if(RectTransformUtility.ScreenPointToLocalPointInRectangle(viewport,e.position,e.pressEventCamera,out var anchor))WheelZoom(e,anchor);};
             player=Rect("Player",mapRect);player.sizeDelta=new Vector2(34,34);
             var arrow=player.gameObject.AddComponent<TextMeshProUGUI>();arrow.text="▲";arrow.color=Color.white;arrow.fontSize=32;arrow.alignment=TextAlignmentOptions.Center;arrow.raycastTarget=false;allText.Add(arrow);if(state.Font!=null)arrow.font=state.Font;
             playerNamePlate=Rect("PlayerName",mapRect);playerNamePlate.sizeDelta=new Vector2(132,27);playerNamePlate.gameObject.AddComponent<Image>().color=new Color(.08f,.085f,.07f,.88f);
@@ -91,6 +94,7 @@ namespace OldMarket.Navigation
             status=Label(root,"",new Vector2(24,31),new Vector2(800,23),14,false);status.color=new Color(1,.77f,.5f,1);
             Button(root,"NorthUp",new Vector2(-264,23),new Vector2(242,35),()=>{state.RotateWithCamera=!state.RotateWithCamera;state.RotationChanged?.Invoke(state.RotateWithCamera);},true,false);
             rotationLabel=labels[labels.Count-1].Item1;
+            poiLayer=new MapPoiLayer(state,mapRect,viewport,id=>{state.TargetId=id;RebuildSidebar();});
             ApplyLayout(new NavigationLayout());root.gameObject.SetActive(false);
         }
         private float CanvasScale(){var canvas=root.GetComponentInParent<Canvas>();return canvas==null?1:Mathf.Max(.1f,canvas.scaleFactor*root.localScale.x);}
@@ -132,7 +136,27 @@ namespace OldMarket.Navigation
             AnimateZoom();ApplyMapGeometry();
             if(valid){var uv=state.Map.Project(state.PlayerPosition.x,state.PlayerPosition.z);player.anchoredPosition=new Vector2((uv.X-.5f)*mapRect.sizeDelta.x,(uv.Y-.5f)*mapRect.sizeDelta.y);player.localEulerAngles=new Vector3(0,0,-state.CameraYaw);player.gameObject.SetActive(state.Available);playerNamePlate.gameObject.SetActive(state.Available);playerNamePlate.anchoredPosition=player.anchoredPosition+new Vector2(0,-32);player.SetAsLastSibling();playerNamePlate.SetAsLastSibling();}
             foreach(var entry in markerNames)if(entry.Item2!=null)entry.Item2.text=entry.Item3+entry.Item1.Name;
+            UpdateMarkerLabelVisibility();poiLayer.SetOccupied(visibleMarkerLabels);poiLayer.Refresh(zoom);
             if(targetInfo!=null){var target=state.Target;if(target==null)targetInfo.text=Texts.Get(state.Locale,"NoTarget");else{float dx=target.X-state.PlayerPosition.x,dz=target.Z-state.PlayerPosition.z;targetInfo.text=MarkerSymbol(target.Icon)+" "+target.Name+"\n"+Mathf.Sqrt(dx*dx+dz*dz).ToString("F0")+" m";}}
+        }
+        private void UpdateMarkerLabelVisibility()
+        {
+            detailedMarkerLabels=PoiLabelLayout.WantsLabel(zoom,detailedMarkerLabels,false);visibleMarkerLabels.Clear();
+            float halfWidth=viewport.rect.width/2,halfHeight=viewport.rect.height/2;
+            foreach(var node in markerNodes)
+            {
+                var p=node.Item2.anchoredPosition+pan;visibleMarkerLabels.Add(new HudBox(p.x-18,p.y-18,36,36));
+            }
+            for(int priority=0;priority<2;priority++)foreach(var entry in markerNames)
+            {
+                if(entry.Item2==null||entry.Item3!="")continue;
+                bool emphasized=entry.Item1.Id==selected||entry.Item1.Id==state.TargetId;if(emphasized!=(priority==0))continue;
+                var plate=(RectTransform)entry.Item2.transform.parent;var node=(RectTransform)plate.parent;
+                var p=node.anchoredPosition+pan;var box=new HudBox(p.x+22,p.y-16,144,32);
+                bool show=(detailedMarkerLabels||emphasized)&&box.X>=-halfWidth&&box.Right<=halfWidth&&box.Y>=-halfHeight&&box.Top<=halfHeight;
+                if(show)foreach(var occupied in visibleMarkerLabels)if(box.Overlaps(occupied,2)){show=false;break;}
+                plate.gameObject.SetActive(show);if(show)visibleMarkerLabels.Add(box);
+            }
         }
         private MapViewportGeometry Geometry(float scale)=>new MapViewportGeometry(viewport.rect.width,viewport.rect.height,(state.Map.MaxX-state.Map.MinX)/(state.Map.MaxZ-state.Map.MinZ),scale);
         private void ApplyMapGeometry()
@@ -145,6 +169,18 @@ namespace OldMarket.Navigation
         {
             if(state.Map==null||!state.Map.Valid||viewport.rect.width<=0||viewport.rect.height<=0)return;
             targetZoom=Mathf.Clamp(targetZoom*factor,1,8);zoomAnchor=anchor;
+        }
+        private void WheelZoom(PointerEventData e,Vector2 anchor)
+        {
+            if(state.Map==null||!state.Map.Valid||viewport.rect.width<=0||viewport.rect.height<=0)return;
+            var module=e.currentInputModule as UnityEngine.InputSystem.UI.InputSystemUIInputModule;
+            float uiScale=module!=null?module.scrollDeltaPerTick:1;
+            var settings=UnityEngine.InputSystem.InputSystem.settings;
+            bool platformRange=module!=null&&settings!=null&&settings.scrollDeltaBehavior==UnityEngine.InputSystem.InputSettings.ScrollDeltaBehavior.KeepPlatformSpecificInputRange;
+            bool windows=Application.platform==RuntimePlatform.WindowsPlayer||Application.platform==RuntimePlatform.WindowsEditor;
+            float factor=MapWheelZoom.Factor(e.scrollDelta.y,uiScale*MapWheelZoom.PlatformScale(platformRange,windows));
+            if(factor==1)return;
+            targetZoom=MapWheelZoom.Target(zoom,targetZoom,factor);zoomAnchor=anchor;
         }
         private void AnimateZoom()
         {
@@ -239,6 +275,6 @@ namespace OldMarket.Navigation
             help.rectTransform.sizeDelta=new Vector2(root.sizeDelta.x-310,32);status.rectTransform.sizeDelta=new Vector2(root.sizeDelta.x-310,28);
             if(IsOpen)RebuildSidebar();ApplyMapGeometry();
         }
-        public void Dispose(){if(root!=null)UnityEngine.Object.Destroy(root.gameObject);if(frameSprite!=null)UnityEngine.Object.Destroy(frameSprite);if(frameTexture!=null)UnityEngine.Object.Destroy(frameTexture);if(paperTexture!=null)UnityEngine.Object.Destroy(paperTexture);}
+        public void Dispose(){poiLayer.Dispose();if(root!=null)UnityEngine.Object.Destroy(root.gameObject);if(frameSprite!=null)UnityEngine.Object.Destroy(frameSprite);if(frameTexture!=null)UnityEngine.Object.Destroy(frameTexture);if(paperTexture!=null)UnityEngine.Object.Destroy(paperTexture);}
     }
 }

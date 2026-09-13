@@ -13,6 +13,7 @@ namespace OldMarket.Navigation
         public float MinX, MaxX, MinZ, MaxZ;
         public string North = "+Z";
         public long[] RequiredExpansions = new long[0], ExcludedExpansions = new long[0];
+        public MapPoi[] Pois = new MapPoi[0];
     }
 
     // Local generated maps remain outside the public DLL and public art assets.
@@ -50,7 +51,8 @@ namespace OldMarket.Navigation
                         throw new InvalidDataException("Map metadata invalid");
                     var image=LoadTexture(directory,m.Texture);
                     var overlay=string.IsNullOrWhiteSpace(m.OverlayTexture)?null:LoadTexture(directory,m.OverlayTexture);
-                    maps.Add((m,new MapDefinition { Id=m.Id,Name=m.Name,Texture=image,OverlayTexture=overlay,MinX=m.MinX,MaxX=m.MaxX,MinZ=m.MinZ,MaxZ=m.MaxZ }));
+                    var pois=MapPoi.Validate(m.Pois,m.MinX,m.MaxX,m.MinZ,m.MaxZ);
+                    maps.Add((m,new MapDefinition { Id=m.Id,Name=m.Name,Texture=image,OverlayTexture=overlay,MinX=m.MinX,MaxX=m.MaxX,MinZ=m.MinZ,MaxZ=m.MaxZ,Pois=pois }));
                     log("Local map loaded: " + m.Id);
                 }
                 catch (Exception error) { log("Local map rejected: " + Path.GetFileName(file) + ": " + error.Message); }

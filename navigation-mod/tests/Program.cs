@@ -10,6 +10,13 @@ static class Program
  static void Reject(Action action,string name){try{action();}catch{count++;return;}throw new Exception(name);}
  static void Main()
  {
+  MapWheelZoomChecks.Run(Check);
+  PoiLabelChecks.Check(Check);
+  var validPoi=new MapPoi {Id="shop",Name="Shop",Category="shop",X=5,Z=5};
+  Check(MapPoi.Validate(new[]{validPoi},0,10,0,10).Count==1,"POI metadata accepts bounded shop");
+  Reject(()=>MapPoi.Validate(new[]{validPoi,validPoi},0,10,0,10),"POI duplicate id rejected");
+  Reject(()=>MapPoi.Validate(new[]{validPoi},6,10,0,10),"POI outside map rejected");
+  Check(MapPoi.Validate(null,0,10,0,10).Count==0,"legacy maps without POI remain supported");
   foreach(var p in new[]{new MapPoint(-10,-30),new MapPoint(90,170),new MapPoint(40,70),new MapPoint(0,0)})
   {var uv=NavMath.WorldToUv(p.X,p.Y,-10,90,-30,170);var round=NavMath.UvToWorld(uv.X,uv.Y,-10,90,-30,170);Near(round.X,p.X,"XZ roundtrip x");Near(round.Y,p.Y,"XZ roundtrip z");}
   Reject(()=>NavMath.WorldToUv(0,0,1,1,0,1),"zero bounds");Reject(()=>NavMath.UvToWorld(0,0,0,float.NaN,0,1),"NaN bounds");

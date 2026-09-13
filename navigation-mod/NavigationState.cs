@@ -10,6 +10,7 @@ namespace OldMarket.Navigation
         public Texture2D OverlayTexture;
         public float MinX, MaxX, MinZ, MaxZ;
         public string Id="",Name="";
+        public List<MapPoi> Pois=new List<MapPoi>();
         public bool Valid => Texture!=null && NavMath.ValidBounds(MinX,MaxX,MinZ,MaxZ);
         public MapPoint Project(float x,float z) => NavMath.WorldToUv(x,z,MinX,MaxX,MinZ,MaxZ);
     }
@@ -28,7 +29,19 @@ namespace OldMarket.Navigation
         public Action Save;
         public Action<bool> RotationChanged;
         public string ErrorKey="";
-        public NavMarker Target => Markers.Find(m=>m.Id==TargetId);
+        private NavMarker poiTarget;
+        public NavMarker Target
+        {
+            get
+            {
+                var personal=Markers.Find(m=>m.Id==TargetId);if(personal!=null)return personal;
+                if(Map==null||!TargetId.StartsWith("poi:",StringComparison.Ordinal))return null;
+                var poi=Map.Pois.Find(p=>"poi:"+p.Id==TargetId);if(poi==null)return null;
+                if(poiTarget==null)poiTarget=new NavMarker();
+                poiTarget.Id=TargetId;poiTarget.Name=poi.DisplayName(Locale);poiTarget.X=poi.X;poiTarget.Z=poi.Z;poiTarget.Icon=1;poiTarget.Color=0;
+                return poiTarget;
+            }
+        }
         public void SaveMarkers()
         {
             try { if(Store!=null && !string.IsNullOrEmpty(ScopeId)) { Store.Save(ScopeId,Markers); ErrorKey=""; } Save?.Invoke(); }
