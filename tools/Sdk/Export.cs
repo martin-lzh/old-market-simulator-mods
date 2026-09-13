@@ -72,6 +72,13 @@ sealed class Export
             var type = resolver.Resolve(assemblies.Values.Single(a => a.Name.Name == "Assembly-CSharp").Name).MainModule.GetType(name)
                 ?? throw new InvalidOperationException($"Supplemental type missing: {name}");
             foreach (var member in members) {
+                // Explicit field seeds cover reflection-only dependencies, while historical bare names remain methods.
+                if (member.StartsWith("field:", StringComparison.Ordinal)) {
+                    var field = type.Fields.SingleOrDefault(f => f.Name == member[6..])
+                        ?? throw new InvalidOperationException($"Supplemental field missing: {name}.{member[6..]}");
+                    Add(field);
+                    continue;
+                }
                 var selected = type.Methods.Where(m => m.Name == member).ToArray();
                 if (selected.Length == 0) throw new InvalidOperationException($"Supplemental member missing: {name}.{member}");
                 foreach (var m in selected) Add(m);

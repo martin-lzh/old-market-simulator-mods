@@ -20,6 +20,7 @@ namespace OldMarket.Navigation
         public IReadOnlyList<long> UnlockedIds => unlocked;
         public string Fingerprint { get; private set; } = "";
         public int Revision { get; private set; }
+        public bool IsReady { get; private set; }
 
         public ExpansionState()
         {
@@ -34,6 +35,7 @@ namespace OldMarket.Navigation
         {
             dirty = true;
             forceRefresh = true;
+            IsReady = false;
             // Let the game's CheckExpansions / scene activation finish before a consumer resamples geometry.
             refreshAfter = Time.unscaledTime + .25f;
         }
@@ -53,6 +55,10 @@ namespace OldMarket.Navigation
                     if (networkList != null) networkList.OnListChanged += ListChanged;
                     Invalidate();
                 }
+                else if (!IsReady && !dirty && current != null && current.IsSpawned)
+                {
+                    dirty = true; refreshAfter = now;
+                }
             }
             // Public API fallback if the private event source changes in a future game build.
             if (networkList == null && now >= nextFallbackCheck)
@@ -64,8 +70,12 @@ namespace OldMarket.Navigation
             dirty = false;
             var values = new List<long>();
             if (manager != null && manager.IsSpawned)
+            {
                 foreach (var item in manager.GetActiveExpansions())
                     if (item != null && !values.Contains(item.id)) values.Add(item.id);
+                IsReady = true;
+            }
+            else IsReady = false;
             values.Sort();
             var parts = new string[values.Count];
             for (int i = 0; i < values.Count; i++) parts[i] = values[i].ToString(CultureInfo.InvariantCulture);
@@ -80,6 +90,7 @@ namespace OldMarket.Navigation
 
         private void Detach()
         {
+            IsReady = false;
             if (networkList != null) networkList.OnListChanged -= ListChanged;
             networkList = null;
         }

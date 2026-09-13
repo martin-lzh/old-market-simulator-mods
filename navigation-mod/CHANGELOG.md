@@ -1,8 +1,12 @@
 # Changelog / 版本记录
 
-## 0.1.0 — 2026-09-13
+## English
+
+### 0.1.0 — 2026-09-13
 
 Experimental initial build; not installed or verified in game.
+
+- Pin game 2.1.6 compilation SDK r2 and register the BepInEx variant in CI, including metadata-only reflection declarations and read-only game contracts. SDK verification does not replace in-game acceptance.
 
 - Add an independent compass, north-up/camera-up minimap and M-key map window.
 - Add zoom, pan, personal marker editing, target bearing/distance and optional XYZ.
@@ -14,7 +18,13 @@ Experimental initial build; not installed or verified in game.
 - Keep game-derived map companions out of the public DLL and archive. No map data is bundled.
 - Supply coordinate, persistence and localization checks. In-game appearance, input, performance and multiplayer testing remain outstanding.
 
+## 中文
+
+### 0.1.0 — 2026-09-13
+
 实验性首版；尚未安装或完成实机验证。
+
+- 固定游戏 2.1.6 编译 SDK r2，将 BepInEx 变体接入 CI，包含仅声明的反射依赖及只读游戏契约验证；SDK 检查不替代实机验收。
 
 - 新增独立罗盘、固定正北/随视角小地图与 M 键大地图。
 - 支持缩放、拖动、个人标记编辑、目标方位/距离及可选 XYZ。

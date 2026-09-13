@@ -41,6 +41,26 @@ class VersionTests(unittest.TestCase):
         for slug in ci.MODS:
             self.assertTrue((ci.ROOT / "sdk" / ci.config(slug)["sdk"] / "manifest.json").is_file())
 
+    def test_navigation_in_all_ci_scopes(self):
+        self.assertEqual(ci.MODS["navigation"], "Navigation")
+        self.assertEqual(ci.variants("navigation"), ["BepInEx"])
+        self.assertTrue((ci.ROOT / "navigation-mod/tests/Navigation.Tests.csproj").is_file())
+
+    def test_navigation_managed_directory_respects_override(self):
+        node = ci.ET.parse(ci.ROOT / "navigation-mod/Navigation.csproj").find(".//ManagedDir")
+        self.assertEqual(node.attrib.get("Condition"), "'$(ManagedDir)' == ''")
+
+    def test_navigation_reflection_declarations_are_exported(self):
+        api = ci.json.loads((ci.ROOT / "sdk/2.1.6/r2/api.json").read_text(encoding="utf-8"))
+        types = {t["Name"]: t for t in api["Types"]}
+        slots = {f["Name"]: f for f in types["SaveManager"]["Fields"]}
+        self.assertEqual(slots["currentSlot"]["Type"]["Name"], "System.String")
+        expansions = {f["Name"]: f for f in types["GameManager"]["Fields"]}
+        active = expansions["activeExpansions"]["Type"]
+        self.assertEqual(active["Element"]["Name"], "Unity.Netcode.NetworkList`1")
+        self.assertEqual(active["Arguments"][0]["Name"], "System.Int64")
+        self.assertIn("GetLocalCurrentRegionSceneName", {m["Name"] for m in types["RegionManager"]["Methods"]})
+
     def test_existing_sdk_cannot_be_edited(self):
         with patch.object(ci.subprocess, "check_output", return_value="sdk/2.1.6/r1/api.json\n"), \
                 patch.object(ci.subprocess, "run") as git:

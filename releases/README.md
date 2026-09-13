@@ -10,7 +10,7 @@ See [SDK maintenance](../sdk/README.md) for game-free builds and game-version up
 
 1. Work on `dev` and open a PR into protected `main`. Update the affected Mod’s assembly/plugin version and add matching numbered release entries to both language sections of its CHANGELOG. Record game/SDK versions, loader, risks, save/multiplayer constraints and actual validation. Unreleased entries are ignored.
 2. Each Mod pins an SDK and prerelease status in its own `release.json`. Keep `prerelease: true` until in-game acceptance is complete. Existing SDK revisions remain immutable.
-3. PR CI compiles all five Mods (six loader variants), runs pure logic/localization tests and verifies package allowlists on a GitHub-hosted Windows runner. It uses compiler-only API declarations; original game files and self-hosted runners are unnecessary.
+3. PR CI compiles all six Mods (seven loader variants), runs pure logic/localization tests and verifies package allowlists on a GitHub-hosted Windows runner. It uses compiler-only API declarations; original game files and self-hosted runners are unnecessary.
 4. A push to `main` after merge automatically publishes new CHANGELOG versions at that exact commit. Already-public versions are skipped without replacing assets or moving tags. Documentation/SDK changes without a new Mod version never republish old binaries.
 5. The publishing job creates a draft, uploads ZIPs, SHA256SUMS.txt and build-info.json, downloads and verifies every asset byte, then publishes. Evidence records source commit, game version/hash, SDK revision and API snapshot hash. Release notes contain the current numbered English and Chinese entries. No workflow writes back to protected main.
 
@@ -24,7 +24,7 @@ The existing catalog.json and tag markdown files remain the historical manual re
 
 1. 在 `dev` 开发，通过 PR 合并受保护的 `main`。更新对应 Mod 的程序集/插件版本，在 CHANGELOG 中英文区段添加相同的新编号条目，注明游戏/SDK 版本、加载器、风险、存档/联机约束和实际验证。“未发布”不参与版本选择。
 2. 各 Mod 在自己的 `release.json` 固定 SDK 并选择预发布状态。未完成实机验收时保留 `prerelease: true`；已有 SDK 修订保持不变。
-3. PR CI 在 GitHub 托管 Windows Runner 上编译五个 Mod（六个加载器变体），运行纯逻辑/本地化测试并检查包清单。引用来自仅含接口声明的 SDK，无需原始游戏文件或自托管 Runner。
+3. PR CI 在 GitHub 托管 Windows Runner 上编译六个 Mod（七个加载器变体），运行纯逻辑/本地化测试并检查包清单。引用来自仅含接口声明的 SDK，无需原始游戏文件或自托管 Runner。
 4. PR 合并后 main 的 push 自动按 CHANGELOG 新版本发布，标签指向此次准确提交。已公开版本直接跳过，不覆盖附件、不移动标签；仅修改文档/SDK 而不增加 Mod 编号，不会重新发布旧包。
 5. 发布任务创建草稿，上传 ZIP、SHA256SUMS.txt、build-info.json，下载逐字节校验所有附件后公开。记录源码提交、游戏版本/哈希、SDK 修订和接口快照哈希；说明提取当前编号的中英文条目。工作流不回写受保护的 main。
 

@@ -227,7 +227,7 @@ namespace OldMarket.Navigation
             else if(!string.IsNullOrWhiteSpace(remoteProfile.Value)) profile="remote|"+remoteProfile.Value.Trim();
             bool persistent=profile.Length>0;
             string next=(persistent?profile:"session|"+sessionId)+"|"+mapKey;
-            state.Map=maps.Find(game.mapSO.id,game.mapSO.sceneName,region,expansions.UnlockedIds);
+            state.Map=maps.Find(game.mapSO.id,game.mapSO.sceneName,region,expansions.IsReady?expansions.UnlockedIds:null);
             if(next==contextKey) return;
             CloseMap();
             if(contextKey!="") sessionMarkers[contextKey]=state.Markers;

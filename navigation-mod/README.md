@@ -76,11 +76,13 @@ For a remote client, leave `RemoteProfile` empty for connection-only markers. Th
 
 UI text follows the game's selected locale and native money-HUD TextMesh Pro font. Original translations cover `zh`, `zh-Hant`, `en`, `de`, `fr`, `it`, `ja`, `ko`, `pt`, `ru`, `es`, `tr`, `uk`; unknown locales fall back to English. These translations have not been reviewed by native speakers or verified for all font glyphs/long labels in game. Marker names and companion-provided place names are not translated automatically.
 
-Built against local Old Market Simulator assemblies and Unity 2022.3-era uGUI/TextMesh Pro APIs. Future game updates can change player, input, locale, save-identity or expansion APIs. Menu/HUD mods and bindings may conflict. A successful build does not establish compatibility for single-player, host or remote clients, nor a frame-rate guarantee.
+Targets Old Market Simulator **2.1.6**, Unity Mono **2022.3.62f3**, and compiler SDK **2.1.6/r2** pinned in `release.json`; the earlier Mods keep r1. CI uses the official SHA256-pinned BepInEx 5.4.23.5 reference, while local installation testing remains outstanding. Reflection-only save/region/expansion members are included in the metadata SDK and checked against real assemblies. Future game updates can change player, input, locale, save-identity or expansion APIs. Menu/HUD mods and bindings may conflict. A successful build does not establish compatibility for single-player, host or remote clients, nor a frame-rate guarantee.
 
 ## Build and validation
 
-Requirements: Windows, .NET SDK (tests target .NET 8), local game assemblies (including the read-only `UnityEngine.PhysicsModule.dll` reference) and BepInEx 5. From the repository root:
+For a game-free CI build, run `python tools/ci.py validate`, `python -m unittest discover -s tools/tests -v`, and `python tools/ci.py build`. This runs Navigation tests and packages only the original DLL and documents. To compare with a matching installed game and execute read-only contracts, run `python tools/ci.py verify-game --game-dir <path>`. These checks do not launch Unity or constitute in-game acceptance.
+
+Requirements for the local build below: Windows, .NET SDK (tests target .NET 8), local game assemblies (including the read-only `UnityEngine.PhysicsModule.dll` reference) and BepInEx 5. From the repository root:
 
 ```powershell
 ./navigation-mod/build.ps1
@@ -140,6 +142,8 @@ Original code, documentation and UI decorations are provided under [MIT](LICENSE
 ### 语言、风险与验证
 
 跟随游戏选定语言及金钱栏 TMP 字体，提供 13 种原创翻译：简中、繁中、英语、德语、法语、意大利语、日语、韩语、葡萄牙语、俄语、西班牙语、土耳其语、乌克兰语；未知语言回退英语。尚未经母语审校和所有字体实机检查。个人标记名与地图文件地名不会自动翻译。
+
+固定游戏 **2.1.6**、Unity Mono **2022.3.62f3** 与编译 SDK **2.1.6/r2**，既有 Mod 保留 r1。CI 使用官方固定哈希的 BepInEx 5.4.23.5 引用；反射使用的存档槽、区域与扩建成员纳入 SDK 和真实程序集契约检查。无游戏环境可运行上文 `ci.py validate`、CI 工具测试和 `ci.py build`；匹配的本机安装可用 `ci.py verify-game --game-dir <path>` 核对真实引用符号 IL/资源与契约，不启动游戏。
 
 构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.1.0.zip`，打印 SHA256，不自动安装，严格只含 DLL、README、CHANGELOG、LICENSE。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
 

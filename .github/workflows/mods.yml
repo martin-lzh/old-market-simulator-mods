@@ -45,7 +45,7 @@ jobs:
           }
           python -m unittest discover -s tools/tests -v
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
-      - name: Build all six variants and run logic/localization tests
+      - name: Build all seven variants and run logic/localization tests
         run: python tools/ci.py build
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:

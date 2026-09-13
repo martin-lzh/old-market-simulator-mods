@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MODS = {
     "material-cost": "MaterialCost", "coordinates": "Coordinates",
     "checkout-all": "CheckoutAll", "stack-all": "StackAll",
-    "price-probability": "PriceProbability",
+    "price-probability": "PriceProbability", "navigation": "Navigation",
 }
 VERSION = r"(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)"
 LOADERS = {
@@ -151,7 +151,7 @@ def build():
             run("dotnet", tool, "build", ROOT / "sdk" / sdk_id / "api.json", refs)
             built[sdk_id] = refs
         tests = [c["directory"] / "localization/tests/Localization.Tests.csproj",
-                 c["directory"] / ("tests/CostTests.csproj" if c["slug"] == "material-cost" else "tests/Tests.csproj")]
+                 c["directory"] / ("tests/CostTests.csproj" if c["slug"] == "material-cost" else "tests/Navigation.Tests.csproj" if c["slug"] == "navigation" else "tests/Tests.csproj")]
         for test in tests:
             if test.exists():
                 run("dotnet", "run", "--project", test, "-c", "Release")

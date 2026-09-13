@@ -10,11 +10,12 @@
 
 | 游戏版本 | SDK | 平台 | 说明 |
 | --- | --- | --- | --- |
-| 2.1.6 | [2.1.6/r1](2.1.6/r1/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | 当前五个 Mod 的六种发行构建；实机 UI、存档及双端联机验收未完成 |
+| 2.1.6 | [2.1.6/r1](2.1.6/r1/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | 原有五个 Mod 的六种发行构建；实机 UI、存档及双端联机验收未完成 |
+| 2.1.6 | [2.1.6/r2](2.1.6/r2/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.0 固定此修订；增加地图 UI、物理投影、输入、区域与反射依赖，实机验收未完成 |
 
 每个 Mod 在自己的 `release.json` 中固定 SDK，例如 `"sdk": "2.1.6/r1"`。不自动选择“最新”SDK。目录 `sdk/<游戏版本>/r<修订号>/` 一旦合并就保留原样；同一游戏版本补充接口时新建 `r2`，游戏升级时新建对应游戏版本目录。旧 Mod 发布、SDK 和 CHANGELOG 都保留，下载前仍须确认存档、加载器与联机要求。
 
-`manifest.json` 记录游戏版本、源码提交、游戏程序集 SHA256 和接口快照 SHA256；`api.json` 另记录实际涉及的 13 个依赖程序集身份与本机文件哈希。SDK 没有重新实现游戏；类型和成员标识用于兼容。原创工具遵循根目录 MIT 许可证，游戏、Unity 和加载器的名称及 API 标识仍属于各自权利人，本项目不声称授予其实现或资源的再分发许可。
+`manifest.json` 记录游戏版本、源码提交、游戏程序集 SHA256 和接口快照 SHA256；`api.json` 另记录各修订实际涉及的依赖程序集身份与本机文件哈希。SDK 没有重新实现游戏；类型和成员标识用于兼容。原创工具遵循根目录 MIT 许可证，游戏、Unity 和加载器的名称及 API 标识仍属于各自权利人，本项目不声称授予其实现或资源的再分发许可。
 
 ### 无游戏文件的构建
 
@@ -31,7 +32,7 @@ python tools/ci.py build
 ### 游戏更新后的维护
 
 1. 在本机合法取得新版游戏，只读检查版本和接口。用真实游戏引用调整 Mod；记录未验证的玩法、UI、存档及网络变化。先提交源码，SDK 导出要求工作区干净，以记录准确源码提交。
-2. 准备 `supplemental.json`：列出只出现在 `nameof` 中、不会生成成员引用的游戏方法。可在 `work/` 下复制旧文件再调整。导出工具自动从真实编译的六个 Mod 读取其他依赖声明，不读取游戏方法体或资源。
+2. 准备 `supplemental.json`：列出只出现在 `nameof` 中、不会生成成员引用的游戏方法。可在 `work/` 下复制旧文件再调整。反射方法同样列出；反射字段使用显式 `field:字段名`，如 `field:currentSlot` 和 `field:activeExpansions`。所有名称必须来自真实程序集。导出工具自动从已注册六个 Mod 的七个发行构建读取其他依赖声明，不读取游戏方法体或资源。
 3. 用实际确认的游戏版本导出新目录。例如同一 2.1.6 基线新增接口时：
 
 ```powershell
@@ -59,11 +60,11 @@ This SDK lets GitHub-hosted runners compile Mods without a game installation. Th
 
 ### Versioning and compatibility
 
-The table above records the current 2.1.6/r1 baseline: Windows x64, Unity Mono 2022.3.62f3, five Mods and six loader variants. In-game UI, save and multiplayer acceptance remains incomplete.
+The table records game 2.1.6 on Windows x64 / Unity Mono 2022.3.62f3. The original five Mods retain SDK r1; Navigation 0.1.0 pins r2, adding map UI, physics projection, input, region and reflection declarations. CI builds six Mods and seven loader variants. In-game UI, save and multiplayer acceptance remains incomplete.
 
 Each Mod pins an SDK in its own `release.json`, for example `"sdk": "2.1.6/r1"`. There is no implicit latest SDK. Merged `sdk/<game-version>/r<revision>/` snapshots are immutable. Add a new revision to extend the same game baseline, or a new game-version directory after a game update. Preserve old SDKs, Mod releases and CHANGELOG records; users must still check save, loader and multiplayer requirements.
 
-The manifest records game version, source commit, game assembly hash and API snapshot hash. API metadata records the identities and local hashes of the 13 required dependency assemblies. Original tools use the root MIT license. Game, Unity and loader names/API identifiers belong to their respective owners; this project does not grant redistribution rights to their implementations or resources.
+The manifest records game version, source commit, game assembly hash and API snapshot hash. API metadata records the identities and local hashes of each revision’s required dependency assemblies. Original tools use the root MIT license. Game, Unity and loader names/API identifiers belong to their respective owners; this project does not grant redistribution rights to their implementations or resources.
 
 ### Building and updating
 
@@ -72,7 +73,7 @@ Install Python 3.12 plus .NET 8 and 10 SDKs. Run the three validation/build comm
 After a game update:
 
 1. Read the legally obtained game installation, adapt the original Mod source and commit it. Export requires a clean worktree to record the exact source commit.
-2. Review supplemental method names used only in `nameof` expressions. Copy the previous `supplemental.json` into ignored `work/` if it needs editing. Other declarations are discovered from six Mods compiled against actual game references; game method bodies/resources are not exported.
+2. Review supplemental method names used only in `nameof` expressions. Copy the previous `supplemental.json` into ignored `work/` if it needs editing. Reflection method names are also listed; reflection fields use the explicit `field:name` syntax (for example `field:currentSlot` and `field:activeExpansions`). All declarations must resolve from real assemblies. Other declarations are discovered from the seven registered loader builds compiled against actual game references; game method bodies/resources are not exported.
 3. Run `export-sdk` as shown above, using the actual verified game version and a new revision. Existing snapshots cannot be overwritten.
 4. Review metadata/hash changes, migrate selected `release.json` pins, update Mod versions, bilingual CHANGELOG entries with game/SDK versions, compatibility/risk notes, root supported baseline and the table above. Mods not migrated keep their previous SDK.
 5. Run the SDK build followed by `verify-game` above. This verifies dependency hashes, compares symbolic Mod IL and embedded resources against a real-reference build, and runs the existing Stack All/Price Probability game contracts. It never executes or modifies the game. The command currently verifies every Mod; when pins span multiple game baselines, retain matching installations and verify each Mod using its build/contract commands. Do not bypass hash failures.

@@ -4,7 +4,7 @@
     <AssemblyName>OldMarket.Navigation</AssemblyName>
     <Version>0.1.0</Version>
     <GameDir Condition="'$(GameDir)' == ''">F:\SteamLibrary\steamapps\common\Old Market Simulator</GameDir>
-    <ManagedDir>$(GameDir)\Old Market Simulator_Data\Managed</ManagedDir>
+    <ManagedDir Condition="'$(ManagedDir)' == ''">$(GameDir)\Old Market Simulator_Data\Managed</ManagedDir>
     <BepInExDir Condition="'$(BepInExDir)' == ''">$(GameDir)\BepInEx\core</BepInExDir>
   </PropertyGroup>
   <ItemGroup><Compile Remove="tests/**/*.cs" />

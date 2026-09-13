@@ -20,7 +20,7 @@ Get installable ZIPs from the linked [GitHub Releases](https://github.com/martin
 
 ### Installation and compatibility
 
-[Navigation 0.1.0](navigation-mod/README.md) is a local-build experiment with a minimap, M-key map, compass and personal target markers. It is not yet in the release catalog or automated release pipeline. Its original UI artwork is embedded in the DLL; scene-derived maps remain local and are not distributed here. See its README for build commands, unlock-state map layers and validation limits.
+[Navigation 0.1.0](navigation-mod/README.md) is a local-build experiment with a minimap, M-key map, compass and personal target markers. It is included in SDK r2 CI builds and the automated prerelease scope, but no Navigation GitHub release has been published yet. Its original UI artwork is embedded in the DLL; scene-derived maps remain local and are not distributed here. See its README for build commands, unlock-state map layers and validation limits.
 
 The build/reference environment is Old Market Simulator **2.1.6**, Windows x64, Unity Mono. Most packages require an existing **BepInEx 5** installation. Material Cost also provides a **MelonLoader 0.7.3** package; choose one loader variant. The experimental standalone entry remains available as source for local testing and has no public release package.
 
@@ -93,7 +93,7 @@ Citation is requested, not an additional MIT condition. A project link does not 
 
 ### 下载
 
-[Navigation 0.1.0](navigation-mod/README.md) 为本地构建实验版，提供小地图、M 键大地图、罗盘与个人目标标记，尚未加入发行目录或自动发行流程。原创 UI 美术资源嵌入 DLL；场景派生地图仅留本机，不在此分发。构建方式、解锁状态叠层和验证范围见其说明。
+[Navigation 0.1.0](navigation-mod/README.md) 为本地构建实验版，提供小地图、M 键大地图、罗盘与个人目标标记，已接入 SDK r2 的 CI 构建与自动预发布范围，但尚无 Navigation GitHub Release。原创 UI 美术资源嵌入 DLL；场景派生地图仅留本机，不在此分发。构建方式、解锁状态叠层和验证范围见其说明。
 
 | Mod | 发布版本 | 功能 |
 | --- | --- | --- |
@@ -164,6 +164,6 @@ Citation is requested, not an additional MIT condition. A project link does not 
 
 ## Compilation SDK and CI / 编译 SDK 与 CI
 
-Current SDK: **Old Market Simulator 2.1.6 / SDK r1**, Windows x64 / Unity Mono 2022.3.62f3. Each Mod pins its SDK in `release.json`; previous SDKs and Mod releases remain available. GitHub CI compiles all five Mods (six loader variants) without original game files. A push to `main` after PR merge publishes only new numbered CHANGELOG versions. See [SDK build/update instructions](sdk/README.md) and [release workflow](releases/README.md).
+Current SDK pins: **Old Market Simulator 2.1.6 / SDK r1 for existing Mods, r2 for Navigation**, Windows x64 / Unity Mono 2022.3.62f3. Each Mod pins its SDK in `release.json`; previous SDKs and Mod releases remain available. GitHub CI compiles all six Mods (seven loader variants) without original game files. A push to `main` after PR merge publishes only new numbered CHANGELOG versions. See [SDK build/update instructions](sdk/README.md) and [release workflow](releases/README.md).
 
-当前 SDK：**Old Market Simulator 2.1.6 / SDK r1**，Windows x64 / Unity Mono 2022.3.62f3。每个 Mod 在 `release.json` 中固定 SDK，保留历史 SDK 和 Mod 发布。GitHub CI 无需原始游戏文件即可编译五个 Mod（六个加载器变体）；PR 合并后推送到 `main`，只发布 CHANGELOG 中尚未发布的编号版本。见 [SDK 构建与更新](sdk/README.md)和[发布流程](releases/README.md)。
+当前 SDK 固定版本：**Old Market Simulator 2.1.6 / 既有 Mod 使用 r1，Navigation 使用 r2**，Windows x64 / Unity Mono 2022.3.62f3。每个 Mod 在 `release.json` 中固定 SDK，保留历史 SDK 和 Mod 发布。GitHub CI 无需原始游戏文件即可编译六个 Mod（七个加载器变体）；PR 合并后推送到 `main`，只发布 CHANGELOG 中尚未发布的编号版本。见 [SDK 构建与更新](sdk/README.md)和[发布流程](releases/README.md)。
