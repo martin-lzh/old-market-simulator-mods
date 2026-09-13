@@ -50,7 +50,7 @@ namespace OldMarket.Navigation
             Clear();definition=state.Map;if(definition==null)return;
             foreach(var poi in definition.Pois)
             {
-                var node=new Node{Poi=poi};node.Root=Rect("MiniPOI_"+poi.Id,root,new Vector2(22,22));
+                var node=new Node{Poi=poi};node.Root=Rect("MiniPOI_"+poi.Id,root,new Vector2(25,25));
                 node.Icon=node.Root.gameObject.AddComponent<Image>();node.Icon.sprite=icons.Get(poi);node.Icon.raycastTarget=true;
                 BindPointer(node.Root,"poi:"+poi.Id);
                 node.Plate=Rect("Name",node.Root,new Vector2(90,24));
@@ -94,11 +94,11 @@ namespace OldMarket.Navigation
             {
                 node.Position=Project(node.Poi.X,node.Poi.Z,scale,cos,sin);
                 node.Root.anchoredPosition=node.Position;
-                node.Visible=node.Position.x*node.Position.x+node.Position.y*node.Position.y<=(radius-12)*(radius-12);
+                node.Visible=node.Position.x*node.Position.x+node.Position.y*node.Position.y<=(radius-18)*(radius-18);
                 node.Root.gameObject.SetActive(node.Visible);
                 if(!node.Visible){node.LabelVisible=false;node.Plate.gameObject.SetActive(false);continue;}
                 InViewCount++;
-                occupied.Add(new HudBox(node.Position.x-11,node.Position.y-11,22,22));
+                occupied.Add(new HudBox(node.Position.x-12.5f,node.Position.y-12.5f,25,25));
                 bool target=state.TargetId=="poi:"+node.Poi.Id;node.Icon.color=Color.white;node.Label.color=target?Gold:Cream;
                 string name=node.Poi.DisplayName(state.Locale);
                 if(node.Label.text!=name)

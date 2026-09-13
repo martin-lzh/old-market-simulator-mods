@@ -28,7 +28,7 @@ namespace OldMarket.Navigation
             {
                 int index=y*size+x;
                 if(mask[index]){pixels[index]=shape==4?(Color32)MapWindow.MarkerColors[(x<16?0:1)+(y<16?0:2)]:(Color32)color;continue;}
-                bool edge=false;for(int dy=-2;dy<=2;dy++)for(int dx=-2;dx<=2;dx++)
+                bool edge=false;for(int dy=-3;dy<=3;dy++)for(int dx=-3;dx<=3;dx++)
                 {int px=x+dx,py=y+dy;if(px>=0&&py>=0&&px<size&&py<size&&mask[py*size+px])edge=true;}
                 pixels[index]=new Color32(15,12,9,(byte)(edge?255:0));
             }

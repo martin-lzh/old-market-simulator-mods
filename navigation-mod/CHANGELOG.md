@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Increase source icon outlines to 3 px and minimap POI, personal marker and player canvases to 25 px; adjust circular bounds and label collision spacing. Preserve the approved palette and 25 px large-map icons.
+
 - Add a filled identification-card symbol for local POIs using the native licenses key. Shop companion coordinates can be anchored to verified NPC transforms; scene-derived coordinates remain outside the public package.
 
 - Replace personal marker font symbols with centered sprites in both maps. Keep Set target as text, place color/icon/delete actions in one icon row, and expand explicit color or shape slots below it. Clicking a slot saves immediately and highlights the selection; existing marker IDs and save format remain compatible.
@@ -76,6 +78,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 图标源纹理描边加至 3 px，小地图 POI、个人标记与玩家图标统一为 25 px，并调整圆形边界和名称避让间距。保持已选配色及大地图 25 px 图标。
 
 - 原生 licenses 词条对应的本地 POI 增加实心证件图标；店铺配套坐标可依据经核实的 NPC Transform 定位，场景派生坐标不进入公开安装包。
 

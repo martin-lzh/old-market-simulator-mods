@@ -53,8 +53,8 @@ def build():
         rendered = resvg_py.svg_to_bytes(svg_string=ET.tostring(svg, encoding="unicode"))
         mask = Image.open(io.BytesIO(rendered)).convert("RGBA").getchannel("A")
         silhouettes.add(hashlib.sha256(mask.tobytes()).hexdigest())
-        # A 2px external outline, drawn at 4x then downsampled with the colored filled shape.
-        outline = mask.filter(ImageFilter.MaxFilter(2*2*SCALE+1))
+        # A 3px external outline, drawn at 4x then downsampled with the colored filled shape.
+        outline = mask.filter(ImageFilter.MaxFilter(2*3*SCALE+1))
         outline = outline.resize((32, 32), Image.Resampling.LANCZOS)
         mask = mask.resize((32, 32), Image.Resampling.LANCZOS).point(lambda value: 255 if value >= 230 else value)
         for category, color in PALETTE.items():
