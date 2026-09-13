@@ -1,6 +1,6 @@
 # Old Market Navigation
 
-Version **0.1.0 — experimental**. An independent navigation HUD for Old Market Simulator: compass, minimap, map window, personal markers and target bearings. It does not require Coordinates or replace that plugin.
+Version **0.1.1 — experimental**. An independent navigation HUD for Old Market Simulator: compass, minimap, map window, personal markers and target bearings. It does not require Coordinates or replace that plugin.
 
 **Build and automated checks are available; installation, in-game appearance, performance, input restoration and multiplayer compatibility have not been verified.** The public package does not include game-derived map images or geometry. Without a local map companion, the compass and optional coordinates work, the map reports that no map is available, and map marker creation is disabled.
 
@@ -36,10 +36,13 @@ The first load creates `BepInEx/config/local.oldmarket.navigation.cfg`. Edit thi
 | `Display.TargetGuidance` | `true` | Show target bearing panel. |
 | `Display.Coordinates` | `false` | Show XYZ below compass; leave off when using Coordinates to avoid duplication. |
 | `Display.CameraUp` | `false` | Rotate minimap with camera; the map-window button saves this choice. |
+| `Display.ReflowNativeHud` | `true` | Move native notification/task/hint HUD around navigation; restore original anchors when disabled. |
 | `Input.MapKey` | `M` | Unity Input System `Key` value; `None` disables the keyboard toggle. Avoid keys used by other actions. |
 | `Markers.RemoteProfile` | empty | Explicit unique identity for a remote host's save. Empty means session-only remote markers. |
 
 ### Layout hot reload
+
+Native HUD reflow uses the rendered navigation bounds, including visible coordinate and target rows. Notifications (including player-join messages, normally in the lower-left list) move above the minimap; task cards and top hints avoid the reserved navigation area. The Mod retains native fonts, content and animation-controlled positions. Disabling the corresponding navigation area, disabling reflow or leaving gameplay restores owned anchor changes. Full-screen menus and external Steam/performance overlays are not moved. In-game animation, long-message and unusual-resolution acceptance remains outstanding.
 
 Edit `BepInEx/config/OldMarket.Navigation/layout.json` while playing. Changes are checked every 0.5 seconds on the main thread. Malformed, oversized or out-of-range files retain the previous valid layout. UI position/size changes do not require a DLL rebuild. This does not hot-reload C# logic, map files or game data.
 
@@ -90,7 +93,7 @@ Requirements for the local build below: Windows, .NET SDK (tests target .NET 8),
 dotnet run --project navigation-mod/tests/Navigation.Tests.csproj
 ```
 
-Build output: `outputs/OldMarket.Navigation-0.1.0.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist is exactly the plugin DLL, this README, CHANGELOG and LICENSE. It excludes game assemblies, loader files, map companions, saves, logs and backups.
+Build output: `outputs/OldMarket.Navigation-0.1.1.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist is exactly the plugin DLL, this README, CHANGELOG and LICENSE. It excludes game assemblies, loader files, map companions, saves, logs and backups.
 
 Verified on the 2.1.6 baseline: SDK r2 and real-reference Release builds match in symbolic IL, assembly references and embedded resources; 511 pure checks, 318 read-only installed-assembly contracts and 22 CI tooling tests pass. No Unity game code was executed by these checks.
 
@@ -104,7 +107,7 @@ Original code, documentation and UI decorations are provided under [MIT](LICENSE
 
 ## 中文说明
 
-**0.1.0 是实验版**：独立导航 Mod，包含顶部罗盘、圆形小地图、M 键大地图、个人标记和目标方位栏，不依赖也不替换 Coordinates。
+**0.1.1 是实验版**：独立导航 Mod，包含顶部罗盘、圆形小地图、M 键大地图、个人标记和目标方位栏，不依赖也不替换 Coordinates。
 
 已提供构建及自动检查；**尚未安装，也未完成游戏内视觉、性能、输入恢复及联机验证**。公开包不含游戏派生地图。没有本地地图配套文件时仍可显示罗盘和可选 XYZ，地图提示无数据，不能在地图上新增标记。
 
@@ -127,6 +130,8 @@ Original code, documentation and UI decorations are provided under [MIT](LICENSE
 
 ### 配置与热更新
 
+原生 HUD 避让使用导航组件的实际屏幕范围，也计算可见的坐标和目标行。玩家加入等原本出现在左下列表的通知移到小地图上方；任务卡及顶部提示避让导航区域，保留游戏原有字体、内容与位置动画。关闭对应导航组件、关闭 `ReflowNativeHud` 或离开游戏场景后，恢复本插件修改的锚点。不会移动全屏菜单或 Steam、性能监控等外部覆盖层；长消息、原生动画及特殊分辨率仍需实机验收。
+
 上方配置表列出了所有项目。小地图、罗盘、目标指引默认开启；导航内 XYZ 默认关闭，避免与独立坐标 Mod 重复。`CameraUp=false` 为固定正北，`MapKey=None` 禁用键盘开关。主 CFG 建议退出游戏后编辑，其说明为英语。
 
 运行时可以编辑 `BepInEx/config/OldMarket.Navigation/layout.json`，上方 JSON 为默认值。每 0.5 秒检查一次；无效配置保留上一版布局。数值以 1920×1080 参考画布计算；`MinimapRange` 为世界单位半径，`WorldMarkerSize` 是沿用的字段名，实际控制目标栏及投影标记的文字大小。布局热更新不包含 C#、底图文件或游戏数据，替换底图后需重启。
@@ -147,7 +152,7 @@ Original code, documentation and UI decorations are provided under [MIT](LICENSE
 
 固定游戏 **2.1.6**、Unity Mono **2022.3.62f3** 与编译 SDK **2.1.6/r2**，既有 Mod 保留 r1。CI 使用官方固定哈希的 BepInEx 5.4.23.5 引用；反射使用的存档槽、区域与扩建成员纳入 SDK 和真实程序集契约检查。无游戏环境可运行上文 `ci.py validate`、CI 工具测试和 `ci.py build`；匹配的本机安装可用 `ci.py verify-game --game-dir <path>` 核对真实引用符号 IL/资源与契约，不启动游戏。
 
-构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.1.0.zip`，打印 SHA256，不自动安装，严格只含 DLL、README、CHANGELOG、LICENSE。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
+构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.1.1.zip`，打印 SHA256，不自动安装，严格只含 DLL、README、CHANGELOG、LICENSE。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
 
 2.1.6 基线验证：SDK r2 与真实引用 Release 构建的符号 IL、程序集引用及内嵌资源一致；511 项纯逻辑/本地化检查、318 项只读原生契约和 22 项 CI 工具测试通过，检查不执行 Unity 游戏代码。
 

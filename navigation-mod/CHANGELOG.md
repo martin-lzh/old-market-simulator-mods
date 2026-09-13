@@ -2,6 +2,13 @@
 
 ## English
 
+### 0.1.1 — 2026-09-13
+
+- Reflow native notifications above the minimap, move conflicting task cards nearby, and place top hint banners below the compass and its visible coordinate/target rows.
+- Measure visible UI in screen space across canvas scales; preserve native text and tweened positions by translating anchors, then restore owned anchor changes when navigation is hidden or disabled.
+- Add the default-enabled `Display.ReflowNativeHud` option and respond to layout hot reload, screen size and native content changes.
+- Extend the game 2.1.6 compilation SDK for verified HUD APIs. Build/contract checks do not replace in-game layout and notification-animation acceptance; keep prerelease status.
+
 ### 0.1.0 — 2026-09-13
 
 Experimental initial build; not installed or verified in game.
@@ -20,6 +27,13 @@ Experimental initial build; not installed or verified in game.
 - Supply coordinate, persistence and localization checks. In-game appearance, input, performance and multiplayer testing remain outstanding.
 
 ## 中文
+
+### 0.1.1 — 2026-09-13
+
+- 将原生通知列表放到小地图上方，将冲突的任务卡安排在附近，顶部提示条移到罗盘及可见坐标/目标行下方。
+- 按屏幕空间测量原生 UI，兼容不同画布缩放；通过平移锚点保留原生文字及位置动画，导航隐藏或停用后恢复本插件修改的锚点。
+- 新增默认开启的 `Display.ReflowNativeHud`，响应布局热更新、屏幕尺寸与原生内容变化。
+- 为已核对的 HUD 接口扩展游戏 2.1.6 编译 SDK；构建与契约检查不能替代游戏内布局及通知动画验收，仍保持预发布。
 
 ### 0.1.0 — 2026-09-13
 

@@ -14,12 +14,13 @@ using UnityEngine.UI;
 
 namespace OldMarket.Navigation
 {
-    [BepInPlugin("local.oldmarket.navigation", "Old Market Navigation", "0.1.0")]
+    [BepInPlugin("local.oldmarket.navigation", "Old Market Navigation", "0.1.1")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {
         private readonly NavigationState state = new NavigationState();
-        private ConfigEntry<bool> minimap, compass, guidance, coordinates, cameraUp;
+        private ConfigEntry<bool> minimap, compass, guidance, coordinates, cameraUp, reflowNativeHud;
+        private readonly NativeHudReflow nativeHud = new NativeHudReflow();
         private ConfigEntry<Key> mapKey;
         private ConfigEntry<string> remoteProfile;
         private MapLibrary maps;
@@ -52,6 +53,7 @@ namespace OldMarket.Navigation
             guidance = Config.Bind("Display", "TargetGuidance", true, "Show target direction and distance.");
             coordinates = Config.Bind("Display", "Coordinates", false, "Show coordinates below compass; disable when using Coordinates mod.");
             cameraUp = Config.Bind("Display", "CameraUp", false, "Rotate minimap with camera instead of keeping north up.");
+            reflowNativeHud = Config.Bind("Display", "ReflowNativeHud", true, "Move native HUD notifications and top banners around visible navigation elements; restore their anchors when disabled.");
             mapKey = Config.Bind("Input", "MapKey", Key.M, "Unity Input System key for map; None disables the hotkey.");
             remoteProfile = Config.Bind("Markers", "RemoteProfile", "", "Optional unique save profile for a remote host. Blank keeps remote markers only for this connection.");
             string modDirectory = Path.GetDirectoryName(Info.Location);
@@ -62,7 +64,7 @@ namespace OldMarket.Navigation
             layout = new LayoutHotReload(Path.Combine(settings,"layout.json"), message=>Logger.LogWarning(message));
             gameObject.hideFlags |= HideFlags.HideAndDontSave;
             DontDestroyOnLoad(gameObject);
-            Logger.LogInfo("Navigation 0.1.0 loaded. Map texture is optional; no scene cameras or additional regions are created.");
+            Logger.LogInfo("Navigation 0.1.1 loaded. Map texture is optional; no scene cameras or additional regions are created.");
         }
 
         private void CreateUi()
@@ -175,6 +177,7 @@ namespace OldMarket.Navigation
             state.Available = local != null && local.IsSpawned && local.IsLocalPlayer && UIManager.Instance != null && UIManager.Instance.textCoins != null;
             if (!state.Available)
             {
+                nativeHud.Restore();
                 CloseMap();
                 if (canvas != null) canvas.SetActive(false);
                 if(hadPlayer) { hadPlayer=false; sessionId=Guid.NewGuid().ToString("N"); contextKey=""; state.Markers.Clear(); state.TargetId=""; state.Map=null; sessionMarkers.Clear(); }
@@ -182,7 +185,7 @@ namespace OldMarket.Navigation
             }
             hadPlayer=true;
             player = local.GetComponent<ExampleCharacterSetup>();
-            if (player == null) { state.Available = false; CloseMap(); if(canvas!=null)canvas.SetActive(false); return; }
+            if (player == null) { state.Available = false; nativeHud.Restore(); CloseMap(); if(canvas!=null)canvas.SetActive(false); return; }
             state.PlayerPosition = player.customCharacterController != null ? player.customCharacterController.transform.position : local.transform.position;
             var camera = GameManager.Instance != null && GameManager.Instance.exampleCharacterCamera != null ? GameManager.Instance.exampleCharacterCamera.Camera : Camera.main;
             state.CameraYaw = camera != null ? camera.transform.eulerAngles.y : local.transform.eulerAngles.y;
@@ -200,6 +203,12 @@ namespace OldMarket.Navigation
             hud.GuidanceVisible = guidance.Value;
             hud.CoordinatesVisible = coordinates.Value;
             hud.Refresh();
+            if(reflowNativeHud.Value)
+            {
+                hud.GetReservedBounds(out var minimapBounds,out var topBounds);
+                nativeHud.Tick(UIManager.Instance,minimapBounds,topBounds);
+            }
+            else nativeHud.Restore();
             window.Refresh();
             // A close button inside MapWindow follows the same input restoration path.
             if (ownsInput && !window.IsOpen) CloseMap();
@@ -248,12 +257,14 @@ namespace OldMarket.Navigation
 
         private void OnDisable()
         {
+            nativeHud.Restore();
             CloseMap();
             RestoreEscapeActions(true); // No future Update is guaranteed after disable.
             if (canvas != null) canvas.SetActive(false);
         }
         private void OnDestroy()
         {
+            nativeHud.Dispose();
             CloseMap();
             RestoreEscapeActions(true);
             window?.Dispose();

@@ -53,6 +53,34 @@ static class Program
    foreach(float value in new[]{bound.Value.min,bound.Value.max}){var layout=new NavigationLayout();field.SetValue(layout,value);Check(layout.IsValid(),"inclusive layout bound "+bound.Key);}
    foreach(float value in new[]{bound.Value.min-.01f,bound.Value.max+.01f,float.NaN,float.PositiveInfinity,float.NegativeInfinity}){var layout=new NavigationLayout();field.SetValue(layout,value);Check(!layout.IsValid(),"reject invalid layout "+bound.Key);}
   }
+  // Native notification stacks must fit above the map, or take a genuinely empty adjacent slot.
+  var viewport=new HudBox(12,12,1896,1056);
+  var mini=new HudBox(1650,650,250,280);
+  var compass=new HudBox(700,920,520,110);
+  var occupied=new List<HudBox>{mini,compass};
+  Check(HudPlacement.TryPlace(new HudBox(1300,942,600,60),viewport,occupied,12,out var message),"notification fits above minimap");
+  Near(message.Y,942,"notification above minimap");
+  occupied.Add(message);
+  Check(HudPlacement.TryPlace(new HudBox(1540,540,360,98),viewport,occupied,12,out var tutorial),"tutorial fits below minimap");
+  Check(!tutorial.Overlaps(mini,12)&&!tutorial.Overlaps(message,12),"tutorial avoids map and messages");
+  Check(HudPlacement.TryPlace(new HudBox(1300,942,600,420),viewport,new[]{mini,compass},12,out var burst),"large burst has fallback");
+  Check(burst.X>=viewport.X&&burst.Y>=viewport.Y&&burst.Right<=viewport.Right&&burst.Top<=viewport.Top,"burst stays onscreen");
+  Check(!burst.Overlaps(mini,12)&&!burst.Overlaps(compass,12),"burst fallback avoids navigation");
+  Check(!HudPlacement.TryPlace(new HudBox(0,0,2000,1100),viewport,occupied,12,out _),"oversized content fails without clipping");
+  Check(!HudPlacement.TryPlace(new HudBox(0,0,100,100),viewport,new[]{viewport},12,out _),"no space fails without overlap");
+  var belowCompass=new HudBox(12,12,1896,896);
+  Check(HudPlacement.TryPlace(new HudBox(660,804,600,104),belowCompass,new[]{new HudBox(660,790,600,120)},12,out var hint),"top banner finds space below compass");
+  Check(hint.Top<=compass.Y-12,"top banner fallback never jumps above compass");
+  var free=new HudBox(110,210,300,60);
+  Check(HudPlacement.TryPlace(free,viewport,Array.Empty<HudBox>(),12,out var untouched),"free original location accepted");
+  Near(untouched.X,free.X,"free original x preserved");Near(untouched.Y,free.Y,"free original y preserved");
+  // Scaling both canvases to physical pixels must preserve the chosen logical slot.
+  foreach(float scale in new[]{.5f,.75f,1.5f,2f})
+  {
+   HudBox Scaled(HudBox b)=>new HudBox(b.X*scale,b.Y*scale,b.Width*scale,b.Height*scale);
+   Check(HudPlacement.TryPlace(Scaled(new HudBox(1300,942,600,60)),Scaled(viewport),new[]{Scaled(mini),Scaled(compass)},12*scale,out var scaled),"resolution scaled placement");
+   Near(scaled.X/scale,message.X,"resolution stable x");Near(scaled.Y/scale,message.Y,"resolution stable y");
+  }
   Console.WriteLine($"Passed {count} navigation checks.");
  }
 }

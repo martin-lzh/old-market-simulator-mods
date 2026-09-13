@@ -21,6 +21,7 @@ namespace OldMarket.Navigation
         private readonly List<TextMeshProUGUI> labels = new List<TextMeshProUGUI>();
         private readonly List<UnityEngine.Object> owned = new List<UnityEngine.Object>();
         private NavigationLayout layout = new NavigationLayout();
+        private readonly Vector3[] boundsCorners = new Vector3[4];
         public bool MinimapVisible = true, CompassVisible = true, GuidanceVisible = true, CoordinatesVisible;
         public float MinimapRange = 100;
         private static readonly Color Gold = new Color(.92f, .79f, .53f, 1);
@@ -85,6 +86,8 @@ namespace OldMarket.Navigation
             compass.sizeDelta=new Vector2(layout.CompassWidth,70);
             compass.anchoredPosition=new Vector2(0,-layout.CompassTop);
             mode.rectTransform.anchoredPosition=new Vector2(0,-layout.MinimapSize/2-18);
+            mode.rectTransform.sizeDelta=new Vector2(layout.MinimapSize+12,28);
+            mode.enableAutoSizing=true;mode.fontSizeMin=10;mode.fontSizeMax=17;
             noMap.rectTransform.sizeDelta=new Vector2(layout.MinimapSize*.72f,layout.MinimapSize*.25f);
             noMap.rectTransform.anchoredPosition=new Vector2(0,-layout.MinimapSize*.22f);
             noMap.fontSize=Mathf.Clamp(layout.MinimapSize/17,10,16);
@@ -161,6 +164,29 @@ namespace OldMarket.Navigation
                 worldTargetRoot.anchoredPosition=local;
                 worldTargetText.text=target.Name+"  "+Mathf.Sqrt(dx*dx+dz*dz).ToString("F0",CultureInfo.CurrentCulture)+" m";
                 worldTargetRoot.gameObject.SetActive(true);
+            }
+        }
+
+        public void GetReservedBounds(out Rect? minimapBounds,out Rect? topBounds)
+        {
+            minimapBounds=null;topBounds=null;
+            if(root==null || root.rect.width<=0 || root.rect.height<=0)return;
+            AddBounds(ref minimapBounds,mini);
+            AddBounds(ref minimapBounds,ringArt);
+            AddBounds(ref minimapBounds,mode.rectTransform);
+            AddBounds(ref topBounds,compass);
+            AddBounds(ref topBounds,location.rectTransform);
+            AddBounds(ref topBounds,targetRoot);
+        }
+
+        private void AddBounds(ref Rect? bounds,RectTransform rect)
+        {
+            if(rect==null || !rect.gameObject.activeInHierarchy)return;
+            rect.GetWorldCorners(boundsCorners);
+            for(int i=0;i<4;i++)
+            {
+                var point=RectTransformUtility.WorldToScreenPoint(null,boundsCorners[i]);
+                bounds=bounds.HasValue?UnityEngine.Rect.MinMaxRect(Mathf.Min(bounds.Value.xMin,point.x),Mathf.Min(bounds.Value.yMin,point.y),Mathf.Max(bounds.Value.xMax,point.x),Mathf.Max(bounds.Value.yMax,point.y)):new Rect(point.x,point.y,0,0);
             }
         }
 
