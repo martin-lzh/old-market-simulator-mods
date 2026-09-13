@@ -18,8 +18,8 @@ Press main-row **-** to zoom the minimap out and **=** to zoom in. The map frame
 - Circular minimap defaults to north up. Switch to camera up in the map window or configuration; the choice persists. Big map always stays north up.
 - Press **M** to open/close the map, or **Esc** / the Close button to close it. Keyboard input inside a marker name does not trigger M. The default matches the game's `UI.Map` default binding, but this version uses its own configurable keyboard key and does not automatically follow game rebinding.
 - Scroll to zoom, drag with the left mouse button to pan, right-click empty mapped terrain to add a marker. Right-click a personal marker icon or its visible name to remove it; left-click either to edit its text, color and icon below the current target in the sidebar. Color, shape and delete actions share one icon row below Set target. Color and shape buttons expand a slot grid below; select a slot to apply and save. Personal marker sprites stay visible without native font symbols. Fixed POIs remain read-only. Up to 512 markers per scope, with names up to 80 characters.
-- The target panel below the compass displays left/right bearing, horizontal distance and the absolute angle from your camera direction. Distance uses X/Z world units displayed as metres. This bearing panel is not an elevation measurement, route or obstacle-aware path.
-- When a loaded non-trigger collision surface is found below the target, a separate diamond and name/distance label use the actual camera projection. The probe runs at most once per second while a target exists and the map is closed; target/scene changes invalidate its cache. No hit, a point behind the camera or a label near screen edges leaves only the bearing panel. There is no line-of-sight/occlusion check: a hit may be a roof or object rather than walkable ground, and the cached height may lag moving surfaces. No unloaded terrain is generated.
+- The compass retains a target bearing marker. The separate name/distance/angle panel below it is removed.
+- When a loaded non-trigger collision surface is found below the target, a matching target icon and name/distance label use the actual camera projection. The probe runs at most once per second while a target exists and the map is closed; target/scene changes invalidate its cache. No hit, a point behind the camera or a label near screen edges leaves only the compass target marker. There is no line-of-sight/occlusion check: a hit may be a roof or object rather than walkable ground, and the cached height may lag moving surfaces. No unloaded terrain is generated.
 - Opening the map releases the cursor and suppresses character controls. It temporarily suppresses the game's Settings/Close actions to prevent Esc from also opening Pause. It does not pause the world or other players. Native windows/loading take priority.
 - UI decorations are embedded in the DLL. The map reuses static textures; it does not create a scene-rendering camera, load extra game regions or send gameplay RPCs.
 
@@ -41,7 +41,7 @@ The first load creates `BepInEx/config/local.oldmarket.navigation.cfg`. Edit thi
 | --- | --- | --- |
 | `Display.Minimap` | `true` | Show minimap. |
 | `Display.Compass` | `true` | Show compass. |
-| `Display.TargetGuidance` | `true` | Show target bearing panel. |
+| `Display.TargetGuidance` | `true` | Show compass and 3D target guidance. |
 | `Display.Coordinates` | `false` | Show XYZ below compass; leave off when using Coordinates to avoid duplication. |
 | `Display.CameraUp` | `false` | Rotate minimap with camera; the map-window button saves this choice. |
 | `Display.ReflowNativeHud` | `true` | Move native notification/task/hint HUD around navigation; restore original anchors when disabled. |
@@ -72,7 +72,7 @@ Edit `BepInEx/config/OldMarket.Navigation/layout.json` while playing. Changes ar
 }
 ```
 
-Layout units use a 1920×1080 reference canvas. `MinimapRange` is the radius in world units. The historical field name `WorldMarkerSize` controls target-panel and projected-marker text size. Very small layouts and long translated text still require visual testing.
+Layout units use a 1920×1080 reference canvas. `MinimapRange` is the radius in world units. The historical field name `WorldMarkerSize` controls projected-marker icon and text size. Very small layouts and long translated text still require visual testing.
 
 `MinimapBottomLeft=true` uses `MinimapLeft`/`MinimapBottom`; the default bottom margin leaves room for the mode label. Set it to `false` to use the legacy `MinimapRight`/`MinimapTop` upper-right placement. Existing layout files without the new fields use the new lower-left defaults. HUD content is remeasured at most every 0.1 seconds, with immediate reflow for navigation-bound or screen-size changes. If a message burst cannot fit anywhere without overlap, its original position is retained rather than hiding or shrinking it.
 
@@ -120,7 +120,7 @@ Original code, documentation and original UI decorations are provided under [MIT
 
 ## 中文说明
 
-**0.1.4 是实验版**：独立导航 Mod，包含顶部罗盘、圆形小地图、M 键大地图、个人标记和目标方位栏，不依赖也不替换 Coordinates。
+**0.1.4 是实验版**：独立导航 Mod，包含顶部罗盘、圆形小地图、M 键大地图、个人标记和目标方位指示，不依赖也不替换 Coordinates。
 
 已提供构建及自动检查。0.1.2 已在本机安装，用户截图暴露了布局缺陷和 M 键失效；**本次修复仍需游戏内视觉、输入恢复、性能及联机验收**。公开包不含游戏派生地图。没有本地地图配套文件时仍可显示罗盘和可选 XYZ，地图提示无数据，不能在地图上新增标记。
 
@@ -138,8 +138,8 @@ POI 按类别使用商店 #ad7568、房屋/休息点 #829278、码头/订购点 
 - 小地图默认固定正北，可在大地图按钮或配置切换随视角转动并保存选择；大地图始终固定正北。
 - **M** 开关地图，**Esc** 或关闭按钮关图。输入标记名时 M 不触发开关。默认键与游戏 `UI.Map` 默认相同，但当前版本使用独立配置键，不自动跟随游戏改键。
 - 滚轮缩放、左键拖动；空白地图处右键添加个人标记，再次右键其图标或可见名称即可删除。左键其图标或名称后在右栏编辑文字、颜色、图标和目标。“设为目标”下方的颜色、形状、删除使用一排图标；颜色与形状按钮展开下方格子，点击即应用保存。个人标记使用精灵图标，不依赖原生字体符号。固定 POI 不受右键删除影响。每个存储范围最多 512 个标记，名称最多 80 字符。
-- 罗盘下方目标栏显示左右方向、水平距离及相对镜头的角差。距离按 X/Z 世界单位显示为米；**方位栏本身不提供高度、寻路或绕障路线**。
-- 若从目标上方向下射线命中已加载的非触发碰撞体，另显示实际摄像机投影的菱形、名称和距离。仅有目标且大地图关闭时每秒最多采样一次；目标或场景变化清除缓存。未命中、位于镜头后方或靠近屏幕边缘时，仅保留方位栏。没有视线遮挡判断，命中可能落在屋顶或物体表面，并不保证是可行走地面；移动表面的缓存高度可能有延迟。不生成未加载地形。
+- 罗盘保留目标方位标记，移除其下方独立的名称、距离与角度提示栏。
+- 若从目标上方向下射线命中已加载的非触发碰撞体，另显示实际摄像机投影的目标图标、名称和距离。仅有目标且大地图关闭时每秒最多采样一次；目标或场景变化清除缓存。未命中、位于镜头后方或靠近屏幕边缘时，仅保留罗盘上的目标标记。没有视线遮挡判断，命中可能落在屋顶或物体表面，并不保证是可行走地面；移动表面的缓存高度可能有延迟。不生成未加载地形。
 - 开图释放鼠标并抑制角色操作；暂时停用原生 Settings/Close 操作以避免 Esc 同时打开暂停菜单，不暂停整个世界。原生窗口及加载画面优先。
 - 只使用静态底图，不新建场景渲染相机、不额外加载区域、不发送游戏操作 RPC。
 
@@ -157,7 +157,7 @@ POI 按类别使用商店 #ad7568、房屋/休息点 #829278、码头/订购点 
 
 上方配置表列出了所有项目。小地图、罗盘、目标指引默认开启；导航内 XYZ 默认关闭，避免与独立坐标 Mod 重复。`CameraUp=false` 为固定正北，`MapKey=None` 禁用键盘开关。主 CFG 建议退出游戏后编辑，其说明为英语。
 
-运行时可以编辑 `BepInEx/config/OldMarket.Navigation/layout.json`，上方 JSON 为默认值。每 0.5 秒检查一次；无效配置保留上一版布局。数值以 1920×1080 参考画布计算；`MinimapRange` 为世界单位半径，`WorldMarkerSize` 是沿用的字段名，实际控制目标栏及投影标记的文字大小。布局热更新不包含 C#、底图文件或游戏数据，替换底图后需重启。
+运行时可以编辑 `BepInEx/config/OldMarket.Navigation/layout.json`，上方 JSON 为默认值。每 0.5 秒检查一次；无效配置保留上一版布局。数值以 1920×1080 参考画布计算；`MinimapRange` 为世界单位半径，`WorldMarkerSize` 是沿用的字段名，实际控制投影标记的图标和文字大小。布局热更新不包含 C#、底图文件或游戏数据，替换底图后需重启。
 
 ### 地图状态与存储
 

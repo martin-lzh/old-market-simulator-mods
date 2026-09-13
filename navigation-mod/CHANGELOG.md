@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Remove the separate top target name/distance/bearing panel; retain the compass target marker and projected world guidance.
+
 - Reuse the selected POI or personal marker sprite for 3D target guidance, preserving its semantic shape, color and outline instead of a generic diamond.
 
 - Start the minimap at a 75-unit radius, one zoom-in step from the previous 100-unit default.
@@ -84,6 +86,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 移除顶部独立的目标名称、距离与方位提示栏，保留罗盘目标标记和 3D 场景指引。
 
 - 3D 目标指引复用所选 POI 或个人标记的图标、颜色和描边，不再统一显示菱形。
 

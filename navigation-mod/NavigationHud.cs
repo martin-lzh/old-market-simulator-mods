@@ -12,9 +12,9 @@ namespace OldMarket.Navigation
     public sealed class NavigationHud : IDisposable
     {
         private readonly NavigationState state;
-        private readonly RectTransform root, mini, disk, content, compass, targetRoot, worldTargetRoot;
+        private readonly RectTransform root, mini, disk, content, compass, worldTargetRoot;
         private readonly RawImage map, mapOverlay;
-        private readonly TextMeshProUGUI north, mode, location, targetText, compassTarget, center, noMap, worldTargetText;
+        private readonly TextMeshProUGUI north, mode, location, compassTarget, center, noMap, worldTargetText;
         private readonly Image playerArrow, worldTargetIcon;
         private readonly PoiIconSet playerIcons=new PoiIconSet();
         private RectTransform ringArt;
@@ -81,10 +81,6 @@ namespace OldMarket.Navigation
             center = Text("Heading",compass,16); center.rectTransform.anchoredPosition = new Vector2(0,-24);
             compassTarget = Text("TargetBearing",compass,22); compassTarget.text="◆";
             location = Text("Coordinates",compass,18); location.rectTransform.anchoredPosition=new Vector2(0,-62); location.rectTransform.sizeDelta=new Vector2(550,28);
-            targetRoot = Rect("TargetGuidance",root,new Vector2(.5f,1),new Vector2(520,64));
-            targetRoot.pivot=new Vector2(.5f,1);
-            targetText=Text("Target",targetRoot,22); targetText.rectTransform.sizeDelta=new Vector2(520,64);
-            targetText.enableAutoSizing=true; targetText.fontSizeMin=14;
             worldTargetRoot=Rect("WorldTarget",root,new Vector2(.5f,.5f),new Vector2(300,80));
             var worldIconRect=Rect("WorldTargetIcon",worldTargetRoot,new Vector2(.5f,.5f),new Vector2(28,28));
             worldTargetIcon=worldIconRect.gameObject.AddComponent<Image>();worldTargetIcon.color=Color.white;worldTargetIcon.raycastTarget=false;
@@ -113,8 +109,6 @@ namespace OldMarket.Navigation
             noMap.rectTransform.sizeDelta=new Vector2(layout.MinimapSize*.72f,layout.MinimapSize*.25f);
             noMap.rectTransform.anchoredPosition=new Vector2(0,-layout.MinimapSize*.22f);
             noMap.fontSize=Mathf.Clamp(layout.MinimapSize/17,10,16);
-            targetText.fontSize=layout.WorldMarkerSize;
-            targetText.fontSizeMax=layout.WorldMarkerSize;
             worldTargetText.fontSize=layout.WorldMarkerSize;worldTargetText.fontSizeMax=layout.WorldMarkerSize;
             worldTargetIcon.rectTransform.sizeDelta=Vector2.one*layout.WorldMarkerSize;
             var group=root.GetComponent<CanvasGroup>() ?? root.gameObject.AddComponent<CanvasGroup>();
@@ -184,16 +178,13 @@ namespace OldMarket.Navigation
             }
             for(int i=state.Markers.Count;i<marks.Count;i++)marks[i].gameObject.SetActive(false);
             bool targetVisible=GuidanceVisible && target!=null;
-            targetRoot.gameObject.SetActive(targetVisible); compassTarget.gameObject.SetActive(targetVisible);
+            compassTarget.gameObject.SetActive(targetVisible);
             worldTargetRoot.gameObject.SetActive(false);
             if(!targetVisible)return;
             float dx=target.X-state.PlayerPosition.x,dz=target.Z-state.PlayerPosition.z;
             float bearing=Mathf.Atan2(dx,dz)*Mathf.Rad2Deg;
             float difference=Mathf.DeltaAngle(state.CameraYaw,bearing);
             compassTarget.rectTransform.anchoredPosition=new Vector2(Mathf.Clamp(difference,-83,83)/170*layout.CompassWidth,-7);
-            targetText.text=(difference < -5 ? "◀ " : difference > 5 ? "▶ " : "◆ ")+Texts.Get(state.Locale,"Target")+": "+target.Name+"\n"+Mathf.Sqrt(dx*dx+dz*dz).ToString("F0",CultureInfo.CurrentCulture)+" m  ·  "+Mathf.Abs(difference).ToString("F0",CultureInfo.CurrentCulture)+"°";
-            // Fixed bearing panel: markers have X/Z only, so never imply an invented world height.
-            targetRoot.anchoredPosition=new Vector2(0,-layout.CompassTop-(CompassVisible?CoordinatesVisible?126:92:0));
             if(state.WorldTargetVisible && RectTransformUtility.ScreenPointToLocalPointInRectangle(root,state.WorldTargetScreen,null,out var local)
                 && Mathf.Abs(local.x)<root.rect.width/2-160 && Mathf.Abs(local.y)<root.rect.height/2-60)
             {
@@ -215,7 +206,6 @@ namespace OldMarket.Navigation
             AddBounds(ref minimapBounds,zoomHint.Rect);
             AddBounds(ref topBounds,compass);
             AddBounds(ref topBounds,location.rectTransform);
-            AddBounds(ref topBounds,targetRoot);
         }
 
         private void AddBounds(ref Rect? bounds,RectTransform rect)
