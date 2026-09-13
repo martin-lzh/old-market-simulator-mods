@@ -1,6 +1,7 @@
 import importlib.util
 from pathlib import Path
 import tempfile
+import subprocess
 import unittest
 from unittest.mock import patch
 import zipfile
@@ -95,6 +96,89 @@ class VersionTests(unittest.TestCase):
                 ci.export_sdk("fake-game", "2.1.6", 1, "fake-seeds")
 
 
+class ReleaseDirectoryTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+        self.root_patch = patch.object(ci, "ROOT", self.root)
+        self.root_patch.start()
+        self.git("init", "--quiet")
+        self.write("coordinates-mod/Plugin.cs", "original")
+        self.baseline = self.commit()
+        self.git("-c", "user.name=Test", "-c", "user.email=test@example.invalid",
+                 "tag", "-a", "coordinates-v1.0.0", "-m", "Release")
+        self.releases = [dict(tag_name="coordinates-v1.0.0", draft=False, target_commitish="main")]
+
+    def tearDown(self):
+        self.root_patch.stop()
+        self.temp.cleanup()
+
+    def git(self, *args):
+        return subprocess.check_output(["git", *args], cwd=self.root, text=True, stderr=subprocess.PIPE).strip()
+
+    def write(self, path, value):
+        file = self.root / path
+        file.parent.mkdir(parents=True, exist_ok=True)
+        file.write_text(value)
+
+    def commit(self):
+        self.git("add", ".")
+        self.git("-c", "user.name=Test", "-c", "user.email=test@example.invalid", "commit", "--quiet", "-m", "Test")
+        return self.git("rev-parse", "HEAD")
+
+    def test_shared_and_other_mod_changes_do_not_trigger_release(self):
+        for path in ("README.md", "sdk/api.json", "tools/ci.py", ".github/workflows/mods.yml", "navigation-mod/Plugin.cs"):
+            self.write(path, "change")
+        head = self.commit()
+        self.assertFalse(ci.mod_changed_since_release("coordinates", head, self.releases))
+        # Neither uncommitted files nor a changed target_commitish branch count as released source.
+        self.write("coordinates-mod/Plugin.cs", "uncommitted")
+        self.assertFalse(ci.mod_changed_since_release("coordinates", head, self.releases))
+
+    def test_earlier_mod_commit_counts_even_when_latest_commit_is_shared_only(self):
+        self.write("coordinates-mod/Plugin.cs", "fix")
+        self.commit()
+        self.write("README.md", "later docs")
+        self.assertTrue(ci.mod_changed_since_release("coordinates", self.commit(), self.releases))
+
+    def test_reverted_directory_is_unchanged(self):
+        self.write("coordinates-mod/Plugin.cs", "fix")
+        self.commit()
+        self.write("coordinates-mod/Plugin.cs", "original")
+        self.assertFalse(ci.mod_changed_since_release("coordinates", self.commit(), self.releases))
+
+    def test_mod_docs_count_and_other_mods_and_drafts_do_not_set_baseline(self):
+        self.write("coordinates-mod/README.md", "usage")
+        head = self.commit()
+        releases = self.releases + [dict(tag_name="coordinates-v99.0.0", draft=True),
+                                   dict(tag_name="navigation-v99.0.0", draft=False)]
+        self.assertTrue(ci.mod_changed_since_release("coordinates", head, releases))
+
+    def test_highest_numeric_published_version_is_baseline(self):
+        self.git("tag", "coordinates-v1.9.0", self.baseline)
+        self.write("coordinates-mod/Plugin.cs", "latest released")
+        latest = self.commit()
+        self.git("tag", "coordinates-v1.10.0", latest)
+        releases = self.releases + [dict(tag_name="coordinates-v1.10.0", draft=False),
+                                   dict(tag_name="coordinates-v1.9.0", draft=False)]
+        self.assertFalse(ci.mod_changed_since_release("coordinates", latest, releases))
+
+    def test_first_release_needs_tracked_mod_directory(self):
+        self.assertTrue(ci.mod_changed_since_release("coordinates", self.baseline, []))
+        self.assertFalse(ci.mod_changed_since_release("navigation", self.baseline, []))
+
+    def test_missing_published_tag_fails_closed(self):
+        with self.assertRaisesRegex(ValueError, "fetch complete history"):
+            ci.mod_changed_since_release("coordinates", self.baseline, [dict(tag_name="coordinates-v2.0.0", draft=False)])
+
+    def test_git_diff_error_is_not_treated_as_a_change(self):
+        with patch.object(ci.subprocess, "check_output", return_value=self.baseline), \
+                patch.object(ci.subprocess, "run") as diff:
+            diff.return_value.returncode = 128
+            with self.assertRaisesRegex(ValueError, "Cannot compare"):
+                ci.mod_changed_since_release("coordinates", self.baseline, self.releases)
+
+
 class FakeGitHub:
     def __init__(self, existing=None, corrupt=False):
         self.existing = existing or []
@@ -158,6 +242,14 @@ class PublishTests(unittest.TestCase):
     def test_existing_public_release_is_never_modified(self):
         api = FakeGitHub([dict(tag_name="coordinates-v1.0.0", draft=False)])
         ci.publish("owner/repo", "a" * 40, api)
+        self.assertEqual(api.calls, [])
+
+    def test_unchanged_mod_skips_artifact_reads_and_all_network_writes(self):
+        self.package.unlink()
+        api = FakeGitHub()
+        with patch.object(ci, "mod_changed_since_release", return_value=False) as changed:
+            ci.publish("owner/repo", "a" * 40, api)
+        changed.assert_called_once()
         self.assertEqual(api.calls, [])
 
     def test_upload_verify_then_publish(self):

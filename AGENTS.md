@@ -11,6 +11,8 @@
 3. 用户明确要求推进后，按其指定范围统一落实版本号、插件声明、包名、README 与中英文 CHANGELOG，将相应 Unreleased 内容移入编号版本。必要的不可变 SDK 接口快照修订按下文维护，但不自动推进 Mod 版本。
 4. 创建、更新或审查 PR 时，必须检查所有 Mod 的 CHANGELOG，并对照 PR 差异，列出有改动但尚未指定版本的 Mod（包括仍有 Unreleased 内容者）。PR 中逐项记录“已明确指定的目标版本”或“Unreleased，待用户指定版本”；没有则明确写“无”。不得为了让检查通过自行分配版本，也不得仅凭已有旧版本号认定本轮改动已指定版本。
 
+5. 发布还须检查对应 `<mod>-mod/` 目录相对该 Mod 最近已发布版本标签的净差异；目录未变默认跳过。共享 SDK、CI 或根目录文档改动可以触发验证，但不能单独触发未改动 Mod 的 Release。首次发布须有已跟踪的 Mod 文件；目录变化也不能替代用户的版本推进授权。
+
 ### SDK 维护是 Mod 开发的一部分
 
 1. 每次新增或修改 Mod，都检查其 `release.json` 所固定的 SDK 是否覆盖实际使用的游戏、Unity 和网络接口。新增类型/成员调用、修改方法签名或泛型用法、增加 `nameof`/反射/Harmony 目标、适配游戏更新时，必须重新评估 SDK 和本地游戏契约检查。纯文档、翻译或不改变接口依赖的逻辑修改无需机械增加 SDK 修订。
@@ -36,6 +38,8 @@ This is the public repository for original Mod source, the compilation SDK and r
 2. Otherwise, record all pending changes in that Mod's bilingual `Unreleased` / `未发布` CHANGELOG sections. Preserve existing assembly, plugin and package versions; do not create numbered entries or append new changes to numbered historical entries. Identify local builds by commit and SHA256 instead of inventing a version for installation tests.
 3. After an explicit request, synchronize the authorized version scope across assembly/plugin declarations, package names, README and both CHANGELOG languages, moving the relevant Unreleased entries into the numbered release. Maintain required immutable SDK API revisions under the rules below; this does not automatically advance any Mod version.
 4. When creating, updating or reviewing a PR, inspect every Mod CHANGELOG and compare the PR diff. List Mods with changes that have not yet been assigned a version, including those with pending Unreleased entries. Record each as an explicitly assigned target version or “Unreleased, awaiting a user-assigned version”; state “none” if there are none. Never assign versions just to pass this check or treat an existing old version number as an assignment for the new changes.
+
+5. Publishing additionally requires a net change in the corresponding `<mod>-mod/` directory since that Mod's latest published version tag. Skip unchanged directories. Shared SDK, CI and root documentation changes may trigger validation, but cannot alone trigger a Release for an unchanged Mod. A first release requires tracked Mod files; directory changes do not replace explicit version-advancement authorization.
 
 ### SDK maintenance is part of Mod development
 

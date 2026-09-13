@@ -14,6 +14,8 @@ See [SDK maintenance](../sdk/README.md) for game-free builds and game-version up
 4. A push to `main` after merge automatically publishes new CHANGELOG versions at that exact commit. Already-public versions are skipped without replacing assets or moving tags. Documentation/SDK changes without a new Mod version never republish old binaries.
 5. The publishing job creates a draft, uploads ZIPs, SHA256SUMS.txt and build-info.json, downloads and verifies every asset byte, then publishes. Evidence records source commit, game version/hash, SDK revision and API snapshot hash. Release notes contain the current numbered English and Chinese entries. No workflow writes back to protected main.
 
+Release selection also compares the committed `<mod>-mod/` directory with the tag of that Mod's highest already-published semantic version (including published prereleases, excluding drafts and other Mods). An unchanged directory is skipped before reading artifacts or writing to GitHub. The comparison covers all commits since that release, not just the latest push; fully reverted changes do not count. Files within the Mod directory, including its documentation, count as changes. Shared SDK, CI and root documentation alone do not. First releases require tracked files in the Mod directory. Missing baseline tags or Git comparison errors stop publication rather than guessing. Release checkout fetches complete history and tags. This gate supplements explicit user version authorization and the new numbered CHANGELOG requirement; it does not replace either.
+
 Packages allow exactly the original Mod DLL under its installation path, README.md, CHANGELOG.md and LICENSE. Never package loaders, SDK references or game files. Existing three-file releases remain untouched.
 
 For interrupted uploads, rerun the failed jobs of the original main-push workflow. A draft can resume only for the same source and notes; existing asset bytes must match. Conflicts leave the draft for inspection. Conflicting tags, another commit’s draft and backwards new versions fail closed. Manual workflow_dispatch runs build diagnostics only and never publish.
@@ -27,6 +29,8 @@ The existing catalog.json and tag markdown files remain the historical manual re
 3. PR CI 在 GitHub 托管 Windows Runner 上编译六个 Mod（七个加载器变体），运行纯逻辑/本地化测试并检查包清单。引用来自仅含接口声明的 SDK，无需原始游戏文件或自托管 Runner。
 4. PR 合并后 main 的 push 自动按 CHANGELOG 新版本发布，标签指向此次准确提交。已公开版本直接跳过，不覆盖附件、不移动标签；仅修改文档/SDK 而不增加 Mod 编号，不会重新发布旧包。
 5. 发布任务创建草稿，上传 ZIP、SHA256SUMS.txt、build-info.json，下载逐字节校验所有附件后公开。记录源码提交、游戏版本/哈希、SDK 修订和接口快照哈希；说明提取当前编号的中英文条目。工作流不回写受保护的 main。
+
+发布筛选还会将已提交的 `<mod>-mod/` 目录与该 Mod 最高已公开语义版本的标签比较（包括已公开预发布，排除草稿及其他 Mod）。目录无净变化时，在读取附件和写入 GitHub 前跳过。比较覆盖上次发布以来的所有提交，不只检查最近一次 push；完全还原的改动不计。目录内文档也属于改动，共享 SDK、CI 和根目录文档单独变化则不计。首次发布须有已跟踪的 Mod 文件。缺少基准标签或 Git 比较失败时停止，不猜测结果；发布任务获取完整历史与标签。此条件与用户明确授权推进版本、新编号 CHANGELOG 同时适用，不能相互替代。
 
 包内只允许原创 Mod DLL（保留安装目录）、README.md、CHANGELOG.md、LICENSE。加载器、SDK 引用、原始游戏文件不得入包；已有三文件发布保持原样。
 

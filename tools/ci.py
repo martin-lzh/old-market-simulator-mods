@@ -298,6 +298,35 @@ class GitHub:
         raise ValueError("Release pagination limit exceeded")
 
 
+def mod_changed_since_release(slug, commit, releases):
+    """Compare committed directory contents with this Mod's highest published version."""
+    if slug not in MODS or not re.fullmatch(r"[0-9a-f]{40}", commit):
+        raise ValueError("Directory comparison requires a known Mod and exact commit")
+    prefix = slug + "-v"
+    tags = [r["tag_name"] for r in releases if not r["draft"]
+            and r["tag_name"].startswith(prefix)
+            and re.fullmatch(VERSION, r["tag_name"][len(prefix):])]
+    directory = f"{slug}-mod/"
+    if not tags:
+        # First release: require tracked files at the exact release commit.
+        return bool(subprocess.check_output(
+            ["git", "ls-tree", "-r", "--name-only", commit, "--", directory], cwd=ROOT, text=True).strip())
+    tag = max(tags, key=lambda t: tuple(map(int, t[len(prefix):].split('.'))))
+    try:
+        # Peel annotated tags; target_commitish may be a branch name and is not evidence.
+        baseline = subprocess.check_output(
+            ["git", "rev-parse", "--verify", f"refs/tags/{tag}^{{commit}}"], cwd=ROOT, text=True).strip()
+    except subprocess.CalledProcessError as error:
+        raise ValueError(f"Cannot resolve published tag {tag}; fetch complete history and tags") from error
+    if not re.fullmatch(r"[0-9a-f]{40}", baseline):
+        raise ValueError(f"Invalid published tag commit: {tag}")
+    result = subprocess.run(["git", "diff", "--quiet", "--no-ext-diff", "--no-textconv",
+                             baseline, commit, "--", directory], cwd=ROOT)
+    if result.returncode not in (0, 1):
+        raise ValueError(f"Cannot compare {directory} with published tag {tag}")
+    return result.returncode == 1
+
+
 def publish(repository, commit, api=None):
     if not re.fullmatch(r"[0-9a-f]{40}", commit):
         raise ValueError("Publish requires an exact commit SHA")
@@ -318,6 +347,9 @@ def publish(repository, commit, api=None):
                  and tuple(map(int, t[len(slug) + 2:].split('.'))) > tuple(map(int, c["version"].split('.')))]
         if newer:
             raise ValueError(f"Refusing a new release older than an existing version: {tag}")
+        if not mod_changed_since_release(slug, commit, published.values()):
+            print(f"Skip {tag}; {slug}-mod/ is unchanged since its last published version (or has no tracked files).")
+            continue
         directory = ROOT / "outputs/ci" / slug
         names = [archive_name(c, v) for v in variants(slug)] + ["build-info.json", "SHA256SUMS.txt"]
         files = {name: (directory / name).read_bytes() for name in names}
