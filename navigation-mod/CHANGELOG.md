@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Right-click a personal marker icon or label to remove it; left-click to edit. Remove the icon backdrop and overview list; place current target above the marker editor. Pair minimap action labels individually with their minus/equals keycaps.
+
 - Pin game 2.1.6 SDK r7 for the actual UI scroll multiplier, runtime input range and platform APIs. Pass 1397 navigation checks, 553 native contracts, 31 CI tooling tests and all seven SDK/real-reference comparisons; in-game acceptance remains pending.
 
 - Normalize wheel input by the active UI module scale, preserve fractional movement and cancel pending opposite zoom; +/- button behavior is unchanged.
@@ -62,6 +64,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 右键个人标记图标或名称即可删除，左键选中编辑；去掉图标底色和标记总览，将当前目标放在编辑区上方。小地图缩放提示改为“缩小 [-]　放大 [=]”两组动作与键帽。
 
 - 固定游戏 2.1.6 SDK r7，覆盖实际 UI 滚轮倍率、运行时输入范围与平台接口。通过 1397 项导航检查、553 项原生契约、31 项 CI 工具测试及全部七个 SDK/真实引用对比；实机验收仍待完成。
 

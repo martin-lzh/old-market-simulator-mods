@@ -11,7 +11,7 @@ namespace OldMarket.Navigation
         private readonly RectTransform parent;
         private UIManager owner;
         private GameObject host;
-        private TextMeshProUGUI caption;
+        private TextMeshProUGUI caption, zoomInCaption;
         private ControlSlot minus, equals;
         private string lastLocale;
         private TMP_FontAsset lastFont;
@@ -33,6 +33,8 @@ namespace OldMarket.Navigation
                 // Only borrow the native visual elements. Its description container expects a different parent layout.
                 caption=UnityEngine.Object.Instantiate(source.gameObject,host.transform,false).GetComponent<TextMeshProUGUI>();
                 caption.gameObject.SetActive(true);
+                zoomInCaption=UnityEngine.Object.Instantiate(source.gameObject,host.transform,false).GetComponent<TextMeshProUGUI>();
+                zoomInCaption.gameObject.SetActive(true);
                 minus=CreateKey(ui.prefabControlHintSlot,"-");
                 equals=CreateKey(ui.prefabControlHintSlot,"=");
                 if(caption==null || minus==null || equals==null) {Dispose();return;}
@@ -44,16 +46,19 @@ namespace OldMarket.Navigation
             }
             if(lastLocale==state.Locale && lastFont==state.Font && lastWidth==width)return;
             lastLocale=state.Locale;lastFont=state.Font;lastWidth=width;
-            caption.text=Texts.Get(state.Locale,"ZoomHint");caption.richText=false;
-            if(state.Font!=null) {caption.font=state.Font;minus.textBinding.font=state.Font;equals.textBinding.font=state.Font;}
-            // One explicit horizontal row: caption, minus, equals. No layout pass may shrink Chinese to one character.
+            caption.text=Texts.Get(state.Locale,"ZoomOut");zoomInCaption.text=Texts.Get(state.Locale,"ZoomIn");
+            if(state.Font!=null) {caption.font=zoomInCaption.font=state.Font;minus.textBinding.font=state.Font;equals.textBinding.font=state.Font;}
+            // Keep each action beside its own keycap, with a gap between the two pairs.
             float rowWidth=Mathf.Max(240,width);
             Rect.sizeDelta=new Vector2(rowWidth,32);Rect.localScale=Vector3.one;
-            Place(caption.rectTransform,new Vector2(-40,0),new Vector2(rowWidth-80,32));
-            caption.textWrappingMode=TextWrappingModes.NoWrap;caption.overflowMode=TextOverflowModes.Ellipsis;
-            caption.alignment=TextAlignmentOptions.Center;caption.enableAutoSizing=true;caption.fontSizeMin=10;caption.fontSizeMax=18;
-            Place(minus.transform as RectTransform,new Vector2(rowWidth/2-58,0),new Vector2(32,32));
-            Place(equals.transform as RectTransform,new Vector2(rowWidth/2-18,0),new Vector2(32,32));
+            float groupWidth=(rowWidth-16)/2,captionWidth=groupWidth-40;
+            Place(caption.rectTransform,new Vector2(-rowWidth/2+captionWidth/2,0),new Vector2(captionWidth,32));
+            Place(zoomInCaption.rectTransform,new Vector2(8+captionWidth/2,0),new Vector2(captionWidth,32));
+            foreach(var label in new[]{caption,zoomInCaption})
+            {label.richText=false;label.textWrappingMode=TextWrappingModes.NoWrap;label.overflowMode=TextOverflowModes.Ellipsis;
+             label.alignment=TextAlignmentOptions.Center;label.enableAutoSizing=true;label.fontSizeMin=10;label.fontSizeMax=18;}
+            Place(minus.transform as RectTransform,new Vector2(-rowWidth/2+groupWidth-16,0),new Vector2(32,32));
+            Place(equals.transform as RectTransform,new Vector2(rowWidth/2-16,0),new Vector2(32,32));
         }
 
         private static void Place(RectTransform rect,Vector2 position,Vector2 size)
@@ -78,7 +83,7 @@ namespace OldMarket.Navigation
         public void Dispose()
         {
             if(host!=null) {host.SetActive(false);UnityEngine.Object.Destroy(host);}
-            host=null;owner=null;caption=null;minus=equals=null;lastLocale=null;lastFont=null;lastWidth=-1;
+            host=null;owner=null;caption=zoomInCaption=null;minus=equals=null;lastLocale=null;lastFont=null;lastWidth=-1;
         }
     }
 }

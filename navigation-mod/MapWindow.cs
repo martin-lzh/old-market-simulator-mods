@@ -32,7 +32,7 @@ namespace OldMarket.Navigation
         private string selected="", lastLocale="", lastScope="";
         private float zoom=1, targetZoom=1, lastZoomTime;
         private Vector2 zoomAnchor;
-        private int listOffset, lastCount=-1;
+        private int lastCount=-1;
         private TMP_InputField nameInput;
         private Texture2D frameTexture, paperTexture;
         private Sprite frameSprite;
@@ -125,7 +125,7 @@ namespace OldMarket.Navigation
             if(!IsOpen)return;
             if(((RectTransform)root.parent).rect.size!=lastParentSize)ApplyLayout(appliedLayout);
             if(state.Font!=null)foreach(var text in allText)if(text!=null)text.font=state.Font;
-            if(lastScope!=state.ScopeId){lastScope=state.ScopeId;selected="";zoom=targetZoom=1;pan=Vector2.zero;listOffset=0;RebuildSidebar();}
+            if(lastScope!=state.ScopeId){lastScope=state.ScopeId;selected="";zoom=targetZoom=1;pan=Vector2.zero;RebuildSidebar();}
             if(lastLocale!=state.Locale){lastLocale=state.Locale;RebuildSidebar();foreach(var label in labels)if(label.Item1!=null)label.Item1.text=Texts.Get(state.Locale,label.Item2);}
             if(lastCount!=state.Markers.Count)RebuildSidebar();
             rotationLabel.text=Texts.Get(state.Locale,state.RotateWithCamera?"CameraUp":"NorthUp");
@@ -201,7 +201,14 @@ namespace OldMarket.Navigation
             var world=NavMath.UvToWorld(u,v,state.Map.MinX,state.Map.MaxX,state.Map.MinZ,state.Map.MaxZ);
             var marker=new NavMarker{Name=Texts.Get(state.Locale,"marker")+" "+(state.Markers.Count+1),X=world.X,Z=world.Y};state.Markers.Add(marker);Select(marker.Id);state.SaveMarkers();
         }
-        private void Select(string id){selected=id;int index=state.Markers.FindIndex(m=>m.Id==id);if(index>=0)listOffset=index;RebuildSidebar();}
+        private void Select(string id){selected=id;RebuildSidebar();}
+        private void RemoveMarker(NavMarker marker)
+        {
+            if(!state.Markers.Remove(marker))return;
+            if(state.TargetId==marker.Id)state.TargetId="";
+            if(selected==marker.Id)selected="";
+            state.SaveMarkers();RebuildSidebar();
+        }
         private void RebuildSidebar()
         {
             // Commit an active edit before replacing its controls; its callback also checks scope identity.
@@ -213,36 +220,22 @@ namespace OldMarket.Navigation
             {
                 var node=Rect(marker.Id,mapRect);node.sizeDelta=new Vector2(36,36);var icon=Label(node,"",new Vector2(0,0),new Vector2(36,36),30);icon.text=MarkerSymbol(marker.Icon);icon.alignment=TextAlignmentOptions.Center;icon.color=MarkerColors[marker.Color];
                 bool emphasized=marker.Id==selected||marker.Id==state.TargetId;
-                var click=node.gameObject.AddComponent<Image>();click.color=emphasized?new Color(.25f,.19f,.09f,.94f):new Color(.07f,.075f,.065f,.8f);
-                var button=node.gameObject.AddComponent<UnityEngine.UI.Button>();string id=marker.Id;button.onClick.AddListener(()=>Select(id));
-                var plate=Box("NamePlate",node,new Vector2(40,-2),new Vector2(144,32),emphasized?new Color(.4f,.30f,.15f,.98f):new Color(.1f,.11f,.09f,.94f));plate.GetComponent<Image>().raycastTarget=false;
+                // Keep a transparent hit area so right-click works on the icon without a dark square.
+                node.gameObject.AddComponent<Image>().color=new Color(0,0,0,0);
+                string id=marker.Id;var gesture=node.gameObject.AddComponent<MapGesture>();
+                gesture.Click=e=>{if(e.button==PointerEventData.InputButton.Right)RemoveMarker(marker);else if(e.button==PointerEventData.InputButton.Left)Select(id);};
+                gesture.Drag=e=>{targetZoom=zoom;pan+=e.delta/CanvasScale();ApplyMapGeometry();};
+                gesture.Scroll=e=>{if(RectTransformUtility.ScreenPointToLocalPointInRectangle(viewport,e.position,e.pressEventCamera,out var anchor))WheelZoom(e,anchor);};
+                var plate=Box("NamePlate",node,new Vector2(40,-2),new Vector2(144,32),emphasized?new Color(.4f,.30f,.15f,.98f):new Color(.1f,.11f,.09f,.94f));plate.GetComponent<Image>().raycastTarget=true;
                 var text=Label(plate,"",new Vector2(7,-4),new Vector2(130,24),16);text.text=marker.Name;text.textWrappingMode=TextWrappingModes.NoWrap;text.color=emphasized?Gold:Cream;markerNames.Add(Tuple.Create(marker,text,""));markerNodes.Add(Tuple.Create(marker,node));
             }
             float width=sidebarContent.rect.width>0?sidebarContent.rect.width:218;
-            float height=sidebarContent.rect.height>0?sidebarContent.rect.height:500;
-            Label(sidebarContent,"Markers",Vector2.zero,new Vector2(width-40,28),21).color=Gold;
-            var countLabel=Label(sidebarContent,"",new Vector2(width-36,-3),new Vector2(36,24),16);countLabel.text=state.Markers.Count.ToString();countLabel.alignment=TextAlignmentOptions.Center;countLabel.color=Gold;
-            float listHeight=Mathf.Clamp(height-410,72,240);int rows=Math.Max(2,(int)(listHeight/36));
-            listOffset=Math.Max(0,Math.Min(listOffset,Math.Max(0,state.Markers.Count-rows)));
-            var list=Box("MarkerList",sidebarContent,new Vector2(0,-38),new Vector2(width,listHeight),new Color(.085f,.073f,.058f,.8f));
-            var scroll=list.gameObject.AddComponent<MapGesture>();scroll.Scroll=e=>{listOffset=Math.Max(0,Math.Min(listOffset+(e.scrollDelta.y>0?-1:1),Math.Max(0,state.Markers.Count-rows)));RebuildSidebar();};
-            if(state.Markers.Count==0)Label(list,"NoMarkers",new Vector2(9,-12),new Vector2(width-18,60),16);
-            else for(int i=0;i<rows&&listOffset+i<state.Markers.Count;i++)
-            {
-                var marker=state.Markers[listOffset+i];string id=marker.Id;var row=Button(list,"",new Vector2(3,-3-i*36),new Vector2(width-6,32),()=>Select(id));
-                row.GetComponent<Image>().color=id==selected?Gold:new Color(.4f,.31f,.19f,1);
-                row.GetChild(0).GetComponent<Image>().color=id==selected?new Color(.33f,.25f,.14f,1):new Color(.15f,.13f,.09f,1);
-                var text=row.GetComponentInChildren<TMP_Text>();text.text=MarkerSymbol(marker.Icon)+"  "+marker.Name;text.color=id==selected?Gold:Cream;text.alignment=TextAlignmentOptions.Left;text.textWrappingMode=TextWrappingModes.NoWrap;
-                markerNames.Add(Tuple.Create(marker,text,MarkerSymbol(marker.Icon)+"  "));
-            }
-            if(state.Markers.Count>rows)
-            {
-                float thumb=Mathf.Max(18,listHeight*rows/state.Markers.Count);
-                float travel=(listHeight-thumb)*listOffset/(state.Markers.Count-rows);
-                var rail=Box("ScrollTrack",list,new Vector2(width-3,0),new Vector2(3,listHeight),new Color(.1f,.08f,.05f,1));rail.GetComponent<Image>().raycastTarget=false;
-                var handle=Box("ScrollPosition",list,new Vector2(width-3,-travel),new Vector2(3,thumb),Gold);handle.GetComponent<Image>().raycastTarget=false;
-            }
-            float y=50+listHeight;Line("ListDivider",sidebarContent,new Vector2(0,-y),new Vector2(width,1));y+=12;
+            float y=0;
+            Label(sidebarContent,"CurrentTarget",new Vector2(0,-y),new Vector2(width,34),20).color=Gold;y+=40;
+            targetInfo=Label(sidebarContent,"",new Vector2(0,-y),new Vector2(width,60),17);y+=66;
+            if(state.Target!=null){Button(sidebarContent,"clear_target",new Vector2(0,-y),new Vector2(width,32),()=>{state.TargetId="";RebuildSidebar();});y+=42;}
+            Line("EditDivider",sidebarContent,new Vector2(0,-y),new Vector2(width,1));y+=14;
+            Label(sidebarContent,"EditMarker",new Vector2(0,-y),new Vector2(width,34),20).color=Gold;y+=42;
             var chosen=state.Markers.Find(m=>m.Id==selected);
             if(chosen!=null)
             {
@@ -254,13 +247,9 @@ namespace OldMarket.Navigation
                 Button(sidebarContent,"SetTarget",new Vector2(0,-y),new Vector2(width,34),()=>{state.TargetId=chosen.Id;RebuildSidebar();});y+=43;
                 Button(sidebarContent,"color",new Vector2(0,-y),new Vector2((width-8)/2,32),()=>{chosen.Color=(chosen.Color+1)%4;state.SaveMarkers();RebuildSidebar();});
                 Button(sidebarContent,"icon",new Vector2((width+8)/2,-y),new Vector2((width-8)/2,32),()=>{chosen.Icon=(chosen.Icon+1)%3;state.SaveMarkers();RebuildSidebar();});y+=41;
-                Button(sidebarContent,"delete",new Vector2(0,-y),new Vector2(width,30),()=>{state.Markers.Remove(chosen);if(state.TargetId==chosen.Id)state.TargetId="";selected="";state.SaveMarkers();RebuildSidebar();});y+=43;
+                Button(sidebarContent,"delete",new Vector2(0,-y),new Vector2(width,30),()=>RemoveMarker(chosen));y+=43;
             }
             else{Label(sidebarContent,"SelectMarker",new Vector2(0,-y),new Vector2(width,52),16);y+=66;}
-            Line("TargetDivider",sidebarContent,new Vector2(0,-y),new Vector2(width,1));y+=12;
-            Label(sidebarContent,"CurrentTarget",new Vector2(0,-y),new Vector2(width,25),17).color=Gold;y+=29;
-            targetInfo=Label(sidebarContent,"",new Vector2(0,-y),new Vector2(width,47),16);y+=51;
-            if(state.Target!=null)Button(sidebarContent,"clear_target",new Vector2(0,-y),new Vector2(width,30),()=>{state.TargetId="";RebuildSidebar();});
             ApplyMapGeometry();
         }
         public void ApplyLayout(NavigationLayout layout)

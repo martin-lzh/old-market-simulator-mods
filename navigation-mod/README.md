@@ -8,14 +8,14 @@ Version **0.1.4 — experimental**. An independent navigation HUD for Old Market
 
 Pending local build (Unreleased, version unchanged): the wheel compensates for the active UI module scroll multiplier while keeping fractional input. Optional `Pois` arrays in local map manifests contain `Id`, `Name`, `NameKey`, `Category` (shop/home/dock/other), `X` and `Z`. Up to 256 validated points per map are supported. POI icons stay visible; names open above 1.5x zoom and close below 1.35x or when blocked. Click an icon or label to target it. Personal labels also collapse when space is limited. POIs are companion data, not automatically discovered moving player buildings. Shop origins are representative locations, not verified entrances; a home-shaped rest icon does not imply player ownership. Old maps without Pois still work.
 
-The map window uses a dark brown frame with gold borders, a map viewport and a separate marker sidebar. The sidebar lists your saved markers and shows the current target. Wheel zoom and the on-map +/- buttons transition smoothly; wheel zoom follows the pointer where map boundaries allow. The map covers its viewport and panning stops at its edges. Map geography still comes from the same local companion files.
+The map window uses a dark brown frame with gold borders, a map viewport and a separate marker sidebar. The sidebar shows the current target at the top and the selected personal marker editor below; there is no marker overview list. Wheel zoom and the on-map +/- buttons transition smoothly; wheel zoom follows the pointer where map boundaries allow. The map covers its viewport and panning stops at its edges. Map geography still comes from the same local companion files.
 
-Press main-row **-** to zoom the minimap out and **=** to zoom in. The map frame stays the same size. Its native-style key hint sits above the map and participates in HUD avoidance. Typing, native menus, the large map and hidden minimaps suppress these shortcuts; numpad +/- are unchanged. Range steps are 20–1000 world units. Shortcut zoom lasts for this session; editing MinimapRange resets it, while moving/resizing the HUD preserves it.
+Press main-row **-** to zoom the minimap out and **=** to zoom in. The map frame stays the same size. Its native-style hint pairs each action with its keycap: Zoom out [-], Zoom in [=]; it sits above the map and participates in HUD avoidance. Typing, native menus, the large map and hidden minimaps suppress these shortcuts; numpad +/- are unchanged. Range steps are 20–1000 world units. Shortcut zoom lasts for this session; editing MinimapRange resets it, while moving/resizing the HUD preserves it.
 
 - Compass follows camera yaw with 5° short, 15° medium and 45° long ticks, a fixed graphical pointer and a separate degree readout. This mod defines **+Z as north and +X as east**; this is a navigation convention, not a verified native geographic definition.
 - Circular minimap defaults to north up. Switch to camera up in the map window or configuration; the choice persists. Big map always stays north up.
 - Press **M** to open/close the map, or **Esc** / the Close button to close it. Keyboard input inside a marker name does not trigger M. The default matches the game's `UI.Map` default binding, but this version uses its own configurable keyboard key and does not automatically follow game rebinding.
-- Scroll to zoom, drag with the left mouse button to pan, right-click mapped terrain to add a marker, then click its symbol to rename, select a color/icon, choose a target or delete it. Up to 512 markers per scope, with names up to 80 characters.
+- Scroll to zoom, drag with the left mouse button to pan, right-click empty mapped terrain to add a marker. Right-click a personal marker icon or its visible name to remove it; left-click either to edit its text, color and icon below the current target in the sidebar. Fixed POIs remain read-only. Up to 512 markers per scope, with names up to 80 characters.
 - The target panel below the compass displays left/right bearing, horizontal distance and the absolute angle from your camera direction. Distance uses X/Z world units displayed as metres. This bearing panel is not an elevation measurement, route or obstacle-aware path.
 - When a loaded non-trigger collision surface is found below the target, a separate diamond and name/distance label use the actual camera projection. The probe runs at most once per second while a target exists and the map is closed; target/scene changes invalidate its cache. No hit, a point behind the camera or a label near screen edges leaves only the bearing panel. There is no line-of-sight/occlusion check: a hit may be a roof or object rather than walkable ground, and the cached height may lag moving surfaces. No unloaded terrain is generated.
 - Opening the map releases the cursor and suppresses character controls. It temporarily suppresses the game's Settings/Close actions to prevent Esc from also opening Pause. It does not pause the world or other players. Native windows/loading take priority.
@@ -126,14 +126,14 @@ Original code, documentation and UI decorations are provided under [MIT](LICENSE
 
 本地待发布构建（版本号不变）：滚轮按当前 UI 模块的实际倍率归一化，保留小数输入。本地地图 manifest 可选 `Pois` 数组，每项含 `Id`、`Name`、`NameKey`、`Category`（shop/home/dock/other）、`X`、`Z`，每幅图最多 256 个经校验地点。POI 保留语义图标，缩放达到 1.5 倍且空间足够时展开名称，低于 1.35 倍或发生遮挡时收起；点击图标或名称可设为目标。个人标记的名称也会按空间收起。地点来自本地配套数据，不会自动追踪玩家移动的建筑；店铺原点仅代表地点，不保证是入口，房屋形休息图标不代表玩家所有权。旧地图没有 Pois 时仍正常使用。
 
-地图窗口采用深棕金边外框、地图主区与独立标记侧栏。右侧列出现有个人标记及当前目标；滚轮与地图内加减按钮平滑缩放，边界允许时以鼠标位置为中心。地图铺满视口，拖动限制在地图边缘。地图地形继续使用原有本地配套文件。
+地图窗口采用深棕金边外框、地图主区与独立标记侧栏。右侧顶部显示当前目标，下方编辑选中的个人标记，不再显示标记总览；滚轮与地图内加减按钮平滑缩放，边界允许时以鼠标位置为中心。地图铺满视口，拖动限制在地图边缘。地图地形继续使用原有本地配套文件。
 
-主键盘 **-** 缩小小地图、**=** 放大，地图框大小不变。地图上方复用原生键帽提示，并纳入 HUD 避让。输入文字、原生菜单、大地图打开或小地图隐藏时不响应，不占用数字小键盘加减。显示半径在 20–1000 世界单位间分档切换，快捷键缩放保留本次会话；修改 MinimapRange 会重置范围，挪动/调整 HUD 大小则保留缩放。
+主键盘 **-** 缩小小地图、**=** 放大，地图框大小不变。地图上方按“缩小 [-]　放大 [=]”分别配对动作与原生键帽，并纳入 HUD 避让。输入文字、原生菜单、大地图打开或小地图隐藏时不响应，不占用数字小键盘加减。显示半径在 20–1000 世界单位间分档切换，快捷键缩放保留本次会话；修改 MinimapRange 会重置范围，挪动/调整 HUD 大小则保留缩放。
 
 - 约定 **+Z 为北、+X 为东**，并非已确认的原生地理北向。罗盘跟随镜头方向，显示 5° 短刻度、15° 中刻度和 45° 长刻度，使用固定图形指针与独立角度读数。
 - 小地图默认固定正北，可在大地图按钮或配置切换随视角转动并保存选择；大地图始终固定正北。
 - **M** 开关地图，**Esc** 或关闭按钮关图。输入标记名时 M 不触发开关。默认键与游戏 `UI.Map` 默认相同，但当前版本使用独立配置键，不自动跟随游戏改键。
-- 滚轮缩放、左键拖动、右键添加标记；点击标记后可改名、颜色、图标、设为目标或删除。每个存储范围最多 512 个标记，名称最多 80 字符。
+- 滚轮缩放、左键拖动；空白地图处右键添加个人标记，再次右键其图标或可见名称即可删除。左键其图标或名称后在右栏编辑文字、颜色、图标和目标。固定 POI 不受右键删除影响。每个存储范围最多 512 个标记，名称最多 80 字符。
 - 罗盘下方目标栏显示左右方向、水平距离及相对镜头的角差。距离按 X/Z 世界单位显示为米；**方位栏本身不提供高度、寻路或绕障路线**。
 - 若从目标上方向下射线命中已加载的非触发碰撞体，另显示实际摄像机投影的菱形、名称和距离。仅有目标且大地图关闭时每秒最多采样一次；目标或场景变化清除缓存。未命中、位于镜头后方或靠近屏幕边缘时，仅保留方位栏。没有视线遮挡判断，命中可能落在屋顶或物体表面，并不保证是可行走地面；移动表面的缓存高度可能有延迟。不生成未加载地形。
 - 开图释放鼠标并抑制角色操作；暂时停用原生 Settings/Close 操作以避免 Esc 同时打开暂停菜单，不暂停整个世界。原生窗口及加载画面优先。
