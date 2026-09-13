@@ -21,6 +21,7 @@ try {
     foreach ($taskEntry in @(
         @{ Source = $taskDll; Entry = 'BepInEx/plugins/OldMarket.StackAll/OldMarket.StackAll.dll' },
         @{ Source = (Join-Path $PSScriptRoot 'README.md'); Entry = 'README.md' },
+        @{ Source = (Join-Path $PSScriptRoot 'CHANGELOG.md'); Entry = 'CHANGELOG.md' },
         @{ Source = (Join-Path $PSScriptRoot 'LICENSE'); Entry = 'LICENSE' }
     )) {
         $taskTarget = $taskArchive.CreateEntry($taskEntry.Entry).Open()

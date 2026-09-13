@@ -1,5 +1,7 @@
 # Old Market Stack All
 
+[Risk notes / 风险提示](#risk-notes--风险提示) · [Change Log / 版本记录](CHANGELOG.md)
+
 English | [中文](#中文说明)
 
 Version 0.2.1 expands the inventory while preserving physical product containers. It targets Old Market Simulator 2.1.6 for Windows/Mono and requires BepInEx 5.
@@ -111,3 +113,25 @@ Original work here is under the [MIT License](LICENSE); game and third-party com
 ## 许可与引用
 
 原创内容采用 [MIT License](LICENSE)，不涵盖游戏及第三方组件。引用完全自愿，不是许可条件：**Old Market Stack All，作者 Zhaohan Liu**，并链接[项目仓库](https://github.com/martin-lzh/old-market-simulator-mods)。
+
+## Risk notes / 风险提示
+
+### English
+
+- Extra container records persist through normal saves and need 0.2.0 or a compatible later plugin. Direct disabling/downgrading may fail loading or lose/miscount items. Unpack to vanilla limits and save first; deleting DLLs does not convert saves. Old 0.1.0 merged containers cannot be reconstructed.
+
+- NetworkList/RPC handling changes: host and every player need the same version; no automatic check exists. Mixed versions may fail joining either way or desynchronize inventory. Matching versions still needs real multiplayer tests.
+
+- Holds release whole containers; overflow/shrinking backpacks place objects in the world, possibly out of convenient reach. Weighted/truncated cost/freshness merges cannot restore original batches. Test consumption, placement and reload on a copy.
+
+- Larger records increase processing/network/save load; repeated drops spawn objects. Inventory Mods may conflict. Unreviewed assemblies/patches are rejected: do not load an extended save in vanilla after an update disables the plugin; restore compatible files or a backup.
+
+### 中文
+
+- 额外容器记录由正常存档保留，需要 0.2.0 或后续兼容插件；直接停用/降级可能读档失败、丢物或计数错误。先拆回原版上限并保存，删 DLL 不会转换存档；0.1.0 已合并容器无法重建。
+
+- 修改 NetworkList/RPC 处理，房主及全员须同版本且无自动检查；混版可能双方无法加入或库存不同步。同版本仍需实测。
+
+- 长按释放完整容器，溢出/背包缩容将物品放回世界，可能不便拾取。成本/保鲜加权截断不能还原原始批次；先在副本测试消耗、放置及重载。
+
+- 扩展记录增加处理/网络/存档负担，连续丢弃生成物体，库存 Mod 可能冲突。未核对程序集/接口会拒绝启用；更新后若失效，不用原版读取扩展存档，应恢复兼容环境或备份。

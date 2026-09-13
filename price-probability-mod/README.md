@@ -1,5 +1,7 @@
 # Old Market Price Probability
 
+[Risk notes / 风险提示](#risk-notes--风险提示) · [Change Log / 版本记录](CHANGELOG.md)
+
 English | [中文](#中文说明)
 
 Version 0.1.1 adds price-acceptance preview and host-owned automatic anchors to the native price panel. It targets Old Market Simulator 2.1.6 for Windows/Mono and requires BepInEx 5. Download this prerelease from the [release page](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.1); in-game acceptance is not yet complete.
@@ -91,3 +93,25 @@ Original work here is under the [MIT License](LICENSE); game and third-party com
 ## 许可与引用
 
 原创内容采用 [MIT License](LICENSE)，不涵盖游戏及第三方组件。引用完全自愿，不是许可条件：**Old Market Price Probability，作者 Zhaohan Liu**，并链接[项目仓库](https://github.com/martin-lzh/old-market-simulator-mods)。
+
+## Risk notes / 风险提示
+
+### English
+
+- Native price RPCs change real prices persisted in saves. Anchors are local slot/product configuration; externally replacing a slot may apply old rules to the wrong save. Back up both and clear mismatched anchors. Uninstalling stops automation, not saved prices.
+
+- No custom network objects/protocol; all players need not install by design. Host anchors override client requests without vanilla UI notices; resource/date differences affect estimates. Actual connections and synchronization are unverified.
+
+- Automatic repricing may lower income/acceptance. Acceptance is not daily sales; integer prices may miss targets. Closing a panel cancels the draft, not saved anchors. Check price/mode before confirming.
+
+- Periodic/pre-purchase checks add processing/sync work. Other auto-pricing Mods may compete; updates may break APIs/assumptions. UI overlap may mislead input. Keep one controller, disable anchors and confirm, check actual price, then exit before rollback.
+
+### 中文
+
+- 原生价格 RPC 改真实售价并持久化；锚定按本地槽位/商品配置，外部替换槽位可能误用旧规则。备份两者并清除不匹配锚定；卸载停止自动跟随，不恢复售价。
+
+- 无自定义网络对象/协议，设计上无需全员安装；房主锚定覆盖客人请求，原版无提示，资源/日期差异影响估算。实际连接和同步未验证。
+
+- 自动改价可能降低收入/接受率，接受率不等于日销量，整数价格可能偏离目标。关面板只取消草稿，不停止已存锚定，确认前检查售价/模式。
+
+- 定时/购买前检查增加处理/同步工作，其他自动定价 Mod 可能争价，更新可能破坏接口/前提，UI 遮挡可能误操作。保留一套控制，关闭锚定确认、核对价签并退出回退。

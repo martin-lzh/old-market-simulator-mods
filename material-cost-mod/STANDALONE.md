@@ -89,3 +89,9 @@ Runtime initialization, UI layout, locale switching, old-save behavior, multipla
 独立目标已完成编译，其依赖白名单和启动结构通过自动化检查。共用逻辑还通过 40 项会计检查、27 项运行时缓存与规则检查，以及 11 组本地化测试。这些结果不等同于游戏内验证。
 
 此入口的运行时初始化、界面布局、语言切换、旧存档表现、多人房间码、卡顿和覆盖层交互仍未验证。本项目不宣称它能够修复性能问题。
+
+## Risks / 风险提示
+
+This experimental source-only entry still uses native bootstrap and patch dependencies. Missing/incompatible libraries or simultaneous loader entry points may cause startup failures, stuttering or crashes. No claim is made that it fixes overlay waits or connection problems. Cost UI does not add save fields; estimates and UI conflicts remain subject to the Material Cost README risks. Exit and back up before changing entry/configuration files. Disabling the cost module does not necessarily disable the bootstrap itself; follow this document's rollback steps.
+
+该实验入口仅提供源码，仍使用原生引导和补丁依赖；缺失/不匹配依赖或同时启用多个入口可能启动失败、卡顿或崩溃，不保证修复覆盖层等待或连接问题。成本 UI 不新增存档字段，估算和 UI 冲突风险见成本 README。修改入口/配置前退出并备份；关闭成本模块不等于停用引导本身，按本文步骤回退。

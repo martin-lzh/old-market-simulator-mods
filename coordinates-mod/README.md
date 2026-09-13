@@ -1,5 +1,7 @@
 # Old Market Coordinates
 
+[Risk notes / 风险提示](#risk-notes--风险提示) · [Change Log / 版本记录](CHANGELOG.md)
+
 Displays the local player's world coordinates below the money HUD in Old Market Simulator.
 
 Version 0.1.3 is a prerelease for Old Market Simulator 2.1.6, Unity 2022.3, and BepInEx 5.
@@ -147,3 +149,25 @@ If this mod helps your project, article, or video, please credit **Old Market Co
 Copyright © 2026 Zhaohan Liu。本目录的原创源码、测试和文档采用 [MIT License](LICENSE)。复制软件或其重要部分时必须保留版权和许可声明；Old Market Simulator 及第三方组件不受此许可证覆盖。
 
 如果本 Mod 帮助了你的项目、文章或视频，欢迎注明 **Old Market Coordinates** 并链接到 [Old Market Simulator Mods 仓库](https://github.com/martin-lzh/old-market-simulator-mods)。这是自愿引用请求，不是附加许可条件。
+
+## Risk notes / 风险提示
+
+### English
+
+- Saves: reads local position and creates HUD text; no save writes, teleportation, inventory changes or migration. Back up saves before loader changes.
+
+- Multiplayer: no RPC or connection changes; others need not install by design. Two-machine tests are incomplete, so joining friends or accepting connections is not guaranteed with all loader/Mod combinations.
+
+- Game updates/HUD Mods may break anchors or overlap text. F8 may conflict; change ToggleKey or use None. Rounded world coordinates are not map-grid coordinates.
+
+- Per-frame formatting/UI adds overhead without a performance guarantee. Exit before removing this DLL for comparison.
+
+### 中文
+
+- 存档：只读本地位置并创建 HUD，不写存档、不传送、不改库存，无迁移；更换加载器前仍应备份。
+
+- 联机：不发送 RPC 或改连接流程，设计上其他人无需安装。双端未验证，不保证各种加载器/Mod 组合下能加入好友或接受连接。
+
+- 游戏更新/HUD Mod 可能破坏锚点或遮挡文字；F8 可能冲突，可改 ToggleKey 或设 None。取整世界坐标不是地图格号。
+
+- 每帧格式化/UI 增加开销，无性能保证；退出后移除本 DLL 做对照。

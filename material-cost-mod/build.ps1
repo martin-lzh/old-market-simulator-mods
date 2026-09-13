@@ -44,6 +44,7 @@ New-Item -ItemType Directory -Force $pluginDir | Out-Null
 $dll = Join-Path $PSScriptRoot "bin\$Loader\Release\netstandard2.1\OldMarket.MaterialCost.dll"
 Copy-Item -LiteralPath $dll -Destination $pluginDir
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'README.md') -Destination (Join-Path $package 'README.md')
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'CHANGELOG.md') -Destination (Join-Path $package 'CHANGELOG.md')
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'LICENSE') -Destination (Join-Path $package 'LICENSE')
 $zip = Join-Path $outputDir "OldMarket.MaterialCost-0.5.1-$Loader.zip"
 # Pass file paths, not a recursive staging directory, to prevent stale file inclusion.
@@ -52,7 +53,7 @@ Add-Type -AssemblyName System.IO.Compression
 $stream = [System.IO.File]::Open($zip, [System.IO.FileMode]::Create)
 $zipFile = [System.IO.Compression.ZipArchive]::new($stream, [System.IO.Compression.ZipArchiveMode]::Create)
 try {
-    foreach ($entryPath in @($pluginRelative, 'README.md', 'LICENSE')) {
+    foreach ($entryPath in @($pluginRelative, 'README.md', 'CHANGELOG.md', 'LICENSE')) {
         $entry = $zipFile.CreateEntry($entryPath)
         $entryStream = $entry.Open()
         $sourceStream = [System.IO.File]::OpenRead((Join-Path $package $entryPath))

@@ -1,5 +1,7 @@
 # Old Market Material Cost
 
+[Risk notes / 风险提示](#risk-notes--风险提示) · [Change Log / 版本记录](CHANGELOG.md)
+
 Old Market Material Cost adds cost and profit estimates to three Old Market Simulator screens:
 
 - The end-of-day sales report gets a **Materials only** switch. Enabled rows use estimated recipe-material costs and recomputed profit; disabling it restores the native cost and profit text.
@@ -165,3 +167,25 @@ GitHub 自动生成的 **Source code** 压缩包是源码快照，不是可安�
 本目录原创源码、测试、构建脚本和文档采用 [MIT License](LICENSE)，Copyright (c) 2026 Zhaohan Liu。游戏和第三方组件继续适用各自许可证。
 
 如果本项目帮助了其他 Mod、文章、视频或研究，欢迎链接到 [martin-lzh/old-market-simulator-mods](https://github.com/martin-lzh/old-market-simulator-mods)，并注明 Mod 名称和版本。引用完全自愿，不是 MIT 许可证的附加条件。
+
+## Risk notes / 风险提示
+
+### English
+
+- Saves: UI-only patches and local toggle configuration; no new game-save fields or cash/item-cost changes. Old-inventory estimates are not historical purchase costs.
+
+- Multiplayer: no custom protocol or connection changes; only viewers need this Mod by design. Actual host/client tests are incomplete; loader/Mod combinations may prevent joining in either direction.
+
+- Performance/conflicts: first-use resource discovery and UI add overhead. Local loader comparisons have shown stuttering even without plugins; no variant is proven to fix it. Use one variant/copy. Other report/recipe/order UI Mods may conflict or overlap.
+
+- Estimates exclude equipment/other expenses; profits assume all goods sell at today's recommended price. Other Mods changing resources within a day may leave caches stale. Turn off the report toggle to compare (recipe/order UI stays enabled), or exit before uninstalling.
+
+### 中文
+
+- 存档：仅 UI 补丁及本地开关配置，不新增存档字段或修改现金/物品成本；旧库存估算不是历史采购成本。
+
+- 联机：不新增协议或修改连接流程，设计上仅查看者需要安装；房主/客人实测未完成，加载器/Mod 组合可能导致双方无法加入。
+
+- 性能/冲突：首次资源查询和 UI 增加开销，零插件加载器对照也曾卡顿，未证明任何变体已修复。只启用一种变体/一个副本，其他日报/配方/订购 UI Mod 可能冲突遮挡。
+
+- 估算排除设备等费用，利润假设全部按当天建议价售出；其他 Mod 同日改资源可能使缓存过时。关闭日报开关可对照（配方/订购仍启用），或退出后卸载。

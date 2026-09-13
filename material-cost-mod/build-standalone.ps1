@@ -26,6 +26,7 @@ foreach ($taskLib in @('0Harmony.dll','Mono.Cecil.dll','MonoMod.RuntimeDetour.dl
 }
 Copy-Item (Join-Path $PSScriptRoot 'STANDALONE.md') (Join-Path $taskStage 'README.md')
 Copy-Item (Join-Path $PSScriptRoot 'LICENSE') (Join-Path $taskStage 'LICENSE')
+Copy-Item (Join-Path $PSScriptRoot 'CHANGELOG.md') (Join-Path $taskStage 'CHANGELOG.md')
 [IO.File]::WriteAllText((Join-Path $taskRuntime 'enabled.txt'), 'true')
 [IO.File]::WriteAllText((Join-Path $taskRuntime 'materials-only.txt'), 'false')
 @'

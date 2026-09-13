@@ -1,5 +1,7 @@
 # Old Market Checkout All
 
+[Risk notes / 风险提示](#risk-notes--风险提示) · [Change Log / 版本记录](CHANGELOG.md)
+
 Continuously bags products and collects payment at one checkout while you hold a key or enable a toggle.
 
 Version 0.1.4 is a prerelease for Old Market Simulator 2.1.6, Unity 2022.3, and BepInEx 5.
@@ -165,3 +167,25 @@ Mod 每次处理一件商品，等待它从网络中消失，并在所有商品�
 Copyright © 2026 Zhaohan Liu。本目录的原创源码、测试和文档采用 [MIT License](LICENSE)。复制软件或其重要部分时必须保留版权和许可声明；Old Market Simulator 及第三方组件不受此许可证覆盖。
 
 如果本 Mod 帮助了你的项目、文章或视频，欢迎注明 **Old Market Checkout All** 并链接到 [Old Market Simulator Mods 仓库](https://github.com/martin-lzh/old-market-simulator-mods)。这是自愿引用请求，不是附加许可条件。
+
+## Risk notes / 风险提示
+
+### English
+
+- Saves: no custom format/session persistence, but completed native transactions affect normal saves. Uninstalling does not undo bagging/payments; back up and test a copy.
+
+- Native RPCs need no new connection protocol; server installation is not required by design but real multiplayer is unverified. Latency, disconnects, staff/player races may cause timeouts or incorrect results. Local deduplication cannot guarantee no multiplayer duplicates; connections may fail with incompatible combinations.
+
+- First press can bag/ring/collect immediately. F9 mode continues after release; toggle off or look away. Sent actions cannot be recalled; hotkeys can conflict.
+
+- Updates or checkout Mods may break interaction/confirmation patches. Continuous checks add overhead and hints may overlap. Stop automation on errors, exit before rollback, and check income/counts/sales.
+
+### 中文
+
+- 存档：无自定义格式/会话持久化，但原生交易会影响正常保存；卸载不撤销装袋/收款，应备份并测试副本。
+
+- 原生 RPC 不新增连接协议，设计上服务器无需安装但未实测。延迟、断线、员工/玩家竞争可能超时或结果异常；本地去重不保证联机绝不重复，不兼容组合可能连接失败。
+
+- 首按可立即装袋/响铃/收款；F9 模式松手仍继续，需再次关闭或移开视线。已发送动作不可撤回，热键可能冲突。
+
+- 更新或结账 Mod 可能破坏交互/确认补丁；连续检查增加开销，提示可能遮挡。异常时停止自动操作、退出回退并核对收入/数量/销量。
