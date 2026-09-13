@@ -190,3 +190,7 @@ Phosphor POI 图标的上游 MIT 声明见 [LICENSE](LICENSE)，源文件与重�
 World and bearing target guidance hides while native modal or loading panels are open, and resumes when they close without clearing the selected target.
 
 原生弹窗或加载面板打开时，世界目标与方位目标提示隐藏，关闭后自动恢复，所选目标保留。
+
+3D target guidance reuses the selected POI icon or personal marker shape and color, including its outline.
+
+3D 目标指引复用所选 POI 图标或个人标记的形状、颜色和描边。

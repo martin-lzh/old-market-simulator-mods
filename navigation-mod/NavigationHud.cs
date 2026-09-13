@@ -14,8 +14,8 @@ namespace OldMarket.Navigation
         private readonly NavigationState state;
         private readonly RectTransform root, mini, disk, content, compass, targetRoot, worldTargetRoot;
         private readonly RawImage map, mapOverlay;
-        private readonly TextMeshProUGUI north, mode, location, targetText, compassTarget, center, noMap, worldTargetText, worldTargetDiamond;
-        private readonly Image playerArrow;
+        private readonly TextMeshProUGUI north, mode, location, targetText, compassTarget, center, noMap, worldTargetText;
+        private readonly Image playerArrow, worldTargetIcon;
         private readonly PoiIconSet playerIcons=new PoiIconSet();
         private RectTransform ringArt;
         private readonly List<TextMeshProUGUI> cardinals = new List<TextMeshProUGUI>();
@@ -86,7 +86,8 @@ namespace OldMarket.Navigation
             targetText=Text("Target",targetRoot,22); targetText.rectTransform.sizeDelta=new Vector2(520,64);
             targetText.enableAutoSizing=true; targetText.fontSizeMin=14;
             worldTargetRoot=Rect("WorldTarget",root,new Vector2(.5f,.5f),new Vector2(300,80));
-            worldTargetDiamond=Text("WorldTargetDiamond",worldTargetRoot,28);worldTargetDiamond.text="◆";
+            var worldIconRect=Rect("WorldTargetIcon",worldTargetRoot,new Vector2(.5f,.5f),new Vector2(28,28));
+            worldTargetIcon=worldIconRect.gameObject.AddComponent<Image>();worldTargetIcon.color=Color.white;worldTargetIcon.raycastTarget=false;
             worldTargetText=Text("WorldTargetLabel",worldTargetRoot,24);
             worldTargetText.rectTransform.sizeDelta=new Vector2(300,40);worldTargetText.rectTransform.anchoredPosition=new Vector2(0,-32);
             worldTargetText.enableAutoSizing=true;worldTargetText.fontSizeMin=14;
@@ -115,7 +116,7 @@ namespace OldMarket.Navigation
             targetText.fontSize=layout.WorldMarkerSize;
             targetText.fontSizeMax=layout.WorldMarkerSize;
             worldTargetText.fontSize=layout.WorldMarkerSize;worldTargetText.fontSizeMax=layout.WorldMarkerSize;
-            worldTargetDiamond.fontSize=layout.WorldMarkerSize;
+            worldTargetIcon.rectTransform.sizeDelta=Vector2.one*layout.WorldMarkerSize;
             var group=root.GetComponent<CanvasGroup>() ?? root.gameObject.AddComponent<CanvasGroup>();
             group.alpha=layout.Opacity; group.blocksRaycasts=false;
         }
@@ -197,6 +198,8 @@ namespace OldMarket.Navigation
                 && Mathf.Abs(local.x)<root.rect.width/2-160 && Mathf.Abs(local.y)<root.rect.height/2-60)
             {
                 worldTargetRoot.anchoredPosition=local;
+                var targetPoi=state.Markers.Contains(target)?null:state.Map?.Pois.Find(p=>"poi:"+p.Id==state.TargetId);
+                worldTargetIcon.sprite=targetPoi!=null?playerIcons.Get(targetPoi):markerSprites.Get(target.Icon,target.Color);
                 worldTargetText.text=target.Name+"  "+Mathf.Sqrt(dx*dx+dz*dz).ToString("F0",CultureInfo.CurrentCulture)+" m";
                 worldTargetRoot.gameObject.SetActive(true);
             }

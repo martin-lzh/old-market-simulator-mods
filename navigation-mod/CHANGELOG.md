@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Reuse the selected POI or personal marker sprite for 3D target guidance, preserving its semantic shape, color and outline instead of a generic diamond.
+
 - Start the minimap at a 75-unit radius, one zoom-in step from the previous 100-unit default.
 
 - Hide world and bearing target guidance while native modal/loading panels are open, using the same native panel gate as map input. Closing the panel restores guidance without clearing the selected target.
@@ -82,6 +84,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 3D 目标指引复用所选 POI 或个人标记的图标、颜色和描边，不再统一显示菱形。
 
 - 小地图默认显示半径改为 75 世界单位，相当于原先 100 默认值按一次放大。
 
