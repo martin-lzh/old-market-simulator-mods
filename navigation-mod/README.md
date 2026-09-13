@@ -86,7 +86,7 @@ For a remote client, leave `RemoteProfile` empty for connection-only markers. Th
 
 UI text follows the game's selected locale and native money-HUD TextMesh Pro font. Original translations cover `zh`, `zh-Hant`, `en`, `de`, `fr`, `it`, `ja`, `ko`, `pt`, `ru`, `es`, `tr`, `uk`; unknown locales fall back to English. These translations have not been reviewed by native speakers or verified for all font glyphs/long labels in game. Marker names and companion-provided place names are not translated automatically.
 
-Targets Old Market Simulator **2.1.6**, Unity Mono **2022.3.62f3**, and compiler SDK **2.1.6/r3** pinned in `release.json`; the earlier Mods keep r1. CI uses the official SHA256-pinned BepInEx 5.4.23.5 reference, while local installation testing remains outstanding. Reflection-only save/region/expansion members are included in the metadata SDK and checked against real assemblies. Future game updates can change player, input, locale, save-identity or expansion APIs. Menu/HUD mods and bindings may conflict. A successful build does not establish compatibility for single-player, host or remote clients, nor a frame-rate guarantee.
+Targets Old Market Simulator **2.1.6**, Unity Mono **2022.3.62f3**, and compiler SDK **2.1.6/r4** pinned in `release.json`; the earlier Mods keep r1. CI uses the official SHA256-pinned BepInEx 5.4.23.5 reference, while local installation testing remains outstanding. Reflection-only save/region/expansion members are included in the metadata SDK and checked against real assemblies. Future game updates can change player, input, locale, save-identity or expansion APIs. Menu/HUD mods and bindings may conflict. A successful build does not establish compatibility for single-player, host or remote clients, nor a frame-rate guarantee.
 
 ## Build and validation
 
@@ -102,7 +102,7 @@ dotnet run --project navigation-mod/tests/Navigation.Tests.csproj
 
 Build output: `outputs/OldMarket.Navigation-0.1.2.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist is exactly the plugin DLL, this README, CHANGELOG and LICENSE. It excludes game assemblies, loader files, map companions, saves, logs and backups.
 
-Verified on the 2.1.6 baseline: SDK r3 and real-reference Release builds match in symbolic IL, assembly references and embedded resources; 564 pure checks, 400 read-only installed-assembly contracts and 22 CI tooling tests pass. No Unity game code was executed by these checks.
+Verified on the 2.1.6 baseline: SDK r4 and real-reference Release builds match in symbolic IL, assembly references and embedded resources; 606 pure checks, 424 read-only installed-assembly contracts and 22 CI tooling tests pass. No Unity game code was executed by these checks.
 
 Automated coverage exercises coordinate conversion/rotation boundaries, marker serialization/isolation/error handling and locale fallback. Static review checked camera-up rotation, expansion event invalidation and Esc action handling. **Still required in game:** native font/overlap, both map modes, dragging/zoom/marker editing, Esc without Pause leakage, disconnect/region travel, each market unlock transition, frame time and host/client behavior. Check those in a backed-up test setup before relying on the experimental build.
 
@@ -161,11 +161,11 @@ Original code, documentation and UI decorations are provided under [MIT](LICENSE
 
 跟随游戏选定语言及金钱栏 TMP 字体，提供 13 种原创翻译：简中、繁中、英语、德语、法语、意大利语、日语、韩语、葡萄牙语、俄语、西班牙语、土耳其语、乌克兰语；未知语言回退英语。尚未经母语审校和所有字体实机检查。个人标记名与地图文件地名不会自动翻译。
 
-固定游戏 **2.1.6**、Unity Mono **2022.3.62f3** 与编译 SDK **2.1.6/r3**，既有 Mod 保留 r1。CI 使用官方固定哈希的 BepInEx 5.4.23.5 引用；反射使用的存档槽、区域与扩建成员纳入 SDK 和真实程序集契约检查。无游戏环境可运行上文 `ci.py validate`、CI 工具测试和 `ci.py build`；匹配的本机安装可用 `ci.py verify-game --game-dir <path>` 核对真实引用符号 IL/资源与契约，不启动游戏。
+固定游戏 **2.1.6**、Unity Mono **2022.3.62f3** 与编译 SDK **2.1.6/r4**，既有 Mod 保留 r1。CI 使用官方固定哈希的 BepInEx 5.4.23.5 引用；反射使用的存档槽、区域与扩建成员纳入 SDK 和真实程序集契约检查。无游戏环境可运行上文 `ci.py validate`、CI 工具测试和 `ci.py build`；匹配的本机安装可用 `ci.py verify-game --game-dir <path>` 核对真实引用符号 IL/资源与契约，不启动游戏。
 
 构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.1.2.zip`，打印 SHA256，不自动安装，严格只含 DLL、README、CHANGELOG、LICENSE。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
 
-2.1.6 基线验证：SDK r3 与真实引用 Release 构建的符号 IL、程序集引用及内嵌资源一致；564 项纯逻辑/本地化检查、400 项只读原生契约和 22 项 CI 工具测试通过，检查不执行 Unity 游戏代码。
+2.1.6 基线验证：SDK r4 与真实引用 Release 构建的符号 IL、程序集引用及内嵌资源一致；606 项纯逻辑/本地化检查、424 项只读原生契约和 22 项 CI 工具测试通过，检查不执行 Unity 游戏代码。
 
 实机待检查：字体遮挡、两种旋转模式、缩放拖动和标记编辑、Esc 不穿透暂停菜单、断线与区域旅行、市场各解锁阶段、帧耗时、单机/主机/客户端。游戏更新及其他 HUD/按键插件可能产生冲突，应在备份后的测试环境验收。
 

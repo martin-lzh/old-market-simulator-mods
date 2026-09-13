@@ -13,6 +13,7 @@
 | 2.1.6 | [2.1.6/r1](2.1.6/r1/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | 原有五个 Mod 的六种发行构建；实机 UI、存档及双端联机验收未完成 |
 | 2.1.6 | [2.1.6/r2](2.1.6/r2/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.0 固定此修订；增加地图 UI、物理投影、输入、区域与反射依赖，实机验收未完成 |
 | 2.1.6 | [2.1.6/r3](2.1.6/r3/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.1 固定此修订；增加原生 HUD 容器、补间端点与跨画布屏幕坐标接口，实机验收未完成 |
+| 2.1.6 | [2.1.6/r4](2.1.6/r4/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.2 固定此修订；增加原生按键提示预制体与布局接口，实机验收未完成 |
 
 每个 Mod 在自己的 `release.json` 中固定 SDK，例如 `"sdk": "2.1.6/r1"`。不自动选择“最新”SDK。目录 `sdk/<游戏版本>/r<修订号>/` 一旦合并就保留原样；同一游戏版本补充接口时新建 `r2`，游戏升级时新建对应游戏版本目录。旧 Mod 发布、SDK 和 CHANGELOG 都保留，下载前仍须确认存档、加载器与联机要求。
 
@@ -89,3 +90,7 @@ SDK updates follow maintainer-verified game versions; they do not automatically 
 Validation on 2026-09-13: r2 was exported from source `135eb89` and contains 15 assemblies, 255 types, 641 methods and 469 fields, declarations only. All r1 declarations are retained; the original 13 identities/hashes and old SDK pins are unchanged. All seven builds passed SDK compilation and real-reference symbolic IL/resource comparison. Navigation passed 511 logic/localization checks and 318 read-only game contracts; the CI tools passed 22 tests. In-game acceptance is not performed; Navigation remains a prerelease.
 
 Validation on 2026-09-13: r3 was exported from source `b038bf0` and contains 15 assemblies, 257 types, 652 methods and 476 fields, declarations only. All r2 declarations and all 15 assembly identities/hashes remain intact; the additional UnityEngine `Screen` forwarder matches the real assemblies. Only Navigation 0.1.1 moves to r3; old snapshots and other Mod pins are unchanged. The bottom-left layout uses the same API. The final version passed all seven SDK/real-reference symbolic IL and resource comparisons, 564 navigation checks, 400 read-only game contracts and 22 CI tooling tests. In-game UI and animation acceptance was not performed.
+
+2026-09-13：r4 从源码提交 `b242768` 导出，共 15 个程序集、258 个类型、655 个方法、481 个字段，仅含声明。Navigation 0.1.2 使用原生按键提示预制体与布局接口；其他 Mod 固定版本不变。七个构建通过 SDK/真实引用符号 IL 与资源比对，606 项导航检查、424 项只读原生契约和 22 项 CI 工具测试通过。实机显示验收未执行。
+
+Validation on 2026-09-13: r4 was exported from source `b242768`, with 15 assemblies, 258 types, 655 methods and 481 fields, declarations only. Navigation 0.1.2 uses native key-hint prefab and layout APIs; other Mod pins are unchanged. All seven builds passed SDK/real-reference symbolic IL and resource comparison, with 606 navigation checks, 424 read-only game contracts and 22 CI tooling tests passing. In-game visual acceptance remains outstanding.
