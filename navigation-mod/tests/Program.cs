@@ -98,6 +98,17 @@ static class Program
    Check(HudPlacement.TryPlace(Scaled(new HudBox(1300,942,600,60)),Scaled(viewport),new[]{Scaled(mini),Scaled(compass)},12*scale,out var scaled),"resolution scaled placement");
    Near(scaled.X/scale,message.X,"resolution stable x");Near(scaled.Y/scale,message.Y,"resolution stable y");
   }
+  Near(MinimapZoom.Step(100,true),75,"equals zooms in by reducing range");
+  Near(MinimapZoom.Step(100,false),150,"minus zooms out by increasing range");
+  Near(MinimapZoom.Step(123,true),100,"custom range steps inward to nearest level");
+  Near(MinimapZoom.Step(123,false),150,"custom range steps outward to nearest level");
+  Near(MinimapZoom.Step(20,true),20,"zoom-in lower limit");
+  Near(MinimapZoom.Step(1000,false),1000,"zoom-out upper limit");
+  foreach(float range in new[]{20f,35,50,75,100,150,225,350,500,750,1000})
+  {
+   Check(MinimapZoom.Step(range,true)<=range && MinimapZoom.Step(range,true)>=20,"inward zoom bounded and monotonic");
+   Check(MinimapZoom.Step(range,false)>=range && MinimapZoom.Step(range,false)<=1000,"outward zoom bounded and monotonic");
+  }
   Console.WriteLine($"Passed {count} navigation checks.");
  }
 }

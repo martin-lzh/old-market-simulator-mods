@@ -2,6 +2,12 @@
 
 ## English
 
+### 0.1.2 — 2026-09-13
+
+- Add main-row minus/equals minimap zoom shortcuts with bounded range steps; ignore typing, native menus, the large map and hidden minimaps. Numpad add/remove bindings remain separate.
+- Clone native keycap/description prefabs above the minimap, localize the hint in all 13 languages and include it in notification avoidance bounds.
+- Keep shortcut zoom for the current session; a changed MinimapRange in layout JSON resets it, while unrelated layout changes preserve it. In-game validation remains outstanding.
+
 ### 0.1.1 — 2026-09-13
 
 - Default the minimap to the lower-left corner; retain optional upper-right placement through layout JSON.
@@ -28,6 +34,12 @@ Experimental initial build; not installed or verified in game.
 - Supply coordinate, persistence and localization checks. In-game appearance, input, performance and multiplayer testing remain outstanding.
 
 ## 中文
+
+### 0.1.2 — 2026-09-13
+
+- 增加主键盘减号/等号小地图缩放，按有限范围分档切换；输入文字、原生菜单、大地图及隐藏小地图时不触发，不复用数字小键盘加减。
+- 在小地图上方复用原生键帽与说明预制体，提供 13 种语言提示，并将其纳入通知避让范围。
+- 快捷键缩放保留于本次会话；修改布局 JSON 的 MinimapRange 会重置范围，其他布局修改保留当前缩放。尚待实机验收。
 
 ### 0.1.1 — 2026-09-13
 

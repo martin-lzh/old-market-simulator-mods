@@ -14,7 +14,7 @@ using UnityEngine.UI;
 
 namespace OldMarket.Navigation
 {
-    [BepInPlugin("local.oldmarket.navigation", "Old Market Navigation", "0.1.1")]
+    [BepInPlugin("local.oldmarket.navigation", "Old Market Navigation", "0.1.2")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {
@@ -64,7 +64,7 @@ namespace OldMarket.Navigation
             layout = new LayoutHotReload(Path.Combine(settings,"layout.json"), message=>Logger.LogWarning(message));
             gameObject.hideFlags |= HideFlags.HideAndDontSave;
             DontDestroyOnLoad(gameObject);
-            Logger.LogInfo("Navigation 0.1.1 loaded. Map texture is optional; no scene cameras or additional regions are created.");
+            Logger.LogInfo("Navigation 0.1.2 loaded. Map texture is optional; no scene cameras or additional regions are created.");
         }
 
         private void CreateUi()
@@ -92,6 +92,17 @@ namespace OldMarket.Navigation
             var keyboard = Keyboard.current;
             if (keyboard == null) return;
             if (window.IsOpen && keyboard.escapeKey.wasPressedThisFrame) { CloseMap(); return; }
+            if(state.Available && minimap.Value && !window.IsOpen && !Typing() && !NativePanelOpen()
+                && InputManager.Instance!=null && InputManager.Instance.inputMaster.Player.enabled)
+            {
+                bool zoomIn=false,zoomOut=false;
+                foreach(var key in keyboard.allKeys)
+                {
+                    if(key.keyCode==Key.Equals && key.wasPressedThisFrame)zoomIn=true;
+                    if(key.keyCode==Key.Minus && key.wasPressedThisFrame)zoomOut=true;
+                }
+                if(zoomIn!=zoomOut)hud.ChangeZoom(zoomIn);
+            }
             bool pressed = false;
             foreach (var key in keyboard.allKeys)
                 if (key.keyCode == mapKey.Value && key.wasPressedThisFrame) { pressed = true; break; }

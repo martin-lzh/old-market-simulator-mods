@@ -6,6 +6,7 @@ namespace OldMarket.Navigation
     {
         private static readonly string[] Languages={"en","zh","zh-Hant","de","fr","it","ja","ko","pt","ru","es","tr","uk"};
         private static readonly Dictionary<string,string[]> Values=new Dictionary<string,string[]> {
+            ["ZoomHint"]=new[]{"Zoom out / in","缩小 / 放大","縮小 / 放大","Verkleinern / Vergrößern","Dézoomer / Zoomer","Riduci / Ingrandisci","縮小 / 拡大","축소 / 확대","Diminuir / Ampliar","Отдалить / Приблизить","Alejar / Acercar","Uzaklaştır / Yakınlaştır","Віддалити / Наблизити"},
             ["NE"]=new[]{"NE","东北","東北","NO","NE","NE","北東","북동","NE","СВ","NE","KD","ПнСх"},
             ["SE"]=new[]{"SE","东南","東南","SO","SE","SE","南東","남동","SE","ЮВ","SE","GD","ПдСх"},
             ["SW"]=new[]{"SW","西南","西南","SW","SO","SO","南西","남서","SO","ЮЗ","SO","GB","ПдЗх"},

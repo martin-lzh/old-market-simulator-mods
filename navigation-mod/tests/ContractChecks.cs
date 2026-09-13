@@ -54,6 +54,10 @@ PublicField("UIManager", "textCoins", "TextMeshProUGUI");
 foreach (string name in new[] { "panelNotifications", "prefabNotification", "panelTutorial", "toastHint", "panelStats" })
     PublicField("UIManager", name, "GameObject");
 PublicField("UIManager", "hints", "Transform");
+foreach(string name in new[]{"prefabControlHintDesc","prefabControlHintSlot"})PublicField("UIManager",name,"GameObject");
+PublicField("ControlSlot","textBinding","TextMeshProUGUI");
+foreach(string name in new[]{"imageBinding","imageBackground"})PublicField("ControlSlot",name,"Image");
+Check(Calls(Method("UIManager","CheckPanelHints"),"Instantiate"),"native key hints use cloneable UI prefabs");
 bool UsesField(MethodDefinition method, string type, string name) => method.HasBody && method.Body.Instructions.Any(i => i.Operand is FieldReference f && f.DeclaringType.Name == type && f.Name == name);
 MethodDefinition Coroutine(string name) => Type("UIManager").NestedTypes.Single(t => t.Name.StartsWith("<" + name + ">d__", StringComparison.Ordinal)).Methods.Single(m => m.Name == "MoveNext");
 var notifications = Coroutine("ShowNotificationEnum");
@@ -89,6 +93,8 @@ string json = Type("InputMaster").Methods.Where(x => x.IsConstructor && x.HasBod
 using (var document = JsonDocument.Parse(json))
 {
     var ui = document.RootElement.GetProperty("maps").EnumerateArray().Single(x => x.GetProperty("name").GetString() == "UI");
+    foreach(var map in document.RootElement.GetProperty("maps").EnumerateArray())
+        Check(!map.GetProperty("bindings").EnumerateArray().Any(x=>x.GetProperty("path").GetString() is "<Keyboard>/minus" or "<Keyboard>/equals"),"native map has no main-row zoom-key binding: "+map.GetProperty("name").GetString());
     foreach (var pair in new[] { ("Settings", "<Keyboard>/escape"), ("Close", "<Keyboard>/escape"), ("Map", "<Keyboard>/m") })
         Check(ui.GetProperty("bindings").EnumerateArray().Any(x => x.GetProperty("action").GetString() == pair.Item1 && x.GetProperty("path").GetString() == pair.Item2), "native default " + pair.Item1 + " binding");
 }

@@ -22,6 +22,8 @@ namespace OldMarket.Navigation
         private readonly List<UnityEngine.Object> owned = new List<UnityEngine.Object>();
         private NavigationLayout layout = new NavigationLayout();
         private readonly Vector3[] boundsCorners = new Vector3[4];
+        private readonly MinimapZoomHint zoomHint;
+        private float configuredRange=float.NaN;
         public bool MinimapVisible = true, CompassVisible = true, GuidanceVisible = true, CoordinatesVisible;
         public float MinimapRange = 100;
         private static readonly Color Gold = new Color(.92f, .79f, .53f, 1);
@@ -72,13 +74,14 @@ namespace OldMarket.Navigation
             worldTargetText.rectTransform.sizeDelta=new Vector2(300,40);worldTargetText.rectTransform.anchoredPosition=new Vector2(0,-32);
             worldTargetText.enableAutoSizing=true;worldTargetText.fontSizeMin=14;
             worldTargetRoot.gameObject.SetActive(false);
+            zoomHint=new MinimapZoomHint(mini);
             ApplyLayout(layout);
         }
 
         public void ApplyLayout(NavigationLayout value)
         {
             layout=value ?? new NavigationLayout();
-            MinimapRange=layout.MinimapRange;
+            if(configuredRange!=layout.MinimapRange) {configuredRange=layout.MinimapRange;MinimapRange=configuredRange;}
             mini.sizeDelta=Vector2.one*layout.MinimapSize;
             mini.anchorMin=mini.anchorMax=mini.pivot=layout.MinimapBottomLeft?Vector2.zero:Vector2.one;
             mini.anchoredPosition=layout.MinimapBottomLeft?new Vector2(layout.MinimapLeft,layout.MinimapBottom):new Vector2(-layout.MinimapRight,-layout.MinimapTop);
@@ -106,6 +109,7 @@ namespace OldMarket.Navigation
             if (!state.Available) return;
             foreach(var label in labels) if(label.font!=state.Font) label.font=state.Font;
             mini.gameObject.SetActive(MinimapVisible);
+            if(MinimapVisible)zoomHint.Refresh(state,layout.MinimapSize);
             compass.gameObject.SetActive(CompassVisible);
             location.gameObject.SetActive(CoordinatesVisible);
             location.text=string.Format(CultureInfo.CurrentCulture,"X {0:F1}   Y {1:F1}   Z {2:F1}",state.PlayerPosition.x,state.PlayerPosition.y,state.PlayerPosition.z);
@@ -175,6 +179,7 @@ namespace OldMarket.Navigation
             AddBounds(ref minimapBounds,mini);
             AddBounds(ref minimapBounds,ringArt);
             AddBounds(ref minimapBounds,mode.rectTransform);
+            AddBounds(ref minimapBounds,zoomHint.Rect);
             AddBounds(ref topBounds,compass);
             AddBounds(ref topBounds,location.rectTransform);
             AddBounds(ref topBounds,targetRoot);
@@ -217,6 +222,7 @@ namespace OldMarket.Navigation
             try {var bytes=UiAssets.Read(path); if(bytes==null)return null; var texture=new Texture2D(2,2); if(!ImageConversion.LoadImage(texture,bytes)) {UnityEngine.Object.Destroy(texture);return null;} owned.Add(texture);var sprite=Sprite.Create(texture,new Rect(0,0,texture.width,texture.height),new Vector2(.5f,.5f));owned.Add(sprite);return sprite;}
             catch(IOException){return null;}
         }
-        public void Dispose() { if(root!=null)UnityEngine.Object.Destroy(root.gameObject);foreach(var item in owned)UnityEngine.Object.Destroy(item); }
+        public void ChangeZoom(bool zoomIn) {MinimapRange=MinimapZoom.Step(MinimapRange,zoomIn);}
+        public void Dispose() { zoomHint.Dispose();if(root!=null)UnityEngine.Object.Destroy(root.gameObject);foreach(var item in owned)UnityEngine.Object.Destroy(item); }
     }
 }

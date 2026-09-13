@@ -1,10 +1,12 @@
 # Old Market Navigation
 
-Version **0.1.1 — experimental**. An independent navigation HUD for Old Market Simulator: compass, minimap, map window, personal markers and target bearings. It does not require Coordinates or replace that plugin.
+Version **0.1.2 — experimental**. An independent navigation HUD for Old Market Simulator: compass, minimap, map window, personal markers and target bearings. It does not require Coordinates or replace that plugin.
 
 **Build and automated checks are available; installation, in-game appearance, performance, input restoration and multiplayer compatibility have not been verified.** The public package does not include game-derived map images or geometry. Without a local map companion, the compass and optional coordinates work, the map reports that no map is available, and map marker creation is disabled.
 
 ## Features and controls
+
+Press main-row **-** to zoom the minimap out and **=** to zoom in. The map frame stays the same size. Its native-style key hint sits above the map and participates in HUD avoidance. Typing, native menus, the large map and hidden minimaps suppress these shortcuts; numpad +/- are unchanged. Range steps are 20–1000 world units. Shortcut zoom lasts for this session; editing MinimapRange resets it, while moving/resizing the HUD preserves it.
 
 - Compass follows camera yaw. This mod defines **+Z as north and +X as east**; this is a navigation convention, not a verified native geographic definition.
 - Circular minimap defaults to north up. Switch to camera up in the map window or configuration; the choice persists. Big map always stays north up.
@@ -98,7 +100,7 @@ Requirements for the local build below: Windows, .NET SDK (tests target .NET 8),
 dotnet run --project navigation-mod/tests/Navigation.Tests.csproj
 ```
 
-Build output: `outputs/OldMarket.Navigation-0.1.1.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist is exactly the plugin DLL, this README, CHANGELOG and LICENSE. It excludes game assemblies, loader files, map companions, saves, logs and backups.
+Build output: `outputs/OldMarket.Navigation-0.1.2.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist is exactly the plugin DLL, this README, CHANGELOG and LICENSE. It excludes game assemblies, loader files, map companions, saves, logs and backups.
 
 Verified on the 2.1.6 baseline: SDK r3 and real-reference Release builds match in symbolic IL, assembly references and embedded resources; 564 pure checks, 400 read-only installed-assembly contracts and 22 CI tooling tests pass. No Unity game code was executed by these checks.
 
@@ -112,11 +114,13 @@ Original code, documentation and UI decorations are provided under [MIT](LICENSE
 
 ## 中文说明
 
-**0.1.1 是实验版**：独立导航 Mod，包含顶部罗盘、圆形小地图、M 键大地图、个人标记和目标方位栏，不依赖也不替换 Coordinates。
+**0.1.2 是实验版**：独立导航 Mod，包含顶部罗盘、圆形小地图、M 键大地图、个人标记和目标方位栏，不依赖也不替换 Coordinates。
 
 已提供构建及自动检查；**尚未安装，也未完成游戏内视觉、性能、输入恢复及联机验证**。公开包不含游戏派生地图。没有本地地图配套文件时仍可显示罗盘和可选 XYZ，地图提示无数据，不能在地图上新增标记。
 
 ### 功能与操作
+
+主键盘 **-** 缩小小地图、**=** 放大，地图框大小不变。地图上方复用原生键帽提示，并纳入 HUD 避让。输入文字、原生菜单、大地图打开或小地图隐藏时不响应，不占用数字小键盘加减。显示半径在 20–1000 世界单位间分档切换，快捷键缩放保留本次会话；修改 MinimapRange 会重置范围，挪动/调整 HUD 大小则保留缩放。
 
 - 约定 **+Z 为北、+X 为东**，并非已确认的原生地理北向。罗盘跟随镜头方向。
 - 小地图默认固定正北，可在大地图按钮或配置切换随视角转动并保存选择；大地图始终固定正北。
@@ -159,7 +163,7 @@ Original code, documentation and UI decorations are provided under [MIT](LICENSE
 
 固定游戏 **2.1.6**、Unity Mono **2022.3.62f3** 与编译 SDK **2.1.6/r3**，既有 Mod 保留 r1。CI 使用官方固定哈希的 BepInEx 5.4.23.5 引用；反射使用的存档槽、区域与扩建成员纳入 SDK 和真实程序集契约检查。无游戏环境可运行上文 `ci.py validate`、CI 工具测试和 `ci.py build`；匹配的本机安装可用 `ci.py verify-game --game-dir <path>` 核对真实引用符号 IL/资源与契约，不启动游戏。
 
-构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.1.1.zip`，打印 SHA256，不自动安装，严格只含 DLL、README、CHANGELOG、LICENSE。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
+构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.1.2.zip`，打印 SHA256，不自动安装，严格只含 DLL、README、CHANGELOG、LICENSE。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
 
 2.1.6 基线验证：SDK r3 与真实引用 Release 构建的符号 IL、程序集引用及内嵌资源一致；564 项纯逻辑/本地化检查、400 项只读原生契约和 22 项 CI 工具测试通过，检查不执行 Unity 游戏代码。
 
