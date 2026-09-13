@@ -52,6 +52,8 @@ python tools/ci.py verify-game --game-dir 'F:\SteamLibrary\steamapps\common\Old 
 
 SDK 随维护者确认的游戏版本更新，不会监测到一次游戏更新就自动覆盖已验证的接口快照。
 
+2026-09-13：r2 从源码提交 `135eb89` 导出，共 15 个程序集、255 个类型、641 个方法、469 个字段，仅含声明。原 r1 全部类型/方法/字段保留，原 13 个程序集身份与哈希不变；r1 文件及旧 Mod pin 未修改。六个 Mod 的七个构建均通过 SDK 编译与真实引用符号 IL/嵌入资源比对；Navigation 511 项逻辑/本地化检查、318 项只读原生契约、22 项 CI 工具测试通过。实机验收未执行，Navigation 保持预发布。
+
 ## English
 
 This SDK lets GitHub-hosted runners compile Mods without a game installation. The standard .NET compiler consumes references reconstructed from `api.json`: the types, fields, method signatures, generic constraints, enum values and compiler metadata used by these Mods. No original game DLLs, game method implementations, resources, saves or decompiled source are included.
@@ -80,3 +82,5 @@ After a game update:
 6. Review Harmony targets, RPC/save behavior and IL assumptions even if API signatures did not change. Perform in-game checks appropriate to the risks. Keep `"prerelease": true` until acceptance is complete. Commit on `dev` and merge through a PR into `main`.
 
 SDK updates follow maintainer-verified game versions; they do not automatically overwrite a reviewed snapshot whenever the game updates.
+
+Validation on 2026-09-13: r2 was exported from source `135eb89` and contains 15 assemblies, 255 types, 641 methods and 469 fields, declarations only. All r1 declarations are retained; the original 13 identities/hashes and old SDK pins are unchanged. All seven builds passed SDK compilation and real-reference symbolic IL/resource comparison. Navigation passed 511 logic/localization checks and 318 read-only game contracts; the CI tools passed 22 tests. In-game acceptance is not performed; Navigation remains a prerelease.

@@ -92,6 +92,8 @@ dotnet run --project navigation-mod/tests/Navigation.Tests.csproj
 
 Build output: `outputs/OldMarket.Navigation-0.1.0.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist is exactly the plugin DLL, this README, CHANGELOG and LICENSE. It excludes game assemblies, loader files, map companions, saves, logs and backups.
 
+Verified on the 2.1.6 baseline: SDK r2 and real-reference Release builds match in symbolic IL, assembly references and embedded resources; 511 pure checks, 318 read-only installed-assembly contracts and 22 CI tooling tests pass. No Unity game code was executed by these checks.
+
 Automated coverage exercises coordinate conversion/rotation boundaries, marker serialization/isolation/error handling and locale fallback. Static review checked camera-up rotation, expansion event invalidation and Esc action handling. **Still required in game:** native font/overlap, both map modes, dragging/zoom/marker editing, Esc without Pause leakage, disconnect/region travel, each market unlock transition, frame time and host/client behavior. Check those in a backed-up test setup before relying on the experimental build.
 
 ## License and provenance
@@ -146,6 +148,8 @@ Original code, documentation and UI decorations are provided under [MIT](LICENSE
 固定游戏 **2.1.6**、Unity Mono **2022.3.62f3** 与编译 SDK **2.1.6/r2**，既有 Mod 保留 r1。CI 使用官方固定哈希的 BepInEx 5.4.23.5 引用；反射使用的存档槽、区域与扩建成员纳入 SDK 和真实程序集契约检查。无游戏环境可运行上文 `ci.py validate`、CI 工具测试和 `ci.py build`；匹配的本机安装可用 `ci.py verify-game --game-dir <path>` 核对真实引用符号 IL/资源与契约，不启动游戏。
 
 构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.1.0.zip`，打印 SHA256，不自动安装，严格只含 DLL、README、CHANGELOG、LICENSE。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
+
+2.1.6 基线验证：SDK r2 与真实引用 Release 构建的符号 IL、程序集引用及内嵌资源一致；511 项纯逻辑/本地化检查、318 项只读原生契约和 22 项 CI 工具测试通过，检查不执行 Unity 游戏代码。
 
 实机待检查：字体遮挡、两种旋转模式、缩放拖动和标记编辑、Esc 不穿透暂停菜单、断线与区域旅行、市场各解锁阶段、帧耗时、单机/主机/客户端。游戏更新及其他 HUD/按键插件可能产生冲突，应在备份后的测试环境验收。
 

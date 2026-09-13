@@ -61,6 +61,16 @@ class VersionTests(unittest.TestCase):
         self.assertEqual(active["Arguments"][0]["Name"], "System.Int64")
         self.assertIn("GetLocalCurrentRegionSceneName", {m["Name"] for m in types["RegionManager"]["Methods"]})
 
+    def test_navigation_inlined_constants_match_reviewed_metadata(self):
+        api = ci.json.loads((ci.ROOT / "sdk/2.1.6/r2/api.json").read_text(encoding="utf-8"))
+        types = {t["Name"]: t for t in api["Types"]}
+        maths = {f["Name"]: f for f in types["UnityEngine.Mathf"]["Fields"]}
+        self.assertEqual(maths["Deg2Rad"]["ConstantType"], "Single")
+        self.assertAlmostEqual(float(maths["Deg2Rad"]["Constant"]), 0.017453292, places=9)
+        self.assertAlmostEqual(float(maths["Rad2Deg"]["Constant"]), 57.29578, places=5)
+        physics = {f["Name"]: f for f in types["UnityEngine.Physics"]["Fields"]}
+        self.assertEqual(physics["DefaultRaycastLayers"]["Constant"], "-5")
+
     def test_existing_sdk_cannot_be_edited(self):
         with patch.object(ci.subprocess, "check_output", return_value="sdk/2.1.6/r1/api.json\n"), \
                 patch.object(ci.subprocess, "run") as git:

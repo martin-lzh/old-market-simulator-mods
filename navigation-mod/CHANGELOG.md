@@ -16,6 +16,7 @@ Experimental initial build; not installed or verified in game.
 - Add embedded UI decorations, layout JSON hot reload and 13-language UI text.
 - Guard player/cursor ownership and defer restoration of native Escape actions after closing.
 - Keep game-derived map companions out of the public DLL and archive. No map data is bundled.
+- Pass SDK/real-reference symbolic IL/resource equivalence, 511 pure checks and 318 read-only game contracts on game 2.1.6; 22 CI tooling tests pass.
 - Supply coordinate, persistence and localization checks. In-game appearance, input, performance and multiplayer testing remain outstanding.
 
 ## 中文
@@ -34,4 +35,5 @@ Experimental initial build; not installed or verified in game.
 - 提供内嵌 UI 装饰、布局 JSON 热更新及 13 种语言。
 - 限定角色/鼠标控制权恢复，关图后延迟恢复原生 Esc 操作。
 - 游戏派生底图配套文件不进入公开 DLL 或发行包；包内不含地图数据。
+- 游戏 2.1.6 上通过 SDK/真实引用符号 IL 与资源等价、511 项纯检查、318 项只读原生契约及 22 项 CI 工具测试。
 - 提供坐标、存储及本地化检查；视觉、输入、性能和联机仍待实机验收。
