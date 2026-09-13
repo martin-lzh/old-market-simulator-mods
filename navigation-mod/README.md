@@ -6,6 +6,8 @@
 
 Find your way around town with a minimap, a compass and your own map markers. Navigation works independently of the Coordinates Mod.
 
+**Currently, only the Eastern Town map is supported. More maps will be added as soon as possible.**
+
 Version 0.2.0 is being prepared. There is no public Navigation download yet.
 
 ## Install
@@ -79,6 +81,8 @@ Close the game and back up the plugin before replacing its DLL. Keep `BepInEx/co
 ## 中文
 
 用小地图、罗盘和自己的标记点，轻松找到镇上的目的地。Navigation 可以独立使用，不需要安装 Coordinates。
+
+**目前仅支持东方小镇地图，其他地图会尽快加入。**
 
 0.2.0 正在准备，目前还没有公开的 Navigation 下载包。
 
