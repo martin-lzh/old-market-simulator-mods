@@ -16,6 +16,7 @@
 | 2.1.6 | [2.1.6/r4](2.1.6/r4/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.2 固定此修订；增加原生按键提示预制体与布局接口，实机验收未完成 |
 | 2.1.6 | [2.1.6/r5](2.1.6/r5/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.3 固定此修订；增加输入框焦点、原生提示子控件与独立布局接口，实机验收未完成 |
 | 2.1.6 | [2.1.6/r6](2.1.6/r6/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.4 固定此修订；增加地图控件查找与输入编辑结束接口，实机验收未完成 |
+| 2.1.6 | [2.1.6/r7](2.1.6/r7/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 未发布修改固定此修订，Mod 仍为 0.1.4；增加滚轮事件倍率、输入范围与平台接口，实机验收未完成 |
 
 每个 Mod 在自己的 `release.json` 中固定 SDK，例如 `"sdk": "2.1.6/r1"`。不自动选择“最新”SDK。目录 `sdk/<游戏版本>/r<修订号>/` 一旦合并就保留原样；同一游戏版本补充接口时新建 `r2`，游戏升级时新建对应游戏版本目录。旧 Mod 发布、SDK 和 CHANGELOG 都保留，下载前仍须确认存档、加载器与联机要求。
 
@@ -104,3 +105,8 @@ Validation on 2026-09-13: r5 was exported from source `907b196` with 15 assembli
 2026-09-13：r6 从源码提交 `dbd4960` 导出，共 15 个程序集、259 个类型、658 个方法、484 个字段，仅含声明。新增 Component 泛型子控件查找、Transform.Find 与 TMP_InputField.DeactivateInputField（可选 clearSelection=false），移除不再引用的 Vector2 一元负号；15 个程序集身份和哈希同 r5，历史 SDK 保留原样，仅 Navigation 0.1.4 改用 r6。七个构建通过 SDK/真实引用符号 IL 与资源比对，894 项导航检查、489 项只读原生契约、22 项 CI 工具测试通过。新增检查覆盖地图填满视口、拖动边界、居中、鼠标锚点及分步平滑缩放。测试项目缓存与输出按项目隔离；实机外观、输入及帧耗时尚未验收。
 
 Validation on 2026-09-13: r6 was exported from source `dbd4960` with 15 assemblies, 259 types, 658 methods and 484 fields, declarations only. It adds Component generic child lookup, Transform.Find and TMP_InputField.DeactivateInputField with optional clearSelection=false; unused Vector2 unary negation is no longer referenced. All 15 assembly identities/hashes match r5. Historical SDKs remain unchanged; only Navigation 0.1.4 moves to r6. All seven SDK/real-reference symbolic IL and resource comparisons pass, along with 894 navigation checks, 489 read-only game contracts and 22 CI tooling tests. Added geometry checks cover viewport filling, drag limits, centering, mouse anchors and incremental smooth zoom. Test project caches and outputs are isolated. In-game appearance, input and frame time remain unverified.
+
+
+2026-09-13：r7 从源码提交 `7d333b8` 导出，共 15 个程序集、265 个类型、666 个方法和 540 个字段，仅含声明。新增真实 UI 输入模块及滚轮倍率、InputSettings 的滚轮输入范围、运行平台接口；15 个依赖身份与哈希同 r6，旧快照保留原样。Navigation 的未发布修改固定 r7，Mod 版本保持 0.1.4。全部七个 SDK/真实引用符号 IL 与资源对比通过；1397 项导航检查、553 项只读原生契约和 31 项 CI 工具测试通过。滚轮按运行时实际设置区分统一单位与 Windows 平台 120 单位；不执行 Unity 游戏代码，交互和 POI 显示仍需实机验收。
+
+Validation on 2026-09-13: r7 was exported from source `7d333b8`, with 15 assemblies, 265 types, 666 methods and 540 fields, declarations only. It adds the actual UI input module and scroll multiplier, InputSettings scroll range and runtime platform APIs. All 15 dependency identities/hashes match r6; earlier snapshots remain unchanged. Navigation Unreleased changes pin r7 while retaining Mod version 0.1.4. All seven SDK/real-reference symbolic IL and resource comparisons pass, with 1397 navigation checks, 553 read-only native contracts and 31 CI tooling tests. Wheel conversion reads runtime settings to distinguish uniform units from the Windows platform 120-unit range. No Unity game code executes; interaction and POI visuals still require in-game acceptance.
