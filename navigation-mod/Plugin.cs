@@ -276,7 +276,11 @@ namespace OldMarket.Navigation
             bool persistent=profile.Length>0;
             string next=(persistent?profile:"session|"+sessionId)+"|"+mapKey;
             state.Map=maps.Find(game.mapSO.id,game.mapSO.sceneName,region,expansions.IsReady?expansions.UnlockedIds:null);
-            if(next==contextKey) return;
+            if(next==contextKey)
+            {
+                if(state.TargetId.StartsWith("poi:",StringComparison.Ordinal)&&state.Target==null)state.TargetId="";
+                return;
+            }
             CloseMap();
             if(contextKey!="") sessionMarkers[contextKey]=state.Markers;
             contextKey=next;

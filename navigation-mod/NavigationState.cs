@@ -8,9 +8,12 @@ namespace OldMarket.Navigation
     {
         public Texture2D Texture;
         public Texture2D OverlayTexture;
+        public Texture2D DetailTexture;
+        public float DetailMinX,DetailMaxX,DetailMinZ,DetailMaxZ;
         public float MinX, MaxX, MinZ, MaxZ;
         public string Id="",Name="";
         public List<MapPoi> Pois=new List<MapPoi>();
+        public List<MapArea> LockedAreas=new List<MapArea>();
         public bool Valid => Texture!=null && NavMath.ValidBounds(MinX,MaxX,MinZ,MaxZ);
         public MapPoint Project(float x,float z) => NavMath.WorldToUv(x,z,MinX,MaxX,MinZ,MaxZ);
     }

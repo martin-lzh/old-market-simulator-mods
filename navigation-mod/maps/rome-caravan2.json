@@ -1,0 +1,27 @@
+{
+  "Id": "rome-caravan2",
+  "Name": "Caravan 2",
+  "MapId": 2,
+  "SceneName": "BazaarRome",
+  "Region": "RomeCaravan2",
+  "Texture": "rome-caravan2-artwork.png",
+  "North": "+Z",
+  "MinX": -203,
+  "MaxX": 202,
+  "MinZ": -2002,
+  "MaxZ": -1597,
+  "RequiredExpansions": [],
+  "ExcludedExpansions": [],
+  "Pois": [
+    {
+      "Id": "rome-caravan2-return",
+      "Name": "Return to Rome",
+      "NameKey": "poi_return",
+      "Category": "other",
+      "Icon": "return",
+      "X": -1.3918,
+      "Z": -1785.358485
+    }
+  ],
+  "Areas": []
+}

@@ -22,7 +22,7 @@ SOURCE = ROOT / "assets" / "phosphor"
 COMMIT = "2b75f3ad12b420c9504ef05df8d2564a28f8500e"
 ICONS = ["barn", "bank", "hammer", "wrench", "armchair", "axe", "cow",
          "plant", "t-shirt", "bed", "boat", "storefront", "house", "map-pin", "identification-card",
-         "users-three", "ruler", "recycle", "drop", "calendar-blank"]
+         "users-three", "ruler", "recycle", "drop", "calendar-blank", "door-open", "lock-key", "arrow-u-up-left", "mailbox"]
 PALETTE = {"shop": "#ad7568", "home": "#829278", "dock": "#77929d", "other": "#978190"}
 SCALE = 4
 

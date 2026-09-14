@@ -1,0 +1,27 @@
+{
+  "Id": "rome-gate2",
+  "Name": "Gate 2",
+  "MapId": 2,
+  "SceneName": "BazaarRome",
+  "Region": "RomeGate2",
+  "Texture": "rome-gate2-artwork.png",
+  "North": "+Z",
+  "MinX": -2002,
+  "MaxX": -1797,
+  "MinZ": -2002,
+  "MaxZ": -1797,
+  "RequiredExpansions": [],
+  "ExcludedExpansions": [],
+  "Pois": [
+    {
+      "Id": "rome-gate2-return",
+      "Name": "Return to Rome",
+      "NameKey": "poi_return",
+      "Category": "other",
+      "Icon": "return",
+      "X": -1816.361882,
+      "Z": -1910.32988
+    }
+  ],
+  "Areas": []
+}

@@ -144,6 +144,49 @@ class MapPackageTests(unittest.TestCase):
                 self.assertAlmostEqual(point["Z"], z, places=5)
                 self.assertEqual((point["Category"], point["NameKey"]), ("other", native))
 
+    def test_rome_regions_and_independent_unlocks(self):
+        maps = [json.loads(p.read_text()) for p in (self.c["directory"] / "maps").glob("rome-*.json")]
+        by_region = {m["Region"]: m for m in maps}
+        self.assertEqual(set(by_region), {"", "RomeCaravan1", "RomeCaravan2", "RomeEngineerMine",
+                                         "RomeGate1", "RomeGate2", "RomeGate3", "RomeGate4"})
+        self.assertTrue(all((m["MapId"], m["SceneName"]) == (2, "BazaarRome") for m in maps))
+        town, mine = by_region[""], by_region["RomeEngineerMine"]
+        self.assertEqual((len(town["Areas"]), len(mine["Areas"])), (59, 2))
+        areas = [a for m in maps for a in m["Areas"]]
+        ids = {a["RequiredExpansions"][0] for a in areas}
+        self.assertEqual(len(ids), 61)
+        for m in maps:
+            for a in m["Areas"]:
+                self.assertTrue(m["MinX"] <= a["MinX"] < a["MaxX"] <= m["MaxX"])
+                self.assertTrue(m["MinZ"] <= a["MinZ"] < a["MaxZ"] <= m["MaxZ"])
+            self.assertEqual(len({p["Id"] for p in m["Pois"]}), len(m["Pois"]))
+        self.assertEqual({a["Id"] for a in mine["Areas"]}, {"engineer_6", "engineer_7"})
+        visible = lambda p, unlocked: (set(p.get("RequiredExpansions", [])) <= unlocked
+                                      and not set(p.get("ExcludedExpansions", [])) & unlocked)
+        # Initial save, each independent unlock, each rollback from a complete save.
+        for unlocked in [set(), ids, *({i} for i in ids), *(ids - {i} for i in ids)]:
+            points = [p for p in town["Pois"] if visible(p, unlocked)]
+            for gate in range(1, 5):
+                matches = [p for p in points if p["NameKey"] == f"gate_{gate}"]
+                self.assertEqual(len(matches), 1)
+                expansion = next(a["RequiredExpansions"][0] for a in areas if a["Id"] == f"gate_{gate}")
+                self.assertEqual(matches[0]["Icon"], "portal" if expansion in unlocked else "locked")
+            for key in ("engineer", "gardener"):
+                self.assertEqual(sum(p["NameKey"] == key for p in points), 1)
+            self.assertEqual(sum(p["NameKey"] == "museum" for p in points), 1)
+        for region, m in by_region.items():
+            if region:
+                self.assertEqual(len(m["Pois"]), 1)
+                self.assertEqual(m["Pois"][0]["Icon"], "return")
+                self.assertTrue(visible(m["Pois"][0], set()))
+        self.assertEqual(sum(visible(p, set()) for p in town["Pois"]), 15)
+        self.assertEqual(sum(visible(p, ids) for p in town["Pois"]), 39)
+
+    def test_detail_texture_must_be_packaged(self):
+        self.update_map(lambda m: m.update(DetailTexture="unlisted-detail.png"))
+        with self.assertRaisesRegex(ValueError, "texture not in package"):
+            self.build()
+
     def test_package_rejects_missing_altered_moved_or_extra_resources(self):
         with zipfile.ZipFile(io.BytesIO(self.build())) as z:
             original = {name: z.read(name) for name in z.namelist()}

@@ -14,6 +14,7 @@ namespace OldMarket.Navigation
         private readonly NavigationState state;
         private readonly RectTransform root, mini, disk, content, compass, worldTargetRoot;
         private readonly RawImage map, mapOverlay;
+        private readonly MapAreaLayer areaLayer;
         private readonly TextMeshProUGUI north, mode, location, center, noMap, worldTargetText;
         private readonly Image playerArrow, worldTargetIcon, compassTarget;
         private readonly PoiIconSet playerIcons=new PoiIconSet();
@@ -52,6 +53,7 @@ namespace OldMarket.Navigation
             var overlayRect=Rect("Obstacles",mapRect,new Vector2(.5f,.5f),Vector2.zero);
             overlayRect.anchorMin=Vector2.zero;overlayRect.anchorMax=Vector2.one;overlayRect.offsetMin=overlayRect.offsetMax=Vector2.zero;
             mapOverlay=overlayRect.gameObject.AddComponent<RawImage>();mapOverlay.raycastTarget=false;mapOverlay.gameObject.SetActive(false);
+            areaLayer=new MapAreaLayer(mapRect);
             noMap = Text("NoTerrain", disk, 14); noMap.rectTransform.sizeDelta=new Vector2(175,54); noMap.rectTransform.anchoredPosition=new Vector2(0,-52); noMap.textWrappingMode=TextWrappingModes.Normal;
             poiLayer=new MiniMapPoiLayer(state,disk);
             var playerRect=Rect("Player",disk,new Vector2(.5f,.5f),new Vector2(25,25));
@@ -158,6 +160,7 @@ namespace OldMarket.Navigation
             float scale=(layout.MinimapSize-12)/(2*MinimapRange);
             map.gameObject.SetActive(state.Map!=null && state.Map.Valid);
             noMap.gameObject.SetActive(!map.gameObject.activeSelf);
+            areaLayer.Refresh(state.Map);
             mapOverlay.texture=state.Map?.OverlayTexture;mapOverlay.uvRect=map.uvRect;
             mapOverlay.gameObject.SetActive(map.gameObject.activeSelf && mapOverlay.texture!=null);
             noMap.text=Texts.Get(state.Locale,"NoMap");
@@ -263,6 +266,7 @@ namespace OldMarket.Navigation
         }
         public void ChangeZoom(bool zoomIn) {MinimapRange=MinimapZoom.Step(MinimapRange,zoomIn);}
         public string PoiDiagnostics => "mini nodes="+poiLayer.NodeCount+"; in view="+poiLayer.InViewCount;
-        public void Dispose() { zoomHint.Dispose();markerSprites.Dispose();playerIcons.Dispose();poiLayer.Dispose();if(root!=null)UnityEngine.Object.Destroy(root.gameObject);foreach(var item in owned)UnityEngine.Object.Destroy(item); }
+        public void Dispose() {
+            areaLayer.Dispose(); zoomHint.Dispose();markerSprites.Dispose();playerIcons.Dispose();poiLayer.Dispose();if(root!=null)UnityEngine.Object.Destroy(root.gameObject);foreach(var item in owned)UnityEngine.Object.Destroy(item); }
     }
 }

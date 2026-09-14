@@ -35,6 +35,7 @@ namespace OldMarket.Navigation
         private int lastCount=-1;
         private TMP_InputField nameInput;
         private Texture2D frameTexture, paperTexture;
+        private readonly MapAreaLayer areaLayer;
         private Sprite frameSprite;
         private readonly MarkerSprites markerSprites=new MarkerSprites();
         private int markerPicker;
@@ -74,6 +75,7 @@ namespace OldMarket.Navigation
             mapRect=Rect("MapTexture",viewport);mapRect.anchorMin=mapRect.anchorMax=new Vector2(.5f,.5f);
             mapImage=mapRect.gameObject.AddComponent<RawImage>();mapImage.raycastTarget=false;
             var overlay=Fill("MapObstacles",mapRect,0);mapOverlay=overlay.gameObject.AddComponent<RawImage>();mapOverlay.raycastTarget=false;mapOverlay.gameObject.SetActive(false);
+            areaLayer=new MapAreaLayer(mapRect);
             var gesture=viewport.gameObject.AddComponent<MapGesture>();gesture.Click=ClickMap;
             gesture.Drag=e=>{targetZoom=zoom;pan+=e.delta/CanvasScale();ApplyMapGeometry();};
             gesture.Scroll=e=>{if(RectTransformUtility.ScreenPointToLocalPointInRectangle(viewport,e.position,e.pressEventCamera,out var anchor))WheelZoom(e,anchor);};
@@ -141,6 +143,7 @@ namespace OldMarket.Navigation
             rotationLabel.text=Texts.Get(state.Locale,state.RotateWithCamera?"CameraUp":"NorthUp");
             title.text=string.IsNullOrWhiteSpace(state.Map?.Name)?Texts.Get(state.Locale,"Map"):state.Map.Name;
             bool valid=state.Map!=null&&state.Map.Valid;mapImage.texture=state.Map?.Texture;mapRect.gameObject.SetActive(valid);
+            areaLayer.Refresh(state.Map);
             mapOverlay.texture=state.Map?.OverlayTexture;mapOverlay.uvRect=mapImage.uvRect;mapOverlay.gameObject.SetActive(valid&&mapOverlay.texture!=null);
             status.text=state.ErrorKey!=""?Texts.Get(state.Locale,state.ErrorKey):!valid?Texts.Get(state.Locale,"NoMap"):(string.IsNullOrEmpty(state.ScopeId)||state.Store==null)?Texts.Get(state.Locale,"temporary"):"";
             AnimateZoom();ApplyMapGeometry();
@@ -291,6 +294,6 @@ namespace OldMarket.Navigation
             help.rectTransform.sizeDelta=new Vector2(root.sizeDelta.x-310,32);status.rectTransform.sizeDelta=new Vector2(root.sizeDelta.x-310,28);
             if(IsOpen)RebuildSidebar();ApplyMapGeometry();
         }
-        public void Dispose(){markerSprites.Dispose();playerIcons.Dispose();poiLayer.Dispose();if(root!=null)UnityEngine.Object.Destroy(root.gameObject);if(frameSprite!=null)UnityEngine.Object.Destroy(frameSprite);if(frameTexture!=null)UnityEngine.Object.Destroy(frameTexture);if(paperTexture!=null)UnityEngine.Object.Destroy(paperTexture);}
+        public void Dispose(){areaLayer.Dispose();markerSprites.Dispose();playerIcons.Dispose();poiLayer.Dispose();if(root!=null)UnityEngine.Object.Destroy(root.gameObject);if(frameSprite!=null)UnityEngine.Object.Destroy(frameSprite);if(frameTexture!=null)UnityEngine.Object.Destroy(frameTexture);if(paperTexture!=null)UnityEngine.Object.Destroy(paperTexture);}
     }
 }

@@ -6,7 +6,7 @@ These files are Navigation Mod resources for Old Market Simulator 2.1.6. The rel
 - `market0-obstacles.png` through `market3-obstacles.png`: programmatically drawn transparent obstacle overlays for four central-market unlock states. Their footprints were measured from the supported game scene; the fully unlocked overlay is transparent.
 - `market0.json` through `market3.json`: map identity, world bounds, expansion matching, texture references and POI coordinates. POI display names are resolved through native localization by the plugin.
 
-The base artwork and overlays use normalized UVs and the same world bounds; their pixel resolutions may differ. PNG files retain the exact bytes used in the local bundle tested on two computers; JSON line endings are normalized to LF without changing map data. Moving arbitrary buildings or objects does not regenerate it. Island is included as a separate static preview; other towns are not included.
+The base artwork and overlays use normalized UVs and the same world bounds; their pixel resolutions may differ. Eastern Town PNG files retain the exact bytes used in the local bundle tested on two computers; JSON line endings are normalized to LF without changing map data. Moving arbitrary buildings or objects does not regenerate it. Island is included as a separate static preview. Rome adds eight region maps with conditional areas and POIs.
 
 The Mod's original illustration, overlay styling and metadata contributions are provided under [LICENSE](../LICENSE). Game names and underlying game content remain their owners' property. Original game binaries, textures, meshes, extraction snapshots and personal markers are not included.
 
@@ -16,7 +16,7 @@ To update a map, replace only the intended runtime files, update their hashes in
 
 底图在 2026-09-13 基于校准地图示意图由 Image Gen 生成，并非直接提取的游戏贴图。四张透明障碍层按已核对场景的占地范围程序绘制，对应中央市场四种解锁状态；完全解锁层为透明。四份 JSON 保存地图标识、世界边界、解锁条件、贴图引用和 POI 坐标，显示名称由插件查询游戏本地化。
 
-底图和覆盖层通过相同的归一化 UV 与世界边界对齐，像素分辨率可以不同。PNG 与已完成双实机测试的本地合集保持逐字节一致，JSON 仅统一为 LF 换行、地图数据不变；移动任意建筑或物体不会自动重绘地图，另含海岛静态预览，其他城镇尚未加入。
+底图和覆盖层通过相同的归一化 UV 与世界边界对齐，像素分辨率可以不同。东方小镇 PNG 与已完成双实机测试的本地合集保持逐字节一致，JSON 仅统一为 LF 换行、地图数据不变；移动任意建筑或物体不会自动重绘地图，另含海岛静态预览及罗马的八个区域地图，罗马区块与 POI 随解锁变化。
 
 地图中的原创插画、覆盖层样式及元数据贡献随 Mod 采用 [LICENSE](../LICENSE)；游戏名称和底层游戏内容仍属于各自权利人。不包含原始游戏程序集、贴图、网格、提取快照或个人标记。
 
@@ -33,3 +33,9 @@ To update a map, replace only the intended runtime files, update their hashes in
 The four Eastern Town manifests share 17 fixed POIs. The [coverage review](eastern-poi-audit.md) adds recycling, employees, water refill and calendar; aquarium and origami remain grouped under the museum POI. Water/calendar are icon-only until native place-name keys are verified.
 
 东方小镇四份地图共用 17 个固定 POI。[覆盖复核](eastern-poi-audit.md)补充回收、雇员、补水和日历；水族馆与折纸收集合并在博物馆 POI 中。水井与日历在确认原生地点名之前仅显示图标。
+
+## Rome / 罗马
+
+Eight manifests select map ID 2 / BazaarRome and the exact local region name. The town has 59 unlock areas and a higher-detail image patch; the mine has two additional areas whose source objects reside in the main scene. See [region links, POIs, conditions and artwork provenance](rome-audit.md).
+
+八份元数据按地图 ID 2、BazaarRome 和本地玩家区域名称匹配。主城有 59 个解锁区块及细节底图；矿洞有两个额外区块，其源对象属于主城场景。[区域关联、POI、条件及插画来源](rome-audit.md)。

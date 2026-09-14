@@ -24,6 +24,9 @@ namespace OldMarket.Navigation
         [DataMember] public long[] RequiredExpansions=new long[0];
         [DataMember] public long[] ExcludedExpansions=new long[0];
         [DataMember] public MapPoi[] Pois=new MapPoi[0];
+        [DataMember] public MapArea[] Areas=new MapArea[0];
+        [DataMember] public string DetailTexture;
+        [DataMember] public float DetailMinX,DetailMaxX,DetailMinZ,DetailMaxZ;
         [OnDeserializing]
         private void SetDefaults(StreamingContext context){North="+Z";}
     }
@@ -41,6 +44,11 @@ namespace OldMarket.Navigation
                 if(map==null)throw new InvalidDataException("Map metadata missing");
                 map.Pois=map.Pois??new MapPoi[0];map.Region=map.Region??"";
                 map.RequiredExpansions=map.RequiredExpansions??new long[0];map.ExcludedExpansions=map.ExcludedExpansions??new long[0];
+                map.Areas=map.Areas??new MapArea[0];
+                MapArea.Validate(map.Areas,map.MinX,map.MaxX,map.MinZ,map.MaxZ);
+                if(!string.IsNullOrEmpty(map.DetailTexture)&&(!NavMath.ValidBounds(map.DetailMinX,map.DetailMaxX,map.DetailMinZ,map.DetailMaxZ)
+                    ||map.DetailMinX<map.MinX||map.DetailMaxX>map.MaxX||map.DetailMinZ<map.MinZ||map.DetailMaxZ>map.MaxZ))
+                    throw new InvalidDataException("Map detail bounds invalid");
                 MapPoi.Validate(map.Pois,map.MinX,map.MaxX,map.MinZ,map.MaxZ);
                 return map;
             }

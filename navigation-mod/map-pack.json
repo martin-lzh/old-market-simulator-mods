@@ -45,6 +45,74 @@
     {
       "name": "island-artwork.png",
       "sha256": "615f9099389b1a4eaf885455f356b661cfb8073a488193ae09c5d75f68f59dc2"
+    },
+    {
+      "name": "rome-caravan1-artwork.png",
+      "sha256": "37ba1a15263890ef25cf05330b1595e90e40f530d8a9e2fc456785eb6e389210"
+    },
+    {
+      "name": "rome-caravan1.json",
+      "sha256": "109bc27a841d3771bf63aeaeb366fe19ed42445628756b12434cb95547a22e67"
+    },
+    {
+      "name": "rome-caravan2-artwork.png",
+      "sha256": "e9bc309e74257938dc031779078a33a48f8df57efffb4444ccecd1374e8053a8"
+    },
+    {
+      "name": "rome-caravan2.json",
+      "sha256": "8f19319ec3da5bf901f6d4945286aacafa662905b528361828f857ccb179142e"
+    },
+    {
+      "name": "rome-gate1-artwork.png",
+      "sha256": "bd98db370d8e7d3abc0a2f2c9a1315bc362150796309174bfcfdf3722381a4b7"
+    },
+    {
+      "name": "rome-gate1.json",
+      "sha256": "8760101e7c1d6f1844a95b4073aaebc28aaef2a35d55ab02f2e1025e02ee44b0"
+    },
+    {
+      "name": "rome-gate2-artwork.png",
+      "sha256": "6ef1d153c0828b7a1ba1781e4da16fe629497359dfc847cfdeff3842929d4029"
+    },
+    {
+      "name": "rome-gate2.json",
+      "sha256": "29598e47c838bca93a2b91f35a0aab72d18e09a5aab9b5b6bbd3524f49284c1f"
+    },
+    {
+      "name": "rome-gate3-artwork.png",
+      "sha256": "dd2e17704e79fb1d3672c16f43867109aa3b8fd0401ad0d66a4b48abe18fed42"
+    },
+    {
+      "name": "rome-gate3.json",
+      "sha256": "7dc797cab7dfa379630ed74534da00da5c9f0b822b35f2101664f904c09b09e3"
+    },
+    {
+      "name": "rome-gate4-artwork.png",
+      "sha256": "32bfc0cacbe14427f1ffcef39f6a7e4adaac7df4557ac7381afda705aa1749d5"
+    },
+    {
+      "name": "rome-gate4.json",
+      "sha256": "b79a6c832c0f2c0e31ded45cfd95662a0ce925aa3101d0f3c0201fc27991d9d1"
+    },
+    {
+      "name": "rome-mine-artwork.png",
+      "sha256": "bf31e39b49d590fa060d236d24e00cb9304e2613ad6b18b7f5da004aa7fc08f0"
+    },
+    {
+      "name": "rome-mine.json",
+      "sha256": "21db407c1ac5f0baf73f686c72c90f3c1f6e452559c7a36382d6e9ccce9edc5b"
+    },
+    {
+      "name": "rome-town-artwork.png",
+      "sha256": "ed8af78ff2e378c541428c95e292a56c119bd498aa69cc71d812ccb48ae6c9de"
+    },
+    {
+      "name": "rome-town-detail.png",
+      "sha256": "492fe8b59f16099e0fe90c9f340f848ce0504ed05e543c95d15d7698b5b1ba91"
+    },
+    {
+      "name": "rome-town.json",
+      "sha256": "b5ecc603e0ee290957c3aab4b12499c05707cd1cd83c978c1535669dc1e68da1"
     }
   ]
 }

@@ -1,0 +1,48 @@
+{
+  "Id": "rome-mine",
+  "Name": "Engineer Mine",
+  "MapId": 2,
+  "SceneName": "BazaarRome",
+  "Region": "RomeEngineerMine",
+  "Texture": "rome-mine-artwork.png",
+  "North": "+Z",
+  "MinX": 1023,
+  "MaxX": 1178,
+  "MinZ": 1192,
+  "MaxZ": 1247,
+  "RequiredExpansions": [],
+  "ExcludedExpansions": [],
+  "Pois": [
+    {
+      "Id": "rome-mine-return",
+      "Name": "Return to Rome",
+      "NameKey": "poi_return",
+      "Category": "other",
+      "Icon": "return",
+      "X": 1171.226347,
+      "Z": 1213.280516
+    }
+  ],
+  "Areas": [
+    {
+      "Id": "engineer_7",
+      "MinX": 1109.27,
+      "MaxX": 1120.45,
+      "MinZ": 1208.14,
+      "MaxZ": 1218.33,
+      "RequiredExpansions": [
+        1762112246577
+      ]
+    },
+    {
+      "Id": "engineer_6",
+      "MinX": 1142.48,
+      "MaxX": 1148.08,
+      "MinZ": 1209.93,
+      "MaxZ": 1216.99,
+      "RequiredExpansions": [
+        1762112244457
+      ]
+    }
+  ]
+}

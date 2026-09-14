@@ -196,9 +196,9 @@ def map_resources(c):
                 or not isinstance(m.get("SceneName"), str) or not m["SceneName"]):
             raise ValueError("Invalid or duplicate map metadata")
         ids.add(m["Id"])
-        for key in ("Texture", "OverlayTexture"):
+        for key in ("Texture", "OverlayTexture", "DetailTexture"):
             texture = m.get(key)
-            if key == "OverlayTexture" and not texture:
+            if key != "Texture" and not texture:
                 continue
             if texture not in dimensions:
                 raise ValueError(f"Map texture not in package: {texture}")

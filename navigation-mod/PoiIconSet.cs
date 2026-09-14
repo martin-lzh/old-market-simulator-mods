@@ -14,24 +14,32 @@ namespace OldMarket.Navigation
         {
             if(poi==null)return Get("other");
             string key=poi.NameKey??"", native=MapPoi.NativeKey(key), name;
-            if(key=="poi_rest"||native=="rest")name="bed";
+            if(poi.Icon=="portal")name="door-open";
+            else if(poi.Icon=="locked")name="lock-key";
+            else if(poi.Icon=="return")name="arrow-u-up-left";
+            else if(poi.Icon=="mail")name="mailbox";
+            else if(key=="poi_rest"||native=="rest")name="bed";
             else if(key=="poi_market"||native=="market")name="storefront";
             else if(key=="poi_water")name="drop";
             else if(key=="poi_calendar")name="calendar-blank";
+            else if(native.StartsWith("workshop_",StringComparison.Ordinal))name="hammer";
+            else if(native.StartsWith("farm_",StringComparison.Ordinal)||native.StartsWith("barn_",StringComparison.Ordinal))name="barn";
+            else if(native.StartsWith("greenhouse_",StringComparison.Ordinal))name="plant";
+            else if(native.StartsWith("clothing_store_",StringComparison.Ordinal))name="t-shirt";
             else switch(native)
             {
                 case "farm":name="barn";break;
                 case "museum":name="bank";break;
                 case "workshop":name="hammer";break;
                 case "engineer":name="wrench";break;
-                case "decoration_store":name="armchair";break;
+                case "decoration_store":case "decorator":name="armchair";break;
                 case "lumberjack":name="axe";break;
-                case "animal_market":name="cow";break;
+                case "animal_market":case "breeder":name="cow";break;
                 case "gardener":name="plant";break;
                 case "clothing_store":name="t-shirt";break;
                 case "orders":name="boat";break;
                 case "licenses":name="identification-card";break;
-                case "employees":name="users-three";break;
+                case "employees":case "recruiter":case "plautia":name="users-three";break;
                 case "expansions":name="ruler";break;
                 case "junkman":name="recycle";break;
                 default:return Get(poi.Category);
