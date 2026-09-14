@@ -24,6 +24,8 @@ The bottom-left number is the amount of goods; the bottom-right is the number of
 
 Each container keeps its contents, cost and freshness. Compatible goods use the game's usual merging and expiry rules. Other non-tool items stack up to 64. A 65th container goes into another available slot; if there is no room, it stays near you.
 
+Seed packets also stack up to 64 per slot. The left number counts seeds and the right counts packets. Drop, throw and placement move one complete packet, including a partially used one; planting still uses one seed. Packets retain their individual contents and cost without transferring seeds between packets. Seed quantities already merged by an older build remain one packet with their saved quantity; their original packet count cannot be recovered.
+
 ## Controls
 
 - Tap Q to drop one item or one complete container; tap F to throw one. Mouse placement also handles one at a time.
@@ -43,6 +45,7 @@ There are no settings to adjust before playing.
 To remove it or return to an incompatible older version:
 
 1. With Stack All still installed, take out extra containers until each product slot has at most one.
+   Do the same for seed packets. Use up any seed packet exceeding the native packet size before returning to vanilla or an older build.
 2. Split other stacks to the game's normal limits.
 3. Save normally, then exit the game.
 4. Back up that save and remove the plugin DLL. Keep the previous backup until you have checked the result.
@@ -76,6 +79,8 @@ For a compatible update, close the game and back up your save and old DLL before
 
 每个容器保留自己的内容、成本和保鲜信息，兼容商品按游戏原有的合并与过期规则处理。其他非工具物品最多堆叠 64 个。第 65 个容器会放到其他空格；没有空间时会留在玩家附近。
 
+种子每格最多堆叠 64 包，左侧显示种子总数，右侧显示包数。丢下、投掷和放置每次移动完整一包，包括已经用掉部分种子的包；播种仍只消耗一粒。各包保留自己的数量和成本，不在包之间转移种子。旧构建已经合并的种子会按存档数量保留为一包，无法还原原来的包数。
+
 ## 怎么操作
 
 - 短按 Q 丢下一个物品或一个完整容器，短按 F 投掷一个；鼠标放置也是一次一个。
@@ -95,6 +100,7 @@ For a compatible update, close the game and back up your save and old DLL before
 如果想卸载，或退回不兼容的旧版：
 
 1. 先保持 Stack All 安装着，把每个商品格的额外容器取出，直到每格最多一个。
+   种子包也要整理到每格最多一包；超过原生包容量的旧种子包，应先用完再退回原版或旧构建。
 2. 将其他堆叠拆分到游戏原有上限以内。
 3. 正常保存并退出游戏。
 4. 备份整理后的存档，再移除插件 DLL；确认结果前保留原来的备份。

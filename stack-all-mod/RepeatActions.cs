@@ -36,7 +36,7 @@ namespace OldMarket.StackAll
             var slot = inventory.GetCurrentInventorySlot();
             var definition = GameManager.Instance.GetItemById(slot.itemId);
             int units = definition is ToolSO ? 1 : System.Math.Max(0, slot.amount);
-            if (definition is ProductSO)
+            if (PacketRules.IsPacket(definition))
             {
                 units = 0;
                 for (int p = 0; p < ContainerPlan.Limit; p++)

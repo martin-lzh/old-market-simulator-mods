@@ -67,7 +67,14 @@ foreach (string name in new[] { "HandleDrop", "HandleThrow" })
         method.Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "ReduceCurrentItemAmount"), "separate container and item actions " + name);
 }
 var repeat = plugin.MainModule.Types.Single(t => t.Name == "RepeatActions");
-Check(repeat.Methods.Single(m => m.Name == "Units").Body.Instructions.Any(i => i.Operand is TypeReference t && t.Name == "ProductSO"), "repeat count uses product containers");
+Check(repeat.Methods.Single(m => m.Name == "Units").Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "IsPacket"), "repeat count uses physical packets");
+Check(Type("SeedSO").BaseType.Name == "ItemSO", "seeds are separate from ProductSO");
+Check(Method("BlockDirt", "Interact").Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "ReduceCurrentItemAmount"), "native planting consumes one seed");
+var packets = plugin.MainModule.Types.Single(t => t.Name == "PacketRules");
+Check(packets.Methods.Single(m => m.Name == "IsPacket").Body.Instructions.Any(i => i.Operand is TypeReference t && t.Name == "SeedSO"), "seed packets use physical storage");
+Check(mod.Methods.Single(m => m.Name == "StackLimit").Body.Instructions.Any(i => i.Operand is MethodReference m && m.DeclaringType.Name == "PacketRules"), "drop and placement use packet-aware stack limits");
+foreach (string name in new[] { "Receive", "AfterLoad" })
+    Check(mod.Methods.Single(m => m.Name == name).Body.Instructions.Any(i => i.Operand is MethodReference m && m.DeclaringType.Name == "PacketRules" && m.Name == "Add"), "packet storage on " + name);
 Check(repeat.Methods.Single(m => m.Name == "ShouldAct").Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "IsAnyPanelActive"), "repeat cancels in menus");
 var hint = plugin.MainModule.Types.Single(t => t.Name == "ActionHint");
 Check(hint.Methods.Single(m => m.Name == "Show").Body.Instructions.Any(i => i.Operand is FieldReference f && f.Name == "controlHintPanel"), "hint follows native operation panel");

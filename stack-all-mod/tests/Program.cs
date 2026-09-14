@@ -45,6 +45,38 @@ for (int trial = 0; trial < 2000; trial++)
     Check(Enumerable.Range(0, 8).Where(i => before[i].itemId > 1).All(i => slots[i].Equals(before[i])), "other items unchanged");
 }
 InventorySlot[] Storage(int width) => Enumerable.Repeat(Empty(), ContainerPlan.StorageSize(width)).ToArray();
+var seeds = new SeedSO { amount = 10, stackSize = 1 };
+Check(PacketRules.StackLimit(seeds) == 1, "seed drop and placement select native whole-packet branch");
+Check(PacketRules.StackLimit(new ItemSO()) == 64, "ordinary items keep expanded stacking");
+Check(PacketRules.StackLimit(new ToolSO()) == 1, "tools retain native stack limit");
+slots = Storage(2);
+Check(PacketRules.Add(slots, 2, 1, 0, Slot(7, 4, 13, 2), seeds), "partially planted packet fits");
+Check(PacketRules.Add(slots, 2, 1, 0, Slot(7, 10, 29, 5), seeds), "full packet stacks alongside partial packet");
+Check(slots[0].amount == 4 && slots[0].cost == 13 && slots[0].dayCounter == 2 &&
+    slots[2].amount == 10 && slots[2].cost == 29 && slots[2].dayCounter == 5,
+    "seed stacking preserves each packet's contents and metadata without merging");
+slots[0].amount--; // The native planting path calls ReduceCurrentItemAmount.
+Check(ContainerPlan.Total(slots, 2, 0) == 13 && ContainerPlan.Count(slots, 2, 0) == 2, "planting consumes one seed, not a packet");
+slots[0] = Empty(); // Native UseItem clears only the front slot before promotion.
+ContainerPlan.Promote(slots, 2, 0);
+Check(slots[0].amount == 10 && slots[0].cost == 29 && ContainerPlan.Count(slots, 2, 0) == 1,
+    "dropping or exhausting a packet promotes the next packet intact");
+for (int p = 1; p < 64; p++) Check(PacketRules.Add(slots, 2, 1, 0, Slot(7, 10), seeds), "64 seed packets fit");
+Check(!PacketRules.Add(slots, 2, 1, 0, Slot(7, 6, 31), seeds) && ContainerPlan.Total(slots, 2, 0) == 640,
+    "full inventory rejects the entire incoming packet for intact spill");
+Check(PacketRules.Add(slots, 2, 2, 0, Slot(7, 6, 31), seeds) && slots[1].amount == 6 && slots[1].cost == 31,
+    "65th packet uses the next unlocked slot");
+var savedPackets = ContainerPlan.Trim(slots, 2);
+var restoredPackets = Storage(2);
+for (int i = 0; i < savedPackets.Length; i++)
+    if (savedPackets[i].itemId != -1)
+        Check(PacketRules.Add(restoredPackets, 2, 2, ContainerPlan.Group(2, i), savedPackets[i], seeds), "saved packet reloads");
+Check(ContainerPlan.Total(restoredPackets, 2, 0) + ContainerPlan.Total(restoredPackets, 2, 1) == 646 &&
+    ContainerPlan.Count(restoredPackets, 2, 0) + ContainerPlan.Count(restoredPackets, 2, 1) == 65,
+    "save reload conserves seed contents and packet count");
+slots = Storage(1);
+Check(PacketRules.Add(slots, 1, 1, 0, Slot(7, 64, 19), seeds) && slots[0].amount == 64 &&
+    ContainerPlan.Count(slots, 1, 0) == 1, "legacy merged seed amount remains one intact record without guessed splitting");
 slots = Storage(8);
 Check(ContainerPlan.Add(slots, 8, 1, 0, Slot(1, 24), 24, 8), "first full basket");
 Check(ContainerPlan.Add(slots, 8, 1, 0, Slot(1, 24), 24, 8), "second full basket");

@@ -6,6 +6,7 @@
 
 ### Unreleased
 
+- Treat seeds as physical packets for stacking, drop, throw, placement, overflow, repeat actions and quantity display. Preserve each packet's remaining seeds and metadata without merging contents; planting still consumes one seed. Existing merged seed records retain their saved quantity as one packet. Save records and RPC formats are unchanged, but all peers need the same build. Seed UI, save/reload and multiplayer acceptance remain untested in game. Retain Mod 0.2.2 and SDK 2.1.6/r1.
 - Show only the right-hand physical quantity for single-use, one-unit products such as whole fish. Keep both goods and container counts for reusable containers and multi-unit products, including boxed fish cuts. Inventory, saves and networking are unchanged.
 - Keep one- and two-digit quantities at the native font size with auto-sizing disabled and full slot width. Only goods totals of three or more digits may shrink within the left half to avoid overlapping the container count. Game 2.1.6 uses 22-point inventory numbers. The new display regression still needs in-game visual confirmation; the preceding build's two-computer multiplayer test is complete.
 - Retain version 0.2.2 and SDK 2.1.6/r1; this follow-up awaits a maintainer-assigned release version.
@@ -33,6 +34,7 @@ Older development versions mentioned in the README are not verified downloadable
 
 ### 未发布
 
+- 种子按实物包处理堆叠、丢下、投掷、放置、溢出、连续操作及数量显示。各包保留剩余种子和元数据，不合并包内数量；播种仍消耗一粒。旧版已合并的种子记录按存档数量保留为一包。存档记录和 RPC 格式不变，但所有玩家须使用相同构建。种子 UI、保存重载和联机仍待实机验收；保持 Mod 0.2.2 和 SDK 2.1.6/r1。
 - 整条鱼等容量为 1、用完消失的单件商品只显示右侧实际数量；可复用容器及多件装商品（包括鱼肉箱）仍显示商品量和容器数。不改变库存、存档或网络逻辑。
 - 一位数和两位数使用原生字号，关闭自动缩放并使用整个格子的宽度；只有三位及以上的商品总量可在左半格缩小，避免与容器数重叠；游戏 2.1.6 的库存数字原生字号为 22。本次显示修复仍待实机视觉确认，修复前构建的双实机联机测试已完成。
 - 保持版本 0.2.2 和 SDK 2.1.6/r1；本次后续修复尚待维护者指定发行版本。

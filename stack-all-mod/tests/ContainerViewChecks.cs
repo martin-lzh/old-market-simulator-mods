@@ -67,6 +67,8 @@ internal static class ContainerViewChecks
         check(native.gameObject.activeSelf && native.text == "60" && Right().text == "10", "boxed fish cuts retain both quantities");
         check(native.fontSize == 22 && Right().fontSize == 22 && !native.enableAutoSizing && !Right().enableAutoSizing,
             "both two-digit labels return to native size after a large goods total");
+        Update(new SeedSO { amount = 10 }, 3, 4);
+        check(native.gameObject.activeSelf && native.text == "12" && Right().text == "3", "seed contents and packet count are distinct");
         Update(fish, 10, 1);
         Update(new ItemSO(), 1, 10);
         check(native.gameObject.activeSelf && native.text == "10" && !Right().gameObject.activeSelf,
@@ -81,8 +83,10 @@ internal static class ContainerViewChecks
     }
 }
 
-public class ItemSO { public int amount; }
-public class ProductSO : ItemSO { public bool destroyWhenEmpty; }
+public class ItemSO { public int amount; public int stackSize = 1; }
+public class SeedSO : ItemSO { }
+public class ToolSO : ItemSO { }
+public class ProductSO : ItemSO { public bool destroyWhenEmpty; public int maxDays = -1; }
 public class ItemSlot
 {
     public Transform transform = new Transform();

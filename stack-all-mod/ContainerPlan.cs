@@ -3,7 +3,7 @@ using System;
 namespace OldMarket.StackAll
 {
     // First 'width' entries remain native hotbar slots; each owns 63 backing entries.
-    // Each product entry is one real container, including zero-content containers.
+    // Each entry is one physical container or seed packet; reusable containers may be empty.
     public static class ContainerPlan
     {
         public const int Limit = 64;
@@ -29,7 +29,7 @@ namespace OldMarket.StackAll
             return total;
         }
         public static bool Add(InventorySlot[] slots, int width, int active, int preferred,
-            InventorySlot incoming, int capacity, int maxDays)
+            InventorySlot incoming, int capacity, int maxDays, bool mergeContents = true)
         {
             if (incoming.itemId == -1 || incoming.amount < 0) throw new ArgumentException("Expected a product container");
             int group = -1;
@@ -41,7 +41,7 @@ namespace OldMarket.StackAll
 
             // Exactly the native V transfer rule, per physical container. Moving contents leaves
             // the source container present even when its contents reach zero.
-            for (int p = 0; p < Limit && incoming.amount > 0; p++)
+            for (int p = 0; mergeContents && p < Limit && incoming.amount > 0; p++)
             {
                 int index = Index(width, group, p);
                 var target = slots[index];

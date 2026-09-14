@@ -23,10 +23,10 @@ namespace OldMarket.StackAll
             var network = NetworkManager.Singleton;
             var player = network != null && network.LocalClient != null ? network.LocalClient.PlayerObject : null;
             var inventory = player != null ? player.GetComponent<PlayerInventory>() : null;
-            var product = inventorySlot.itemId != -1 && GameManager.Instance != null
-                ? GameManager.Instance.GetItemById(inventorySlot.itemId) as ProductSO : null;
+            var definition = inventorySlot.itemId != -1 && GameManager.Instance != null
+                ? GameManager.Instance.GetItemById(inventorySlot.itemId) : null;
             if (inventory == null || inventory.itemSlots == null || !__instance.transform.IsChildOf(inventory.itemSlots.transform)) return;
-            if (product == null || index < 0 || index >= inventory.maxSlots)
+            if (!PacketRules.IsPacket(definition) || index < 0 || index >= inventory.maxSlots)
             {
                 Restore(__instance);
                 return;
@@ -62,7 +62,7 @@ namespace OldMarket.StackAll
             view.Right.text = count.ToString();
             // Whole fish and other single-use products are individual items, not reusable
             // containers. Keep their physical count on the right without duplicating it.
-            __instance.textAmount.gameObject.SetActive(product.amount != 1 || !product.destroyWhenEmpty);
+            __instance.textAmount.gameObject.SetActive(!(definition is ProductSO product) || product.amount != 1 || !product.destroyWhenEmpty);
             view.Right.gameObject.SetActive(true);
         }
 
