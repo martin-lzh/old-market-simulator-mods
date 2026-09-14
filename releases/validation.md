@@ -2,7 +2,13 @@
 
 ## English
 
-### Current status — 2026-09-14
+### Current status — two-computer multiplayer completed, 2026-09-14
+
+Two-computer in-game multiplayer testing is complete for all six Mods in the supplied `e23f986` bundle: Material Cost 0.5.2, Coordinates 0.1.4, Checkout All 0.1.5, Stack All 0.2.2, Price Probability 0.1.2 and Navigation 0.2.0, on game 2.1.6. This is maintainer-reported manual testing, following the already completed visual and local in-game tests. It supersedes the multiplayer-pending status below without claiming a detailed scenario matrix or performance measurements.
+
+A subsequent Stack All display fix removes the duplicate left number for whole fish and preserves native-size quantity labels. That follow-up is Unreleased and still needs in-game visual confirmation; the completed multiplayer report does not claim testing of later code. Versions, SDK pins and prerelease flags are unchanged. Stack All's follow-up has no assigned target release version. Same-version multiplayer requirements and save rollback instructions remain applicable.
+
+### Previous status — 2026-09-14
 
 The maintainer confirmed that visual testing and all other local in-game testing for the current PR's Mods are complete. **Only multiplayer testing remains.** This supersedes the narrower initial confirmation below. It records maintainer-reported manual testing; no new automated checks or measurements are implied. The supported game baseline remains 2.1.6, and prerelease status is retained while multiplayer testing is pending.
 
@@ -44,7 +50,13 @@ Reviewed all six Mod READMEs, CHANGELOG/version metadata and build/package decla
 
 ## 中文
 
-### 当前状态 — 2026-09-14
+### 当前状态 — 双实机联机测试已完成，2026-09-14
+
+维护者确认已完成所提供 `e23f986` 合集内全部六个 Mod 的双实机联机测试：Material Cost 0.5.2、Coordinates 0.1.4、Checkout All 0.1.5、Stack All 0.2.2、Price Probability 0.1.2、Navigation 0.2.0，游戏基线为 2.1.6。此前视觉及本地实机测试也已完成。这是维护者反馈的人工测试，更新下方“多人待完成”的状态，不据此声称提供了完整场景矩阵或性能测量。
+
+随后新增的 Stack All 显示修复去除整条鱼左侧重复数字，并保持数量标签的原生字号。该后续修复记入未发布，仍待实机视觉确认；已完成的联机报告不涵盖后续代码。版本、SDK 固定修订及预发布标记不变，Stack All 后续修复尚未指定目标发行版本。既有联机同版本要求及存档回退说明继续适用。
+
+### 先前状态 — 2026-09-14
 
 维护者确认当前 PR 各 Mod 的视觉测试及其他本地实机测试均已完成，**目前只剩多人游戏测试**。此确认更新了下方最初较窄的记录；它属于维护者反馈的人工测试，不表示本次新增了自动检查或性能测量。支持的游戏基线仍为 2.1.6，多人测试完成前保留预发布状态。
 

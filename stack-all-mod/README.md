@@ -20,7 +20,7 @@ Choose the Mod ZIP on the release page, not GitHub's **Source code** download. T
 
 ## How stacks work
 
-The bottom-left number is the amount of goods; the bottom-right is the number of containers. Two baskets with 24 goods each show **48 goods / 2 containers**. Empty baskets still count as containers.
+The bottom-left number is the amount of goods; the bottom-right is the number of containers. Two baskets with 24 goods each show **48 goods / 2 containers**. Empty baskets still count as containers. Whole fish and other single-use, one-unit products show only their quantity on the right. One- and two-digit quantities keep the native font size; larger goods totals fit in the left half.
 
 Each container keeps its contents, cost and freshness. Compatible goods use the game's usual merging and expiry rules. Other non-tool items stack up to 64. A 65th container goes into another available slot; if there is no room, it stays near you.
 
@@ -34,7 +34,7 @@ There are no settings to adjust before playing.
 
 ## Multiplayer
 
-**Everyone in the room, including the host, needs the same Stack All version.** Please compare versions before joining; the Mod does not check this for you. Avoid combining it with other Mods that change inventory stacking. Visual and other local in-game testing is complete; multiplayer testing is the only remaining test area.
+**Everyone in the room, including the host, needs the same Stack All version.** Please compare versions before joining; the Mod does not check this for you. Avoid combining it with other Mods that change inventory stacking. Visual, local in-game and two-computer multiplayer testing of the preceding build is complete. The subsequent fish-quantity and font-size fix still needs in-game visual confirmation.
 
 ## Backups and removal
 
@@ -72,7 +72,7 @@ For a compatible update, close the game and back up your save and old DLL before
 
 ## 数量怎么看
 
-格子左下角是商品总数，右下角是容器数。例如两个各装 24 件商品的篮子，会显示 **48 件商品 / 2 个容器**。空篮子也会计入容器数。
+格子左下角是商品总数，右下角是容器数。例如两个各装 24 件商品的篮子，会显示 **48 件商品 / 2 个容器**。空篮子也会计入容器数。整条鱼等容量为 1、用完消失的单件商品只显示右侧数量；一位数和两位数保持原生字号，更大的商品总量会在左半格内缩放。
 
 每个容器保留自己的内容、成本和保鲜信息，兼容商品按游戏原有的合并与过期规则处理。其他非工具物品最多堆叠 64 个。第 65 个容器会放到其他空格；没有空间时会留在玩家附近。
 
@@ -86,7 +86,7 @@ For a compatible update, close the game and back up your save and old DLL before
 
 ## 和朋友一起玩
 
-**房主和所有玩家都需要安装相同版本的 Stack All。**加入房间前请互相确认，Mod 不会自动检查版本。尽量不要同时使用其他修改库存堆叠的 Mod。视觉及其他本地实机测试已完成，目前只剩多人游戏测试。
+**房主和所有玩家都需要安装相同版本的 Stack All。**加入房间前请互相确认，Mod 不会自动检查版本。尽量不要同时使用其他修改库存堆叠的 Mod。修复前构建的视觉、本地实机及双实机联机测试已完成；随后新增的鱼类数量和字号修复仍待实机视觉确认。
 
 ## 备份与卸载
 

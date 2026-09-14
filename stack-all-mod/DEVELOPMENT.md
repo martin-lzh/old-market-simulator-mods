@@ -1,8 +1,8 @@
 # Development notes / 开发说明
 
-**2026-09-14 — maintainer confirmation:** Visual and other local in-game testing is complete; multiplayer testing is the only remaining test area. This records manual testing feedback; it is not an automated test result.
+**2026-09-14 — maintainer confirmation:** Visual, local in-game and two-computer multiplayer testing of the preceding build is complete. The subsequent quantity-display fix awaits in-game visual confirmation. This records manual testing feedback; it is not an automated test result.
 
-**2026-09-14 — 维护者确认：**视觉及其他本地实机测试已完成，目前只剩多人游戏测试。这是人工测试反馈，不是自动测试结果。
+**2026-09-14 — 维护者确认：**修复前构建的视觉、本地实机及双实机联机测试已完成；后续数量显示修复仍待实机视觉确认。这是人工测试反馈，不是自动测试结果。
 
 Player instructions: [README](README.md). Repository workflow: [CONTRIBUTING](../CONTRIBUTING.md), [SDK](../sdk/README.md), [releases](../releases/README.md). Earlier unchecked-scenario descriptions below are superseded by the confirmation above. Current test scope: [validation record](../releases/validation.md).
 
