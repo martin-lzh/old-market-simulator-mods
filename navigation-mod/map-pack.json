@@ -37,6 +37,14 @@
     {
       "name": "oriental-town-artwork.png",
       "sha256": "fed8dd0369825749cd967c39db411e0cc546f83fb805590b6ace1c957c1acb97"
+    },
+    {
+      "name": "island.json",
+      "sha256": "88de5193d41b40ab7c0dbfc81e5c33e6805b77f2528ab44b4ea4dd6af5d6503c"
+    },
+    {
+      "name": "island-artwork.png",
+      "sha256": "615f9099389b1a4eaf885455f356b661cfb8073a488193ae09c5d75f68f59dc2"
     }
   ]
 }

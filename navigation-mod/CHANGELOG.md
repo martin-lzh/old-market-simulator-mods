@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Add the first Island map (BazaarIsland, map ID 0), a full-terrain Image Gen illustration and 16 scene-verified POIs. Add filled employee, expansion and recycling icons with native labels and category colors. Ship the map through the hashed allowlist. This is a static surface overview, not all expansion/underground states; new-map in-game alignment and multiplayer checks are pending. Keep 0.2.0 and SDK 2.1.6/r7 unchanged.
+
 - Scale large-map wheel/button zoom steps and the maximum zoom by world coverage and viewport aspect, preserving close-up detail and approximately the same input travel for larger maps. Minimap steps remain world-distance based. SDK 2.1.6/r7 and Mod version are unchanged; in-game zoom feel remains unverified.
 
 - Include the Eastern Town base map, four unlock overlays and four map/POI manifests in the Navigation release ZIP. Maps are tracked Mod resources and install with the DLL; no separate map download is needed.
@@ -96,6 +98,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 补入第一个海岛地图（BazaarIsland，地图 ID 0）、完整地形范围的 Image Gen 插画及 16 个经场景核对的 POI。新增雇员、扩建、回收实心图标，复用原生名称及类别配色；地图纳入哈希白名单打包。这是静态地表概览，不覆盖全部扩建与地下状态；新地图实机对齐及联机验证待完成。保持 0.2.0 与 SDK 2.1.6/r7 不变。
 
 - 大地图滚轮、按钮缩放步长与放大上限随世界覆盖范围和视口比例调整，让扩大后的地图保持近景细节与近似操作次数。小地图仍按世界距离分档。SDK 2.1.6/r7 与 Mod 版本不变，缩放手感尚未实机验收。
 

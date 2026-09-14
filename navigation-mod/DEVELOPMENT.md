@@ -38,7 +38,7 @@ Layout units use a 1920×1080 reference canvas. `MinimapRange` is the radius in 
 
 ## Map data and expansion states
 
-Local companion metadata matches map ID, scene, region and expansion IDs; each image includes explicit X/Z bounds and `North: "+Z"`. Unlock variants can share one painted base image and supply exact obstacle overlays; they are not four independently invented terrain layouts. Ambiguous matching metadata is rejected instead of choosing an arbitrary map. Map geometry is never inferred from decorative artwork alone. The reviewed map pack is tracked under `maps/` and ships in the public ZIP; `map-pack.json` pins every allowed JSON/PNG and SHA256. Original game assemblies, raw assets and extraction snapshots remain excluded. The included pack currently has evidence only for Eastern Town and the central market's four unlock states; other areas or changes in game content must be independently checked.
+Local companion metadata matches map ID, scene, region and expansion IDs; each image includes explicit X/Z bounds and `North: "+Z"`. Unlock variants can share one painted base image and supply exact obstacle overlays; they are not four independently invented terrain layouts. Ambiguous matching metadata is rejected instead of choosing an arbitrary map. Map geometry is never inferred from decorative artwork alone. The reviewed map pack is tracked under `maps/` and ships in the public ZIP; `map-pack.json` pins every allowed JSON/PNG and SHA256. Original game assemblies, raw assets and extraction snapshots remain excluded. The included pack covers Eastern Town and its four central-market states, plus the Island static surface preview described below; other areas and state changes require independent verification.
 
 The runtime reads the replicated unlock set and selects matching variants after unlock or scene events, with a short delay for game activation. This supports removal of market clutter when the corresponding companion variant exists. It does not redraw arbitrary player buildings, items, vegetation or every expansion automatically. Map files load at plugin startup; restart after changing them. Expansion changes do not change marker storage scope.
 
@@ -54,7 +54,7 @@ Requirements for the local build below: Windows, Python 3.12, .NET SDK (tests ta
 dotnet run --project navigation-mod/tests/Navigation.Tests.csproj
 ```
 
-Build output: `outputs/OldMarket.Navigation-0.2.0.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist contains the plugin DLL, README, CHANGELOG, LICENSE and the nine map files named in `map-pack.json`. Local and CI builds use `tools/ci.py package` / `write_package` for identical packaging. Validation checks resource hashes, PNG integrity, map bounds and texture references; the plugin's own metadata reader validates each packaged map and its POIs. Game assemblies, loaders, saves, logs and backups remain excluded.
+Build output: `outputs/OldMarket.Navigation-0.2.0.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist contains the plugin DLL, README, CHANGELOG, LICENSE and the eleven map files named in `map-pack.json`. Local and CI builds use `tools/ci.py package` / `write_package` for identical packaging. Validation checks resource hashes, PNG integrity, map bounds and texture references; the plugin's own metadata reader validates each packaged map and its POIs. Game assemblies, loaders, saves, logs and backups remain excluded.
 
 Verified on the 2.1.6 baseline: SDK r7 and real-reference Release builds match in symbolic IL, assembly references and embedded resources; The 0.2.0 build passes 1225 navigation checks, 19 native-name checks, 635 read-only installed-assembly contracts and 48 CI tooling tests. No Unity game code was executed by these checks.
 
@@ -62,7 +62,7 @@ Automated coverage exercises coordinate conversion/rotation boundaries, marker s
 
 ### 地图状态与存储
 
-本地地图按地图 ID、场景、区域和解锁集合匹配，显式保存 X/Z 边界及北向。解锁变体可共用同一绘画底图，并叠加准确障碍层，并非四幅各自编造地形的地图；匹配条件有歧义时拒绝选图。不能仅凭装饰画推断几何。经核对的地图包纳入 `maps/` 并随公开 ZIP 发行；`map-pack.json` 逐项固定 JSON/PNG 文件及 SHA256。原始游戏程序集、资源和提取快照仍不入包。当前地图证据范围为东方小镇及中央市场四个解锁状态，其余区域尚未验证。
+本地地图按地图 ID、场景、区域和解锁集合匹配，显式保存 X/Z 边界及北向。解锁变体可共用同一绘画底图，并叠加准确障碍层，并非四幅各自编造地形的地图；匹配条件有歧义时拒绝选图。不能仅凭装饰画推断几何。经核对的地图包纳入 `maps/` 并随公开 ZIP 发行；`map-pack.json` 逐项固定 JSON/PNG 文件及 SHA256。原始游戏程序集、资源和提取快照仍不入包。地图证据范围为东方小镇及中央市场四态，以及下文海岛静态地表预览；其他区域和状态仍需独立验证。
 
 读取原生同步的解锁集合，在解锁或场景事件后切换匹配底图；有对应变体时可反映市场垃圾消失。不会自动重绘任意玩家建筑、物品、植被或全部扩建。解锁变化不改变个人标记的存储范围。
 
@@ -76,7 +76,7 @@ Automated coverage exercises coordinate conversion/rotation boundaries, marker s
 
 固定游戏 **2.1.6**、Unity Mono **2022.3.62f3** 与编译 SDK **2.1.6/r7**，既有 Mod 保留 r1。CI 使用官方固定哈希的 BepInEx 5.4.23.5 引用；反射使用的存档槽、区域与扩建成员纳入 SDK 和真实程序集契约检查。无游戏环境可运行上文 `ci.py validate`、CI 工具测试和 `ci.py build`；匹配的本机安装可用 `ci.py verify-game --game-dir <path>` 核对真实引用符号 IL/资源与契约，不启动游戏。
 
-构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.2.0.zip`，打印 SHA256，不自动安装，包含 DLL、README、CHANGELOG、LICENSE 及 `map-pack.json` 列出的九个地图文件。本地脚本和 CI 共用 Python 打包器；校验哈希、PNG 完整性、地图边界和贴图引用，并使用插件自身的读取器检查地图及 POI。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
+构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.2.0.zip`，打印 SHA256，不自动安装，包含 DLL、README、CHANGELOG、LICENSE 及 `map-pack.json` 列出的十一个地图文件。本地脚本和 CI 共用 Python 打包器；校验哈希、PNG 完整性、地图边界和贴图引用，并使用插件自身的读取器检查地图及 POI。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
 
 2.1.6 基线验证：SDK r7 与真实引用 Release 构建的符号 IL、程序集引用及内嵌资源一致；0.2.0 通过 1225 项导航检查、19 项原生名称检查、635 项只读原生契约和 48 项 CI 工具测试，检查不执行 Unity 游戏代码。
 
@@ -95,3 +95,13 @@ World and bearing target guidance hides while native modal or loading panels are
 Compass and 3D target guidance reuse the selected POI icon or personal marker shape and color, including its outline.
 
 罗盘和 3D 目标指引复用所选 POI 图标或个人标记的形状、颜色和描边。
+
+## Island map preview / 海岛地图预览
+
+The first map is BazaarIsland, ID 0. See [POI coordinates and evidence](maps/island-pois.md) for its 16 fixed anchors, native keys, categories and icons. The full-terrain illustration is a static surface overview; it is not an expansion-state or underground-floor map. Game 2.1.6 / SDK r7 stays unchanged: no new game, Unity or network interfaces are called. Image Gen registration is approximate and requires in-game acceptance.
+
+第一张地图为 BazaarIsland、ID 0；[POI 坐标记录](maps/island-pois.md)列出 16 个固定锚点及类别图标。新增的是完整地形范围的静态地表图，不是全部扩建或地下楼层图。沿用游戏 2.1.6 / SDK r7，没有新增游戏、Unity 或网络接口调用；生成图对齐仍需实机验收。
+
+2026-09-15 validation: version/map-hash validation, 61 CI tooling tests, all SDK builds and 1263 Navigation checks passed (including five packaged manifests). Icon generation verified 72 category variants and 18 distinct silhouettes. No new SDK snapshot, game installation changes, in-game tests or multiplayer tests were performed.
+
+2026-09-15 验证：版本/地图哈希校验、61 项 CI 工具测试、全部 SDK 构建及 1263 项导航检查通过（包含五份打包地图）。图标生成检查 72 个类别变体和 18 个独立轮廓。未新增 SDK 快照，未修改游戏安装，未执行实机与联机测试。

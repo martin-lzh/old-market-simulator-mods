@@ -45,10 +45,11 @@ class MapPackageTests(unittest.TestCase):
         self.update_manifest(lambda m: next(e for e in m["files"] if e["name"] == path.name)
                              .update(sha256=ci.sha(path.read_bytes())))
 
-    def test_package_contains_all_nine_maps_at_install_path(self):
+    def test_package_contains_all_reviewed_maps_at_install_path(self):
         with zipfile.ZipFile(io.BytesIO(self.build())) as z:
-            self.assertEqual(len(z.namelist()), 13)
-            self.assertEqual(sum("/maps/" in n for n in z.namelist()), 9)
+            count = len(json.loads(self.manifest.read_text())["files"])
+            self.assertEqual(len(z.namelist()), 4 + count)
+            self.assertEqual(sum("/maps/" in n for n in z.namelist()), count)
             self.assertIsNone(z.testzip())
             for name, data in ci.map_resources(self.c).items():
                 self.assertEqual(z.read(name), data)
@@ -104,7 +105,23 @@ class MapPackageTests(unittest.TestCase):
         (self.c["directory"] / "maps/private-config.json").write_text("private")
         (self.c["directory"] / "maps/Assembly-CSharp.dll").write_bytes(b"MZ")
         with zipfile.ZipFile(io.BytesIO(self.build())) as z:
-            self.assertEqual(len(z.namelist()), 13)
+            self.assertEqual(len(z.namelist()), 4 + len(json.loads(self.manifest.read_text())["files"]))
+
+    def test_island_identity_pois_and_texture_are_packaged(self):
+        with zipfile.ZipFile(io.BytesIO(self.build())) as z:
+            prefix = "BepInEx/plugins/OldMarket.Navigation/maps/"
+            island = json.loads(z.read(prefix + "island.json"))
+            self.assertEqual((island["MapId"], island["SceneName"]), (0, "BazaarIsland"))
+            self.assertEqual(len(island["Pois"]), 16)
+            self.assertEqual(len({p["Id"] for p in island["Pois"]}), 16)
+            self.assertIn(prefix + island["Texture"], z.namelist())
+            points = {p["Id"]: p for p in island["Pois"]}
+            self.assertEqual(points["island-junkman"]["Category"], "other")
+            self.assertAlmostEqual(points["island-employees"]["X"], 33.278999, places=5)
+            self.assertAlmostEqual(points["island-orders"]["Z"], 50.721001, places=5)
+            for point in island["Pois"]:
+                self.assertTrue(island["MinX"] <= point["X"] <= island["MaxX"])
+                self.assertTrue(island["MinZ"] <= point["Z"] <= island["MaxZ"])
 
     def test_package_rejects_missing_altered_moved_or_extra_resources(self):
         with zipfile.ZipFile(io.BytesIO(self.build())) as z:
@@ -133,7 +150,7 @@ class MapPackageTests(unittest.TestCase):
                 patch.object(ci, "release_authorized", return_value=True):
             ci.write_evidence(self.c, self.output)
             evidence = json.loads((self.output / "build-info.json").read_text(encoding="utf-8"))
-            self.assertEqual(len(evidence["mapFiles"]), 9)
+            self.assertEqual(len(evidence["mapFiles"]), len(json.loads(self.manifest.read_text())["files"]))
             api = FakeGitHub()
             ci.publish("owner/repo", "a" * 40, api)
             self.assertIn(data, api.assets.values())

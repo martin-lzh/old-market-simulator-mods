@@ -1,0 +1,145 @@
+{
+  "Id": "island-surface",
+  "Name": "",
+  "MapId": 0,
+  "SceneName": "BazaarIsland",
+  "Region": "",
+  "MinX": -501,
+  "MaxX": 501,
+  "MinZ": -501,
+  "MaxZ": 501,
+  "North": "+Z",
+  "RequiredExpansions": [],
+  "ExcludedExpansions": [],
+  "Texture": "island-artwork.png",
+  "Pois": [
+    {
+      "Id": "island-engineer",
+      "Name": "Engineer",
+      "NameKey": "engineer",
+      "Category": "shop",
+      "X": 30.197999,
+      "Z": 18.887
+    },
+    {
+      "Id": "island-decorations",
+      "Name": "Decoration Store",
+      "NameKey": "decoration_store",
+      "Category": "shop",
+      "X": 24.407,
+      "Z": -47.569
+    },
+    {
+      "Id": "island-carpenter",
+      "Name": "Lumberjack",
+      "NameKey": "lumberjack",
+      "Category": "shop",
+      "X": -0.474216,
+      "Z": -45.254703
+    },
+    {
+      "Id": "island-animals",
+      "Name": "Animal Market",
+      "NameKey": "animal_market",
+      "Category": "shop",
+      "X": -7.231,
+      "Z": -37.34
+    },
+    {
+      "Id": "island-garden",
+      "Name": "Gardener",
+      "NameKey": "gardener",
+      "Category": "shop",
+      "X": -8.867162,
+      "Z": 2.014615
+    },
+    {
+      "Id": "island-clothing",
+      "Name": "Clothing Store",
+      "NameKey": "clothing_store",
+      "Category": "shop",
+      "X": 39.799999,
+      "Z": -6.207
+    },
+    {
+      "Id": "island-junkman",
+      "Name": "Junkman",
+      "NameKey": "junkman",
+      "Category": "other",
+      "X": 37.919728,
+      "Z": -18.629119
+    },
+    {
+      "Id": "island-orders",
+      "Name": "Orders",
+      "NameKey": "orders",
+      "Category": "dock",
+      "X": -5.679,
+      "Z": 50.721001
+    },
+    {
+      "Id": "island-licenses",
+      "Name": "Licenses",
+      "NameKey": "licenses",
+      "Category": "other",
+      "X": 37.116001,
+      "Z": -40.936001
+    },
+    {
+      "Id": "island-employees",
+      "Name": "Employees",
+      "NameKey": "employees",
+      "Category": "other",
+      "X": 33.278999,
+      "Z": -28.929001
+    },
+    {
+      "Id": "island-expansions",
+      "Name": "Expansions",
+      "NameKey": "expansions",
+      "Category": "other",
+      "X": 49.89687,
+      "Z": -45.855766
+    },
+    {
+      "Id": "island-rest",
+      "Name": "Rest",
+      "NameKey": "poi_rest",
+      "Category": "home",
+      "X": 3.367357,
+      "Z": -15.197052
+    },
+    {
+      "Id": "island-market",
+      "Name": "Market",
+      "NameKey": "poi_market",
+      "Category": "shop",
+      "X": 1.17,
+      "Z": -13.43
+    },
+    {
+      "Id": "island-farm",
+      "Name": "Farm",
+      "NameKey": "farm",
+      "Category": "home",
+      "X": -25.786367,
+      "Z": -7.696741
+    },
+    {
+      "Id": "island-museum",
+      "Name": "Museum",
+      "NameKey": "museum",
+      "Category": "other",
+      "X": 28.300001,
+      "Z": 15.096001
+    },
+    {
+      "Id": "island-workshop",
+      "Name": "Workshop",
+      "NameKey": "workshop",
+      "Category": "home",
+      "X": 4.613001,
+      "Z": -20.672001
+    }
+  ]
+}
