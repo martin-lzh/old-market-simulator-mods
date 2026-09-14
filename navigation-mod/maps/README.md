@@ -27,3 +27,9 @@ To update a map, replace only the intended runtime files, update their hashes in
 `island.json` selects map ID 0 / BazaarIsland and records 16 fixed POIs; `island-artwork.png` is a new Image Gen illustration made on 2026-09-15 from a full-terrain orthographic diagram, with a second pass correcting town/northern-island placement. Bounds are X/Z [-501,501]. It is independent of Eastern Town unlock conditions and intentionally has no expansion overlay. See [coordinates, categories, icon assignments and validation limits](island-pois.md).
 
 `island.json` 对应第一张海岛地图，记录 16 个固定 POI；`island-artwork.png` 于 2026-09-15 由完整地形投影经 Image Gen 绘制并修正镇区和北岛位置。X/Z 边界均为 [-501,501]，不复用东方小镇的解锁条件，也不包含扩建覆盖层。[坐标、类别、图标及验证范围](island-pois.md)。新图仍待实机验收。
+
+## Eastern Town service coverage / 东方小镇服务覆盖
+
+The four Eastern Town manifests share 17 fixed POIs. The [coverage review](eastern-poi-audit.md) adds recycling, employees, water refill and calendar; aquarium and origami remain grouped under the museum POI. Water/calendar are icon-only until native place-name keys are verified.
+
+东方小镇四份地图共用 17 个固定 POI。[覆盖复核](eastern-poi-audit.md)补充回收、雇员、补水和日历；水族馆与折纸收集合并在博物馆 POI 中。水井与日历在确认原生地点名之前仅显示图标。

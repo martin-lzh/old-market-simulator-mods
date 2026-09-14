@@ -122,6 +122,38 @@
       "Category": "other",
       "X": 70.841999,
       "Z": 111.190002
+    },
+    {
+      "Id": "oriental-town-junkman",
+      "Name": "Recycling",
+      "NameKey": "junkman",
+      "Category": "other",
+      "X": 64.817823,
+      "Z": 126.047634
+    },
+    {
+      "Id": "oriental-town-employees",
+      "Name": "Employees",
+      "NameKey": "employees",
+      "Category": "other",
+      "X": 100.18498,
+      "Z": 127.189024
+    },
+    {
+      "Id": "oriental-town-water",
+      "Name": "Water Well",
+      "NameKey": "poi_water",
+      "Category": "other",
+      "X": 70.910004,
+      "Z": 206.740005
+    },
+    {
+      "Id": "oriental-town-calendar",
+      "Name": "Calendar",
+      "NameKey": "poi_calendar",
+      "Category": "other",
+      "X": 72.853999,
+      "Z": 111.877002
     }
   ]
 }

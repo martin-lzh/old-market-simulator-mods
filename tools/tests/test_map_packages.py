@@ -123,6 +123,27 @@ class MapPackageTests(unittest.TestCase):
                 self.assertTrue(island["MinX"] <= point["X"] <= island["MaxX"])
                 self.assertTrue(island["MinZ"] <= point["Z"] <= island["MaxZ"])
 
+    def test_eastern_services_exist_in_every_market_state(self):
+        expected = {"junkman": (64.817823, 126.047634, "junkman"),
+                    "employees": (100.18498, 127.189024, "employees"),
+                    "water": (70.910004, 206.740005, "poi_water"),
+                    "calendar": (72.853999, 111.877002, "poi_calendar")}
+        variants = [json.loads((self.c["directory"] / f"maps/market{i}.json").read_text()) for i in range(4)]
+        for variant in variants:
+            self.assertEqual((variant["MapId"], variant["SceneName"]), (1, "BazaarFarEast"))
+            self.assertEqual(len(variant["Pois"]), 17)
+            self.assertEqual(variant["Pois"], variants[0]["Pois"])
+            points = {p["Id"]: p for p in variant["Pois"]}
+            self.assertEqual(len(points), 17)
+            self.assertIn("oriental-town-museum", points)
+            self.assertNotIn("oriental-town-aquarium", points)
+            self.assertNotIn("oriental-town-origami", points)
+            for suffix, (x, z, native) in expected.items():
+                point = points["oriental-town-" + suffix]
+                self.assertAlmostEqual(point["X"], x, places=5)
+                self.assertAlmostEqual(point["Z"], z, places=5)
+                self.assertEqual((point["Category"], point["NameKey"]), ("other", native))
+
     def test_package_rejects_missing_altered_moved_or_extra_resources(self):
         with zipfile.ZipFile(io.BytesIO(self.build())) as z:
             original = {name: z.read(name) for name in z.namelist()}

@@ -31,7 +31,8 @@ namespace OldMarket.Navigation
             ["poi_garden"]="gardener", ["poi_clothing"]="clothing_store",
             ["poi_orders"]="orders", ["poi_workshop"]="workshop",
             ["poi_farm"]="farm", ["poi_museum"]="museum",
-            ["poi_rest"]="", ["poi_market"]=""
+            ["poi_rest"]="", ["poi_market"]="",
+            ["poi_water"]="", ["poi_calendar"]=""
         };
         public static string NativeKey(string key)
         { return NativeAliases.TryGetValue(key??"",out var native)?native:key??""; }

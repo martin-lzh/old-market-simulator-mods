@@ -8,7 +8,7 @@
     },
     {
       "name": "market0.json",
-      "sha256": "7d8d719c6a735f6e79ac61a9a2bad91679f57d8e8e0828305bb72818f5d07775"
+      "sha256": "fec8f6270d1774393cf80035f88f02c5a9d0f223e705c12870117209035c2497"
     },
     {
       "name": "market1-obstacles.png",
@@ -16,7 +16,7 @@
     },
     {
       "name": "market1.json",
-      "sha256": "e53e004ce316d072f47cd82d09d77483102991659a483dc6e993fcac8256f01d"
+      "sha256": "f56d9b67352626d453815c2b2af0b5d9b3df819eee28a17991eefc84a6ae1f99"
     },
     {
       "name": "market2-obstacles.png",
@@ -24,7 +24,7 @@
     },
     {
       "name": "market2.json",
-      "sha256": "2f2909068d29bc452257404695305b3c56b8e408489099209d20c90aa491a252"
+      "sha256": "f1d5613717b3c78bd9b256ee697e6aaafdffef620fc3a4880df8910c31ec4a25"
     },
     {
       "name": "market3-obstacles.png",
@@ -32,7 +32,7 @@
     },
     {
       "name": "market3.json",
-      "sha256": "23535000ba7cf92d4850dc2dd160bc953216b13ea7130adfd6e01999ccba9a5d"
+      "sha256": "e95e41cbe37831b16a6851da93f76bac656758ae699d547330665fc78ed565a2"
     },
     {
       "name": "oriental-town-artwork.png",

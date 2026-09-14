@@ -19,14 +19,14 @@ The generator verifies vendored source hashes and works offline after its pinned
 resvg-py 0.2.5 and Pillow 11.1.0 dependencies are cached. `--fetch` explicitly
 downloads the pinned sources again. It renders the official filled paths,
 applies four category colors, and adds a 3px dark outer outline at 32px output
-size. All 72 PNGs are embedded in the Mod, without a runtime SVG dependency.
-Generation checks transparent backgrounds, four exact colors and 18 distinct
+size. All 80 PNGs are embedded in the Mod, without a runtime SVG dependency.
+Generation checks transparent backgrounds, four exact colors and 20 distinct
 silhouettes. The player's existing original arrow remains unchanged.
 
 生成器校验来源哈希，固定版本依赖缓存后可离线执行；`--fetch` 才重新下载来源。
 官方实心路径按四种类别颜色着色，在 32px 输出上增加 3px 深色外描边。
-72 张 PNG 嵌入 Mod，运行时无需 SVG 依赖；检查透明背景、四种精确颜色和
-18 个不同轮廓。玩家原创箭头保持不变。
+80 张 PNG 嵌入 Mod，运行时无需 SVG 依赖；检查透明背景、四种精确颜色和
+20 个不同轮廓。玩家原创箭头保持不变。
 
 | Place / 地点 | Phosphor fill icon |
 | --- | --- |
@@ -45,6 +45,8 @@ silhouettes. The player's existing original arrow remains unchanged.
 | Employees / 雇员 | users-three |
 | Expansions / 扩建 | ruler |
 | Recycling / 回收 | recycle |
+| Water refill / 补水 | drop |
+| Calendar / 日历 | calendar-blank |
 | Market / 市场 | storefront |
 | Generic home / 通用住所 | house |
 | Generic place / 通用地点 | map-pin |

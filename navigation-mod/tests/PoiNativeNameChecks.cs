@@ -18,7 +18,7 @@ internal static class PoiNativeNameChecks
             MapPoi.NativeNameResolver=(locale,key)=>locale+":"+key;
             Equal(shop.DisplayName("zh"),"zh:gardener","selected locale and native key reach reader");
             Equal(shop.DisplayName("de"),"de:gardener","language switch reads again without stale MapPoi cache");
-            foreach(var alias in new[]{"poi_rest","poi_market"})
+            foreach(var alias in new[]{"poi_rest","poi_market","poi_water","poi_calendar"})
                 Equal(new MapPoi {Name="Invented fallback",NameKey=alias}.DisplayName("en"),"","unnamed place stays icon-only");
             Equal(new MapPoi {Name="Personal name"}.DisplayName("en"),"Personal name","explicit custom name preserved");
             Equal(new MapPoi {NameKey="museum"}.DisplayName("en"),"en:museum","native keys supported directly");
@@ -26,7 +26,7 @@ internal static class PoiNativeNameChecks
             Equal(shop.DisplayName("zh"),"","pending table does not leak fallback");
             MapPoi.NativeNameResolver=(locale,key)=>"Ready";
             Equal(shop.DisplayName("zh"),"Ready","ready table updates without language change");
-            Console.WriteLine("POI native-name checks passed (19).");
+            Console.WriteLine("POI native-name checks passed (21).");
         }
         finally { MapPoi.NativeNameResolver=previous; }
     }

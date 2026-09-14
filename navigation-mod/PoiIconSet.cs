@@ -16,6 +16,8 @@ namespace OldMarket.Navigation
             string key=poi.NameKey??"", native=MapPoi.NativeKey(key), name;
             if(key=="poi_rest"||native=="rest")name="bed";
             else if(key=="poi_market"||native=="market")name="storefront";
+            else if(key=="poi_water")name="drop";
+            else if(key=="poi_calendar")name="calendar-blank";
             else switch(native)
             {
                 case "farm":name="barn";break;
