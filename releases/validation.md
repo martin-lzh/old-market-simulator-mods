@@ -2,7 +2,13 @@
 
 ## English
 
-### Current status — two-computer multiplayer completed, 2026-09-14
+### Navigation follow-up — source `db03d32`, 2026-09-15
+
+Subsequent Navigation changes add adaptive large-map zoom, Island POIs, expanded Eastern Town service POIs and Rome's eight region maps with conditional POIs and 61 unlock areas. They remain Unreleased with target version **UNASSIGNED**; the source version remains 0.2.0 and the SDK remains 2.1.6/r7. The earlier manual confirmation applies to `e23f986`, not these later changes. New in-game alignment, zoom interaction, region travel, unlock sequencing and multiplayer checks remain pending. No release approval was refreshed.
+
+For `db03d32`, version validation, all SDK builds, 64 CI tooling tests, 1291 Navigation checks, 22 native-name checks and 659 Navigation installed-assembly contracts passed. Navigation's real-reference and SDK builds matched after verification of 15 dependency hashes. The repository-wide real-reference run stopped at Stack All differences; Navigation was then checked independently. No Unity execution, installation or save changes were performed. These are recorded implementation results, not tests rerun for the documentation update. See [Rome evidence](../navigation-mod/maps/rome-audit.md) and [map coverage limits](../navigation-mod/maps/README.md).
+
+### Tested bundle — two-computer multiplayer completed, 2026-09-14
 
 Two-computer in-game multiplayer testing is complete for all six Mods in the supplied `e23f986` bundle: Material Cost 0.5.2, Coordinates 0.1.4, Checkout All 0.1.5, Stack All 0.2.2, Price Probability 0.1.2 and Navigation 0.2.0, on game 2.1.6. This is maintainer-reported manual testing, following the already completed visual and local in-game tests. It supersedes the multiplayer-pending status below without claiming a detailed scenario matrix or performance measurements.
 
@@ -25,7 +31,7 @@ The version column identifies the PR's target versions; this confirmation does n
 
 ### Earlier evidence
 
-The following initial report is retained for provenance; its open non-multiplayer items are superseded by the current confirmation.
+The following initial report is retained for provenance; its open non-multiplayer items were superseded by the later confirmation for that bundle.
 
 ### Local in-game confirmation — 2026-09-14
 
@@ -50,7 +56,13 @@ Reviewed all six Mod READMEs, CHANGELOG/version metadata and build/package decla
 
 ## 中文
 
-### 当前状态 — 双实机联机测试已完成，2026-09-14
+### Navigation 后续改动 — 源码 `db03d32`，2026-09-15
+
+后续 Navigation 改动包含大地图自适应缩放、海岛 POI、东方小镇服务 POI 补全，以及罗马八个区域地图、条件 POI 和 61 个解锁区块。这些改动记入未发布，目标版本为 **UNASSIGNED**；源码版本保持 0.2.0，SDK 保持 2.1.6/r7。此前人工确认仅覆盖 `e23f986`，不涵盖后续改动。新地图实机对齐、缩放操作、区域往返、解锁顺序与多人测试仍待完成；未刷新发行授权。
+
+`db03d32` 已通过版本验证、全部 SDK 构建、64 项 CI 工具测试、1291 项导航检查、22 项原生名称检查及 659 项 Navigation 原生契约检查。核对 15 个依赖哈希后，Navigation 的真实引用与 SDK 构建一致。全仓真实引用检查先在 Stack All 差异处停止，随后独立验证 Navigation。未执行 Unity，未修改游戏安装或存档。这是实现阶段的已记录结果，不是本次文档更新重新运行的检查。详见[罗马证据](../navigation-mod/maps/rome-audit.md)和[地图覆盖边界](../navigation-mod/maps/README.md)。
+
+### 已测试合集 — 双实机联机测试已完成，2026-09-14
 
 维护者确认已完成所提供 `e23f986` 合集内全部六个 Mod 的双实机联机测试：Material Cost 0.5.2、Coordinates 0.1.4、Checkout All 0.1.5、Stack All 0.2.2、Price Probability 0.1.2、Navigation 0.2.0，游戏基线为 2.1.6。此前视觉及本地实机测试也已完成。这是维护者反馈的人工测试，更新下方“多人待完成”的状态，不据此声称提供了完整场景矩阵或性能测量。
 
@@ -73,7 +85,7 @@ Reviewed all six Mod READMEs, CHANGELOG/version metadata and build/package decla
 
 ### 早期证据
 
-下方保留最初报告以便追溯，其中未完成的非多人项目已由上述最新确认更新。
+下方保留最初报告以便追溯，其中未完成的非多人项目已由随后针对该合集的确认更新。
 
 ### 本地实机确认 — 2026-09-14
 

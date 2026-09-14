@@ -26,7 +26,7 @@ silhouettes. The player's existing original arrow remains unchanged.
 生成器校验来源哈希，固定版本依赖缓存后可离线执行；`--fetch` 才重新下载来源。
 官方实心路径按四种类别颜色着色，在 32px 输出上增加 3px 深色外描边。
 96 张 PNG 嵌入 Mod，运行时无需 SVG 依赖；检查透明背景、四种精确颜色和
-20 个不同轮廓。玩家原创箭头保持不变。
+24 个不同轮廓。玩家原创箭头保持不变。
 
 | Place / 地点 | Phosphor fill icon |
 | --- | --- |
@@ -50,8 +50,10 @@ silhouettes. The player's existing original arrow remains unchanged.
 | Market / 市场 | storefront |
 | Generic home / 通用住所 | house |
 | Generic place / 通用地点 | map-pin |
+| Open entrance / 开放入口 | door-open |
+| Locked gate / 锁定大门 | lock-key |
+| Return to town / 返回主城 | arrow-u-up-left |
+| Mailbox tasks / 信箱任务 | mailbox |
 
 These descriptions document semantic mappings; game labels still come from the
 native translation table. 上表解释图标语义，游戏内标签仍使用原生翻译表。
-
-Rome travel / 罗马区域通行：`door-open`（开放入口）、`lock-key`（锁定大门）、`arrow-u-up-left`（返回主城）、`mailbox`（信箱任务）。

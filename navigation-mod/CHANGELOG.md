@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Refresh bilingual map coverage, package and icon inventories, Rome unlock behavior and source-specific validation documentation. Make the unbundled Eastern Town outer terrain explicit; preserve historical test evidence and version/SDK pins.
+
 - Add Rome and all seven travel-region maps, a calibrated town detail layer, and 61 independent unlock-area overlays (59 in town, two in the mine). Filter POIs by enable/disable ancestry, distinguish locked gates from open portals, and retain region-scoped markers and return entrances. Preserve SDK 2.1.6/r7 and version 0.2.0; in-game travel, unlock alignment and multiplayer acceptance remain pending.
 
 - Audit Eastern Town services beyond the former fixed NPC list. Add recycling, employees, water refill and calendar to all four market manifests (17 POIs); keep aquarium and origami collection grouped under the existing museum POI. Add water/calendar icons without inventing native place labels. Record expansion-sign and fishing-area audit limits; no version or SDK change, in-game validation pending.
@@ -102,6 +104,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 更新双语地图覆盖、地图包与图标清单、罗马解锁行为及按源码区分的验证说明。明确东方小镇外围地形尚未打包，保留历史测试证据及版本/SDK 固定值。
 
 - 加入罗马主城与七个独立传送区域、主城细节层及 61 个独立解锁区块（主城 59、矿洞 2）。POI 按启停条件更新，区分锁定大门与开放传送入口，保留按区域隔离的个人标记及返回入口。SDK 2.1.6/r7 与版本 0.2.0 不变；区域往返、解锁对齐及联机实机验收待完成。
 

@@ -20,6 +20,6 @@ Exact pixel reproduction is not guaranteed by a generative model. The checked-in
 
 生成模型不保证逐像素重现。仓库中的 PNG 是可复现构建输入；构建及游戏启动均不调用图像生成服务。两张边框已检查中心 alpha 透明。
 
-The town map is maintained separately in [../maps/](../maps/README.md). Its generated illustrated base and compiled unlock obstacle layers are part of the Mod and ship in the release archive.
+The [map pack](../maps/README.md) ships generated illustrations for Eastern Town, Island and Rome. Eastern Town uses market obstacle textures, Island is a static surface overview, and Rome uses runtime hatched unlock areas plus conditional POIs. [Phosphor POI icons](phosphor/README.md) have separate upstream sources and MIT notices.
 
-城镇地图单独维护于 [../maps/](../maps/README.md)，由生成的绘画底图与按解锁状态编译的障碍覆盖层组成，属于 Mod 并随发行 ZIP 打包。
+[地图包](../maps/README.md)随发行 ZIP 提供东方小镇、海岛与罗马的生成插画。东方小镇使用市场障碍贴图，海岛为静态地表概览，罗马由运行时绘制解锁斜线区块并筛选条件 POI。[Phosphor POI 图标](phosphor/README.md)单独记录上游来源及 MIT 声明。

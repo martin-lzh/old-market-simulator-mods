@@ -121,6 +121,6 @@ No game installation or save was modified. In-game travel, unlock sequencing, ar
 
 未修改游戏安装或存档；区域往返、解锁顺序、插画实机对齐、重载和双端联机尚待验收。版本与 SDK 不推进。
 
-Validation on this source: version validation and the full SDK build passed; 64 CI tooling tests, 1291 navigation checks and 659 Navigation contract checks passed. The Navigation real-reference build matched the SDK build in symbolic IL and embedded resources after verifying 15 dependency hashes. The repository-wide real-reference command stopped earlier at Stack All's SDK/real-build differences; Navigation was then verified independently without bypassing any hashes.
+Validation for source `db03d32` (2026-09-15): version validation and the full SDK build passed; 64 CI tooling tests, 1291 navigation checks and 659 Navigation contract checks passed. The Navigation real-reference build matched the SDK build in symbolic IL and embedded resources after verifying 15 dependency hashes. The repository-wide real-reference command stopped earlier at Stack All's SDK/real-build differences; Navigation was then verified independently without bypassing any hashes.
 
-本轮版本验证与全仓 SDK 构建通过，64 项 CI 工具测试、1291 项导航检查和 659 项 Navigation 契约检查通过。Navigation 的 15 个真实依赖哈希已核对，真实引用与 SDK 构建的符号 IL/内嵌资源一致。全仓真实引用命令先在 Stack All 的 SDK/真实构建差异处停止，随后独立验证 Navigation，未绕过任何哈希检查。
+源码 `db03d32`（2026-09-15）的版本验证与全仓 SDK 构建通过，64 项 CI 工具测试、1291 项导航检查和 659 项 Navigation 契约检查通过。Navigation 的 15 个真实依赖哈希已核对，真实引用与 SDK 构建的符号 IL/内嵌资源一致。全仓真实引用命令先在 Stack All 的 SDK/真实构建差异处停止，随后独立验证 Navigation，未绕过任何哈希检查。
