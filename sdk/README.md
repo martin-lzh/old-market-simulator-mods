@@ -4,7 +4,7 @@
 
 本 SDK 让 GitHub 托管 Runner 在没有安装游戏的情况下编译 Mod。使用标准 .NET 编译器；`api.json` 保存 Mod 用到的类型、字段、方法签名、泛型约束、枚举值及必要的编译元数据。没有原始游戏 DLL、游戏方法实现、资源、存档或反编译源码。
 
-`tools/Sdk` 用 Mono.Cecil 将声明重建为带 `ReferenceAssemblyAttribute` 的编译引用，所有非抽象方法都是工具生成的 `throw null` 占位体。SDK 不是游戏运行库，不能运行游戏，也不能安装到游戏或放进 Mod 下载包。发布脚本只打包原创 Mod DLL、README、CHANGELOG 和 LICENSE。加载器从官方固定版本下载并校验 SHA256。
+`tools/Sdk` 用 Mono.Cecil 将声明重建为带 `ReferenceAssemblyAttribute` 的编译引用，所有非抽象方法都是工具生成的 `throw null` 占位体。SDK 不是游戏运行库，不能运行游戏，也不能安装到游戏或放进 Mod 下载包。发布脚本打包原创 Mod DLL、README、CHANGELOG 和 LICENSE；Navigation 另包含明确列入清单并校验哈希的地图 JSON/PNG。加载器从官方固定版本下载并校验 SHA256。
 
 ### 版本与支持范围
 
@@ -65,7 +65,7 @@ SDK 随维护者确认的游戏版本更新，不会监测到一次游戏更新�
 
 This SDK lets GitHub-hosted runners compile Mods without a game installation. The standard .NET compiler consumes references reconstructed from `api.json`: the types, fields, method signatures, generic constraints, enum values and compiler metadata used by these Mods. No original game DLLs, game method implementations, resources, saves or decompiled source are included.
 
-`tools/Sdk` uses Mono.Cecil to produce assemblies marked `ReferenceAssemblyAttribute`; every concrete method contains a tool-authored `throw null` placeholder. These are compiler references, never runtime libraries. Do not install or distribute them with a Mod. Packages contain only the original Mod DLL, README, CHANGELOG and LICENSE. Official loader downloads are version-pinned and SHA256-verified.
+`tools/Sdk` uses Mono.Cecil to produce assemblies marked `ReferenceAssemblyAttribute`; every concrete method contains a tool-authored `throw null` placeholder. These are compiler references, never runtime libraries. Do not install or distribute them with a Mod. Packages contain the original Mod DLL, README, CHANGELOG and LICENSE; Navigation also includes its explicitly listed, hash-verified map JSON/PNG resources. Official loader downloads are version-pinned and SHA256-verified.
 
 ### Versioning and compatibility
 

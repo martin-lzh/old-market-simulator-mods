@@ -4,15 +4,18 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
 import subprocess
+import struct
 import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 import zipfile
+import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
 MODS = {
@@ -123,14 +126,118 @@ def plugin_path(c, variant):
     return f'Mods/{name}.dll' if variant == "MelonLoader" else f'BepInEx/plugins/{name}/{name}.dll'
 
 
+def validate_png(data):
+    if not data.startswith(b"\x89PNG\r\n\x1a\n") or len(data) > 32 * 1024 * 1024:
+        raise ValueError("Invalid map PNG signature or size")
+    offset, kinds = 8, []
+    while offset + 12 <= len(data):
+        size = struct.unpack_from(">I", data, offset)[0]
+        end = offset + 12 + size
+        if end > len(data):
+            raise ValueError("Truncated map PNG")
+        chunk = data[offset + 4:offset + 8 + size]
+        if zlib.crc32(chunk) & 0xffffffff != struct.unpack_from(">I", data, offset + 8 + size)[0]:
+            raise ValueError("Map PNG CRC mismatch")
+        kind = chunk[:4]
+        if not kinds:
+            if kind != b"IHDR" or size != 13:
+                raise ValueError("Invalid map PNG header")
+            dimensions = struct.unpack_from(">II", chunk, 4)
+            if not all(0 < n <= 8192 for n in dimensions):
+                raise ValueError("Invalid map PNG dimensions")
+        kinds.append(kind)
+        offset = end
+        if kind == b"IEND":
+            break
+    if offset != len(data) or not kinds or kinds[-1] != b"IEND" or b"IDAT" not in kinds:
+        raise ValueError("Incomplete map PNG")
+    return dimensions
+
+
+def map_resources(c):
+    if c["slug"] != "navigation":
+        return {}
+    manifest = json.loads((c["directory"] / "map-pack.json").read_text(encoding="utf-8"))
+    if (set(manifest) != {"schema", "gameVersion", "files"} or manifest["schema"] != 1
+            or manifest["gameVersion"] != c["manifest"]["gameVersion"]
+            or not isinstance(manifest["files"], list) or not manifest["files"]):
+        raise ValueError("Invalid map pack manifest or game baseline")
+    directory = c["directory"] / "maps"
+    files, dimensions = {}, {}
+    for entry in manifest["files"]:
+        if (not isinstance(entry, dict) or set(entry) != {"name", "sha256"}
+                or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*\.(json|png)", entry["name"])
+                or not re.fullmatch(r"[0-9a-f]{64}", entry["sha256"])):
+            raise ValueError("Invalid map pack file entry")
+        name = entry["name"]
+        if name.lower() in {n.lower() for n in files}:
+            raise ValueError("Duplicate map pack file")
+        path = directory / name
+        if path.resolve().parent != directory.resolve():
+            raise ValueError("Map resource escapes source directory")
+        data = path.read_bytes()
+        if sha(data) != entry["sha256"]:
+            raise ValueError(f"Map resource hash mismatch: {name}")
+        if name.endswith(".png"):
+            dimensions[name] = validate_png(data)
+        elif len(data) > 32768:
+            raise ValueError("Map metadata too large")
+        files[name] = data
+    ids, textures = set(), set()
+    for name, data in files.items():
+        if not name.endswith(".json"):
+            continue
+        m = json.loads(data)
+        bounds = [m.get(k) for k in ("MinX", "MaxX", "MinZ", "MaxZ")]
+        if (not all(type(v) in (int, float) and math.isfinite(v) for v in bounds)
+                or bounds[0] >= bounds[1] or bounds[2] >= bounds[3]
+                or not isinstance(m.get("Id"), str) or not m["Id"] or m["Id"] in ids
+                or m.get("North") != "+Z" or type(m.get("MapId")) is not int
+                or not isinstance(m.get("SceneName"), str) or not m["SceneName"]):
+            raise ValueError("Invalid or duplicate map metadata")
+        ids.add(m["Id"])
+        for key in ("Texture", "OverlayTexture"):
+            texture = m.get(key)
+            if key == "OverlayTexture" and not texture:
+                continue
+            if texture not in dimensions:
+                raise ValueError(f"Map texture not in package: {texture}")
+            textures.add(texture)
+        # Base artwork and overlays may use different pixel resolutions: the runtime
+        # aligns them through the same normalized UVs and explicit world bounds.
+    if not ids or textures != set(dimensions):
+        raise ValueError("Map pack must contain maps and exactly their referenced textures")
+    return {f"BepInEx/plugins/OldMarket.Navigation/maps/{name}": data for name, data in files.items()}
+
+
+def package_resources(c):
+    return {**{doc: (c["directory"] / doc).read_bytes() for doc in ("README.md", "CHANGELOG.md", "LICENSE")},
+            **map_resources(c)}
+
+
+def write_package(c, variant, dll, output):
+    if variant not in variants(c["slug"]):
+        raise ValueError("Unsupported loader variant")
+    entries = {plugin_path(c, variant): Path(dll).read_bytes(), **package_resources(c)}
+    output = Path(output)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as z:
+        for entry, data in entries.items():
+            info = zipfile.ZipInfo(entry, (2026, 1, 1, 0, 0, 0))
+            info.compress_type = zipfile.ZIP_DEFLATED
+            z.writestr(info, data)
+    validate_package(c, variant, output.read_bytes())
+
+
 def validate_package(c, variant, data):
     import io
+    resources = package_resources(c)
     with zipfile.ZipFile(io.BytesIO(data)) as z:
-        expected = {plugin_path(c, variant), "README.md", "CHANGELOG.md", "LICENSE"}
+        expected = {plugin_path(c, variant), *resources}
         if len(z.namelist()) != len(expected) or set(z.namelist()) != expected:
             raise ValueError("Unexpected package content (SDK/loader/game files must never ship)")
-        for doc in ("README.md", "CHANGELOG.md", "LICENSE"):
-            if z.read(doc) != (c["directory"] / doc).read_bytes():
+        for doc, expected_data in resources.items():
+            if z.read(doc) != expected_data:
                 raise ValueError(f"Packaged {doc} differs from release source")
         dll = z.read(plugin_path(c, variant))
         if not dll.startswith(b"MZ") or b"ReferenceAssemblyAttribute" in dll:
@@ -154,7 +261,8 @@ def build():
                  c["directory"] / ("tests/CostTests.csproj" if c["slug"] == "material-cost" else "tests/Navigation.Tests.csproj" if c["slug"] == "navigation" else "tests/Tests.csproj")]
         for test in tests:
             if test.exists():
-                run("dotnet", "run", "--project", test, "-c", "Release")
+                maps = [c["directory"] / "maps" / Path(name).name for name in map_resources(c) if name.endswith(".json")]
+                run("dotnet", "run", "--project", test, "-c", "Release", *(["--", *maps] if maps else []))
         for variant in variants(c["slug"]):
             output = ROOT / "work" / "ci-build" / c["slug"] / variant
             run("dotnet", "build", c["project"], "-c", "Release", "--nologo",
@@ -167,13 +275,7 @@ def build():
             target = ROOT / "outputs/ci" / c["slug"]
             target.mkdir(parents=True, exist_ok=True)
             package = target / archive_name(c, variant)
-            with zipfile.ZipFile(package, "w", zipfile.ZIP_DEFLATED) as z:
-                for entry, data in [(plugin_path(c, variant), dll.read_bytes())] + [
-                        (doc, (c["directory"] / doc).read_bytes()) for doc in ("README.md", "CHANGELOG.md", "LICENSE")]:
-                    info = zipfile.ZipInfo(entry, (2026, 1, 1, 0, 0, 0))
-                    info.compress_type = zipfile.ZIP_DEFLATED
-                    z.writestr(info, data)
-            validate_package(c, variant, package.read_bytes())
+            write_package(c, variant, dll, package)
         write_evidence(c, target)
 
 
@@ -252,6 +354,8 @@ def write_evidence(c, directory):
                     gameVersion=c["manifest"]["gameVersion"], gameAssemblySha256=c["manifest"]["gameAssemblySha256"],
                     apiSha256=c["manifest"]["apiSha256"],
                     validation="SDK compilation and pure logic/localization tests; in-game validation not performed / SDK 编译与纯逻辑、本地化测试，未执行实机验证")
+    if c["slug"] == "navigation":
+        evidence["mapFiles"] = {name: sha(data) for name, data in map_resources(c).items()}
     (directory / "build-info.json").write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     files = [archive_name(c, v) for v in variants(c["slug"])] + ["build-info.json"]
     (directory / "SHA256SUMS.txt").write_text("".join(f'{sha((directory / name).read_bytes())}  {name}\n' for name in files), encoding="utf-8", newline="\n")
@@ -468,7 +572,10 @@ def publish(repository, commit, api=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=["validate", "build", "publish", "verify-game", "export-sdk", "record-approval", "check-releases"])
+    parser.add_argument("command", choices=["validate", "build", "package", "publish", "verify-game", "export-sdk", "record-approval", "check-releases"])
+    parser.add_argument("--dll")
+    parser.add_argument("--output")
+    parser.add_argument("--variant", default="BepInEx")
     parser.add_argument("--base")
     parser.add_argument("--repository")
     parser.add_argument("--commit")
@@ -482,11 +589,16 @@ if __name__ == "__main__":
     if args.command == "validate":
         for slug in MODS:
             c = config(slug)
+            map_resources(c)
             print(f'{slug} {c["version"]}: SDK {c["sdk"]}')
         if args.base:
             immutable_sdk(args.base)
     elif args.command == "build":
         build()
+    elif args.command == "package":
+        if not args.mod or not args.dll or not args.output:
+            parser.error("package requires --mod, --dll and --output")
+        write_package(config(args.mod), args.variant, args.dll, args.output)
     elif args.command == "verify-game":
         if not args.game_dir:
             parser.error("verify-game requires --game-dir")

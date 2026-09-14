@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "gameVersion": "2.1.6",
+  "files": [
+    {
+      "name": "market0-obstacles.png",
+      "sha256": "3754874559d2c55ca7f2e5b56e53c577075fe08cbd06757d4c24b83af5e1855a"
+    },
+    {
+      "name": "market0.json",
+      "sha256": "7d8d719c6a735f6e79ac61a9a2bad91679f57d8e8e0828305bb72818f5d07775"
+    },
+    {
+      "name": "market1-obstacles.png",
+      "sha256": "19db2713218fe298b1fc0f686b8debbc0fbf60e7a820d584544d581f78c7e078"
+    },
+    {
+      "name": "market1.json",
+      "sha256": "e53e004ce316d072f47cd82d09d77483102991659a483dc6e993fcac8256f01d"
+    },
+    {
+      "name": "market2-obstacles.png",
+      "sha256": "d1c0e9acc6819cebe97749c3982283ff7c90587f148ac5fd027a019af2b20fe1"
+    },
+    {
+      "name": "market2.json",
+      "sha256": "2f2909068d29bc452257404695305b3c56b8e408489099209d20c90aa491a252"
+    },
+    {
+      "name": "market3-obstacles.png",
+      "sha256": "dcb085776aa1552d7e2ee17a689a2867c83a10761c339cc39a04c76bfd22b7bb"
+    },
+    {
+      "name": "market3.json",
+      "sha256": "23535000ba7cf92d4850dc2dd160bc953216b13ea7130adfd6e01999ccba9a5d"
+    },
+    {
+      "name": "oriental-town-artwork.png",
+      "sha256": "fed8dd0369825749cd967c39db411e0cc546f83fb805590b6ace1c957c1acb97"
+    }
+  ]
+}

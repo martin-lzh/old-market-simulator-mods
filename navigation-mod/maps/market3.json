@@ -1,0 +1,126 @@
+{
+  "Id": "oriental-town-market3",
+  "Name": "",
+  "MapId": 1,
+  "SceneName": "BazaarFarEast",
+  "Region": "",
+  "MinX": -120,
+  "MaxX": 220,
+  "MinZ": 40,
+  "MaxZ": 300,
+  "North": "+Z",
+  "RequiredExpansions": [
+    1736262582250,
+    1736262699472,
+    1736262748098
+  ],
+  "ExcludedExpansions": [],
+  "Texture": "oriental-town-artwork.png",
+  "OverlayTexture": "market3-obstacles.png",
+  "Pois": [
+    {
+      "Id": "oriental-town-engineer",
+      "Name": "Engineer",
+      "NameKey": "poi_engineer",
+      "Category": "shop",
+      "X": 46.033001,
+      "Z": 139.950997
+    },
+    {
+      "Id": "oriental-town-decorations",
+      "Name": "Decoration Store",
+      "NameKey": "poi_decorations",
+      "Category": "shop",
+      "X": 43.624948,
+      "Z": 115.7321
+    },
+    {
+      "Id": "oriental-town-carpenter",
+      "Name": "Carpenter",
+      "NameKey": "poi_carpenter",
+      "Category": "shop",
+      "X": 78.011091,
+      "Z": 138.683514
+    },
+    {
+      "Id": "oriental-town-animals",
+      "Name": "Animal Market",
+      "NameKey": "poi_animals",
+      "Category": "shop",
+      "X": 112.424988,
+      "Z": 189.006011
+    },
+    {
+      "Id": "oriental-town-garden",
+      "Name": "Garden Supply",
+      "NameKey": "poi_garden",
+      "Category": "shop",
+      "X": 66.35611,
+      "Z": 215.061511
+    },
+    {
+      "Id": "oriental-town-clothing",
+      "Name": "Clothing Store",
+      "NameKey": "poi_clothing",
+      "Category": "shop",
+      "X": 100.458984,
+      "Z": 133.15703
+    },
+    {
+      "Id": "oriental-town-rest",
+      "Name": "Rest Area",
+      "NameKey": "poi_rest",
+      "Category": "home",
+      "X": 70.711797,
+      "Z": 178.956995
+    },
+    {
+      "Id": "oriental-town-orders",
+      "Name": "Orders",
+      "NameKey": "poi_orders",
+      "Category": "dock",
+      "X": 44.771536,
+      "Z": 174.329785
+    },
+    {
+      "Id": "oriental-town-market",
+      "Name": "Market",
+      "NameKey": "poi_market",
+      "Category": "shop",
+      "X": 70.800003,
+      "Z": 153.539993
+    },
+    {
+      "Id": "oriental-town-workshop",
+      "Name": "Workshop",
+      "NameKey": "poi_workshop",
+      "Category": "other",
+      "X": 70.661797,
+      "Z": 172.022995
+    },
+    {
+      "Id": "oriental-town-farm",
+      "Name": "Farm",
+      "NameKey": "poi_farm",
+      "Category": "other",
+      "X": 96.089996,
+      "Z": 213.610001
+    },
+    {
+      "Id": "oriental-town-museum",
+      "Name": "Museum",
+      "NameKey": "poi_museum",
+      "Category": "other",
+      "X": 46.52,
+      "Z": 188.809998
+    },
+    {
+      "Id": "oriental-town-licenses",
+      "Name": "LICENSES",
+      "NameKey": "licenses",
+      "Category": "other",
+      "X": 70.841999,
+      "Z": 111.190002
+    }
+  ]
+}

@@ -42,9 +42,9 @@ Opening the map frees the mouse but **does not pause the game**. M is a separate
 
 ## Map files and saved markers
 
-**The plugin download does not include map files.** You need a separate matching map pack for the minimap and large map. Without one, the compass and optional coordinates still work, but map marker placement is unavailable.
+**The plugin ZIP includes the Eastern Town map pack.** Its base artwork, four market overlays and map metadata are installed together with the plugin.
 
-If you already have a local map pack, put its JSON and PNG files in `BepInEx/plugins/OldMarket.Navigation/maps/` and restart the game. The current local pack covers Eastern Town and four central-market unlock states. It can show cleared market clutter, but will not automatically redraw every building or item you move.
+Extract the complete ZIP into the game folder, retaining `BepInEx/plugins/OldMarket.Navigation/maps/`, and restart the game. The included pack covers Eastern Town and four central-market unlock states. It can show cleared market clutter, but will not automatically redraw every building or item you move.
 
 Your markers are personal and kept separately for each save and area. They are not shared with other players. When joining someone else's game, markers last for that connection by default. To keep them between visits, use a different `Markers.RemoteProfile` name for each host's save. Copying or recreating a save folder may make your old markers appear missing. Your selected target is not remembered after restarting.
 
@@ -73,7 +73,7 @@ Target icons show a direction, not a walking route. They may appear through buil
 
 ## Updating or removing
 
-Close the game and back up the plugin before replacing its DLL. Keep `BepInEx/config/OldMarket.Navigation/` and `BepInEx/config/local.oldmarket.navigation.cfg` to preserve your markers and settings. To remove the Mod, delete its DLL; you can also remove its map folder if you no longer need it. Restore your backed-up DLL and settings to go back to an earlier version.
+Close the game and back up the plugin before replacing its DLL and bundled maps. Keep `BepInEx/config/OldMarket.Navigation/` and `BepInEx/config/local.oldmarket.navigation.cfg` to preserve your markers and settings. To remove the Mod, delete its DLL; you can also remove its map folder if you no longer need it. Restore your backed-up DLL and settings to go back to an earlier version.
 
 
 [What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [License](LICENSE)
@@ -118,9 +118,9 @@ Close the game and back up the plugin before replacing its DLL. Keep `BepInEx/co
 
 ## 地图文件与标记保存
 
-**插件下载包不包含地图文件。**小地图和大地图需要另外准备对应地图包；没有地图包时，罗盘和可选坐标仍能使用，但不能在地图上添加标记。
+**插件 ZIP 已包含东方小镇地图包。**底图、四种市场障碍覆盖层和地图元数据会随插件一起安装。
 
-如果你已有本地地图包，将其中 JSON 和 PNG 文件放进 `BepInEx/plugins/OldMarket.Navigation/maps/`，再重启游戏。当前本地地图包覆盖东方小镇及中央市场的四种解锁状态，可以反映市场垃圾清理，但不会自动重画你移动的所有建筑和物品。
+将整个 ZIP 解压到游戏目录，保留 `BepInEx/plugins/OldMarket.Navigation/maps/`，再重启游戏。内置地图包覆盖东方小镇及中央市场的四种解锁状态，可以反映市场垃圾清理，但不会自动重画你移动的所有建筑和物品。
 
 个人标记按存档和区域分别保存，不会分享给其他玩家。加入好友房间时，默认只保留本次连接中的标记。如果想下次继续使用，请为每位好友的存档设置不同的 `Markers.RemoteProfile` 名称。复制或重建存档文件夹后，旧标记可能暂时找不到。当前选中的目标不会在重启后保留。
 
@@ -149,7 +149,7 @@ Close the game and back up the plugin before replacing its DLL. Keep `BepInEx/co
 
 ## 更新与卸载
 
-退出游戏并备份旧插件后，只替换本 Mod 的 DLL。保留 `BepInEx/config/OldMarket.Navigation/` 和 `BepInEx/config/local.oldmarket.navigation.cfg`，就能留下标记和设置。卸载时删除 DLL；地图文件不用了也可以移除。需要退回旧版时，还原备份的 DLL 和设置即可。
+退出游戏并备份旧插件后，替换本 Mod 的 DLL 和随包地图。保留 `BepInEx/config/OldMarket.Navigation/` 和 `BepInEx/config/local.oldmarket.navigation.cfg`，就能留下标记和设置。卸载时删除 DLL；地图文件不用了也可以移除。需要退回旧版时，还原备份的 DLL 和设置即可。
 
 
 [版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [许可证](LICENSE)

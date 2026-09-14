@@ -20,6 +20,6 @@ Exact pixel reproduction is not guaranteed by a generative model. The checked-in
 
 生成模型不保证逐像素重现。仓库中的 PNG 是可复现构建输入；构建及游戏启动均不调用图像生成服务。两张边框已检查中心 alpha 透明。
 
-The scene-derived town map is deliberately absent here. Its local companion pack combines a separately generated illustrated base with compiled unlock obstacle layers, or uses compiled geometry directly. It is not part of the public source or release archive.
+The town map is maintained separately in [../maps/](../maps/README.md). Its generated illustrated base and compiled unlock obstacle layers are part of the Mod and ship in the release archive.
 
-本目录不包含游戏场景派生城镇地图。本地配套地图包可使用独立生成的绘画底图与按解锁状态编译的障碍覆盖层，也可使用几何底图；不纳入公开源码或发行包。
+城镇地图单独维护于 [../maps/](../maps/README.md)，由生成的绘画底图与按解锁状态编译的障碍覆盖层组成，属于 Mod 并随发行 ZIP 打包。

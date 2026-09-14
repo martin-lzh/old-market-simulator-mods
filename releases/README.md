@@ -20,7 +20,7 @@ See [SDK maintenance](../sdk/README.md) for game-free builds and game-version up
 
 Release selection also compares the committed `<mod>-mod/` directory with the tag of that Mod's highest already-published semantic version (including published prereleases, excluding drafts and other Mods). An unchanged directory is skipped before reading artifacts or writing to GitHub. The comparison covers all commits since that release, not just the latest push; fully reverted changes do not count. Files within the Mod directory, including its documentation, count as changes. Shared SDK, CI and root documentation alone do not. First releases require tracked files in the Mod directory. Missing baseline tags or Git comparison errors stop publication rather than guessing. Release checkout fetches complete history and tags. This gate supplements explicit maintainer version authorization and the new numbered CHANGELOG requirement; it does not replace either.
 
-Packages allow exactly the original Mod DLL under its installation path, README.md, CHANGELOG.md and LICENSE. Never package loaders, SDK references or game files. Existing three-file releases remain untouched.
+Packages allow the original Mod DLL under its installation path, README.md, CHANGELOG.md and LICENSE. Navigation additionally requires every reviewed map JSON/PNG listed in its `map-pack.json`, under `BepInEx/plugins/OldMarket.Navigation/maps/`; missing, changed or unlisted package entries fail validation. Never package loaders, SDK references or game files. Existing three-file releases remain untouched.
 
 For interrupted uploads, rerun the failed jobs of the original main-push workflow. A draft can resume only for the same source and notes; existing asset bytes must match. Conflicts leave the draft for inspection. Conflicting tags, another commit’s draft and backwards new versions fail closed. Manual workflow_dispatch runs build diagnostics only and never publish.
 
@@ -36,7 +36,7 @@ The existing catalog.json and tag markdown files remain the historical manual re
 
 发布筛选还会将已提交的 `<mod>-mod/` 目录与该 Mod 最高已公开语义版本的标签比较（包括已公开预发布，排除草稿及其他 Mod）。目录无净变化时，在读取附件和写入 GitHub 前跳过。比较覆盖上次发布以来的所有提交，不只检查最近一次 push；完全还原的改动不计。目录内文档也属于改动，共享 SDK、CI 和根目录文档单独变化则不计。首次发布须有已跟踪的 Mod 文件。缺少基准标签或 Git 比较失败时停止，不猜测结果；发布任务获取完整历史与标签。此条件与维护者明确授权推进版本、新编号 CHANGELOG 同时适用，不能相互替代。
 
-包内只允许原创 Mod DLL（保留安装目录）、README.md、CHANGELOG.md、LICENSE。加载器、SDK 引用、原始游戏文件不得入包；已有三文件发布保持原样。
+包内允许原创 Mod DLL（保留安装目录）、README.md、CHANGELOG.md、LICENSE；Navigation 还必须包含 `map-pack.json` 明确列出的地图 JSON/PNG，安装路径为 `BepInEx/plugins/OldMarket.Navigation/maps/`。地图缺失、字节变化或包内混入未列明文件均校验失败。加载器、SDK 引用、原始游戏文件不得入包；已有三文件发布保持原样。
 
 上传中断时，重跑原 main push 工作流的失败任务。仅同源码、同说明的草稿能续传，已有附件必须逐字节匹配；冲突时保留草稿供检查，不覆盖。已有冲突标签、其他提交的草稿或新版本倒退均拒绝发布。手动 workflow_dispatch 只构建诊断，不发布。
 

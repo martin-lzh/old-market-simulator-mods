@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace OldMarket.Navigation
 {
-    // Local generated maps remain outside the public DLL and public art assets.
+    // Map files ship alongside the plugin DLL in its maps directory.
     public sealed class MapLibrary : IDisposable
     {
         private readonly List<(LocalMapManifest manifest, MapDefinition map)> maps = new List<(LocalMapManifest, MapDefinition)>();

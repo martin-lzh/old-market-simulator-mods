@@ -12,7 +12,13 @@ static class Program
  {
   PoiNativeNameChecks.Run();
   MapManifestChecks.Run(Check,Reject);
-  foreach(string path in args){var map=MapManifestReader.Read(File.ReadAllText(path));Check(map.Pois.Length>0,"local map contains POIs");Console.WriteLine(Path.GetFileName(path)+": "+map.Pois.Length+" POIs");}
+  foreach(string path in args)
+  {
+   var map=MapManifestReader.Read(File.ReadAllText(path));
+   Check(NavMath.ValidBounds(map.MinX,map.MaxX,map.MinZ,map.MaxZ),"packaged map bounds");
+   Check(MapPoi.Validate(map.Pois,map.MinX,map.MaxX,map.MinZ,map.MaxZ).Count>0,"packaged map contains valid POIs");
+   Console.WriteLine(Path.GetFileName(path)+": "+map.Pois.Length+" POIs");
+  }
   MapWheelZoomChecks.Run(Check);
   PoiLabelChecks.Check(Check);
   var validPoi=new MapPoi {Id="shop",Name="Shop",Category="shop",X=5,Z=5};
