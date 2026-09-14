@@ -1,5 +1,10 @@
 # Eastern Town POI review / 东方小镇地点复核
 
+Current localization: water/calendar now have original functional labels in all 13 game languages. The icon-only findings below describe the earlier audit. See [current map naming](README.md#localized-names--本地化名称).
+
+本地化更新：补水处和日历现已有全部 13 种游戏语言的原创功能标签；下方仅图标结论保留早期审计状态，当前行为见[地图命名说明](README.md#localized-names--本地化名称)。
+
+
 2026-09-15, game 2.1.6, BazaarFarEast / map ID 1. Scene SHA256: `6f84c8de8332a5746af4143f66f35c54fecf3c5a25d421b8c1367fadc4228fae`.
 
 The earlier NPC extraction verified a fixed list of eight actors and retained five landmark/bed entries. It was not an exhaustive interaction inventory: it omitted the Junkman and EmployeeStation actors, plus non-NPC facilities. This review scans all serialized scene components, checks Interactable inheritance against local read-only scripts and recomputes world positions through parent transforms. Original scene files and extraction inventories remain local and are not distributed.

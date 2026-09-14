@@ -141,7 +141,7 @@ namespace OldMarket.Navigation
             if(lastLocale!=state.Locale){lastLocale=state.Locale;RebuildSidebar();foreach(var label in labels)if(label.Item1!=null)label.Item1.text=Texts.Get(state.Locale,label.Item2);}
             if(lastCount!=state.Markers.Count)RebuildSidebar();
             rotationLabel.text=Texts.Get(state.Locale,state.RotateWithCamera?"CameraUp":"NorthUp");
-            title.text=string.IsNullOrWhiteSpace(state.Map?.Name)?Texts.Get(state.Locale,"Map"):state.Map.Name;
+            title.text=Texts.MapTitle(state.Locale,state.Map?.NameTextKey,state.Map?.Name);
             bool valid=state.Map!=null&&state.Map.Valid;mapImage.texture=state.Map?.Texture;mapRect.gameObject.SetActive(valid);
             areaLayer.Refresh(state.Map);
             mapOverlay.texture=state.Map?.OverlayTexture;mapOverlay.uvRect=mapImage.uvRect;mapOverlay.gameObject.SetActive(valid&&mapOverlay.texture!=null);

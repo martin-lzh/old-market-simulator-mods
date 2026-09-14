@@ -69,7 +69,7 @@ To adjust size or position, edit `BepInEx/config/OldMarket.Navigation/layout.jso
 
 ## A few things to know
 
-The earlier Eastern Town bundle passed reported local and two-computer multiplayer tests. Later zoom and Eastern Town POI changes, plus the Island and Rome maps, still need in-game acceptance, including Rome travel, unlocks and multiplayer synchronization. See the [source-specific validation record](../releases/validation.md). Built-in place names use the game's language where verified; icon-only places have no name label. Your own marker names stay as written.
+The earlier Eastern Town bundle passed reported local and two-computer multiplayer tests. Later zoom and Eastern Town POI changes, plus the Island and Rome maps, still need in-game acceptance, including Rome travel, unlocks and multiplayer synchronization. See the [source-specific validation record](../releases/validation.md). The interface, built-in map titles and functional place labels follow all 13 game languages: English, Simplified Chinese, Traditional Chinese, German, French, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Turkish and Ukrainian. Verified place names use the game's translations; rest areas, markets, water refill, calendars and return entrances use original Mod translations. Unknown languages fall back to English for Mod text. Your own marker names stay as written. Font coverage and long labels still need in-game checks.
 
 Target icons show a direction, not a walking route. They may appear through buildings or over a roof. Map north is a consistent Mod convention and may differ from other maps. Overlays from Steam or performance tools may still cover the display.
 
@@ -147,7 +147,7 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 
 ## 使用时留意
 
-此前东方小镇合集已获本地实机及双实机联机测试确认。后续缩放、东方小镇 POI 调整及海岛、罗马地图仍待实机验收，包括罗马区域往返、扩建与多人同步，详见[按源码记录的验证范围](../releases/validation.md)。已确认的内置地点名跟随游戏语言，只有图标的地点不显示名称；自己填写的标记名称保持原样。
+此前东方小镇合集已获本地实机及双实机联机测试确认。后续缩放、东方小镇 POI 调整及海岛、罗马地图仍待实机验收，包括罗马区域往返、扩建与多人同步，详见[按源码记录的验证范围](../releases/validation.md)。界面、内置地图标题及功能地点标签支持游戏全部 13 种语言：英语、简中、繁中、德语、法语、意大利语、日语、韩语、葡萄牙语、俄语、西班牙语、土耳其语和乌克兰语。已确认的地点名使用游戏译文，休息处、市场、补水处、日历及返回入口使用 Mod 原创翻译；未知语言的 Mod 文字回退英语。自己填写的标记名称保持原样。字体覆盖及长标签仍待实机检查。
 
 目标图标提供方向，不是可行走路线；可能透过建筑显示，也可能落在屋顶上。地图北向使用本 Mod 的统一约定，可能与其他地图不同。Steam 或性能工具的覆盖层仍可能挡住界面。
 

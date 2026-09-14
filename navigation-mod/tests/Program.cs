@@ -17,6 +17,9 @@ static class Program
    var map=MapManifestReader.Read(File.ReadAllText(path));
    Check(NavMath.ValidBounds(map.MinX,map.MaxX,map.MinZ,map.MaxZ),"packaged map bounds");
    Check(MapPoi.Validate(map.Pois,map.MinX,map.MaxX,map.MinZ,map.MaxZ).Count>0,"packaged map contains valid POIs");
+   Check(Texts.Contains(map.NameTextKey),"packaged map has a translated title");
+   foreach(var locale in new[]{"en","zh","zh-Hant","de","fr","it","ja","ko","pt","ru","es","tr","uk"})
+    Check(Texts.MapTitle(locale,map.NameTextKey,map.Name)==Texts.Get(locale,map.NameTextKey),"packaged title follows locale");
    Console.WriteLine(Path.GetFileName(path)+": "+map.Pois.Length+" POIs");
   }
   MapWheelZoomChecks.Run(Check);
@@ -88,6 +91,19 @@ static class Program
   Check(Texts.Get("xx","NoMap")==Texts.Get("en","NoMap"),"unknown fallback");Check(Texts.Normalize("zh-TW")=="zh-Hant","traditional locale");Check(Texts.Normalize("pt-BR")=="pt","region locale");
     var values=(Dictionary<string,string[]>)typeof(Texts).GetField("Values",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Static).GetValue(null);
   foreach(var row in values) {Check(row.Value.Length==13,"locale count "+row.Key);foreach(var translation in row.Value)Check(!string.IsNullOrWhiteSpace(translation),"translation content "+row.Key);}
+  Check(Texts.MapTitle("zh","MapRome","Rome")=="罗马小镇","map title is translated");
+  Check(Texts.MapTitle("de","MapRome","Rome")=="Rom","map title changes with locale");
+  Check(Texts.MapTitle("xx","MapRome","Rome")=="Rome","map title English fallback");
+  Check(Texts.MapTitle("zh",null,"My map")=="My map","legacy custom title preserved");
+  Check(Texts.MapTitle("zh","missing","My map")=="My map","unknown map key preserves custom title");
+  Check(Texts.MapTitle("zh",null,null)=="地图","missing map uses translated generic title");
+  Check(Texts.Normalize(" ZH_mo ")=="zh-Hant","Macau and whitespace locale alias");
+  var localPoi=new MapPoi {Name="Unused",NameKey="poi_return"};
+  Check(localPoi.DisplayName("zh")=="返回罗马小镇" && localPoi.DisplayName("de")=="Zurück nach Rom","functional POI language switches immediately");
+  Check(localPoi.DisplayName("xx")=="Return to Rome","functional POI unknown locale fallback");
+  foreach(var locale in new[]{"zh","zh-Hant","de","fr","it","ja","ko","pt","ru","es","tr","uk"})
+   foreach(var key in new[]{"MapIsland","MapEastern","MapMine","PoiRest","PoiWater","PoiCalendar","PoiReturn"})
+    Check(Texts.Get(locale,key)!=Texts.Get("en",key),"new text has a locale-specific translation");
   // Synthetic identifiers verify the four legal stages without publishing game data.
   long[][] required={Array.Empty<long>(),new long[]{11},new long[]{11,22},new long[]{11,22,33}};
   long[][] excluded={new long[]{11,22,33},new long[]{22,33},new long[]{33},Array.Empty<long>()};

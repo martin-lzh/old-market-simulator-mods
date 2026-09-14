@@ -11,6 +11,7 @@ namespace OldMarket.Navigation
     {
         [DataMember] public string Id;
         [DataMember] public string Name;
+        [DataMember] public string NameTextKey;
         [DataMember] public string SceneName;
         [DataMember] public string Region="";
         [DataMember] public string Texture;

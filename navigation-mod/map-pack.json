@@ -8,7 +8,7 @@
     },
     {
       "name": "market0.json",
-      "sha256": "fec8f6270d1774393cf80035f88f02c5a9d0f223e705c12870117209035c2497"
+      "sha256": "4bcdfe4888734fcfc94d0d2b3d5d1da1978e2dd061ad7aba047a4c57e3571a96"
     },
     {
       "name": "market1-obstacles.png",
@@ -16,7 +16,7 @@
     },
     {
       "name": "market1.json",
-      "sha256": "f56d9b67352626d453815c2b2af0b5d9b3df819eee28a17991eefc84a6ae1f99"
+      "sha256": "c2f09539550559668183abdc5d8497bc4fb1116a5174c29b80e8c3ed4eff2f2d"
     },
     {
       "name": "market2-obstacles.png",
@@ -24,7 +24,7 @@
     },
     {
       "name": "market2.json",
-      "sha256": "f1d5613717b3c78bd9b256ee697e6aaafdffef620fc3a4880df8910c31ec4a25"
+      "sha256": "ed77eebf62c97524624a3d6b58bf2441aecf33af83da4fd1ea2c3b28dbb84eb1"
     },
     {
       "name": "market3-obstacles.png",
@@ -32,7 +32,7 @@
     },
     {
       "name": "market3.json",
-      "sha256": "e95e41cbe37831b16a6851da93f76bac656758ae699d547330665fc78ed565a2"
+      "sha256": "28bcd7bb5cfae175c14f8c59901ac372c0b0b85c4ebcb8235b68d1313542d059"
     },
     {
       "name": "oriental-town-artwork.png",
@@ -40,7 +40,7 @@
     },
     {
       "name": "island.json",
-      "sha256": "88de5193d41b40ab7c0dbfc81e5c33e6805b77f2528ab44b4ea4dd6af5d6503c"
+      "sha256": "561a17fdb941550549af7aedc2b296f2279e9a3c2e2367cee265a48ee497bf5e"
     },
     {
       "name": "island-artwork.png",
@@ -52,7 +52,7 @@
     },
     {
       "name": "rome-caravan1.json",
-      "sha256": "109bc27a841d3771bf63aeaeb366fe19ed42445628756b12434cb95547a22e67"
+      "sha256": "325f1f385e6b9cbb30dd4d49f694f841a2e4156a0fca87a51ef8125795094c62"
     },
     {
       "name": "rome-caravan2-artwork.png",
@@ -60,7 +60,7 @@
     },
     {
       "name": "rome-caravan2.json",
-      "sha256": "8f19319ec3da5bf901f6d4945286aacafa662905b528361828f857ccb179142e"
+      "sha256": "1326cd61b2ba32e46a756d2fbdc8355ab0024484a2e4672a59e2efa288c9b539"
     },
     {
       "name": "rome-gate1-artwork.png",
@@ -68,7 +68,7 @@
     },
     {
       "name": "rome-gate1.json",
-      "sha256": "8760101e7c1d6f1844a95b4073aaebc28aaef2a35d55ab02f2e1025e02ee44b0"
+      "sha256": "f70e2195d3c61f81c09698846b6ca7225ee4bc359861eec1b9efabb0af682790"
     },
     {
       "name": "rome-gate2-artwork.png",
@@ -76,7 +76,7 @@
     },
     {
       "name": "rome-gate2.json",
-      "sha256": "29598e47c838bca93a2b91f35a0aab72d18e09a5aab9b5b6bbd3524f49284c1f"
+      "sha256": "eace3e43ac69e118789530c5a3b183f8fd46acdecff6d46edeb4678b2ccba279"
     },
     {
       "name": "rome-gate3-artwork.png",
@@ -84,7 +84,7 @@
     },
     {
       "name": "rome-gate3.json",
-      "sha256": "7dc797cab7dfa379630ed74534da00da5c9f0b822b35f2101664f904c09b09e3"
+      "sha256": "8f4e8818f454b3b6334582d97e3fdb2e75ee4d1ae10f285aee539e19a4931d3e"
     },
     {
       "name": "rome-gate4-artwork.png",
@@ -92,7 +92,7 @@
     },
     {
       "name": "rome-gate4.json",
-      "sha256": "b79a6c832c0f2c0e31ded45cfd95662a0ce925aa3101d0f3c0201fc27991d9d1"
+      "sha256": "3dc384901a5475b0ed6e8da0fbab1d81c7dd35eb0010af4bb1edd87e83503539"
     },
     {
       "name": "rome-mine-artwork.png",
@@ -100,7 +100,7 @@
     },
     {
       "name": "rome-mine.json",
-      "sha256": "21db407c1ac5f0baf73f686c72c90f3c1f6e452559c7a36382d6e9ccce9edc5b"
+      "sha256": "dd97c118b1229059bfc83501c63d3d53ab44ff4cc9a43782681b32601de17a7b"
     },
     {
       "name": "rome-town-artwork.png",
@@ -112,7 +112,7 @@
     },
     {
       "name": "rome-town.json",
-      "sha256": "b5ecc603e0ee290957c3aab4b12499c05707cd1cd83c978c1535669dc1e68da1"
+      "sha256": "ffa9ecf6653bbb4389f67d2de4826b4a37a46dca81dc37a1b2d371e68729b88e"
     }
   ]
 }

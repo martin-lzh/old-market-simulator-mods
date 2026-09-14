@@ -11,7 +11,7 @@ namespace OldMarket.Navigation
         public Texture2D DetailTexture;
         public float DetailMinX,DetailMaxX,DetailMinZ,DetailMaxZ;
         public float MinX, MaxX, MinZ, MaxZ;
-        public string Id="",Name="";
+        public string Id="",Name="",NameTextKey="";
         public List<MapPoi> Pois=new List<MapPoi>();
         public List<MapArea> LockedAreas=new List<MapArea>();
         public bool Valid => Texture!=null && NavMath.ValidBounds(MinX,MaxX,MinZ,MaxZ);

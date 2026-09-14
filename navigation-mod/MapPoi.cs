@@ -22,6 +22,8 @@ namespace OldMarket.Navigation
         public string DisplayName(string locale)
         {
             if (string.IsNullOrEmpty(NameKey)) return Name;
+            // Original functional labels for places without a verified native place-name key.
+            if(LocalLabels.TryGetValue(NameKey,out var textKey))return Texts.Get(locale,textKey);
             string key=NativeKey(NameKey);
             // Known game POIs stay icon-only until their native text is available.
             // Do not substitute an action or a made-up place name for an unnamed location.
@@ -29,6 +31,10 @@ namespace OldMarket.Navigation
         }
         // The runtime supplies an asynchronous game-table reader; metadata stays Unity-independent.
         public static Func<string,string,string> NativeNameResolver;
+        private static readonly Dictionary<string,string> LocalLabels=new Dictionary<string,string> {
+            ["poi_rest"]="PoiRest", ["poi_market"]="PoiMarket", ["poi_water"]="PoiWater",
+            ["poi_calendar"]="PoiCalendar", ["poi_return"]="PoiReturn"
+        };
         private static readonly Dictionary<string,string> NativeAliases=new Dictionary<string,string> {
             ["poi_engineer"]="engineer", ["poi_decorations"]="decoration_store",
             ["poi_carpenter"]="lumberjack", ["poi_animals"]="animal_market",

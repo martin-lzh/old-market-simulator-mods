@@ -38,12 +38,18 @@ To update a map, replace only the intended runtime files, update their hashes in
 
 ## Eastern Town service coverage / 东方小镇服务覆盖
 
-The four Eastern Town manifests share 17 fixed POIs and cover X [-120,220], Z [40,300]. The expanded full-terrain render remains a local artifact and is not part of the runtime map pack. The [coverage review](eastern-poi-audit.md) adds recycling, employees, water refill and calendar; aquarium and origami remain grouped under the museum POI. Water/calendar are icon-only until native place-name keys are verified.
+The four Eastern Town manifests share 17 fixed POIs and cover X [-120,220], Z [40,300]. The expanded full-terrain render remains a local artifact and is not part of the runtime map pack. The [coverage review](eastern-poi-audit.md) adds recycling, employees, water refill and calendar; aquarium and origami remain grouped under the museum POI. Water/calendar now use original functional labels in all 13 game languages; verified native names still use the game table.
 
-东方小镇四份地图共用 17 个固定 POI，覆盖 X [-120,220]、Z [40,300]。扩大后的完整地形渲染仍为本地产物，尚未纳入运行时地图包。[覆盖复核](eastern-poi-audit.md)补充回收、雇员、补水和日历；水族馆与折纸收集合并在博物馆 POI 中。水井与日历在确认原生地点名之前仅显示图标。
+东方小镇四份地图共用 17 个固定 POI，覆盖 X [-120,220]、Z [40,300]。扩大后的完整地形渲染仍为本地产物，尚未纳入运行时地图包。[覆盖复核](eastern-poi-audit.md)补充回收、雇员、补水和日历；水族馆与折纸收集合并在博物馆 POI 中。补水处和日历现使用覆盖游戏全部 13 种语言的原创功能标签；已确认的地点名继续使用游戏翻译表。
 
 ## Rome / 罗马
 
 Eight manifests select map ID 2 / BazaarRome and the exact local region name. The town has 59 unlock areas and a higher-detail image patch; the mine has two additional areas whose source objects reside in the main scene. These 61 independent unlock IDs control hatched rectangles over measured affected-object bounds, not intermediate building reconstructions or walkability. The town has 46 conditional POI records, with 15 initially visible and 39 fully unlocked; each of the seven travel regions has a return portal. See [region links, POIs, conditions and artwork provenance](rome-audit.md).
 
 八份元数据按地图 ID 2、BazaarRome 和本地玩家区域名称匹配。主城有 59 个解锁区块及细节底图；矿洞有两个额外区块，其源对象属于主城场景。61 个独立解锁 ID 控制按受影响对象边界测得的斜线矩形，不表示中间建筑模型或通行性。主城有 46 条条件 POI 记录，初始显示 15 个，全部解锁后显示 39 个；七个传送区域各有一个返回入口。[区域关联、POI、条件及插画来源](rome-audit.md)。
+
+## Localized names / 本地化名称
+
+All 13 manifests set `NameTextKey` for a title from the Mod's 13-language text catalog, updated whenever the game language changes. `Name` remains a fallback for custom maps without a recognized key. Rest, market, water, calendar and return POIs have original translated functional labels; other verified POI keys resolve through native localization. Metadata and texture bounds are independent of language, and personal marker names are never rewritten.
+
+13 份地图元数据均设置 NameTextKey，标题从 Mod 的 13 语种词条读取并随游戏语言更新；没有可识别键的自定义地图仍使用 Name。休息处、市场、补水处、日历与返回入口使用原创功能标签，其他已确认的 POI 继续查询原生本地化。语言不会改变地图坐标或贴图边界，也不会重写个人标记名称。

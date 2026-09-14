@@ -72,7 +72,7 @@ Automated coverage exercises coordinate conversion/rotation boundaries, marker s
 
 ### 语言、风险与验证
 
-跟随游戏选定语言及金钱栏 TMP 字体，提供 13 种原创翻译：简中、繁中、英语、德语、法语、意大利语、日语、韩语、葡萄牙语、俄语、西班牙语、土耳其语、乌克兰语；未知语言回退英语。尚未经母语审校和所有字体实机检查。内置 POI 的 NameKey 使用游戏原生本地化；未确认原生地点名的点仅显示图标。个人标记、自定义字面名称和地图标题保留原文。
+跟随游戏选定语言及金钱栏 TMP 字体，提供 13 种原创翻译：简中、繁中、英语、德语、法语、意大利语、日语、韩语、葡萄牙语、俄语、西班牙语、土耳其语、乌克兰语；未知语言回退英语。尚未经母语审校和所有字体实机检查。已确认的 POI NameKey 使用游戏原生本地化；休息处、市场、补水处、日历和返回入口使用 Mod 原创功能标签。地图元数据可通过 NameTextKey 使用 Mod 的 13 语种标题，语言切换即时更新；未设置或无法识别的键保留自定义 Name，空名称使用本地化的“地图”。个人标记和自定义字面名称保留原文。
 
 固定游戏 **2.1.6**、Unity Mono **2022.3.62f3** 与编译 SDK **2.1.6/r7**，既有 Mod 保留 r1。CI 使用官方固定哈希的 BepInEx 5.4.23.5 引用；反射使用的存档槽、区域与扩建成员纳入 SDK 和真实程序集契约检查。无游戏环境可运行上文 `ci.py validate`、CI 工具测试和 `ci.py build`；匹配的本机安装可用 `ci.py verify-game --game-dir <path>` 核对真实引用符号 IL/资源与契约，不启动游戏。
 
@@ -111,3 +111,9 @@ Historical Island introduction (`5d328aa`, 2026-09-15): version/map-hash validat
 Rome uses a town map plus two caravan regions, an engineer mine and four gate regions. The town contains 46 conditional POI records (15 initially visible, 39 fully unlocked); each travel region has a return portal. There are 61 independent unlock IDs across 59 town areas and two mine areas. Gate state distinguishes blocked and open entrances; caravan availability does not waive the native fare. Selecting a target does not teleport or unlock an area. [Region, POI and expansion evidence](maps/rome-audit.md).
 
 罗马包含主城、两个商队区域、工程师矿洞及四个大门区域。主城有 46 条条件 POI 记录（初始显示 15 个，全部解锁后显示 39 个），每个传送区域都有返回入口。59 个主城区块与两个矿洞区块对应 61 个独立解锁 ID。大门区分锁定与开放状态，商队可用图标不免除原生车费；选择目标不会传送或解锁区域。[区域、POI 与扩建证据](maps/rome-audit.md)。
+
+## Localization / 本地化
+
+Game 2.1.6 has 13 locale assets: `en`, `zh`, `zh-Hant`, `de`, `fr`, `it`, `ja`, `ko`, `pt`, `ru`, `es`, `tr`, `uk`. Navigation supplies every UI and built-in map-title key in each locale. `NameTextKey` in map metadata selects an original Mod translation; absent or unknown keys preserve a custom `Name`, with a localized generic map title when empty. Functional POI aliases for rest, market, water, calendar and return use original translations; verified native POI keys continue through the asynchronous game table. Personal names are preserved. Language changes require no map reload. Unknown Mod locales fall back to English; native text remains icon-only while unavailable. Traditional Chinese regional aliases include Taiwan, Hong Kong and Macau. No new game, Unity or networking API is required; SDK 2.1.6/r7 and version 0.2.0 remain unchanged. In-game font and overflow acceptance remains pending.
+
+已按游戏 2.1.6 的语言资源核对全部 13 种语言。界面和内置地图标题均提供完整译文；功能地点使用原创标签，已确认的地点名继续异步查询游戏翻译表，原生表未就绪时保留图标。切换语言无需重载地图；未知语言的 Mod 文字回退英语，繁中地区别名包括台湾、香港和澳门。无新增游戏、Unity 或网络 API，继续使用 SDK 2.1.6/r7 和 0.2.0，字体与长文本仍待实机验收。

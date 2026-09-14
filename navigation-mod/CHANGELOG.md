@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Complete localization of built-in map titles and functional POI labels across all 13 game languages. Add optional NameTextKey metadata, preserve custom names, update labels immediately on language changes, and support Macau Traditional Chinese aliases. Keep native place translations, version 0.2.0 and SDK 2.1.6/r7; fonts and long labels still await in-game acceptance.
+
 - Refresh bilingual map coverage, package and icon inventories, Rome unlock behavior and source-specific validation documentation. Make the unbundled Eastern Town outer terrain explicit; preserve historical test evidence and version/SDK pins.
 
 - Add Rome and all seven travel-region maps, a calibrated town detail layer, and 61 independent unlock-area overlays (59 in town, two in the mine). Filter POIs by enable/disable ancestry, distinguish locked gates from open portals, and retain region-scoped markers and return entrances. Preserve SDK 2.1.6/r7 and version 0.2.0; in-game travel, unlock alignment and multiplayer acceptance remain pending.
@@ -104,6 +106,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 补齐游戏全部 13 种语言的内置地图标题及功能 POI 标签。增加可选 NameTextKey 元数据，保留自定义名称，切换语言即时更新，补充澳门繁中别名。保留原生地点译文、0.2.0 版本与 SDK 2.1.6/r7；字体及长标签仍待实机验收。
 
 - 更新双语地图覆盖、地图包与图标清单、罗马解锁行为及按源码区分的验证说明。明确东方小镇外围地形尚未打包，保留历史测试证据及版本/SDK 固定值。
 

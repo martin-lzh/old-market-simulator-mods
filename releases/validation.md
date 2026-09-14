@@ -2,6 +2,12 @@
 
 ## English
 
+### Navigation localization follow-up — 2026-09-15
+
+Complete the 13-language interface with localized titles for all 13 packaged map manifests and original functional labels for rest, market, water, calendar and return POIs. The locale list was checked against game 2.1.6 locale assets; no game translation tables are bundled. Version 0.2.0 / SDK 2.1.6/r7 remain unchanged, with target version **UNASSIGNED** and changes under Unreleased.
+
+Version and map-hash validation, all SDK builds, 64 CI tooling tests, 1776 Navigation checks and 22 POI name checks passed. The Navigation-only standard real-reference verifier passed 15 dependency hashes, symbolic IL/resource comparison and 663 installed-assembly contracts. No new game interfaces or SDK revision were needed. Font coverage, long translated labels and in-game language switching remain unverified; no game installation or save was modified.
+
 ### Navigation follow-up — source `db03d32`, 2026-09-15
 
 Subsequent Navigation changes add adaptive large-map zoom, Island POIs, expanded Eastern Town service POIs and Rome's eight region maps with conditional POIs and 61 unlock areas. They remain Unreleased with target version **UNASSIGNED**; the source version remains 0.2.0 and the SDK remains 2.1.6/r7. The earlier manual confirmation applies to `e23f986`, not these later changes. New in-game alignment, zoom interaction, region travel, unlock sequencing and multiplayer checks remain pending. No release approval was refreshed.
@@ -55,6 +61,12 @@ The CI tooling suite passed 48 tests during Navigation 0.2.0 preparation. See ea
 Reviewed all six Mod READMEs, CHANGELOG/version metadata and build/package declarations, plus repository setup, support, security, conduct, templates, SDK and release documentation. Corrected Navigation's obsolete test status and source-version wording, current SDK indexing, root build/CHANGELOG links and package contents, and the Navigation release-tag catalog. Existing published download links still resolve to the five previously published prereleases; 0.2.0 is not presented as an already published Navigation download. Other Mod safety and rollback notes remain applicable.
 
 ## 中文
+
+### Navigation 本地化后续改动 — 2026-09-15
+
+补齐 13 语种界面中的地图标题与功能标签：13 份随包地图均提供本地化标题，休息处、市场、补水处、日历及返回入口使用原创翻译。已按游戏 2.1.6 的语言资源核对语言列表，不打包游戏翻译表。版本保持 0.2.0、SDK 保持 2.1.6/r7，目标版本 **UNASSIGNED**，改动记入未发布。
+
+版本及地图哈希验证、全部 SDK 构建、64 项 CI 工具测试、1776 项导航检查及 22 项 POI 名称检查通过。仅针对 Navigation 运行标准真实引用验证，15 个依赖哈希、符号 IL/资源对比及 663 项原生契约检查通过。无需新增游戏接口或 SDK 修订。字体覆盖、长译文和游戏内语言切换仍待实机验收；未修改游戏安装或存档。
 
 ### Navigation 后续改动 — 源码 `db03d32`，2026-09-15
 

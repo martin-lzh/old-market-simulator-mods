@@ -6,6 +6,21 @@ namespace OldMarket.Navigation
     {
         private static readonly string[] Languages={"en","zh","zh-Hant","de","fr","it","ja","ko","pt","ru","es","tr","uk"};
         private static readonly Dictionary<string,string[]> Values=new Dictionary<string,string[]> {
+            ["MapIsland"]=new[]{"Island","海岛","海島","Insel","Île","Isola","島","섬","Ilha","Остров","Isla","Ada","Острів"},
+            ["MapEastern"]=new[]{"Eastern Town","东方小镇","東方小鎮","Östliche Stadt","Ville orientale","Cittadina orientale","東方の町","동방 마을","Vila oriental","Восточный городок","Pueblo oriental","Doğu Kasabası","Східне містечко"},
+            ["MapRome"]=new[]{"Rome","罗马小镇","羅馬小鎮","Rom","Rome","Roma","ローマ","로마","Roma","Рим","Roma","Roma","Рим"},
+            ["MapMine"]=new[]{"Engineer Mine","工程师矿洞","工程師礦洞","Mine des Ingenieurs","Mine de l’ingénieur","Miniera dell’ingegnere","技師の鉱山","기술자의 광산","Mina do engenheiro","Шахта инженера","Mina del ingeniero","Mühendisin Madeni","Шахта інженера"},
+            ["PoiRest"]=new[]{"Rest area","休息处","休息處","Ruheplatz","Aire de repos","Area di riposo","休憩所","휴식 공간","Área de descanso","Место отдыха","Zona de descanso","Dinlenme alanı","Місце відпочинку"},
+            ["PoiMarket"]=new[]{"Market","市场","市場","Markt","Marché","Mercato","市場","시장","Mercado","Рынок","Mercado","Pazar","Ринок"},
+            ["PoiWater"]=new[]{"Water refill","补水处","補水處","Wasser auffüllen","Point d’eau","Rifornimento d’acqua","給水所","급수대","Abastecimento de água","Пополнение воды","Punto de agua","Su doldurma noktası","Поповнення води"},
+            ["PoiCalendar"]=new[]{"Calendar","日历","日曆","Kalender","Calendrier","Calendario","カレンダー","달력","Calendário","Календарь","Calendario","Takvim","Календар"},
+            ["PoiReturn"]=new[]{"Return to Rome","返回罗马小镇","返回羅馬小鎮","Zurück nach Rom","Retour à Rome","Torna a Roma","ローマに戻る","로마로 돌아가기","Voltar a Roma","Вернуться в Рим","Volver a Roma","Roma’ya dön","Повернутися до Рима"},
+            ["MapGate1"]=new[]{"Gate 1","1 号大门","1 號大門","Tor 1","Porte 1","Porta 1","第1門","1번 관문","Portão 1","Ворота 1","Puerta 1","Kapı 1","Брама 1"},
+            ["MapGate2"]=new[]{"Gate 2","2 号大门","2 號大門","Tor 2","Porte 2","Porta 2","第2門","2번 관문","Portão 2","Ворота 2","Puerta 2","Kapı 2","Брама 2"},
+            ["MapGate3"]=new[]{"Gate 3","3 号大门","3 號大門","Tor 3","Porte 3","Porta 3","第3門","3번 관문","Portão 3","Ворота 3","Puerta 3","Kapı 3","Брама 3"},
+            ["MapGate4"]=new[]{"Gate 4","4 号大门","4 號大門","Tor 4","Porte 4","Porta 4","第4門","4번 관문","Portão 4","Ворота 4","Puerta 4","Kapı 4","Брама 4"},
+            ["MapCaravan1"]=new[]{"Caravan 1","商队区域 1","商隊區域 1","Karawanengebiet 1","Zone de caravane 1","Area carovana 1","隊商エリア 1","대상단 지역 1","Área da caravana 1","Область каравана 1","Zona de caravana 1","Kervan bölgesi 1","Область каравану 1"},
+            ["MapCaravan2"]=new[]{"Caravan 2","商队区域 2","商隊區域 2","Karawanengebiet 2","Zone de caravane 2","Area carovana 2","隊商エリア 2","대상단 지역 2","Área da caravana 2","Область каравана 2","Zona de caravana 2","Kervan bölgesi 2","Область каравану 2"},
             ["ZoomOut"]=new[]{"Zoom out","缩小","縮小","Verkleinern","Dézoomer","Riduci","縮小","축소","Diminuir","Отдалить","Alejar","Uzaklaştır","Віддалити"},
             ["ZoomIn"]=new[]{"Zoom in","放大","放大","Vergrößern","Zoomer","Ingrandisci","拡大","확대","Ampliar","Приблизить","Acercar","Yakınlaştır","Наблизити"},
             ["EditMarker"]=new[]{"Edit marker","编辑标记","編輯標記","Markierung bearbeiten","Modifier le repère","Modifica segnaposto","マーカーを編集","마커 편집","Editar marcador","Изменить метку","Editar marcador","İşareti düzenle","Редагувати мітку"},
@@ -42,10 +57,13 @@ namespace OldMarket.Navigation
         };
         public static string Normalize(string locale)
         {
-            locale=(locale??"en").Replace('_','-').ToLowerInvariant();
-            if(locale.StartsWith("zh")) return locale.Contains("hant")||locale.Contains("tw")||locale.Contains("hk")?"zh-Hant":"zh";
+            locale=(locale??"en").Trim().Replace('_','-').ToLowerInvariant();
+            if(locale.StartsWith("zh")) return locale.Contains("hant")||locale.Contains("tw")||locale.Contains("hk")||locale.Contains("mo")?"zh-Hant":"zh";
             var language=locale.Split('-')[0]; return Array.IndexOf(Languages,language)>=0?language:"en";
         }
+        public static bool Contains(string key) => key!=null && Values.ContainsKey(key);
+        public static string MapTitle(string locale,string textKey,string customName)
+        { return Contains(textKey)?Get(locale,textKey):string.IsNullOrWhiteSpace(customName)?Get(locale,"Map"):customName; }
         public static string Get(string locale,string key)
         { return Values.TryGetValue(key,out var row)?row[Array.IndexOf(Languages,Normalize(locale))]:key; }
     }
