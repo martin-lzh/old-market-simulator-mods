@@ -36,6 +36,8 @@ Choose the Mod ZIP on the release page, not GitHub's **Source code** download. T
 
 The minimap starts in the bottom-left corner. Use the map window's orientation button to switch between north-up and following your view; your choice is remembered. The large map stays north-up. Shop names appear as you zoom in when there is enough room.
 
+Large-map zoom steps and the closest zoom level adapt to the loaded map's world coverage, so larger maps can reach street-level detail with similar wheel travel or button presses.
+
 Select a personal marker to change its name, color or shape in the right sidebar. Color and shape buttons open a grid below them—click the one you want. Choose **Set target** to follow it. The compass and in-world guide use the same icon and color as the map. Guides hide while a menu is open and return when it closes.
 
 Opening the map frees the mouse but **does not pause the game**. M is a separate Mod setting; changing the game's map binding does not change this shortcut.
@@ -111,6 +113,8 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 | 前往店铺等地点 | 左键或右键它的图标或名称 |
 
 小地图默认在左下角。大地图窗口中的朝向按钮可以切换“固定正北”和“随视角转动”，下次进入也会记住选择。大地图始终保持正北朝上。放大地图后，空间足够的地点会显示名称。
+
+大地图的缩放步长与放大上限会适应所加载地图的世界覆盖范围，扩大后的地图也能用相近的滚轮或按钮操作次数放大到街区细节。
 
 选中个人标记后，可以在右侧改名称、颜色和图标。点击颜色或图标按钮，下方会展开选择格，点哪个就用哪个。点击“设为目标”即可跟随指引，罗盘和场景内会显示与地图相同的图标和颜色。打开菜单时指引会暂时隐藏，关闭后恢复。
 

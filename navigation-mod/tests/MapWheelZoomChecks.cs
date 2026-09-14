@@ -26,5 +26,25 @@ internal static class MapWheelZoomChecks
         Near(MapWheelZoom.Target(2,3,1.1f),3.3f,"same direction accumulates pending travel");
         Near(MapWheelZoom.Target(1,1,.9f),1,"zoom-out respects map coverage floor");
         Near(MapWheelZoom.Target(8,8,1.1f),8,"zoom-in respects maximum");
+        foreach(var view in new[]{new MapPoint(900,500),new MapPoint(500,900),new MapPoint(800,800)})
+        {
+            Near(MapWheelZoom.Maximum(340,260,view.X,view.Y),8,"original town zoom range retained");
+            float maximum=MapWheelZoom.Maximum(750,750,view.X,view.Y);
+            var oldDetail=new MapViewportGeometry(view.X,view.Y,340f/260,8);
+            var fullDetail=new MapViewportGeometry(view.X,view.Y,1,maximum);
+            Near(oldDetail.Width/340,fullDetail.Width/750,"full map reaches original world-space detail");
+            float fullFactor=MapWheelZoom.Factor(6,6,maximum);
+            Near((float)(Math.Log(maximum)/Math.Log(fullFactor)),(float)(Math.Log(8)/Math.Log(1.12)),"same wheel travel spans larger map zoom range");
+            Near(MapWheelZoom.Factor(-6,6,maximum)*fullFactor,1,"adaptive wheel zoom remains reversible");
+            float partial=1;for(int i=0;i<10;i++)partial*=MapWheelZoom.Factor(.6f,6,maximum);
+            Near(partial,fullFactor,"adaptive zoom preserves fractional scrolling");
+            Near(MapWheelZoom.ScaleFactor(1.25f,maximum)*MapWheelZoom.ScaleFactor(.8f,maximum),1,"adaptive buttons are reciprocal");
+            Near(MapWheelZoom.Target(maximum,maximum,fullFactor,maximum),maximum,"adaptive maximum enforced");
+            check(MapWheelZoom.Target(8,8,fullFactor,maximum)>8,"full map zoom can exceed previous cap");
+        }
+        Near(MapWheelZoom.Maximum(10,10,900,500),8,"small maps retain existing range");
+        Near(MapWheelZoom.Maximum(float.MaxValue,float.MaxValue,900,500),64,"very large maps have bounded zoom");
+        Near(MapWheelZoom.Maximum(750,750,0,500),8,"uninitialized viewport uses safe default");
+        Near(MapWheelZoom.Maximum(float.NaN,750,900,500),8,"nonfinite bounds use safe default");
     }
 }

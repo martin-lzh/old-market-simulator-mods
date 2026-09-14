@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Scale large-map wheel/button zoom steps and the maximum zoom by world coverage and viewport aspect, preserving close-up detail and approximately the same input travel for larger maps. Minimap steps remain world-distance based. SDK 2.1.6/r7 and Mod version are unchanged; in-game zoom feel remains unverified.
+
 - Include the Eastern Town base map, four unlock overlays and four map/POI manifests in the Navigation release ZIP. Maps are tracked Mod resources and install with the DLL; no separate map download is needed.
 - Share the explicit map allowlist between CI and local packaging. Verify hashes, PNG integrity, texture references and metadata/POIs, and include map hashes in build evidence. Reject missing, modified or unexpected ZIP entries; continue excluding SDK/game/loader binaries and personal files.
 - Keep version 0.2.0 and game 2.1.6 / SDK r7 unchanged. This packaging follow-up awaits a target version; the previous source-bound approval does not cover these new inputs and is not refreshed automatically.
@@ -94,6 +96,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 大地图滚轮、按钮缩放步长与放大上限随世界覆盖范围和视口比例调整，让扩大后的地图保持近景细节与近似操作次数。小地图仍按世界距离分档。SDK 2.1.6/r7 与 Mod 版本不变，缩放手感尚未实机验收。
 
 - 将东方小镇底图、四种解锁覆盖层及四份地图/POI 元数据纳入 Navigation 发行 ZIP。地图作为 Mod 资源跟踪，与 DLL 一起安装，无需另行下载地图。
 - CI 与本地构建共用明确的地图文件白名单，检查哈希、PNG 完整性、贴图引用和地图/POI 元数据，并在构建记录中保存地图哈希。拒绝遗漏、修改或额外 ZIP 条目，继续排除 SDK、游戏、加载器程序集及个人文件。

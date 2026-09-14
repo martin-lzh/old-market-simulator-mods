@@ -169,6 +169,7 @@ namespace OldMarket.Navigation
             }
         }
         private MapViewportGeometry Geometry(float scale)=>new MapViewportGeometry(viewport.rect.width,viewport.rect.height,(state.Map.MaxX-state.Map.MinX)/(state.Map.MaxZ-state.Map.MinZ),scale);
+        private float MaximumZoom=>MapWheelZoom.Maximum(state.Map.MaxX-state.Map.MinX,state.Map.MaxZ-state.Map.MinZ,viewport.rect.width,viewport.rect.height);
         private void ApplyMapGeometry()
         {
             if(state.Map==null||!state.Map.Valid||viewport.rect.width<=0||viewport.rect.height<=0)return;
@@ -178,7 +179,8 @@ namespace OldMarket.Navigation
         private void Zoom(float factor,Vector2 anchor)
         {
             if(state.Map==null||!state.Map.Valid||viewport.rect.width<=0||viewport.rect.height<=0)return;
-            targetZoom=Mathf.Clamp(targetZoom*factor,1,8);zoomAnchor=anchor;
+            float maximum=MaximumZoom;
+            targetZoom=MapWheelZoom.Target(zoom,targetZoom,MapWheelZoom.ScaleFactor(factor,maximum),maximum);zoomAnchor=anchor;
         }
         private void WheelZoom(PointerEventData e,Vector2 anchor)
         {
@@ -188,9 +190,10 @@ namespace OldMarket.Navigation
             var settings=UnityEngine.InputSystem.InputSystem.settings;
             bool platformRange=module!=null&&settings!=null&&settings.scrollDeltaBehavior==UnityEngine.InputSystem.InputSettings.ScrollDeltaBehavior.KeepPlatformSpecificInputRange;
             bool windows=Application.platform==RuntimePlatform.WindowsPlayer||Application.platform==RuntimePlatform.WindowsEditor;
-            float factor=MapWheelZoom.Factor(e.scrollDelta.y,uiScale*MapWheelZoom.PlatformScale(platformRange,windows));
+            float maximum=MaximumZoom;
+            float factor=MapWheelZoom.Factor(e.scrollDelta.y,uiScale*MapWheelZoom.PlatformScale(platformRange,windows),maximum);
             if(factor==1)return;
-            targetZoom=MapWheelZoom.Target(zoom,targetZoom,factor);zoomAnchor=anchor;
+            targetZoom=MapWheelZoom.Target(zoom,targetZoom,factor,maximum);zoomAnchor=anchor;
         }
         private void AnimateZoom()
         {
