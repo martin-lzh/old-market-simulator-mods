@@ -50,6 +50,20 @@ class ApprovalTests(unittest.TestCase):
     def test_no_record_is_not_authorized(self):
         self.assertFalse(ci.release_authorized(self.c, self.source))
 
+    def test_archived_record_is_not_release_authorization(self):
+        self.approve()
+        active = ci.approval_path(self.c)
+        history = active.parent / "history" / active.name
+        history.parent.mkdir()
+        original = active.read_bytes()
+        active.rename(history)
+        self.write("coordinates-mod/CHANGELOG.md", "### Unreleased\n- Follow-up development\n")
+        commit = self.commit()
+        self.assertEqual(history.read_bytes(), original)
+        self.assertFalse(ci.release_authorized(self.c, commit))
+        with patch.object(ci, "MODS", {"coordinates": "Coordinates"}), patch.object(ci, "config", return_value=self.c):
+            self.assertEqual(list(ci.release_candidates(commit, {})), [])
+
     def test_record_commit_does_not_invalidate_source_binding(self):
         approved = self.approve()
         self.assertNotEqual(approved, self.source)

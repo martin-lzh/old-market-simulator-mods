@@ -38,3 +38,13 @@ New versions without records are skipped, so development PRs can merge without p
 Merging into main requires successful GitHub Actions checks named `SDK build and tests` and `Script, data and workflow syntax`, with the branch up to date with main. Never disable these checks or add bypass actors to complete a release.
 
 The SDK check also runs read-only `check-releases` against actual published Releases to detect stale authorization. It neither reads packages nor writes to GitHub. Missing records do not block development PRs; stale candidate records fail the check.
+
+## Retiring an obsolete candidate / 归档失效候选授权
+
+When later Unreleased work supersedes an unpublished release scope, move its active `<mod>-v<version>.json` into `history/` with the bound source revision in the filename, preserving its bytes. Record why it is obsolete. Only files at the exact active approval path authorize a candidate; archived records remain evidence and cannot authorize any release. This permits ordinary development CI to pass while the Mod is skipped for publication. Do not update the old input hash, remove Unreleased notes or assign a version merely to make CI green. A future release still needs a maintainer-assigned scope/version and a fresh source-bound record under the existing rules.
+
+后续未发布改动超出尚未发行的授权范围时，将活动 `<mod>-v<version>.json` 移入 `history/`，在文件名中注明绑定源码，保留原始字节并记录归档原因。只有精确活动路径中的记录可授权候选发布；历史记录只供追溯，不授予发布权限。此时普通开发 CI 可以通过，该 Mod 因缺少活动授权而跳过发布。不得为让 CI 通过而改写旧输入哈希、移除未发布说明或擅自指定版本。未来发布仍须维护者指定范围/版本，并按既有规则生成新的源码绑定记录。
+
+On 2026-09-15, [Navigation's previous 0.2.0 record](history/navigation-v0.2.0-c3eeff1.json) was archived unchanged. It covered source `c3eeff1`; map packaging starting at `b6f1972` and later zoom, POI, Rome and localization changes are Unreleased and outside that scope. Repeated PR failures occurred in release preflight after successful builds/tests. Version 0.2.0 and SDK r7 remain unchanged; no replacement authorization was created.
+
+2026-09-15，[Navigation 旧 0.2.0 记录](history/navigation-v0.2.0-c3eeff1.json)原样归档。该记录绑定 `c3eeff1`；从 `b6f1972` 开始的地图打包及后续缩放、POI、罗马和本地化改动属于未发布，超出原范围。连续 PR 失败发生在编译/测试成功之后的发布预检。版本 0.2.0 与 SDK r7 保持不变，未生成替代授权。
