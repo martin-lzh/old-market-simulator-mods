@@ -3,8 +3,11 @@
   <ItemGroup>
     <Compile Remove="ContractChecks.cs" />
     <Compile Include="../StackRules.cs" Link="StackRules.cs" />
+    <Compile Include="../StackCompatibility.cs" Link="StackCompatibility.cs" />
+    <Compile Include="../PacketRules.cs" Link="PacketRules.cs" />
     <Compile Include="../ContainerPlan.cs" Link="ContainerPlan.cs" />
     <Compile Include="../RepeatGate.cs" Link="RepeatGate.cs" />
     <Compile Include="../StackPlan.cs" Link="StackPlan.cs" />
+    <Compile Include="../ContainerView.cs" Link="ContainerView.cs" />
   </ItemGroup>
 </Project>

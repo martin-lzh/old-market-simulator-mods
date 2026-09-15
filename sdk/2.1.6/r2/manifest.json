@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "gameVersion": "2.1.6",
+  "revision": 2,
+  "platform": "Windows x64 / Unity Mono 2022.3.62f3",
+  "gameAssemblySha256": "FA6CE6B89AEBDF50DD46FF9C857650DB0E9CC618B1CE939F58501E0DC59C6296",
+  "apiSha256": "1fa098de201811beae1a65f61e225f35761ac8281b2613d56d18de440bc76a21",
+  "sourceCommit": "135eb8904561134f20aa2d5146bab4efab199e7f",
+  "verification": "All seven loader builds passed SDK compilation and real-reference symbolic IL/resource comparison; Navigation passed 511 logic/localization checks and 318 read-only game contracts. In-game UI, input, performance, saves and multiplayer acceptance not performed."
+}

@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "gameVersion": "2.1.6",
+  "files": [
+    {
+      "name": "market0-obstacles.png",
+      "sha256": "3754874559d2c55ca7f2e5b56e53c577075fe08cbd06757d4c24b83af5e1855a"
+    },
+    {
+      "name": "market0.json",
+      "sha256": "4bcdfe4888734fcfc94d0d2b3d5d1da1978e2dd061ad7aba047a4c57e3571a96"
+    },
+    {
+      "name": "market1-obstacles.png",
+      "sha256": "19db2713218fe298b1fc0f686b8debbc0fbf60e7a820d584544d581f78c7e078"
+    },
+    {
+      "name": "market1.json",
+      "sha256": "c2f09539550559668183abdc5d8497bc4fb1116a5174c29b80e8c3ed4eff2f2d"
+    },
+    {
+      "name": "market2-obstacles.png",
+      "sha256": "d1c0e9acc6819cebe97749c3982283ff7c90587f148ac5fd027a019af2b20fe1"
+    },
+    {
+      "name": "market2.json",
+      "sha256": "ed77eebf62c97524624a3d6b58bf2441aecf33af83da4fd1ea2c3b28dbb84eb1"
+    },
+    {
+      "name": "market3-obstacles.png",
+      "sha256": "dcb085776aa1552d7e2ee17a689a2867c83a10761c339cc39a04c76bfd22b7bb"
+    },
+    {
+      "name": "market3.json",
+      "sha256": "28bcd7bb5cfae175c14f8c59901ac372c0b0b85c4ebcb8235b68d1313542d059"
+    },
+    {
+      "name": "oriental-town-artwork.png",
+      "sha256": "fed8dd0369825749cd967c39db411e0cc546f83fb805590b6ace1c957c1acb97"
+    },
+    {
+      "name": "island.json",
+      "sha256": "561a17fdb941550549af7aedc2b296f2279e9a3c2e2367cee265a48ee497bf5e"
+    },
+    {
+      "name": "island-artwork.png",
+      "sha256": "615f9099389b1a4eaf885455f356b661cfb8073a488193ae09c5d75f68f59dc2"
+    },
+    {
+      "name": "rome-caravan1-artwork.png",
+      "sha256": "37ba1a15263890ef25cf05330b1595e90e40f530d8a9e2fc456785eb6e389210"
+    },
+    {
+      "name": "rome-caravan1.json",
+      "sha256": "325f1f385e6b9cbb30dd4d49f694f841a2e4156a0fca87a51ef8125795094c62"
+    },
+    {
+      "name": "rome-caravan2-artwork.png",
+      "sha256": "e9bc309e74257938dc031779078a33a48f8df57efffb4444ccecd1374e8053a8"
+    },
+    {
+      "name": "rome-caravan2.json",
+      "sha256": "1326cd61b2ba32e46a756d2fbdc8355ab0024484a2e4672a59e2efa288c9b539"
+    },
+    {
+      "name": "rome-gate1-artwork.png",
+      "sha256": "bd98db370d8e7d3abc0a2f2c9a1315bc362150796309174bfcfdf3722381a4b7"
+    },
+    {
+      "name": "rome-gate1.json",
+      "sha256": "f70e2195d3c61f81c09698846b6ca7225ee4bc359861eec1b9efabb0af682790"
+    },
+    {
+      "name": "rome-gate2-artwork.png",
+      "sha256": "6ef1d153c0828b7a1ba1781e4da16fe629497359dfc847cfdeff3842929d4029"
+    },
+    {
+      "name": "rome-gate2.json",
+      "sha256": "eace3e43ac69e118789530c5a3b183f8fd46acdecff6d46edeb4678b2ccba279"
+    },
+    {
+      "name": "rome-gate3-artwork.png",
+      "sha256": "dd2e17704e79fb1d3672c16f43867109aa3b8fd0401ad0d66a4b48abe18fed42"
+    },
+    {
+      "name": "rome-gate3.json",
+      "sha256": "8f4e8818f454b3b6334582d97e3fdb2e75ee4d1ae10f285aee539e19a4931d3e"
+    },
+    {
+      "name": "rome-gate4-artwork.png",
+      "sha256": "32bfc0cacbe14427f1ffcef39f6a7e4adaac7df4557ac7381afda705aa1749d5"
+    },
+    {
+      "name": "rome-gate4.json",
+      "sha256": "3dc384901a5475b0ed6e8da0fbab1d81c7dd35eb0010af4bb1edd87e83503539"
+    },
+    {
+      "name": "rome-mine-artwork.png",
+      "sha256": "bf31e39b49d590fa060d236d24e00cb9304e2613ad6b18b7f5da004aa7fc08f0"
+    },
+    {
+      "name": "rome-mine.json",
+      "sha256": "dd97c118b1229059bfc83501c63d3d53ab44ff4cc9a43782681b32601de17a7b"
+    },
+    {
+      "name": "rome-town-artwork.png",
+      "sha256": "ed8af78ff2e378c541428c95e292a56c119bd498aa69cc71d812ccb48ae6c9de"
+    },
+    {
+      "name": "rome-town-detail.png",
+      "sha256": "492fe8b59f16099e0fe90c9f340f848ce0504ed05e543c95d15d7698b5b1ba91"
+    },
+    {
+      "name": "rome-town.json",
+      "sha256": "ffa9ecf6653bbb4389f67d2de4826b4a37a46dca81dc37a1b2d371e68729b88e"
+    }
+  ]
+}

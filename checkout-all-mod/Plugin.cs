@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace OldMarket.CheckoutAll
 {
-    [BepInPlugin(Id, "Old Market Checkout All", "0.1.4")]
+    [BepInPlugin(Id, "Old Market Checkout All", "0.1.5")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {
@@ -117,7 +117,7 @@ namespace OldMarket.CheckoutAll
             }
             hintPlayer = player;
             string shortcut = toggleKey.Value == Key.None ? "" :
-                $" / {toggleKey.Value}: {GameText.Native("turn_on")} / {GameText.Native("turn_off")}";
+                " / <color=#FF0000>" + GameText.Get("checkout_toggle_off", toggleKey.Value) + "</color>";
             hintMessage = target == null ? null : checkout == null
                 ? GameText.Get("hold_repeat", "E", GameText.Native("put_to_bag") + " / " + GameText.Native("take_pouch")) + shortcut
                 : session.Toggled ? GameText.Get("checkout_toggle", toggleKey.Value)

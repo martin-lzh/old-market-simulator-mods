@@ -1,5 +1,6 @@
 param([string]$GameDir = 'F:\SteamLibrary\steamapps\common\Old Market Simulator')
 $ErrorActionPreference = 'Stop'
+$modVersion = ([xml](Get-Content -LiteralPath (Join-Path $PSScriptRoot 'PriceProbability.csproj') -Raw)).Project.PropertyGroup.Version
 dotnet run --project (Join-Path $PSScriptRoot 'localization/tests/Localization.Tests.csproj') -c Release
 if ($LASTEXITCODE) { throw 'Localization checks failed.' }
 $taskRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
@@ -11,7 +12,7 @@ dotnet run --project (Join-Path $PSScriptRoot 'tests/ContractChecks.csproj') -c 
 if ($LASTEXITCODE) { throw 'Game patch contract checks failed.' }
 $taskOutput = Join-Path $taskRoot 'outputs'
 New-Item -ItemType Directory -Force $taskOutput | Out-Null
-$taskZip = Join-Path $taskOutput 'OldMarket.PriceProbability-0.1.1.zip'
+$taskZip = Join-Path $taskOutput "OldMarket.PriceProbability-$modVersion.zip"
 $taskDll = Join-Path $PSScriptRoot 'bin/Release/netstandard2.1/OldMarket.PriceProbability.dll'
 Add-Type -AssemblyName System.IO.Compression
 $taskStream = [IO.File]::Open($taskZip, [IO.FileMode]::Create)

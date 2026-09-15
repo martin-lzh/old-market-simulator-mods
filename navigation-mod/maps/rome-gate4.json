@@ -1,0 +1,28 @@
+{
+  "Id": "rome-gate4",
+  "Name": "Gate 4",
+  "MapId": 2,
+  "SceneName": "BazaarRome",
+  "Region": "RomeGate4",
+  "Texture": "rome-gate4-artwork.png",
+  "North": "+Z",
+  "MinX": 1619,
+  "MaxX": 1924,
+  "MinZ": -1316,
+  "MaxZ": -1011,
+  "RequiredExpansions": [],
+  "ExcludedExpansions": [],
+  "Pois": [
+    {
+      "Id": "rome-gate4-return",
+      "Name": "Return to Rome",
+      "NameKey": "poi_return",
+      "Category": "other",
+      "Icon": "return",
+      "X": 1890.268954,
+      "Z": -1158.603195
+    }
+  ],
+  "Areas": [],
+  "NameTextKey": "MapGate4"
+}

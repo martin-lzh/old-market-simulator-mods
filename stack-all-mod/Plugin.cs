@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace OldMarket.StackAll
 {
-    [BepInPlugin(Id, "Old Market Stack All", "0.2.1")]
+    [BepInPlugin(Id, "Old Market Stack All", "0.2.2")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {
@@ -62,7 +62,7 @@ namespace OldMarket.StackAll
                 foreach (var type in new[] { typeof(Aquarium), typeof(OrigamiStand), typeof(BlockBeeHive) })
                     Patch(type, "Interact", transpiler: nameof(ConsumeCalls));
                 Patch(typeof(ItemCrate), "EnableDummyItems", prefix: nameof(CapPreview));
-                Logger.LogInfo("Stack All 0.2.1 ready: goods on left, physical containers on right; 64 containers per product slot. All peers need 0.2.1.");
+                Logger.LogInfo("Stack All 0.2.2 ready: goods on left, physical containers on right; 64 containers per product slot. All peers need 0.2.2.");
             }
             catch (Exception error)
             {
@@ -137,12 +137,13 @@ namespace OldMarket.StackAll
             PrepareStorage(__instance);
             var slots = Snapshot(__instance);
             int remaining;
-            if (GameManager.Instance.GetItemById(itemId) is ProductSO product)
-                remaining = ContainerPlan.Add(slots, __instance.maxSlots, ___activeSlots, ___currentSlot.Value,
-                    incoming, product.amount, product.maxDays) ? 0 : 1;
+            var definition = GameManager.Instance.GetItemById(itemId);
+            if (PacketRules.IsPacket(definition))
+                remaining = PacketRules.Add(slots, __instance.maxSlots, ___activeSlots, ___currentSlot.Value,
+                    incoming, definition) ? 0 : 1;
             else remaining = StackPlan.Add(slots, ___activeSlots, ___currentSlot.Value, incoming, CanMerge);
             Apply(__instance, slots);
-            if (GameManager.Instance.GetItemById(itemId) is ProductSO)
+            if (PacketRules.IsPacket(definition))
             {
                 if (remaining > 0) SpillContainer(__instance, incoming);
             }
@@ -176,10 +177,7 @@ namespace OldMarket.StackAll
 
         private static bool CanMerge(InventorySlot target, InventorySlot source)
         {
-            var product = GameManager.Instance.GetItemById(source.itemId) as ProductSO;
-            // Non-product dayCounter can encode an animal age or trap use count, not freshness.
-            return StackRules.Compatible(target.amount, target.dayCounter, source.amount, source.dayCounter,
-                product != null, product != null ? product.maxDays : -1);
+            return StackCompatibility.CanMerge(GameManager.Instance.GetItemById(source.itemId), target, source);
         }
 
         private static void Spill(PlayerInventory inventory, InventorySlot item, int amount)
@@ -222,9 +220,10 @@ namespace OldMarket.StackAll
             {
                 if (!Eligible(original[i])) continue;
                 var rest = original[i];
-                if (GameManager.Instance.GetItemById(rest.itemId) is ProductSO product)
+                var definition = GameManager.Instance.GetItemById(rest.itemId);
+                if (PacketRules.IsPacket(definition))
                 {
-                    if (!ContainerPlan.Add(next, __instance.maxSlots, active, ContainerPlan.Group(__instance.maxSlots, i), rest, product.amount, product.maxDays)) overflow.Add(rest);
+                    if (!PacketRules.Add(next, __instance.maxSlots, active, ContainerPlan.Group(__instance.maxSlots, i), rest, definition)) overflow.Add(rest);
                 }
                 else
                 {
@@ -234,7 +233,7 @@ namespace OldMarket.StackAll
             }
             Apply(__instance, next, true);
             foreach (var rest in overflow)
-                if (GameManager.Instance.GetItemById(rest.itemId) is ProductSO) SpillContainer(__instance, rest);
+                if (PacketRules.IsPacket(GameManager.Instance.GetItemById(rest.itemId))) SpillContainer(__instance, rest);
                 else Spill(__instance, rest, rest.amount);
         }
 
@@ -383,9 +382,8 @@ namespace OldMarket.StackAll
             return result;
         }
 
-        // Product amount means contents of one container: native drop/place/cargo should move
-        // that container intact. Only inventory insertion uses the expanded content capacity.
-        public static int StackLimit(ItemSO item) => item is ToolSO || item is ProductSO ? item.stackSize : StackRules.Limit;
+        // Product and seed amounts are contents: native drop/place must move the packet intact.
+        public static int StackLimit(ItemSO item) => PacketRules.StackLimit(item);
 
         private static IEnumerable<CodeInstruction> StackReads(IEnumerable<CodeInstruction> instructions)
         {

@@ -3,7 +3,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <LangVersion>latest</LangVersion>
     <AssemblyName>OldMarket.MaterialCost</AssemblyName>
-    <Version>0.5.1</Version>
+    <Version>0.5.2</Version>
     <Loader Condition="'$(Loader)' == ''">BepInEx</Loader>
     <DefineConstants Condition="'$(Loader)' == 'MelonLoader'">$(DefineConstants);MELONLOADER</DefineConstants>
     <DefineConstants Condition="'$(Loader)' == 'Standalone'">$(DefineConstants);STANDALONE</DefineConstants>

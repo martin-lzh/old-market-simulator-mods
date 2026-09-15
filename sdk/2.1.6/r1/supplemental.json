@@ -1,0 +1,7 @@
+{
+  "UIManager": ["OpenEndOfDayPanel", "UpdateRecipeIngredients", "OpenRecipesPanel"],
+  "DockOrderTile": ["SetData"],
+  "GameManager": ["LoadWorldServer"],
+  "PricePanel": ["SetData", "SubmitPrice"],
+  "SaveManager": ["DeleteSlot", "DeleteSave"]
+}

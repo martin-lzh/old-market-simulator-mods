@@ -1,0 +1,272 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace OldMarket.Navigation
+{
+    /// <summary>One static texture and lightweight uGUI transforms; never renders the scene again.</summary>
+    public sealed class NavigationHud : IDisposable
+    {
+        private readonly NavigationState state;
+        private readonly RectTransform root, mini, disk, content, compass, worldTargetRoot;
+        private readonly RawImage map, mapOverlay;
+        private readonly MapAreaLayer areaLayer;
+        private readonly TextMeshProUGUI north, mode, location, center, noMap, worldTargetText;
+        private readonly Image playerArrow, worldTargetIcon, compassTarget;
+        private readonly PoiIconSet playerIcons=new PoiIconSet();
+        private RectTransform ringArt;
+        private readonly List<TextMeshProUGUI> cardinals = new List<TextMeshProUGUI>();
+        private readonly List<Image> ticks = new List<Image>();
+        private readonly List<Image> marks = new List<Image>();
+        private readonly MarkerSprites markerSprites=new MarkerSprites();
+        private readonly List<TextMeshProUGUI> labels = new List<TextMeshProUGUI>();
+        private readonly List<UnityEngine.Object> owned = new List<UnityEngine.Object>();
+        private NavigationLayout layout = new NavigationLayout();
+        private readonly Vector3[] boundsCorners = new Vector3[4];
+        private readonly MinimapZoomHint zoomHint;
+        private readonly MiniMapPoiLayer poiLayer;
+        private float configuredRange=float.NaN;
+        public bool MinimapVisible = true, CompassVisible = true, GuidanceVisible = true, CoordinatesVisible;
+        public float MinimapRange = 75;
+        private static readonly Color Gold = new Color(.92f, .79f, .53f, 1);
+        private static readonly string[] Directions={"North","NE","East","SE","South","SW","West","NW"};
+
+        public NavigationHud(NavigationState state, RectTransform parent, string directory)
+        {
+            this.state = state;
+            root = Rect("NavigationHud", parent, Vector2.one, Vector2.zero);
+            root.anchorMin = Vector2.zero; root.anchorMax = Vector2.one; root.offsetMin = root.offsetMax = Vector2.zero;
+            mini = Rect("Minimap", root, Vector2.one, new Vector2(240,240));
+            mini.pivot = new Vector2(1,1);
+            var ring = mini.gameObject.AddComponent<Image>(); ring.color = Gold; ring.raycastTarget = false;
+            var circle = CircleSprite(); ring.sprite = circle;
+            disk = Rect("MapMask", mini, new Vector2(.5f,.5f), new Vector2(228,228));
+            var maskImage = disk.gameObject.AddComponent<Image>(); maskImage.sprite = circle; maskImage.color = new Color(.14f,.18f,.16f); maskImage.raycastTarget = false;
+            disk.gameObject.AddComponent<Mask>().showMaskGraphic = true;
+            content = Rect("MapContent", disk, new Vector2(.5f,.5f), Vector2.zero);
+            var mapRect = Rect("Terrain", content, new Vector2(.5f,.5f), Vector2.one);
+            map = mapRect.gameObject.AddComponent<RawImage>(); map.raycastTarget = false;
+            var overlayRect=Rect("Obstacles",mapRect,new Vector2(.5f,.5f),Vector2.zero);
+            overlayRect.anchorMin=Vector2.zero;overlayRect.anchorMax=Vector2.one;overlayRect.offsetMin=overlayRect.offsetMax=Vector2.zero;
+            mapOverlay=overlayRect.gameObject.AddComponent<RawImage>();mapOverlay.raycastTarget=false;mapOverlay.gameObject.SetActive(false);
+            areaLayer=new MapAreaLayer(mapRect);
+            noMap = Text("NoTerrain", disk, 14); noMap.rectTransform.sizeDelta=new Vector2(175,54); noMap.rectTransform.anchoredPosition=new Vector2(0,-52); noMap.textWrappingMode=TextWrappingModes.Normal;
+            poiLayer=new MiniMapPoiLayer(state,disk);
+            var playerRect=Rect("Player",disk,new Vector2(.5f,.5f),new Vector2(25,25));
+            playerArrow=playerRect.gameObject.AddComponent<Image>();playerArrow.sprite=playerIcons.Get("player");playerArrow.color=Color.white;playerArrow.raycastTarget=false;
+            north = Text("North", mini, 19);
+            mode = Text("Mode", mini, 17); mode.rectTransform.anchoredPosition = new Vector2(0,-138); mode.rectTransform.sizeDelta = new Vector2(330,28);
+            var decoration = LoadSprite(Path.Combine(directory ?? "", "assets", "minimap-ring.png"));
+            if (decoration != null)
+            {
+                var art = Rect("MinimapFrame", mini, new Vector2(.5f,.5f), new Vector2(252,252));
+                ringArt = art;
+                var image = art.gameObject.AddComponent<Image>(); image.sprite=decoration; image.raycastTarget=false;
+            }
+            compass = Rect("Compass", root, new Vector2(.5f,1), new Vector2(520,70)); compass.pivot=new Vector2(.5f,1);
+            var shade = compass.gameObject.AddComponent<Image>(); shade.color = new Color(.07f,.1f,.12f,.62f); shade.raycastTarget=false;
+            for(int i=0;i<72;i++)
+            {
+                float height=i%9==0?12:i%3==0?8:4;
+                var tick=Rect("Tick"+i,compass,new Vector2(.5f,.5f),new Vector2(i%9==0?2:1,height));
+                tick.pivot=new Vector2(.5f,0);
+                var ink=tick.gameObject.AddComponent<Image>();ink.color=Gold;ink.raycastTarget=false;ticks.Add(ink);
+            }
+            for (int i=0; i<8; i++) cardinals.Add(Text("Bearing"+i,compass,21));
+            var pointer=Rect("HeadingPointer",compass,new Vector2(.5f,.5f),new Vector2(12,8));
+            pointer.anchoredPosition=new Vector2(0,-9);
+            var pointerImage=pointer.gameObject.AddComponent<Image>();pointerImage.sprite=TriangleSprite();pointerImage.color=Gold;pointerImage.raycastTarget=false;
+            center = Text("Heading",compass,16); center.rectTransform.anchoredPosition = new Vector2(0,-24);
+            var compassIconRect=Rect("TargetBearing",compass,new Vector2(.5f,.5f),new Vector2(25,25));
+            compassTarget=compassIconRect.gameObject.AddComponent<Image>();compassTarget.color=Color.white;compassTarget.raycastTarget=false;
+            location = Text("Coordinates",compass,18); location.rectTransform.anchoredPosition=new Vector2(0,-62); location.rectTransform.sizeDelta=new Vector2(550,28);
+            worldTargetRoot=Rect("WorldTarget",root,new Vector2(.5f,.5f),new Vector2(300,80));
+            var worldIconRect=Rect("WorldTargetIcon",worldTargetRoot,new Vector2(.5f,.5f),new Vector2(28,28));
+            worldTargetIcon=worldIconRect.gameObject.AddComponent<Image>();worldTargetIcon.color=Color.white;worldTargetIcon.raycastTarget=false;
+            worldTargetText=Text("WorldTargetLabel",worldTargetRoot,24);
+            worldTargetText.rectTransform.sizeDelta=new Vector2(300,40);worldTargetText.rectTransform.anchoredPosition=new Vector2(0,-32);
+            worldTargetText.enableAutoSizing=true;worldTargetText.fontSizeMin=14;
+            worldTargetRoot.gameObject.SetActive(false);
+            zoomHint=new MinimapZoomHint(mini);
+            ApplyLayout(layout);
+        }
+
+        public void ApplyLayout(NavigationLayout value)
+        {
+            layout=value ?? new NavigationLayout();
+            if(configuredRange!=layout.MinimapRange) {configuredRange=layout.MinimapRange;MinimapRange=configuredRange;}
+            mini.sizeDelta=Vector2.one*layout.MinimapSize;
+            mini.anchorMin=mini.anchorMax=mini.pivot=layout.MinimapBottomLeft?Vector2.zero:Vector2.one;
+            mini.anchoredPosition=layout.MinimapBottomLeft?new Vector2(layout.MinimapLeft,layout.MinimapBottom):new Vector2(-layout.MinimapRight,-layout.MinimapTop);
+            disk.sizeDelta=Vector2.one*(layout.MinimapSize-12);
+            if(ringArt!=null)ringArt.sizeDelta=Vector2.one*(layout.MinimapSize+12);
+            compass.sizeDelta=new Vector2(layout.CompassWidth,70);
+            compass.anchoredPosition=new Vector2(0,-layout.CompassTop);
+            mode.rectTransform.anchoredPosition=new Vector2(0,-layout.MinimapSize/2-18);
+            mode.rectTransform.sizeDelta=new Vector2(layout.MinimapSize+12,28);
+            mode.enableAutoSizing=true;mode.fontSizeMin=10;mode.fontSizeMax=17;
+            noMap.rectTransform.sizeDelta=new Vector2(layout.MinimapSize*.72f,layout.MinimapSize*.25f);
+            noMap.rectTransform.anchoredPosition=new Vector2(0,-layout.MinimapSize*.22f);
+            noMap.fontSize=Mathf.Clamp(layout.MinimapSize/17,10,16);
+            worldTargetText.fontSize=layout.WorldMarkerSize;worldTargetText.fontSizeMax=layout.WorldMarkerSize;
+            worldTargetIcon.rectTransform.sizeDelta=Vector2.one*layout.WorldMarkerSize;
+            var group=root.GetComponent<CanvasGroup>() ?? root.gameObject.AddComponent<CanvasGroup>();
+            group.alpha=layout.Opacity; group.blocksRaycasts=false;
+        }
+
+        public void Refresh()
+        {
+            root.gameObject.SetActive(state.Available);
+            if (!state.Available) return;
+            foreach(var label in labels) if(label.font!=state.Font) label.font=state.Font;
+            mini.gameObject.SetActive(MinimapVisible);
+            if(MinimapVisible)zoomHint.Refresh(state,layout.MinimapSize);
+            compass.gameObject.SetActive(CompassVisible);
+            location.gameObject.SetActive(CoordinatesVisible);
+            location.text=string.Format(CultureInfo.CurrentCulture,"X {0:F1}   Y {1:F1}   Z {2:F1}",state.PlayerPosition.x,state.PlayerPosition.y,state.PlayerPosition.z);
+            for(int i=0;i<ticks.Count;i++)
+            {
+                float delta=Mathf.DeltaAngle(state.CameraYaw,i*5);
+                float x=delta/170*layout.CompassWidth;
+                float edge=layout.CompassWidth/2-Mathf.Abs(x);
+                ticks[i].gameObject.SetActive(edge>=2);
+                ticks[i].rectTransform.anchoredPosition=new Vector2(x,-5);
+                ticks[i].color=new Color(Gold.r,Gold.g,Gold.b,Mathf.Clamp01((edge-2)/20));
+            }
+            for(int i=0;i<8;i++)
+            {
+                float delta=Mathf.DeltaAngle(state.CameraYaw,i*45);
+                float x=delta/170*layout.CompassWidth;
+                // Keep the whole label inside the strip instead of allowing edge glyphs to spill out.
+                float labelWidth=Mathf.Min(100,layout.CompassWidth/3);
+                cardinals[i].gameObject.SetActive(Mathf.Abs(x)<=layout.CompassWidth/2-labelWidth/2-8);
+                cardinals[i].text=Texts.Get(state.Locale,Directions[i]);
+                cardinals[i].rectTransform.sizeDelta=new Vector2(labelWidth,28);
+                cardinals[i].enableAutoSizing=true;cardinals[i].fontSizeMin=12;cardinals[i].fontSizeMax=21;
+                cardinals[i].rectTransform.anchoredPosition=new Vector2(x,21);
+            }
+            center.text=(Mathf.RoundToInt(Mathf.Repeat(state.CameraYaw,360))%360)+"°";
+            float rotation=state.RotateWithCamera?state.CameraYaw:0;
+            content.localRotation=Quaternion.Euler(0,0,rotation);
+            playerArrow.rectTransform.localRotation=Quaternion.Euler(0,0,state.RotateWithCamera?0:-state.CameraYaw);
+            float r=layout.MinimapSize*.43f;
+            north.rectTransform.anchoredPosition=new Vector2(-Mathf.Sin(rotation*Mathf.Deg2Rad)*r,Mathf.Cos(rotation*Mathf.Deg2Rad)*r);
+            north.text=Texts.Get(state.Locale,"North");
+            mode.text=Texts.Get(state.Locale,state.RotateWithCamera?"CameraUp":"NorthUp");
+            float scale=(layout.MinimapSize-12)/(2*MinimapRange);
+            map.gameObject.SetActive(state.Map!=null && state.Map.Valid);
+            noMap.gameObject.SetActive(!map.gameObject.activeSelf);
+            areaLayer.Refresh(state.Map);
+            mapOverlay.texture=state.Map?.OverlayTexture;mapOverlay.uvRect=map.uvRect;
+            mapOverlay.gameObject.SetActive(map.gameObject.activeSelf && mapOverlay.texture!=null);
+            noMap.text=Texts.Get(state.Locale,"NoMap");
+            if(state.Map!=null && state.Map.Valid)
+            {
+                map.texture=state.Map.Texture;
+                map.rectTransform.sizeDelta=new Vector2((state.Map.MaxX-state.Map.MinX)*scale,(state.Map.MaxZ-state.Map.MinZ)*scale);
+                map.rectTransform.anchoredPosition=new Vector2(((state.Map.MinX+state.Map.MaxX)/2-state.PlayerPosition.x)*scale,((state.Map.MinZ+state.Map.MaxZ)/2-state.PlayerPosition.z)*scale);
+            }
+            if(MinimapVisible)poiLayer.Refresh(layout.MinimapSize,MinimapRange,rotation);
+            NavMarker target=state.Target;
+            for(int i=0;i<state.Markers.Count;i++)
+            {
+                var marker=state.Markers[i];
+                if(i>=marks.Count){var markerRect=Rect("Marker"+i,content,new Vector2(.5f,.5f),new Vector2(25,25));var image=markerRect.gameObject.AddComponent<Image>();image.raycastTarget=false;marks.Add(image);}
+                var mark=marks[i];mark.gameObject.SetActive(true);mark.sprite=markerSprites.Get(marker.Icon,marker.Color);mark.color=Color.white;
+                mark.rectTransform.anchoredPosition=new Vector2((marker.X-state.PlayerPosition.x)*scale,(marker.Z-state.PlayerPosition.z)*scale);
+                mark.rectTransform.localRotation=Quaternion.Euler(0,0,-rotation);
+            }
+            for(int i=state.Markers.Count;i<marks.Count;i++)marks[i].gameObject.SetActive(false);
+            bool targetVisible=GuidanceVisible && target!=null;
+            compassTarget.gameObject.SetActive(targetVisible);
+            worldTargetRoot.gameObject.SetActive(false);
+            if(!targetVisible)return;
+            var targetPoi=state.Markers.Contains(target)?null:state.Map?.Pois.Find(p=>"poi:"+p.Id==state.TargetId);
+            var targetSprite=targetPoi!=null?playerIcons.Get(targetPoi):markerSprites.Get(target.Icon,target.Color);
+            compassTarget.sprite=targetSprite;
+            float dx=target.X-state.PlayerPosition.x,dz=target.Z-state.PlayerPosition.z;
+            float bearing=Mathf.Atan2(dx,dz)*Mathf.Rad2Deg;
+            float difference=Mathf.DeltaAngle(state.CameraYaw,bearing);
+            compassTarget.rectTransform.anchoredPosition=new Vector2(Mathf.Clamp(difference/170*layout.CompassWidth,-layout.CompassWidth/2+14,layout.CompassWidth/2-14),-7);
+            if(state.WorldTargetVisible && RectTransformUtility.ScreenPointToLocalPointInRectangle(root,state.WorldTargetScreen,null,out var local)
+                && Mathf.Abs(local.x)<root.rect.width/2-160 && Mathf.Abs(local.y)<root.rect.height/2-60)
+            {
+                worldTargetRoot.anchoredPosition=local;
+                worldTargetIcon.sprite=targetSprite;
+                worldTargetText.text=target.Name+"  "+Mathf.Sqrt(dx*dx+dz*dz).ToString("F0",CultureInfo.CurrentCulture)+" m";
+                worldTargetRoot.gameObject.SetActive(true);
+            }
+        }
+
+        public void GetReservedBounds(out Rect? minimapBounds,out Rect? topBounds)
+        {
+            minimapBounds=null;topBounds=null;
+            if(root==null || root.rect.width<=0 || root.rect.height<=0)return;
+            AddBounds(ref minimapBounds,mini);
+            AddBounds(ref minimapBounds,ringArt);
+            AddBounds(ref minimapBounds,mode.rectTransform);
+            AddBounds(ref minimapBounds,zoomHint.Rect);
+            AddBounds(ref topBounds,compass);
+            AddBounds(ref topBounds,location.rectTransform);
+        }
+
+        private void AddBounds(ref Rect? bounds,RectTransform rect)
+        {
+            if(rect==null || !rect.gameObject.activeInHierarchy)return;
+            rect.GetWorldCorners(boundsCorners);
+            for(int i=0;i<4;i++)
+            {
+                var point=RectTransformUtility.WorldToScreenPoint(null,boundsCorners[i]);
+                bounds=bounds.HasValue?UnityEngine.Rect.MinMaxRect(Mathf.Min(bounds.Value.xMin,point.x),Mathf.Min(bounds.Value.yMin,point.y),Mathf.Max(bounds.Value.xMax,point.x),Mathf.Max(bounds.Value.yMax,point.y)):new Rect(point.x,point.y,0,0);
+            }
+        }
+
+        private TextMeshProUGUI Text(string name,RectTransform parent,float size)
+        {
+            var rect=Rect(name,parent,new Vector2(.5f,.5f),new Vector2(100,36));
+            var label=rect.gameObject.AddComponent<TextMeshProUGUI>(); label.font=state.Font; label.fontSize=size;
+            label.richText=false;
+            label.color=Gold; label.alignment=TextAlignmentOptions.Center; label.raycastTarget=false;
+            label.textWrappingMode=TextWrappingModes.NoWrap; label.overflowMode=TextOverflowModes.Overflow;
+            labels.Add(label); return label;
+        }
+        private static RectTransform Rect(string name,Transform parent,Vector2 anchor,Vector2 size)
+        {
+            var rect=(RectTransform)new GameObject(name,typeof(RectTransform)).transform; rect.SetParent(parent,false);
+            rect.anchorMin=rect.anchorMax=anchor; rect.sizeDelta=size;return rect;
+        }
+        private Sprite CircleSprite()
+        {
+            const int size=128;var texture=new Texture2D(size,size,TextureFormat.RGBA32,false);var pixels=new Color32[size*size];
+            for(int y=0;y<size;y++)for(int x=0;x<size;x++) { float d=Vector2.Distance(new Vector2(x+.5f,y+.5f),new Vector2(size/2f,size/2f)); pixels[y*size+x]=new Color(1,1,1,Mathf.Clamp01(size/2f-d)); }
+            texture.SetPixels32(pixels);texture.Apply(false,true);owned.Add(texture);
+            var sprite=Sprite.Create(texture,new Rect(0,0,size,size),new Vector2(.5f,.5f));owned.Add(sprite);return sprite;
+        }
+        private Sprite TriangleSprite()
+        {
+            const int size=32;var texture=new Texture2D(size,size,TextureFormat.RGBA32,false);var pixels=new Color32[size*size];
+            // Downward pointer is geometry, so native fonts need no triangle glyph.
+            for(int y=0;y<size;y++)for(int x=0;x<size;x++)
+            {
+                float halfWidth=(y+.5f)/2;
+                float alpha=Mathf.Clamp01(halfWidth-Mathf.Abs(x+.5f-size/2f));
+                pixels[y*size+x]=new Color(1,1,1,alpha);
+            }
+            texture.SetPixels32(pixels);texture.Apply(false,true);owned.Add(texture);
+            var sprite=Sprite.Create(texture,new Rect(0,0,size,size),new Vector2(.5f,.5f));owned.Add(sprite);return sprite;
+        }
+        private Sprite LoadSprite(string path)
+        {
+            try {var bytes=UiAssets.Read(path); if(bytes==null)return null; var texture=new Texture2D(2,2); if(!ImageConversion.LoadImage(texture,bytes)) {UnityEngine.Object.Destroy(texture);return null;} owned.Add(texture);var sprite=Sprite.Create(texture,new Rect(0,0,texture.width,texture.height),new Vector2(.5f,.5f));owned.Add(sprite);return sprite;}
+            catch(IOException){return null;}
+        }
+        public void ChangeZoom(bool zoomIn) {MinimapRange=MinimapZoom.Step(MinimapRange,zoomIn);}
+        public string PoiDiagnostics => "mini nodes="+poiLayer.NodeCount+"; in view="+poiLayer.InViewCount;
+        public void Dispose() {
+            areaLayer.Dispose(); zoomHint.Dispose();markerSprites.Dispose();playerIcons.Dispose();poiLayer.Dispose();if(root!=null)UnityEngine.Object.Destroy(root.gameObject);foreach(var item in owned)UnityEngine.Object.Destroy(item); }
+    }
+}

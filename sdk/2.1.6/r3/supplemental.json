@@ -1,0 +1,33 @@
+{
+  "UIManager": [
+    "OpenEndOfDayPanel",
+    "UpdateRecipeIngredients",
+    "OpenRecipesPanel"
+  ],
+  "DockOrderTile": [
+    "SetData"
+  ],
+  "GameManager": [
+    "LoadWorldServer",
+    "field:activeExpansions"
+  ],
+  "PricePanel": [
+    "SetData",
+    "SubmitPrice"
+  ],
+  "SaveManager": [
+    "DeleteSlot",
+    "DeleteSave",
+    "field:currentSlot"
+  ],
+  "RegionManager": [
+    "GetLocalCurrentRegionSceneName"
+  ],
+  "UnityEngine.CoreModule::UnityEngine.Mathf": [
+    "constant:Deg2Rad",
+    "constant:Rad2Deg"
+  ],
+  "UnityEngine.PhysicsModule::UnityEngine.Physics": [
+    "constant:DefaultRaycastLayers"
+  ]
+}
