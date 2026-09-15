@@ -83,7 +83,8 @@ internal static class ContainerViewChecks
     }
 }
 
-public class ItemSO { public int amount; public int stackSize = 1; }
+public class ItemSO { public long id; public int amount; public int stackSize = 1; }
+public class AnimalSO : ItemSO { }
 public class SeedSO : ItemSO { }
 public class ToolSO : ItemSO { }
 public class ProductSO : ItemSO { public bool destroyWhenEmpty; public int maxDays = -1; }

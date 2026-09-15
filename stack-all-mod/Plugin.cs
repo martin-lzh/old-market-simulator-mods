@@ -177,10 +177,7 @@ namespace OldMarket.StackAll
 
         private static bool CanMerge(InventorySlot target, InventorySlot source)
         {
-            var product = GameManager.Instance.GetItemById(source.itemId) as ProductSO;
-            // Non-product dayCounter can encode an animal age or trap use count, not freshness.
-            return StackRules.Compatible(target.amount, target.dayCounter, source.amount, source.dayCounter,
-                product != null, product != null ? product.maxDays : -1);
+            return StackCompatibility.CanMerge(GameManager.Instance.GetItemById(source.itemId), target, source);
         }
 
         private static void Spill(PlayerInventory inventory, InventorySlot item, int amount)

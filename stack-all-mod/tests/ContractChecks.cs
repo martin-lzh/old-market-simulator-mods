@@ -36,6 +36,16 @@ Check(Method("PlayerInventory", "RefillCurrentItemServer").Parameters.Select(p =
 Check(Method("PlayerInventory", "ReduceCurrentItemAmount").Body.Instructions.Any(i => i.Operand is TypeReference t && t.Name == "ToolSO"), "tool consumption remains in native branch");
 var mod = plugin.MainModule.Types.Single(t => t.Name == "Plugin");
 var receive = mod.Methods.Single(m => m.Name == "Receive");
+var worldDays = Method("Item", "OnDayChanged").Body.Instructions;
+Check(worldDays.Any(i => i.Operand is FieldReference f && f.Name == "dayCounter") &&
+    worldDays.Any(i => i.OpCode == OpCodes.Add), "world items increment elapsed day counter");
+Check(worldDays.Any(i => i.Operand is TypeReference t && t.Name == "AnimalSO") &&
+    worldDays.Any(i => i.OpCode == OpCodes.Ldc_I8 && (long)i.Operand == 1725814069046L), "native world ageing excludes animal and fish trap states");
+var placement = Method("PlayerInventory", "PlaceBlockServerRpc").Body.Instructions;
+Check(placement.Any(i => i.Operand is FieldReference f && f.DeclaringType.Name == "BlockAnimal" && f.Name == "dayCounter") &&
+    placement.Any(i => i.Operand is FieldReference f && f.DeclaringType.Name == "BlockFishTrap" && f.Name == "harvestCount"), "placed animals and traps consume preserved state counters");
+Check(mod.Methods.Single(m => m.Name == "CanMerge").Body.Instructions.Any(i =>
+    i.Operand is MethodReference m && m.DeclaringType.Name == "StackCompatibility"), "runtime uses collectible-aware merge policy");
 Check(receive.Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "Executing"), "receive execution-stage gate");
 Check(receive.Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "Eligible"), "tool exclusion in receiver");
 Check(mod.Methods.Single(m => m.Name == "Eligible").Body.Instructions.Any(i => i.Operand is TypeReference t && t.Name == "ToolSO"), "eligibility excludes tools");

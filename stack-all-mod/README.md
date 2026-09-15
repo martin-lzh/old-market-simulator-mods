@@ -26,6 +26,8 @@ Each container keeps its contents, cost and freshness. Compatible goods use the 
 
 Seed packets also stack up to 64 per slot. The left number counts seeds and the right counts packets. Drop, throw and placement move one complete packet, including a partially used one; planting still uses one seed. Packets retain their individual contents and cost without transferring seeds between packets. Seed quantities already merged by an older build remain one packet with their saved quantity; their original packet count cannot be recovered.
 
+Ordinary collectibles such as mint leaves and flowers can rejoin their matching stack after being dropped, even when their time on the ground differs. Animals and fish traps still require matching age/use state; food retains its freshness rules.
+
 ## Controls
 
 - Tap Q to drop one item or one complete container; tap F to throw one. Mouse placement also handles one at a time.
@@ -58,6 +60,8 @@ For a compatible update, close the game and back up your save and old DLL before
 [What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [License](LICENSE)
 
 ## 中文
+
+薄荷叶、花等普通收集品丢出后，即使地面天数计数不同，捡回仍可并入同类堆叠。动物与鱼笼仍要求年龄/使用状态一致，食品继续遵循保鲜规则。
 
 让一个格子装下更多篮子和箱子，又能清楚看见实际数量。每个商品格最多容纳 64 个容器，工具仍然单独放置。
 

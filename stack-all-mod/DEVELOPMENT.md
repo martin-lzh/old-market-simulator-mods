@@ -41,3 +41,13 @@ In-game UI, normal save/load, and real multiplayer have not been verified for th
 This Mod pins its compilation SDK in [release.json](release.json). Current baseline: game 2.1.6 / SDK r1. Run `python tools/ci.py build` from the repository root for a game-free build. See [SDK maintenance](../sdk/README.md) and [CI releases](../releases/README.md). Compilation does not replace in-game compatibility checks.
 
 本 Mod 在 [release.json](release.json) 固定编译 SDK，当前基线为游戏 2.1.6 / SDK r1。从仓库根目录运行 `python tools/ci.py build` 可无游戏文件构建。见 [SDK 维护](../sdk/README.md)和 [CI 发布](../releases/README.md)；编译不能代替实机兼容验证。
+
+## Collectible pickup compatibility / 收集品重新拾取兼容性
+
+Game 2.1.6 gives harvested resources a zero day counter, while Item.OnDayChanged increments that counter for ordinary world items as well as products. Requiring equality for every non-product therefore splits otherwise identical collectibles after time on the ground. StackCompatibility ignores that incidental counter for ordinary items, preserves strict equality for AnimalSO and the native fish-trap item, and retains product freshness checks. Drop/pickup RPCs and save fields are unchanged. Existing split stacks consolidate on a normal inventory reload or by dropping and repicking them, subject to capacity. No game, Unity or network API was added beyond types/members already declared in SDK r1; new read-only IL checks verify the native counter behavior. The regression first failed under the old policy and now covers repickup, repeated cycles, full hotbar capacity, overflow, weighted cost and meaningful state exclusions. In-game acceptance remains pending.
+
+游戏 2.1.6 采集资源时传入天数 0，但 Item.OnDayChanged 会给普通地面物品和商品增加天数。原先对所有非商品都要求天数相等，导致同类收集品因在地面经过的时间不同而分堆。StackCompatibility 对普通物品忽略这一无实际状态含义的计数；AnimalSO 与原生鱼笼仍严格比较状态，商品保鲜规则不变。丢出/拾取 RPC 和存档字段不变，已有分堆可在正常重载背包或重新丢出拾取时按容量合并。使用的类型与成员均已被 SDK r1 覆盖；新增只读 IL 检查核对原生计数行为。回归测试在旧逻辑下先复现失败，再验证重复丢捡、满背包、溢出、成本和状态排除；仍待实机验收。
+
+Validation for this collectible fix: 89,299 stack/container/input/display checks, 65 CI tooling tests, all SDK builds and 57 read-only game IL/patch contracts passed. The 13 r1 dependency hashes and Stack All SDK/real-reference symbolic IL and resources matched on game 2.1.6. No Unity runtime or multiplayer test was performed.
+
+本次收集品修复通过 89,299 项堆叠/容器/输入/显示检查、65 项 CI 工具测试、全部 SDK 构建与 57 项只读游戏 IL/补丁契约检查；游戏 2.1.6 的 r1 依赖哈希及 Stack All SDK/真实引用符号 IL 和资源比对通过。未执行 Unity 实机与联机测试。

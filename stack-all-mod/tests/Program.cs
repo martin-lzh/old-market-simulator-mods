@@ -33,6 +33,34 @@ Check(StackRules.Fresh(50, 999, -1), "nonperishable items merge");
 Check(!StackRules.Compatible(1, 1, 1, 3, false, -1), "non-product state values are not averaged");
 Check(StackRules.Compatible(1, 3, 1, 3, false, -1), "same non-product state can stack");
 var random = new Random(64);
+// A native Resource gives age 0; Item.OnDayChanged also ages ordinary dropped collectibles.
+var collectible = new ItemSO { id = 20, amount = 1, stackSize = 6 };
+slots = new[] { Slot(20, 5, 10, 0), Empty() };
+Check(StackPlan.Add(slots, 2, 1, Slot(20, 1, 22, 1),
+    (a, b) => StackCompatibility.CanMerge(collectible, a, b)) == 0, "repicked collectible accepted");
+Check(slots[0].amount == 6 && slots[1].itemId == -1, "repicked collectible rejoins its original stack despite world age");
+Check(slots[0].cost == 12, "repicked collectible retains weighted cost");
+for (int day = 1; day <= 12; day++)
+{
+    var dropped = slots[0]; dropped.amount = 1; slots[0].amount--;
+    dropped.dayCounter += day;
+    Check(StackPlan.Add(slots, 1, 0, dropped,
+        (a, b) => StackCompatibility.CanMerge(collectible, a, b)) == 0 && slots[0].amount == 6,
+        "repeated drop and later pickup conserves collectible quantity in a full hotbar");
+}
+slots = new[] { Slot(20, 63), Empty() };
+Check(StackPlan.Add(slots, 1, 0, Slot(20, 3, 30, 9),
+    (a, b) => StackCompatibility.CanMerge(collectible, a, b)) == 2 && slots[0].amount == 64,
+    "repickup retains 64 limit and returns overflow");
+foreach (var stateful in new ItemSO[] { new AnimalSO(), new ItemSO { id = StackCompatibility.FishTrapId } })
+{
+    Check(!StackCompatibility.CanMerge(stateful, Slot(1, 1, age: 1), Slot(1, 1, age: 3)), "meaningful age/use states cannot merge");
+    Check(StackCompatibility.CanMerge(stateful, Slot(1, 1, age: 3), Slot(1, 1, age: 3)), "identical age/use states still merge");
+}
+Check(!StackCompatibility.CanMerge(new ProductSO { maxDays = 4 }, Slot(1, 2, age: 0), Slot(1, 1, age: 4)), "repicked spoiled product cannot mix with fresh goods");
+Check(StackCompatibility.CanMerge(new ProductSO { maxDays = -1 }, Slot(1, 2, age: 0), Slot(1, 1, age: 100)), "nonperishable products ignore elapsed days");
+Check(!StackCompatibility.CanMerge(new ToolSO(), Slot(1, 2), Slot(1, 1)), "tools do not enter collectible stacking");
+Check(!StackCompatibility.CanMerge(null, Slot(1, 2), Slot(1, 1)), "unknown definitions do not enter collectible stacking");
 for (int trial = 0; trial < 2000; trial++)
 {
     slots = Enumerable.Range(0, 8).Select(_ => random.Next(3) == 0 ? Empty() : Slot(random.Next(1, 4), random.Next(1, 65))).ToArray();
