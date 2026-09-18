@@ -4,7 +4,7 @@
 
 ## English
 
-Visual and other local in-game testing is complete; multiplayer testing is the only remaining test area.
+The `e23f986` bundle completed reported visual, local and two-computer multiplayer testing; see the [validation scope](../releases/validation.md).
 
 See your XYZ position just below the money display, in the same style as the game. Coordinates update as you move, including when you are aboard a ship.
 
@@ -40,7 +40,7 @@ Older `Left`, `Top` and `FontSize` settings are no longer used; the display foll
 
 ## Compatibility and removal
 
-This Mod only displays your position. It does not move your character or change your inventory or saves, and other players do not need it to see their own game normally. Other HUD Mods may overlap the display; multiplayer testing is still pending.
+This Mod only displays your position. It does not move your character or change your inventory or saves, and other players do not need it to see their own game normally. Other HUD Mods may overlap the display; tested combinations are described in the [validation record](../releases/validation.md).
 
 To update, close the game, back up the old DLL and replace it. To remove the Mod, close the game and delete `OldMarket.Coordinates.dll` from its plugin folder. Leave your loader and other plugins in place.
 
@@ -49,7 +49,7 @@ To update, close the game, back up the old DLL and replace it. To remove the Mod
 
 ## 中文
 
-视觉及其他本地实机测试已完成，目前只剩多人游戏测试。
+`e23f986` 合集已获视觉、本地实机及双实机联机测试完成反馈，详见[验证范围](../releases/validation.md)。
 
 在金钱栏下方随时查看自己的 XYZ 坐标，字体和样式与游戏保持一致。坐标会跟随移动更新，在船上也能查看。
 
@@ -85,7 +85,7 @@ To update, close the game, back up the old DLL and replace it. To remove the Mod
 
 ## 兼容与卸载
 
-这个 Mod 只显示位置，不会移动角色、修改库存或存档，也不要求其他玩家安装。其他界面 Mod 可能造成重叠；多人游戏测试仍待完成。
+这个 Mod 只显示位置，不会移动角色、修改库存或存档，也不要求其他玩家安装。其他界面 Mod 可能造成重叠；已测试组合见[验证记录](../releases/validation.md)。
 
 更新时先退出游戏、备份旧 DLL，再替换。卸载时退出游戏，删除插件文件夹中的 `OldMarket.Coordinates.dll` 即可，保留加载器和其他插件。
 

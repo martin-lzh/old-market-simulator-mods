@@ -37,6 +37,7 @@ Exit before installation/upgrades/removal and test backup copies first. Follow e
 - [Stack All Change Log](stack-all-mod/CHANGELOG.md)
 - [Price Probability Change Log](price-probability-mod/CHANGELOG.md)
 - [Navigation Change Log](navigation-mod/CHANGELOG.md)
+- [Tree Info Change Log](tree-info-mod/CHANGELOG.md)
 
 ### Build from source
 
@@ -51,6 +52,7 @@ Run from the repository root, replacing the example game path:
 ./stack-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ./price-probability-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ./navigation-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
+./tree-info-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
 ZIPs appear in `outputs/`. Each mod with translatable UI runs its own localization checks and applicable feature tests. Coordinates has no translatable messages and no localization-project dependency. Passing builds and tests do not establish in-game UI, save, or multiplayer correctness. See [release management](releases/README.md) for independent tags, release notes, and artifact checks.
@@ -78,9 +80,10 @@ ZIPs appear in `outputs/`. Each mod with translatable UI runs its own localizati
 - [Stack All Change Log](stack-all-mod/CHANGELOG.md)
 - [Price Probability Change Log](price-probability-mod/CHANGELOG.md)
 - [Navigation Change Log](navigation-mod/CHANGELOG.md)
+- [Tree Info Change Log](tree-info-mod/CHANGELOG.md)
 
 ### 从源码构建
 
 可以克隆仓库，也可以单独取出所需 Mod 的目录；各 Mod 独立构建，不依赖其他 Mod 或仓库级本地化工程。需要 PowerShell、支持 .NET 8 工程的 .NET SDK、本机游戏和相应加载器的引用程序集。构建只读取游戏文件，产物写入项目 `work/`、`outputs/` 和构建缓存目录，不自动安装。
 
-在仓库根目录运行前面英文部分的五条构建命令，将示例游戏路径换为你的安装位置。ZIP 输出至 `outputs/`。有可翻译界面的 Mod 执行自己的本地化及功能测试；坐标没有可翻译文案，不依赖本地化工程。编译和测试通过不等于游戏内界面、保存或联机已验证。独立标签、发布说明和产物核验流程见[版本发布规则](releases/README.md)。
+在仓库根目录运行前面英文部分的构建命令，将示例游戏路径换为你的安装位置。ZIP 输出至 `outputs/`。有可翻译界面的 Mod 执行自己的本地化及功能测试；坐标没有可翻译文案，不依赖本地化工程。编译和测试通过不等于游戏内界面、保存或联机已验证。独立标签、发布说明和产物核验流程见[版本发布规则](releases/README.md)。

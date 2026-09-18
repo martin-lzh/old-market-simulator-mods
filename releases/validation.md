@@ -1,5 +1,12 @@
 # Validation record / 验证记录
 
+
+## Current acceptance — 2026-09-18 / 当前验收
+
+Navigation `921d14b` was installed with Gate 4 texture SHA256 `5a3bcf25959b0bfa4126f86e3a514a6777fc1ced71233d54f5c2cf2c487ad267`; the maintainer then confirmed local in-game testing complete. Stack All `d4e033d` hold guidance/native font testing was also confirmed. These updates supersede the corresponding pending local UI/shoreline statements in earlier entries below. They do not supply a new save/reload, full-language or host/client scenario matrix. The older `e23f986` six-Mod multiplayer confirmation remains source-scoped.
+
+Navigation `921d14b` 已安装大门4贴图（SHA256 如上），随后维护者确认本地实机测试完成；Stack All `d4e033d` 长按说明及原生字体测试也已确认。上述反馈更新下方历史记录中对应的本地 UI／湖岸待测状态，不扩展为新的存档重载、全部语言或房主／客人场景矩阵。此前 `e23f986` 六 Mod 联机确认仍仅适用于该源码范围。
+
 ## English
 
 ### Stack All feedback and empty-container follow-up — 2026-09-18
@@ -167,3 +174,17 @@ Navigation 大门4：复核真实水面网格与地形高度后补回高处湖�
 Gate 4 validation: version/immutable-SDK checks, 67 CI tooling tests and all eight SDK builds/package allowlists passed. The new PNG was visually compared with the water-corrected reference; its blue water pixels stay within the reviewed lake region. No runtime code/API changed, so Navigation retains SDK r7. No additional game execution or multiplayer test was performed.
 
 大门4验证：版本及 SDK 不可变性、67 项 CI 工具测试、八种 SDK 构建与打包白名单检查通过。新 PNG 已对照修正参考图检查，蓝色水域仅位于已复核湖区。无运行时代码/API 改动，Navigation 保持 SDK r7；未新增实机或联机测试。
+
+## Pre-release audit — 2026-09-18 / 发布前审核
+
+Three parallel reviews covered documentation, recent runtime/test coverage, and release gates at source `921d14b`. No actionable runtime defect or mandatory missing test was found. Corrected stale current SDK pins/counts, Tree Info development links, and source-scoped manual test status. Historical numbered CHANGELOGs and SDK snapshots remain unchanged; README-only corrections are recorded under Unreleased.
+
+Re-ran version/immutable-SDK validation, 67 tooling tests, eight SDK builds/package checks, all real-reference IL/resource comparisons, script syntax (95 structured files and eight PowerShell scripts) and actionlint 1.7.12: passed. Stack All passed 89,760 logic checks and 84 game contracts; Navigation passed 1,776 checks, 22 native-name checks and 663 game contracts; Tree Info passed nine harvest cases, 13 languages, nine aliases and 21 game contracts. Documentation edits after that run passed content/link/diff and version validation; they do not change runtime inputs or APIs.
+
+Release preflight found no active authorization records and therefore zero release candidates. Material Cost 0.5.2, Coordinates 0.1.4, Checkout All 0.1.5 and Price Probability 0.1.2 retain their previously assigned targets; audit documentation corrections are Unreleased until consolidated within the authorized scope. Stack All, Navigation and Tree Info still have **UNASSIGNED** targets. Before publishing, finalize numbered notes within the assigned scope and create source-bound records; the three unassigned Mods first need an explicit target version. This audit changes no versions, SDK pins or prerelease flags and performs no publication.
+
+三路并行复核覆盖 `921d14b` 的文档、近期运行时及测试覆盖、发布门控，未发现需要修复的运行时缺陷或必须补齐的测试。修正 SDK 当前修订／数量、Tree Info 开发入口及按源码区分的人工测试状态；编号 CHANGELOG 历史和 SDK 快照保持原样，README 修正记入未发布。
+
+重新执行版本／SDK 不可变性、67 项工具测试、八种 SDK 构建及包校验、全部真实引用 IL／资源比对、95 个结构化文件及八个 PowerShell 文件语法检查、actionlint 1.7.12，均通过。Stack All：89,760 项逻辑检查及 84 项游戏契约；Navigation：1,776 项检查、22 项原生名称及 663 项游戏契约；Tree Info：九项收获案例、13 种语言、九项别名及 21 项游戏契约。随后文档改动通过内容／链接／差异及版本检查，不改变运行时代码或 API。
+
+发布预检没有活动授权记录，候选为零。Material Cost 0.5.2、Coordinates 0.1.4、Checkout All 0.1.5、Price Probability 0.1.2 保留此前指定目标，审核文档修正暂记未发布，待按已授权范围整理。Stack All、Navigation、Tree Info 目标仍为 **UNASSIGNED**。发布前须整理编号说明并生成源码绑定记录；三个未指定 Mod 还需明确目标版本。本轮不修改版本、SDK 固定修订或预发布标记，也不执行发布。

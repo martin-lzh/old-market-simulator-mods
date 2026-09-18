@@ -6,7 +6,7 @@
 
 Find your way around town with a minimap, a compass and your own map markers. Navigation works independently of the Coordinates Mod.
 
-**Maps: Eastern Town, Island and Rome with seven separate travel regions. New Island/Rome maps still await in-game alignment checks.**
+**Maps: Eastern Town, Island and Rome with seven separate travel regions. The Gate 4 correction has local in-game confirmation; other Island/Rome checks remain scoped in the validation record.**
 
 Version 0.2.0 is being prepared. There is no public Navigation download yet.
 
@@ -46,7 +46,7 @@ Opening the map frees the mouse but **does not pause the game**. M is a separate
 
 **The plugin ZIP includes Eastern Town, Island and Rome maps.** Artwork, overlays and map metadata install together with the plugin.
 
-Extract the complete ZIP into the game folder, retaining `BepInEx/plugins/OldMarket.Navigation/maps/`, and restart the game. Eastern Town currently covers the central town and four central-market unlock states, showing cleared market clutter; its outer terrain is not yet bundled. Island is a static surface overview; it does not switch through all market, farm, greenhouse or underground expansions. Rome switches to the local player’s current region after travelling through a gate, caravan or mine entrance. Hatched areas mark pending expansions and clear when their unlock is synchronized. Gate symbols change from a lock to an open door. Shops and facilities appear or move with their unlock state. The mine has two additional stages controlled from the main town. These are surface-area indicators, not a reconstruction of every intermediate building model. Maps do not automatically redraw player placements. Gate 4 now shows the lake west of its central terrace; the corrected shoreline still needs in-game alignment confirmation.
+Extract the complete ZIP into the game folder, retaining `BepInEx/plugins/OldMarket.Navigation/maps/`, and restart the game. Eastern Town currently covers the central town and four central-market unlock states, showing cleared market clutter; its outer terrain is not yet bundled. Island is a static surface overview; it does not switch through all market, farm, greenhouse or underground expansions. Rome switches to the local player’s current region after travelling through a gate, caravan or mine entrance. Hatched areas mark pending expansions and clear when their unlock is synchronized. Gate symbols change from a lock to an open door. Shops and facilities appear or move with their unlock state. The mine has two additional stages controlled from the main town. These are surface-area indicators, not a reconstruction of every intermediate building model. Maps do not automatically redraw player placements. Gate 4 now shows the lake west of its central terrace; local in-game testing of the correction in build `921d14b` is complete.
 
 Your markers are personal and kept separately for each save and area. They are not shared with other players. When joining someone else's game, markers last for that connection by default. To keep them between visits, use a different `Markers.RemoteProfile` name for each host's save. Copying or recreating a save folder may make your old markers appear missing. Your selected target is not remembered after restarting.
 
@@ -84,7 +84,7 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 
 用小地图、罗盘和自己的标记点，轻松找到镇上的目的地。Navigation 可以独立使用，不需要安装 Coordinates。
 
-**地图：东方小镇、海岛，以及包含七个独立传送区域的罗马小镇。新增海岛、罗马地图仍待实机对齐验收。**
+**地图：东方小镇、海岛，以及包含七个独立传送区域的罗马小镇。大门4修正已获本地实机确认，其他海岛、罗马检查范围见验证记录。**
 
 0.2.0 正在准备，目前还没有公开的 Navigation 下载包。
 
@@ -124,7 +124,7 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 
 **插件 ZIP 已包含东方小镇、海岛与罗马地图。**底图、覆盖层和地图元数据会随插件一起安装。
 
-将整个 ZIP 解压到游戏目录，保留 `BepInEx/plugins/OldMarket.Navigation/maps/`，再重启游戏。东方小镇目前覆盖镇区及中央市场四种解锁状态，可反映市场垃圾清理，外围地形尚未打包；海岛是静态地表概览，不随市场、农场、温室或地下扩建的全部状态切换。罗马会在穿过大门、乘坐商队或进入矿洞后，切换到本地玩家所在区域的地图。斜线阴影表示待解锁扩建范围，同步解锁后消失；大门图标由锁变为开放入口，店铺和设施图标随启停状态出现或移动。矿洞另含由主城控制的两个扩建阶段。这些是地表范围提示，不逐一重建各阶段建筑模型；地图不会自动重画玩家摆放物。大门4底图已补回中央长平台西侧的湖泊；修正后的湖岸仍需实机对齐确认。
+将整个 ZIP 解压到游戏目录，保留 `BepInEx/plugins/OldMarket.Navigation/maps/`，再重启游戏。东方小镇目前覆盖镇区及中央市场四种解锁状态，可反映市场垃圾清理，外围地形尚未打包；海岛是静态地表概览，不随市场、农场、温室或地下扩建的全部状态切换。罗马会在穿过大门、乘坐商队或进入矿洞后，切换到本地玩家所在区域的地图。斜线阴影表示待解锁扩建范围，同步解锁后消失；大门图标由锁变为开放入口，店铺和设施图标随启停状态出现或移动。矿洞另含由主城控制的两个扩建阶段。这些是地表范围提示，不逐一重建各阶段建筑模型；地图不会自动重画玩家摆放物。大门4底图已补回中央长平台西侧的湖泊；修正构建 `921d14b` 的本地实机测试已完成。
 
 个人标记按存档和区域分别保存，不会分享给其他玩家。加入好友房间时，默认只保留本次连接中的标记。如果想下次继续使用，请为每位好友的存档设置不同的 `Markers.RemoteProfile` 名称。复制或重建存档文件夹后，旧标记可能暂时找不到。当前选中的目标不会在重启后保留。
 

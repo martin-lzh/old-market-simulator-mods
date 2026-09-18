@@ -131,6 +131,6 @@ The previous local reference skipped water-material meshes and classified water 
 
 大门4旧参考图跳过水材质网格，仅以固定海平面识别水域，漏掉了 Y 约 69.66 的高处湖面。新参考图对真实 50 × 50 水面网格按地形高度裁剪，保留上方岩石、树木与结构。可见湖泊位于中央长平台西侧，西南圆形地块并非该湖。公开贴图为重新生成的 Image Gen 插画，原始渲染不公开。
 
-World bounds remain X [1619,1924], Z [-1316,-1011], north +Z. Return POI and region metadata are unchanged. The new artwork has been visually compared with the corrected reference; in-game shoreline alignment remains pending.
+World bounds remain X [1619,1924], Z [-1316,-1011], north +Z. Return POI and region metadata are unchanged. The new artwork has been visually compared with the corrected reference; local in-game testing of build `921d14b` was subsequently reported complete on 2026-09-18.
 
-世界边界仍为 X [1619,1924]、Z [-1316,-1011]，北向 +Z；返回点和区域元数据不变。新图已与修正参考图作视觉比对，实机湖岸对齐待确认。
+世界边界仍为 X [1619,1924]、Z [-1316,-1011]，北向 +Z；返回点和区域元数据不变。新图已与修正参考图作视觉比对，随后于 2026-09-18 获构建 `921d14b` 本地实机测试完成反馈。

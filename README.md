@@ -18,7 +18,7 @@ A collection of unofficial Mods to make running your Old Market Simulator shop a
 | [Tree Info](tree-info-mod/README.md) | Fruit-tree production seasons and harvest estimates | Local source 0.1.1; no public download yet |
 | [Navigation](navigation-mod/README.md) | Minimap, large map, compass and personal markers | 0.2.0 being prepared; no public download yet |
 
-The Mod pages explain upcoming changes as well as the version currently available to download. Stack All’s G empty-container action uses game 2.1.6 / SDK r11 and awaits in-game testing. Navigation includes Eastern Town, an Island preview and Rome with seven travel regions and dynamic unlock areas; Eastern Town outer terrain is not yet bundled. Later map, POI and zoom changes await in-game acceptance; see the [validation scope](releases/validation.md).
+The Mod pages explain upcoming changes as well as the version currently available to download. Stack All’s G empty-container action uses game 2.1.6 / SDK r11; local hold-guidance/font testing is confirmed. Navigation includes Eastern Town, an Island preview and Rome with seven travel regions and dynamic unlock areas; Eastern Town outer terrain is not yet bundled. The Gate 4 lake correction has local in-game confirmation; remaining map, POI and zoom test scope is recorded separately; see the [validation scope](releases/validation.md).
 
 ### Getting started
 
@@ -31,7 +31,7 @@ These Mods are for **Old Market Simulator 2.1.6 on Windows**. Most use **BepInEx
 
 **Using Stack All with friends? Everyone needs the same version.** Before removing it, follow its [save and removal instructions](stack-all-mod/README.md). Other Mods have their own multiplayer notes.
 
-Current downloads are prereleases. The six-Mod `e23f986` bundle completed local and multiplayer testing; subsequent Stack All/Navigation changes and Tree Info still need in-game acceptance. See the [validation record](releases/validation.md). Keep a backup, especially before game updates or changing inventory Mods.
+Current downloads are prereleases. The six-Mod `e23f986` bundle completed local and multiplayer testing; later Stack All hold/font and Gate 4 local checks are confirmed, while other follow-up and Tree Info acceptance remains scoped separately. See the [validation record](releases/validation.md). Keep a backup, especially before game updates or changing inventory Mods.
 
 ### Help and languages
 
@@ -61,7 +61,7 @@ Want to contribute? Start with [CONTRIBUTING](CONTRIBUTING.md) or the [developme
 | [Tree Info](tree-info-mod/README.md) | 果树生产季节和成熟预测 | 本地源码 0.1.1，暂无公开下载 |
 | [Navigation](navigation-mod/README.md) | 小地图、大地图、罗盘和个人标记 | 0.2.0 准备中，暂未公开下载 |
 
-各 Mod 页面会说明当前可下载的版本和即将更新的内容。Stack All 的 G 空盒操作使用游戏 2.1.6 / SDK r11，仍待实机测试。Navigation 插件 ZIP 包含东方小镇、海岛预览图，以及带七个传送区域和动态解锁区块的罗马地图；东方小镇外围地形尚未打包。后续地图、POI 与缩放改动仍待实机验收，详见[验证范围](releases/validation.md)。
+各 Mod 页面会说明当前可下载的版本和即将更新的内容。Stack All 的 G 空盒操作使用游戏 2.1.6 / SDK r11，长按说明及字体已有本地测试确认。Navigation 插件 ZIP 包含东方小镇、海岛预览图，以及带七个传送区域和动态解锁区块的罗马地图；东方小镇外围地形尚未打包。大门4湖泊修正已获本地实机确认，其他地图、POI 与缩放的测试范围分别记录，详见[验证范围](releases/validation.md)。
 
 ### 开始使用
 
@@ -74,7 +74,7 @@ Want to contribute? Start with [CONTRIBUTING](CONTRIBUTING.md) or the [developme
 
 **和朋友一起用 Stack All 时，所有人都需要相同版本。**卸载前请按它的[存档与卸载说明](stack-all-mod/README.md)整理库存。其他 Mod 的联机要求见各自页面。
 
-目前下载均为预发布版。六 Mod 的 `e23f986` 合集已完成本地和联机测试；后续 Stack All、Navigation 改动及 Tree Info 仍需实机验收，见[验证记录](releases/validation.md)。请留好备份，尤其是在游戏更新或更换库存 Mod 前。
+目前下载均为预发布版。六 Mod 的 `e23f986` 合集已完成本地和联机测试；后续 Stack All 长按字体及大门4本地测试已确认，其他后续改动和 Tree Info 的验收范围分别记录，见[验证记录](releases/validation.md)。请留好备份，尤其是在游戏更新或更换库存 Mod 前。
 
 ### 语言与反馈
 

@@ -39,7 +39,7 @@ There are no settings to adjust before playing.
 
 ## Multiplayer
 
-**Everyone in the room, including the host, needs the same Stack All version.** Please compare versions before joining; the Mod does not check this for you. Avoid combining it with other Mods that change inventory stacking. Visual, local in-game and two-computer multiplayer testing of the preceding build is complete. The subsequent Stack All changes received a local test report without major issues on 2026-09-18; that report does not establish a full scenario matrix. The new G action still needs in-game and multiplayer confirmation.
+**Everyone in the room, including the host, needs the same Stack All version.** Please compare versions before joining; the Mod does not check this for you. Avoid combining it with other Mods that change inventory stacking. Visual, local in-game and two-computer multiplayer testing of the preceding build is complete. The subsequent Stack All changes received a local test report without major issues on 2026-09-18; that report does not establish a full scenario matrix. The latest hold guidance and native font change in `d4e033d` passed reported local testing; a new multiplayer scenario matrix has not been reported.
 
 ## Backups and removal
 
@@ -97,7 +97,7 @@ For a compatible update, close the game and back up your save and old DLL before
 
 ## 和朋友一起玩
 
-**房主和所有玩家都需要安装相同版本的 Stack All。**加入房间前请互相确认，Mod 不会自动检查版本。尽量不要同时使用其他修改库存堆叠的 Mod。修复前构建的视觉、本地实机及双实机联机测试已完成；2026-09-18 对后续 Stack All 改动的本地测试反馈为未发现明显问题，但未提供完整场景矩阵；新 G 操作仍待实机和联机确认。
+**房主和所有玩家都需要安装相同版本的 Stack All。**加入房间前请互相确认，Mod 不会自动检查版本。尽量不要同时使用其他修改库存堆叠的 Mod。修复前构建的视觉、本地实机及双实机联机测试已完成；2026-09-18 对后续 Stack All 改动的本地测试反馈为未发现明显问题，但未提供完整场景矩阵；最新长按说明及原生字体改动 `d4e033d` 已获本地测试确认，尚无新的联机场景矩阵报告。
 
 ## 备份与卸载
 

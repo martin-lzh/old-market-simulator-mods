@@ -31,7 +31,7 @@ The percentage means a customer who has found the product will not reject it for
 
 Only the host can keep and apply automatic pricing rules. Other players can preview prices if they have the Mod; they can still use the normal pricing screen without it. A host's active rule takes precedence over a guest's price change, and guests without the Mod cannot see that rule. Reopen a price panel to see changes made by someone else.
 
-Rules stay on the host's computer. Avoid using another automatic-pricing Mod at the same time. Visual and other local in-game testing is complete; multiplayer testing is the only remaining test area.
+Rules stay on the host's computer. Avoid using another automatic-pricing Mod at the same time. The `e23f986` bundle completed reported visual, local and two-computer multiplayer testing; see the [validation scope](../releases/validation.md).
 
 ## Settings and removal
 
@@ -71,7 +71,7 @@ To update, close the game and back up the old DLL and settings before replacing 
 
 只有房主能保存和执行自动定价规则。客人安装后可以查看概率，不安装也能使用游戏原有定价页。房主开启的规则会优先于客人的改价；未安装的客人看不到规则状态。别人改价后，重新打开定价页即可查看。
 
-规则保存在房主电脑上，尽量不要同时使用其他自动定价 Mod。视觉及其他本地实机测试已完成，目前只剩多人游戏测试。
+规则保存在房主电脑上，尽量不要同时使用其他自动定价 Mod。`e23f986` 合集已获视觉、本地实机及双实机联机测试完成反馈，详见[验证范围](../releases/validation.md)。
 
 ## 设置与卸载
 

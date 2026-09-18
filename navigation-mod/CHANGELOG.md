@@ -4,7 +4,7 @@
 
 ### Unreleased
 
-- Regenerate Gate 4 artwork with its missing elevated lake, using a local geometry reference that clips the actual water mesh against terrain heights instead of assuming sea level. Preserve map bounds, return POI, version 0.2.0 and SDK 2.1.6/r7; refresh the packaged texture hash. Corrected shoreline alignment awaits in-game confirmation.
+- Regenerate Gate 4 artwork with its missing elevated lake, using a local geometry reference that clips the actual water mesh against terrain heights instead of assuming sea level. Preserve map bounds, return POI, version 0.2.0 and SDK 2.1.6/r7; refresh the packaged texture hash. Local in-game testing of corrected build `921d14b` is confirmed; this does not extend the multiplayer test scope.
 
 - Complete localization of built-in map titles and functional POI labels across all 13 game languages. Add optional NameTextKey metadata, preserve custom names, update labels immediately on language changes, and support Macau Traditional Chinese aliases. Keep native place translations, version 0.2.0 and SDK 2.1.6/r7; fonts and long labels still await in-game acceptance.
 
@@ -109,7 +109,7 @@ Experimental initial build; not installed or verified in game.
 
 ### 未发布
 
-- 重新生成大门4底图，补回遗漏的高处湖泊；本地参考图按真实水面网格与地形高度裁剪，不再假定海平面。地图边界、返回点、版本 0.2.0 和 SDK 2.1.6/r7 不变，更新打包贴图哈希。修正后的湖岸对齐仍待实机确认。
+- 重新生成大门4底图，补回遗漏的高处湖泊；本地参考图按真实水面网格与地形高度裁剪，不再假定海平面。地图边界、返回点、版本 0.2.0 和 SDK 2.1.6/r7 不变，更新打包贴图哈希。修正构建 `921d14b` 已获本地实机测试确认，不据此扩展联机测试范围。
 
 - 补齐游戏全部 13 种语言的内置地图标题及功能 POI 标签。增加可选 NameTextKey 元数据，保留自定义名称，切换语言即时更新，补充澳门繁中别名。保留原生地点译文、0.2.0 版本与 SDK 2.1.6/r7；字体及长标签仍待实机验收。
 

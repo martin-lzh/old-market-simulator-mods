@@ -44,7 +44,7 @@ Download the matching ZIP from the release page and extract it into the game fol
 
 The report's switch is the easiest way to change the calculation display. BepInEx settings are in `BepInEx/config/local.oldmarket.materialcost.cfg`; MelonLoader settings are in `UserData/OldMarket.MaterialCost.cfg`. `MaterialsOnly` starts off. Leave diagnostics off unless you are investigating a problem.
 
-To update, close the game and back up the old DLL before replacing it. To remove the Mod, delete only `OldMarket.MaterialCost.dll` from the location above; your saves need no conversion. Other Mods changing the same screens may overlap the text. Visual and other local in-game testing is complete; multiplayer testing is the only remaining test area.
+To update, close the game and back up the old DLL before replacing it. To remove the Mod, delete only `OldMarket.MaterialCost.dll` from the location above; your saves need no conversion. Other Mods changing the same screens may overlap the text. The `e23f986` bundle completed reported visual, local and two-computer multiplayer testing; see the [validation scope](../releases/validation.md).
 
 
 [What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [License](LICENSE)
@@ -91,7 +91,7 @@ To update, close the game and back up the old DLL before replacing it. To remove
 
 平时直接使用日报里的开关即可。BepInEx 设置位于 `BepInEx/config/local.oldmarket.materialcost.cfg`，MelonLoader 设置位于 `UserData/OldMarket.MaterialCost.cfg`，`MaterialsOnly` 默认关闭。不排查问题时，诊断选项保持关闭即可。
 
-更新前退出游戏、备份并替换旧 DLL。卸载时只删除上表位置的 `OldMarket.MaterialCost.dll`，存档不用转换。其他修改同一界面的 Mod 可能造成文字重叠；视觉及其他本地实机测试已完成，目前只剩多人游戏测试。
+更新前退出游戏、备份并替换旧 DLL。卸载时只删除上表位置的 `OldMarket.MaterialCost.dll`，存档不用转换。其他修改同一界面的 Mod 可能造成文字重叠；`e23f986` 合集已获视觉、本地实机及双实机联机测试完成反馈，详见[验证范围](../releases/validation.md)。
 
 
 [版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [许可证](LICENSE)

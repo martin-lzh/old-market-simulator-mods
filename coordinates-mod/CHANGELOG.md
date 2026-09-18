@@ -4,6 +4,10 @@
 
 ## English
 
+### Unreleased
+
+- Correct current README test status to reference the completed `e23f986` local and two-computer multiplayer report. Documentation only; runtime, version and SDK are unchanged.
+
 ### 0.1.4 — prerelease (pending publication)
 
 - Add game-versioned SDK compilation and CHANGELOG-driven CI releases; pin this Mod to SDK 2.1.6/r1. Existing published versions are not rebuilt or replaced.
@@ -24,6 +28,10 @@ First public release in this repository: original Mod features with independent 
 Older development versions mentioned in the README are not verified downloadable releases in this public repository. No older/newer supported game baseline is recorded. Match game/hash, loader and save requirements; an older Mod does not imply support for an older game.
 
 ## 中文
+
+### 未发布
+
+- 修正 README 当前测试状态，引用 `e23f986` 已完成的本地及双实机联机报告。仅文档改动，运行时、版本和 SDK 不变。
 
 ### 0.1.4 — 预发布（待发布）
 

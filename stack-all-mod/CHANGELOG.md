@@ -6,11 +6,11 @@
 
 ### Unreleased
 
-- Show a localized “HOLD TO REPEAT” caption above the native controls when multiple items remain. Reuse the game’s font, font material and row layout without a keycap; hide it with the control panel. Version remains 0.2.2; only Stack All moves to game 2.1.6 / SDK r11 for native row ordering. Visual acceptance is pending.
+- Show a localized “HOLD TO REPEAT” caption above the native controls when multiple items remain. Reuse the game’s font, font material and row layout without a keycap; hide it with the control panel. Version remains 0.2.2; only Stack All moves to game 2.1.6 / SDK r11 for native row ordering. Local hold-guidance/font testing of `d4e033d` is confirmed; broader host/client acceptance remains pending.
 
 - Use the native right-hand control-row layout for G: clone the game’s caption/keycap styling and append it alongside existing controls. Dim the entire row when no empty container is available, and remove the separate plain-text Q/F hold overlay. Preserve the existing Q/F rows and behavior.
 
-- Add G to drop only empty reusable containers from the selected slot: tap for one, hold for 0.6 seconds then repeat every 0.12 seconds. Keep filled/partial containers and other slots unchanged. Show a localized hint that turns gray immediately when no empty remains; menus, focus loss, competing inventory actions and slot changes cancel repeating. Preserve version 0.2.2, migrate only Stack All to game 2.1.6 / SDK r10 for reviewed input and Harmony fields. No save/RPC format change; the new action and hint await in-game and multiplayer testing.
+- Add G to drop only empty reusable containers from the selected slot: tap for one, hold for 0.6 seconds then repeat every 0.12 seconds. Keep filled/partial containers and other slots unchanged. Show a localized hint that turns gray immediately when no empty remains; menus, focus loss, competing inventory actions and slot changes cancel repeating. Preserve version 0.2.2, migrate only Stack All to game 2.1.6 / SDK r10 for reviewed input and Harmony fields. No save/RPC format change; local hold-guidance/font testing is recorded for `d4e033d`; host/client testing of the new action remains pending.
 
 - Allow ordinary collectibles such as mint leaves and flowers to rejoin matching stacks when their incidental world-day counters differ after dropping and pickup. Preserve product freshness, animal ages and fish-trap use counts; retain 64-item limits, weighted cost and overflow. Version 0.2.2 and SDK 2.1.6/r1 are unchanged; in-game and multiplayer confirmation is pending.
 
@@ -42,11 +42,11 @@ Older development versions mentioned in the README are not verified downloadable
 
 ### 未发布
 
-- 剩余多个物品时，在原生按钮组上方显示本地化的“长按可连续操作”。复用游戏字体、字体材质和行布局，不加键帽，随操作面板隐藏。版本保持 0.2.2；仅 Stack All 迁移游戏 2.1.6 / SDK r11，以使用原生行排序接口。视觉验收待完成。
+- 剩余多个物品时，在原生按钮组上方显示本地化的“长按可连续操作”。复用游戏字体、字体材质和行布局，不加键帽，随操作面板隐藏。版本保持 0.2.2；仅 Stack All 迁移游戏 2.1.6 / SDK r11，以使用原生行排序接口。`d4e033d` 长按说明及字体已获本地测试确认，后续房主/客人场景验收待完成。
 
 - G 提示复用原生右侧按钮行的文字与键帽样式，和现有操作一起排布；没有空盒时整行变暗。移除独立的 Q/F 纯文字长按浮层，保留原生 Q/F 按钮行和行为。
 
-- 新增 G 专门丢出当前格的空可复用容器：短按一个，长按 0.6 秒后每 0.12 秒一个。保留满盒、半满盒及其他格；本地化提示在空盒耗尽时立即变灰，菜单、失焦、其他库存操作和切换格子会取消连扔。版本保持 0.2.2，仅 Stack All 迁移到游戏 2.1.6 / SDK r10，补齐经核对的输入与 Harmony 字段。不改变存档/RPC 格式，新操作与提示仍待实机和联机验证。
+- 新增 G 专门丢出当前格的空可复用容器：短按一个，长按 0.6 秒后每 0.12 秒一个。保留满盒、半满盒及其他格；本地化提示在空盒耗尽时立即变灰，菜单、失焦、其他库存操作和切换格子会取消连扔。版本保持 0.2.2，仅 Stack All 迁移到游戏 2.1.6 / SDK r10，补齐经核对的输入与 Harmony 字段。不改变存档/RPC 格式，`d4e033d` 长按说明及字体已有本地测试记录，新操作的房主/客人场景仍待验证。
 
 - 修复薄荷叶、花等普通收集品丢出后因地面天数计数不同而无法重新并入同类堆叠的问题。保留食品保鲜、动物年龄、鱼笼使用次数、64 件上限、加权成本与溢出处理。版本 0.2.2 和 SDK 2.1.6/r1 不变；实机与联机仍待确认。
 

@@ -4,6 +4,10 @@
 
 ## English
 
+### Unreleased
+
+- Correct current README test status to reference the completed `e23f986` local and two-computer multiplayer report. Documentation only; runtime, version and SDK are unchanged.
+
 ### 0.1.5 — prerelease (pending publication)
 
 - Validation: 13-locale checks, 46 state checks, SDK compilation and real-reference IL/resource comparison passed on game 2.1.6 / SDK r1; 22 CI tooling tests passed. In-game UI and multiplayer acceptance remain unperformed. No custom save format or network protocol changes; completed native transactions still affect normal saves. Exit the game and restore the previous DLL to roll back; this does not undo transactions.
@@ -28,6 +32,10 @@ First public release in this repository: original Mod features with independent 
 Older development versions mentioned in the README are not verified downloadable releases in this public repository. No older/newer supported game baseline is recorded. Match game/hash, loader and save requirements; an older Mod does not imply support for an older game.
 
 ## 中文
+
+### 未发布
+
+- 修正 README 当前测试状态，引用 `e23f986` 已完成的本地及双实机联机报告。仅文档改动，运行时、版本和 SDK 不变。
 
 ### 0.1.5 — 预发布（待发布）
 

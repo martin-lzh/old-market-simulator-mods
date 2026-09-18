@@ -20,9 +20,9 @@
 | 2.1.6 | [2.1.6/r8](2.1.6/r8/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Tree Info 0.1.1 固定此修订；增加树木状态、季节和交互反射声明，实机验收待完成 |
 | 2.1.6 | [2.1.6/r9](2.1.6/r9/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 0.2.2 未发布空盒操作，增加原生输入门控和当前格 Harmony 字段；实机验收待完成 |
 | 2.1.6 | [2.1.6/r10](2.1.6/r10/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 原生按钮行及键帽提示，保留变暗透明度；实机验收待完成 |
-| 2.1.6 | [2.1.6/r11](2.1.6/r11/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 原生字体长按说明及行排序；当前固定修订，实机验收待完成 |
+| 2.1.6 | [2.1.6/r11](2.1.6/r11/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 原生字体长按说明及行排序；当前固定修订，本地 UI 已确认，后续联机场景待确认 |
 
-表中 r2–r6 的验收描述保留各快照建立时的历史状态。`e23f986` 合集已获视觉、本地实机与双实机联机确认；后续 Navigation 地图、POI 与缩放改动仍待实机验收，详见[验证记录](../releases/validation.md)。
+表中 r2–r6 的验收描述保留各快照建立时的历史状态。`e23f986` 合集已获视觉、本地实机与双实机联机确认；大门4修正已获本地确认，其余 Navigation 地图、POI 与缩放场景仍按记录区分测试范围，详见[验证记录](../releases/validation.md)。
 
 每个 Mod 在自己的 `release.json` 中固定 SDK，例如 `"sdk": "2.1.6/r1"`。不自动选择“最新”SDK。目录 `sdk/<游戏版本>/r<修订号>/` 一旦合并就保留原样；同一游戏版本补充接口时新建 `r2`，游戏升级时新建对应游戏版本目录。旧 Mod 发布、SDK 和 CHANGELOG 都保留，下载前仍须确认存档、加载器与联机要求。
 
@@ -75,7 +75,7 @@ This SDK lets GitHub-hosted runners compile Mods without a game installation. Th
 
 ### Versioning and compatibility
 
-The table records game 2.1.6 on Windows x64 / Unity Mono 2022.3.62f3. The original five Mods retain SDK r1; Navigation 0.2.0 pins r7; r2–r6 remain historical snapshots. The current pin covers map UI, native HUD reflow, input focus, wheel scaling and platform interfaces. CI builds six Mods and seven loader variants. Historical snapshot notes retain the evidence at export time. Bundle `e23f986` has reported visual, local and two-computer multiplayer acceptance; later Navigation map, POI and zoom changes still need in-game acceptance. See the [source-specific validation record](../releases/validation.md).
+The table records game 2.1.6 on Windows x64 / Unity Mono 2022.3.62f3. Material Cost, Coordinates, Checkout All and Price Probability retain SDK r1; Navigation 0.2.0 pins r7, Tree Info 0.1.1 pins r8, and Stack All 0.2.2 pins r11. Earlier snapshots remain historical. CI builds seven Mods and eight loader variants. Historical snapshot notes retain the evidence at export time. Bundle `e23f986` has reported visual, local and two-computer multiplayer acceptance; the Gate 4 correction has local confirmation, while remaining Navigation map, POI and zoom scenarios retain their recorded test scope. See the [source-specific validation record](../releases/validation.md).
 
 Each Mod pins an SDK in its own `release.json`, for example `"sdk": "2.1.6/r1"`. There is no implicit latest SDK. Merged `sdk/<game-version>/r<revision>/` snapshots are immutable. Add a new revision to extend the same game baseline, or a new game-version directory after a game update. Preserve old SDKs, Mod releases and CHANGELOG records; users must still check save, loader and multiplayer requirements.
 
@@ -88,7 +88,7 @@ Install Python 3.12 plus .NET 8 and 10 SDKs. Run the three validation/build comm
 After a game update:
 
 1. Read the legally obtained game installation, adapt the original Mod source and commit it. Export requires a clean worktree to record the exact source commit.
-2. Review supplemental method names used only in `nameof` expressions. Copy the previous `supplemental.json` into ignored `work/` if it needs editing. Reflection method names are also listed; reflection fields use the explicit `field:name` syntax (for example `field:currentSlot` and `field:activeExpansions`). Use `AssemblySimpleName::Type.FullName` for non-game assembly types. Explicit `constant:name` seeds cover reviewed, compiler-inlined numeric/boolean literals; string and nonliteral seeds are rejected. All declarations must resolve from real assemblies. Other declarations are discovered from the seven registered loader builds compiled against actual game references; game method bodies/resources are not exported.
+2. Review supplemental method names used only in `nameof` expressions. Copy the previous `supplemental.json` into ignored `work/` if it needs editing. Reflection method names are also listed; reflection fields use the explicit `field:name` syntax (for example `field:currentSlot` and `field:activeExpansions`). Use `AssemblySimpleName::Type.FullName` for non-game assembly types. Explicit `constant:name` seeds cover reviewed, compiler-inlined numeric/boolean literals; string and nonliteral seeds are rejected. All declarations must resolve from real assemblies. Other declarations are discovered from the eight registered loader builds compiled against actual game references; game method bodies/resources are not exported.
 3. Run `export-sdk` as shown above, using the actual verified game version and a new revision. Existing snapshots cannot be overwritten.
 4. Review metadata/hash changes, migrate selected `release.json` pins, and update bilingual Unreleased CHANGELOG entries with game/SDK versions, compatibility/risk notes, root supported baseline and the table above. Only advance Mod versions and move pending entries into numbered releases when the maintainer explicitly requests version advancement. Mods not migrated keep their previous SDK.
 5. Run the SDK build followed by `verify-game` above. This verifies dependency hashes, compares symbolic Mod IL and embedded resources against a real-reference build, and runs the existing Stack All/Price Probability game contracts. It never executes or modifies the game. The command currently verifies every Mod; when pins span multiple game baselines, retain matching installations and verify each Mod using its build/contract commands. Do not bypass hash failures.
@@ -128,7 +128,7 @@ Tree Info 迁移新增 SDK 2.1.6/r8，仅 Tree Info 固定 r8，其他 Mod 和�
 2026-09-18：r8 从 `e2057f8` 导出，包含 15 个程序集、267 个类型、671 个方法、547 个字段。程序集身份、哈希和类型转发同 r7；新增树木/季节 API 及显式反射/Harmony 字段，当前输入不再引用 JsonUtility.FromJson。已审查签名、NetworkVariable 泛型参数和枚举声明；八种 SDK/真实引用构建对比及 21 项 Tree Info 契约通过，不代表实机验收。
 
 
-Stack All’s Unreleased empty-container action pins r10 for native input gates and the selected-slot Harmony field; other Mod pins stay unchanged. Stack All 的未发布空盒操作固定 r10，补齐原生输入门控与当前格 Harmony 字段，其他 Mod 固定修订不变。
+Stack All’s Unreleased empty-container action pins r11 for native input gates and the selected-slot Harmony field; other Mod pins stay unchanged. Stack All 的未发布空盒操作固定 r11，补齐原生输入门控与当前格 Harmony 字段，其他 Mod 固定修订不变。
 
 
 2026-09-18: r9 records source `cfbe951` (267 types, 676 methods, 548 fields); r10 records `1580f6a` (265 types, 667 methods, 544 fields). Both retain the same 15 dependency identities, hashes and forwarders as r8. r9 adds native input getters and selected-slot Harmony metadata. r10 adds Color.a to preserve native hint transparency and omits binding-display APIs no longer used after removing the separate hold-text overlay. Existing snapshots are retained. Stack All pins r10; all other Mods keep their prior pins.
