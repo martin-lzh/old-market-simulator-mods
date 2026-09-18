@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "mod": "coordinates",
+  "version": "0.1.4",
+  "sdk": "2.1.6/r1",
+  "prerelease": true,
+  "sourceCommit": "358babe3f1ea1cfbea7e2886692f8e96ee780e9f",
+  "inputsSha256": "324e47d89e7f68d4beaddb18316e234963fae2d2423b187f68432f48e17d1f9a",
+  "authorization": "Publish Coordinates HUD 0.1.4 including the current display name and README changes, as explicitly requested by the maintainer."
+}
