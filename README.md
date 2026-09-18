@@ -10,13 +10,13 @@ A collection of unofficial Mods to make running your Old Market Simulator shop a
 
 | Mod | What it adds | Download |
 | --- | --- | --- |
-| [Profit Insights](material-cost-mod/README.md) | Material costs and estimated profit in reports, recipes and orders | [0.5.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1) |
-| [Coordinates HUD](coordinates-mod/README.md) | Your XYZ position below the money bar; F8 to show/hide | [0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.3) |
-| [Auto Checkout](checkout-all-mod/README.md) | Hold E or toggle F9 to process products and collect payment | [0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4) |
-| [Better Stacking](stack-all-mod/README.md) | Up to 64 containers per slot, repeated drop/throw and empty-container disposal | [0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) |
-| [Smart Pricing](price-probability-mod/README.md) | Price acceptance preview and automatic pricing rules | [0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.1) |
-| [Tree Harvest Helper](tree-info-mod/README.md) | Fruit-tree production seasons and harvest estimates | 0.1.0 being prepared; no public download yet |
-| [Map & Compass](navigation-mod/README.md) | Minimap, large map, compass and personal markers | 0.2.0 being prepared; no public download yet |
+| [Profit Insights](material-cost-mod/README.md) | Material costs and estimated profit in reports, recipes and orders | [0.5.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.2) |
+| [Coordinates HUD](coordinates-mod/README.md) | Your XYZ position below the money bar; F8 to show/hide | [0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.4) |
+| [Auto Checkout](checkout-all-mod/README.md) | Hold E or toggle F9 to process products and collect payment | [0.1.5](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.5) |
+| [Better Stacking](stack-all-mod/README.md) | Up to 64 containers per slot, repeated drop/throw and empty-container disposal | [0.3.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.3.0) |
+| [Smart Pricing](price-probability-mod/README.md) | Price acceptance preview and automatic pricing rules | [0.1.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.2) |
+| [Tree Harvest Helper](tree-info-mod/README.md) | Fruit-tree production seasons and harvest estimates | [0.1.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.0) |
+| [Map & Compass](navigation-mod/README.md) | Minimap, large map, compass and personal markers | [0.2.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.0) |
 
 The Mod pages explain upcoming changes as well as the version currently available to download. Stack All’s G empty-container action uses game 2.1.6 / SDK r11; local hold-guidance/font testing is confirmed. Navigation includes Eastern Town, an Island preview and Rome with seven travel regions and dynamic unlock areas; Eastern Town outer terrain is not yet bundled. The Gate 4 lake correction has local in-game confirmation; remaining map, POI and zoom test scope is recorded separately; see the [validation scope](releases/validation.md).
 
@@ -53,13 +53,13 @@ Want to contribute? Start with [CONTRIBUTING](CONTRIBUTING.md) or the [developme
 
 | Mod | 能做什么 | 下载 |
 | --- | --- | --- |
-| [Profit Insights](material-cost-mod/README.md) | 在日报、配方和订购页查看原料成本与预计利润 | [0.5.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1) |
-| [Coordinates HUD](coordinates-mod/README.md) | 金钱栏下显示 XYZ 坐标，F8 显示/隐藏 | [0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.3) |
-| [Auto Checkout](checkout-all-mod/README.md) | 长按 E 或按 F9 连续结算商品、收取钱袋 | [0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4) |
-| [Better Stacking](stack-all-mod/README.md) | 每格最多放 64 个容器，并支持连续丢下/投掷 | [0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) |
-| [Smart Pricing](price-probability-mod/README.md) | 查看价格接受概率，设置自动定价规则 | [0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.1) |
-| [Tree Harvest Helper](tree-info-mod/README.md) | 果树生产季节和成熟预测 | 0.1.0 准备中，暂无公开下载 |
-| [Map & Compass](navigation-mod/README.md) | 小地图、大地图、罗盘和个人标记 | 0.2.0 准备中，暂未公开下载 |
+| [Profit Insights](material-cost-mod/README.md) | 在日报、配方和订购页查看原料成本与预计利润 | [0.5.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.2) |
+| [Coordinates HUD](coordinates-mod/README.md) | 金钱栏下显示 XYZ 坐标，F8 显示/隐藏 | [0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.4) |
+| [Auto Checkout](checkout-all-mod/README.md) | 长按 E 或按 F9 连续结算商品、收取钱袋 | [0.1.5](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.5) |
+| [Better Stacking](stack-all-mod/README.md) | 每格最多放 64 个容器，并支持连续丢下/投掷 | [0.3.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.3.0) |
+| [Smart Pricing](price-probability-mod/README.md) | 查看价格接受概率，设置自动定价规则 | [0.1.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.2) |
+| [Tree Harvest Helper](tree-info-mod/README.md) | 果树生产季节和成熟预测 | [0.1.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.0) |
+| [Map & Compass](navigation-mod/README.md) | 小地图、大地图、罗盘和个人标记 | [0.2.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.0) |
 
 各 Mod 页面会说明当前可下载的版本和即将更新的内容。Stack All 的 G 空盒操作使用游戏 2.1.6 / SDK r11，长按说明及字体已有本地测试确认。Navigation 插件 ZIP 包含东方小镇、海岛预览图，以及带七个传送区域和动态解锁区块的罗马地图；东方小镇外围地形尚未打包。大门4湖泊修正已获本地实机确认，其他地图、POI 与缩放的测试范围分别记录，详见[验证范围](releases/validation.md)。
 

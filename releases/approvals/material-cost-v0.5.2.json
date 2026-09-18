@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "mod": "material-cost",
+  "version": "0.5.2",
+  "sdk": "2.1.6/r1",
+  "prerelease": true,
+  "sourceCommit": "2161f5213964107a65ca8bc6826611e86344fbaa",
+  "inputsSha256": "8d449708c244f8b0fcb5501df2a7c1cf4dbe0b72d3490c94f959ea311cf2b06b",
+  "authorization": "Publish all remaining pending Mod versions, including Profit Insights 0.5.2 and its current Unreleased changes, as explicitly requested by the maintainer."
+}

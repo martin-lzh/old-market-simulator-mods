@@ -8,7 +8,7 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 Get a clearer view of material costs and possible profit while making, ordering and selling goods.
 
-[Download 0.5.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1) · 0.5.2 is being prepared and is not on the release page yet.
+[Download 0.5.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.2)
 
 For Old Market Simulator **2.1.6 on Windows**. Choose the Mod ZIP, not GitHub’s **Source code** download.
 
@@ -63,7 +63,7 @@ To update, close the game and back up the old DLL before replacing it. To remove
 
 制作、订货和查看日报时，多一份原料成本与预计利润参考，定价心里更有数。
 
-[下载 0.5.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1) · 0.5.2 正在准备，发布页暂时仍是 0.5.1。
+[下载 0.5.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.2)
 
 适用于 **Windows 版 Old Market Simulator 2.1.6**。请下载 Mod ZIP，不要把 **Source code** 当作插件安装。
 

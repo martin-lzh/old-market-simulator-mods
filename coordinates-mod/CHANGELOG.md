@@ -6,11 +6,11 @@
 
 ### Unreleased
 
+### 0.1.4 — prerelease (pending publication)
+
 - Rename the plugin display name to **Coordinates HUD** and reorganize the bilingual README around core features and controls, with insertion points for gameplay media. Plugin ID, assembly/configuration paths, gameplay and version are unchanged.
 
 - Correct current README test status to reference the completed `e23f986` local and two-computer multiplayer report. Documentation only; runtime, version and SDK are unchanged.
-
-### 0.1.4 — prerelease (pending publication)
 
 - Add game-versioned SDK compilation and CHANGELOG-driven CI releases; pin this Mod to SDK 2.1.6/r1. Existing published versions are not rebuilt or replaced.
 
@@ -33,11 +33,11 @@ Older development versions mentioned in the README are not verified downloadable
 
 ### 未发布
 
+### 0.1.4 — 预发布（待发布）
+
 - 插件显示名改为 **Coordinates HUD**，双语 README 按核心功能和操作方式组织，并保留实机素材插入位置。插件 ID、程序集／配置路径、玩法及版本不变。
 
 - 修正 README 当前测试状态，引用 `e23f986` 已完成的本地及双实机联机报告。仅文档改动，运行时、版本和 SDK 不变。
-
-### 0.1.4 — 预发布（待发布）
 
 - 增加随游戏版本维护的 SDK 编译和 CHANGELOG 驱动的 CI 发布，本 Mod 固定 SDK 2.1.6/r1；不重建或替换既有公开版本。
 

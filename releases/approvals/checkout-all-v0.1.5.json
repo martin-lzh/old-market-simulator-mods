@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "mod": "checkout-all",
+  "version": "0.1.5",
+  "sdk": "2.1.6/r1",
+  "prerelease": true,
+  "sourceCommit": "d42ea3c10a342a1bd5fa228984bcfdb0c98b6c7b",
+  "inputsSha256": "ff69b50e54417edfba4ab4405054860d34443240a918a5accd38bb73f4f2acc5",
+  "authorization": "Publish all remaining pending Mod versions, including Auto Checkout 0.1.5 and its current Unreleased changes, as explicitly requested by the maintainer."
+}

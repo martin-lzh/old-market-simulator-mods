@@ -13,6 +13,8 @@
 
 5. 发布还须检查对应 `<mod>-mod/` 目录相对该 Mod 最近已发布版本标签的净差异；目录未变默认跳过。共享 SDK、CI 或根目录文档改动可以触发验证，但不能单独触发未改动 Mod 的 Release。首次发布须有已跟踪的 Mod 文件；目录变化也不能替代维护者的版本推进授权。
 
+合并前必须再次检查所有 Mod 的 Unreleased / 未发布内容、源码与远程发行版本差异及发布授权记录，并在对话中明确提醒维护者哪些 Mod 将发布、哪些会被跳过及原因（没有则明确说明）。不得仅凭 CI 通过声称全部会发布，也不能等合并后才报告；已有明确版本授权应直接落实，无需重复询问。
+
 ### SDK 维护是 Mod 开发的一部分
 
 发布授权必须按 [发布记录流程](releases/approvals/README.md)绑定到确定的源码输入。只有维护者明确推进对应版本后才记录授权；已获授权无需重复询问。没有记录的版本默认不发布；有记录但构建输入变化或仍有 Unreleased 内容时停止发布，不自动更新记录绕过检查。记录通过受保护 PR 审查，不能将它宣称为对话授权的自动证明。
@@ -46,6 +48,8 @@ This is the public repository for original Mod source, the compilation SDK and r
 4. When creating, updating or reviewing a PR, inspect every Mod CHANGELOG and compare the PR diff. List Mods with changes that have not yet been assigned a version, including those with pending Unreleased entries. Record each as an explicitly assigned target version or “Unreleased, awaiting a maintainer-assigned version”; state “none” if there are none. Never assign versions just to pass this check or treat an existing old version number as an assignment for the new changes.
 
 5. Publishing additionally requires a net change in the corresponding `<mod>-mod/` directory since that Mod's latest published version tag. Skip unchanged directories. Shared SDK, CI and root documentation changes may trigger validation, but cannot alone trigger a Release for an unchanged Mod. A first release requires tracked Mod files; directory changes do not replace explicit version-advancement authorization.
+
+Before merging, recheck every Mod for pending Unreleased content, source-versus-published version differences and release authorization records. Explicitly tell the maintainer in the conversation which Mods will publish, which will be skipped and why (or state none). Green CI does not mean every Mod will publish; do not defer this notice until after merge. Apply existing explicit version authorization without asking again.
 
 ### SDK maintenance is part of Mod development
 

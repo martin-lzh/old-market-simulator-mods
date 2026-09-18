@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "mod": "price-probability",
+  "version": "0.1.2",
+  "sdk": "2.1.6/r1",
+  "prerelease": true,
+  "sourceCommit": "3a9eb1fd91ab4053ac63152e2707a7053c08a1a7",
+  "inputsSha256": "78759e334a07d101c608680a64ab5890f379f6866ddca81ea5e64a7f06986731",
+  "authorization": "Publish all remaining pending Mod versions, including Smart Pricing 0.1.2 and its current Unreleased changes, as explicitly requested by the maintainer."
+}
