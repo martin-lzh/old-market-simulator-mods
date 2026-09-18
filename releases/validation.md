@@ -6,6 +6,8 @@
 
 Local testing of the preceding Stack All changes was reported without major issues. No detailed save/multiplayer scenario matrix was supplied, and no broader Navigation acceptance is inferred. The new G empty-container action is subsequent work and remains Unreleased, target **UNASSIGNED**, with in-game and multiplayer acceptance pending. Source version stays 0.2.2; only Stack All moves to SDK 2.1.6/r10.
 
+The G action supports one empty per tap and paced holding (0.6-second delay, 0.12-second interval). Its native caption/keycap row joins the existing right-hand control list and dims when no empty remains; native Q/F rows are retained. Version validation, 67 CI tooling tests, all eight SDK builds, 89,760 Stack All checks, 13-language checks and 84 read-only Stack All game contracts passed. Repository-wide SDK/real-reference IL/resource comparison passed, including the r10 dependency hashes. No game installation was changed and no Unity rendering test was performed for this follow-up.
+
 ### Tree Info migration — 2026-09-18
 
 Tree Info 0.1.1 joins the public source repository from the local analysis project. Its existing version is retained, migration changes are Unreleased, the target release version is **UNASSIGNED**, and no release authorization was created. Game baseline remains 2.1.6; only Tree Info pins the new SDK 2.1.6/r8. The earlier six-Mod bundle confirmation does not cover Tree Info.
@@ -75,6 +77,8 @@ Reviewed all six Mod READMEs, CHANGELOG/version metadata and build/package decla
 ### Stack All 反馈与空盒后续操作 — 2026-09-18
 
 此前 Stack All 改动的本地测试反馈为未发现明显问题，未提供完整存档/联机场景矩阵，也不据此扩大 Navigation 的验收范围。新 G 空盒操作属于后续工作，仍记入未发布，目标 **UNASSIGNED**，实机和联机验收待完成。源码版本保持 0.2.2，仅 Stack All 改用 SDK 2.1.6/r10。
+
+G 支持短按一个及长按连扔（延迟 0.6 秒，间隔 0.12 秒）；提示以原生说明文字和键帽加入右侧按钮列表，没有空盒时整行变暗，保留原生 Q/F 行。版本校验、67 项 CI 工具测试、八种 SDK 构建、89,760 项 Stack All 检查、13 语种检查及 84 项 Stack All 只读游戏契约通过。全仓 SDK/真实引用 IL 和资源对比通过，包括 r10 依赖哈希。本次后续改动未修改游戏安装，未执行 Unity 渲染验收。
 
 ### Tree Info 迁移 — 2026-09-18
 

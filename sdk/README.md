@@ -128,3 +128,8 @@ Tree Info 迁移新增 SDK 2.1.6/r8，仅 Tree Info 固定 r8，其他 Mod 和�
 
 
 Stack All’s Unreleased empty-container action pins r10 for native input gates and the selected-slot Harmony field; other Mod pins stay unchanged. Stack All 的未发布空盒操作固定 r10，补齐原生输入门控与当前格 Harmony 字段，其他 Mod 固定修订不变。
+
+
+2026-09-18: r9 records source `cfbe951` (267 types, 676 methods, 548 fields); r10 records `1580f6a` (265 types, 667 methods, 544 fields). Both retain the same 15 dependency identities, hashes and forwarders as r8. r9 adds native input getters and selected-slot Harmony metadata. r10 adds Color.a to preserve native hint transparency and omits binding-display APIs no longer used after removing the separate hold-text overlay. Existing snapshots are retained. Stack All pins r10; all other Mods keep their prior pins.
+
+2026-09-18：r9 记录源码 `cfbe951`（267 类型、676 方法、548 字段），r10 记录 `1580f6a`（265 类型、667 方法、544 字段）。两者的 15 个依赖身份、哈希和类型转发均与 r8 一致。r9 新增原生输入访问器及当前格 Harmony 元数据；r10 新增 Color.a 以保留原生提示透明度，并去除删除独立长按浮层后不再使用的按键显示接口。保留已有快照，Stack All 固定 r10，其他 Mod 保持原修订。
