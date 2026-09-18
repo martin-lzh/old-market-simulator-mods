@@ -1,4 +1,4 @@
-# Tree Info 0.1.1
+# Tree Info 0.1.0
 
 ## English
 
@@ -8,7 +8,7 @@ Text follows all 13 game languages, with regional aliases and English fallback. 
 
 ### Install and remove
 
-Local source version: **0.1.1**. No public download is available yet. Use a locally verified build for Old Market Simulator **2.1.6**, Windows x64 / Unity Mono, with **BepInEx 5**. Build and SDK details: [development notes](DEVELOPMENT.md). Changes: [CHANGELOG](CHANGELOG.md).
+Local source version: **0.1.0**. No public download is available yet. Use a locally verified build for Old Market Simulator **2.1.6**, Windows x64 / Unity Mono, with **BepInEx 5**. Build and SDK details: [development notes](DEVELOPMENT.md). Changes: [CHANGELOG](CHANGELOG.md).
 
 Exit the game, back up the existing plugin, and put the package's DLL in `BepInEx/plugins/OldMarket.TreeInfo/`. Keep only one active copy. Restart to load it. To roll back, exit and restore the backed-up DLL; to uninstall, remove this plugin's DLL. Keep other plugins, the loader and saves intact. Packages contain only the original DLL, README, CHANGELOG and MIT license.
 
@@ -26,7 +26,7 @@ Pending in-game checks: newly planted, ripe and harvested trees; dry trees; inac
 
 ### 安装与卸载
 
-当前本地源码版本 **0.1.1**，尚无公开下载。适用于 Old Market Simulator **2.1.6**、Windows x64 / Unity Mono、**BepInEx 5**。构建与 SDK 见[开发说明](DEVELOPMENT.md)，改动见[版本记录](CHANGELOG.md)。
+当前本地源码版本 **0.1.0**，尚无公开下载。适用于 Old Market Simulator **2.1.6**、Windows x64 / Unity Mono、**BepInEx 5**。构建与 SDK 见[开发说明](DEVELOPMENT.md)，改动见[版本记录](CHANGELOG.md)。
 
 退出游戏，备份旧插件，将包内 DLL 放入 `BepInEx/plugins/OldMarket.TreeInfo/`，只保留一个启用副本，重新启动游戏加载。回退时退出游戏并恢复备份 DLL；卸载仅删除本插件 DLL，保留其他插件、加载器及存档。包内只含原创 DLL、README、CHANGELOG 和 MIT 许可证。
 

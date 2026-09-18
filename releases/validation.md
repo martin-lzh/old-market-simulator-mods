@@ -1,6 +1,12 @@
 # Validation record / 验证记录
 
 
+## Assigned release targets — 2026-09-18 / 已指定发行目标
+
+Stack All **0.3.0**, Navigation **0.2.0**, Tree Info **0.1.0** are now explicitly assigned for the current feature scope. Their earlier UNASSIGNED notes below are historical. Tree Info starts public versioning at 0.1.0 while retaining all unpublished local 0.1.1 features. SDK pins and prerelease flags are unchanged; this assignment does not itself claim additional runtime testing or publication.
+
+当前功能范围已明确指定 Stack All **0.3.0**、Navigation **0.2.0**、Tree Info **0.1.0**；下方此前 UNASSIGNED 状态仅作历史记录。Tree Info 公开版本从 0.1.0 开始，保留全部未发布本地 0.1.1 功能。SDK 及预发布标记不变，版本指定本身不代表新增实机测试或已发布。
+
 ## Current acceptance — 2026-09-18 / 当前验收
 
 Navigation `921d14b` was installed with Gate 4 texture SHA256 `5a3bcf25959b0bfa4126f86e3a514a6777fc1ced71233d54f5c2cf2c487ad267`; the maintainer then confirmed local in-game testing complete. Stack All `d4e033d` hold guidance/native font testing was also confirmed. These updates supersede the corresponding pending local UI/shoreline statements in earlier entries below. They do not supply a new save/reload, full-language or host/client scenario matrix. The older `e23f986` six-Mod multiplayer confirmation remains source-scoped.
@@ -188,3 +194,9 @@ Release preflight found no active authorization records and therefore zero relea
 重新执行版本／SDK 不可变性、67 项工具测试、八种 SDK 构建及包校验、全部真实引用 IL／资源比对、95 个结构化文件及八个 PowerShell 文件语法检查、actionlint 1.7.12，均通过。Stack All：89,760 项逻辑检查及 84 项游戏契约；Navigation：1,776 项检查、22 项原生名称及 663 项游戏契约；Tree Info：九项收获案例、13 种语言、九项别名及 21 项游戏契约。随后文档改动通过内容／链接／差异及版本检查，不改变运行时代码或 API。
 
 发布预检没有活动授权记录，候选为零。Material Cost 0.5.2、Coordinates 0.1.4、Checkout All 0.1.5、Price Probability 0.1.2 保留此前指定目标，审核文档修正暂记未发布，待按已授权范围整理。Stack All、Navigation、Tree Info 目标仍为 **UNASSIGNED**。发布前须整理编号说明并生成源码绑定记录；三个未指定 Mod 还需明确目标版本。本轮不修改版本、SDK 固定修订或预发布标记，也不执行发布。
+
+## Assigned-version verification — 2026-09-18 / 指定版本验证
+
+Stack All 0.3.0, Navigation 0.2.0 and Tree Info 0.1.0 passed version validation, 67 CI tooling tests, all eight SDK builds/package checks, real-reference IL/resource comparisons and existing game contracts. Syntax checks passed for 95 structured files and eight PowerShell scripts; all local Markdown targets resolve. Runtime changes are limited to Stack All/Tree Info version declarations and startup version strings. SDK pins, gameplay and prerelease flags are unchanged; the versioned packages were not installed or published by this step.
+
+Stack All 0.3.0、Navigation 0.2.0、Tree Info 0.1.0 通过版本验证、67 项 CI 工具测试、八种 SDK 构建及包校验、真实引用 IL／资源比对和现有游戏契约检查。95 个结构化文件及八个 PowerShell 文件语法检查通过，本地 Markdown 链接有效。运行时改动仅限 Stack All／Tree Info 版本声明及启动版本文字；SDK、玩法及预发布标记不变，此步骤未安装或公开发布新编号包。

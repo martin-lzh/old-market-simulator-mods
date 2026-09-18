@@ -1,23 +1,18 @@
-# Stack All 0.2.2 Change Log / 版本记录
+# Stack All 0.3.0 Change Log / 版本记录
 
 [English](#english) · [中文](#中文)
 
 ## English
 
-### Unreleased
+### 0.3.0 — prerelease (pending publication)
 
-- Show a localized “HOLD TO REPEAT” caption above the native controls when multiple items remain. Reuse the game’s font, font material and row layout without a keycap; hide it with the control panel. Version remains 0.2.2; only Stack All moves to game 2.1.6 / SDK r11 for native row ordering. Local hold-guidance/font testing of `d4e033d` is confirmed; broader host/client acceptance remains pending.
-
-- Use the native right-hand control-row layout for G: clone the game’s caption/keycap styling and append it alongside existing controls. Dim the entire row when no empty container is available, and remove the separate plain-text Q/F hold overlay. Preserve the existing Q/F rows and behavior.
-
-- Add G to drop only empty reusable containers from the selected slot: tap for one, hold for 0.6 seconds then repeat every 0.12 seconds. Keep filled/partial containers and other slots unchanged. Show a localized hint that turns gray immediately when no empty remains; menus, focus loss, competing inventory actions and slot changes cancel repeating. Preserve version 0.2.2, migrate only Stack All to game 2.1.6 / SDK r10 for reviewed input and Harmony fields. No save/RPC format change; local hold-guidance/font testing is recorded for `d4e033d`; host/client testing of the new action remains pending.
-
-- Allow ordinary collectibles such as mint leaves and flowers to rejoin matching stacks when their incidental world-day counters differ after dropping and pickup. Preserve product freshness, animal ages and fish-trap use counts; retain 64-item limits, weighted cost and overflow. Version 0.2.2 and SDK 2.1.6/r1 are unchanged; in-game and multiplayer confirmation is pending.
-
-- Treat seeds as physical packets for stacking, drop, throw, placement, overflow, repeat actions and quantity display. Preserve each packet's remaining seeds and metadata without merging contents; planting still consumes one seed. Existing merged seed records retain their saved quantity as one packet. Save records and RPC formats are unchanged, but all peers need the same build. Seed UI, save/reload and multiplayer acceptance remain untested in game. Retain Mod 0.2.2 and SDK 2.1.6/r1.
-- Show only the right-hand physical quantity for single-use, one-unit products such as whole fish. Keep both goods and container counts for reusable containers and multi-unit products, including boxed fish cuts. Inventory, saves and networking are unchanged.
-- Keep one- and two-digit quantities at the native font size with auto-sizing disabled and full slot width. Only goods totals of three or more digits may shrink within the left half to avoid overlapping the container count. Game 2.1.6 uses 22-point inventory numbers. The new display regression still needs in-game visual confirmation; the preceding build's two-computer multiplayer test is complete.
-- Retain version 0.2.2 and SDK 2.1.6/r1; this follow-up awaits a maintainer-assigned release version.
+- Add G to drop one empty reusable container from the selected slot; hold for 0.6 seconds, then repeat every 0.12 seconds. Preserve filled/partial containers, individual metadata and other slots. Exclude seed packets and disposable packaging; cancel on menus, focus loss, competing actions and slot changes.
+- Add G to the native right-hand caption/keycap controls and dim the whole row when no empty remains. Place localized hold guidance above the controls using the game font/material, without a keycap, while multiple units remain. Preserve native Q/F behavior.
+- Treat seeds as physical packets for stacking, drop, throw, placement and overflow, retaining contents and cost without merging packets. Planting consumes one seed. Previously merged seed records remain one packet; original packet counts cannot be recovered.
+- Allow ordinary collectibles such as mint and flowers to rejoin matching stacks despite incidental world-day differences. Preserve food freshness, animal age, fish-trap state, costs, overflow and the 64-item limit.
+- Show only physical quantity for disposable single-unit goods such as whole fish. Preserve native font size for one-/two-digit counts; shrink only larger goods totals within the left half.
+- Include game-free SDK builds and source-bound CI publication. Pin game 2.1.6 / SDK r11; package only the original plugin and documentation. Save/RPC record formats are unchanged; all peers require the same build. Follow README unpacking and backup instructions before removing or downgrading.
+- Local hold/font testing of `d4e033d` is confirmed. Automated stack, localization and game-contract checks passed; later save/reload and host/client scenarios retain their recorded limitations. Version 0.3.0 consolidates the previously unpublished follow-ups.
 
 ### 0.2.2 — prerelease (pending publication)
 
@@ -40,20 +35,15 @@ Older development versions mentioned in the README are not verified downloadable
 
 ## 中文
 
-### 未发布
+### 0.3.0 — 预发布（待发布）
 
-- 剩余多个物品时，在原生按钮组上方显示本地化的“长按可连续操作”。复用游戏字体、字体材质和行布局，不加键帽，随操作面板隐藏。版本保持 0.2.2；仅 Stack All 迁移游戏 2.1.6 / SDK r11，以使用原生行排序接口。`d4e033d` 长按说明及字体已获本地测试确认，后续房主/客人场景验收待完成。
-
-- G 提示复用原生右侧按钮行的文字与键帽样式，和现有操作一起排布；没有空盒时整行变暗。移除独立的 Q/F 纯文字长按浮层，保留原生 Q/F 按钮行和行为。
-
-- 新增 G 专门丢出当前格的空可复用容器：短按一个，长按 0.6 秒后每 0.12 秒一个。保留满盒、半满盒及其他格；本地化提示在空盒耗尽时立即变灰，菜单、失焦、其他库存操作和切换格子会取消连扔。版本保持 0.2.2，仅 Stack All 迁移到游戏 2.1.6 / SDK r10，补齐经核对的输入与 Harmony 字段。不改变存档/RPC 格式，`d4e033d` 长按说明及字体已有本地测试记录，新操作的房主/客人场景仍待验证。
-
-- 修复薄荷叶、花等普通收集品丢出后因地面天数计数不同而无法重新并入同类堆叠的问题。保留食品保鲜、动物年龄、鱼笼使用次数、64 件上限、加权成本与溢出处理。版本 0.2.2 和 SDK 2.1.6/r1 不变；实机与联机仍待确认。
-
-- 种子按实物包处理堆叠、丢下、投掷、放置、溢出、连续操作及数量显示。各包保留剩余种子和元数据，不合并包内数量；播种仍消耗一粒。旧版已合并的种子记录按存档数量保留为一包。存档记录和 RPC 格式不变，但所有玩家须使用相同构建。种子 UI、保存重载和联机仍待实机验收；保持 Mod 0.2.2 和 SDK 2.1.6/r1。
-- 整条鱼等容量为 1、用完消失的单件商品只显示右侧实际数量；可复用容器及多件装商品（包括鱼肉箱）仍显示商品量和容器数。不改变库存、存档或网络逻辑。
-- 一位数和两位数使用原生字号，关闭自动缩放并使用整个格子的宽度；只有三位及以上的商品总量可在左半格缩小，避免与容器数重叠；游戏 2.1.6 的库存数字原生字号为 22。本次显示修复仍待实机视觉确认，修复前构建的双实机联机测试已完成。
-- 保持版本 0.2.2 和 SDK 2.1.6/r1；本次后续修复尚待维护者指定发行版本。
+- 新增 G 丢出当前格的一个空可复用容器；长按 0.6 秒后每 0.12 秒重复。保留满盒、半满盒、独立元数据及其他格；排除种子包和一次性包装，菜单、失焦、其他动作及切换格子会取消连扔。
+- G 提示加入原生右侧文字／键帽控件，没有空盒时整行变暗。剩余多个物品时，在按钮上方用游戏字体及材质显示本地化长按说明，不加键帽；保留原生 Q/F 行为。
+- 种子按实物包处理堆叠、丢下、投掷、放置与溢出，保留各包内容和成本，不合并种子包；播种消耗一粒。旧版已合并的记录仍保留为一包，无法还原原包数。
+- 薄荷、花等普通收集品不再因地面天数差异而无法重新堆叠；保留食品保鲜、动物年龄、鱼笼状态、成本、溢出和 64 件上限。
+- 整条鱼等一次性单件商品仅显示实际数量；一至两位数保留原生字号，仅更大的商品量在左半格缩小。
+- 接入无游戏 SDK 构建及源码绑定的 CI 发布，固定游戏 2.1.6 / SDK r11，包内仅含原创插件与文档。存档／RPC 记录格式不变，全员需使用同一构建；卸载或降级前遵循 README 拆包及备份说明。
+- `d4e033d` 长按说明及字体已有本地测试确认；自动堆叠、本地化和游戏契约检查通过，后续存档重载及房主／客人场景仍保留已记录限制。0.3.0 汇总此前未发布的后续改动。
 
 ### 0.2.2 — 预发布（待发布）
 

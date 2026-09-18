@@ -17,7 +17,7 @@ There are no user options; capacity and save representation are compatibility ru
 ./stack-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
-The build uses local game/BepInEx assemblies as read-only references, runs checks, and creates `outputs/OldMarket.StackAll-0.2.2.zip`; it does not install. All required localization source, resources, and tests are contained in `stack-all-mod/localization/`, so this Mod directory builds independently. Startup rejects an unreviewed game assembly or patch surface.
+The build uses local game/BepInEx assemblies as read-only references, runs checks, and creates `outputs/OldMarket.StackAll-0.3.0.zip`; it does not install. All required localization source, resources, and tests are contained in `stack-all-mod/localization/`, so this Mod directory builds independently. Startup rejects an unreviewed game assembly or patch surface.
 
 ## Earlier validation notes
 
@@ -34,7 +34,7 @@ In-game UI, normal save/load, and real multiplayer have not been verified for th
 ./stack-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
-构建只读引用本机程序集，运行检查并生成 `outputs/OldMarket.StackAll-0.2.2.zip`，不会安装。所需本地化源码、资源和测试均位于 `stack-all-mod/localization/`，因此本 Mod 目录可以独立构建。原有功能测试、IL 契约检查和 Mod 自带本地化检查均通过；尚未验证游戏内 UI、正常保存/读取和真实多人联机。首次使用前请备份重要存档。
+构建只读引用本机程序集，运行检查并生成 `outputs/OldMarket.StackAll-0.3.0.zip`，不会安装。所需本地化源码、资源和测试均位于 `stack-all-mod/localization/`，因此本 Mod 目录可以独立构建。原有功能测试、IL 契约检查和 Mod 自带本地化检查均通过；尚未验证游戏内 UI、正常保存/读取和真实多人联机。首次使用前请备份重要存档。
 
 ## SDK and automated builds / SDK 与自动构建
 
@@ -71,3 +71,7 @@ G 提示复制 controlHintPanel 内现有的单键原生行，保持布局组、
 The hold caption clones a native row without its keycap and uses Transform.SetAsFirstSibling so the native layout places it above the actions. It shares the native font, font material and size and appears only while more than one unit remains. SDK r11 adds this verified Transform method; other pins are unchanged.
 
 长按说明复制原生行并隐藏键帽，通过 Transform.SetAsFirstSibling 排在操作上方；字体、字体材质和字号跟随游戏，仅剩余多个物品时显示。SDK r11 增加经真实引用核对的 Transform 方法，其他 Mod 固定修订不变。
+
+Current release target: **0.3.0**; game/SDK pin is unchanged. This version assignment does not alter runtime behavior or extend the recorded test scope.
+
+当前发行目标：**0.3.0**，游戏／SDK 固定修订不变；版本指定不改变运行时行为，也不扩展已记录测试范围。

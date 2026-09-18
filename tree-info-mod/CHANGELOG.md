@@ -2,30 +2,28 @@
 
 ## English
 
-### Unreleased
+### 0.1.0 — prerelease (pending first publication)
 
-- Migrate the original Tree Info source, tests and MIT license from the local analysis project into this repository. Preserve source version 0.1.1; no public release or new target version is assigned.
-- Register BepInEx builds, package allowlists, game-free tests and real-game contract checks with CI. Pin compilation SDK 2.1.6/r8, including reflected tree state and Harmony interaction fields. No gameplay or save changes; in-game UI, language switching and host/client acceptance remain pending.
+- Show planted fruit trees’ production seasons and estimated harvest readiness in the native interaction subtitle. Read actual tree thresholds and growth state; assume daily watering, identify dry trees and insufficient time before season end, and show ripe fruit as harvestable even outside its production season.
+- Support all 13 game languages, regional aliases and English fallback; reuse native season translations. Include the MIT license.
+- Migrate original source and tests into this public repository; integrate BepInEx builds, package allowlists, game-free tests and read-only game contracts. Pin game 2.1.6 / SDK r8 for reflected tree state and Harmony interaction fields. Do not modify gameplay, saves or RPCs.
+- Start public versioning at 0.1.0, including the features from the unpublished local 0.1.1 build. This is release numbering, not a feature rollback. No previous public Tree Info tag or asset is replaced. UI/language and host/client coverage remains as recorded; retain prerelease status.
 
-### 0.1.1 — historical local build, not publicly released
+### Local development history (not public releases)
 
-- Add all 13 game languages, regional locale aliases and English fallback; include the MIT license. This source version existed in the analysis project before migration.
-
-### 0.1.0 — historical local build, 2026-09-12
-
-- Display fruit-tree production season and estimated harvest readiness assuming daily watering. Installed locally on 2026-09-12; no public release in this repository.
+- Local 0.1.1 added 13-language support, locale aliases, English fallback and the MIT license before repository migration.
+- Local 0.1.0 was installed on 2026-09-12 with fruit-tree season and harvest estimates. Those local labels are not public release history.
 
 ## 中文
 
-### 未发布
+### 0.1.0 — 预发布（首次发布待完成）
 
-- 将原创 Tree Info 源码、测试和 MIT 许可证从本地分析项目迁入本仓库。保留已有源码版本 0.1.1；未分配新的目标版本，也未公开发布。
-- 接入 BepInEx 构建、包白名单、无游戏测试及真实游戏契约检查，固定编译 SDK 2.1.6/r8，包含反射读取的树木状态和 Harmony 交互字段。不修改玩法或存档；实机 UI、语言切换及房主/客人验收仍待完成。
+- 在原生交互副标题显示已种植果树的生产季节及成熟预测，读取真实阈值和生长状态，以每日浇水为前提；识别未浇水及季末时间不足，非生产季节的成熟果实仍显示可采收。
+- 支持游戏全部 13 种语言、地区别名及英语回退，季节名复用原生翻译，附 MIT 许可证。
+- 将原创源码和测试迁入公开仓库，接入 BepInEx 构建、包白名单、无游戏测试及只读游戏契约。固定游戏 2.1.6 / SDK r8，覆盖反射树木状态及 Harmony 交互字段；不修改玩法、存档或 RPC。
+- 公开版本从 0.1.0 开始，包含未发布本地 0.1.1 的全部功能；仅调整发行编号，不回退功能，也不覆盖任何已公开 Tree Info 标签或附件。UI／语言及房主／客人覆盖仍按验证记录区分，保持预发布。
 
-### 0.1.1 — 历史本地构建，未公开发布
+### 本地开发历史（非公开版本）
 
-- 增加游戏全部 13 种语言、地区代码及英语回退，附 MIT 许可证；此源码版本在迁移前已存在于分析项目。
-
-### 0.1.0 — 历史本地构建，2026-09-12
-
-- 显示果树生产季节及按每日浇水预测的成熟信息。2026-09-12 已本地安装；未在本仓库公开发布。
+- 本地 0.1.1 在迁入仓库前增加 13 种语言、地区别名、英语回退及 MIT 许可证。
+- 本地 0.1.0 于 2026-09-12 安装，包含果树季节及成熟预测；这些本地编号不作为公开发行历史。

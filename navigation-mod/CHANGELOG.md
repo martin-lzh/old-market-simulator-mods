@@ -2,7 +2,7 @@
 
 ## English
 
-### Unreleased
+### 0.2.0 — prerelease (pending publication)
 
 - Regenerate Gate 4 artwork with its missing elevated lake, using a local geometry reference that clips the actual water mesh against terrain heights instead of assuming sea level. Preserve map bounds, return POI, version 0.2.0 and SDK 2.1.6/r7; refresh the packaged texture hash. Local in-game testing of corrected build `921d14b` is confirmed; this does not extend the multiplayer test scope.
 
@@ -20,9 +20,7 @@
 
 - Include the Eastern Town base map, four unlock overlays and four map/POI manifests in the Navigation release ZIP. Maps are tracked Mod resources and install with the DLL; no separate map download is needed.
 - Share the explicit map allowlist between CI and local packaging. Verify hashes, PNG integrity, texture references and metadata/POIs, and include map hashes in build evidence. Reject missing, modified or unexpected ZIP entries; continue excluding SDK/game/loader binaries and personal files.
-- Keep version 0.2.0 and game 2.1.6 / SDK r7 unchanged. This packaging follow-up awaits a target version; the previous source-bound approval does not cover these new inputs and is not refreshed automatically.
-
-### 0.2.0 — 2026-09-14
+- Consolidate the complete map, UI and localization scope into the assigned 0.2.0 first public release. Retain game 2.1.6 / SDK r7; a new source-bound record replaces the obsolete development candidate for publication.
 
 - Reuse the same colored, outlined POI/personal sprite on the compass and in world guidance; keep the entire 25 px compass icon within its strip.
 
@@ -107,7 +105,7 @@ Experimental initial build; not installed or verified in game.
 
 ## 中文
 
-### 未发布
+### 0.2.0 — 预发布（待发布）
 
 - 重新生成大门4底图，补回遗漏的高处湖泊；本地参考图按真实水面网格与地形高度裁剪，不再假定海平面。地图边界、返回点、版本 0.2.0 和 SDK 2.1.6/r7 不变，更新打包贴图哈希。修正构建 `921d14b` 已获本地实机测试确认，不据此扩展联机测试范围。
 
@@ -125,9 +123,7 @@ Experimental initial build; not installed or verified in game.
 
 - 将东方小镇底图、四种解锁覆盖层及四份地图/POI 元数据纳入 Navigation 发行 ZIP。地图作为 Mod 资源跟踪，与 DLL 一起安装，无需另行下载地图。
 - CI 与本地构建共用明确的地图文件白名单，检查哈希、PNG 完整性、贴图引用和地图/POI 元数据，并在构建记录中保存地图哈希。拒绝遗漏、修改或额外 ZIP 条目，继续排除 SDK、游戏、加载器程序集及个人文件。
-- 保持版本 0.2.0、游戏 2.1.6 / SDK r7。本次打包修订尚待指定目标版本；旧的绑定源码授权不覆盖新输入，不自动刷新授权。
-
-### 0.2.0 — 2026-09-14
+- 将完整地图、UI 及本地化范围整理到已指定的首次公开版本 0.2.0，保持游戏 2.1.6 / SDK r7；使用新的源码绑定记录发布，旧开发候选记录继续归档。
 
 - 罗盘目标标记与 3D 指引复用同一 POI/个人标记图标、颜色和描边，25 px 图标完整限制在罗盘条内。
 

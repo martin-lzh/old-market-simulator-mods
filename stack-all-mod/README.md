@@ -6,7 +6,7 @@
 
 Carry more without losing track of your baskets and boxes. Each product slot can hold up to 64 containers; tools stay separate.
 
-[Download 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) · 0.2.2 is being prepared and is not on the release page yet.
+[Download 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) · 0.3.0 is being prepared and is not on the release page yet.
 
 ## Install
 
@@ -66,7 +66,7 @@ For a compatible update, close the game and back up your save and old DLL before
 
 让一个格子装下更多篮子和箱子，又能清楚看见实际数量。每个商品格最多容纳 64 个容器，工具仍然单独放置。
 
-[下载 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) · 0.2.2 正在准备，发布页暂时仍是 0.2.1。
+[下载 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) · 0.3.0 正在准备，发布页暂时仍是 0.2.1。
 
 ## 安装
 
