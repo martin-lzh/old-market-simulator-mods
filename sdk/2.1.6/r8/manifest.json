@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "gameVersion": "2.1.6",
+  "revision": 8,
+  "platform": "Windows x64 / Unity Mono (verify Unity version locally)",
+  "gameAssemblySha256": "FA6CE6B89AEBDF50DD46FF9C857650DB0E9CC618B1CE939F58501E0DC59C6296",
+  "apiSha256": "41580a1e2754af96deb7bd42d83b3e409a9e47674329c486572b54a67457f80d",
+  "sourceCommit": "e2057f8ccf9aa94e3ccebc5d87efffba908d65e8",
+  "verification": "API export only; compile equivalence, game contracts and in-game acceptance still required."
+}

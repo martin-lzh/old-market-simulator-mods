@@ -2,6 +2,12 @@
 
 ## English
 
+### Tree Info migration — 2026-09-18
+
+Tree Info 0.1.1 joins the public source repository from the local analysis project. Its existing version is retained, migration changes are Unreleased, the target release version is **UNASSIGNED**, and no release authorization was created. Game baseline remains 2.1.6; only Tree Info pins the new SDK 2.1.6/r8. The earlier six-Mod bundle confirmation does not cover Tree Info.
+
+Version/map validation, 66 CI tooling tests, all eight SDK loader builds and repository-wide real-reference symbolic IL/resource comparisons passed. Tree Info passed nine harvest-estimate cases, 13 language checks, nine locale alias/fallback checks and 21 read-only game/plugin contracts. SDK r8 verifies 15 dependency hashes; compiler-only references exclude implementation/resources. Script syntax and actionlint 1.7.12 passed. No Unity execution or in-game UI, language switching, save or multiplayer acceptance was performed. Installation is a separate local operation and does not establish runtime acceptance.
+
 ### Navigation localization follow-up — 2026-09-15
 
 Complete the 13-language interface with localized titles for all 13 packaged map manifests and original functional labels for rest, market, water, calendar and return POIs. The locale list was checked against game 2.1.6 locale assets; no game translation tables are bundled. Version 0.2.0 / SDK 2.1.6/r7 remain unchanged, with target version **UNASSIGNED** and changes under Unreleased.
@@ -61,6 +67,12 @@ The CI tooling suite passed 48 tests during Navigation 0.2.0 preparation. See ea
 Reviewed all six Mod READMEs, CHANGELOG/version metadata and build/package declarations, plus repository setup, support, security, conduct, templates, SDK and release documentation. Corrected Navigation's obsolete test status and source-version wording, current SDK indexing, root build/CHANGELOG links and package contents, and the Navigation release-tag catalog. Existing published download links still resolve to the five previously published prereleases; 0.2.0 is not presented as an already published Navigation download. Other Mod safety and rollback notes remain applicable.
 
 ## 中文
+
+### Tree Info 迁移 — 2026-09-18
+
+Tree Info 0.1.1 从本地分析项目纳入公开源码仓库，保留既有版本，迁移改动记入未发布，目标发行版本 **UNASSIGNED**，未新增发行授权。游戏基线仍为 2.1.6，仅 Tree Info 固定新增 SDK 2.1.6/r8。此前六 Mod 合集的实机确认不覆盖 Tree Info。
+
+版本/地图校验、66 项 CI 工具测试、全部八种 SDK 加载器构建及全仓真实引用符号 IL/资源对比通过。Tree Info 通过 9 项成熟时间用例、13 语种检查、9 项地区代码/回退检查及 21 项只读游戏/插件契约。r8 核验 15 个依赖哈希，编译引用排除实现和资源。脚本语法及 actionlint 1.7.12 通过。未执行 Unity 或实机 UI、语言切换、存档及联机验收；安装另行在本机进行，不等同于运行验收。
 
 ### Navigation 本地化后续改动 — 2026-09-15
 

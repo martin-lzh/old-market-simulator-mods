@@ -47,6 +47,22 @@ class VersionTests(unittest.TestCase):
         self.assertEqual(ci.variants("navigation"), ["BepInEx"])
         self.assertTrue((ci.ROOT / "navigation-mod/tests/Navigation.Tests.csproj").is_file())
 
+    def test_tree_info_build_and_reflection_contracts(self):
+        c = ci.config("tree-info")
+        self.assertEqual(ci.variants("tree-info"), ["BepInEx"])
+        self.assertEqual(c["sdk"], "2.1.6/r8")
+        self.assertTrue((c["directory"] / "tests/Tests.csproj").is_file())
+        self.assertTrue((c["directory"] / "tests/ContractChecks.csproj").is_file())
+        self.assertEqual(ci.ET.parse(c["project"]).find(".//ManagedDir").attrib["Condition"], "'$(ManagedDir)' == ''")
+        api = ci.json.loads((ci.ROOT / "sdk" / c["sdk"] / "api.json").read_text())
+        types = {t["Name"]: t for t in api["Types"]}
+        for name, argument in (("dayCounter", "System.Int32"), ("isWatered", "System.Boolean")):
+            field = next(f for f in types["BlockTree"]["Fields"] if f["Name"] == name)
+            self.assertEqual(field["Type"]["Element"]["Name"], "Unity.Netcode.NetworkVariable`1")
+            self.assertEqual(field["Type"]["Arguments"][0]["Name"], argument)
+        self.assertIn("InteractionRay", {m["Name"] for m in types["PlayerInteraction"]["Methods"]})
+        self.assertTrue({"mainCamera", "isInteractionEnabled"} <= {f["Name"] for f in types["PlayerInteraction"]["Fields"]})
+
     def test_navigation_managed_directory_respects_override(self):
         node = ci.ET.parse(ci.ROOT / "navigation-mod/Navigation.csproj").find(".//ManagedDir")
         self.assertEqual(node.attrib.get("Condition"), "'$(ManagedDir)' == ''")

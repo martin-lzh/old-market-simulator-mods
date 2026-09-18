@@ -118,3 +118,8 @@ Validation on 2026-09-13: r7 was exported from source `7d333b8`, with 15 assembl
 Tree Info migration adds SDK 2.1.6/r8 for tree state, season and interaction reflection declarations. Only Tree Info pins r8; other Mods keep their existing SDKs. Historical snapshots remain unchanged. No game implementation or resource is included.
 
 Tree Info 迁移新增 SDK 2.1.6/r8，仅 Tree Info 固定 r8，其他 Mod 和历史快照不变；新增树木状态、季节及交互反射声明，不含游戏实现或资源。
+
+
+2026-09-18: r8 was exported from `e2057f8` with 15 assemblies, 267 types, 671 methods and 547 fields. Assembly identities, hashes and forwarders match r7. The snapshot adds Tree Info tree/season APIs and explicit reflection/Harmony fields; unused JsonUtility.FromJson is absent from the current build inputs. Exported signatures, generic NetworkVariable arguments and enum declarations were reviewed; all eight SDK/real-reference build comparisons pass, including 21 Tree Info contracts. No runtime acceptance is implied.
+
+2026-09-18：r8 从 `e2057f8` 导出，包含 15 个程序集、267 个类型、671 个方法、547 个字段。程序集身份、哈希和类型转发同 r7；新增树木/季节 API 及显式反射/Harmony 字段，当前输入不再引用 JsonUtility.FromJson。已审查签名、NetworkVariable 泛型参数和枚举声明；八种 SDK/真实引用构建对比及 21 项 Tree Info 契约通过，不代表实机验收。
