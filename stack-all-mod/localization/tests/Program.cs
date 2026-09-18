@@ -16,12 +16,15 @@ internal static class Program
     private static void Main()
     {
         Equal(Locales.Order(), Catalog.Languages.Order(), "locales");
-        Equal(new[] { "hold_repeat" }, Catalog.Keys, "keys");
+        Equal(new[] { "hold_repeat", "drop_empty" }, Catalog.Keys, "keys");
         var catalogs = (Dictionary<string, Dictionary<string, string>>)typeof(Catalog)
             .GetField("Messages", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
         foreach (string locale in Locales)
         {
-            Equal(new[] { "hold_repeat" }, catalogs[locale].Keys, $"{locale} keys");
+            Equal(new[] { "hold_repeat", "drop_empty" }, catalogs[locale].Keys, $"{locale} keys");
+            string empty = Catalog.Template(locale, "drop_empty");
+            Equal(new[] { "{0}" }, Positional.Matches(empty).Select(x => x.Value), $"{locale} empty-container placeholder");
+            Check(Catalog.Format(locale, "drop_empty", _ => "unused", "G").Contains("G"), $"{locale} empty-container binding");
             string template = Catalog.Template(locale, "hold_repeat");
             Equal(new[] { "{0}", "{1}" }, Positional.Matches(template).Select(x => x.Value).Order(), $"{locale} placeholders");
             Check(!string.IsNullOrWhiteSpace(Catalog.Format(locale, "hold_repeat", _ => "unused", "Q", "Drop")), $"{locale} formatting");

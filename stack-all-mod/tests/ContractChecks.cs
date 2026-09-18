@@ -89,4 +89,25 @@ Check(repeat.Methods.Single(m => m.Name == "ShouldAct").Body.Instructions.Any(i 
 var hint = plugin.MainModule.Types.Single(t => t.Name == "ActionHint");
 Check(hint.Methods.Single(m => m.Name == "Show").Body.Instructions.Any(i => i.Operand is FieldReference f && f.Name == "controlHintPanel"), "hint follows native operation panel");
 Check(hint.Methods.Single(m => m.Name == "Binding").Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "GetBindingDisplayString"), "hint uses actual bindings");
+Check(Type("PlayerInventory").Fields.Any(f => f.Name == "currentSlot" &&
+    f.FieldType.FullName == "Unity.Netcode.NetworkVariable`1<System.Int32>"), "empty action current-slot injection type");
+Check(Method("PlayerInventory", "LateUpdate").Parameters.Count == 0 &&
+    Method("PlayerInventory", "LateUpdate").ReturnType.FullName == "System.Void", "empty action LateUpdate target");
+var emptyAction = plugin.MainModule.Types.Single(t => t.Name == "EmptyContainerAction");
+var allowed = emptyAction.Methods.Single(m => m.Name == "Allowed").Body.Instructions;
+foreach (string name in new[] { "get_IsOwner", "get_IsSpawned", "get_IsListening", "get_isFocused", "get_timeScale",
+    "get_lockState", "IsAnyPanelActive", "get_enabled", "get_Drop", "get_Throw", "get_Place", "get_Refill",
+    "get_PrimaryInteraction", "get_SecondaryInteraction" })
+    Check(allowed.Any(i => i.Operand is MethodReference m && m.Name == name), "empty action gate " + name);
+var emptyTick = emptyAction.Methods.Single(m => m.Name == "Tick").Body.Instructions;
+Check(emptyTick.Any(i => i.Operand is MethodReference m && m.DeclaringType.Name == "RepeatGate" && m.Name == "Tick"), "G uses paced repeat state");
+Check(emptyTick.Any(i => i.Operand is MethodReference m && m.DeclaringType.Name == "EmptyContainerPlan" && m.Name == "Count"), "G repeats empty count rather than total containers");
+var updateHint = mod.Methods.Single(m => m.Name == "UpdateHints");
+Check(updateHint.Parameters.Last().Name == "___currentSlot", "G injects the actual selected slot");
+foreach (string name in new[] { "Take", "Apply", "SpillContainer" })
+    Check(updateHint.Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == name), "empty removal path " + name);
+Check(!updateHint.Body.Instructions.Any(i => i.Operand is MethodReference m &&
+    (m.Name == "UseItem" || m.Name == "ReduceCurrentItemAmount")), "empty action never consumes held goods");
+Check(hint.Methods.Single(m => m.Name == "Show").Body.Instructions.Any(i =>
+    i.OpCode == OpCodes.Ldstr && (string)i.Operand == "<color=#888888>"), "empty hint includes muted state");
 Console.WriteLine($"PASS: {checks} game IL and patch contract checks (no Unity methods executed)");

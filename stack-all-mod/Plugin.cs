@@ -81,9 +81,25 @@ namespace OldMarket.StackAll
         }
 
         private void OnDestroy() { harmony?.UnpatchSelf(); Batching.Clear(); ContainerView.Clear(); Hint.Destroy(); }
-        private static void UpdateHints(PlayerInventory __instance)
+        private static void UpdateHints(PlayerInventory __instance, NetworkVariable<int> ___currentSlot)
         {
-            if (__instance.IsOwner && __instance.IsSpawned) Hint.Show(__instance);
+            if (!__instance.IsOwner || !__instance.IsSpawned) return;
+            int group = ___currentSlot.Value;
+            if (GameManager.Instance == null || group < 0 || group >= __instance.maxSlots || group >= __instance.slots.Count)
+            { Hint.Destroy(); return; }
+            if (EmptyContainerAction.Tick(__instance, group, Batching.Contains(__instance)))
+            {
+                var next = Snapshot(__instance);
+                if (EmptyContainerPlan.Take(next, __instance.maxSlots, group,
+                    __instance.GetCurrentInventorySlot().itemId, EmptyContainerAction.IsReusable(__instance), out var empty))
+                {
+                    // Remove only the selected empty physical record, then use the existing spawn RPC.
+                    // Filled containers and their metadata never pass through native UseItem.
+                    Apply(__instance, next, true);
+                    SpillContainer(__instance, empty);
+                }
+            }
+            Hint.Show(__instance, EmptyContainerAction.Available(__instance, group));
         }
         private static void ClearPlayerUi(PlayerInventory __instance)
         {

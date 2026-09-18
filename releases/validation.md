@@ -2,6 +2,10 @@
 
 ## English
 
+### Stack All feedback and empty-container follow-up — 2026-09-18
+
+Local testing of the preceding Stack All changes was reported without major issues. No detailed save/multiplayer scenario matrix was supplied, and no broader Navigation acceptance is inferred. The new G empty-container action is subsequent work and remains Unreleased, target **UNASSIGNED**, with in-game and multiplayer acceptance pending. Source version stays 0.2.2; only Stack All moves to SDK 2.1.6/r9.
+
 ### Tree Info migration — 2026-09-18
 
 Tree Info 0.1.1 joins the public source repository from the local analysis project. Its existing version is retained, migration changes are Unreleased, the target release version is **UNASSIGNED**, and no release authorization was created. Game baseline remains 2.1.6; only Tree Info pins the new SDK 2.1.6/r8. The earlier six-Mod bundle confirmation does not cover Tree Info.
@@ -67,6 +71,10 @@ The CI tooling suite passed 48 tests during Navigation 0.2.0 preparation. See ea
 Reviewed all six Mod READMEs, CHANGELOG/version metadata and build/package declarations, plus repository setup, support, security, conduct, templates, SDK and release documentation. Corrected Navigation's obsolete test status and source-version wording, current SDK indexing, root build/CHANGELOG links and package contents, and the Navigation release-tag catalog. Existing published download links still resolve to the five previously published prereleases; 0.2.0 is not presented as an already published Navigation download. Other Mod safety and rollback notes remain applicable.
 
 ## 中文
+
+### Stack All 反馈与空盒后续操作 — 2026-09-18
+
+此前 Stack All 改动的本地测试反馈为未发现明显问题，未提供完整存档/联机场景矩阵，也不据此扩大 Navigation 的验收范围。新 G 空盒操作属于后续工作，仍记入未发布，目标 **UNASSIGNED**，实机和联机验收待完成。源码版本保持 0.2.2，仅 Stack All 改用 SDK 2.1.6/r9。
 
 ### Tree Info 迁移 — 2026-09-18
 

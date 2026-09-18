@@ -15,12 +15,16 @@ namespace OldMarket.StackAll
         private float nextBindings;
         private TextMeshProUGUI native;
         private string language;
+        private bool lastRepeat, lastContainer, lastEmpty;
 
-        internal void Show(PlayerInventory inventory)
+        internal void Show(PlayerInventory inventory, bool hasEmpty)
         {
+            bool repeat = RepeatActions.Units(inventory) > 1;
+            bool container = EmptyContainerAction.IsReusable(inventory);
             var panel = inventory.controlHintPanel != null ? inventory.controlHintPanel.transform as RectTransform : null;
             if (panel == null || !panel.gameObject.activeInHierarchy || !Application.isFocused || Time.timeScale <= 0 ||
-                UIManager.Instance == null || UIManager.Instance.IsAnyPanelActive() || RepeatActions.Units(inventory) <= 1)
+                InputManager.Instance == null || UIManager.Instance == null || UIManager.Instance.IsAnyPanelActive() ||
+                (!repeat && !container))
             { if (text != null) text.gameObject.SetActive(false); return; }
             var root = panel.parent as RectTransform;
             if (root == null) return;
@@ -58,11 +62,19 @@ namespace OldMarket.StackAll
                 text.fontWeight = native.fontWeight;
                 text.color = native.color;
             }
-            if (Time.unscaledTime >= nextBindings || language != GameText.Stamp)
+            if (Time.unscaledTime >= nextBindings || language != GameText.Stamp ||
+                repeat != lastRepeat || container != lastContainer || hasEmpty != lastEmpty)
             {
                 var actions = InputManager.Instance.inputMaster.Player;
-                string message = GameText.Get("hold_repeat", Binding(actions.Drop), GameText.Native("drop")) + "\n" +
-                    GameText.Get("hold_repeat", Binding(actions.Throw), GameText.Native("throw"));
+                string message = repeat ? GameText.Get("hold_repeat", Binding(actions.Drop), GameText.Native("drop")) + "\n" +
+                    GameText.Get("hold_repeat", Binding(actions.Throw), GameText.Native("throw")) : "";
+                if (container)
+                {
+                    string emptyHint = GameText.Get("drop_empty", "G");
+                    if (!hasEmpty) emptyHint = "<color=#888888>" + emptyHint + "</color>";
+                    message += (message.Length == 0 ? "" : "\n") + emptyHint;
+                }
+                lastRepeat = repeat; lastContainer = container; lastEmpty = hasEmpty;
                 language = GameText.Stamp;
                 if (text.text != message) text.text = message;
                 nextBindings = Time.unscaledTime + .25f;

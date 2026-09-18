@@ -198,6 +198,7 @@ gate.Tick(true, true, true, 0, 1, 64, 0);
 Check(gate.Tick(true, false, true, 0, 1, 63, 10), "low FPS still emits only one action");
 Check(!gate.Tick(true, false, true, 0, 1, 62, 10), "no catch-up burst on same frame");
 ContainerViewChecks.Run(Check);
+EmptyContainerChecks.Run(Check);
 Console.WriteLine($"PASS: {checks} stack, container, input and display checks");
 
 // Test stand-in for the native network value type: no Unity or game code is executed.

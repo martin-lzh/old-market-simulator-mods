@@ -38,9 +38,9 @@ In-game UI, normal save/load, and real multiplayer have not been verified for th
 
 ## SDK and automated builds / SDK 与自动构建
 
-This Mod pins its compilation SDK in [release.json](release.json). Current baseline: game 2.1.6 / SDK r1. Run `python tools/ci.py build` from the repository root for a game-free build. See [SDK maintenance](../sdk/README.md) and [CI releases](../releases/README.md). Compilation does not replace in-game compatibility checks.
+This Mod pins its compilation SDK in [release.json](release.json). Current baseline: game 2.1.6 / SDK r9. Run `python tools/ci.py build` from the repository root for a game-free build. See [SDK maintenance](../sdk/README.md) and [CI releases](../releases/README.md). Compilation does not replace in-game compatibility checks.
 
-本 Mod 在 [release.json](release.json) 固定编译 SDK，当前基线为游戏 2.1.6 / SDK r1。从仓库根目录运行 `python tools/ci.py build` 可无游戏文件构建。见 [SDK 维护](../sdk/README.md)和 [CI 发布](../releases/README.md)；编译不能代替实机兼容验证。
+本 Mod 在 [release.json](release.json) 固定编译 SDK，当前基线为游戏 2.1.6 / SDK r9。从仓库根目录运行 `python tools/ci.py build` 可无游戏文件构建。见 [SDK 维护](../sdk/README.md)和 [CI 发布](../releases/README.md)；编译不能代替实机兼容验证。
 
 ## Collectible pickup compatibility / 收集品重新拾取兼容性
 
@@ -51,3 +51,14 @@ Game 2.1.6 gives harvested resources a zero day counter, while Item.OnDayChanged
 Validation for this collectible fix: 89,299 stack/container/input/display checks, 65 CI tooling tests, all SDK builds and 57 read-only game IL/patch contracts passed. The 13 r1 dependency hashes and Stack All SDK/real-reference symbolic IL and resources matched on game 2.1.6. No Unity runtime or multiplayer test was performed.
 
 本次收集品修复通过 89,299 项堆叠/容器/输入/显示检查、65 项 CI 工具测试、全部 SDK 构建与 57 项只读游戏 IL/补丁契约检查；游戏 2.1.6 的 r1 依赖哈希及 Stack All SDK/真实引用符号 IL 和资源比对通过。未执行 Unity 实机与联机测试。
+
+
+## Empty-container action / 空盒操作
+
+G uses the existing RepeatGate: one immediate drop, 0.6-second hold delay, then one every 0.12 seconds. The batch tracks only empty reusable containers in the selected group, not total goods/containers. Removing a backing record preserves its item/cost/age metadata for the existing spawn RPC and leaves all filled records intact. Held input cannot resume after cancellation or silently extend to newly acquired empties. Native gameplay-action enablement, menus, focus, cursor lock, network state and competing inventory actions gate disposal. The action runs after native inventory LateUpdate, and its hint immediately reflects the remaining empties.
+
+G 复用 RepeatGate：立即丢一个，长按 0.6 秒后每 0.12 秒一个，只计当前格空的可复用容器。移除空盒记录后使用现有生成 RPC，保留物品、成本与天数元数据，不改变有货容器。取消后须松开重按，新增空盒不能延长原批次。原生操作启用状态、菜单、焦点、鼠标锁定、网络状态及冲突库存操作均参与门控；操作在原生 LateUpdate 后执行，提示即时更新。
+
+SDK r9 adds the required native input getters and explicitly records PlayerInventory.currentSlot/LateUpdate for Harmony injection. Only Stack All changes its pin. The game remains 2.1.6, Mod version remains 0.2.2, and existing save/RPC formats are unchanged. In-game UI, hold timing and host/client acceptance for G remain pending.
+
+SDK r9 补充实际输入访问器及 Harmony 注入的 PlayerInventory.currentSlot/LateUpdate，仅变更 Stack All 固定修订；游戏 2.1.6、Mod 0.2.2 和存档/RPC 格式不变。G 的 UI、长按手感和房主/客人验收仍待完成。

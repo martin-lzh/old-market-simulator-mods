@@ -18,6 +18,7 @@
 | 2.1.6 | [2.1.6/r6](2.1.6/r6/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.4 固定此修订；增加地图控件查找与输入编辑结束接口，实机验收未完成 |
 | 2.1.6 | [2.1.6/r7](2.1.6/r7/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.2.0 固定此修订；增加滚轮事件倍率、输入范围与平台接口。本地实机测试见 [验证记录](../releases/validation.md) |
 | 2.1.6 | [2.1.6/r8](2.1.6/r8/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Tree Info 0.1.1 固定此修订；增加树木状态、季节和交互反射声明，实机验收待完成 |
+| 2.1.6 | [2.1.6/r9](2.1.6/r9/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 0.2.2 未发布空盒操作，增加原生输入门控和当前格 Harmony 字段；实机验收待完成 |
 
 表中 r2–r6 的验收描述保留各快照建立时的历史状态。`e23f986` 合集已获视觉、本地实机与双实机联机确认；后续 Navigation 地图、POI 与缩放改动仍待实机验收，详见[验证记录](../releases/validation.md)。
 
@@ -123,3 +124,6 @@ Tree Info 迁移新增 SDK 2.1.6/r8，仅 Tree Info 固定 r8，其他 Mod 和�
 2026-09-18: r8 was exported from `e2057f8` with 15 assemblies, 267 types, 671 methods and 547 fields. Assembly identities, hashes and forwarders match r7. The snapshot adds Tree Info tree/season APIs and explicit reflection/Harmony fields; unused JsonUtility.FromJson is absent from the current build inputs. Exported signatures, generic NetworkVariable arguments and enum declarations were reviewed; all eight SDK/real-reference build comparisons pass, including 21 Tree Info contracts. No runtime acceptance is implied.
 
 2026-09-18：r8 从 `e2057f8` 导出，包含 15 个程序集、267 个类型、671 个方法、547 个字段。程序集身份、哈希和类型转发同 r7；新增树木/季节 API 及显式反射/Harmony 字段，当前输入不再引用 JsonUtility.FromJson。已审查签名、NetworkVariable 泛型参数和枚举声明；八种 SDK/真实引用构建对比及 21 项 Tree Info 契约通过，不代表实机验收。
+
+
+Stack All’s Unreleased empty-container action pins r9 for native input gates and the selected-slot Harmony field; other Mod pins stay unchanged. Stack All 的未发布空盒操作固定 r9，补齐原生输入门控与当前格 Harmony 字段，其他 Mod 固定修订不变。

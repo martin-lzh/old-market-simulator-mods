@@ -1,38 +1,51 @@
 [en]
 hold_repeat=Hold {0}: repeat {1}
+drop_empty={0}: drop empty container (hold to repeat)
 
 [zh]
 hold_repeat=按住 {0}：重复{1}
+drop_empty={0}：丢出空盒（长按连续）
 
 [zh-Hant]
 hold_repeat=按住 {0}：重複{1}
+drop_empty={0}：丟出空盒（長按連續）
 
 [fr]
 hold_repeat=Maintenir {0} : répéter {1}
+drop_empty={0} : lâcher un contenant vide (maintenir pour répéter)
 
 [de]
 hold_repeat={0} gedrückt halten: {1} wiederholen
+drop_empty={0}: Leeren Behälter ablegen (halten zum Wiederholen)
 
 [it]
 hold_repeat=Tieni premuto {0}: ripeti {1}
+drop_empty={0}: lascia un contenitore vuoto (tieni premuto per ripetere)
 
 [es]
 hold_repeat=Mantén {0}: repetir {1}
+drop_empty={0}: soltar recipiente vacío (mantén para repetir)
 
 [pt]
 hold_repeat=Segure {0}: repetir {1}
+drop_empty={0}: soltar recipiente vazio (segure para repetir)
 
 [ja]
 hold_repeat={0}長押し：{1}を繰り返す
+drop_empty={0}：空の容器を落とす（長押しで連続）
 
 [ko]
 hold_repeat={0} 길게 누르기: {1} 반복
+drop_empty={0}: 빈 용기 버리기 (길게 눌러 반복)
 
 [ru]
 hold_repeat=Удерживайте {0}: повторять {1}
+drop_empty={0}: выбросить пустую тару (удерживать для повтора)
 
 [tr]
 hold_repeat={0} tuşunu basılı tut: {1} eylemini tekrarla
+drop_empty={0}: boş kabı bırak (tekrarlamak için basılı tut)
 
 [uk]
 hold_repeat=Утримуйте {0}: повторювати {1}
+drop_empty={0}: викинути порожню тару (утримувати для повторення)

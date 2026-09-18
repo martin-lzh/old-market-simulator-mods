@@ -32,13 +32,14 @@ Ordinary collectibles such as mint leaves and flowers can rejoin their matching 
 
 - Tap Q to drop one item or one complete container; tap F to throw one. Mouse placement also handles one at a time.
 - Hold Q or F to continue through the selected slot, starting after about 0.6 seconds.
-- These actions follow your game key bindings. Switching slots/items, opening a menu, pausing, switching windows or pressing both actions stops the sequence.
+- Tap G to drop one empty reusable basket/box from the selected slot; hold G for 0.6 seconds to repeat every 0.12 seconds. Filled and partly filled containers remain. For reusable containers, the G hint turns gray when no empty is available. Seed packets and disposable packaging are excluded. G is a fixed keyboard shortcut; avoid assigning another inventory action to G.
+- Q/F follow your game key bindings; G uses the fixed shortcut. Switching slots/items, opening a menu, pausing, switching windows or pressing both actions stops the sequence.
 
 There are no settings to adjust before playing.
 
 ## Multiplayer
 
-**Everyone in the room, including the host, needs the same Stack All version.** Please compare versions before joining; the Mod does not check this for you. Avoid combining it with other Mods that change inventory stacking. Visual, local in-game and two-computer multiplayer testing of the preceding build is complete. The subsequent fish-quantity and font-size fix still needs in-game visual confirmation.
+**Everyone in the room, including the host, needs the same Stack All version.** Please compare versions before joining; the Mod does not check this for you. Avoid combining it with other Mods that change inventory stacking. Visual, local in-game and two-computer multiplayer testing of the preceding build is complete. The subsequent Stack All changes received a local test report without major issues on 2026-09-18; that report does not establish a full scenario matrix. The new G action still needs in-game and multiplayer confirmation.
 
 ## Backups and removal
 
@@ -89,13 +90,14 @@ For a compatible update, close the game and back up your save and old DLL before
 
 - 短按 Q 丢下一个物品或一个完整容器，短按 F 投掷一个；鼠标放置也是一次一个。
 - 长按 Q 或 F，约 0.6 秒后会继续逐个处理当前格。
-- 按键跟随游戏设置。切换格子或物品、打开菜单、暂停、切换窗口或同时按两个动作都会停止。
+- 短按 G 丢出当前格的一个空篮/空盒；长按 0.6 秒后每 0.12 秒丢一个，保留满盒及半满盒。选中可复用容器时，没有空盒则 G 提示变灰；不处理种子包或一次性包装。G 是固定键盘快捷键，请避免把其他库存操作绑定到 G。
+- Q/F 跟随游戏设置，G 为固定快捷键。切换格子或物品、打开菜单、暂停、切换窗口或同时按两个动作都会停止。
 
 不用额外调整设置，安装后即可使用。
 
 ## 和朋友一起玩
 
-**房主和所有玩家都需要安装相同版本的 Stack All。**加入房间前请互相确认，Mod 不会自动检查版本。尽量不要同时使用其他修改库存堆叠的 Mod。修复前构建的视觉、本地实机及双实机联机测试已完成；随后新增的鱼类数量和字号修复仍待实机视觉确认。
+**房主和所有玩家都需要安装相同版本的 Stack All。**加入房间前请互相确认，Mod 不会自动检查版本。尽量不要同时使用其他修改库存堆叠的 Mod。修复前构建的视觉、本地实机及双实机联机测试已完成；2026-09-18 对后续 Stack All 改动的本地测试反馈为未发现明显问题，但未提供完整场景矩阵；新 G 操作仍待实机和联机确认。
 
 ## 备份与卸载
 
