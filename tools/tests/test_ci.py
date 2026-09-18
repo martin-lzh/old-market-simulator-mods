@@ -67,6 +67,15 @@ class VersionTests(unittest.TestCase):
         node = ci.ET.parse(ci.ROOT / "navigation-mod/Navigation.csproj").find(".//ManagedDir")
         self.assertEqual(node.attrib.get("Condition"), "'$(ManagedDir)' == ''")
 
+    def test_stack_empty_action_exports_harmony_injection(self):
+        c = ci.config("stack-all")
+        api = ci.json.loads((ci.ROOT / "sdk" / c["sdk"] / "api.json").read_text())
+        inventory = next(t for t in api["Types"] if t["Name"] == "PlayerInventory")
+        current = next(f for f in inventory["Fields"] if f["Name"] == "currentSlot")
+        self.assertEqual(current["Type"]["Element"]["Name"], "Unity.Netcode.NetworkVariable`1")
+        self.assertEqual(current["Type"]["Arguments"][0]["Name"], "System.Int32")
+        self.assertIn("LateUpdate", {m["Name"] for m in inventory["Methods"]})
+
     def test_navigation_reflection_declarations_are_exported(self):
         api = ci.json.loads((ci.ROOT / "sdk/2.1.6/r2/api.json").read_text(encoding="utf-8"))
         types = {t["Name"]: t for t in api["Types"]}

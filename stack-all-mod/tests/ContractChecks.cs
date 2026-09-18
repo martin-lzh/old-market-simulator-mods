@@ -88,7 +88,7 @@ foreach (string name in new[] { "Receive", "AfterLoad" })
 Check(repeat.Methods.Single(m => m.Name == "ShouldAct").Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "IsAnyPanelActive"), "repeat cancels in menus");
 var hint = plugin.MainModule.Types.Single(t => t.Name == "ActionHint");
 Check(hint.Methods.Single(m => m.Name == "Show").Body.Instructions.Any(i => i.Operand is FieldReference f && f.Name == "controlHintPanel"), "hint follows native operation panel");
-Check(hint.Methods.Single(m => m.Name == "Binding").Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "GetBindingDisplayString"), "hint uses actual bindings");
+Check(hint.Methods.Single(m => m.Name == "Show").Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "Instantiate"), "empty hint clones a native control row");
 Check(Type("PlayerInventory").Fields.Any(f => f.Name == "currentSlot" &&
     f.FieldType.FullName == "Unity.Netcode.NetworkVariable`1<System.Int32>"), "empty action current-slot injection type");
 Check(Method("PlayerInventory", "LateUpdate").Parameters.Count == 0 &&
@@ -108,6 +108,9 @@ foreach (string name in new[] { "Take", "Apply", "SpillContainer" })
     Check(updateHint.Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == name), "empty removal path " + name);
 Check(!updateHint.Body.Instructions.Any(i => i.Operand is MethodReference m &&
     (m.Name == "UseItem" || m.Name == "ReduceCurrentItemAmount")), "empty action never consumes held goods");
+foreach (string field in new[] { "textBinding", "imageBinding", "imageBackground" })
+    Check(hint.Methods.Single(m => m.Name == "Show").Body.Instructions.Any(i =>
+        i.Operand is FieldReference f && f.DeclaringType.Name == "ControlSlot" && f.Name == field), "native keycap field " + field);
 Check(hint.Methods.Single(m => m.Name == "Show").Body.Instructions.Any(i =>
-    i.OpCode == OpCodes.Ldstr && (string)i.Operand == "<color=#888888>"), "empty hint includes muted state");
+    i.Operand is MethodReference m && m.Name == "set_color" && m.DeclaringType.Name == "Graphic"), "whole native hint row supports muted tint");
 Console.WriteLine($"PASS: {checks} game IL and patch contract checks (no Unity methods executed)");

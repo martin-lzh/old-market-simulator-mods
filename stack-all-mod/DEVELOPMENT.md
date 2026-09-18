@@ -38,9 +38,9 @@ In-game UI, normal save/load, and real multiplayer have not been verified for th
 
 ## SDK and automated builds / SDK 与自动构建
 
-This Mod pins its compilation SDK in [release.json](release.json). Current baseline: game 2.1.6 / SDK r9. Run `python tools/ci.py build` from the repository root for a game-free build. See [SDK maintenance](../sdk/README.md) and [CI releases](../releases/README.md). Compilation does not replace in-game compatibility checks.
+This Mod pins its compilation SDK in [release.json](release.json). Current baseline: game 2.1.6 / SDK r10. Run `python tools/ci.py build` from the repository root for a game-free build. See [SDK maintenance](../sdk/README.md) and [CI releases](../releases/README.md). Compilation does not replace in-game compatibility checks.
 
-本 Mod 在 [release.json](release.json) 固定编译 SDK，当前基线为游戏 2.1.6 / SDK r9。从仓库根目录运行 `python tools/ci.py build` 可无游戏文件构建。见 [SDK 维护](../sdk/README.md)和 [CI 发布](../releases/README.md)；编译不能代替实机兼容验证。
+本 Mod 在 [release.json](release.json) 固定编译 SDK，当前基线为游戏 2.1.6 / SDK r10。从仓库根目录运行 `python tools/ci.py build` 可无游戏文件构建。见 [SDK 维护](../sdk/README.md)和 [CI 发布](../releases/README.md)；编译不能代替实机兼容验证。
 
 ## Collectible pickup compatibility / 收集品重新拾取兼容性
 
@@ -59,6 +59,11 @@ G uses the existing RepeatGate: one immediate drop, 0.6-second hold delay, then 
 
 G 复用 RepeatGate：立即丢一个，长按 0.6 秒后每 0.12 秒一个，只计当前格空的可复用容器。移除空盒记录后使用现有生成 RPC，保留物品、成本与天数元数据，不改变有货容器。取消后须松开重按，新增空盒不能延长原批次。原生操作启用状态、菜单、焦点、鼠标锁定、网络状态及冲突库存操作均参与门控；操作在原生 LateUpdate 后执行，提示即时更新。
 
-SDK r9 adds the required native input getters and explicitly records PlayerInventory.currentSlot/LateUpdate for Harmony injection. Only Stack All changes its pin. The game remains 2.1.6, Mod version remains 0.2.2, and existing save/RPC formats are unchanged. In-game UI, hold timing and host/client acceptance for G remain pending.
+SDK r10 adds the required native input getters and explicitly records PlayerInventory.currentSlot/LateUpdate for Harmony injection. Only Stack All changes its pin. The game remains 2.1.6, Mod version remains 0.2.2, and existing save/RPC formats are unchanged. In-game UI, hold timing and host/client acceptance for G remain pending.
 
-SDK r9 补充实际输入访问器及 Harmony 注入的 PlayerInventory.currentSlot/LateUpdate，仅变更 Stack All 固定修订；游戏 2.1.6、Mod 0.2.2 和存档/RPC 格式不变。G 的 UI、长按手感和房主/客人验收仍待完成。
+SDK r10 补充实际输入访问器及 Harmony 注入的 PlayerInventory.currentSlot/LateUpdate，仅变更 Stack All 固定修订；游戏 2.1.6、Mod 0.2.2 和存档/RPC 格式不变。G 的 UI、长按手感和房主/客人验收仍待完成。
+
+
+The G hint clones an existing native one-key row inside controlHintPanel, keeping the native layout group, caption and keycap sizing. It recreates itself after native CheckHint rebuilds, refreshes fonts on language changes, and dims every Graphic when unavailable. Native Q/F rows are unchanged; their duplicate plain-text hold overlay is removed. SDK r10 adds the Color alpha field needed to preserve the original row transparency while dimming.
+
+G 提示复制 controlHintPanel 内现有的单键原生行，保持布局组、说明文字及键帽尺寸。原生 CheckHint 重建后自动恢复，随语言更新字体；无空盒时所有 Graphic 一起变暗。原生 Q/F 行不变，移除重复的纯文字长按浮层。SDK r10 补充 Color 的透明度字段，用于变暗时保留原有透明度。

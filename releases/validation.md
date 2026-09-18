@@ -4,7 +4,7 @@
 
 ### Stack All feedback and empty-container follow-up — 2026-09-18
 
-Local testing of the preceding Stack All changes was reported without major issues. No detailed save/multiplayer scenario matrix was supplied, and no broader Navigation acceptance is inferred. The new G empty-container action is subsequent work and remains Unreleased, target **UNASSIGNED**, with in-game and multiplayer acceptance pending. Source version stays 0.2.2; only Stack All moves to SDK 2.1.6/r9.
+Local testing of the preceding Stack All changes was reported without major issues. No detailed save/multiplayer scenario matrix was supplied, and no broader Navigation acceptance is inferred. The new G empty-container action is subsequent work and remains Unreleased, target **UNASSIGNED**, with in-game and multiplayer acceptance pending. Source version stays 0.2.2; only Stack All moves to SDK 2.1.6/r10.
 
 ### Tree Info migration — 2026-09-18
 
@@ -74,7 +74,7 @@ Reviewed all six Mod READMEs, CHANGELOG/version metadata and build/package decla
 
 ### Stack All 反馈与空盒后续操作 — 2026-09-18
 
-此前 Stack All 改动的本地测试反馈为未发现明显问题，未提供完整存档/联机场景矩阵，也不据此扩大 Navigation 的验收范围。新 G 空盒操作属于后续工作，仍记入未发布，目标 **UNASSIGNED**，实机和联机验收待完成。源码版本保持 0.2.2，仅 Stack All 改用 SDK 2.1.6/r9。
+此前 Stack All 改动的本地测试反馈为未发现明显问题，未提供完整存档/联机场景矩阵，也不据此扩大 Navigation 的验收范围。新 G 空盒操作属于后续工作，仍记入未发布，目标 **UNASSIGNED**，实机和联机验收待完成。源码版本保持 0.2.2，仅 Stack All 改用 SDK 2.1.6/r10。
 
 ### Tree Info 迁移 — 2026-09-18
 
