@@ -73,7 +73,7 @@ jobs:
           }
           python -m unittest discover -s tools/tests -v
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
-      - name: Build all seven variants and run logic/localization tests
+      - name: Build all eight variants and run logic/localization tests
         run: python tools/ci.py build
       - name: Check release eligibility without publishing
         env:

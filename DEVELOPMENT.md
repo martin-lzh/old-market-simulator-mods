@@ -10,6 +10,7 @@ Player information: [README](README.md). Contribution setup and branch rules: [C
 | Coordinates | [DEVELOPMENT](coordinates-mod/DEVELOPMENT.md) |
 | Checkout All | [DEVELOPMENT](checkout-all-mod/DEVELOPMENT.md) |
 | Material Cost | [DEVELOPMENT](material-cost-mod/DEVELOPMENT.md) · [Standalone](material-cost-mod/STANDALONE.md) |
+| Tree Info | [DEVELOPMENT](tree-info-mod/DEVELOPMENT.md) |
 | Stack All | [DEVELOPMENT](stack-all-mod/DEVELOPMENT.md) |
 | Price Probability | [DEVELOPMENT](price-probability-mod/DEVELOPMENT.md) |
 

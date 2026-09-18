@@ -14,7 +14,7 @@ See [SDK maintenance](../sdk/README.md) for game-free builds and game-version up
 
 1. Work on `dev` and open a PR into protected `main`. Only after the maintainer explicitly requests version advancement, update the affected Mod’s assembly/plugin version and move its pending changes into matching numbered entries in both CHANGELOG languages. Otherwise retain the existing version and record changes under Unreleased. During PR review, inspect every Mod CHANGELOG against the diff and list all Mods still awaiting version assignment; do not assign versions automatically. Record game/SDK versions, loader, risks, save/multiplayer constraints and actual validation. Unreleased entries are ignored.
 2. Each Mod pins an SDK and prerelease status in its own `release.json`. Keep `prerelease: true` until in-game acceptance is complete. Existing SDK revisions remain immutable.
-3. PR CI compiles all six Mods (seven loader variants), runs pure logic/localization tests and verifies package allowlists on a GitHub-hosted Windows runner. It uses compiler-only API declarations; original game files and self-hosted runners are unnecessary.
+3. PR CI compiles all seven Mods (eight loader variants), runs pure logic/localization tests and verifies package allowlists on a GitHub-hosted Windows runner. It uses compiler-only API declarations; original game files and self-hosted runners are unnecessary.
 4. A push to `main` after merge automatically publishes new CHANGELOG versions at that exact commit. Already-public versions are skipped without replacing assets or moving tags. Documentation/SDK changes without a new Mod version never republish old binaries.
 5. The publishing job creates a draft, uploads ZIPs, SHA256SUMS.txt and build-info.json, downloads and verifies every asset byte, then publishes. Evidence records source commit, game version/hash, SDK revision and API snapshot hash. Release notes contain the current numbered English and Chinese entries. No workflow writes back to protected main.
 
@@ -30,7 +30,7 @@ The existing catalog.json and tag markdown files remain the historical manual re
 
 1. 在 `dev` 开发，通过 PR 合并受保护的 `main`。只有维护者明确要求推进版本后，才更新对应 Mod 的程序集/插件版本，并将待发布改动移入 CHANGELOG 中英文区段对应的新编号条目；否则保持现有版本，改动暂归 Unreleased / 未发布。PR 检查须对照差异检查所有 Mod 的 CHANGELOG，列出尚未指定版本的 Mod，不自行补定版本。注明游戏/SDK 版本、加载器、风险、存档/联机约束和实际验证。“未发布”不参与版本选择。
 2. 各 Mod 在自己的 `release.json` 固定 SDK 并选择预发布状态。未完成实机验收时保留 `prerelease: true`；已有 SDK 修订保持不变。
-3. PR CI 在 GitHub 托管 Windows Runner 上编译六个 Mod（七个加载器变体），运行纯逻辑/本地化测试并检查包清单。引用来自仅含接口声明的 SDK，无需原始游戏文件或自托管 Runner。
+3. PR CI 在 GitHub 托管 Windows Runner 上编译七个 Mod（八个加载器变体），运行纯逻辑/本地化测试并检查包清单。引用来自仅含接口声明的 SDK，无需原始游戏文件或自托管 Runner。
 4. PR 合并后 main 的 push 自动按 CHANGELOG 新版本发布，标签指向此次准确提交。已公开版本直接跳过，不覆盖附件、不移动标签；仅修改文档/SDK 而不增加 Mod 编号，不会重新发布旧包。
 5. 发布任务创建草稿，上传 ZIP、SHA256SUMS.txt、build-info.json，下载逐字节校验所有附件后公开。记录源码提交、游戏版本/哈希、SDK 修订和接口快照哈希；说明提取当前编号的中英文条目。工作流不回写受保护的 main。
 
@@ -69,13 +69,14 @@ Each mod has its own version and tag. Releases share this repository; they do no
 | Stack All | `stack-all-vMAJOR.MINOR.PATCH` |
 | Price Probability | `price-probability-vMAJOR.MINOR.PATCH` |
 | Navigation | `navigation-vMAJOR.MINOR.PATCH` |
+| Tree Info | `tree-info-vMAJOR.MINOR.PATCH` |
 
 1. After the maintainer explicitly authorizes version advancement, update the affected mod's assembly/plugin version, package name, and English/Chinese README. Until then, keep changes in Unreleased. Localization belongs to each mod. Test the mod whose own code or messages changed, and advance its version only with that explicit authorization; no shared localization project is required.
 2. Run its build script and tests against the supported local game installation. Original game assemblies must not be uploaded to Git or CI; the reviewed API-only SDK is maintained separately.
 3. Verify the ZIP's explicit file list, version, README, license, and embedded messages. Future public plugin ZIPs must include the original DLL, README, CHANGELOG.md, and LICENSE; existing releases retain their original three-file contents. Create `SHA256SUMS.txt` for the exact bytes to upload.
 4. Commit and push the source. Tag the exact commit used for the release; do not tag an unrelated later implementation. Save release notes as `<tag>.md` here and record the source commit and asset hashes in `catalog.json`.
 5. Create the GitHub Release as a draft, upload the named ZIPs and checksum file, then verify the uploaded assets before publishing. Use a prerelease while in-game acceptance is incomplete. Material Cost may have separate BepInEx and MelonLoader assets under the same mod version.
-6. Link the release from the root and mod READMEs. Use per-mod release links: a repository-wide “latest release” cannot represent the latest version of all six Mods.
+6. Link the release from the root and mod READMEs. Use per-mod release links: a repository-wide “latest release” cannot represent the latest version of all seven Mods.
 
 Never replace published binaries or move a published tag to different source. Publish a new version for fixes. Preserve earlier releases for reproducibility. The current standalone loading bundle is for local validation and is not a public release asset.
 
@@ -90,7 +91,7 @@ Never replace published binaries or move a published tag to different source. Pu
 3. 检查 ZIP 文件清单、版本、README、许可证和内嵌语言资源。后续公开插件 ZIP 须含原创 DLL、README、CHANGELOG.md 和 LICENSE，既有发布保持原三文件内容；为将上传的准确文件生成 `SHA256SUMS.txt`。
 4. 提交并推送源码，标签指向实际发布所用的提交，不指向后来无关的实现。发布说明保存在此目录 `<tag>.md`，源码提交与安装包哈希记入 `catalog.json`。
 5. 先创建 GitHub Release 草稿，上传明确指定的 ZIP 和校验文件，验证远程附件后公开。实机验收未完成时标记预发布。成本插件的 BepInEx 与 MelonLoader 包可放在同一 Mod 版本下。
-6. 更新仓库首页及对应 Mod 的发布链接。使用各 Mod 的链接，仓库级“最新发布”不能代表六个 Mod 各自的最新版本。
+6. 更新仓库首页及对应 Mod 的发布链接。使用各 Mod 的链接，仓库级“最新发布”不能代表七个 Mod 各自的最新版本。
 
 已公开的二进制文件不覆盖，标签不改指向；修复通过新版本发布，历史版本保留以便追溯。当前独立启动包仅用于本机验证，不作为公开发布附件。
 

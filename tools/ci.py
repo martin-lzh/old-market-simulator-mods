@@ -22,6 +22,7 @@ MODS = {
     "material-cost": "MaterialCost", "coordinates": "Coordinates",
     "checkout-all": "CheckoutAll", "stack-all": "StackAll",
     "price-probability": "PriceProbability", "navigation": "Navigation",
+    "tree-info": "TreeInfo",
 }
 VERSION = r"(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)"
 LOADERS = {

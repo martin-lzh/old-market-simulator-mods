@@ -15,6 +15,7 @@ A collection of unofficial Mods to make running your Old Market Simulator shop a
 | [Checkout All](checkout-all-mod/README.md) | Hold E or toggle F9 to process products and collect payment | [0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4) |
 | [Stack All](stack-all-mod/README.md) | Up to 64 containers per slot, plus repeated drop/throw | [0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) |
 | [Price Probability](price-probability-mod/README.md) | Price acceptance preview and automatic pricing rules | [0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.1) |
+| [Tree Info](tree-info-mod/README.md) | Fruit-tree production seasons and harvest estimates | Local source 0.1.1; no public download yet |
 | [Navigation](navigation-mod/README.md) | Minimap, large map, compass and personal markers | 0.2.0 being prepared; no public download yet |
 
 The Mod pages explain upcoming changes as well as the version currently available to download. Navigation includes Eastern Town, an Island preview and Rome with seven travel regions and dynamic unlock areas; Eastern Town outer terrain is not yet bundled. Later map, POI and zoom changes await in-game acceptance; see the [validation scope](releases/validation.md).
@@ -30,7 +31,7 @@ These Mods are for **Old Market Simulator 2.1.6 on Windows**. Most use **BepInEx
 
 **Using Stack All with friends? Everyone needs the same version.** Before removing it, follow its [save and removal instructions](stack-all-mod/README.md). Other Mods have their own multiplayer notes.
 
-Current downloads are prereleases. Visual and other local in-game testing is complete; multiplayer testing is the only remaining test area. Keep a backup, especially before game updates or changing inventory Mods.
+Current downloads are prereleases. The six-Mod `e23f986` bundle completed local and multiplayer testing; subsequent Stack All/Navigation changes and Tree Info still need in-game acceptance. See the [validation record](releases/validation.md). Keep a backup, especially before game updates or changing inventory Mods.
 
 ### Help and languages
 
@@ -57,6 +58,7 @@ Want to contribute? Start with [CONTRIBUTING](CONTRIBUTING.md) or the [developme
 | [Checkout All](checkout-all-mod/README.md) | 长按 E 或按 F9 连续结算商品、收取钱袋 | [0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4) |
 | [Stack All](stack-all-mod/README.md) | 每格最多放 64 个容器，并支持连续丢下/投掷 | [0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) |
 | [Price Probability](price-probability-mod/README.md) | 查看价格接受概率，设置自动定价规则 | [0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.1) |
+| [Tree Info](tree-info-mod/README.md) | 果树生产季节和成熟预测 | 本地源码 0.1.1，暂无公开下载 |
 | [Navigation](navigation-mod/README.md) | 小地图、大地图、罗盘和个人标记 | 0.2.0 准备中，暂未公开下载 |
 
 各 Mod 页面会说明当前可下载的版本和即将更新的内容。Navigation 插件 ZIP 包含东方小镇、海岛预览图，以及带七个传送区域和动态解锁区块的罗马地图；东方小镇外围地形尚未打包。后续地图、POI 与缩放改动仍待实机验收，详见[验证范围](releases/validation.md)。
@@ -72,7 +74,7 @@ Want to contribute? Start with [CONTRIBUTING](CONTRIBUTING.md) or the [developme
 
 **和朋友一起用 Stack All 时，所有人都需要相同版本。**卸载前请按它的[存档与卸载说明](stack-all-mod/README.md)整理库存。其他 Mod 的联机要求见各自页面。
 
-目前下载均为预发布版。视觉及其他本地实机测试已完成，目前只剩多人游戏测试。请留好备份，尤其是在游戏更新或更换库存 Mod 前。
+目前下载均为预发布版。六 Mod 的 `e23f986` 合集已完成本地和联机测试；后续 Stack All、Navigation 改动及 Tree Info 仍需实机验收，见[验证记录](releases/validation.md)。请留好备份，尤其是在游戏更新或更换库存 Mod 前。
 
 ### 语言与反馈
 

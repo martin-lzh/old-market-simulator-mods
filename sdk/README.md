@@ -17,6 +17,7 @@
 | 2.1.6 | [2.1.6/r5](2.1.6/r5/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.3 固定此修订；增加输入框焦点、原生提示子控件与独立布局接口，实机验收未完成 |
 | 2.1.6 | [2.1.6/r6](2.1.6/r6/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.4 固定此修订；增加地图控件查找与输入编辑结束接口，实机验收未完成 |
 | 2.1.6 | [2.1.6/r7](2.1.6/r7/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.2.0 固定此修订；增加滚轮事件倍率、输入范围与平台接口。本地实机测试见 [验证记录](../releases/validation.md) |
+| 2.1.6 | [2.1.6/r8](2.1.6/r8/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Tree Info 0.1.1 固定此修订；增加树木状态、季节和交互反射声明，实机验收待完成 |
 
 表中 r2–r6 的验收描述保留各快照建立时的历史状态。`e23f986` 合集已获视觉、本地实机与双实机联机确认；后续 Navigation 地图、POI 与缩放改动仍待实机验收，详见[验证记录](../releases/validation.md)。
 
@@ -39,7 +40,7 @@ python tools/ci.py build
 ### 游戏更新后的维护
 
 1. 在本机合法取得新版游戏，只读检查版本和接口。用真实游戏引用调整 Mod；记录未验证的玩法、UI、存档及网络变化。先提交源码，SDK 导出要求工作区干净，以记录准确源码提交。
-2. 准备 `supplemental.json`：列出只出现在 `nameof` 中、不会生成成员引用的游戏方法。可在 `work/` 下复制旧文件再调整。反射方法同样列出；反射字段使用显式 `field:字段名`，如 `field:currentSlot` 和 `field:activeExpansions`。跨程序集类型使用 `程序集简单名::类型全名`；编译内联的数值/布尔常量使用 `constant:字段名`，显式审核真实值，拒绝字符串或非字面量。所有名称必须来自真实程序集。导出工具自动从已注册六个 Mod 的七个发行构建读取其他依赖声明，不读取游戏方法体或资源。
+2. 准备 `supplemental.json`：列出只出现在 `nameof` 中、不会生成成员引用的游戏方法。可在 `work/` 下复制旧文件再调整。反射方法同样列出；反射字段使用显式 `field:字段名`，如 `field:currentSlot` 和 `field:activeExpansions`。跨程序集类型使用 `程序集简单名::类型全名`；编译内联的数值/布尔常量使用 `constant:字段名`，显式审核真实值，拒绝字符串或非字面量。所有名称必须来自真实程序集。导出工具自动从已注册七个 Mod 的八个发行构建读取其他依赖声明，不读取游戏方法体或资源。
 3. 用实际确认的游戏版本导出新目录。例如同一 2.1.6 基线新增接口时：
 
 ```powershell
@@ -112,3 +113,8 @@ Validation on 2026-09-13: r6 was exported from source `dbd4960` with 15 assembli
 2026-09-13：r7 从源码提交 `7d333b8` 导出，共 15 个程序集、265 个类型、666 个方法和 540 个字段，仅含声明。新增真实 UI 输入模块及滚轮倍率、InputSettings 的滚轮输入范围、运行平台接口；15 个依赖身份与哈希同 r6，旧快照保留原样。Navigation 的未发布修改固定 r7，Mod 版本保持 0.1.4。全部七个 SDK/真实引用符号 IL 与资源对比通过；1397 项导航检查、553 项只读原生契约和 31 项 CI 工具测试通过。滚轮按运行时实际设置区分统一单位与 Windows 平台 120 单位；不执行 Unity 游戏代码，交互和 POI 显示仍需实机验收。
 
 Validation on 2026-09-13: r7 was exported from source `7d333b8`, with 15 assemblies, 265 types, 666 methods and 540 fields, declarations only. It adds the actual UI input module and scroll multiplier, InputSettings scroll range and runtime platform APIs. All 15 dependency identities/hashes match r6; earlier snapshots remain unchanged. Navigation Unreleased changes pin r7 while retaining Mod version 0.1.4. All seven SDK/real-reference symbolic IL and resource comparisons pass, with 1397 navigation checks, 553 read-only native contracts and 31 CI tooling tests. Wheel conversion reads runtime settings to distinguish uniform units from the Windows platform 120-unit range. No Unity game code executes; interaction and POI visuals still require in-game acceptance.
+
+
+Tree Info migration adds SDK 2.1.6/r8 for tree state, season and interaction reflection declarations. Only Tree Info pins r8; other Mods keep their existing SDKs. Historical snapshots remain unchanged. No game implementation or resource is included.
+
+Tree Info 迁移新增 SDK 2.1.6/r8，仅 Tree Info 固定 r8，其他 Mod 和历史快照不变；新增树木状态、季节及交互反射声明，不含游戏实现或资源。
