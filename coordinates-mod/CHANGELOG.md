@@ -6,7 +6,7 @@
 
 ### Unreleased
 
-### 0.1.4 — prerelease (pending publication)
+### 0.1.4 — 2026-09-19 (prerelease)
 
 - Rename the plugin display name to **Coordinates HUD** and reorganize the bilingual README around core features and controls, with insertion points for gameplay media. Plugin ID, assembly/configuration paths, gameplay and version are unchanged.
 
@@ -33,7 +33,7 @@ Older development versions mentioned in the README are not verified downloadable
 
 ### 未发布
 
-### 0.1.4 — 预发布（待发布）
+### 0.1.4 — 2026-09-19（预发布）
 
 - 插件显示名改为 **Coordinates HUD**，双语 README 按核心功能和操作方式组织，并保留实机素材插入位置。插件 ID、程序集／配置路径、玩法及版本不变。
 
