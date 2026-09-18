@@ -2,6 +2,10 @@
 
 ## English
 
+### Unreleased
+
+- Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
+
 ### 0.1.0 — 2026-09-18 (stable release)
 
 In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
@@ -19,6 +23,10 @@ In-game acceptance is confirmed by the maintainer. This version is a stable rele
 - Local 0.1.0 was installed on 2026-09-12 with fruit-tree season and harvest estimates. Those local labels are not public release history.
 
 ## 中文
+
+### 未发布
+
+- 将 Nexus 封面移入 assets/cover.png，并作为 README 首图展示。仅文档改动，运行时、版本和 SDK 不变。
 
 ### 0.1.0 — 2026-09-18（正式发布）
 

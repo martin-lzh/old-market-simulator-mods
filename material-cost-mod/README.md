@@ -1,5 +1,7 @@
 # Profit Insights
 
+![Profit Insights](assets/cover.png)
+
 A mod for Old Market Simulator / Old Market Simulator 模组
 
 [English](#english) · [中文](#中文)
