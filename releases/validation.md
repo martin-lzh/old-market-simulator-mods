@@ -153,3 +153,17 @@ Source `2a7ae08` adds a localized caption above native controls, reusing the gam
 Validation: version/immutable-SDK validation, all eight SDK builds and real-reference comparisons, 67 CI tooling tests, 89,760 Stack All logic checks, 13-language localization and 84 read-only game contracts passed. These checks do not execute Unity.
 
 验证：版本及 SDK 不可变性、八种 SDK 构建与真实引用比对、67 项 CI 工具测试、89,760 项 Stack All 逻辑检查、13 种语言及 84 项只读游戏契约全部通过；未执行 Unity 实机显示。
+
+## Local follow-up — 2026-09-18
+
+Stack All build `d4e033d`: local testing of the latest hold guidance/native font change was reported complete. This confirms that local UI follow-up only; it does not establish a new save/reload or host/client scenario matrix.
+
+Stack All 构建 `d4e033d`：最新长按说明及原生字体改动获本地测试完成反馈。本次确认限于该 UI 后续改动，不扩展为新的存档重载或房主/客人场景验收。
+
+Navigation Gate 4: corrected the omitted elevated lake after reviewing the real water mesh and terrain elevation. The regenerated illustrated texture preserves metadata/bounds; in-game shoreline confirmation remains pending. Navigation remains 0.2.0 / SDK 2.1.6/r7, target version **UNASSIGNED**.
+
+Navigation 大门4：复核真实水面网格与地形高度后补回高处湖泊，重新生成插画贴图；元数据和边界不变，实机湖岸确认待完成。保持 0.2.0 / SDK 2.1.6/r7，目标版本 **UNASSIGNED**。
+
+Gate 4 validation: version/immutable-SDK checks, 67 CI tooling tests and all eight SDK builds/package allowlists passed. The new PNG was visually compared with the water-corrected reference; its blue water pixels stay within the reviewed lake region. No runtime code/API changed, so Navigation retains SDK r7. No additional game execution or multiplayer test was performed.
+
+大门4验证：版本及 SDK 不可变性、67 项 CI 工具测试、八种 SDK 构建与打包白名单检查通过。新 PNG 已对照修正参考图检查，蓝色水域仅位于已复核湖区。无运行时代码/API 改动，Navigation 保持 SDK r7；未新增实机或联机测试。

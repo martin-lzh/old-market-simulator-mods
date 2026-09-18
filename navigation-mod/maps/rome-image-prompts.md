@@ -21,3 +21,11 @@ Use case: style-transfer. Asset: calibrated orthographic game navigation map. Re
 ## Gate 4 correction
 
 Precise-object-edit. Image 1 is the map to correct, image 2 is the exact geometry reference. Change ONLY the large elongated rectangle near the center-right: it is a flat pale limestone top surface/terrace, as shown in reference image 2, not a pitched red tiled roof. Remove its invented roof ridge and red tile pattern; restore the flat warm cream rectangle and its thin stepped edge. Keep its exact footprint, every other object and all terrain unchanged. Strict overhead map, no text.
+
+## Gate 4 elevated lake correction — 2026-09-18
+
+Built-in Image Gen, precise-object-edit. Input 1: existing Gate 4 artwork (edit target). Input 2: corrected local orthographic geometry with terrain-clipped water (geographic reference). The reference and raw scene evidence remain local.
+
+Correct only the omitted lake west of the long cream terrace, matching the cyan region in the corrected geometry reference (approximately x42–55%, y38–53%). Preserve its irregular shoreline, stones, wooden square, overlapping rocks/trees, all other terrain, square framing, north-up orientation and 305 × 305 world coverage. Render blue-teal water in the existing ink/watercolor Mediterranean style, no labels. Do not add water to the southwestern circular terrain patch. Preserve the flat terrace, not a roof.
+
+Cleanup pass: remove the newly invented horizontal tan rectangle at approximately x44.1%, y49.7%, replacing it with water; preserve the original diagonal square below/right at x45.5%, y51.5%. Keep the lake boundary and all other features unchanged.

@@ -124,3 +124,13 @@ No game installation or save was modified. In-game travel, unlock sequencing, ar
 Validation for source `db03d32` (2026-09-15): version validation and the full SDK build passed; 64 CI tooling tests, 1291 navigation checks and 659 Navigation contract checks passed. The Navigation real-reference build matched the SDK build in symbolic IL and embedded resources after verifying 15 dependency hashes. The repository-wide real-reference command stopped earlier at Stack All's SDK/real-build differences; Navigation was then verified independently without bypassing any hashes.
 
 源码 `db03d32`（2026-09-15）的版本验证与全仓 SDK 构建通过，64 项 CI 工具测试、1291 项导航检查和 659 项 Navigation 契约检查通过。Navigation 的 15 个真实依赖哈希已核对，真实引用与 SDK 构建的符号 IL/内嵌资源一致。全仓真实引用命令先在 Stack All 的 SDK/真实构建差异处停止，随后独立验证 Navigation，未绕过任何哈希检查。
+
+## Gate 4 water correction — 2026-09-18
+
+The previous local reference skipped water-material meshes and classified water only below a fixed sea-level threshold. Gate 4 contains an active elevated lake at Y ≈ 69.66, so that reference incorrectly showed dry terrain. The replacement reference rasterizes its actual 50 × 50 water mesh footprint, clips it against terrain elevations, and preserves overlying rocks, trees and structures. The visible lake is west of the long central terrace; the southwestern circular terrain patch is not this lake. The published asset is a new Image Gen illustration, not the raw render.
+
+大门4旧参考图跳过水材质网格，仅以固定海平面识别水域，漏掉了 Y 约 69.66 的高处湖面。新参考图对真实 50 × 50 水面网格按地形高度裁剪，保留上方岩石、树木与结构。可见湖泊位于中央长平台西侧，西南圆形地块并非该湖。公开贴图为重新生成的 Image Gen 插画，原始渲染不公开。
+
+World bounds remain X [1619,1924], Z [-1316,-1011], north +Z. Return POI and region metadata are unchanged. The new artwork has been visually compared with the corrected reference; in-game shoreline alignment remains pending.
+
+世界边界仍为 X [1619,1924]、Z [-1316,-1011]，北向 +Z；返回点和区域元数据不变。新图已与修正参考图作视觉比对，实机湖岸对齐待确认。
