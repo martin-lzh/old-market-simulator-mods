@@ -8,7 +8,7 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 Let checkout handle the whole table while you hold a key—or keep it running with a toggle. Products are processed one by one, followed by the payment pouch.
 
-[Download 0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4) · 0.1.5 is being prepared and is not on the release page yet.
+[Download 0.1.5](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.5)
 
 ### Core features
 
@@ -69,7 +69,7 @@ Close the game, back up the old DLL and replace it to update. Delete `OldMarket.
 
 长按一个键，就能依次结算桌上的商品并收取钱袋；也可以打开连续结账，不用一直按住。
 
-[下载 0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4) · 0.1.5 正在准备，发布页暂时仍是 0.1.4。
+[下载 0.1.5](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.5)
 
 ### 核心功能
 
