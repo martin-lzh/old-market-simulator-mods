@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "mod": "stack-all",
+  "version": "0.3.0",
+  "sdk": "2.1.6/r11",
+  "prerelease": true,
+  "sourceCommit": "c8b64cad816acb0e6e9d237c0ef76376aaa8832c",
+  "inputsSha256": "abd30e329b70f1123976a86c82d371a6b4deae37e7198a66369dbe5da0f96452",
+  "authorization": "Maintainer explicitly assigned stack-all 0.3.0 and subsequently requested improved Mod display names and feature/control READMEs before publication. This renewal covers the display name Better Stacking and bilingual player-guide changes within that same version scope; gameplay, stable plugin identity and SDK pin are unchanged."
+}
