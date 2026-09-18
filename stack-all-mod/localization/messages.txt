@@ -1,38 +1,51 @@
 [en]
-hold_repeat=Hold {0}: repeat {1}
+drop_empty=DROP EMPTY
+hold_repeat=HOLD TO REPEAT
 
 [zh]
-hold_repeat=按住 {0}：重复{1}
+drop_empty=丢出空盒
+hold_repeat=长按可连续操作
 
 [zh-Hant]
-hold_repeat=按住 {0}：重複{1}
+drop_empty=丟出空盒
+hold_repeat=長按可連續操作
 
 [fr]
-hold_repeat=Maintenir {0} : répéter {1}
+drop_empty=LÂCHER LE CONTENANT VIDE
+hold_repeat=MAINTENIR POUR RÉPÉTER
 
 [de]
-hold_repeat={0} gedrückt halten: {1} wiederholen
+drop_empty=LEEREN BEHÄLTER ABLEGEN
+hold_repeat=ZUM WIEDERHOLEN GEDRÜCKT HALTEN
 
 [it]
-hold_repeat=Tieni premuto {0}: ripeti {1}
+drop_empty=LASCIA CONTENITORE VUOTO
+hold_repeat=TIENI PREMUTO PER RIPETERE
 
 [es]
-hold_repeat=Mantén {0}: repetir {1}
+drop_empty=SOLTAR RECIPIENTE VACÍO
+hold_repeat=MANTÉN PULSADO PARA REPETIR
 
 [pt]
-hold_repeat=Segure {0}: repetir {1}
+drop_empty=SOLTAR RECIPIENTE VAZIO
+hold_repeat=SEGURE PARA REPETIR
 
 [ja]
-hold_repeat={0}長押し：{1}を繰り返す
+drop_empty=空の容器を落とす
+hold_repeat=長押しで連続操作
 
 [ko]
-hold_repeat={0} 길게 누르기: {1} 반복
+drop_empty=빈 용기 버리기
+hold_repeat=길게 눌러 반복
 
 [ru]
-hold_repeat=Удерживайте {0}: повторять {1}
+drop_empty=ВЫБРОСИТЬ ПУСТУЮ ТАРУ
+hold_repeat=УДЕРЖИВАЙТЕ ДЛЯ ПОВТОРА
 
 [tr]
-hold_repeat={0} tuşunu basılı tut: {1} eylemini tekrarla
+drop_empty=BOŞ KABI BIRAK
+hold_repeat=TEKRARLAMAK İÇİN BASILI TUT
 
 [uk]
-hold_repeat=Утримуйте {0}: повторювати {1}
+drop_empty=ВИКИНУТИ ПОРОЖНЮ ТАРУ
+hold_repeat=УТРИМУЙТЕ ДЛЯ ПОВТОРЕННЯ

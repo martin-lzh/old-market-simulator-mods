@@ -1,0 +1,1109 @@
+{
+  "Id": "rome-town",
+  "Name": "Rome",
+  "MapId": 2,
+  "SceneName": "BazaarRome",
+  "Region": "",
+  "Texture": "rome-town-artwork.png",
+  "North": "+Z",
+  "MinX": -472,
+  "MaxX": 533,
+  "MinZ": -365,
+  "MaxZ": 640,
+  "RequiredExpansions": [],
+  "ExcludedExpansions": [],
+  "DetailTexture": "rome-town-detail.png",
+  "DetailMinX": -60,
+  "DetailMaxX": 105,
+  "DetailMinZ": -85,
+  "DetailMaxZ": 90,
+  "Pois": [
+    {
+      "Id": "rome-397",
+      "Name": "Lumberjack",
+      "NameKey": "lumberjack",
+      "Category": "shop",
+      "X": 12.762087,
+      "Z": 21.493506,
+      "RequiredExpansions": [
+        1762112294224
+      ]
+    },
+    {
+      "Id": "rome-1666",
+      "Name": "Engineer",
+      "NameKey": "engineer",
+      "Category": "shop",
+      "X": -16.848195,
+      "Z": -4.501701,
+      "ExcludedExpansions": [
+        1762112234865
+      ]
+    },
+    {
+      "Id": "rome-1744",
+      "Name": "Breeder",
+      "NameKey": "breeder",
+      "Category": "shop",
+      "X": 28.017004,
+      "Z": 34.015999,
+      "RequiredExpansions": [
+        1762112177650
+      ]
+    },
+    {
+      "Id": "rome-2337",
+      "Name": "Recruiter",
+      "NameKey": "recruiter",
+      "Category": "other",
+      "X": 30.303993,
+      "Z": -5.156998,
+      "ExcludedExpansions": [
+        1762112233170
+      ]
+    },
+    {
+      "Id": "rome-2474",
+      "Name": "Caravan",
+      "NameKey": "plautia",
+      "Category": "other",
+      "X": 78.329001,
+      "Z": 70.171997,
+      "RequiredExpansions": [
+        1762112210506
+      ]
+    },
+    {
+      "Id": "rome-3251",
+      "Name": "Gardener",
+      "NameKey": "gardener",
+      "Category": "shop",
+      "X": 23.267003,
+      "Z": -7.337012,
+      "RequiredExpansions": [
+        1762112264976
+      ]
+    },
+    {
+      "Id": "rome-4124",
+      "Name": "Curator",
+      "NameKey": "museum",
+      "Category": "other",
+      "X": -10.990272,
+      "Z": -6.122931
+    },
+    {
+      "Id": "rome-4228",
+      "Name": "Gardener",
+      "NameKey": "gardener",
+      "Category": "shop",
+      "X": 21.013001,
+      "Z": -6.935004,
+      "ExcludedExpansions": [
+        1762112264976
+      ]
+    },
+    {
+      "Id": "rome-6192",
+      "Name": "Engineer",
+      "NameKey": "engineer",
+      "Category": "shop",
+      "X": -18.403594,
+      "Z": -4.5105,
+      "RequiredExpansions": [
+        1762112234865
+      ]
+    },
+    {
+      "Id": "rome-11057",
+      "Name": "Postbox",
+      "NameKey": "postbox",
+      "Category": "other",
+      "X": 20.546753,
+      "Z": -17.692535,
+      "Icon": "mail"
+    },
+    {
+      "Id": "rome-8007",
+      "Name": "Decorator",
+      "NameKey": "decorator",
+      "Category": "shop",
+      "X": -9.846149,
+      "Z": 8.977359
+    },
+    {
+      "Id": "rome-1519",
+      "Name": "Bed",
+      "NameKey": "poi_rest",
+      "Category": "home",
+      "X": 29.736003,
+      "Z": -18.894027
+    },
+    {
+      "Id": "rome-2005",
+      "Name": "Employees",
+      "NameKey": "employees",
+      "Category": "other",
+      "X": 30.303993,
+      "Z": -5.156998,
+      "RequiredExpansions": [
+        1762112233170
+      ]
+    },
+    {
+      "Id": "rome-7534",
+      "Name": "Water well",
+      "NameKey": "poi_water",
+      "Category": "other",
+      "X": 78.826752,
+      "Z": 23.667465
+    },
+    {
+      "Id": "rome-10486",
+      "Name": "Water well",
+      "NameKey": "poi_water",
+      "Category": "other",
+      "X": 69.279999,
+      "Z": 48.210007
+    },
+    {
+      "Id": "rome-13189",
+      "Name": "Water well",
+      "NameKey": "poi_water",
+      "Category": "other",
+      "X": 47.330002,
+      "Z": 13.419998
+    },
+    {
+      "Id": "rome-3199",
+      "Name": "Recycling",
+      "NameKey": "junkman",
+      "Category": "other",
+      "X": 27.167999,
+      "Z": 0.147995,
+      "RequiredExpansions": [
+        1762112291698
+      ]
+    },
+    {
+      "Id": "rome-7501",
+      "Name": "Market",
+      "NameKey": "poi_market",
+      "Category": "other",
+      "X": 9.552185,
+      "Z": -27.390228
+    },
+    {
+      "Id": "rome-gate_2-open",
+      "Name": "RomeGate2",
+      "NameKey": "gate_2",
+      "Category": "other",
+      "X": 90.757998,
+      "Z": 68.199997,
+      "Icon": "portal",
+      "RequiredExpansions": [
+        1762112275696
+      ]
+    },
+    {
+      "Id": "rome-gate_2-locked",
+      "Name": "RomeGate2",
+      "NameKey": "gate_2",
+      "Category": "other",
+      "X": 90.757998,
+      "Z": 68.199997,
+      "Icon": "locked",
+      "ExcludedExpansions": [
+        1762112275696
+      ]
+    },
+    {
+      "Id": "rome-gate_1-open",
+      "Name": "RomeGate1",
+      "NameKey": "gate_1",
+      "Category": "other",
+      "X": -35.400002,
+      "Z": 16.537997,
+      "Icon": "portal",
+      "RequiredExpansions": [
+        1762112272642
+      ]
+    },
+    {
+      "Id": "rome-gate_1-locked",
+      "Name": "RomeGate1",
+      "NameKey": "gate_1",
+      "Category": "other",
+      "X": -35.400002,
+      "Z": 16.537997,
+      "Icon": "locked",
+      "ExcludedExpansions": [
+        1762112272642
+      ]
+    },
+    {
+      "Id": "rome-gate_3-open",
+      "Name": "RomeGate3",
+      "NameKey": "gate_3",
+      "Category": "other",
+      "X": 26.299995,
+      "Z": -23.814003,
+      "Icon": "portal",
+      "RequiredExpansions": [
+        1762112277788
+      ]
+    },
+    {
+      "Id": "rome-gate_3-locked",
+      "Name": "RomeGate3",
+      "NameKey": "gate_3",
+      "Category": "other",
+      "X": 26.299995,
+      "Z": -23.814003,
+      "Icon": "locked",
+      "ExcludedExpansions": [
+        1762112277788
+      ]
+    },
+    {
+      "Id": "rome-caravan_1-open",
+      "Name": "RomeCaravan1",
+      "NameKey": "caravan_1",
+      "Category": "other",
+      "X": 76.75,
+      "Z": 72.110001,
+      "Icon": "portal",
+      "RequiredExpansions": [
+        1762112210506
+      ]
+    },
+    {
+      "Id": "rome-caravan_2-open",
+      "Name": "RomeCaravan2",
+      "NameKey": "caravan_2",
+      "Category": "other",
+      "X": 81.375999,
+      "Z": 70.944,
+      "Icon": "portal",
+      "RequiredExpansions": [
+        1762112212734
+      ]
+    },
+    {
+      "Id": "rome-gate_4-open",
+      "Name": "RomeGate4",
+      "NameKey": "gate_4",
+      "Category": "other",
+      "X": -30.200005,
+      "Z": -69.948007,
+      "Icon": "portal",
+      "RequiredExpansions": [
+        1762112279681
+      ]
+    },
+    {
+      "Id": "rome-gate_4-locked",
+      "Name": "RomeGate4",
+      "NameKey": "gate_4",
+      "Category": "other",
+      "X": -30.200005,
+      "Z": -69.948007,
+      "Icon": "locked",
+      "ExcludedExpansions": [
+        1762112279681
+      ]
+    },
+    {
+      "Id": "rome-engineer_mine-open",
+      "Name": "RomeEngineerMine",
+      "NameKey": "engineer_mine",
+      "Category": "other",
+      "X": -26.589994,
+      "Z": -1.642002,
+      "Icon": "portal",
+      "RequiredExpansions": [
+        1762112242569
+      ]
+    },
+    {
+      "Id": "rome-facility-barn_1",
+      "Name": "Barn 1",
+      "NameKey": "barn_1",
+      "Category": "other",
+      "X": 36.655,
+      "Z": 30.56,
+      "RequiredExpansions": [
+        1762112200305
+      ]
+    },
+    {
+      "Id": "rome-facility-barn_2",
+      "Name": "Barn 2",
+      "NameKey": "barn_2",
+      "Category": "other",
+      "X": 66.89,
+      "Z": 8.63,
+      "RequiredExpansions": [
+        1762112203057
+      ]
+    },
+    {
+      "Id": "rome-facility-barn_4",
+      "Name": "Barn 4",
+      "NameKey": "barn_4",
+      "Category": "other",
+      "X": 54.13,
+      "Z": 70.225,
+      "RequiredExpansions": [
+        1762112208026
+      ]
+    },
+    {
+      "Id": "rome-facility-barn_3",
+      "Name": "Barn 3",
+      "NameKey": "barn_3",
+      "Category": "other",
+      "X": 24.95,
+      "Z": 41.99,
+      "RequiredExpansions": [
+        1762112205490
+      ]
+    },
+    {
+      "Id": "rome-facility-clothing_store_1",
+      "Name": "Clothing Store 1",
+      "NameKey": "clothing_store_1",
+      "Category": "shop",
+      "X": 6.015,
+      "Z": -9.93,
+      "RequiredExpansions": [
+        1762112222977
+      ]
+    },
+    {
+      "Id": "rome-facility-farm_1",
+      "Name": "Farm 1",
+      "NameKey": "farm_1",
+      "Category": "other",
+      "X": 20.825,
+      "Z": 16.775,
+      "RequiredExpansions": [
+        1762112248741
+      ]
+    },
+    {
+      "Id": "rome-facility-farm_6",
+      "Name": "Farm 6",
+      "NameKey": "farm_6",
+      "Category": "other",
+      "X": 57.88,
+      "Z": 42.92,
+      "RequiredExpansions": [
+        1762112258729
+      ]
+    },
+    {
+      "Id": "rome-facility-farm_5",
+      "Name": "Farm 5",
+      "NameKey": "farm_5",
+      "Category": "other",
+      "X": 79.09,
+      "Z": 56.78,
+      "RequiredExpansions": [
+        1762112257233
+      ]
+    },
+    {
+      "Id": "rome-facility-farm_4",
+      "Name": "Farm 4",
+      "NameKey": "farm_4",
+      "Category": "other",
+      "X": 78.66,
+      "Z": 30.08,
+      "RequiredExpansions": [
+        1762112255681
+      ]
+    },
+    {
+      "Id": "rome-facility-farm_3",
+      "Name": "Farm 3",
+      "NameKey": "farm_3",
+      "Category": "other",
+      "X": 54.055,
+      "Z": 12.055,
+      "RequiredExpansions": [
+        1762112253353
+      ]
+    },
+    {
+      "Id": "rome-facility-farm_2",
+      "Name": "Farm 2",
+      "NameKey": "farm_2",
+      "Category": "other",
+      "X": 20.705,
+      "Z": 23.105,
+      "RequiredExpansions": [
+        1762112250785
+      ]
+    },
+    {
+      "Id": "rome-facility-greenhouse_2",
+      "Name": "Greenhouse 2",
+      "NameKey": "greenhouse_2",
+      "Category": "other",
+      "X": 37.77,
+      "Z": 70.24,
+      "RequiredExpansions": [
+        1762112285796
+      ]
+    },
+    {
+      "Id": "rome-facility-greenhouse_1",
+      "Name": "Greenhouse 1",
+      "NameKey": "greenhouse_1",
+      "Category": "other",
+      "X": 27.27,
+      "Z": 70.24,
+      "RequiredExpansions": [
+        1762112283728
+      ]
+    },
+    {
+      "Id": "rome-facility-workshop_2",
+      "Name": "Workshop 2",
+      "NameKey": "workshop_2",
+      "Category": "other",
+      "X": 80.59,
+      "Z": 11.085,
+      "RequiredExpansions": [
+        1762112318271
+      ]
+    },
+    {
+      "Id": "rome-facility-workshop_1",
+      "Name": "Workshop 1",
+      "NameKey": "workshop_1",
+      "Category": "other",
+      "X": -43.965,
+      "Z": 10.25,
+      "RequiredExpansions": [
+        1762112316424
+      ]
+    },
+    {
+      "Id": "rome-facility-workshop_4",
+      "Name": "Workshop 4",
+      "NameKey": "workshop_4",
+      "Category": "other",
+      "X": 6.94,
+      "Z": -17.16,
+      "RequiredExpansions": [
+        1762112321865
+      ]
+    },
+    {
+      "Id": "rome-facility-workshop_3",
+      "Name": "Workshop 3",
+      "NameKey": "workshop_3",
+      "Category": "other",
+      "X": 36.46,
+      "Z": 45.0,
+      "RequiredExpansions": [
+        1762112320143
+      ]
+    }
+  ],
+  "Areas": [
+    {
+      "Id": "animal_market_1",
+      "MinX": 20.88,
+      "MaxX": 30.28,
+      "MinZ": 28.5,
+      "MaxZ": 34.51,
+      "RequiredExpansions": [
+        1762112177650
+      ]
+    },
+    {
+      "Id": "animal_market_2",
+      "MinX": 24.24,
+      "MaxX": 28.42,
+      "MinZ": 31.85,
+      "MaxZ": 34.11,
+      "RequiredExpansions": [
+        1762112180190
+      ]
+    },
+    {
+      "Id": "barn_1",
+      "MinX": 31.75,
+      "MaxX": 41.56,
+      "MinZ": 26.46,
+      "MaxZ": 34.66,
+      "RequiredExpansions": [
+        1762112200305
+      ]
+    },
+    {
+      "Id": "barn_2",
+      "MinX": 61.72,
+      "MaxX": 72.06,
+      "MinZ": 4.34,
+      "MaxZ": 12.92,
+      "RequiredExpansions": [
+        1762112203057
+      ]
+    },
+    {
+      "Id": "barn_4",
+      "MinX": 49.2,
+      "MaxX": 59.06,
+      "MinZ": 65.83,
+      "MaxZ": 74.62,
+      "RequiredExpansions": [
+        1762112208026
+      ]
+    },
+    {
+      "Id": "barn_3",
+      "MinX": 19.84,
+      "MaxX": 30.06,
+      "MinZ": 37.59,
+      "MaxZ": 46.39,
+      "RequiredExpansions": [
+        1762112205490
+      ]
+    },
+    {
+      "Id": "caravan_1",
+      "MinX": 73.62,
+      "MaxX": 83.2,
+      "MinZ": 70.02,
+      "MaxZ": 76.78,
+      "RequiredExpansions": [
+        1762112210506
+      ]
+    },
+    {
+      "Id": "caravan_2",
+      "MinX": 78.87,
+      "MaxX": 84.5,
+      "MinZ": 70.02,
+      "MaxZ": 76.78,
+      "RequiredExpansions": [
+        1762112212734
+      ]
+    },
+    {
+      "Id": "r_cellar_1",
+      "MinX": -3.01,
+      "MaxX": -1.67,
+      "MinZ": -24.81,
+      "MaxZ": -24.57,
+      "RequiredExpansions": [
+        1762112214805
+      ]
+    },
+    {
+      "Id": "cellar_2",
+      "MinX": -1.09,
+      "MaxX": 1.73,
+      "MinZ": -29.21,
+      "MaxZ": -27.14,
+      "RequiredExpansions": [
+        1762112216641
+      ]
+    },
+    {
+      "Id": "cellar_3",
+      "MinX": 36.43,
+      "MaxX": 36.94,
+      "MinZ": 6.69,
+      "MaxZ": 7.94,
+      "RequiredExpansions": [
+        1762112218714
+      ]
+    },
+    {
+      "Id": "cellar_4",
+      "MinX": 41.68,
+      "MaxX": 42.23,
+      "MinZ": 3.18,
+      "MaxZ": 8.69,
+      "RequiredExpansions": [
+        1762112220761
+      ]
+    },
+    {
+      "Id": "clothing_store_1",
+      "MinX": 5.33,
+      "MaxX": 6.7,
+      "MinZ": -12.19,
+      "MaxZ": -7.67,
+      "RequiredExpansions": [
+        1762112222977
+      ]
+    },
+    {
+      "Id": "clothing_store_2",
+      "MinX": 5.46,
+      "MaxX": 5.8,
+      "MinZ": -10.64,
+      "MaxZ": -10.19,
+      "RequiredExpansions": [
+        1762112224953
+      ]
+    },
+    {
+      "Id": "decoration_store_2",
+      "MinX": -13.74,
+      "MaxX": -0.56,
+      "MinZ": 4.77,
+      "MaxZ": 20.51,
+      "RequiredExpansions": [
+        1762112227034
+      ]
+    },
+    {
+      "Id": "decoration_store_3",
+      "MinX": -10.89,
+      "MaxX": 2.5,
+      "MinZ": 4.99,
+      "MaxZ": 21.55,
+      "RequiredExpansions": [
+        1762112229229
+      ]
+    },
+    {
+      "Id": "decoration_store_4",
+      "MinX": -12.09,
+      "MaxX": 9.72,
+      "MinZ": 4.65,
+      "MaxZ": 19.84,
+      "RequiredExpansions": [
+        1762112231097
+      ]
+    },
+    {
+      "Id": "employee_station",
+      "MinX": 30.15,
+      "MaxX": 31.68,
+      "MinZ": -5.66,
+      "MaxZ": -4.5,
+      "RequiredExpansions": [
+        1762112233170
+      ]
+    },
+    {
+      "Id": "engineer_1",
+      "MinX": -19.76,
+      "MaxX": -16.67,
+      "MinZ": -7.37,
+      "MaxZ": -3.07,
+      "RequiredExpansions": [
+        1762112234865
+      ]
+    },
+    {
+      "Id": "engineer_2",
+      "MinX": -22.98,
+      "MaxX": -19.31,
+      "MinZ": -5.15,
+      "MaxZ": -2.38,
+      "RequiredExpansions": [
+        1762112236793
+      ]
+    },
+    {
+      "Id": "engineer_3",
+      "MinX": -25.38,
+      "MaxX": -17.34,
+      "MinZ": -7.64,
+      "MaxZ": -2.32,
+      "RequiredExpansions": [
+        1762112238697
+      ]
+    },
+    {
+      "Id": "engineer_5",
+      "MinX": -28.71,
+      "MaxX": -25.27,
+      "MinZ": -2.22,
+      "MaxZ": 0.26,
+      "RequiredExpansions": [
+        1762112242569
+      ]
+    },
+    {
+      "Id": "engineer_4",
+      "MinX": -25.79,
+      "MaxX": -22.98,
+      "MinZ": -7.6,
+      "MaxZ": 0.19,
+      "RequiredExpansions": [
+        1762112240645
+      ]
+    },
+    {
+      "Id": "farm_1",
+      "MinX": 18.59,
+      "MaxX": 23.06,
+      "MinZ": 13.95,
+      "MaxZ": 19.6,
+      "RequiredExpansions": [
+        1762112248741
+      ]
+    },
+    {
+      "Id": "farm_6",
+      "MinX": 50.88,
+      "MaxX": 64.88,
+      "MinZ": 35.23,
+      "MaxZ": 50.61,
+      "RequiredExpansions": [
+        1762112258729
+      ]
+    },
+    {
+      "Id": "farm_5",
+      "MinX": 72.94,
+      "MaxX": 85.24,
+      "MinZ": 53.94,
+      "MaxZ": 59.62,
+      "RequiredExpansions": [
+        1762112257233
+      ]
+    },
+    {
+      "Id": "farm_4",
+      "MinX": 71.02,
+      "MaxX": 86.3,
+      "MinZ": 24.26,
+      "MaxZ": 35.9,
+      "RequiredExpansions": [
+        1762112255681
+      ]
+    },
+    {
+      "Id": "farm_3",
+      "MinX": 46.33,
+      "MaxX": 61.78,
+      "MinZ": 5.63,
+      "MaxZ": 18.48,
+      "RequiredExpansions": [
+        1762112253353
+      ]
+    },
+    {
+      "Id": "farm_2",
+      "MinX": 16.5,
+      "MaxX": 24.91,
+      "MinZ": 20.11,
+      "MaxZ": 26.1,
+      "RequiredExpansions": [
+        1762112250785
+      ]
+    },
+    {
+      "Id": "farmland",
+      "MinX": 15.89,
+      "MaxX": 22.42,
+      "MinZ": 0.29,
+      "MaxZ": 6.11,
+      "RequiredExpansions": [
+        1762112260448
+      ]
+    },
+    {
+      "Id": "gardener_4",
+      "MinX": 19.25,
+      "MaxX": 30.99,
+      "MinZ": -11.67,
+      "MaxZ": -6.75,
+      "RequiredExpansions": [
+        1762112270704
+      ]
+    },
+    {
+      "Id": "gardener_3",
+      "MinX": 23.87,
+      "MaxX": 30.98,
+      "MinZ": -11.86,
+      "MaxZ": -6.84,
+      "RequiredExpansions": [
+        1762112268793
+      ]
+    },
+    {
+      "Id": "gardener_2",
+      "MinX": 24.42,
+      "MaxX": 30.93,
+      "MinZ": -10.93,
+      "MaxZ": -6.8,
+      "RequiredExpansions": [
+        1762112266993
+      ]
+    },
+    {
+      "Id": "gardener_1",
+      "MinX": 20.85,
+      "MaxX": 23.97,
+      "MinZ": -11.53,
+      "MaxZ": -6.82,
+      "RequiredExpansions": [
+        1762112264976
+      ]
+    },
+    {
+      "Id": "gate_4",
+      "MinX": -32.53,
+      "MaxX": -27.86,
+      "MinZ": -68.33,
+      "MaxZ": -66.95,
+      "RequiredExpansions": [
+        1762112279681
+      ]
+    },
+    {
+      "Id": "gate_3",
+      "MinX": 23.95,
+      "MaxX": 28.62,
+      "MinZ": -23.35,
+      "MaxZ": -22.52,
+      "RequiredExpansions": [
+        1762112277788
+      ]
+    },
+    {
+      "Id": "gate_2",
+      "MinX": 89.89,
+      "MaxX": 90.4,
+      "MinZ": 65.85,
+      "MaxZ": 70.52,
+      "RequiredExpansions": [
+        1762112275696
+      ]
+    },
+    {
+      "Id": "gate_1",
+      "MinX": -37.75,
+      "MaxX": -33.08,
+      "MinZ": 15.35,
+      "MaxZ": 16.24,
+      "RequiredExpansions": [
+        1762112272642
+      ]
+    },
+    {
+      "Id": "greenhouse_2",
+      "MinX": 34.65,
+      "MaxX": 40.89,
+      "MinZ": 66.14,
+      "MaxZ": 74.34,
+      "RequiredExpansions": [
+        1762112285796
+      ]
+    },
+    {
+      "Id": "greenhouse_1",
+      "MinX": 24.15,
+      "MaxX": 30.39,
+      "MinZ": 66.14,
+      "MaxZ": 74.34,
+      "RequiredExpansions": [
+        1762112283728
+      ]
+    },
+    {
+      "Id": "house_2",
+      "MinX": -36.58,
+      "MaxX": -28.82,
+      "MinZ": -2.71,
+      "MaxZ": 4.41,
+      "RequiredExpansions": [
+        1762112290056
+      ]
+    },
+    {
+      "Id": "house_1",
+      "MinX": -39.81,
+      "MaxX": -33.03,
+      "MinZ": -46.73,
+      "MaxZ": -38.32,
+      "RequiredExpansions": [
+        1762112288016
+      ]
+    },
+    {
+      "Id": "lumberjack_4",
+      "MinX": 13.12,
+      "MaxX": 15.56,
+      "MinZ": 19.1,
+      "MaxZ": 26.63,
+      "RequiredExpansions": [
+        1762112299936
+      ]
+    },
+    {
+      "Id": "lumberjack_3",
+      "MinX": 10.29,
+      "MaxX": 14.58,
+      "MinZ": 19.1,
+      "MaxZ": 26.85,
+      "RequiredExpansions": [
+        1762112298056
+      ]
+    },
+    {
+      "Id": "lumberjack_2",
+      "MinX": 10.73,
+      "MaxX": 11.37,
+      "MinZ": 22.01,
+      "MaxZ": 24.43,
+      "RequiredExpansions": [
+        1762112296120
+      ]
+    },
+    {
+      "Id": "lumberjack_1",
+      "MinX": 10.26,
+      "MaxX": 12.21,
+      "MinZ": 18.91,
+      "MaxZ": 24.53,
+      "RequiredExpansions": [
+        1762112294224
+      ]
+    },
+    {
+      "Id": "market_4",
+      "MinX": 1.45,
+      "MaxX": 10.77,
+      "MinZ": -31.36,
+      "MaxZ": -24.61,
+      "RequiredExpansions": [
+        1762112308160
+      ]
+    },
+    {
+      "Id": "market_3",
+      "MinX": 1.78,
+      "MaxX": 10.84,
+      "MinZ": -41.4,
+      "MaxZ": -31.2,
+      "RequiredExpansions": [
+        1762112305602
+      ]
+    },
+    {
+      "Id": "market_2",
+      "MinX": 10.76,
+      "MaxX": 19.59,
+      "MinZ": -40.87,
+      "MaxZ": -30.89,
+      "RequiredExpansions": [
+        1762112303576
+      ]
+    },
+    {
+      "Id": "market_1",
+      "MinX": 11.65,
+      "MaxX": 19.35,
+      "MinZ": -31.13,
+      "MaxZ": -23.46,
+      "RequiredExpansions": [
+        1762112301840
+      ]
+    },
+    {
+      "Id": "museum",
+      "MinX": -14.11,
+      "MaxX": -3.78,
+      "MinZ": -15.9,
+      "MaxZ": -7.02,
+      "RequiredExpansions": [
+        1762112310112
+      ]
+    },
+    {
+      "Id": "workshop_2",
+      "MinX": 76.91,
+      "MaxX": 84.27,
+      "MinZ": 7.31,
+      "MaxZ": 14.86,
+      "RequiredExpansions": [
+        1762112318271
+      ]
+    },
+    {
+      "Id": "workshop_1",
+      "MinX": -47.74,
+      "MaxX": -40.19,
+      "MinZ": 6.57,
+      "MaxZ": 13.93,
+      "RequiredExpansions": [
+        1762112316424
+      ]
+    },
+    {
+      "Id": "street_2",
+      "MinX": -40.14,
+      "MaxX": -21.87,
+      "MinZ": -54.61,
+      "MaxZ": -44.75,
+      "RequiredExpansions": [
+        1762112314337
+      ]
+    },
+    {
+      "Id": "street_1",
+      "MinX": -39.15,
+      "MaxX": -28.12,
+      "MinZ": -3.16,
+      "MaxZ": 6.26,
+      "RequiredExpansions": [
+        1762112312471
+      ]
+    },
+    {
+      "Id": "workshop_4",
+      "MinX": 3.26,
+      "MaxX": 10.62,
+      "MinZ": -21.01,
+      "MaxZ": -13.31,
+      "RequiredExpansions": [
+        1762112321865
+      ]
+    },
+    {
+      "Id": "workshop_3",
+      "MinX": 32.78,
+      "MaxX": 40.14,
+      "MinZ": 41.15,
+      "MaxZ": 48.85,
+      "RequiredExpansions": [
+        1762112320143
+      ]
+    },
+    {
+      "Id": "junkman",
+      "MinX": 21.39,
+      "MaxX": 28.21,
+      "MinZ": -1.87,
+      "MaxZ": 2.62,
+      "RequiredExpansions": [
+        1762112291698
+      ]
+    },
+    {
+      "Id": "farmland_2",
+      "MinX": 44.86,
+      "MaxX": 52.65,
+      "MinZ": 34.0,
+      "MaxZ": 52.43,
+      "RequiredExpansions": [
+        1762112262848
+      ]
+    }
+  ],
+  "NameTextKey": "MapRome"
+}

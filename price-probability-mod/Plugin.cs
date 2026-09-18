@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace OldMarket.PriceProbability
 {
-    [BepInPlugin(Id, "Old Market Price Probability", "0.1.1")]
+    [BepInPlugin(Id, "Smart Pricing", "0.1.2")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {
@@ -41,7 +41,7 @@ namespace OldMarket.PriceProbability
                 Patch(typeof(SaveManager), nameof(SaveManager.DeleteSave), postfix: nameof(DeletedSave));
             }
             catch (Exception error) { harmony.UnpatchSelf(); Logger.LogError(error); enabled = false; return; }
-            Logger.LogInfo("Price Probability ready; automatic anchors are host-owned.");
+            Logger.LogInfo("Smart Pricing ready; automatic anchors are host-owned.");
         }
 
         private void Patch(Type type, string method, string prefix = null, string postfix = null)

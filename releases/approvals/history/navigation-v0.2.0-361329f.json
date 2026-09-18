@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "mod": "navigation",
+  "version": "0.2.0",
+  "sdk": "2.1.6/r7",
+  "prerelease": true,
+  "sourceCommit": "361329f6a1a44827b985be9188ca7a81b6ac2e74",
+  "inputsSha256": "5916f162f25aea4735e85bc0950facb91af0902aff1646ca62b304452fb2cb8d",
+  "authorization": "Maintainer explicitly selected retaining Navigation 0.2.0 for the current first-public-release scope, including packaged Eastern Town, Island and Rome maps, localization and the reviewed Gate 4 water correction."
+}

@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace OldMarket.CheckoutAll
 {
-    [BepInPlugin(Id, "Old Market Checkout All", "0.1.4")]
+    [BepInPlugin(Id, "Auto Checkout", "0.1.5")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {
@@ -48,7 +48,7 @@ namespace OldMarket.CheckoutAll
                 prefix: new HarmonyMethod(typeof(Plugin), nameof(BeforeItem)));
             harmony.Patch(AccessTools.Method(typeof(CoinPouch), nameof(CoinPouch.Interact)),
                 prefix: new HarmonyMethod(typeof(Plugin), nameof(BeforePouch)));
-            Logger.LogInfo($"Checkout All ready: hold E or toggle {toggleKey.Value} for continuous checkout.");
+            Logger.LogInfo($"Auto Checkout ready: hold E or toggle {toggleKey.Value} for continuous checkout.");
         }
 
         private static bool BeforeItem(CheckoutItem __instance) => instance == null || instance.AllowItem(__instance);
@@ -117,7 +117,7 @@ namespace OldMarket.CheckoutAll
             }
             hintPlayer = player;
             string shortcut = toggleKey.Value == Key.None ? "" :
-                $" / {toggleKey.Value}: {GameText.Native("turn_on")} / {GameText.Native("turn_off")}";
+                " / <color=#FF0000>" + GameText.Get("checkout_toggle_off", toggleKey.Value) + "</color>";
             hintMessage = target == null ? null : checkout == null
                 ? GameText.Get("hold_repeat", "E", GameText.Native("put_to_bag") + " / " + GameText.Native("take_pouch")) + shortcut
                 : session.Toggled ? GameText.Get("checkout_toggle", toggleKey.Value)

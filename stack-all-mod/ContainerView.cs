@@ -23,10 +23,10 @@ namespace OldMarket.StackAll
             var network = NetworkManager.Singleton;
             var player = network != null && network.LocalClient != null ? network.LocalClient.PlayerObject : null;
             var inventory = player != null ? player.GetComponent<PlayerInventory>() : null;
-            bool product = inventorySlot.itemId != -1 && GameManager.Instance != null &&
-                GameManager.Instance.GetItemById(inventorySlot.itemId) is ProductSO;
+            var definition = inventorySlot.itemId != -1 && GameManager.Instance != null
+                ? GameManager.Instance.GetItemById(inventorySlot.itemId) : null;
             if (inventory == null || inventory.itemSlots == null || !__instance.transform.IsChildOf(inventory.itemSlots.transform)) return;
-            if (!product || index < 0 || index >= inventory.maxSlots)
+            if (!PacketRules.IsPacket(definition) || index < 0 || index >= inventory.maxSlots)
             {
                 Restore(__instance);
                 return;
@@ -54,29 +54,33 @@ namespace OldMarket.StackAll
                 count++;
                 total += System.Math.Max(0, entry.amount);
             }
-            Place(__instance.textAmount, true, view.FontSize);
-            Place(view.Right, false, view.FontSize);
+            Place(__instance.textAmount, true, view.FontSize, total >= 100);
+            Place(view.Right, false, view.FontSize, false);
             view.Right.font = __instance.textAmount.font;
             view.Right.fontSharedMaterial = __instance.textAmount.fontSharedMaterial;
             __instance.textAmount.text = total.ToString();
             view.Right.text = count.ToString();
-            __instance.textAmount.gameObject.SetActive(true);
+            // Whole fish and other single-use products are individual items, not reusable
+            // containers. Keep their physical count on the right without duplicating it.
+            __instance.textAmount.gameObject.SetActive(!(definition is ProductSO product) || product.amount != 1 || !product.destroyWhenEmpty);
             view.Right.gameObject.SetActive(true);
         }
 
-        private static void Place(TextMeshProUGUI label, bool left, float fontSize)
+        private static void Place(TextMeshProUGUI label, bool left, float fontSize, bool fitContents)
         {
             var rect = label.rectTransform;
             float height = Mathf.Max(20f, fontSize * 1.4f);
-            rect.anchorMin = new Vector2(left ? 0 : .68f, 0);
-            rect.anchorMax = new Vector2(left ? .65f : 1, 0);
+            // Two-digit counts keep native size. Only longer goods totals may shrink
+            // within the left half, leaving room for the right count in a 64px slot.
+            rect.anchorMin = new Vector2(0, 0);
+            rect.anchorMax = new Vector2(fitContents ? .5f : 1, 0);
             rect.pivot = new Vector2(.5f, 0);
             rect.offsetMin = new Vector2(3, 2);
             rect.offsetMax = new Vector2(-3, height + 2);
             label.alignment = left ? TextAlignmentOptions.BottomLeft : TextAlignmentOptions.BottomRight;
-            label.enableAutoSizing = true;
+            label.enableAutoSizing = fitContents;
             label.fontSize = fontSize;
-            label.fontSizeMin = Mathf.Min(9, fontSize);
+            label.fontSizeMin = fitContents ? Mathf.Min(9, fontSize) : fontSize;
             label.fontSizeMax = fontSize;
         }
         private static void Restore(ItemSlot slot)

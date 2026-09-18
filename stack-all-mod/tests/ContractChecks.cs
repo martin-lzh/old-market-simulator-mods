@@ -36,6 +36,16 @@ Check(Method("PlayerInventory", "RefillCurrentItemServer").Parameters.Select(p =
 Check(Method("PlayerInventory", "ReduceCurrentItemAmount").Body.Instructions.Any(i => i.Operand is TypeReference t && t.Name == "ToolSO"), "tool consumption remains in native branch");
 var mod = plugin.MainModule.Types.Single(t => t.Name == "Plugin");
 var receive = mod.Methods.Single(m => m.Name == "Receive");
+var worldDays = Method("Item", "OnDayChanged").Body.Instructions;
+Check(worldDays.Any(i => i.Operand is FieldReference f && f.Name == "dayCounter") &&
+    worldDays.Any(i => i.OpCode == OpCodes.Add), "world items increment elapsed day counter");
+Check(worldDays.Any(i => i.Operand is TypeReference t && t.Name == "AnimalSO") &&
+    worldDays.Any(i => i.OpCode == OpCodes.Ldc_I8 && (long)i.Operand == 1725814069046L), "native world ageing excludes animal and fish trap states");
+var placement = Method("PlayerInventory", "PlaceBlockServerRpc").Body.Instructions;
+Check(placement.Any(i => i.Operand is FieldReference f && f.DeclaringType.Name == "BlockAnimal" && f.Name == "dayCounter") &&
+    placement.Any(i => i.Operand is FieldReference f && f.DeclaringType.Name == "BlockFishTrap" && f.Name == "harvestCount"), "placed animals and traps consume preserved state counters");
+Check(mod.Methods.Single(m => m.Name == "CanMerge").Body.Instructions.Any(i =>
+    i.Operand is MethodReference m && m.DeclaringType.Name == "StackCompatibility"), "runtime uses collectible-aware merge policy");
 Check(receive.Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "Executing"), "receive execution-stage gate");
 Check(receive.Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "Eligible"), "tool exclusion in receiver");
 Check(mod.Methods.Single(m => m.Name == "Eligible").Body.Instructions.Any(i => i.Operand is TypeReference t && t.Name == "ToolSO"), "eligibility excludes tools");
@@ -67,9 +77,40 @@ foreach (string name in new[] { "HandleDrop", "HandleThrow" })
         method.Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "ReduceCurrentItemAmount"), "separate container and item actions " + name);
 }
 var repeat = plugin.MainModule.Types.Single(t => t.Name == "RepeatActions");
-Check(repeat.Methods.Single(m => m.Name == "Units").Body.Instructions.Any(i => i.Operand is TypeReference t && t.Name == "ProductSO"), "repeat count uses product containers");
+Check(repeat.Methods.Single(m => m.Name == "Units").Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "IsPacket"), "repeat count uses physical packets");
+Check(Type("SeedSO").BaseType.Name == "ItemSO", "seeds are separate from ProductSO");
+Check(Method("BlockDirt", "Interact").Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "ReduceCurrentItemAmount"), "native planting consumes one seed");
+var packets = plugin.MainModule.Types.Single(t => t.Name == "PacketRules");
+Check(packets.Methods.Single(m => m.Name == "IsPacket").Body.Instructions.Any(i => i.Operand is TypeReference t && t.Name == "SeedSO"), "seed packets use physical storage");
+Check(mod.Methods.Single(m => m.Name == "StackLimit").Body.Instructions.Any(i => i.Operand is MethodReference m && m.DeclaringType.Name == "PacketRules"), "drop and placement use packet-aware stack limits");
+foreach (string name in new[] { "Receive", "AfterLoad" })
+    Check(mod.Methods.Single(m => m.Name == name).Body.Instructions.Any(i => i.Operand is MethodReference m && m.DeclaringType.Name == "PacketRules" && m.Name == "Add"), "packet storage on " + name);
 Check(repeat.Methods.Single(m => m.Name == "ShouldAct").Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "IsAnyPanelActive"), "repeat cancels in menus");
 var hint = plugin.MainModule.Types.Single(t => t.Name == "ActionHint");
 Check(hint.Methods.Single(m => m.Name == "Show").Body.Instructions.Any(i => i.Operand is FieldReference f && f.Name == "controlHintPanel"), "hint follows native operation panel");
-Check(hint.Methods.Single(m => m.Name == "Binding").Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "GetBindingDisplayString"), "hint uses actual bindings");
+Check(hint.Methods.Single(m => m.Name == "Show").Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == "Instantiate"), "empty hint clones a native control row");
+Check(Type("PlayerInventory").Fields.Any(f => f.Name == "currentSlot" &&
+    f.FieldType.FullName == "Unity.Netcode.NetworkVariable`1<System.Int32>"), "empty action current-slot injection type");
+Check(Method("PlayerInventory", "LateUpdate").Parameters.Count == 0 &&
+    Method("PlayerInventory", "LateUpdate").ReturnType.FullName == "System.Void", "empty action LateUpdate target");
+var emptyAction = plugin.MainModule.Types.Single(t => t.Name == "EmptyContainerAction");
+var allowed = emptyAction.Methods.Single(m => m.Name == "Allowed").Body.Instructions;
+foreach (string name in new[] { "get_IsOwner", "get_IsSpawned", "get_IsListening", "get_isFocused", "get_timeScale",
+    "get_lockState", "IsAnyPanelActive", "get_enabled", "get_Drop", "get_Throw", "get_Place", "get_Refill",
+    "get_PrimaryInteraction", "get_SecondaryInteraction" })
+    Check(allowed.Any(i => i.Operand is MethodReference m && m.Name == name), "empty action gate " + name);
+var emptyTick = emptyAction.Methods.Single(m => m.Name == "Tick").Body.Instructions;
+Check(emptyTick.Any(i => i.Operand is MethodReference m && m.DeclaringType.Name == "RepeatGate" && m.Name == "Tick"), "G uses paced repeat state");
+Check(emptyTick.Any(i => i.Operand is MethodReference m && m.DeclaringType.Name == "EmptyContainerPlan" && m.Name == "Count"), "G repeats empty count rather than total containers");
+var updateHint = mod.Methods.Single(m => m.Name == "UpdateHints");
+Check(updateHint.Parameters.Last().Name == "___currentSlot", "G injects the actual selected slot");
+foreach (string name in new[] { "Take", "Apply", "SpillContainer" })
+    Check(updateHint.Body.Instructions.Any(i => i.Operand is MethodReference m && m.Name == name), "empty removal path " + name);
+Check(!updateHint.Body.Instructions.Any(i => i.Operand is MethodReference m &&
+    (m.Name == "UseItem" || m.Name == "ReduceCurrentItemAmount")), "empty action never consumes held goods");
+foreach (string field in new[] { "textBinding", "imageBinding", "imageBackground" })
+    Check(hint.Methods.Single(m => m.Name == "Show").Body.Instructions.Any(i =>
+        i.Operand is FieldReference f && f.DeclaringType.Name == "ControlSlot" && f.Name == field), "native keycap field " + field);
+Check(hint.Methods.Single(m => m.Name == "Show").Body.Instructions.Any(i =>
+    i.Operand is MethodReference m && m.Name == "set_color" && m.DeclaringType.Name == "Graphic"), "whole native hint row supports muted tint");
 Console.WriteLine($"PASS: {checks} game IL and patch contract checks (no Unity methods executed)");

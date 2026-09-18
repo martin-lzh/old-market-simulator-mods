@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "mod": "tree-info",
+  "version": "0.1.0",
+  "sdk": "2.1.6/r8",
+  "prerelease": true,
+  "sourceCommit": "78f0ae1720634811bdedc18717bb6d1db3306174",
+  "inputsSha256": "43b4540174404dba9f22830505b2501206b9d7ae663c3083d783b3c7a71d9be4",
+  "authorization": "Maintainer explicitly assigned tree-info 0.1.0 and subsequently requested improved Mod display names and feature/control READMEs before publication. This renewal covers the display name Tree Harvest Helper and bilingual player-guide changes within that same version scope; gameplay, stable plugin identity and SDK pin are unchanged."
+}

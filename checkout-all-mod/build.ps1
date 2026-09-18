@@ -1,15 +1,16 @@
 param([string]$GameDir = 'F:\SteamLibrary\steamapps\common\Old Market Simulator')
 $ErrorActionPreference = 'Stop'
+$modVersion = ([xml](Get-Content -LiteralPath (Join-Path $PSScriptRoot 'CheckoutAll.csproj') -Raw)).Project.PropertyGroup.Version
 dotnet run --project (Join-Path $PSScriptRoot 'localization/tests/Localization.Tests.csproj') -c Release
 if ($LASTEXITCODE) { throw 'Localization checks failed.' }
 $taskRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 dotnet run --project (Join-Path $PSScriptRoot 'tests/Tests.csproj') -c Release
 if ($LASTEXITCODE) { throw 'Checkout hold checks failed.' }
-dotnet build (Join-Path $PSScriptRoot 'CheckoutAll.csproj') -c Release --nologo "-p:GameDir=$GameDir"
+dotnet build (Join-Path $PSScriptRoot 'CheckoutAll.csproj') -c Release --nologo "-p:GameDir=$GameDir" "-p:GameDir=$GameDir"
 if ($LASTEXITCODE) { throw 'Checkout build failed.' }
 $taskOutput = Join-Path $taskRoot 'outputs'
 New-Item -ItemType Directory -Force $taskOutput | Out-Null
-$taskZip = Join-Path $taskOutput 'OldMarket.CheckoutAll-0.1.4.zip'
+$taskZip = Join-Path $taskOutput "OldMarket.CheckoutAll-$modVersion.zip"
 $taskDll = Join-Path $PSScriptRoot 'bin/Release/netstandard2.1/OldMarket.CheckoutAll.dll'
 Add-Type -AssemblyName System.IO.Compression
 $taskStream = [IO.File]::Open($taskZip, [IO.FileMode]::Create)

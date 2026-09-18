@@ -41,7 +41,9 @@ namespace OldMarket.CheckoutAll
             text.fontStyle = native.fontStyle;
             text.fontWeight = native.fontWeight;
             text.characterSpacing = native.characterSpacing;
-            text.color = native.color;
+            // Native interaction availability must not tint our independent hold/toggle hint.
+            // Only the toggle-off fragment supplies its own status color.
+            text.color = Color.white;
             if (text.text != message) text.text = message;
 
             float left = float.PositiveInfinity, bottom = float.PositiveInfinity;

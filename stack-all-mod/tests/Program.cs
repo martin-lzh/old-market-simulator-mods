@@ -33,6 +33,34 @@ Check(StackRules.Fresh(50, 999, -1), "nonperishable items merge");
 Check(!StackRules.Compatible(1, 1, 1, 3, false, -1), "non-product state values are not averaged");
 Check(StackRules.Compatible(1, 3, 1, 3, false, -1), "same non-product state can stack");
 var random = new Random(64);
+// A native Resource gives age 0; Item.OnDayChanged also ages ordinary dropped collectibles.
+var collectible = new ItemSO { id = 20, amount = 1, stackSize = 6 };
+slots = new[] { Slot(20, 5, 10, 0), Empty() };
+Check(StackPlan.Add(slots, 2, 1, Slot(20, 1, 22, 1),
+    (a, b) => StackCompatibility.CanMerge(collectible, a, b)) == 0, "repicked collectible accepted");
+Check(slots[0].amount == 6 && slots[1].itemId == -1, "repicked collectible rejoins its original stack despite world age");
+Check(slots[0].cost == 12, "repicked collectible retains weighted cost");
+for (int day = 1; day <= 12; day++)
+{
+    var dropped = slots[0]; dropped.amount = 1; slots[0].amount--;
+    dropped.dayCounter += day;
+    Check(StackPlan.Add(slots, 1, 0, dropped,
+        (a, b) => StackCompatibility.CanMerge(collectible, a, b)) == 0 && slots[0].amount == 6,
+        "repeated drop and later pickup conserves collectible quantity in a full hotbar");
+}
+slots = new[] { Slot(20, 63), Empty() };
+Check(StackPlan.Add(slots, 1, 0, Slot(20, 3, 30, 9),
+    (a, b) => StackCompatibility.CanMerge(collectible, a, b)) == 2 && slots[0].amount == 64,
+    "repickup retains 64 limit and returns overflow");
+foreach (var stateful in new ItemSO[] { new AnimalSO(), new ItemSO { id = StackCompatibility.FishTrapId } })
+{
+    Check(!StackCompatibility.CanMerge(stateful, Slot(1, 1, age: 1), Slot(1, 1, age: 3)), "meaningful age/use states cannot merge");
+    Check(StackCompatibility.CanMerge(stateful, Slot(1, 1, age: 3), Slot(1, 1, age: 3)), "identical age/use states still merge");
+}
+Check(!StackCompatibility.CanMerge(new ProductSO { maxDays = 4 }, Slot(1, 2, age: 0), Slot(1, 1, age: 4)), "repicked spoiled product cannot mix with fresh goods");
+Check(StackCompatibility.CanMerge(new ProductSO { maxDays = -1 }, Slot(1, 2, age: 0), Slot(1, 1, age: 100)), "nonperishable products ignore elapsed days");
+Check(!StackCompatibility.CanMerge(new ToolSO(), Slot(1, 2), Slot(1, 1)), "tools do not enter collectible stacking");
+Check(!StackCompatibility.CanMerge(null, Slot(1, 2), Slot(1, 1)), "unknown definitions do not enter collectible stacking");
 for (int trial = 0; trial < 2000; trial++)
 {
     slots = Enumerable.Range(0, 8).Select(_ => random.Next(3) == 0 ? Empty() : Slot(random.Next(1, 4), random.Next(1, 65))).ToArray();
@@ -45,6 +73,38 @@ for (int trial = 0; trial < 2000; trial++)
     Check(Enumerable.Range(0, 8).Where(i => before[i].itemId > 1).All(i => slots[i].Equals(before[i])), "other items unchanged");
 }
 InventorySlot[] Storage(int width) => Enumerable.Repeat(Empty(), ContainerPlan.StorageSize(width)).ToArray();
+var seeds = new SeedSO { amount = 10, stackSize = 1 };
+Check(PacketRules.StackLimit(seeds) == 1, "seed drop and placement select native whole-packet branch");
+Check(PacketRules.StackLimit(new ItemSO()) == 64, "ordinary items keep expanded stacking");
+Check(PacketRules.StackLimit(new ToolSO()) == 1, "tools retain native stack limit");
+slots = Storage(2);
+Check(PacketRules.Add(slots, 2, 1, 0, Slot(7, 4, 13, 2), seeds), "partially planted packet fits");
+Check(PacketRules.Add(slots, 2, 1, 0, Slot(7, 10, 29, 5), seeds), "full packet stacks alongside partial packet");
+Check(slots[0].amount == 4 && slots[0].cost == 13 && slots[0].dayCounter == 2 &&
+    slots[2].amount == 10 && slots[2].cost == 29 && slots[2].dayCounter == 5,
+    "seed stacking preserves each packet's contents and metadata without merging");
+slots[0].amount--; // The native planting path calls ReduceCurrentItemAmount.
+Check(ContainerPlan.Total(slots, 2, 0) == 13 && ContainerPlan.Count(slots, 2, 0) == 2, "planting consumes one seed, not a packet");
+slots[0] = Empty(); // Native UseItem clears only the front slot before promotion.
+ContainerPlan.Promote(slots, 2, 0);
+Check(slots[0].amount == 10 && slots[0].cost == 29 && ContainerPlan.Count(slots, 2, 0) == 1,
+    "dropping or exhausting a packet promotes the next packet intact");
+for (int p = 1; p < 64; p++) Check(PacketRules.Add(slots, 2, 1, 0, Slot(7, 10), seeds), "64 seed packets fit");
+Check(!PacketRules.Add(slots, 2, 1, 0, Slot(7, 6, 31), seeds) && ContainerPlan.Total(slots, 2, 0) == 640,
+    "full inventory rejects the entire incoming packet for intact spill");
+Check(PacketRules.Add(slots, 2, 2, 0, Slot(7, 6, 31), seeds) && slots[1].amount == 6 && slots[1].cost == 31,
+    "65th packet uses the next unlocked slot");
+var savedPackets = ContainerPlan.Trim(slots, 2);
+var restoredPackets = Storage(2);
+for (int i = 0; i < savedPackets.Length; i++)
+    if (savedPackets[i].itemId != -1)
+        Check(PacketRules.Add(restoredPackets, 2, 2, ContainerPlan.Group(2, i), savedPackets[i], seeds), "saved packet reloads");
+Check(ContainerPlan.Total(restoredPackets, 2, 0) + ContainerPlan.Total(restoredPackets, 2, 1) == 646 &&
+    ContainerPlan.Count(restoredPackets, 2, 0) + ContainerPlan.Count(restoredPackets, 2, 1) == 65,
+    "save reload conserves seed contents and packet count");
+slots = Storage(1);
+Check(PacketRules.Add(slots, 1, 1, 0, Slot(7, 64, 19), seeds) && slots[0].amount == 64 &&
+    ContainerPlan.Count(slots, 1, 0) == 1, "legacy merged seed amount remains one intact record without guessed splitting");
 slots = Storage(8);
 Check(ContainerPlan.Add(slots, 8, 1, 0, Slot(1, 24), 24, 8), "first full basket");
 Check(ContainerPlan.Add(slots, 8, 1, 0, Slot(1, 24), 24, 8), "second full basket");
@@ -137,7 +197,9 @@ gate = new RepeatGate();
 gate.Tick(true, true, true, 0, 1, 64, 0);
 Check(gate.Tick(true, false, true, 0, 1, 63, 10), "low FPS still emits only one action");
 Check(!gate.Tick(true, false, true, 0, 1, 62, 10), "no catch-up burst on same frame");
-Console.WriteLine($"PASS: {checks} stack, container and input checks");
+ContainerViewChecks.Run(Check);
+EmptyContainerChecks.Run(Check);
+Console.WriteLine($"PASS: {checks} stack, container, input and display checks");
 
 // Test stand-in for the native network value type: no Unity or game code is executed.
 public struct InventorySlot { public long itemId; public int amount, cost, dayCounter; }

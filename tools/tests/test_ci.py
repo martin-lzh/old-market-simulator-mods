@@ -1,0 +1,335 @@
+import importlib.util
+from pathlib import Path
+import tempfile
+import subprocess
+import unittest
+from unittest.mock import patch
+import zipfile
+
+spec = importlib.util.spec_from_file_location("ci", Path(__file__).parents[1] / "ci.py")
+ci = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(ci)
+
+
+def log(en="1.2.3", zh="1.2.3"):
+    return f"## English\n### Unreleased\nPending\n### {en} — 2026-09-13\nEnglish notes\n## 中文\n### 未发布\n待发布\n### {zh} — 2026-09-13\n中文记录\n"
+
+
+class VersionTests(unittest.TestCase):
+    def test_bilingual_notes_ignore_unreleased(self):
+        version, notes = ci.changelog(log())
+        self.assertEqual(version, "1.2.3")
+        self.assertNotIn("Pending", notes)
+        self.assertIn("中文记录", notes)
+
+    def test_disagreement_fails(self):
+        with self.assertRaises(ValueError):
+            ci.changelog(log(zh="1.2.2"))
+
+    def test_duplicate_history_fails(self):
+        with self.assertRaises(ValueError):
+            ci.changelog(log().replace("## 中文", "### 1.2.3 — duplicate\n\n## 中文"))
+
+    def test_missing_language_fails(self):
+        with self.assertRaises(ValueError):
+            ci.changelog("## English\n### 1.0.0 — today\n")
+
+    def test_numeric_order(self):
+        text = log("1.10.0", "1.10.0").replace("## 中文", "### 1.9.0 — old\n\n## 中文") + "### 1.9.0 — old\n"
+        self.assertEqual(ci.changelog(text)[0], "1.10.0")
+
+    def test_repository_configs(self):
+        for slug in ci.MODS:
+            self.assertTrue((ci.ROOT / "sdk" / ci.config(slug)["sdk"] / "manifest.json").is_file())
+
+    def test_navigation_in_all_ci_scopes(self):
+        self.assertEqual(ci.MODS["navigation"], "Navigation")
+        self.assertEqual(ci.variants("navigation"), ["BepInEx"])
+        self.assertTrue((ci.ROOT / "navigation-mod/tests/Navigation.Tests.csproj").is_file())
+
+    def test_tree_info_build_and_reflection_contracts(self):
+        c = ci.config("tree-info")
+        self.assertEqual(ci.variants("tree-info"), ["BepInEx"])
+        self.assertEqual(c["sdk"], "2.1.6/r8")
+        self.assertTrue((c["directory"] / "tests/Tests.csproj").is_file())
+        self.assertTrue((c["directory"] / "tests/ContractChecks.csproj").is_file())
+        self.assertEqual(ci.ET.parse(c["project"]).find(".//ManagedDir").attrib["Condition"], "'$(ManagedDir)' == ''")
+        api = ci.json.loads((ci.ROOT / "sdk" / c["sdk"] / "api.json").read_text())
+        types = {t["Name"]: t for t in api["Types"]}
+        for name, argument in (("dayCounter", "System.Int32"), ("isWatered", "System.Boolean")):
+            field = next(f for f in types["BlockTree"]["Fields"] if f["Name"] == name)
+            self.assertEqual(field["Type"]["Element"]["Name"], "Unity.Netcode.NetworkVariable`1")
+            self.assertEqual(field["Type"]["Arguments"][0]["Name"], argument)
+        self.assertIn("InteractionRay", {m["Name"] for m in types["PlayerInteraction"]["Methods"]})
+        self.assertTrue({"mainCamera", "isInteractionEnabled"} <= {f["Name"] for f in types["PlayerInteraction"]["Fields"]})
+
+    def test_navigation_managed_directory_respects_override(self):
+        node = ci.ET.parse(ci.ROOT / "navigation-mod/Navigation.csproj").find(".//ManagedDir")
+        self.assertEqual(node.attrib.get("Condition"), "'$(ManagedDir)' == ''")
+
+    def test_stack_empty_action_exports_harmony_injection(self):
+        c = ci.config("stack-all")
+        api = ci.json.loads((ci.ROOT / "sdk" / c["sdk"] / "api.json").read_text())
+        inventory = next(t for t in api["Types"] if t["Name"] == "PlayerInventory")
+        current = next(f for f in inventory["Fields"] if f["Name"] == "currentSlot")
+        self.assertEqual(current["Type"]["Element"]["Name"], "Unity.Netcode.NetworkVariable`1")
+        self.assertEqual(current["Type"]["Arguments"][0]["Name"], "System.Int32")
+        self.assertIn("LateUpdate", {m["Name"] for m in inventory["Methods"]})
+
+    def test_navigation_reflection_declarations_are_exported(self):
+        api = ci.json.loads((ci.ROOT / "sdk/2.1.6/r2/api.json").read_text(encoding="utf-8"))
+        types = {t["Name"]: t for t in api["Types"]}
+        slots = {f["Name"]: f for f in types["SaveManager"]["Fields"]}
+        self.assertEqual(slots["currentSlot"]["Type"]["Name"], "System.String")
+        expansions = {f["Name"]: f for f in types["GameManager"]["Fields"]}
+        active = expansions["activeExpansions"]["Type"]
+        self.assertEqual(active["Element"]["Name"], "Unity.Netcode.NetworkList`1")
+        self.assertEqual(active["Arguments"][0]["Name"], "System.Int64")
+        self.assertIn("GetLocalCurrentRegionSceneName", {m["Name"] for m in types["RegionManager"]["Methods"]})
+
+    def test_navigation_inlined_constants_match_reviewed_metadata(self):
+        api = ci.json.loads((ci.ROOT / "sdk/2.1.6/r2/api.json").read_text(encoding="utf-8"))
+        types = {t["Name"]: t for t in api["Types"]}
+        maths = {f["Name"]: f for f in types["UnityEngine.Mathf"]["Fields"]}
+        self.assertEqual(maths["Deg2Rad"]["ConstantType"], "Single")
+        self.assertAlmostEqual(float(maths["Deg2Rad"]["Constant"]), 0.017453292, places=9)
+        self.assertAlmostEqual(float(maths["Rad2Deg"]["Constant"]), 57.29578, places=5)
+        physics = {f["Name"]: f for f in types["UnityEngine.Physics"]["Fields"]}
+        self.assertEqual(physics["DefaultRaycastLayers"]["Constant"], "-5")
+
+    def test_existing_sdk_cannot_be_edited(self):
+        with patch.object(ci.subprocess, "check_output", return_value="sdk/2.1.6/r1/api.json\n"), \
+                patch.object(ci.subprocess, "run") as git:
+            git.return_value.returncode = 0
+            with self.assertRaises(ValueError):
+                ci.immutable_sdk("a" * 40)
+
+    def test_new_sdk_revision_is_allowed(self):
+        with patch.object(ci.subprocess, "check_output", return_value="sdk/2.1.6/r2/api.json\n"), \
+                patch.object(ci.subprocess, "run") as git:
+            git.return_value.returncode = 1
+            ci.immutable_sdk("a" * 40)
+
+    def test_export_refuses_dirty_source(self):
+        with patch.object(ci.subprocess, "check_output", return_value=" M Plugin.cs\n"):
+            with self.assertRaisesRegex(ValueError, "Commit source"):
+                ci.export_sdk("fake-game", "2.1.6", 2, "fake-seeds")
+
+    def test_export_refuses_existing_revision(self):
+        with patch.object(ci.subprocess, "check_output", return_value=""):
+            with self.assertRaisesRegex(ValueError, "already exists"):
+                ci.export_sdk("fake-game", "2.1.6", 1, "fake-seeds")
+
+
+class ReleaseDirectoryTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+        self.root_patch = patch.object(ci, "ROOT", self.root)
+        self.root_patch.start()
+        self.git("init", "--quiet")
+        self.write("coordinates-mod/Plugin.cs", "original")
+        self.baseline = self.commit()
+        self.git("-c", "user.name=Test", "-c", "user.email=test@example.invalid",
+                 "tag", "-a", "coordinates-v1.0.0", "-m", "Release")
+        self.releases = [dict(tag_name="coordinates-v1.0.0", draft=False, target_commitish="main")]
+
+    def tearDown(self):
+        self.root_patch.stop()
+        self.temp.cleanup()
+
+    def git(self, *args):
+        return subprocess.check_output(["git", *args], cwd=self.root, text=True, stderr=subprocess.PIPE).strip()
+
+    def write(self, path, value):
+        file = self.root / path
+        file.parent.mkdir(parents=True, exist_ok=True)
+        file.write_text(value)
+
+    def commit(self):
+        self.git("add", ".")
+        self.git("-c", "user.name=Test", "-c", "user.email=test@example.invalid", "commit", "--quiet", "-m", "Test")
+        return self.git("rev-parse", "HEAD")
+
+    def test_shared_and_other_mod_changes_do_not_trigger_release(self):
+        for path in ("README.md", "sdk/api.json", "tools/ci.py", ".github/workflows/mods.yml", "navigation-mod/Plugin.cs"):
+            self.write(path, "change")
+        head = self.commit()
+        self.assertFalse(ci.mod_changed_since_release("coordinates", head, self.releases))
+        # Neither uncommitted files nor a changed target_commitish branch count as released source.
+        self.write("coordinates-mod/Plugin.cs", "uncommitted")
+        self.assertFalse(ci.mod_changed_since_release("coordinates", head, self.releases))
+
+    def test_earlier_mod_commit_counts_even_when_latest_commit_is_shared_only(self):
+        self.write("coordinates-mod/Plugin.cs", "fix")
+        self.commit()
+        self.write("README.md", "later docs")
+        self.assertTrue(ci.mod_changed_since_release("coordinates", self.commit(), self.releases))
+
+    def test_reverted_directory_is_unchanged(self):
+        self.write("coordinates-mod/Plugin.cs", "fix")
+        self.commit()
+        self.write("coordinates-mod/Plugin.cs", "original")
+        self.assertFalse(ci.mod_changed_since_release("coordinates", self.commit(), self.releases))
+
+    def test_mod_docs_count_and_other_mods_and_drafts_do_not_set_baseline(self):
+        self.write("coordinates-mod/README.md", "usage")
+        head = self.commit()
+        releases = self.releases + [dict(tag_name="coordinates-v99.0.0", draft=True),
+                                   dict(tag_name="navigation-v99.0.0", draft=False)]
+        self.assertTrue(ci.mod_changed_since_release("coordinates", head, releases))
+
+    def test_highest_numeric_published_version_is_baseline(self):
+        self.git("tag", "coordinates-v1.9.0", self.baseline)
+        self.write("coordinates-mod/Plugin.cs", "latest released")
+        latest = self.commit()
+        self.git("tag", "coordinates-v1.10.0", latest)
+        releases = self.releases + [dict(tag_name="coordinates-v1.10.0", draft=False),
+                                   dict(tag_name="coordinates-v1.9.0", draft=False)]
+        self.assertFalse(ci.mod_changed_since_release("coordinates", latest, releases))
+
+    def test_first_release_needs_tracked_mod_directory(self):
+        self.assertTrue(ci.mod_changed_since_release("coordinates", self.baseline, []))
+        self.assertFalse(ci.mod_changed_since_release("navigation", self.baseline, []))
+
+    def test_missing_published_tag_fails_closed(self):
+        with self.assertRaisesRegex(ValueError, "fetch complete history"):
+            ci.mod_changed_since_release("coordinates", self.baseline, [dict(tag_name="coordinates-v2.0.0", draft=False)])
+
+    def test_git_diff_error_is_not_treated_as_a_change(self):
+        with patch.object(ci.subprocess, "check_output", return_value=self.baseline), \
+                patch.object(ci.subprocess, "run") as diff:
+            diff.return_value.returncode = 128
+            with self.assertRaisesRegex(ValueError, "Cannot compare"):
+                ci.mod_changed_since_release("coordinates", self.baseline, self.releases)
+
+
+class FakeGitHub:
+    def __init__(self, existing=None, corrupt=False):
+        self.existing = existing or []
+        self.calls = []
+        self.assets = {}
+        self.corrupt = corrupt
+        self.draft = None
+
+    def releases(self):
+        return self.existing
+
+    def request(self, path, method="GET", payload=None, raw=False):
+        self.calls.append((path, method))
+        if path.startswith("/git/ref/"):
+            return None
+        if path == "/releases" and method == "POST":
+            self.draft = dict(payload, id=1, assets=[], upload_url="https://uploads.github.com/fake{?name}")
+            return self.draft
+        if path.startswith("https://uploads"):
+            number = len(self.assets) + 1
+            self.assets[number] = payload
+            return {"id": number}
+        if raw:
+            return b"wrong" if self.corrupt else self.assets[int(path.split('/')[-1])]
+        return {}
+
+
+class PublishTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+        self.c = dict(slug="coordinates", name="Coordinates", version="1.0.0", sdk="2.1.6/r1",
+                      prerelease=True, notes="## English\nRelease\n## 中文\n发布\n", directory=self.root / "coordinates-mod",
+                      manifest=dict(gameVersion="2.1.6", gameAssemblySha256="game", apiSha256="api"))
+        self.c["directory"].mkdir()
+        for name in ("README.md", "CHANGELOG.md", "LICENSE"):
+            (self.c["directory"] / name).write_text(name)
+        self.output = self.root / "outputs/ci/coordinates"
+        self.output.mkdir(parents=True)
+        self.package = self.output / ci.archive_name(self.c, "BepInEx")
+        self.zip()
+        self.patches = [patch.object(ci, "ROOT", self.root), patch.object(ci, "MODS", {"coordinates": "Coordinates"}),
+                        patch.object(ci, "config", return_value=self.c), patch.object(ci.subprocess, "check_output", return_value="a" * 40),
+                        patch.object(ci, "release_authorized", return_value=True)]
+        for p in self.patches:
+            p.start()
+        ci.write_evidence(self.c, self.output)
+
+    def tearDown(self):
+        for p in reversed(self.patches):
+            p.stop()
+        self.temp.cleanup()
+
+    def zip(self, extra=None):
+        with zipfile.ZipFile(self.package, "w") as z:
+            z.writestr(ci.plugin_path(self.c, "BepInEx"), b"MZ-test-plugin")
+            for name in ("README.md", "CHANGELOG.md", "LICENSE"):
+                z.writestr(name, name)
+            if extra:
+                z.writestr(extra, "unexpected")
+
+    def test_existing_public_release_is_never_modified(self):
+        api = FakeGitHub([dict(tag_name="coordinates-v1.0.0", draft=False)])
+        ci.publish("owner/repo", "a" * 40, api)
+        self.assertEqual(api.calls, [])
+
+    def test_no_approval_skips_artifacts_and_network_writes(self):
+        self.package.unlink()
+        api = FakeGitHub()
+        with patch.object(ci, "release_authorized", return_value=False):
+            ci.publish("owner/repo", "a" * 40, api)
+        self.assertEqual(api.calls, [])
+
+    def test_unchanged_mod_skips_artifact_reads_and_all_network_writes(self):
+        self.package.unlink()
+        api = FakeGitHub()
+        with patch.object(ci, "mod_changed_since_release", return_value=False) as changed:
+            ci.publish("owner/repo", "a" * 40, api)
+        changed.assert_called_once()
+        self.assertEqual(api.calls, [])
+
+    def test_upload_verify_then_publish(self):
+        api = FakeGitHub()
+        ci.publish("owner/repo", "a" * 40, api)
+        self.assertEqual(len(api.assets), 3)
+        self.assertEqual(api.calls[-1], ("/releases/1", "PATCH"))
+        self.assertEqual(api.draft["target_commitish"], "a" * 40)
+        self.assertTrue(api.draft["prerelease"])
+
+    def test_remote_corruption_leaves_draft(self):
+        api = FakeGitHub(corrupt=True)
+        with self.assertRaises(ValueError):
+            ci.publish("owner/repo", "a" * 40, api)
+        self.assertNotIn(("/releases/1", "PATCH"), api.calls)
+
+    def test_rejects_sdk_in_package(self):
+        self.zip("Assembly-CSharp.dll")
+        ci.write_evidence(self.c, self.output)
+        api = FakeGitHub()
+        with self.assertRaises(ValueError):
+            ci.publish("owner/repo", "a" * 40, api)
+        self.assertEqual(api.calls, [])
+
+    def test_bad_checksum_fails_before_network_write(self):
+        (self.output / "SHA256SUMS.txt").write_text("wrong")
+        api = FakeGitHub()
+        with self.assertRaises(ValueError):
+            ci.publish("owner/repo", "a" * 40, api)
+        self.assertEqual(api.calls, [])
+
+    def test_other_commit_draft_is_not_reused(self):
+        api = FakeGitHub([dict(tag_name="coordinates-v1.0.0", draft=True, target_commitish="b" * 40)])
+        with self.assertRaises(ValueError):
+            ci.publish("owner/repo", "a" * 40, api)
+        self.assertEqual(api.calls, [])
+
+    def test_refuses_backwards_new_release(self):
+        api = FakeGitHub([dict(tag_name="coordinates-v2.0.0", draft=False)])
+        with self.assertRaises(ValueError):
+            ci.publish("owner/repo", "a" * 40, api)
+        self.assertEqual(api.calls, [])
+
+    def test_mismatched_source_fails(self):
+        with self.assertRaises(ValueError):
+            ci.publish("owner/repo", "b" * 40, FakeGitHub())
+
+
+if __name__ == "__main__":
+    unittest.main()

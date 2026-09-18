@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "mod": "stack-all",
+  "version": "0.3.0",
+  "sdk": "2.1.6/r11",
+  "prerelease": true,
+  "sourceCommit": "d4d2eccdeba8b8a09ae62bc45e348b02876f7bb2",
+  "inputsSha256": "b0c3b3eac0e2ed23e065dc10934401cae808de2561e268a68688bc48b01eeff5",
+  "authorization": "Maintainer explicitly requested advancing Stack All one minor version from 0.2.2 to 0.3.0 for the current reviewed feature scope, including seed packets, collectible stacking, quantity display, empty-container disposal and native hold guidance."
+}
