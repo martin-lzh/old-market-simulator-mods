@@ -6,7 +6,7 @@
 
 ### Unreleased
 
-- Show a localized “HOLD TO REPEAT” caption above the native controls when multiple items remain. Reuse the game’s font, font material and row layout without a keycap; hide it with the control panel. Version remains 0.2.2; visual acceptance is pending.
+- Show a localized “HOLD TO REPEAT” caption above the native controls when multiple items remain. Reuse the game’s font, font material and row layout without a keycap; hide it with the control panel. Version remains 0.2.2; only Stack All moves to game 2.1.6 / SDK r11 for native row ordering. Visual acceptance is pending.
 
 - Use the native right-hand control-row layout for G: clone the game’s caption/keycap styling and append it alongside existing controls. Dim the entire row when no empty container is available, and remove the separate plain-text Q/F hold overlay. Preserve the existing Q/F rows and behavior.
 
@@ -42,7 +42,7 @@ Older development versions mentioned in the README are not verified downloadable
 
 ### 未发布
 
-- 剩余多个物品时，在原生按钮组上方显示本地化的“长按可连续操作”。复用游戏字体、字体材质和行布局，不加键帽，随操作面板隐藏。版本保持 0.2.2；视觉验收待完成。
+- 剩余多个物品时，在原生按钮组上方显示本地化的“长按可连续操作”。复用游戏字体、字体材质和行布局，不加键帽，随操作面板隐藏。版本保持 0.2.2；仅 Stack All 迁移游戏 2.1.6 / SDK r11，以使用原生行排序接口。视觉验收待完成。
 
 - G 提示复用原生右侧按钮行的文字与键帽样式，和现有操作一起排布；没有空盒时整行变暗。移除独立的 Q/F 纯文字长按浮层，保留原生 Q/F 按钮行和行为。
 

@@ -24,9 +24,9 @@ internal static class Program
             Equal(new[] { "drop_empty", "hold_repeat" }, catalogs[locale].Keys, $"{locale} keys");
             foreach (string key in new[] { "drop_empty", "hold_repeat" })
             {
-            string template = Catalog.Template(locale, key);
-            Equal(Array.Empty<string>(), Positional.Matches(template).Select(x => x.Value), $"{locale} caption excludes key markup");
-            Check(!string.IsNullOrWhiteSpace(Catalog.Format(locale, key, _ => "unused")), $"{locale} caption");
+                string template = Catalog.Template(locale, key);
+                Equal(Array.Empty<string>(), Positional.Matches(template).Select(x => x.Value), $"{locale} caption excludes key markup");
+                Check(!string.IsNullOrWhiteSpace(Catalog.Format(locale, key, _ => "unused")), $"{locale} caption");
             }
         }
         Check(Catalog.Normalize("zh-HK") == "zh-Hant" && Catalog.Normalize("de-DE") == "de" && Catalog.Normalize("unknown") == "en", "normalization");

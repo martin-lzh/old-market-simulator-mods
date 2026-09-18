@@ -38,9 +38,9 @@ In-game UI, normal save/load, and real multiplayer have not been verified for th
 
 ## SDK and automated builds / SDK 与自动构建
 
-This Mod pins its compilation SDK in [release.json](release.json). Current baseline: game 2.1.6 / SDK r10. Run `python tools/ci.py build` from the repository root for a game-free build. See [SDK maintenance](../sdk/README.md) and [CI releases](../releases/README.md). Compilation does not replace in-game compatibility checks.
+This Mod pins its compilation SDK in [release.json](release.json). Current baseline: game 2.1.6 / SDK r11. Run `python tools/ci.py build` from the repository root for a game-free build. See [SDK maintenance](../sdk/README.md) and [CI releases](../releases/README.md). Compilation does not replace in-game compatibility checks.
 
-本 Mod 在 [release.json](release.json) 固定编译 SDK，当前基线为游戏 2.1.6 / SDK r10。从仓库根目录运行 `python tools/ci.py build` 可无游戏文件构建。见 [SDK 维护](../sdk/README.md)和 [CI 发布](../releases/README.md)；编译不能代替实机兼容验证。
+本 Mod 在 [release.json](release.json) 固定编译 SDK，当前基线为游戏 2.1.6 / SDK r11。从仓库根目录运行 `python tools/ci.py build` 可无游戏文件构建。见 [SDK 维护](../sdk/README.md)和 [CI 发布](../releases/README.md)；编译不能代替实机兼容验证。
 
 ## Collectible pickup compatibility / 收集品重新拾取兼容性
 
@@ -67,3 +67,7 @@ SDK r10 补充实际输入访问器及 Harmony 注入的 PlayerInventory.current
 The G hint clones an existing native one-key row inside controlHintPanel, keeping the native layout group, caption and keycap sizing. It recreates itself after native CheckHint rebuilds, refreshes fonts on language changes, and dims every Graphic when unavailable. Native Q/F rows are unchanged; their duplicate plain-text hold overlay is removed. SDK r10 adds the Color alpha field needed to preserve the original row transparency while dimming.
 
 G 提示复制 controlHintPanel 内现有的单键原生行，保持布局组、说明文字及键帽尺寸。原生 CheckHint 重建后自动恢复，随语言更新字体；无空盒时所有 Graphic 一起变暗。原生 Q/F 行不变，移除重复的纯文字长按浮层。SDK r10 补充 Color 的透明度字段，用于变暗时保留原有透明度。
+
+The hold caption clones a native row without its keycap and uses Transform.SetAsFirstSibling so the native layout places it above the actions. It shares the native font, font material and size and appears only while more than one unit remains. SDK r11 adds this verified Transform method; other pins are unchanged.
+
+长按说明复制原生行并隐藏键帽，通过 Transform.SetAsFirstSibling 排在操作上方；字体、字体材质和字号跟随游戏，仅剩余多个物品时显示。SDK r11 增加经真实引用核对的 Transform 方法，其他 Mod 固定修订不变。

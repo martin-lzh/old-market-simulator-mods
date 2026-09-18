@@ -143,3 +143,13 @@ Navigation 0.2.0 准备时通过 48 项 CI 工具测试。具体命令、历史�
 ### 文档核对
 
 核对了六个 Mod 的 README、CHANGELOG/版本元数据、构建和包声明，以及仓库环境、支持、安全、行为准则、模板、SDK 和发布说明。修正 Navigation 过时的验证状态与源码版本表述、当前 SDK 索引、首页构建/CHANGELOG 入口与包内容，以及 Navigation 标签命名表。公开下载仍指向已有五个预发布版本，不将 Navigation 0.2.0 写成已经公开下载。其余 Mod 的风险及回退说明继续适用。
+
+## Stack All hold guidance — 2026-09-18
+
+Source `2a7ae08` adds a localized caption above native controls, reusing the game font, material and layout and hiding its keycap. It appears only when the selected stack has multiple units. Stack All alone moves to game 2.1.6 / SDK r11 (Transform.SetAsFirstSibling); Mod version remains 0.2.2 and the target release remains **UNASSIGNED**. In-game layout, font fallback and host/client acceptance remain pending.
+
+源码 `2a7ae08` 在原生按钮上方增加本地化长按说明，复用游戏字体、材质和布局并隐藏键帽，仅当前堆叠剩余多个物品时显示。仅 Stack All 切换游戏 2.1.6 / SDK r11（Transform.SetAsFirstSibling），Mod 保持 0.2.2，目标发行版本仍为 **UNASSIGNED**。实机布局、字体回退及房主/客人验收仍待完成。
+
+Validation: version/immutable-SDK validation, all eight SDK builds and real-reference comparisons, 67 CI tooling tests, 89,760 Stack All logic checks, 13-language localization and 84 read-only game contracts passed. These checks do not execute Unity.
+
+验证：版本及 SDK 不可变性、八种 SDK 构建与真实引用比对、67 项 CI 工具测试、89,760 项 Stack All 逻辑检查、13 种语言及 84 项只读游戏契约全部通过；未执行 Unity 实机显示。

@@ -18,7 +18,7 @@ A collection of unofficial Mods to make running your Old Market Simulator shop a
 | [Tree Info](tree-info-mod/README.md) | Fruit-tree production seasons and harvest estimates | Local source 0.1.1; no public download yet |
 | [Navigation](navigation-mod/README.md) | Minimap, large map, compass and personal markers | 0.2.0 being prepared; no public download yet |
 
-The Mod pages explain upcoming changes as well as the version currently available to download. Stack All’s G empty-container action uses game 2.1.6 / SDK r10 and awaits in-game testing. Navigation includes Eastern Town, an Island preview and Rome with seven travel regions and dynamic unlock areas; Eastern Town outer terrain is not yet bundled. Later map, POI and zoom changes await in-game acceptance; see the [validation scope](releases/validation.md).
+The Mod pages explain upcoming changes as well as the version currently available to download. Stack All’s G empty-container action uses game 2.1.6 / SDK r11 and awaits in-game testing. Navigation includes Eastern Town, an Island preview and Rome with seven travel regions and dynamic unlock areas; Eastern Town outer terrain is not yet bundled. Later map, POI and zoom changes await in-game acceptance; see the [validation scope](releases/validation.md).
 
 ### Getting started
 
@@ -61,7 +61,7 @@ Want to contribute? Start with [CONTRIBUTING](CONTRIBUTING.md) or the [developme
 | [Tree Info](tree-info-mod/README.md) | 果树生产季节和成熟预测 | 本地源码 0.1.1，暂无公开下载 |
 | [Navigation](navigation-mod/README.md) | 小地图、大地图、罗盘和个人标记 | 0.2.0 准备中，暂未公开下载 |
 
-各 Mod 页面会说明当前可下载的版本和即将更新的内容。Stack All 的 G 空盒操作使用游戏 2.1.6 / SDK r10，仍待实机测试。Navigation 插件 ZIP 包含东方小镇、海岛预览图，以及带七个传送区域和动态解锁区块的罗马地图；东方小镇外围地形尚未打包。后续地图、POI 与缩放改动仍待实机验收，详见[验证范围](releases/validation.md)。
+各 Mod 页面会说明当前可下载的版本和即将更新的内容。Stack All 的 G 空盒操作使用游戏 2.1.6 / SDK r11，仍待实机测试。Navigation 插件 ZIP 包含东方小镇、海岛预览图，以及带七个传送区域和动态解锁区块的罗马地图；东方小镇外围地形尚未打包。后续地图、POI 与缩放改动仍待实机验收，详见[验证范围](releases/validation.md)。
 
 ### 开始使用
 

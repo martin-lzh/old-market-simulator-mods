@@ -19,7 +19,8 @@
 | 2.1.6 | [2.1.6/r7](2.1.6/r7/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.2.0 固定此修订；增加滚轮事件倍率、输入范围与平台接口。本地实机测试见 [验证记录](../releases/validation.md) |
 | 2.1.6 | [2.1.6/r8](2.1.6/r8/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Tree Info 0.1.1 固定此修订；增加树木状态、季节和交互反射声明，实机验收待完成 |
 | 2.1.6 | [2.1.6/r9](2.1.6/r9/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 0.2.2 未发布空盒操作，增加原生输入门控和当前格 Harmony 字段；实机验收待完成 |
-| 2.1.6 | [2.1.6/r10](2.1.6/r10/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 原生按钮行及键帽提示，保留变暗透明度；当前 Stack All 固定修订，实机验收待完成 |
+| 2.1.6 | [2.1.6/r10](2.1.6/r10/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 原生按钮行及键帽提示，保留变暗透明度；实机验收待完成 |
+| 2.1.6 | [2.1.6/r11](2.1.6/r11/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 原生字体长按说明及行排序；当前固定修订，实机验收待完成 |
 
 表中 r2–r6 的验收描述保留各快照建立时的历史状态。`e23f986` 合集已获视觉、本地实机与双实机联机确认；后续 Navigation 地图、POI 与缩放改动仍待实机验收，详见[验证记录](../releases/validation.md)。
 
@@ -133,3 +134,7 @@ Stack All’s Unreleased empty-container action pins r10 for native input gates 
 2026-09-18: r9 records source `cfbe951` (267 types, 676 methods, 548 fields); r10 records `1580f6a` (265 types, 667 methods, 544 fields). Both retain the same 15 dependency identities, hashes and forwarders as r8. r9 adds native input getters and selected-slot Harmony metadata. r10 adds Color.a to preserve native hint transparency and omits binding-display APIs no longer used after removing the separate hold-text overlay. Existing snapshots are retained. Stack All pins r10; all other Mods keep their prior pins.
 
 2026-09-18：r9 记录源码 `cfbe951`（267 类型、676 方法、548 字段），r10 记录 `1580f6a`（265 类型、667 方法、544 字段）。两者的 15 个依赖身份、哈希和类型转发均与 r8 一致。r9 新增原生输入访问器及当前格 Harmony 元数据；r10 新增 Color.a 以保留原生提示透明度，并去除删除独立长按浮层后不再使用的按键显示接口。保留已有快照，Stack All 固定 r10，其他 Mod 保持原修订。
+
+2026-09-18: r11 exports source `2a7ae08`: 265 types, 668 methods, 544 fields. It adds Transform.SetAsFirstSibling for the hold caption above native controls. The 15 dependency identities, hashes and forwarders are unchanged from r10. Only Stack All pins r11; game 2.1.6 and Mod 0.2.2 are unchanged.
+
+2026-09-18：r11 从 `2a7ae08` 导出：265 类型、668 方法、544 字段。新增 Transform.SetAsFirstSibling，将长按说明排在原生按钮上方；15 个依赖身份、哈希和类型转发与 r10 一致。仅 Stack All 固定 r11，游戏 2.1.6 与 Mod 0.2.2 不变。
