@@ -6,6 +6,8 @@
 
 ### Unreleased
 
+- Show a localized “HOLD TO REPEAT” caption above the native controls when multiple items remain. Reuse the game’s font, font material and row layout without a keycap; hide it with the control panel. Version remains 0.2.2; visual acceptance is pending.
+
 - Use the native right-hand control-row layout for G: clone the game’s caption/keycap styling and append it alongside existing controls. Dim the entire row when no empty container is available, and remove the separate plain-text Q/F hold overlay. Preserve the existing Q/F rows and behavior.
 
 - Add G to drop only empty reusable containers from the selected slot: tap for one, hold for 0.6 seconds then repeat every 0.12 seconds. Keep filled/partial containers and other slots unchanged. Show a localized hint that turns gray immediately when no empty remains; menus, focus loss, competing inventory actions and slot changes cancel repeating. Preserve version 0.2.2, migrate only Stack All to game 2.1.6 / SDK r10 for reviewed input and Harmony fields. No save/RPC format change; the new action and hint await in-game and multiplayer testing.
@@ -39,6 +41,8 @@ Older development versions mentioned in the README are not verified downloadable
 ## 中文
 
 ### 未发布
+
+- 剩余多个物品时，在原生按钮组上方显示本地化的“长按可连续操作”。复用游戏字体、字体材质和行布局，不加键帽，随操作面板隐藏。版本保持 0.2.2；视觉验收待完成。
 
 - G 提示复用原生右侧按钮行的文字与键帽样式，和现有操作一起排布；没有空盒时整行变暗。移除独立的 Q/F 纯文字长按浮层，保留原生 Q/F 按钮行和行为。
 

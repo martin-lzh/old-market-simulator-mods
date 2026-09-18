@@ -1,38 +1,51 @@
 [en]
 drop_empty=DROP EMPTY
+hold_repeat=HOLD TO REPEAT
 
 [zh]
 drop_empty=丢出空盒
+hold_repeat=长按可连续操作
 
 [zh-Hant]
 drop_empty=丟出空盒
+hold_repeat=長按可連續操作
 
 [fr]
 drop_empty=LÂCHER LE CONTENANT VIDE
+hold_repeat=MAINTENIR POUR RÉPÉTER
 
 [de]
 drop_empty=LEEREN BEHÄLTER ABLEGEN
+hold_repeat=ZUM WIEDERHOLEN GEDRÜCKT HALTEN
 
 [it]
 drop_empty=LASCIA CONTENITORE VUOTO
+hold_repeat=TIENI PREMUTO PER RIPETERE
 
 [es]
 drop_empty=SOLTAR RECIPIENTE VACÍO
+hold_repeat=MANTÉN PULSADO PARA REPETIR
 
 [pt]
 drop_empty=SOLTAR RECIPIENTE VAZIO
+hold_repeat=SEGURE PARA REPETIR
 
 [ja]
 drop_empty=空の容器を落とす
+hold_repeat=長押しで連続操作
 
 [ko]
 drop_empty=빈 용기 버리기
+hold_repeat=길게 눌러 반복
 
 [ru]
 drop_empty=ВЫБРОСИТЬ ПУСТУЮ ТАРУ
+hold_repeat=УДЕРЖИВАЙТЕ ДЛЯ ПОВТОРА
 
 [tr]
 drop_empty=BOŞ KABI BIRAK
+hold_repeat=TEKRARLAMAK İÇİN BASILI TUT
 
 [uk]
 drop_empty=ВИКИНУТИ ПОРОЖНЮ ТАРУ
+hold_repeat=УТРИМУЙТЕ ДЛЯ ПОВТОРЕННЯ

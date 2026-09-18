@@ -31,7 +31,7 @@ Ordinary collectibles such as mint leaves and flowers can rejoin their matching 
 ## Controls
 
 - Tap Q to drop one item or one complete container; tap F to throw one. Mouse placement also handles one at a time.
-- Hold Q or F to continue through the selected slot, starting after about 0.6 seconds.
+- Hold Q or F to continue through the selected slot, starting after about 0.6 seconds. When multiple items remain, “HOLD TO REPEAT” appears above the controls using the game’s own font and layout; it also applies to G.
 - Tap G to drop one empty reusable basket/box from the selected slot; hold G for 0.6 seconds to repeat every 0.12 seconds. Filled and partly filled containers remain. For reusable containers, the G hint uses the native caption/keycap format beside the existing controls and dims as a whole when no empty is available. Seed packets and disposable packaging are excluded. G is a fixed keyboard shortcut; avoid assigning another inventory action to G.
 - Q/F follow your game key bindings; G uses the fixed shortcut. Switching slots/items, opening a menu, pausing, switching windows or pressing both actions stops the sequence.
 
@@ -89,7 +89,7 @@ For a compatible update, close the game and back up your save and old DLL before
 ## 怎么操作
 
 - 短按 Q 丢下一个物品或一个完整容器，短按 F 投掷一个；鼠标放置也是一次一个。
-- 长按 Q 或 F，约 0.6 秒后会继续逐个处理当前格。
+- 长按 Q 或 F，约 0.6 秒后会继续逐个处理当前格。剩余多个物品时，按钮组上方以游戏原生字体和布局显示“长按可连续操作”，同样适用于 G。
 - 短按 G 丢出当前格的一个空篮/空盒；长按 0.6 秒后每 0.12 秒丢一个，保留满盒及半满盒。选中可复用容器时，G 提示采用原生文字和键帽样式，与现有按钮一起排布，没有空盒则整行变暗；不处理种子包或一次性包装。G 是固定键盘快捷键，请避免把其他库存操作绑定到 G。
 - Q/F 跟随游戏设置，G 为固定快捷键。切换格子或物品、打开菜单、暂停、切换窗口或同时按两个动作都会停止。
 

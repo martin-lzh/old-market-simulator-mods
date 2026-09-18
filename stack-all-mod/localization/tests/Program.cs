@@ -16,15 +16,18 @@ internal static class Program
     private static void Main()
     {
         Equal(Locales.Order(), Catalog.Languages.Order(), "locales");
-        Equal(new[] { "drop_empty" }, Catalog.Keys, "keys");
+        Equal(new[] { "drop_empty", "hold_repeat" }, Catalog.Keys, "keys");
         var catalogs = (Dictionary<string, Dictionary<string, string>>)typeof(Catalog)
             .GetField("Messages", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
         foreach (string locale in Locales)
         {
-            Equal(new[] { "drop_empty" }, catalogs[locale].Keys, $"{locale} keys");
-            string template = Catalog.Template(locale, "drop_empty");
+            Equal(new[] { "drop_empty", "hold_repeat" }, catalogs[locale].Keys, $"{locale} keys");
+            foreach (string key in new[] { "drop_empty", "hold_repeat" })
+            {
+            string template = Catalog.Template(locale, key);
             Equal(Array.Empty<string>(), Positional.Matches(template).Select(x => x.Value), $"{locale} caption excludes key markup");
-            Check(!string.IsNullOrWhiteSpace(Catalog.Format(locale, "drop_empty", _ => "unused")), $"{locale} caption");
+            Check(!string.IsNullOrWhiteSpace(Catalog.Format(locale, key, _ => "unused")), $"{locale} caption");
+            }
         }
         Check(Catalog.Normalize("zh-HK") == "zh-Hant" && Catalog.Normalize("de-DE") == "de" && Catalog.Normalize("unknown") == "en", "normalization");
 
