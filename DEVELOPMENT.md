@@ -6,13 +6,13 @@ Player information: [README](README.md). Contribution setup and branch rules: [C
 
 | Mod | Development notes / 开发说明 |
 | --- | --- |
-| Navigation | [DEVELOPMENT](navigation-mod/DEVELOPMENT.md) |
-| Coordinates | [DEVELOPMENT](coordinates-mod/DEVELOPMENT.md) |
-| Checkout All | [DEVELOPMENT](checkout-all-mod/DEVELOPMENT.md) |
-| Material Cost | [DEVELOPMENT](material-cost-mod/DEVELOPMENT.md) · [Standalone](material-cost-mod/STANDALONE.md) |
-| Tree Info | [DEVELOPMENT](tree-info-mod/DEVELOPMENT.md) |
-| Stack All | [DEVELOPMENT](stack-all-mod/DEVELOPMENT.md) |
-| Price Probability | [DEVELOPMENT](price-probability-mod/DEVELOPMENT.md) |
+| Map & Compass | [DEVELOPMENT](navigation-mod/DEVELOPMENT.md) |
+| Coordinates HUD | [DEVELOPMENT](coordinates-mod/DEVELOPMENT.md) |
+| Auto Checkout | [DEVELOPMENT](checkout-all-mod/DEVELOPMENT.md) |
+| Profit Insights | [DEVELOPMENT](material-cost-mod/DEVELOPMENT.md) · [Standalone](material-cost-mod/STANDALONE.md) |
+| Tree Harvest Helper | [DEVELOPMENT](tree-info-mod/DEVELOPMENT.md) |
+| Better Stacking | [DEVELOPMENT](stack-all-mod/DEVELOPMENT.md) |
+| Smart Pricing | [DEVELOPMENT](price-probability-mod/DEVELOPMENT.md) |
 
 ### Current support and risks
 
@@ -31,13 +31,13 @@ Installing a Mod or loader may cause save incompatibility, failed connections to
 
 Exit before installation/upgrades/removal and test backup copies first. Follow each Mod's risk and rollback instructions; do not load a Stack All extended save in vanilla just because an update disables the plugin. See the independent change logs for release downloads and compatibility:
 
-- [Material Cost Change Log](material-cost-mod/CHANGELOG.md)
-- [Coordinates Change Log](coordinates-mod/CHANGELOG.md)
-- [Checkout All Change Log](checkout-all-mod/CHANGELOG.md)
-- [Stack All Change Log](stack-all-mod/CHANGELOG.md)
-- [Price Probability Change Log](price-probability-mod/CHANGELOG.md)
-- [Navigation Change Log](navigation-mod/CHANGELOG.md)
-- [Tree Info Change Log](tree-info-mod/CHANGELOG.md)
+- [Profit Insights Change Log](material-cost-mod/CHANGELOG.md)
+- [Coordinates HUD Change Log](coordinates-mod/CHANGELOG.md)
+- [Auto Checkout Change Log](checkout-all-mod/CHANGELOG.md)
+- [Better Stacking Change Log](stack-all-mod/CHANGELOG.md)
+- [Smart Pricing Change Log](price-probability-mod/CHANGELOG.md)
+- [Map & Compass Change Log](navigation-mod/CHANGELOG.md)
+- [Tree Harvest Helper Change Log](tree-info-mod/CHANGELOG.md)
 
 ### Build from source
 
@@ -74,13 +74,13 @@ ZIPs appear in `outputs/`. Each mod with translatable UI runs its own localizati
 
 安装/升级/卸载前退出游戏，先测试备份副本，遵循各 Mod 风险及回退说明；不要因为更新后插件失效就用原版读 Stack All 扩展存档。历史下载及兼容性见独立版本记录：
 
-- [Material Cost Change Log](material-cost-mod/CHANGELOG.md)
-- [Coordinates Change Log](coordinates-mod/CHANGELOG.md)
-- [Checkout All Change Log](checkout-all-mod/CHANGELOG.md)
-- [Stack All Change Log](stack-all-mod/CHANGELOG.md)
-- [Price Probability Change Log](price-probability-mod/CHANGELOG.md)
-- [Navigation Change Log](navigation-mod/CHANGELOG.md)
-- [Tree Info Change Log](tree-info-mod/CHANGELOG.md)
+- [Profit Insights Change Log](material-cost-mod/CHANGELOG.md)
+- [Coordinates HUD Change Log](coordinates-mod/CHANGELOG.md)
+- [Auto Checkout Change Log](checkout-all-mod/CHANGELOG.md)
+- [Better Stacking Change Log](stack-all-mod/CHANGELOG.md)
+- [Smart Pricing Change Log](price-probability-mod/CHANGELOG.md)
+- [Map & Compass Change Log](navigation-mod/CHANGELOG.md)
+- [Tree Harvest Helper Change Log](tree-info-mod/CHANGELOG.md)
 
 ### 从源码构建
 

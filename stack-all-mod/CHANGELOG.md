@@ -1,10 +1,12 @@
-# Stack All 0.3.0 Change Log / 版本记录
+# Better Stacking — Changelog / 版本记录
 
 [English](#english) · [中文](#中文)
 
 ## English
 
 ### 0.3.0 — prerelease (pending publication)
+
+- Rename the plugin display name to **Better Stacking** and reorganize the bilingual README around core features and controls, with insertion points for gameplay media. Plugin ID, assembly/configuration paths, gameplay and version are unchanged.
 
 - Add G to drop one empty reusable container from the selected slot; hold for 0.6 seconds, then repeat every 0.12 seconds. Preserve filled/partial containers, individual metadata and other slots. Exclude seed packets and disposable packaging; cancel on menus, focus loss, competing actions and slot changes.
 - Add G to the native right-hand caption/keycap controls and dim the whole row when no empty remains. Place localized hold guidance above the controls using the game font/material, without a keycap, while multiple units remain. Preserve native Q/F behavior.
@@ -36,6 +38,8 @@ Older development versions mentioned in the README are not verified downloadable
 ## 中文
 
 ### 0.3.0 — 预发布（待发布）
+
+- 插件显示名改为 **Better Stacking**，双语 README 按核心功能和操作方式组织，并保留实机素材插入位置。插件 ID、程序集／配置路径、玩法及版本不变。
 
 - 新增 G 丢出当前格的一个空可复用容器；长按 0.6 秒后每 0.12 秒重复。保留满盒、半满盒、独立元数据及其他格；排除种子包和一次性包装，菜单、失焦、其他动作及切换格子会取消连扔。
 - G 提示加入原生右侧文字／键帽控件，没有空盒时整行变暗。剩余多个物品时，在按钮上方用游戏字体及材质显示本地化长按说明，不加键帽；保留原生 Q/F 行为。

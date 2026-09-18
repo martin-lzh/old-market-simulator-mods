@@ -1,26 +1,24 @@
-# Old Market Checkout All
+# Auto Checkout
+
+A mod for Old Market Simulator / Old Market Simulator 模组
 
 [English](#english) · [中文](#中文)
 
 ## English
 
-The `e23f986` bundle completed reported visual, local and two-computer multiplayer testing; see the [validation scope](../releases/validation.md).
-
 Let checkout handle the whole table while you hold a key—or keep it running with a toggle. Products are processed one by one, followed by the payment pouch.
 
 [Download 0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4) · 0.1.5 is being prepared and is not on the release page yet.
 
-## Install
+### Core features
 
-For Old Market Simulator **2.1.6 on Windows**, with **BepInEx 5** installed.
+- Process products one by one, then collect the payment pouch.
+- Choose hold-to-run or toggle mode; wait for the next customer when the table is empty.
+- Stop when you look away, leave interaction range or open a menu.
 
-1. Close the game and back up your save and any older plugin.
-2. Extract the Mod ZIP into the game folder. The plugin belongs at `BepInEx/plugins/OldMarket.CheckoutAll/OldMarket.CheckoutAll.dll`.
-3. Start the game and enter your town.
+<!-- Add gameplay screenshots or GIFs here when available. -->
 
-Choose the Mod ZIP on the release page, not GitHub's **Source code** download. The loader is not included.
-
-## At the checkout
+### How to use
 
 | Action | Control |
 | --- | --- |
@@ -34,7 +32,17 @@ Looking away, leaving reach, opening a menu, switching windows or disconnecting 
 
 The 0.1.5 hint uses white for hold instructions; toggle status is white when on and red when off. This hint change is not in the older 0.1.4 download.
 
-## Settings
+### Install
+
+For Old Market Simulator **2.1.6 on Windows**, with **BepInEx 5** installed.
+
+1. Close the game and back up your save and any older plugin.
+2. Extract the Mod ZIP into the game folder. The plugin belongs at `BepInEx/plugins/OldMarket.CheckoutAll/OldMarket.CheckoutAll.dll`.
+3. Start the game and enter your town.
+
+Choose the Mod ZIP on the release page, not GitHub's **Source code** download. The loader is not included.
+
+### Settings
 
 Close the game before editing `BepInEx/config/local.oldmarket.checkoutall.cfg`, created on first launch.
 
@@ -45,38 +53,33 @@ Close the game before editing `BepInEx/config/local.oldmarket.checkoutall.cfg`, 
 
 Holding is fixed to keyboard E and does not follow game rebinding. Controllers are not supported. Toggle mode starts off each time you launch.
 
-## If checkout stops
+### If checkout stops
 
 Aim at the checkout again, then release and hold E or press F9. Slow multiplayer responses can stop the sequence after about 10 seconds; it will not repeatedly retry the same action. If nearby checkouts or payment pouches cannot be distinguished safely, collect the pouch manually.
 
 These are real sales: completed transactions and collected money stay completed when you stop or remove the Mod. Prices and customer behavior remain as in the game. Multiplayer combinations have not all been checked.
 
-## Updating or removing
+### Updating or removing
 
 Close the game, back up the old DLL and replace it to update. Delete `OldMarket.CheckoutAll.dll` from its plugin folder to uninstall, leaving other plugins and the loader in place. Returning to an older version does not undo sales.
-
 
 [What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [License](LICENSE)
 
 ## 中文
 
-`e23f986` 合集已获视觉、本地实机及双实机联机测试完成反馈，详见[验证范围](../releases/validation.md)。
-
 长按一个键，就能依次结算桌上的商品并收取钱袋；也可以打开连续结账，不用一直按住。
 
 [下载 0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4) · 0.1.5 正在准备，发布页暂时仍是 0.1.4。
 
-## 安装
+### 核心功能
 
-适用于 **Windows 版 Old Market Simulator 2.1.6**，需要先安装 **BepInEx 5**。
+- 逐件处理结账台上的商品，然后收取钱袋。
+- 支持长按和开关两种模式，桌面清空后等待下一位顾客。
+- 移开视角、离开交互距离或打开菜单时停止。
 
-1. 退出游戏，备份存档和已有的旧插件。
-2. 将 Mod ZIP 解压到游戏目录，确认插件位于 `BepInEx/plugins/OldMarket.CheckoutAll/OldMarket.CheckoutAll.dll`。
-3. 启动游戏并进入小镇。
+<!-- 后续在此加入实机截图或 GIF。 -->
 
-请选发布页里的 Mod ZIP，不要下载 **Source code** 当作插件安装。安装包不含加载器。
-
-## 在结账台怎么用
+### 怎么操作
 
 | 操作 | 按键 |
 | --- | --- |
@@ -90,7 +93,17 @@ Close the game, back up the old DLL and replace it to update. Delete `OldMarket.
 
 0.1.5 的长按提示为白色，连续结账状态开启时为白色、关闭时为红色；旧的 0.1.4 下载包尚不包含这项提示调整。
 
-## 调整设置
+### 安装
+
+适用于 **Windows 版 Old Market Simulator 2.1.6**，需要先安装 **BepInEx 5**。
+
+1. 退出游戏，备份存档和已有的旧插件。
+2. 将 Mod ZIP 解压到游戏目录，确认插件位于 `BepInEx/plugins/OldMarket.CheckoutAll/OldMarket.CheckoutAll.dll`。
+3. 启动游戏并进入小镇。
+
+请选发布页里的 Mod ZIP，不要下载 **Source code** 当作插件安装。安装包不含加载器。
+
+### 调整设置
 
 首次运行会生成 `BepInEx/config/local.oldmarket.checkoutall.cfg`，请退出游戏后编辑。
 
@@ -101,15 +114,14 @@ Close the game, back up the old DLL and replace it to update. Delete `OldMarket.
 
 长按键固定为键盘 E，不跟随游戏改键，也暂不支持手柄。每次启动时连续结账默认关闭。
 
-## 如果结账停了
+### 如果结账停了
 
 重新对准结账台，松开后再次长按 E，或按 F9 即可。联机响应过慢时，等待约 10 秒后可能停止，不会反复重试同一件商品。附近结账台或钱袋挤在一起、无法确认归属时，请手动收取钱袋。
 
 自动结账完成的交易和金币收入会照常保留，停止或卸载不会撤销。商品价格和顾客行为保持游戏原有规则；已测试联机组合见[验证记录](../releases/validation.md)。
 
-## 更新与卸载
+### 更新与卸载
 
 更新前退出游戏、备份并替换旧 DLL。卸载时删除插件文件夹中的 `OldMarket.CheckoutAll.dll`，保留加载器和其他插件。退回旧版也不会撤销已经完成的交易。
-
 
 [版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [许可证](LICENSE)

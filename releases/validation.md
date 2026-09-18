@@ -200,3 +200,17 @@ Release preflight found no active authorization records and therefore zero relea
 Stack All 0.3.0, Navigation 0.2.0 and Tree Info 0.1.0 passed version validation, 67 CI tooling tests, all eight SDK builds/package checks, real-reference IL/resource comparisons and existing game contracts. Syntax checks passed for 95 structured files and eight PowerShell scripts; all local Markdown targets resolve. Runtime changes are limited to Stack All/Tree Info version declarations and startup version strings. SDK pins, gameplay and prerelease flags are unchanged; the versioned packages were not installed or published by this step.
 
 Stack All 0.3.0、Navigation 0.2.0、Tree Info 0.1.0 通过版本验证、67 项 CI 工具测试、八种 SDK 构建及包校验、真实引用 IL／资源比对和现有游戏契约检查。95 个结构化文件及八个 PowerShell 文件语法检查通过，本地 Markdown 链接有效。运行时改动仅限 Stack All／Tree Info 版本声明及启动版本文字；SDK、玩法及预发布标记不变，此步骤未安装或公开发布新编号包。
+
+## Display names and player guides — 2026-09-18 / 显示名与玩家指南
+
+Current display names: Profit Insights (material-cost), Coordinates HUD (coordinates), Auto Checkout (checkout-all), Better Stacking (stack-all), Smart Pricing (price-probability), Map & Compass (navigation), Tree Harvest Helper (tree-info). Bilingual README introductions now prioritize core features and controls, with hidden insertion points for later gameplay screenshots/GIFs. Technical plugin IDs, namespaces, DLL/package names, configuration paths, versions and SDK pins remain unchanged.
+
+当前显示名与内部标识对应关系如上。双语 README 优先介绍核心功能与操作，保留后续实机图片／GIF 的隐藏插入位置。插件 ID、命名空间、DLL／包名、配置路径、版本及 SDK 固定修订不变。
+
+The display-name/README follow-up changes release inputs within the already assigned scope. Previous Stack All, Navigation and Tree Info records are retained unchanged in history; replacement records bind the reviewed names and guides to the same assigned versions. No additional version advancement, installation or publication is performed.
+
+本次显示名／README 后续修改改变已指定范围内的发行输入。旧 Stack All、Navigation、Tree Info 授权记录原样保留在 history，新记录将名称及指南绑定到相同的已指定版本；不另行推进版本、安装或公开发布。
+
+Naming verification: all seven display-name declarations and README headings match; BepInEx/MelonLoader names agree. Feature/control sections precede installation in both languages, original DLL/config paths are retained, and local Markdown links resolve. All 67 tooling tests, eight SDK builds/package checks and real-reference IL/resource/game-contract checks passed. No new game API or SDK revision is needed.
+
+命名验证：七个显示名与 README 标题一致，BepInEx／MelonLoader 名称一致；两种语言均先介绍功能与操作，再说明安装，原 DLL／配置路径保留，本地 Markdown 链接有效。67 项工具测试、八种 SDK 构建及包校验、真实引用 IL／资源／游戏契约检查通过，不需要新游戏 API 或 SDK 修订。

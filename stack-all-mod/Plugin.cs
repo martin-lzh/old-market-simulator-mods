@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace OldMarket.StackAll
 {
-    [BepInPlugin(Id, "Old Market Stack All", "0.3.0")]
+    [BepInPlugin(Id, "Better Stacking", "0.3.0")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {
@@ -62,12 +62,12 @@ namespace OldMarket.StackAll
                 foreach (var type in new[] { typeof(Aquarium), typeof(OrigamiStand), typeof(BlockBeeHive) })
                     Patch(type, "Interact", transpiler: nameof(ConsumeCalls));
                 Patch(typeof(ItemCrate), "EnableDummyItems", prefix: nameof(CapPreview));
-                Logger.LogInfo("Stack All 0.3.0 ready: goods on left, physical containers on right; 64 containers per product slot. All peers need 0.3.0.");
+                Logger.LogInfo("Better Stacking 0.3.0 ready: goods on left, physical containers on right; 64 containers per product slot. All peers need 0.3.0.");
             }
             catch (Exception error)
             {
                 harmony?.UnpatchSelf();
-                Logger.LogError("Stack All disabled without modifying game assets: " + error);
+                Logger.LogError("Better Stacking disabled without modifying game assets: " + error);
             }
         }
 

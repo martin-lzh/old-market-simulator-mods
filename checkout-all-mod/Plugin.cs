@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace OldMarket.CheckoutAll
 {
-    [BepInPlugin(Id, "Old Market Checkout All", "0.1.5")]
+    [BepInPlugin(Id, "Auto Checkout", "0.1.5")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {
@@ -48,7 +48,7 @@ namespace OldMarket.CheckoutAll
                 prefix: new HarmonyMethod(typeof(Plugin), nameof(BeforeItem)));
             harmony.Patch(AccessTools.Method(typeof(CoinPouch), nameof(CoinPouch.Interact)),
                 prefix: new HarmonyMethod(typeof(Plugin), nameof(BeforePouch)));
-            Logger.LogInfo($"Checkout All ready: hold E or toggle {toggleKey.Value} for continuous checkout.");
+            Logger.LogInfo($"Auto Checkout ready: hold E or toggle {toggleKey.Value} for continuous checkout.");
         }
 
         private static bool BeforeItem(CheckoutItem __instance) => instance == null || instance.AllowItem(__instance);

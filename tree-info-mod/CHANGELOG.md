@@ -1,8 +1,10 @@
-# Tree Info change log / 版本记录
+# Tree Harvest Helper — Changelog / 版本记录
 
 ## English
 
 ### 0.1.0 — prerelease (pending first publication)
+
+- Rename the plugin display name to **Tree Harvest Helper** and reorganize the bilingual README around core features and controls, with insertion points for gameplay media. Plugin ID, assembly/configuration paths, gameplay and version are unchanged.
 
 - Show planted fruit trees’ production seasons and estimated harvest readiness in the native interaction subtitle. Read actual tree thresholds and growth state; assume daily watering, identify dry trees and insufficient time before season end, and show ripe fruit as harvestable even outside its production season.
 - Support all 13 game languages, regional aliases and English fallback; reuse native season translations. Include the MIT license.
@@ -17,6 +19,8 @@
 ## 中文
 
 ### 0.1.0 — 预发布（首次发布待完成）
+
+- 插件显示名改为 **Tree Harvest Helper**，双语 README 按核心功能和操作方式组织，并保留实机素材插入位置。插件 ID、程序集／配置路径、玩法及版本不变。
 
 - 在原生交互副标题显示已种植果树的生产季节及成熟预测，读取真实阈值和生长状态，以每日浇水为前提；识别未浇水及季末时间不足，非生产季节的成熟果实仍显示可采收。
 - 支持游戏全部 13 种语言、地区别名及英语回退，季节名复用原生翻译，附 MIT 许可证。

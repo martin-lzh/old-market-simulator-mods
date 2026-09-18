@@ -8,7 +8,7 @@ using UnityEngine.Localization.Settings;
 
 namespace OldMarket.TreeInfo
 {
-    [BepInPlugin(Id, "Old Market Tree Info", "0.1.0")]
+    [BepInPlugin(Id, "Tree Harvest Helper", "0.1.0")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {
@@ -31,7 +31,7 @@ namespace OldMarket.TreeInfo
                 var method = AccessTools.Method(typeof(PlayerInteraction), "InteractionRay")
                     ?? throw new MissingMethodException("PlayerInteraction.InteractionRay");
                 harmony.Patch(method, postfix: new HarmonyMethod(typeof(Plugin), nameof(ShowTreeInfo)));
-                Logger.LogInfo("Tree Info 0.1.0 ready; hover display only.");
+                Logger.LogInfo("Tree Harvest Helper 0.1.0 ready; hover display only.");
             }
             catch (Exception error)
             {

@@ -1,8 +1,10 @@
-# Changelog / 版本记录
+# Map & Compass — Changelog / 版本记录
 
 ## English
 
 ### 0.2.0 — prerelease (pending publication)
+
+- Rename the plugin display name to **Map & Compass** and reorganize the bilingual README around core features and controls, with insertion points for gameplay media. Plugin ID, assembly/configuration paths, gameplay and version are unchanged.
 
 - Regenerate Gate 4 artwork with its missing elevated lake, using a local geometry reference that clips the actual water mesh against terrain heights instead of assuming sea level. Preserve map bounds, return POI, version 0.2.0 and SDK 2.1.6/r7; refresh the packaged texture hash. Local in-game testing of corrected build `921d14b` is confirmed; this does not extend the multiplayer test scope.
 
@@ -106,6 +108,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 0.2.0 — 预发布（待发布）
+
+- 插件显示名改为 **Map & Compass**，双语 README 按核心功能和操作方式组织，并保留实机素材插入位置。插件 ID、程序集／配置路径、玩法及版本不变。
 
 - 重新生成大门4底图，补回遗漏的高处湖泊；本地参考图按真实水面网格与地形高度裁剪，不再假定海平面。地图边界、返回点、版本 0.2.0 和 SDK 2.1.6/r7 不变，更新打包贴图哈希。修正构建 `921d14b` 已获本地实机测试确认，不据此扩展联机测试范围。
 

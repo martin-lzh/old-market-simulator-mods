@@ -1,10 +1,12 @@
-# Price Probability 0.1.2 Change Log / 版本记录
+# Smart Pricing — Changelog / 版本记录
 
 [English](#english) · [中文](#中文)
 
 ## English
 
 ### Unreleased
+
+- Rename the plugin display name to **Smart Pricing** and reorganize the bilingual README around core features and controls, with insertion points for gameplay media. Plugin ID, assembly/configuration paths, gameplay and version are unchanged.
 
 - Correct current README test status to reference the completed `e23f986` local and two-computer multiplayer report. Documentation only; runtime, version and SDK are unchanged.
 
@@ -30,6 +32,8 @@ Older development versions mentioned in the README are not verified downloadable
 ## 中文
 
 ### 未发布
+
+- 插件显示名改为 **Smart Pricing**，双语 README 按核心功能和操作方式组织，并保留实机素材插入位置。插件 ID、程序集／配置路径、玩法及版本不变。
 
 - 修正 README 当前测试状态，引用 `e23f986` 已完成的本地及双实机联机报告。仅文档改动，运行时、版本和 SDK 不变。
 
