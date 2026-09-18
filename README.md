@@ -11,7 +11,7 @@ A collection of unofficial Mods to make running your Old Market Simulator shop a
 | Mod | What it adds | Download |
 | --- | --- | --- |
 | [Profit Insights](material-cost-mod/README.md) | Material costs and estimated profit in reports, recipes and orders | [0.5.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1) |
-| [Coordinates HUD](coordinates-mod/README.md) | Your XYZ position below the money bar; F8 to show/hide | [0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.3) |
+| [Coordinates HUD](coordinates-mod/README.md) | Your XYZ position below the money bar; F8 to show/hide | [0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.4) |
 | [Auto Checkout](checkout-all-mod/README.md) | Hold E or toggle F9 to process products and collect payment | [0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4) |
 | [Better Stacking](stack-all-mod/README.md) | Up to 64 containers per slot, repeated drop/throw and empty-container disposal | [0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) |
 | [Smart Pricing](price-probability-mod/README.md) | Price acceptance preview and automatic pricing rules | [0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.1) |
@@ -54,7 +54,7 @@ Want to contribute? Start with [CONTRIBUTING](CONTRIBUTING.md) or the [developme
 | Mod | 能做什么 | 下载 |
 | --- | --- | --- |
 | [Profit Insights](material-cost-mod/README.md) | 在日报、配方和订购页查看原料成本与预计利润 | [0.5.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.1) |
-| [Coordinates HUD](coordinates-mod/README.md) | 金钱栏下显示 XYZ 坐标，F8 显示/隐藏 | [0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.3) |
+| [Coordinates HUD](coordinates-mod/README.md) | 金钱栏下显示 XYZ 坐标，F8 显示/隐藏 | [0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.4) |
 | [Auto Checkout](checkout-all-mod/README.md) | 长按 E 或按 F9 连续结算商品、收取钱袋 | [0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.4) |
 | [Better Stacking](stack-all-mod/README.md) | 每格最多放 64 个容器，并支持连续丢下/投掷 | [0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) |
 | [Smart Pricing](price-probability-mod/README.md) | 查看价格接受概率，设置自动定价规则 | [0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.1) |
