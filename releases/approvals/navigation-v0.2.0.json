@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "mod": "navigation",
+  "version": "0.2.0",
+  "sdk": "2.1.6/r7",
+  "prerelease": true,
+  "sourceCommit": "21ebafff844cfd8c894ea2e794ed7ffb7cfe26d1",
+  "inputsSha256": "2b129ca58cea8faa2b6c7b474496b379b40bb14d1d3a5d9afd7359898ad5859a",
+  "authorization": "Maintainer explicitly assigned navigation 0.2.0 and subsequently requested improved Mod display names and feature/control READMEs before publication. This renewal covers the display name Map & Compass and bilingual player-guide changes within that same version scope; gameplay, stable plugin identity and SDK pin are unchanged."
+}
