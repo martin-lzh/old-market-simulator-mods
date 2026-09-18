@@ -6,15 +6,17 @@
 
 ### Unreleased
 
-### 0.1.5 — prerelease (pending publication)
+### 0.1.5 — 2026-09-19 (stable release)
+
+In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
 
 - Rename the plugin display name to **Auto Checkout** and reorganize the bilingual README around core features and controls, with insertion points for gameplay media. Plugin ID, assembly/configuration paths, gameplay and version are unchanged.
 
 - Correct current README test status to reference the completed `e23f986` local and two-computer multiplayer report. Documentation only; runtime, version and SDK are unchanged.
 
-- Validation: 13-locale checks, 46 state checks, SDK compilation and real-reference IL/resource comparison passed on game 2.1.6 / SDK r1; 22 CI tooling tests passed. In-game UI and multiplayer acceptance remain unperformed. No custom save format or network protocol changes; completed native transactions still affect normal saves. Exit the game and restore the previous DLL to roll back; this does not undo transactions.
+- Validation: 13-locale checks, 46 state checks, SDK compilation and real-reference IL/resource comparison passed on game 2.1.6 / SDK r1; 22 CI tooling tests passed. No custom save format or network protocol changes; completed native transactions still affect normal saves. Exit the game and restore the previous DLL to roll back; this does not undo transactions.
 
-- Keep hold instructions white even when the native interaction is red. Only toggle status uses red when off and white when on; add an explicit localized off state in all 13 locales. No checkout, save or network behavior changes. Game 2.1.6 / SDK r1 / BepInEx 5 remain unchanged; in-game color/layout acceptance is pending.
+- Keep hold instructions white even when the native interaction is red. Only toggle status uses red when off and white when on; add an explicit localized off state in all 13 locales. No checkout, save or network behavior changes. Game 2.1.6 / SDK r1 / BepInEx 5 remain unchanged.
 
 - Add game-versioned SDK compilation and CHANGELOG-driven CI releases; pin this Mod to SDK 2.1.6/r1. Existing published versions are not rebuilt or replaced.
 
@@ -37,15 +39,17 @@ Older development versions mentioned in the README are not verified downloadable
 
 ### 未发布
 
-### 0.1.5 — 预发布（待发布）
+### 0.1.5 — 2026-09-19（正式发布）
+
+维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](../releases/validation.md)。
 
 - 插件显示名改为 **Auto Checkout**，双语 README 按核心功能和操作方式组织，并保留实机素材插入位置。插件 ID、程序集／配置路径、玩法及版本不变。
 
 - 修正 README 当前测试状态，引用 `e23f986` 已完成的本地及双实机联机报告。仅文档改动，运行时、版本和 SDK 不变。
 
-- 验证：基于游戏 2.1.6 / SDK r1，通过 13 种语言检查、46 项状态检查、SDK 编译及真实引用 IL/资源比对；22 项 CI 工具测试通过。实机 UI 与多人验收未执行。不改变自定义存档格式或网络协议，已完成的原生交易仍影响正常存档。回退时退出游戏并恢复旧 DLL，不会撤销交易。
+- 验证：基于游戏 2.1.6 / SDK r1，通过 13 种语言检查、46 项状态检查、SDK 编译及真实引用 IL/资源比对；22 项 CI 工具测试通过。不改变自定义存档格式或网络协议，已完成的原生交易仍影响正常存档。回退时退出游戏并恢复旧 DLL，不会撤销交易。
 
-- 长按说明固定为白色，不再继承原生交互的红色。仅切换状态在停用时为红色、启用时为白色；13 种语言均补充明确的停用状态。不改变结账、存档或网络行为，保留游戏 2.1.6 / SDK r1 / BepInEx 5 基线；颜色与排版仍待实机验收。
+- 长按说明固定为白色，不再继承原生交互的红色。仅切换状态在停用时为红色、启用时为白色；13 种语言均补充明确的停用状态。不改变结账、存档或网络行为，保留游戏 2.1.6 / SDK r1 / BepInEx 5 基线。
 
 - 增加随游戏版本维护的 SDK 编译和 CHANGELOG 驱动的 CI 发布，本 Mod 固定 SDK 2.1.6/r1；不重建或替换既有公开版本。
 

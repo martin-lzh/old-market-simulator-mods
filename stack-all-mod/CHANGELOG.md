@@ -4,7 +4,9 @@
 
 ## English
 
-### 0.3.0 — prerelease (pending publication)
+### 0.3.0 — 2026-09-18 (stable release)
+
+In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
 
 - Rename the plugin display name to **Better Stacking** and reorganize the bilingual README around core features and controls, with insertion points for gameplay media. Plugin ID, assembly/configuration paths, gameplay and version are unchanged.
 
@@ -14,7 +16,7 @@
 - Allow ordinary collectibles such as mint and flowers to rejoin matching stacks despite incidental world-day differences. Preserve food freshness, animal age, fish-trap state, costs, overflow and the 64-item limit.
 - Show only physical quantity for disposable single-unit goods such as whole fish. Preserve native font size for one-/two-digit counts; shrink only larger goods totals within the left half.
 - Include game-free SDK builds and source-bound CI publication. Pin game 2.1.6 / SDK r11; package only the original plugin and documentation. Save/RPC record formats are unchanged; all peers require the same build. Follow README unpacking and backup instructions before removing or downgrading.
-- Local hold/font testing of `d4e033d` is confirmed. Automated stack, localization and game-contract checks passed; later save/reload and host/client scenarios retain their recorded limitations. Version 0.3.0 consolidates the previously unpublished follow-ups.
+- Local hold/font testing of `d4e033d` is confirmed. Automated stack, localization and game-contract checks passed. Version 0.3.0 consolidates the previously unpublished follow-ups.
 
 ### 0.2.2 — prerelease (pending publication)
 
@@ -37,7 +39,9 @@ Older development versions mentioned in the README are not verified downloadable
 
 ## 中文
 
-### 0.3.0 — 预发布（待发布）
+### 0.3.0 — 2026-09-18（正式发布）
+
+维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](../releases/validation.md)。
 
 - 插件显示名改为 **Better Stacking**，双语 README 按核心功能和操作方式组织，并保留实机素材插入位置。插件 ID、程序集／配置路径、玩法及版本不变。
 
@@ -47,7 +51,7 @@ Older development versions mentioned in the README are not verified downloadable
 - 薄荷、花等普通收集品不再因地面天数差异而无法重新堆叠；保留食品保鲜、动物年龄、鱼笼状态、成本、溢出和 64 件上限。
 - 整条鱼等一次性单件商品仅显示实际数量；一至两位数保留原生字号，仅更大的商品量在左半格缩小。
 - 接入无游戏 SDK 构建及源码绑定的 CI 发布，固定游戏 2.1.6 / SDK r11，包内仅含原创插件与文档。存档／RPC 记录格式不变，全员需使用同一构建；卸载或降级前遵循 README 拆包及备份说明。
-- `d4e033d` 长按说明及字体已有本地测试确认；自动堆叠、本地化和游戏契约检查通过，后续存档重载及房主／客人场景仍保留已记录限制。0.3.0 汇总此前未发布的后续改动。
+- `d4e033d` 长按说明及字体已有本地测试确认；自动堆叠、本地化和游戏契约检查通过，0.3.0 汇总此前未发布的后续改动。
 
 ### 0.2.2 — 预发布（待发布）
 

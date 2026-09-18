@@ -6,6 +6,8 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 ## English
 
+In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
+
 See your XYZ position just below the money display, in the same style as the game. The readout updates as you move, including when you are aboard a ship.
 
 [Download 0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.4)
@@ -55,6 +57,8 @@ To update, close the game, back up the old DLL and replace it. To remove the Mod
 [What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [License](LICENSE)
 
 ## 中文
+
+维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](../releases/validation.md)。
 
 在金钱栏下方随时查看自己的 XYZ 坐标，字体和样式与游戏保持一致。坐标会跟随移动更新，在船上也能查看。
 

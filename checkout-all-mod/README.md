@@ -6,6 +6,8 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 ## English
 
+In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
+
 Let checkout handle the whole table while you hold a key—or keep it running with a toggle. Products are processed one by one, followed by the payment pouch.
 
 [Download 0.1.5](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.5)
@@ -57,7 +59,7 @@ Holding is fixed to keyboard E and does not follow game rebinding. Controllers a
 
 Aim at the checkout again, then release and hold E or press F9. Slow multiplayer responses can stop the sequence after about 10 seconds; it will not repeatedly retry the same action. If nearby checkouts or payment pouches cannot be distinguished safely, collect the pouch manually.
 
-These are real sales: completed transactions and collected money stay completed when you stop or remove the Mod. Prices and customer behavior remain as in the game. Multiplayer combinations have not all been checked.
+These are real sales: completed transactions and collected money stay completed when you stop or remove the Mod. Prices and customer behavior remain as in the game. Tested multiplayer coverage is recorded in the [validation record](../releases/validation.md).
 
 ### Updating or removing
 
@@ -66,6 +68,8 @@ Close the game, back up the old DLL and replace it to update. Delete `OldMarket.
 [What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [License](LICENSE)
 
 ## 中文
+
+维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](../releases/validation.md)。
 
 长按一个键，就能依次结算桌上的商品并收取钱袋；也可以打开连续结账，不用一直按住。
 

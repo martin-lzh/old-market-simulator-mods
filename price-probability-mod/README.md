@@ -6,6 +6,8 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 ## English
 
+In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
+
 See how likely customers are to accept a price, then choose whether to keep a fixed price or a fixed acceptance chance.
 
 [Download 0.1.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.2)
@@ -52,6 +54,8 @@ To update, close the game and back up the old DLL and settings before replacing 
 [What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [License](LICENSE)
 
 ## 中文
+
+维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](../releases/validation.md)。
 
 定价时直接看看顾客愿不愿意买，还可以选择固定售价或固定接受概率，让价格随行情调整。
 

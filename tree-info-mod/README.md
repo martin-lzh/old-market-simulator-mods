@@ -6,6 +6,8 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 ## English
 
+In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
+
 See when your fruit trees are ready to harvest, directly in the interaction hint.
 
 ### Core features
@@ -27,17 +29,19 @@ Purchased saplings and wild timber trees are excluded. Ripe fruit remains harves
 
 ### Install and remove
 
-Local source version: **0.1.0**. No public download is available yet. Use a locally verified build for Old Market Simulator **2.1.6**, Windows x64 / Unity Mono, with **BepInEx 5**. Build and SDK details: [development notes](DEVELOPMENT.md). Changes: [CHANGELOG](CHANGELOG.md).
+[Download 0.1.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.0). For Old Market Simulator **2.1.6**, Windows x64 / Unity Mono, with **BepInEx 5**. Build and SDK details: [development notes](DEVELOPMENT.md). Changes: [CHANGELOG](CHANGELOG.md).
 
 Exit the game, back up the existing plugin, and put the package's DLL in `BepInEx/plugins/OldMarket.TreeInfo/`. Keep only one active copy. Restart to load it. To roll back, exit and restore the backed-up DLL; to uninstall, remove this plugin's DLL. Keep other plugins, the loader and saves intact. Packages contain only the original DLL, README, CHANGELOG and MIT license.
 
 ### Compatibility and testing
 
-The plugin appends local UI text; it does not change saves, watering, harvesting, growth or RPCs. Other players need not install it by design. Host/client operation and combinations with other subtitle patches still need in-game verification. Missing glyphs, long translated text and competing subtitle changes may affect display. No support for other game versions is established.
+The plugin appends local UI text; it does not change saves, watering, harvesting, growth or RPCs. Other players need not install it by design. Missing glyphs, long translated text and competing subtitle changes may affect display. No support for other game versions is established.
 
 Detailed validation and language coverage: [development notes](DEVELOPMENT.md) and [validation record](../releases/validation.md). [MIT License](LICENSE).
 
 ## 中文
+
+维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](../releases/validation.md)。
 
 准星对准果树，就能在交互提示中查看生产季节与成熟时间。
 
@@ -60,12 +64,12 @@ Detailed validation and language coverage: [development notes](DEVELOPMENT.md) a
 
 ### 安装与卸载
 
-当前本地源码版本 **0.1.0**，尚无公开下载。适用于 Old Market Simulator **2.1.6**、Windows x64 / Unity Mono、**BepInEx 5**。构建与 SDK 见[开发说明](DEVELOPMENT.md)，改动见[版本记录](CHANGELOG.md)。
+[下载 0.1.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.0)。适用于 Old Market Simulator **2.1.6**、Windows x64 / Unity Mono、**BepInEx 5**。构建与 SDK 见[开发说明](DEVELOPMENT.md)，改动见[版本记录](CHANGELOG.md)。
 
 退出游戏，备份旧插件，将包内 DLL 放入 `BepInEx/plugins/OldMarket.TreeInfo/`，只保留一个启用副本，重新启动游戏加载。回退时退出游戏并恢复备份 DLL；卸载仅删除本插件 DLL，保留其他插件、加载器及存档。包内只含原创 DLL、README、CHANGELOG 和 MIT 许可证。
 
 ### 兼容与测试
 
-插件仅追加本地 UI，不修改存档、浇水、采收、生长或 RPC；设计上其他玩家无需安装。房主/客人及与其他副标题插件的组合仍待实机验证。可能出现缺字、长译文换行及提示争用，尚未确认其他游戏版本兼容性。
+插件仅追加本地 UI，不修改存档、浇水、采收、生长或 RPC；设计上其他玩家无需安装。可能出现缺字、长译文换行及提示争用，尚未确认其他游戏版本兼容性。
 
 详细测试与语言覆盖见[开发说明](DEVELOPMENT.md)和[验证记录](../releases/validation.md)。[MIT 许可证](LICENSE)。
