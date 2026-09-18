@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "mod": "tree-info",
+  "version": "0.1.0",
+  "sdk": "2.1.6/r8",
+  "prerelease": true,
+  "sourceCommit": "f704519267bc2dee8d21f34eefb7cfc9353b1bdf",
+  "inputsSha256": "1c37c0747d354726fadf12d36b5fbb471c5b601b8a0a17576189af3b81aa43b8",
+  "authorization": "Maintainer explicitly selected Tree Info 0.1.0 as its first public version because it has not previously been published. Retain all features from the unpublished local 0.1.1 source, including 13-language support and repository SDK/build integration."
+}
