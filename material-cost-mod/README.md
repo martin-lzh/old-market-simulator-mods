@@ -6,6 +6,8 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 ## English
 
+In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
+
 Get a clearer view of material costs and possible profit while making, ordering and selling goods.
 
 [Download 0.5.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.2)
@@ -60,6 +62,8 @@ To update, close the game and back up the old DLL before replacing it. To remove
 [What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [License](LICENSE)
 
 ## 中文
+
+维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](../releases/validation.md)。
 
 制作、订货和查看日报时，多一份原料成本与预计利润参考，定价心里更有数。
 

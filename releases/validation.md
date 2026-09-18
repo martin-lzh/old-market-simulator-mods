@@ -1,5 +1,16 @@
 # Validation record / 验证记录
 
+## Stable release acceptance — 2026-09-19 / 正式发布验收
+
+The maintainer confirms that in-game acceptance was already completed for Profit Insights 0.5.2, Coordinates HUD 0.1.4, Auto Checkout 0.1.5, Better Stacking 0.3.0, Smart Pricing 0.1.2, Map & Compass 0.2.0 and Tree Harvest Helper 0.1.0. These current releases are designated stable. This supersedes earlier pending-acceptance and prerelease status below; dated development evidence remains historical. This records maintainer-reported acceptance, not a new automated game run or newly measured scenario results.
+
+维护者确认上述七个当前版本早已完成实机验收，现统一标记为正式发布。本条取代下方历史记录中的待验收及预发布状态；历史开发证据保留。这是维护者确认的实机验收，不代表本次重新执行了自动化游戏测试或新增场景测量结果。
+
+This is a release-status and documentation correction. Existing release tags, ZIPs, checksums, build-info and original source-bound approval records remain immutable evidence of the original builds. GitHub release metadata and current source release.json files change to stable; no version bump or package replacement occurs.
+
+本次仅修正发行状态与文档。已有标签、ZIP、校验文件、build-info 及原始源码绑定授权记录继续作为原始构建证据保留；GitHub 发行元数据和当前源码 release.json 改为正式发布，不升版本、不替换安装包。
+
+
 
 ## Assigned release targets — 2026-09-18 / 已指定发行目标
 
@@ -7,7 +18,7 @@ Stack All **0.3.0**, Navigation **0.2.0**, Tree Info **0.1.0** are now explicitl
 
 当前功能范围已明确指定 Stack All **0.3.0**、Navigation **0.2.0**、Tree Info **0.1.0**；下方此前 UNASSIGNED 状态仅作历史记录。Tree Info 公开版本从 0.1.0 开始，保留全部未发布本地 0.1.1 功能。SDK 及预发布标记不变，版本指定本身不代表新增实机测试或已发布。
 
-## Current acceptance — 2026-09-18 / 当前验收
+## Previous acceptance — 2026-09-18 / 此前验收
 
 Navigation `921d14b` was installed with Gate 4 texture SHA256 `5a3bcf25959b0bfa4126f86e3a514a6777fc1ced71233d54f5c2cf2c487ad267`; the maintainer then confirmed local in-game testing complete. Stack All `d4e033d` hold guidance/native font testing was also confirmed. These updates supersede the corresponding pending local UI/shoreline statements in earlier entries below. They do not supply a new save/reload, full-language or host/client scenario matrix. The older `e23f986` six-Mod multiplayer confirmation remains source-scoped.
 

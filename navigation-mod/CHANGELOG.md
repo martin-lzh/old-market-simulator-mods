@@ -2,23 +2,25 @@
 
 ## English
 
-### 0.2.0 — prerelease (pending publication)
+### 0.2.0 — 2026-09-18 (stable release)
+
+In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
 
 - Rename the plugin display name to **Map & Compass** and reorganize the bilingual README around core features and controls, with insertion points for gameplay media. Plugin ID, assembly/configuration paths, gameplay and version are unchanged.
 
 - Regenerate Gate 4 artwork with its missing elevated lake, using a local geometry reference that clips the actual water mesh against terrain heights instead of assuming sea level. Preserve map bounds, return POI, version 0.2.0 and SDK 2.1.6/r7; refresh the packaged texture hash. Local in-game testing of corrected build `921d14b` is confirmed; this does not extend the multiplayer test scope.
 
-- Complete localization of built-in map titles and functional POI labels across all 13 game languages. Add optional NameTextKey metadata, preserve custom names, update labels immediately on language changes, and support Macau Traditional Chinese aliases. Keep native place translations, version 0.2.0 and SDK 2.1.6/r7; fonts and long labels still await in-game acceptance.
+- Complete localization of built-in map titles and functional POI labels across all 13 game languages. Add optional NameTextKey metadata, preserve custom names, update labels immediately on language changes, and support Macau Traditional Chinese aliases. Keep native place translations, version 0.2.0 and SDK 2.1.6/r7.
 
 - Refresh bilingual map coverage, package and icon inventories, Rome unlock behavior and source-specific validation documentation. Make the unbundled Eastern Town outer terrain explicit; preserve historical test evidence and version/SDK pins.
 
-- Add Rome and all seven travel-region maps, a calibrated town detail layer, and 61 independent unlock-area overlays (59 in town, two in the mine). Filter POIs by enable/disable ancestry, distinguish locked gates from open portals, and retain region-scoped markers and return entrances. Preserve SDK 2.1.6/r7 and version 0.2.0; in-game travel, unlock alignment and multiplayer acceptance remain pending.
+- Add Rome and all seven travel-region maps, a calibrated town detail layer, and 61 independent unlock-area overlays (59 in town, two in the mine). Filter POIs by enable/disable ancestry, distinguish locked gates from open portals, and retain region-scoped markers and return entrances. Preserve SDK 2.1.6/r7 and version 0.2.0.
 
-- Audit Eastern Town services beyond the former fixed NPC list. Add recycling, employees, water refill and calendar to all four market manifests (17 POIs); keep aquarium and origami collection grouped under the existing museum POI. Add water/calendar icons without inventing native place labels. Record expansion-sign and fishing-area audit limits; no version or SDK change, in-game validation pending.
+- Audit Eastern Town services beyond the former fixed NPC list. Add recycling, employees, water refill and calendar to all four market manifests (17 POIs); keep aquarium and origami collection grouped under the existing museum POI. Add water/calendar icons without inventing native place labels. Record expansion-sign and fishing-area audit limits; no version or SDK change.
 
-- Add the first Island map (BazaarIsland, map ID 0), a full-terrain Image Gen illustration and 16 scene-verified POIs. Add filled employee, expansion and recycling icons with native labels and category colors. Ship the map through the hashed allowlist. This is a static surface overview, not all expansion/underground states; new-map in-game alignment and multiplayer checks are pending. Keep 0.2.0 and SDK 2.1.6/r7 unchanged.
+- Add the first Island map (BazaarIsland, map ID 0), a full-terrain Image Gen illustration and 16 scene-verified POIs. Add filled employee, expansion and recycling icons with native labels and category colors. Ship the map through the hashed allowlist. This is a static surface overview, not all expansion/underground states. Keep 0.2.0 and SDK 2.1.6/r7 unchanged.
 
-- Scale large-map wheel/button zoom steps and the maximum zoom by world coverage and viewport aspect, preserving close-up detail and approximately the same input travel for larger maps. Minimap steps remain world-distance based. SDK 2.1.6/r7 and Mod version are unchanged; in-game zoom feel remains unverified.
+- Scale large-map wheel/button zoom steps and the maximum zoom by world coverage and viewport aspect, preserving close-up detail and approximately the same input travel for larger maps. Minimap steps remain world-distance based. SDK 2.1.6/r7 and Mod version are unchanged.
 
 - Include the Eastern Town base map, four unlock overlays and four map/POI manifests in the Navigation release ZIP. Maps are tracked Mod resources and install with the DLL; no separate map download is needed.
 - Share the explicit map allowlist between CI and local packaging. Verify hashes, PNG integrity, texture references and metadata/POIs, and include map hashes in build evidence. Reject missing, modified or unexpected ZIP entries; continue excluding SDK/game/loader binaries and personal files.
@@ -107,23 +109,25 @@ Experimental initial build; not installed or verified in game.
 
 ## 中文
 
-### 0.2.0 — 预发布（待发布）
+### 0.2.0 — 2026-09-18（正式发布）
+
+维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](../releases/validation.md)。
 
 - 插件显示名改为 **Map & Compass**，双语 README 按核心功能和操作方式组织，并保留实机素材插入位置。插件 ID、程序集／配置路径、玩法及版本不变。
 
 - 重新生成大门4底图，补回遗漏的高处湖泊；本地参考图按真实水面网格与地形高度裁剪，不再假定海平面。地图边界、返回点、版本 0.2.0 和 SDK 2.1.6/r7 不变，更新打包贴图哈希。修正构建 `921d14b` 已获本地实机测试确认，不据此扩展联机测试范围。
 
-- 补齐游戏全部 13 种语言的内置地图标题及功能 POI 标签。增加可选 NameTextKey 元数据，保留自定义名称，切换语言即时更新，补充澳门繁中别名。保留原生地点译文、0.2.0 版本与 SDK 2.1.6/r7；字体及长标签仍待实机验收。
+- 补齐游戏全部 13 种语言的内置地图标题及功能 POI 标签。增加可选 NameTextKey 元数据，保留自定义名称，切换语言即时更新，补充澳门繁中别名。保留原生地点译文、0.2.0 版本与 SDK 2.1.6/r7。
 
 - 更新双语地图覆盖、地图包与图标清单、罗马解锁行为及按源码区分的验证说明。明确东方小镇外围地形尚未打包，保留历史测试证据及版本/SDK 固定值。
 
-- 加入罗马主城与七个独立传送区域、主城细节层及 61 个独立解锁区块（主城 59、矿洞 2）。POI 按启停条件更新，区分锁定大门与开放传送入口，保留按区域隔离的个人标记及返回入口。SDK 2.1.6/r7 与版本 0.2.0 不变；区域往返、解锁对齐及联机实机验收待完成。
+- 加入罗马主城与七个独立传送区域、主城细节层及 61 个独立解锁区块（主城 59、矿洞 2）。POI 按启停条件更新，区分锁定大门与开放传送入口，保留按区域隔离的个人标记及返回入口。SDK 2.1.6/r7 与版本 0.2.0 不变。
 
-- 将东方小镇复核范围从原先固定 NPC 名单扩展到交互组件，四份市场地图补充回收、雇员、补水、日历，共 17 个 POI；水族馆与折纸收集共用原有博物馆点位。新增水滴/日历图标，不编造原生地点名；记录扩建购买牌与钓鱼区域的审核边界。版本与 SDK 不变，实机验收待完成。
+- 将东方小镇复核范围从原先固定 NPC 名单扩展到交互组件，四份市场地图补充回收、雇员、补水、日历，共 17 个 POI；水族馆与折纸收集共用原有博物馆点位。新增水滴/日历图标，不编造原生地点名；记录扩建购买牌与钓鱼区域的审核边界。版本与 SDK 不变。
 
-- 补入第一个海岛地图（BazaarIsland，地图 ID 0）、完整地形范围的 Image Gen 插画及 16 个经场景核对的 POI。新增雇员、扩建、回收实心图标，复用原生名称及类别配色；地图纳入哈希白名单打包。这是静态地表概览，不覆盖全部扩建与地下状态；新地图实机对齐及联机验证待完成。保持 0.2.0 与 SDK 2.1.6/r7 不变。
+- 补入第一个海岛地图（BazaarIsland，地图 ID 0）、完整地形范围的 Image Gen 插画及 16 个经场景核对的 POI。新增雇员、扩建、回收实心图标，复用原生名称及类别配色；地图纳入哈希白名单打包。这是静态地表概览，不覆盖全部扩建与地下状态。保持 0.2.0 与 SDK 2.1.6/r7 不变。
 
-- 大地图滚轮、按钮缩放步长与放大上限随世界覆盖范围和视口比例调整，让扩大后的地图保持近景细节与近似操作次数。小地图仍按世界距离分档。SDK 2.1.6/r7 与 Mod 版本不变，缩放手感尚未实机验收。
+- 大地图滚轮、按钮缩放步长与放大上限随世界覆盖范围和视口比例调整，让扩大后的地图保持近景细节与近似操作次数。小地图仍按世界距离分档。SDK 2.1.6/r7 与 Mod 版本不变。
 
 - 将东方小镇底图、四种解锁覆盖层及四份地图/POI 元数据纳入 Navigation 发行 ZIP。地图作为 Mod 资源跟踪，与 DLL 一起安装，无需另行下载地图。
 - CI 与本地构建共用明确的地图文件白名单，检查哈希、PNG 完整性、贴图引用和地图/POI 元数据，并在构建记录中保存地图哈希。拒绝遗漏、修改或额外 ZIP 条目，继续排除 SDK、游戏、加载器程序集及个人文件。

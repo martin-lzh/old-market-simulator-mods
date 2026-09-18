@@ -6,9 +6,11 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 ## English
 
+In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
+
 Carry more without losing track of your baskets and boxes. Each product slot can hold up to 64 containers; tools stay separate.
 
-[Download 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) · 0.3.0 is being prepared and is not on the release page yet.
+[Download 0.3.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.3.0)
 
 ### Core features
 
@@ -50,7 +52,7 @@ Ordinary collectibles such as mint leaves and flowers can rejoin their matching 
 
 ### Multiplayer
 
-**Everyone in the room, including the host, needs the same Better Stacking version.** Please compare versions before joining; the Mod does not check this for you. Avoid combining it with other Mods that change inventory stacking. Visual, local in-game and two-computer multiplayer testing of the preceding build is complete. The subsequent Better Stacking changes received a local test report without major issues on 2026-09-18; that report does not establish a full scenario matrix. The latest hold guidance and native font change in `d4e033d` passed reported local testing; a new multiplayer scenario matrix has not been reported.
+**Everyone in the room, including the host, needs the same Better Stacking version.** Please compare versions before joining; the Mod does not check this for you. Avoid combining it with other Mods that change inventory stacking.
 
 ### Backups and removal
 
@@ -72,9 +74,11 @@ For a compatible update, close the game and back up your save and old DLL before
 
 ## 中文
 
+维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](../releases/validation.md)。
+
 让一个格子装下更多篮子和箱子，又能清楚看见实际数量。每个商品格最多容纳 64 个容器，工具仍然单独放置。
 
-[下载 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.2.1) · 0.3.0 正在准备，发布页暂时仍是 0.2.1。
+[下载 0.3.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.3.0)
 
 ### 核心功能
 
@@ -114,7 +118,7 @@ For a compatible update, close the game and back up your save and old DLL before
 
 ### 和朋友一起玩
 
-**房主和所有玩家都需要安装相同版本的 Better Stacking。**加入房间前请互相确认，Mod 不会自动检查版本。尽量不要同时使用其他修改库存堆叠的 Mod。修复前构建的视觉、本地实机及双实机联机测试已完成；2026-09-18 对后续 Better Stacking 改动的本地测试反馈为未发现明显问题，但未提供完整场景矩阵；最新长按说明及原生字体改动 `d4e033d` 已获本地测试确认，尚无新的联机场景矩阵报告。
+**房主和所有玩家都需要安装相同版本的 Better Stacking。**加入房间前请互相确认，Mod 不会自动检查版本。尽量不要同时使用其他修改库存堆叠的 Mod。
 
 ### 备份与卸载
 

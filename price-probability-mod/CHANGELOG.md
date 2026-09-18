@@ -6,7 +6,9 @@
 
 ### Unreleased
 
-### 0.1.2 — 2026-09-19 (prerelease)
+### 0.1.2 — 2026-09-19 (stable release)
+
+In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
 
 - Rename the plugin display name to **Smart Pricing** and reorganize the bilingual README around core features and controls, with insertion points for gameplay media. Plugin ID, assembly/configuration paths, gameplay and version are unchanged.
 
@@ -33,7 +35,9 @@ Older development versions mentioned in the README are not verified downloadable
 
 ### 未发布
 
-### 0.1.2 — 2026-09-19（预发布）
+### 0.1.2 — 2026-09-19（正式发布）
+
+维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](../releases/validation.md)。
 
 - 插件显示名改为 **Smart Pricing**，双语 README 按核心功能和操作方式组织，并保留实机素材插入位置。插件 ID、程序集／配置路径、玩法及版本不变。
 
