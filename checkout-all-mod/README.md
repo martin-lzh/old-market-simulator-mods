@@ -30,6 +30,8 @@ Let checkout handle the whole table while you hold a key—or keep it running wi
 
 ![In-game checkout hints for holding E and toggling with F9; toggle mode is off](assets/auto-checkout-gameplay.png)
 
+![In-game continuous checkout enabled, with F9 to turn it off](assets/continuous-checkout-on-gameplay.png)
+
 Keep looking at the checkout body and stay within reach. When the table is empty, continuous mode waits for the next customer. It does not ring the bell for you. A short E press still does the game's normal action before the hold starts.
 
 Looking away, leaving reach, opening a menu, switching windows or disconnecting stops checkout. In hold mode, releasing E also stops it. If you press F9 during a hold, it switches to toggle mode and keeps going after you release E. Press F9 again to stop; release E before starting another hold.
@@ -92,6 +94,8 @@ Close the game, back up the old DLL and replace it to update. Delete `OldMarket.
 | 保持原版单次交互 | 短按 E |
 
 ![实机画面：长按 E 连续结账及 F9 开关提示，当前连续结账关闭](assets/auto-checkout-gameplay.png)
+
+![实机画面：连续结账已开启，按 F9 关闭](assets/continuous-checkout-on-gameplay.png)
 
 请让准星对着结账台本体，并保持在可交互距离内。桌上没有商品时会等待下一位顾客，不会自动摇铃。长按开始前，第一次按下 E 仍可能执行原版交互，例如处理一件商品或摇铃。
 
