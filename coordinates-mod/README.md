@@ -20,7 +20,7 @@ See your XYZ position just below the money display, in the same style as the gam
 - Keep the readout updated while walking or travelling aboard a ship.
 - Toggle the display with F8; hide it automatically when your character is unavailable.
 
-<!-- Add gameplay screenshots or GIFs here when available. -->
+![XYZ coordinates displayed beneath the money bar in game](assets/coordinates-hud-gameplay.png)
 
 ### How to use
 
@@ -72,7 +72,7 @@ To update, close the game, back up the old DLL and replace it. To remove the Mod
 - 步行或乘船时持续更新位置。
 - 按 F8 显示／隐藏；角色尚未生成或断线后自动隐藏。
 
-<!-- 后续在此加入实机截图或 GIF。 -->
+![实机画面：金钱栏下方显示 XYZ 坐标](assets/coordinates-hud-gameplay.png)
 
 ### 怎么操作
 
