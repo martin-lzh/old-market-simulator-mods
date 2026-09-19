@@ -25,6 +25,10 @@ Find your way around town with a minimap, a compass and your own map markers. Ma
 
 ![In-game compass showing directions and a 71-degree heading](assets/compass-gameplay.png)
 
+![In-game minimap with place icons and camera-up orientation](assets/minimap-gameplay.png)
+
+![In-game Rome map with place labels and the marker editor](assets/rome-map-gameplay.png)
+
 ### How to use
 
 | Action | Control |
@@ -112,6 +116,10 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 - 显示受支持的解锁区域覆盖层，标记按存档和区域分别保存。
 
 ![实机画面：罗盘轴显示方位与 71° 朝向](assets/compass-gameplay.png)
+
+![实机画面：小地图显示地点图标，朝向跟随视角](assets/minimap-gameplay.png)
+
+![实机画面：罗马大地图、地点名称与标记编辑区](assets/rome-map-gameplay.png)
 
 ### 怎么操作
 

@@ -4,7 +4,7 @@
 
 ### Unreleased
 
-- Add an in-game compass screenshot to both README languages. Documentation only.
+- Add in-game compass, minimap and Rome map screenshots to both README languages. Documentation only.
 
 - Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
 
@@ -117,7 +117,7 @@ Experimental initial build; not installed or verified in game.
 
 ### 未发布
 
-- 在双语 README 中加入罗盘轴实机截图，仅更新文档。
+- 在双语 README 中加入罗盘轴、小地图及罗马大地图实机截图，仅更新文档。
 
 - 将 Nexus 封面移入 assets/cover.png，并作为 README 首图展示。仅文档改动，运行时、版本和 SDK 不变。
 
