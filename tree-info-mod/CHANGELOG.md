@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Add an in-game production-season and harvest-readiness screenshot to both README languages. Documentation only.
+
 - Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
 
 ### 0.1.0 — 2026-09-18 (stable release)
@@ -25,6 +27,8 @@ In-game acceptance is confirmed by the maintainer. This version is a stable rele
 ## 中文
 
 ### 未发布
+
+- 在双语 README 中加入果树生产季节与成熟采收状态的实机截图，仅更新文档。
 
 - 将 Nexus 封面移入 assets/cover.png，并作为 README 首图展示。仅文档改动，运行时、版本和 SDK 不变。
 
