@@ -29,6 +29,10 @@ See how likely customers are to accept a price, then choose whether to keep a fi
 - A 100% target uses the game's suggested price for that day.
 - Use the game's **Confirm** button to save. Closing the panel without confirming discards your unsaved rule changes.
 
+![In-game fixed-probability pricing: an 86.2% target corresponds to a selling price of 73 C](assets/fixed-probability-gameplay.png)
+
+Drag the acceptance slider to update the selling-price field, then choose **Fixed probability** to maintain that target as wholesale prices change. Press the game's confirmation button to save.
+
 The percentage means a customer who has found the product will not reject it for being too expensive. **It is not the chance of selling all your stock.** Demand, customer traffic, freshness and stock still matter. Prices use whole numbers, so the actual estimate can differ from the requested chance, especially for cheap products.
 
 ### Install
@@ -77,6 +81,10 @@ To update, close the game and back up the old DLL and settings before replacing 
 - 可选“关闭”“固定售价”或“固定概率”；固定概率会在批发价格变化时重新调整售价。
 - 100% 目标使用游戏当天的建议售价。
 - 点击游戏原有的**确认按钮**保存；直接关闭页面会丢弃尚未确认的规则修改。
+
+![实机画面：固定概率模式下，86.2% 目标接受率对应 73 C 售价](assets/fixed-probability-gameplay.png)
+
+拖动接受概率滑条会同步更新售价输入框，再选择“固定概率”，即可随批发价变化维持目标接受率。最后点击游戏原有的确认按钮保存。
 
 这里的概率指顾客已经找到商品后，不会因为太贵而放弃购买的可能性，**不是当天卖光库存的概率**。需求、客流、保鲜和库存依然影响销量。售价只能是整数，因此实际概率可能与目标略有差异，低价商品尤其明显。
 
