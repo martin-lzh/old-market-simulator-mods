@@ -22,7 +22,7 @@ For Old Market Simulator **2.1.6 on Windows**. Choose the Mod ZIP, not GitHub’
 - Switch the daily report between material estimates and the game’s usual figures.
 - See per-item and whole-batch costs, output quantities and suggested-price profit.
 
-<!-- Add gameplay screenshots or GIFs here when available. -->
+![In-game daily report showing material costs, average prices, estimated profits and the Materials only switch](assets/material-cost-report-gameplay.png)
 
 ### How to use
 
@@ -79,7 +79,7 @@ To update, close the game and back up the old DLL before replacing it. To remove
 - 日报可切换原料估算与游戏原有统计，并记住选择。
 - 同时查看单件与整批成本、产出数量及按建议售价计算的利润。
 
-<!-- 后续在此加入实机截图或 GIF。 -->
+![实机画面：日报中的原料成本、平均售价、预计利润及仅计原料开关](assets/material-cost-report-gameplay.png)
 
 ### 怎么操作
 
