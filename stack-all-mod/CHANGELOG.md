@@ -6,7 +6,7 @@
 
 ### Unreleased
 
-- Add an in-game screenshot illustrating separate goods and container counts to both README languages. Documentation only.
+- Add in-game screenshots illustrating separate goods/container counts, the G empty-container action and hold-to-repeat controls to both README languages. Documentation only.
 
 - Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
 
@@ -47,7 +47,7 @@ Older development versions mentioned in the README are not verified downloadable
 
 ### 未发布
 
-- 在双语 README 中加入商品总量与容器数量分别显示的实机截图，仅更新文档。
+- 在双语 README 中加入商品／容器数量、G 丢空盒及长按连续操作的实机截图，仅更新文档。
 
 - 将 Nexus 封面移入 assets/cover.png，并作为 README 首图展示。仅文档改动，运行时、版本和 SDK 不变。
 
