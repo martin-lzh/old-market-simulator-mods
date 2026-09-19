@@ -49,6 +49,10 @@ Large-map zoom steps and the closest zoom level adapt to the loaded map's world 
 
 Select a personal marker to change its name, color or shape in the right sidebar. Color and shape buttons open a grid below them—click the one you want. Choose **Set target** to follow it. The compass and in-world guide use the same icon and color as the map. Guides hide while a menu is open and return when it closes.
 
+![In-game personal marker editor with name, color, icon and target controls](assets/marker-editor-gameplay.png)
+
+![In-game target guidance showing Gate 4 at a distance of 84 metres](assets/target-tracking-gameplay.png)
+
 Opening the map frees the mouse but **does not pause the game**. M is a separate Mod setting; changing the game's map binding does not change this shortcut.
 
 ### Install
@@ -140,6 +144,10 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 大地图的缩放步长与放大上限会适应所加载地图的世界覆盖范围，扩大后的地图也能用相近的滚轮或按钮操作次数放大到街区细节。
 
 选中个人标记后，可以在右侧改名称、颜色和图标。点击颜色或图标按钮，下方会展开选择格，点哪个就用哪个。点击“设为目标”即可跟随指引，罗盘和场景内会显示与地图相同的图标和颜色。打开菜单时指引会暂时隐藏，关闭后恢复。
+
+![实机画面：编辑个人标记名称、颜色和图标，并设为目标](assets/marker-editor-gameplay.png)
+
+![实机画面：场景内目标指引显示大门4及 84 米距离](assets/target-tracking-gameplay.png)
 
 打开地图后可以自由使用鼠标，但**游戏不会暂停**。M 是本 Mod 的独立设置，不会跟随游戏里的地图改键。
 
