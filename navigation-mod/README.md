@@ -23,7 +23,7 @@ Find your way around town with a minimap, a compass and your own map markers. Ma
 - Create personal markers with names, colors and icons; navigate to markers or map POIs.
 - See supported unlock-area overlays and keep your markers separate for each save and region.
 
-<!-- Add gameplay screenshots or GIFs here when available. -->
+![In-game compass showing directions and a 71-degree heading](assets/compass-gameplay.png)
 
 ### How to use
 
@@ -111,7 +111,7 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 - 创建带名称、颜色和图标的个人标记，或直接前往地图地点。
 - 显示受支持的解锁区域覆盖层，标记按存档和区域分别保存。
 
-<!-- 后续在此加入实机截图或 GIF。 -->
+![实机画面：罗盘轴显示方位与 71° 朝向](assets/compass-gameplay.png)
 
 ### 怎么操作
 
