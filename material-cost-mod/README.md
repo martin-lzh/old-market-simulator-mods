@@ -24,6 +24,8 @@ For Old Market Simulator **2.1.6 on Windows**. Choose the Mod ZIP, not GitHub’
 
 ![In-game daily report showing material costs, average prices, estimated profits and the Materials only switch](assets/material-cost-report-gameplay.png)
 
+![In-game recipe details showing batch and unit material costs, recommended price and estimated profit](assets/recipe-cost-profit-gameplay.png)
+
 ### How to use
 
 - **Daily sales report:** turn on **Materials only** to estimate costs from ingredients. Turn it off to return to the game's usual figures; your choice is remembered.
@@ -80,6 +82,8 @@ To update, close the game and back up the old DLL before replacing it. To remove
 - 同时查看单件与整批成本、产出数量及按建议售价计算的利润。
 
 ![实机画面：日报中的原料成本、平均售价、预计利润及仅计原料开关](assets/material-cost-report-gameplay.png)
+
+![实机画面：配方页显示整批及单件原料成本、建议售价与预计利润](assets/recipe-cost-profit-gameplay.png)
 
 ### 怎么操作
 

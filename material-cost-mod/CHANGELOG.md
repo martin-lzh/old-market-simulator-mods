@@ -6,7 +6,7 @@
 
 ### Unreleased
 
-- Add an in-game material-cost report screenshot to both README languages. Documentation only.
+- Add in-game screenshots of the material-cost report and recipe cost/profit details to both README languages. Documentation only.
 
 - Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
 
@@ -39,7 +39,7 @@ Older development versions mentioned in the README are not verified downloadable
 
 ### 未发布
 
-- 在双语 README 中加入原料成本与预计利润报表的实机截图，仅更新文档。
+- 在双语 README 中加入原料成本报表及配方页成本／利润详情的实机截图，仅更新文档。
 
 - 将 Nexus 封面移入 assets/cover.png，并作为 README 首图展示。仅文档改动，运行时、版本和 SDK 不变。
 
