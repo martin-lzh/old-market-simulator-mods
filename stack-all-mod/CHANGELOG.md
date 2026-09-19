@@ -4,6 +4,12 @@
 
 ## English
 
+### Unreleased
+
+- Add in-game screenshots illustrating separate goods/container counts, the G empty-container action and hold-to-repeat controls to both README languages. Documentation only.
+
+- Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
+
 ### 0.3.0 — 2026-09-18 (stable release)
 
 In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
@@ -38,6 +44,12 @@ First public release in this repository: original Mod features with independent 
 Older development versions mentioned in the README are not verified downloadable releases in this public repository. No older/newer supported game baseline is recorded. Match game/hash, loader and save requirements; an older Mod does not imply support for an older game.
 
 ## 中文
+
+### 未发布
+
+- 在双语 README 中加入商品／容器数量、G 丢空盒及长按连续操作的实机截图，仅更新文档。
+
+- 将 Nexus 封面移入 assets/cover.png，并作为 README 首图展示。仅文档改动，运行时、版本和 SDK 不变。
 
 ### 0.3.0 — 2026-09-18（正式发布）
 

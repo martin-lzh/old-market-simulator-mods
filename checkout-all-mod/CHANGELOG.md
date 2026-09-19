@@ -6,6 +6,10 @@
 
 ### Unreleased
 
+- Add in-game screenshots of hold instructions and both enabled/disabled continuous checkout hints to both README languages. Documentation only.
+
+- Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
+
 ### 0.1.5 — 2026-09-19 (stable release)
 
 In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
@@ -38,6 +42,10 @@ Older development versions mentioned in the README are not verified downloadable
 ## 中文
 
 ### 未发布
+
+- 在双语 README 中加入长按提示及连续结账开启／关闭状态的实机截图，仅更新文档。
+
+- 将 Nexus 封面移入 assets/cover.png，并作为 README 首图展示。仅文档改动，运行时、版本和 SDK 不变。
 
 ### 0.1.5 — 2026-09-19（正式发布）
 

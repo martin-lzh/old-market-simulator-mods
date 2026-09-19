@@ -9,7 +9,7 @@
   </PropertyGroup>
   <ItemGroup><Compile Remove="tests/**/*.cs" />
     <Reference Include="UnityEngine.PhysicsModule"><HintPath>$(ManagedDir)\UnityEngine.PhysicsModule.dll</HintPath><Private>false</Private></Reference>
-    <EmbeddedResource Include="assets/*.png" LogicalName="OldMarket.Navigation.assets.%(Filename)%(Extension)" />
+    <EmbeddedResource Include="assets/*.png" Exclude="assets/cover.png;assets/*-gameplay.png" LogicalName="OldMarket.Navigation.assets.%(Filename)%(Extension)" />
     <Reference Include="UnityEngine.JSONSerializeModule"><HintPath>$(ManagedDir)\UnityEngine.JSONSerializeModule.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="Assembly-CSharp"><HintPath>$(ManagedDir)\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="Unity.TextMeshPro"><HintPath>$(ManagedDir)\Unity.TextMeshPro.dll</HintPath><Private>false</Private></Reference>

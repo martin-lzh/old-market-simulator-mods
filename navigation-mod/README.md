@@ -1,5 +1,7 @@
 # Map & Compass
 
+![Map & Compass](assets/cover.png)
+
 A mod for Old Market Simulator / Old Market Simulator 模组
 
 [English](#english) · [中文](#中文)
@@ -21,7 +23,11 @@ Find your way around town with a minimap, a compass and your own map markers. Ma
 - Create personal markers with names, colors and icons; navigate to markers or map POIs.
 - See supported unlock-area overlays and keep your markers separate for each save and region.
 
-<!-- Add gameplay screenshots or GIFs here when available. -->
+![In-game compass showing directions and a 71-degree heading](assets/compass-gameplay.png)
+
+![In-game minimap with place icons and camera-up orientation](assets/minimap-gameplay.png)
+
+![In-game Rome map with place labels and the marker editor](assets/rome-map-gameplay.png)
 
 ### How to use
 
@@ -42,6 +48,10 @@ The minimap starts in the bottom-left corner. Use the map window's orientation b
 Large-map zoom steps and the closest zoom level adapt to the loaded map's world coverage, so larger maps can reach street-level detail with similar wheel travel or button presses.
 
 Select a personal marker to change its name, color or shape in the right sidebar. Color and shape buttons open a grid below them—click the one you want. Choose **Set target** to follow it. The compass and in-world guide use the same icon and color as the map. Guides hide while a menu is open and return when it closes.
+
+![In-game personal marker editor with name, color, icon and target controls](assets/marker-editor-gameplay.png)
+
+![In-game target guidance showing Gate 4 at a distance of 84 metres](assets/target-tracking-gameplay.png)
 
 Opening the map frees the mouse but **does not pause the game**. M is a separate Mod setting; changing the game's map binding does not change this shortcut.
 
@@ -109,7 +119,11 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 - 创建带名称、颜色和图标的个人标记，或直接前往地图地点。
 - 显示受支持的解锁区域覆盖层，标记按存档和区域分别保存。
 
-<!-- 后续在此加入实机截图或 GIF。 -->
+![实机画面：罗盘轴显示方位与 71° 朝向](assets/compass-gameplay.png)
+
+![实机画面：小地图显示地点图标，朝向跟随视角](assets/minimap-gameplay.png)
+
+![实机画面：罗马大地图、地点名称与标记编辑区](assets/rome-map-gameplay.png)
 
 ### 怎么操作
 
@@ -130,6 +144,10 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 大地图的缩放步长与放大上限会适应所加载地图的世界覆盖范围，扩大后的地图也能用相近的滚轮或按钮操作次数放大到街区细节。
 
 选中个人标记后，可以在右侧改名称、颜色和图标。点击颜色或图标按钮，下方会展开选择格，点哪个就用哪个。点击“设为目标”即可跟随指引，罗盘和场景内会显示与地图相同的图标和颜色。打开菜单时指引会暂时隐藏，关闭后恢复。
+
+![实机画面：编辑个人标记名称、颜色和图标，并设为目标](assets/marker-editor-gameplay.png)
+
+![实机画面：场景内目标指引显示大门4及 84 米距离](assets/target-tracking-gameplay.png)
 
 打开地图后可以自由使用鼠标，但**游戏不会暂停**。M 是本 Mod 的独立设置，不会跟随游戏里的地图改键。
 

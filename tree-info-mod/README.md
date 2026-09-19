@@ -1,5 +1,7 @@
 # Tree Harvest Helper
 
+![Tree Harvest Helper](assets/cover.png)
+
 A mod for Old Market Simulator / Old Market Simulator 模组
 
 [English](#english) · [中文](#中文)
@@ -17,7 +19,7 @@ See when your fruit trees are ready to harvest, directly in the interaction hint
 - Flag missing watering, inactive seasons and insufficient time before season end.
 - Follow all 13 game languages and reuse native season names.
 
-<!-- Add gameplay screenshots or GIFs here when available. -->
+![In-game fruit-tree hint showing all-season production and fruit ready to harvest](assets/tree-harvest-gameplay.png)
 
 ### How to use
 
@@ -52,7 +54,7 @@ Detailed validation and language coverage: [development notes](DEVELOPMENT.md) a
 - 提示今日未浇水、本季不生产及季末时间不足。
 - 跟随游戏全部 13 种语言，季节名复用原生翻译。
 
-<!-- 后续在此加入实机截图或 GIF。 -->
+![实机画面：果树提示全年生产，果实已成熟可采收](assets/tree-harvest-gameplay.png)
 
 ### 怎么操作
 

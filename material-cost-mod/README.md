@@ -1,5 +1,7 @@
 # Profit Insights
 
+![Profit Insights](assets/cover.png)
+
 A mod for Old Market Simulator / Old Market Simulator 模组
 
 [English](#english) · [中文](#中文)
@@ -20,7 +22,11 @@ For Old Market Simulator **2.1.6 on Windows**. Choose the Mod ZIP, not GitHub’
 - Switch the daily report between material estimates and the game’s usual figures.
 - See per-item and whole-batch costs, output quantities and suggested-price profit.
 
-<!-- Add gameplay screenshots or GIFs here when available. -->
+![In-game daily report showing material costs, average prices, estimated profits and the Materials only switch](assets/material-cost-report-gameplay.png)
+
+![In-game recipe details showing batch and unit material costs, recommended price and estimated profit](assets/recipe-cost-profit-gameplay.png)
+
+![In-game dock order showing purchase cost per pack, recommended unit price and estimated profit](assets/order-cost-profit-gameplay.png)
 
 ### How to use
 
@@ -77,7 +83,11 @@ To update, close the game and back up the old DLL before replacing it. To remove
 - 日报可切换原料估算与游戏原有统计，并记住选择。
 - 同时查看单件与整批成本、产出数量及按建议售价计算的利润。
 
-<!-- 后续在此加入实机截图或 GIF。 -->
+![实机画面：日报中的原料成本、平均售价、预计利润及仅计原料开关](assets/material-cost-report-gameplay.png)
+
+![实机画面：配方页显示整批及单件原料成本、建议售价与预计利润](assets/recipe-cost-profit-gameplay.png)
+
+![实机画面：订单页显示整包进货成本、单件建议售价与预计利润](assets/order-cost-profit-gameplay.png)
 
 ### 怎么操作
 

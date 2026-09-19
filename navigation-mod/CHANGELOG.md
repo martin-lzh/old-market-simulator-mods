@@ -2,6 +2,12 @@
 
 ## English
 
+### Unreleased
+
+- Add in-game compass, minimap, Rome map, marker editor and target-tracking screenshots to both README languages. Exclude README cover/screenshots from embedded plugin resources; gameplay, version and SDK are unchanged.
+
+- Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
+
 ### 0.2.0 — 2026-09-18 (stable release)
 
 In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
@@ -108,6 +114,12 @@ Experimental initial build; not installed or verified in game.
 - Supply coordinate, persistence and localization checks. In-game appearance, input, performance and multiplayer testing remain outstanding.
 
 ## 中文
+
+### 未发布
+
+- 在双语 README 中加入罗盘轴、小地图、罗马大地图、标记编辑及目标跟踪实机截图；将 README 封面及截图排除出插件嵌入资源，玩法、版本及 SDK 不变。
+
+- 将 Nexus 封面移入 assets/cover.png，并作为 README 首图展示。仅文档改动，运行时、版本和 SDK 不变。
 
 ### 0.2.0 — 2026-09-18（正式发布）
 

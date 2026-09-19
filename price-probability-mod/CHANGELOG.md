@@ -6,6 +6,10 @@
 
 ### Unreleased
 
+- Add in-game pricing panel and fixed-probability screenshots to both README languages, illustrating slider-driven price changes and probability anchoring. Documentation only.
+
+- Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
+
 ### 0.1.2 — 2026-09-19 (stable release)
 
 In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
@@ -34,6 +38,10 @@ Older development versions mentioned in the README are not verified downloadable
 ## 中文
 
 ### 未发布
+
+- 在双语 README 中加入智能定价面板及固定概率模式的实机截图，说明滑条联动售价与概率锚定操作，仅更新文档。
+
+- 将 Nexus 封面移入 assets/cover.png，并作为 README 首图展示。仅文档改动，运行时、版本和 SDK 不变。
 
 ### 0.1.2 — 2026-09-19（正式发布）
 

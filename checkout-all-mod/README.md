@@ -1,5 +1,7 @@
 # Auto Checkout
 
+![Auto Checkout](assets/cover.png)
+
 A mod for Old Market Simulator / Old Market Simulator 模组
 
 [English](#english) · [中文](#中文)
@@ -18,8 +20,6 @@ Let checkout handle the whole table while you hold a key—or keep it running wi
 - Choose hold-to-run or toggle mode; wait for the next customer when the table is empty.
 - Stop when you look away, leave interaction range or open a menu.
 
-<!-- Add gameplay screenshots or GIFs here when available. -->
-
 ### How to use
 
 | Action | Control |
@@ -27,6 +27,10 @@ Let checkout handle the whole table while you hold a key—or keep it running wi
 | Process continuously while held | Hold E for 0.6 seconds |
 | Turn continuous checkout on/off | Aim at the checkout and press F9 |
 | Use the normal game interaction | Tap E |
+
+![In-game checkout hints for holding E and toggling with F9; toggle mode is off](assets/auto-checkout-gameplay.png)
+
+![In-game continuous checkout enabled, with F9 to turn it off](assets/continuous-checkout-on-gameplay.png)
 
 Keep looking at the checkout body and stay within reach. When the table is empty, continuous mode waits for the next customer. It does not ring the bell for you. A short E press still does the game's normal action before the hold starts.
 
@@ -81,8 +85,6 @@ Close the game, back up the old DLL and replace it to update. Delete `OldMarket.
 - 支持长按和开关两种模式，桌面清空后等待下一位顾客。
 - 移开视角、离开交互距离或打开菜单时停止。
 
-<!-- 后续在此加入实机截图或 GIF。 -->
-
 ### 怎么操作
 
 | 操作 | 按键 |
@@ -90,6 +92,10 @@ Close the game, back up the old DLL and replace it to update. Delete `OldMarket.
 | 按住时持续结账 | 长按 E 约 0.6 秒 |
 | 开启/关闭连续结账 | 对准结账台按 F9 |
 | 保持原版单次交互 | 短按 E |
+
+![实机画面：长按 E 连续结账及 F9 开关提示，当前连续结账关闭](assets/auto-checkout-gameplay.png)
+
+![实机画面：连续结账已开启，按 F9 关闭](assets/continuous-checkout-on-gameplay.png)
 
 请让准星对着结账台本体，并保持在可交互距离内。桌上没有商品时会等待下一位顾客，不会自动摇铃。长按开始前，第一次按下 E 仍可能执行原版交互，例如处理一件商品或摇铃。
 
