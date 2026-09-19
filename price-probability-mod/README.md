@@ -20,7 +20,7 @@ See how likely customers are to accept a price, then choose whether to keep a fi
 - Adjust the price or target acceptance chance and see the corresponding estimate.
 - Let the host keep a fixed price or automatically maintain a target acceptance chance as wholesale prices change.
 
-<!-- Add gameplay screenshots or GIFs here when available. -->
+![In-game pricing panel with price acceptance estimate, target slider and pricing-rule control](assets/smart-pricing-gameplay.png)
 
 ### How to use
 
@@ -69,7 +69,7 @@ To update, close the game and back up the old DLL and settings before replacing 
 - 调整价格或目标接受率，查看对应估算。
 - 房主可设置固定价格，或随批发价变化自动维持目标接受率。
 
-<!-- 后续在此加入实机截图或 GIF。 -->
+![实机画面：定价面板中的价格接受概率、目标滑条与定价规则控件](assets/smart-pricing-gameplay.png)
 
 ### 怎么操作
 
