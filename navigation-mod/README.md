@@ -8,13 +8,13 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 ## English
 
-Version **0.2.1** includes a smaller Rome main map and matching wheel/button zoom steps. Both fixes have passed local in-game acceptance and await publication. See the [validation record](../releases/validation.md).
+Version **0.2.1** includes a smaller Rome main map and matching wheel/button zoom steps. Both fixes have passed local in-game acceptance; 0.2.1 was published as a stable release on 2026-09-20. See the [validation record](../releases/validation.md).
 
 Find your way around town with a minimap, a compass and your own map markers. Map & Compass works independently of the Coordinates HUD Mod.
 
 **Maps: Eastern Town, Island and Rome with seven separate travel regions.**
 
-[Stable download 0.2.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.0)
+[Stable download 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.1)
 
 ### Core features
 
@@ -106,13 +106,13 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 
 ## 中文
 
-**0.2.1** 收紧罗马主地图范围并统一滚轮与按钮缩放步长。两项修复均已通过本地实机验收，等待发布，详见[验证记录](../releases/validation.md)。
+**0.2.1** 收紧罗马主地图范围并统一滚轮与按钮缩放步长。两项修复均已通过本地实机验收，0.2.1 已于 2026-09-20 正式发布，详见[验证记录](../releases/validation.md)。
 
 用小地图、罗盘和自己的标记点，轻松找到镇上的目的地。Map & Compass 可以独立使用，不需要安装 Coordinates HUD。
 
 **地图：东方小镇、海岛，以及包含七个独立传送区域的罗马小镇。**
 
-[正式版下载 0.2.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.0)
+[正式版下载 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.1)
 
 ### 核心功能
 
