@@ -52,3 +52,7 @@ On 2026-09-15, [Navigation's previous 0.2.0 record](history/navigation-v0.2.0-c3
 Navigation's [initial 0.2.1 record](history/navigation-v0.2.1-538024f.json) is preserved unchanged after local feedback exposed incomplete Windows wheel normalization. Correcting the same wheel/button consistency issue remains within the assigned 0.2.1 patch scope. Retire the stale record before binding the corrected, verified source; version 0.2.1 and SDK r7 stay unchanged.
 
 本地反馈发现 Windows 滚轮单位换算仍不完整后，[Navigation 初始 0.2.1 记录](history/navigation-v0.2.1-538024f.json)原样归档。修正相同的滚轮／按钮一致性问题仍属已指定的 0.2.1 补丁范围；先移除失效记录，再绑定修正并验证后的源码，版本 0.2.1 与 SDK r7 不变。
+
+After local in-game acceptance of source `0c5b952`, preserve its [0.2.1 prerelease record](history/navigation-v0.2.1-0c5b952.json) unchanged and bind the stable release metadata under the same assigned patch scope. Only acceptance documentation and prerelease status change; runtime code and SDK remain as tested.
+
+源码 `0c5b952` 通过本地实机验收后，其 [0.2.1 预发布记录](history/navigation-v0.2.1-0c5b952.json)原样归档，按同一已指定补丁范围绑定正式发行元数据。仅更新验收文档和预发布状态，运行时代码与 SDK 保持实测版本。

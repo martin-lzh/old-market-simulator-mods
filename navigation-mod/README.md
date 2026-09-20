@@ -8,7 +8,7 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 ## English
 
-Version **0.2.1** is a prerelease with a smaller Rome main map and matching wheel/button zoom steps. The map update has local in-game confirmation; corrected Windows wheel input still awaits acceptance. See the [validation record](../releases/validation.md).
+Version **0.2.1** includes a smaller Rome main map and matching wheel/button zoom steps. Both fixes have passed local in-game acceptance and await publication. See the [validation record](../releases/validation.md).
 
 Find your way around town with a minimap, a compass and your own map markers. Map & Compass works independently of the Coordinates HUD Mod.
 
@@ -71,7 +71,7 @@ Choose the Mod ZIP on the release page, not GitHub's **Source code** download. T
 
 Extract the complete ZIP into the game folder, retaining `BepInEx/plugins/OldMarket.Navigation/maps/`, and restart the game. Eastern Town currently covers the central town and four central-market unlock states, showing cleared market clutter; its outer terrain is not yet bundled. Island is a static surface overview; it does not switch through all market, farm, greenhouse or underground expansions. Rome switches to the local player’s current region after travelling through a gate, caravan or mine entrance. Hatched areas mark pending expansions and clear when their unlock is synchronized. Gate symbols change from a lock to an open door. Shops and facilities appear or move with their unlock state. The mine has two additional stages controlled from the main town. These are surface-area indicators, not a reconstruction of every intermediate building model. Maps do not automatically redraw player placements. Gate 4 now shows the lake west of its central terrace; local in-game testing of the correction in build `921d14b` is complete.
 
-Rome's main map focuses on the walled town and farms, with a margin around the walls. Gates, caravans and the mine retain their separate region maps. The reduced town coverage and unified zoom steps are pending in-game acceptance.
+Rome's main map focuses on the walled town and farms, with a margin around the walls. Gates, caravans and the mine retain their separate region maps. The reduced town coverage and unified zoom steps have passed local in-game acceptance.
 
 Your markers are personal and kept separately for each save and area. They are not shared with other players. When joining someone else's game, markers last for that connection by default. To keep them between visits, use a different `Markers.RemoteProfile` name for each host's save. Copying or recreating a save folder may make your old markers appear missing. Your selected target is not remembered after restarting.
 
@@ -106,7 +106,7 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 
 ## 中文
 
-**0.2.1** 为预发布版本，收紧罗马主地图范围并统一滚轮与按钮缩放步长。地图更新已获本地实机确认，修正后的 Windows 滚轮输入仍待验收，详见[验证记录](../releases/validation.md)。
+**0.2.1** 收紧罗马主地图范围并统一滚轮与按钮缩放步长。两项修复均已通过本地实机验收，等待发布，详见[验证记录](../releases/validation.md)。
 
 用小地图、罗盘和自己的标记点，轻松找到镇上的目的地。Map & Compass 可以独立使用，不需要安装 Coordinates HUD。
 
@@ -169,7 +169,7 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 
 将整个 ZIP 解压到游戏目录，保留 `BepInEx/plugins/OldMarket.Navigation/maps/`，再重启游戏。东方小镇目前覆盖镇区及中央市场四种解锁状态，可反映市场垃圾清理，外围地形尚未打包；海岛是静态地表概览，不随市场、农场、温室或地下扩建的全部状态切换。罗马会在穿过大门、乘坐商队或进入矿洞后，切换到本地玩家所在区域的地图。斜线阴影表示待解锁扩建范围，同步解锁后消失；大门图标由锁变为开放入口，店铺和设施图标随启停状态出现或移动。矿洞另含由主城控制的两个扩建阶段。这些是地表范围提示，不逐一重建各阶段建筑模型；地图不会自动重画玩家摆放物。大门4底图已补回中央长平台西侧的湖泊；修正构建 `921d14b` 的本地实机测试已完成。
 
-罗马主地图聚焦城墙内的镇区与农田，并在城墙外保留余量；大门、商队与矿洞继续使用各自的区域地图。本次主城范围收紧与统一缩放步长仍待实机验收。
+罗马主地图聚焦城墙内的镇区与农田，并在城墙外保留余量；大门、商队与矿洞继续使用各自的区域地图。本次主城范围收紧与统一缩放步长已通过本地实机验收。
 
 个人标记按存档和区域分别保存，不会分享给其他玩家。加入好友房间时，默认只保留本次连接中的标记。如果想下次继续使用，请为每位好友的存档设置不同的 `Markers.RemoteProfile` 名称。复制或重建存档文件夹后，旧标记可能暂时找不到。当前选中的目标不会在重启后保留。
 
