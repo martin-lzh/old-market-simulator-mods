@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "appid": "2878420",
+  "name": "Old Market Simulator",
+  "branch": "public",
+  "repository": "martin-lzh/old-market-simulator-mods",
+  "observedOn": "2026-09-21",
+  "source": "Valve SteamCMD anonymous app_info_print 2878420",
+  "initialBuild": {
+    "buildid": "25102733",
+    "timeupdated": "1788442220"
+  }
+}
