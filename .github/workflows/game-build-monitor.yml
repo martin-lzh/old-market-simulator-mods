@@ -53,10 +53,10 @@ jobs:
             }
             & $exe +quit
             if ($LASTEXITCODE -eq 0) { break }
-            if ($LASTEXITCODE -ne 1 -or $attempt -eq 2) {
+            if ($attempt -eq 2) {
               throw "SteamCMD initialization failed with exit code $LASTEXITCODE"
             }
-            # The Windows bootstrap returns 1 after replacing itself during an update.
+            # Self-update can return nonzero; the second launch must succeed normally.
             Write-Host 'Retrying the signed SteamCMD executable after its bootstrap update.'
           }
       - name: Check the public build (notify only from main)
