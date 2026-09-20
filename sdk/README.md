@@ -16,7 +16,7 @@
 | 2.1.6 | [2.1.6/r4](2.1.6/r4/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.2 固定此修订；增加原生按键提示预制体与布局接口，实机验收未完成 |
 | 2.1.6 | [2.1.6/r5](2.1.6/r5/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.3 固定此修订；增加输入框焦点、原生提示子控件与独立布局接口，实机验收未完成 |
 | 2.1.6 | [2.1.6/r6](2.1.6/r6/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.4 固定此修订；增加地图控件查找与输入编辑结束接口，实机验收未完成 |
-| 2.1.6 | [2.1.6/r7](2.1.6/r7/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.2.0 固定此修订；增加滚轮事件倍率、输入范围与平台接口。本地实机测试见 [验证记录](../releases/validation.md) |
+| 2.1.6 | [2.1.6/r7](2.1.6/r7/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.2.1 继续固定此修订；罗马主城范围与滚轮缩放修复不增加接口，已通过本地实机验收。此前测试见 [验证记录](../releases/validation.md) |
 | 2.1.6 | [2.1.6/r8](2.1.6/r8/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Tree Info 0.1.0 首次公开版本固定此修订；增加树木状态、季节和交互反射声明，实机验收待完成 |
 | 2.1.6 | [2.1.6/r9](2.1.6/r9/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 0.2.2 未发布空盒操作，增加原生输入门控和当前格 Harmony 字段；实机验收待完成 |
 | 2.1.6 | [2.1.6/r10](2.1.6/r10/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 原生按钮行及键帽提示，保留变暗透明度；实机验收待完成 |
@@ -75,7 +75,7 @@ This SDK lets GitHub-hosted runners compile Mods without a game installation. Th
 
 ### Versioning and compatibility
 
-The table records game 2.1.6 on Windows x64 / Unity Mono 2022.3.62f3. Material Cost, Coordinates, Checkout All and Price Probability retain SDK r1; Navigation 0.2.0 pins r7, Tree Info 0.1.0 pins r8, and Stack All 0.3.0 pins r11. Earlier snapshots remain historical. CI builds seven Mods and eight loader variants. Historical snapshot notes retain the evidence at export time. Bundle `e23f986` has reported visual, local and two-computer multiplayer acceptance; the Gate 4 correction has local confirmation, while remaining Navigation map, POI and zoom scenarios retain their recorded test scope. See the [source-specific validation record](../releases/validation.md).
+The table records game 2.1.6 on Windows x64 / Unity Mono 2022.3.62f3. Material Cost, Coordinates, Checkout All and Price Probability retain SDK r1; Navigation 0.2.1 pins r7, Tree Info 0.1.0 pins r8, and Stack All 0.3.0 pins r11. Earlier snapshots remain historical. CI builds seven Mods and eight loader variants. Historical snapshot notes retain the evidence at export time. Bundle `e23f986` has reported visual, local and two-computer multiplayer acceptance; the Gate 4 correction has local confirmation, while remaining Navigation map, POI and zoom scenarios retain their recorded test scope. See the [source-specific validation record](../releases/validation.md).
 
 Each Mod pins an SDK in its own `release.json`, for example `"sdk": "2.1.6/r1"`. There is no implicit latest SDK. Merged `sdk/<game-version>/r<revision>/` snapshots are immutable. Add a new revision to extend the same game baseline, or a new game-version directory after a game update. Preserve old SDKs, Mod releases and CHANGELOG records; users must still check save, loader and multiplayer requirements.
 
@@ -142,3 +142,7 @@ Stack All’s Unreleased empty-container action pins r11 for native input gates 
 Current release assignment (2026-09-18): Stack All 0.3.0 / r11, Navigation 0.2.0 / r7, Tree Info 0.1.0 / r8. Only Mod version declarations and release notes change; historical SDK source/version records remain immutable.
 
 当前发行指定（2026-09-18）：Stack All 0.3.0 / r11、Navigation 0.2.0 / r7、Tree Info 0.1.0 / r8；仅修改 Mod 版本声明与发行说明，历史 SDK 源码／版本记录保持不变。
+
+Navigation 0.2.1 (2026-09-20) retains game 2.1.6 / SDK r7. The Rome main-town crop, shared wheel/button zoom factor and existing README artwork changes require no new game APIs or SDK snapshot. Local feedback confirms the map update. Read-only inspection of the actual Input System assembly found that the scroll-range setter only stores its value and the UI callback divides by a constant one; Windows therefore still requires 120-unit conversion regardless of that setting. The correction removes the unreliable settings dependency and adds native contract checks. Local in-game acceptance of the map and corrected wheel input is confirmed on build `0c5b952`; 0.2.1 is a stable release candidate. Historical release evidence remains unchanged.
+
+Navigation 0.2.1（2026-09-20）保持游戏 2.1.6 / SDK r7。罗马主城范围、滚轮与按钮共用缩放倍率及现有 README 配图改动不增加游戏接口或 SDK 快照。地图更新已获本地实机确认；只读核对实际 Input System 程序集发现滚轮范围 setter 仅存储枚举，UI 回调除数固定为 1，因此 Windows 无论此设置为何值都仍需进行 120 单位换算。本次修正移除对该设置的依赖并增加原生契约检查。构建 `0c5b952` 的地图及滚轮修正已通过本地实机验收，0.2.1 作为正式发行候选；历史发行证据保留原样。

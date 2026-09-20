@@ -30,6 +30,8 @@
 
 ### 分支与交付
 
+为小红书、Steam 等社交或社区平台制作的宣传素材（宣传图、生成原图、文案、导出脚本及打包文件）只保存在被忽略的 `outputs/` 或已忽略的宣传目录中，不提交或推送到 GitHub。此规则不影响已跟踪的 Mod 运行时资源和 README 功能截图。
+
 PR 版本表中，尚未明确指定的目标版本必须醒目标为 `**UNASSIGNED**`；不得用旧版本、当前源码版本或 Unreleased 代替目标版本。Unreleased 状态放在改动说明中。
 
 PR 标题和正文使用英语，以维护者的口吻面向其他开发者撰写。说明最终问题、行为变化、验证和发布状态；不写 Agent 向用户汇报的语气，不叙述对话、用户指令或执行过程。版本推进由维护者决定，终端用户不需要创建 PR。
@@ -65,6 +67,8 @@ Bind release authorization to exact source inputs using the [release record work
 8. SDK snapshots contain compilation declarations, not game implementations or resources. Never commit or upload original game DLLs/EXEs, resources, decompiled snapshots, saves or credentials. Generated SDK DLLs remain in ignored build directories and must never be installed or packaged with Mods. Preserve explicit package allowlists. Game installations are read-only; building does not authorize game installation changes or save modifications.
 
 ### Branches and delivery
+
+Keep promotional materials made for social or community platforms such as Xiaohongshu and Steam (posters, generated source art, copy, export scripts and archives) only in ignored `outputs/` or an already-ignored promotional directory. Do not commit or push them to GitHub. This does not change the treatment of existing tracked Mod runtime assets or README feature screenshots.
 
 In PR version tables, display an unassigned target version as `**UNASSIGNED**`. Never substitute an old release, current source version or Unreleased for a target version; describe Unreleased changes in the scope/status column.
 

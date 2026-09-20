@@ -180,13 +180,26 @@ var wheelCallback = inputUi.Methods.Single(x => x.Name == "OnScrollCallback");
 Check(Calls(wheelCallback,"get_scrollDeltaPerTick") && wheelCallback.Body.Instructions.Any(i=>i.OpCode.Code==Mono.Cecil.Cil.Code.Call && i.Operand is MethodReference m && m.Name=="op_Multiply" && m.DeclaringType.FullName=="UnityEngine.Vector2"), "native UI wheel callback applies scrollDeltaPerTick multiplier");
 var scrollScale=inputUi.Properties.Single(x=>x.Name=="scrollDeltaPerTick");
 Check(scrollScale.GetMethod.IsPublic && scrollScale.PropertyType.FullName=="System.Single", "native UI wheel scale is readable float");
-var inputSettings=All(input).Single(x=>x.FullName=="UnityEngine.InputSystem.InputSettings");
-Check(inputSettings.Properties.Single(x=>x.Name=="scrollDeltaBehavior").GetMethod.IsPublic,"actual input scroll range can be read");
-var rangeEnum=inputSettings.NestedTypes.Single(x=>x.Name=="ScrollDeltaBehavior");
-Check(Convert.ToInt32(rangeEnum.Fields.Single(x=>x.Name=="UniformAcrossAllPlatforms").Constant)==0 && Convert.ToInt32(rangeEnum.Fields.Single(x=>x.Name=="KeepPlatformSpecificInputRange").Constant)==1,"verified uniform and platform scroll range enum values");
+// The API exists on Unity 2022.3, but its platform-normalization code was not
+// compiled into this game. Fail on engine changes instead of trusting the enum.
+var inputSystem=All(input).Single(x=>x.FullName=="UnityEngine.InputSystem.InputSystem");
+var nativeTick=inputSystem.Fields.SingleOrDefault(x=>x.Name=="scrollWheelDeltaPerTick");
+Check(nativeTick!=null && nativeTick.IsLiteral && Convert.ToSingle(nativeTick.Constant)==1,"native scroll tick divisor is the legacy constant one");
+var callbackDivision=wheelCallback.Body.Instructions.Single(i=>i.Operand is MethodReference m && m.Name=="op_Division" && m.DeclaringType.FullName=="UnityEngine.Vector2");
+Check(callbackDivision.Previous.OpCode.Code==Mono.Cecil.Cil.Code.Ldc_R4 && Convert.ToSingle(callbackDivision.Previous.Operand)==1,"native UI callback leaves the Windows 120-unit range intact");
+var rangeSetter=All(input).Single(x=>x.FullName=="UnityEngine.InputSystem.InputManager").Methods.Single(x=>x.Name=="set_scrollDeltaBehavior");
+Check(UsesField(rangeSetter,"InputManager","m_ScrollDeltaBehavior") && !rangeSetter.Body.Instructions.Any(i=>i.Operand is MethodReference),"scroll range setter stores the enum without configuring native normalization");
+Check(!All(input).Single(x=>x.FullName=="UnityEngine.InputSystem.LowLevel.IInputRuntime").Properties.Any(x=>x.Name=="normalizeScrollWheelDelta"),"game input runtime has no scroll normalization switch");
 var baseEvent=All(ugui).Single(x=>x.FullName=="UnityEngine.EventSystems.BaseEventData");
 Check(baseEvent.Properties.Single(x=>x.Name=="currentInputModule").GetMethod.IsPublic,"event identifies its actual input module");
 var mapWindow=All(plugin).Single(x=>x.Name=="MapWindow");
 var wheelZoom=mapWindow.Methods.Single(x=>x.Name=="WheelZoom");
 Check(Calls(wheelZoom,"get_currentInputModule") && Calls(wheelZoom,"get_scrollDeltaPerTick") && Calls(wheelZoom,"Factor"),"map wheel normalizes the emitting UI module scale");
+Check(Calls(wheelZoom,"PlatformScale") && !Calls(wheelZoom,"get_scrollDeltaBehavior") && !Calls(wheelZoom,"get_settings"),"map wheel conversion does not depend on the ineffective native range setting");
+Check(Calls(mapWindow.Methods.Single(x=>x.Name=="Zoom"),"Factor"),"map buttons use the same normalized zoom step as the wheel");
+foreach(string typeName in new[]{"MapWindow","NavigationHud"})
+{
+    var methods=All(plugin).Single(x=>x.Name==typeName).Methods.Where(x=>x.HasBody);
+    Check(methods.Any(x=>UsesField(x,"MapDefinition","TextureUv")&&Calls(x,"set_uvRect")),typeName+" applies the calibrated texture crop");
+}
 Console.WriteLine($"Passed {checks} Navigation installed-assembly contract checks; metadata/IL only, no Unity execution.");

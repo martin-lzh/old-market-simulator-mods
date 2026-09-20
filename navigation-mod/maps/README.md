@@ -14,7 +14,7 @@ Eastern Town resources / 东方小镇资源：
 - `market0-obstacles.png` through `market3-obstacles.png`: programmatically drawn transparent obstacle overlays for four central-market unlock states. Their footprints were measured from the supported game scene; the fully unlocked overlay is transparent.
 - `market0.json` through `market3.json`: map identity, world bounds, expansion matching, texture references and POI coordinates. POI display names are resolved through native localization by the plugin.
 
-Eastern Town base artwork and market overlays use normalized UVs and the same world bounds; their pixel resolutions may differ. Rome’s town detail patch uses its own world rectangle. Eastern Town PNG files retain the bytes used in the tested `e23f986` bundle, but later POI metadata changes are not covered by that manual report. Island is a static surface overview; Rome has eight region maps with conditional areas and POIs. Moving arbitrary buildings or objects does not regenerate the artwork.
+Eastern Town base artwork and market overlays use normalized UVs and the same world bounds; their pixel resolutions may differ. Optional `TextureBounds` calibrates base artwork and overlays independently of the displayed world bounds; omitted bounds use the full image. Rome crops the existing terrain artwork to the town, while its detail patch retains its own world rectangle. Eastern Town PNG files retain the bytes used in the tested `e23f986` bundle, but later POI metadata changes are not covered by that manual report. Island is a static surface overview; Rome has eight region maps with conditional areas and POIs. Moving arbitrary buildings or objects does not regenerate the artwork.
 
 The Mod's original illustration, overlay styling and metadata contributions are provided under [LICENSE](../LICENSE). Game names and underlying game content remain their owners' property. Original game binaries, textures, meshes, extraction snapshots and personal markers are not included.
 
@@ -24,7 +24,7 @@ To update a map, replace only the intended runtime files, update their hashes in
 
 东方小镇底图在 2026-09-13 基于校准地图示意图由 Image Gen 生成，并非直接提取的游戏贴图。四张透明障碍层按已核对场景的占地范围程序绘制，对应中央市场四种解锁状态；完全解锁层为透明。四份 JSON 保存地图标识、世界边界、解锁条件、贴图引用和 POI 坐标，显示名称由插件查询游戏本地化。
 
-东方小镇底图与市场覆盖层通过相同的归一化 UV 和世界边界对齐，像素分辨率可以不同；罗马主城细节图使用独立世界矩形。东方小镇 PNG 与已测试的 `e23f986` 合集保持逐字节一致，但后续 POI 元数据改动不在该人工测试范围内。另含海岛静态地表图及罗马八个区域地图，罗马区块与 POI 随解锁变化；移动任意建筑或物体不会自动重绘插画。
+东方小镇底图与市场覆盖层通过相同的归一化 UV 和世界边界对齐，像素分辨率可以不同；可选 `TextureBounds` 将底图与覆盖层的坐标范围独立于显示范围，未指定时使用整图。罗马将原有地形插画裁剪至主城，细节图仍使用独立世界矩形。东方小镇 PNG 与已测试的 `e23f986` 合集保持逐字节一致，但后续 POI 元数据改动不在该人工测试范围内。另含海岛静态地表图及罗马八个区域地图，罗马区块与 POI 随解锁变化；移动任意建筑或物体不会自动重绘插画。
 
 地图中的原创插画、覆盖层样式及元数据贡献随 Mod 采用 [LICENSE](../LICENSE)；游戏名称和底层游戏内容仍属于各自权利人。不包含原始游戏程序集、贴图、网格、提取快照或个人标记。
 

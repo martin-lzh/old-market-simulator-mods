@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "mod": "navigation",
+  "version": "0.2.1",
+  "sdk": "2.1.6/r7",
+  "prerelease": true,
+  "sourceCommit": "0c5b952ac1b10ecc8bfac5a9485d140e0eacde60",
+  "inputsSha256": "ef38269acd8c887fb718ee0be60b9ba49c891f45071651fb0a0569862e1f3177",
+  "authorization": "The assigned Navigation 0.2.1 patch covers the Rome map crop and wheel/button zoom consistency, including correction of the same Windows wheel unit conversion after local feedback. It also includes the pending Navigation README artwork notes. This replaces the archived 538024f input record within the existing one-patch authorization; it does not advance another version. Game 2.1.6 and SDK r7 remain unchanged. The map update has local in-game confirmation; corrected wheel input and remaining patch scenarios still await acceptance, so 0.2.1 remains prerelease."
+}

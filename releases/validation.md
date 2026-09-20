@@ -225,3 +225,37 @@ The display-name/README follow-up changes release inputs within the already assi
 Naming verification: all seven display-name declarations and README headings match; BepInEx/MelonLoader names agree. Feature/control sections precede installation in both languages, original DLL/config paths are retained, and local Markdown links resolve. All 67 tooling tests, eight SDK builds/package checks and real-reference IL/resource/game-contract checks passed. No new game API or SDK revision is needed.
 
 命名验证：七个显示名与 README 标题一致，BepInEx／MelonLoader 名称一致；两种语言均先介绍功能与操作，再说明安装，原 DLL／配置路径保留，本地 Markdown 链接有效。67 项工具测试、八种 SDK 构建及包校验、真实引用 IL／资源／游戏契约检查通过，不需要新游戏 API 或 SDK 修订。
+
+## Navigation 0.2.1 patch verification — 2026-09-20 / 导航补丁验证
+
+Source `538024f` assigns Navigation 0.2.1 to the Rome main-town crop and matching wheel/button zoom steps from `0154694`, together with the pending README artwork notes. Game 2.1.6 / SDK r7 is unchanged. Version and syntax checks, 69 CI tooling tests, 1820 navigation checks, all eight SDK builds/package validations and all eight real-reference IL/resource comparisons passed. The real-reference pass verified original dependency hashes and passed 674 Navigation metadata/IL contracts. The Navigation ZIP contains the original plugin, README, CHANGELOG, LICENSE and all 28 allowlisted map files.
+
+In-game map alignment, town-edge movement, zoom feel, save/reload and host/client acceptance were not performed for this patch. Navigation 0.2.1 remains a prerelease; prior 0.2.0 acceptance does not extend to these fixes. No game installation or save was modified at this verification step. The [original authorization record](approvals/history/navigation-v0.2.1-538024f.json) binds those source inputs. Other Mods retain their published versions and pending documentation-only Unreleased notes; no new target versions are assigned to them.
+
+源码 `538024f` 将 `0154694` 的罗马主城范围与滚轮／按钮缩放步长修复，以及现有 README 配图说明归入 Navigation 0.2.1。游戏 2.1.6 / SDK r7 不变。版本与语法检查、69 项 CI 工具测试、1820 项导航检查、八种 SDK 构建／包校验和八种真实引用 IL／资源比对全部通过；真实依赖哈希已核对，674 项 Navigation 元数据／IL 契约通过。Navigation ZIP 包含原创插件、README、CHANGELOG、LICENSE 和白名单内全部 28 个地图文件。
+
+本补丁未执行实机地图对齐、城墙边缘行走、缩放手感、存档重载及房主／客人验收，因此 0.2.1 保持预发布；旧版 0.2.0 验收不覆盖本次修复。该验证步骤未修改游戏安装或存档。[原授权记录](approvals/history/navigation-v0.2.1-538024f.json)绑定该次源码输入。其他 Mod 保留已发布版本和文档类未发布记录，本次不为它们指定新版本。
+
+## Navigation 0.2.1 Windows wheel correction / Windows 滚轮后续修正
+
+Local feedback confirms the Rome map update in installed build `538024f`, but reports excessive wheel steps. Read-only IL inspection found that game 2.1.6's Unity 2022.3 Input System stores `scrollDeltaBehavior` without forwarding it to the native runtime. The UI callback divides by a constant one before multiplying by `scrollDeltaPerTick`. Windows' 120-unit notch therefore survived the old conversion and hit the eight-tick cap: 1.25^8 ≈ 5.96 instead of 1.25 on Rome's base zoom range. Unity's [InputManager source](https://github.com/Unity-Technologies/InputSystem/blob/1.14.0/Packages/com.unity.inputsystem/InputSystem/InputManager.cs) gates native normalization behind an engine feature define; the installed assembly confirms that code is absent.
+
+Source `0c5b952` corrects this within the assigned 0.2.1 patch. It applies the Windows native scale for Input System UI events regardless of the inactive setting and retains unit ticks for legacy UI events. No new runtime API or SDK revision is required; game 2.1.6 / SDK r7 remains pinned. Validation passed: 69 CI tooling tests, 1842 Navigation checks, 22 native-name checks, all eight SDK builds/packages and real-reference IL/resource comparisons, 677 Navigation game contracts, and syntax checks. The new contract rejects the previously installed plugin specifically for depending on the ineffective setting, and passes the corrected build. Original dependency hashes match.
+
+The original approval is archived unchanged; the [prerelease record](approvals/history/navigation-v0.2.1-0c5b952.json) binds the corrected source under the existing authorization. Map feedback does not establish edge-by-edge coverage, save/reload or multiplayer acceptance. Corrected wheel interaction has not yet been tested in-game; 0.2.1 remains prerelease.
+
+本地反馈确认已安装的 `538024f` 罗马地图更新正常，但滚轮步长仍过大。只读 IL 核对发现，游戏 2.1.6 的 Unity 2022.3 Input System 仅存储 `scrollDeltaBehavior`，没有传递给原生输入运行时；UI 回调先除以常量 1，再乘 `scrollDeltaPerTick`。旧换算因此留下 Windows 每格 120 的单位，触发八格限幅，罗马基础缩放范围上一格变成 1.25^8 ≈ 5.96 倍，而非 1.25 倍。Unity 官方源码中的原生归一化受引擎特性编译条件控制，实际程序集确认该代码未编入。
+
+源码 `0c5b952` 在已指定的 0.2.1 补丁范围内修正：Input System UI 的 Windows 事件统一换算原生单位，不再依赖无效设置；旧 UI 模块保留单位格数。不增加运行时 API 或 SDK 修订，继续固定游戏 2.1.6 / SDK r7。69 项 CI 工具测试、1842 项导航检查、22 项原生名称检查、八种 SDK 构建／包校验及真实引用 IL／资源比对、677 项导航游戏契约和语法检查通过，原始依赖哈希匹配。新增契约可因无效设置依赖而拒绝此前已安装插件，并通过修正版。
+
+旧授权原样归档，[预发布记录](approvals/history/navigation-v0.2.1-0c5b952.json)按既有授权绑定修正源码。地图反馈不扩展为逐边覆盖、存档重载或联机验收；修正后的滚轮交互尚未实机验证，0.2.1 保持预发布。
+
+## Navigation 0.2.1 in-game acceptance — 2026-09-20 / 实机验收
+
+The maintainer confirms that the installed wheel correction works in-game, following the earlier Rome map confirmation. Accepted source: `0c5b952ac1b10ecc8bfac5a9485d140e0eacde60`; installed DLL SHA256: `c4290ef65612e8646a80ccf866322bd6a1415937e0c8adea99b8f4317eb21e6a`. Baseline remains game 2.1.6 on Windows/BepInEx 5 with SDK r7. This closes the local map and wheel/button zoom acceptance for the assigned 0.2.1 patch; it does not establish additional save/reload, exhaustive map-edge or host/client scenarios.
+
+Set `prerelease: false` for the existing 0.2.1 stable release candidate and synchronize its current documentation. Runtime source, version number, maps and SDK are unchanged from the accepted build. Preserve the earlier prerelease authorization in history and bind the finalized release metadata under the existing patch authorization. No PR merge or public release is performed by this acceptance update.
+
+维护者确认已安装的滚轮修正版实机运行正常，连同此前罗马地图的确认，完成本次 0.2.1 补丁的本地地图及滚轮／按钮缩放验收。验收源码为 `0c5b952ac1b10ecc8bfac5a9485d140e0eacde60`，已安装 DLL 的 SHA256 为 `c4290ef65612e8646a80ccf866322bd6a1415937e0c8adea99b8f4317eb21e6a`；基线仍为 Windows/BepInEx 5、游戏 2.1.6 和 SDK r7。本次反馈不扩展为额外的存档重载、逐边地图覆盖或房主／客人测试。
+
+将已指定的 0.2.1 正式发行候选设为 `prerelease: false`，同步当前文档；运行时代码、版本号、地图和 SDK 均与验收构建一致。此前预发布授权原样保留在 history，按既有补丁授权绑定最终发行元数据；本次验收更新不合并 PR 或公开发布。

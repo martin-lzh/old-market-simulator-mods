@@ -86,8 +86,8 @@ namespace OldMarket.Navigation
             north=Label(northPlate,"North",new Vector2(4,-4),new Vector2(56,44),22);north.alignment=TextAlignmentOptions.Center;
             north.textWrappingMode=TextWrappingModes.NoWrap;north.overflowMode=TextOverflowModes.Overflow;north.color=Gold;
             var northArrow=Label(northPlate,"",new Vector2(4,-45),new Vector2(56,38),27);northArrow.text="▲";northArrow.alignment=TextAlignmentOptions.Center;northArrow.color=Gold;
-            var plus=Button(viewport,"",new Vector2(-104,16),new Vector2(38,36),()=>Zoom(1.25f,Vector2.zero),true,false);SetButtonSymbol(plus,"+");
-            var minus=Button(viewport,"",new Vector2(-56,16),new Vector2(38,36),()=>Zoom(.8f,Vector2.zero),true,false);SetButtonSymbol(minus,"-");
+            var plus=Button(viewport,"",new Vector2(-104,16),new Vector2(38,36),()=>Zoom(1,Vector2.zero),true,false);SetButtonSymbol(plus,"+");
+            var minus=Button(viewport,"",new Vector2(-56,16),new Vector2(38,36),()=>Zoom(-1,Vector2.zero),true,false);SetButtonSymbol(minus,"-");
             Button(viewport,"center",new Vector2(16,16),new Vector2(164,36),Center,false,false);
             sidebar=Rect("MarkerSidebar",root);sidebar.anchorMin=new Vector2(1,0);sidebar.anchorMax=Vector2.one;sidebar.pivot=new Vector2(1,.5f);sidebar.offsetMin=new Vector2(-264,82);sidebar.offsetMax=new Vector2(-22,-84);
             sidebar.gameObject.AddComponent<Image>().color=Panel;
@@ -143,6 +143,7 @@ namespace OldMarket.Navigation
             rotationLabel.text=Texts.Get(state.Locale,state.RotateWithCamera?"CameraUp":"NorthUp");
             title.text=Texts.MapTitle(state.Locale,state.Map?.NameTextKey,state.Map?.Name);
             bool valid=state.Map!=null&&state.Map.Valid;mapImage.texture=state.Map?.Texture;mapRect.gameObject.SetActive(valid);
+            if(valid)mapImage.uvRect=state.Map.TextureUv;
             areaLayer.Refresh(state.Map);
             mapOverlay.texture=state.Map?.OverlayTexture;mapOverlay.uvRect=mapImage.uvRect;mapOverlay.gameObject.SetActive(valid&&mapOverlay.texture!=null);
             status.text=state.ErrorKey!=""?Texts.Get(state.Locale,state.ErrorKey):!valid?Texts.Get(state.Locale,"NoMap"):(string.IsNullOrEmpty(state.ScopeId)||state.Store==null)?Texts.Get(state.Locale,"temporary"):"";
@@ -179,22 +180,20 @@ namespace OldMarket.Navigation
             var geometry=Geometry(zoom);mapRect.sizeDelta=new Vector2(geometry.Width,geometry.Height);var bounded=geometry.ClampPan(new MapPoint(pan.x,pan.y));pan=new Vector2(bounded.X,bounded.Y);mapRect.anchoredPosition=pan;
             foreach(var node in markerNodes)if(node.Item2!=null){var marker=node.Item1;var uv=state.Map.Project(marker.X,marker.Z);node.Item2.anchoredPosition=new Vector2((uv.X-.5f)*geometry.Width,(uv.Y-.5f)*geometry.Height);}
         }
-        private void Zoom(float factor,Vector2 anchor)
+        private void Zoom(float ticks,Vector2 anchor)
         {
             if(state.Map==null||!state.Map.Valid||viewport.rect.width<=0||viewport.rect.height<=0)return;
             float maximum=MaximumZoom;
-            targetZoom=MapWheelZoom.Target(zoom,targetZoom,MapWheelZoom.ScaleFactor(factor,maximum),maximum);zoomAnchor=anchor;
+            targetZoom=MapWheelZoom.Target(zoom,targetZoom,MapWheelZoom.Factor(ticks,1,maximum),maximum);zoomAnchor=anchor;
         }
         private void WheelZoom(PointerEventData e,Vector2 anchor)
         {
             if(state.Map==null||!state.Map.Valid||viewport.rect.width<=0||viewport.rect.height<=0)return;
             var module=e.currentInputModule as UnityEngine.InputSystem.UI.InputSystemUIInputModule;
             float uiScale=module!=null?module.scrollDeltaPerTick:1;
-            var settings=UnityEngine.InputSystem.InputSystem.settings;
-            bool platformRange=module!=null&&settings!=null&&settings.scrollDeltaBehavior==UnityEngine.InputSystem.InputSettings.ScrollDeltaBehavior.KeepPlatformSpecificInputRange;
             bool windows=Application.platform==RuntimePlatform.WindowsPlayer||Application.platform==RuntimePlatform.WindowsEditor;
             float maximum=MaximumZoom;
-            float factor=MapWheelZoom.Factor(e.scrollDelta.y,uiScale*MapWheelZoom.PlatformScale(platformRange,windows),maximum);
+            float factor=MapWheelZoom.Factor(e.scrollDelta.y,uiScale*MapWheelZoom.PlatformScale(module!=null,windows),maximum);
             if(factor==1)return;
             targetZoom=MapWheelZoom.Target(zoom,targetZoom,factor,maximum);zoomAnchor=anchor;
         }

@@ -161,6 +161,7 @@ namespace OldMarket.Navigation
             map.gameObject.SetActive(state.Map!=null && state.Map.Valid);
             noMap.gameObject.SetActive(!map.gameObject.activeSelf);
             areaLayer.Refresh(state.Map);
+            if(state.Map!=null&&state.Map.Valid)map.uvRect=state.Map.TextureUv;
             mapOverlay.texture=state.Map?.OverlayTexture;mapOverlay.uvRect=map.uvRect;
             mapOverlay.gameObject.SetActive(map.gameObject.activeSelf && mapOverlay.texture!=null);
             noMap.text=Texts.Get(state.Locale,"NoMap");

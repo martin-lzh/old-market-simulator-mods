@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "mod": "navigation",
+  "version": "0.2.1",
+  "sdk": "2.1.6/r7",
+  "prerelease": true,
+  "sourceCommit": "538024f7303114d94d4b239ccfbefefb7763c921",
+  "inputsSha256": "d859c6cedc2c6a5c78fed30c5a190ab25c376ad433685500a548ef54e82a4343",
+  "authorization": "Maintainer explicitly requested one patch version advancement and a dev-to-main PR for Navigation's Rome map bounds and zoom-step fixes. This assigns Navigation 0.2.1 from 0.2.0, including the pending Navigation README artwork documentation. Game 2.1.6 and SDK r7 remain unchanged; prerelease status records outstanding in-game acceptance."
+}
