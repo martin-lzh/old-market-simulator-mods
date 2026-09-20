@@ -187,6 +187,27 @@ class MapPackageTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "texture not in package"):
             self.build()
 
+    def test_rome_town_crop_preserves_walls_pois_and_texture_calibration(self):
+        town = json.loads((self.c["directory"] / "maps/rome-town.json").read_text())
+        self.assertEqual([town[k] for k in ("MinX", "MaxX", "MinZ", "MaxZ")], [-75, 105, -85, 90])
+        self.assertEqual(town["TextureBounds"], dict(MinX=-472, MaxX=533, MinZ=-365, MaxZ=640))
+        # Scene-reviewed outer castle wall, including the west edge outside the detail patch.
+        for x, z in [(-63.665, -71.004), (93.797, 80.29), *((p["X"], p["Z"]) for p in town["Pois"])]:
+            self.assertLess(town["MinX"], x)
+            self.assertLess(x, town["MaxX"])
+            self.assertLess(town["MinZ"], z)
+            self.assertLess(z, town["MaxZ"])
+        self.assertEqual((town["DetailMinX"], town["DetailMaxX"], town["DetailMinZ"], town["DetailMaxZ"]), (-60, 105, -85, 90))
+        self.build()
+
+    def test_package_rejects_invalid_texture_bounds(self):
+        for bounds in ({}, [], dict(MinX=0, MaxX=1, MinZ=0, MaxZ=1),
+                       dict(MinX=-200, MaxX=300, MinZ=0, MaxZ=float("inf"))):
+            with self.subTest(bounds=bounds):
+                self.update_map(lambda m: m.update(TextureBounds=bounds))
+                with self.assertRaisesRegex(ValueError, "texture bounds invalid"):
+                    self.build()
+
     def test_package_rejects_missing_altered_moved_or_extra_resources(self):
         with zipfile.ZipFile(io.BytesIO(self.build())) as z:
             original = {name: z.read(name) for name in z.namelist()}

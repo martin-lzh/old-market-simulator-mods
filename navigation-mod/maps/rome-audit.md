@@ -15,11 +15,11 @@ Baseline: Old Market Simulator 2.1.6, map ID 2 (`BazaarRome`), SDK 2.1.6/r7. Rev
 | `rome-gate3.json` | `RomeGate3` | -1318 … -913 | 1793 … 2198 | 0 |
 | `rome-gate4.json` | `RomeGate4` | 1619 … 1924 | -1316 … -1011 | 0 |
 | `rome-mine.json` | `RomeEngineerMine` | 1023 … 1178 | 1192 … 1247 | 2 |
-| `rome-town.json` | `(main)` | -472 … 533 | -365 … 640 | 59 |
+| `rome-town.json` | `(main)` | -75 … 105 | -85 … 90 | 59 |
 
-Bounds include every terrain tile in each region, with a small margin. The two Gate 1 tiles are both included. The main town retains its surrounding terrain and uses an additional calibrated detail image at X [-60,105], Z [-85,90]. Local player region identity, rather than the active Unity scene or another player’s region, selects the map. Return travel uses the empty region identifier. Existing marker scopes already include this region identity.
+Travel-region bounds include every terrain tile with a small margin; both Gate 1 tiles are included. The main map focuses on the town walls with a margin, sampling the original terrain artwork through `TextureBounds` X [-472,533], Z [-365,640]. The calibrated detail image remains at X [-60,105], Z [-85,90]. Local player region identity, rather than the active Unity scene or another player’s region, selects the map. Return travel uses the empty region identifier. Existing marker scopes already include this region identity.
 
-边界包含各区域全部地形块；一号大门区域包含南北两块地形。主城保留外围地形，另在指定世界坐标加载街区细节。按本地玩家所在区域选图，不根据 Unity 当前活动场景或其他玩家区域猜测；回到主城时区域标识为空，个人标记按区域隔离。
+传送区域边界包含各自全部地形块；一号大门区域包含南北两块地形。主城范围收紧至城墙及周边余量，通过 TextureBounds X [-472,533]、Z [-365,640] 采样原有地形插画，街区细节仍位于 X [-60,105]、Z [-85,90]。按本地玩家所在区域选图，不根据 Unity 当前活动场景或其他玩家区域猜测；回到主城时区域标识为空，个人标记按区域隔离。
 
 ## Travel links / 传送关联
 
@@ -134,3 +134,17 @@ The previous local reference skipped water-material meshes and classified water 
 World bounds remain X [1619,1924], Z [-1316,-1011], north +Z. Return POI and region metadata are unchanged. The new artwork has been visually compared with the corrected reference; local in-game testing of build `921d14b` was subsequently reported complete on 2026-09-18.
 
 世界边界仍为 X [1619,1924]、Z [-1316,-1011]，北向 +Z；返回点和区域元数据不变。新图已与修正参考图作视觉比对，随后于 2026-09-18 获构建 `921d14b` 本地实机测试完成反馈。
+
+## Main-town coverage correction — 2026-09-20
+
+The local `level11` scene hash still matches the evidence used for the original map. Its large terrain tile spans 1000 × 1000 units; that is scenery coverage, not a measured player-accessible boundary. The active castle-wall geometry spans approximately X [-63.665,93.797], Z [-71.004,80.290]. The former 1005 × 1005 map rectangle was about 32 times the area of the replacement 180 × 175 rectangle, X [-75,105], Z [-85,90]. The replacement includes the wall footprint with at least 9 units of margin, all 46 conditional POIs and all 59 town expansion rectangles. Travel destinations remain on their seven separate maps.
+
+The west wall extends beyond the detail patch's X = -60 edge, so the detail image alone cannot replace the base map. Preserve both PNGs byte-for-byte and crop the base UVs using its original world bounds. Both large map and minimap use this calibration; detail/expansion layers and personal markers continue to use world coordinates. This is a framing correction based on scene geometry, not a NavMesh or exhaustive walkability claim. In-game alignment, town-edge movement and wheel/button feel remain untested for this change.
+
+本地 level11 场景哈希与原地图证据一致。1000 × 1000 的大地形块表示背景覆盖，不是实测可行走边界；当前激活城墙的几何范围约为 X [-63.665,93.797]、Z [-71.004,80.290]。原 1005 × 1005 显示矩形面积约为新范围的 32 倍；新范围为 X [-75,105]、Z [-85,90]，包含城墙及至少 9 单位余量、全部 46 条条件 POI 和 59 个主城扩建矩形，七个旅行目的地继续单独显示。
+
+西侧城墙超出细节图 X = -60 的边界，不能直接把细节图当成完整底图。保留两张 PNG 的原始字节，按原世界范围裁剪底图 UV；大小地图共用此标定，细节层、扩建层与个人标记继续使用世界坐标。本次依据场景几何修正显示范围，不代表 NavMesh 或逐处通行验收；实机对齐、城墙边缘行走及滚轮/按钮手感仍待验证。
+
+Validation: version and syntax checks, 69 CI tooling tests, 1820 navigation checks and all eight SDK builds passed. All eight real-reference builds matched SDK symbolic IL/resources after dependency-hash verification; 674 Navigation metadata/IL contracts passed. SDK 2.1.6/r7 and Mod 0.2.0 are unchanged. No game installation or save was modified.
+
+验证：版本与语法检查、69 项 CI 工具测试、1820 项导航检查及八种 SDK 构建通过；依赖哈希核对后，八种真实引用构建的符号 IL/资源均与 SDK 构建一致，674 项 Navigation 元数据/IL 契约通过。SDK 2.1.6/r7 与 Mod 0.2.0 不变，未修改游戏安装或存档。

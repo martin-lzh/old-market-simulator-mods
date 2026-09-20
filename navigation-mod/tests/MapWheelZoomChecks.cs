@@ -6,13 +6,13 @@ internal static class MapWheelZoomChecks
     internal static void Run(Action<bool,string> check)
     {
         void Near(float a,float b,string name)=>check(Math.Abs(a-b)<.0001f,name);
-        Near(MapWheelZoom.Factor(6,6),1.12f,"UI-scaled wheel notch is a small map zoom");
-        Near(MapWheelZoom.Factor(720,6*MapWheelZoom.PlatformScale(true,true)),1.12f,"Windows platform-range wheel normalizes 120 before zoom");
-        Near(MapWheelZoom.Factor(6,6*MapWheelZoom.PlatformScale(false,true)),1.12f,"uniform Windows wheel is not divided by 120");
+        Near(MapWheelZoom.Factor(6,6),1.25f,"UI-scaled wheel notch matches the button step");
+        Near(MapWheelZoom.Factor(720,6*MapWheelZoom.PlatformScale(true,true)),1.25f,"Windows platform-range wheel normalizes 120 before zoom");
+        Near(MapWheelZoom.Factor(6,6*MapWheelZoom.PlatformScale(false,true)),1.25f,"uniform Windows wheel is not divided by 120");
         Near(MapWheelZoom.PlatformScale(true,false),1,"other supported platform native units remain one");
-        Near(MapWheelZoom.Factor(2.5f,2.5f),1.12f,"custom UI scroll scale preserves map sensitivity");
-        Near(MapWheelZoom.Factor(1,1),1.12f,"legacy module notch uses unscaled wheel units");
-        Near(MapWheelZoom.Factor(.6f,6), (float)Math.Pow(1.12,.1),"fractional wheel motion is not rounded");
+        Near(MapWheelZoom.Factor(2.5f,2.5f),1.25f,"custom UI scroll scale preserves map sensitivity");
+        Near(MapWheelZoom.Factor(1,1),1.25f,"legacy module notch uses unscaled wheel units");
+        Near(MapWheelZoom.Factor(.6f,6), (float)Math.Pow(1.25,.1),"fractional wheel motion is not rounded");
         float pieces=1;for(int i=0;i<10;i++)pieces*=MapWheelZoom.Factor(.6f,6);
         Near(pieces,MapWheelZoom.Factor(6,6),"split high-resolution scroll equals one full notch");
         Near(MapWheelZoom.Factor(-6,6)*MapWheelZoom.Factor(6,6),1,"opposite wheel travel cancels");
@@ -20,7 +20,7 @@ internal static class MapWheelZoomChecks
         {Near(MapWheelZoom.Factor(bad,6),1,"invalid delta ignored");Near(MapWheelZoom.Factor(6,bad),1,"invalid module scale ignored");}
         Near(MapWheelZoom.Factor(6,0),1,"zero module scale cannot divide by zero");
         Near(MapWheelZoom.Factor(6,-1),1,"invalid negative module scale ignored");
-        check(MapWheelZoom.Factor(float.MaxValue,6)<2.5f,"extreme input remains bounded");
+        check(MapWheelZoom.Factor(float.MaxValue,6)<6f,"extreme input remains bounded");
         Near(MapWheelZoom.Target(2,3,.9f),1.8f,"reversing wheel immediately reverses pending zoom");
         Near(MapWheelZoom.Target(3,2,1.1f),3.3f,"reverse zoom-in discards pending zoom-out");
         Near(MapWheelZoom.Target(2,3,1.1f),3.3f,"same direction accumulates pending travel");
@@ -34,11 +34,19 @@ internal static class MapWheelZoomChecks
             var fullDetail=new MapViewportGeometry(view.X,view.Y,1,maximum);
             Near(oldDetail.Width/340,fullDetail.Width/750,"full map reaches original world-space detail");
             float fullFactor=MapWheelZoom.Factor(6,6,maximum);
-            Near((float)(Math.Log(maximum)/Math.Log(fullFactor)),(float)(Math.Log(8)/Math.Log(1.12)),"same wheel travel spans larger map zoom range");
+            Near((float)(Math.Log(maximum)/Math.Log(fullFactor)),(float)(Math.Log(8)/Math.Log(1.25)),"same wheel travel spans larger map zoom range");
             Near(MapWheelZoom.Factor(-6,6,maximum)*fullFactor,1,"adaptive wheel zoom remains reversible");
             float partial=1;for(int i=0;i<10;i++)partial*=MapWheelZoom.Factor(.6f,6,maximum);
             Near(partial,fullFactor,"adaptive zoom preserves fractional scrolling");
-            Near(MapWheelZoom.ScaleFactor(1.25f,maximum)*MapWheelZoom.ScaleFactor(.8f,maximum),1,"adaptive buttons are reciprocal");
+            foreach(float direction in new[]{-1f,1f})
+            {
+                float button=MapWheelZoom.Factor(direction,1,maximum);
+                Near(MapWheelZoom.Factor(direction*6,6,maximum),button,"uniform wheel notch equals one button press");
+                Near(MapWheelZoom.Factor(direction*720,720,maximum),button,"Windows wheel notch equals one button press");
+                foreach(var pending in new[]{new MapPoint(1,1),new MapPoint(2,3),new MapPoint(3,2),new MapPoint(maximum,maximum)})
+                    Near(MapWheelZoom.Target(pending.X,pending.Y,button,maximum),MapWheelZoom.Target(pending.X,pending.Y,MapWheelZoom.Factor(direction*6,6,maximum),maximum),"wheel and button agree during animation, reversal and clamping");
+            }
+            Near(MapWheelZoom.Factor(1,1,maximum)*MapWheelZoom.Factor(-1,1,maximum),1,"shared zoom steps are reciprocal");
             Near(MapWheelZoom.Target(maximum,maximum,fullFactor,maximum),maximum,"adaptive maximum enforced");
             check(MapWheelZoom.Target(8,8,fullFactor,maximum)>8,"full map zoom can exceed previous cap");
         }

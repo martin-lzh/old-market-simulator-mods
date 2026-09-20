@@ -44,7 +44,9 @@ namespace OldMarket.Navigation
                     var overlay=string.IsNullOrWhiteSpace(m.OverlayTexture)?null:LoadTexture(directory,m.OverlayTexture);
                     var detail=string.IsNullOrWhiteSpace(m.DetailTexture)?null:LoadTexture(directory,m.DetailTexture);
                     var pois=MapPoi.Validate(m.Pois,m.MinX,m.MaxX,m.MinZ,m.MaxZ);
+                    var low=m.TextureUvMin;var high=m.TextureUvMax;
                     maps.Add((m,new MapDefinition { Id=m.Id,Name=m.Name,NameTextKey=m.NameTextKey,Texture=image,OverlayTexture=overlay,DetailTexture=detail,
+                        TextureUv=new Rect(low.X,low.Y,high.X-low.X,high.Y-low.Y),
                         DetailMinX=m.DetailMinX,DetailMaxX=m.DetailMaxX,DetailMinZ=m.DetailMinZ,DetailMaxZ=m.DetailMaxZ,
                         MinX=m.MinX,MaxX=m.MaxX,MinZ=m.MinZ,MaxZ=m.MaxZ,Pois=pois }));
                     log("Local map loaded: " + m.Id + "; POIs=" + pois.Count);
@@ -71,6 +73,7 @@ namespace OldMarket.Navigation
                     if(match!=null)return null;
                     var source=entry.map;
                     match=new MapDefinition{Id=source.Id,Name=source.Name,Texture=source.Texture,OverlayTexture=source.OverlayTexture,
+                        TextureUv=source.TextureUv,
                         DetailTexture=source.DetailTexture,DetailMinX=source.DetailMinX,DetailMaxX=source.DetailMaxX,DetailMinZ=source.DetailMinZ,DetailMaxZ=source.DetailMaxZ,
                         MinX=source.MinX,MaxX=source.MaxX,MinZ=source.MinZ,MaxZ=source.MaxZ};
                     foreach(var poi in source.Pois)if(poi.IsVisible(unlocked))match.Pois.Add(poi);

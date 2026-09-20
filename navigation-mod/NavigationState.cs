@@ -7,6 +7,7 @@ namespace OldMarket.Navigation
     public sealed class MapDefinition
     {
         public Texture2D Texture;
+        public Rect TextureUv=new Rect(0,0,1,1);
         public Texture2D OverlayTexture;
         public Texture2D DetailTexture;
         public float DetailMinX,DetailMaxX,DetailMinZ,DetailMaxZ;

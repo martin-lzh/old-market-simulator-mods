@@ -23,7 +23,7 @@ namespace OldMarket.Navigation
         {
             if(float.IsNaN(delta)||float.IsInfinity(delta)||float.IsNaN(uiScale)||float.IsInfinity(uiScale)||uiScale<=0)return 1;
             double ticks=Math.Max(-8,Math.Min(8,delta/uiScale));
-            return ScaleFactor((float)Math.Pow(1.12,ticks),maximum);
+            return ScaleFactor((float)Math.Pow(1.25,ticks),maximum);
         }
 
         public static float Target(float current,float pending,float factor,float maximum=8)

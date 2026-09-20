@@ -45,7 +45,7 @@ Find your way around town with a minimap, a compass and your own map markers. Ma
 
 The minimap starts in the bottom-left corner. Use the map window's orientation button to switch between north-up and following your view; your choice is remembered. The large map stays north-up. Shop names appear as you zoom in when there is enough room.
 
-Large-map zoom steps and the closest zoom level adapt to the loaded map's world coverage, so larger maps can reach street-level detail with similar wheel travel or button presses.
+One mouse-wheel notch changes the large-map zoom by the same amount as one + / − click. Fractional trackpad movement is preserved. Zoom steps and the closest zoom level adapt to the loaded map's world coverage.
 
 Select a personal marker to change its name, color or shape in the right sidebar. Color and shape buttons open a grid below them—click the one you want. Choose **Set target** to follow it. The compass and in-world guide use the same icon and color as the map. Guides hide while a menu is open and return when it closes.
 
@@ -70,6 +70,8 @@ Choose the Mod ZIP on the release page, not GitHub's **Source code** download. T
 **The plugin ZIP includes Eastern Town, Island and Rome maps.** Artwork, overlays and map metadata install together with the plugin.
 
 Extract the complete ZIP into the game folder, retaining `BepInEx/plugins/OldMarket.Navigation/maps/`, and restart the game. Eastern Town currently covers the central town and four central-market unlock states, showing cleared market clutter; its outer terrain is not yet bundled. Island is a static surface overview; it does not switch through all market, farm, greenhouse or underground expansions. Rome switches to the local player’s current region after travelling through a gate, caravan or mine entrance. Hatched areas mark pending expansions and clear when their unlock is synchronized. Gate symbols change from a lock to an open door. Shops and facilities appear or move with their unlock state. The mine has two additional stages controlled from the main town. These are surface-area indicators, not a reconstruction of every intermediate building model. Maps do not automatically redraw player placements. Gate 4 now shows the lake west of its central terrace; local in-game testing of the correction in build `921d14b` is complete.
+
+Rome's main map focuses on the walled town and farms, with a margin around the walls. Gates, caravans and the mine retain their separate region maps. The reduced town coverage and unified zoom steps are pending in-game acceptance.
 
 Your markers are personal and kept separately for each save and area. They are not shared with other players. When joining someone else's game, markers last for that connection by default. To keep them between visits, use a different `Markers.RemoteProfile` name for each host's save. Copying or recreating a save folder may make your old markers appear missing. Your selected target is not remembered after restarting.
 
@@ -141,7 +143,7 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 
 小地图默认在左下角。大地图窗口中的朝向按钮可以切换“固定正北”和“随视角转动”，下次进入也会记住选择。大地图始终保持正北朝上。放大地图后，空间足够的地点会显示名称。
 
-大地图的缩放步长与放大上限会适应所加载地图的世界覆盖范围，扩大后的地图也能用相近的滚轮或按钮操作次数放大到街区细节。
+大地图滚轮每滚动一格，与点击一次 + / − 按钮的缩放幅度相同；触控板的小数滚动仍然有效。缩放步长与放大上限会适应所加载地图的世界覆盖范围。
 
 选中个人标记后，可以在右侧改名称、颜色和图标。点击颜色或图标按钮，下方会展开选择格，点哪个就用哪个。点击“设为目标”即可跟随指引，罗盘和场景内会显示与地图相同的图标和颜色。打开菜单时指引会暂时隐藏，关闭后恢复。
 
@@ -166,6 +168,8 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 **插件 ZIP 已包含东方小镇、海岛与罗马地图。**底图、覆盖层和地图元数据会随插件一起安装。
 
 将整个 ZIP 解压到游戏目录，保留 `BepInEx/plugins/OldMarket.Navigation/maps/`，再重启游戏。东方小镇目前覆盖镇区及中央市场四种解锁状态，可反映市场垃圾清理，外围地形尚未打包；海岛是静态地表概览，不随市场、农场、温室或地下扩建的全部状态切换。罗马会在穿过大门、乘坐商队或进入矿洞后，切换到本地玩家所在区域的地图。斜线阴影表示待解锁扩建范围，同步解锁后消失；大门图标由锁变为开放入口，店铺和设施图标随启停状态出现或移动。矿洞另含由主城控制的两个扩建阶段。这些是地表范围提示，不逐一重建各阶段建筑模型；地图不会自动重画玩家摆放物。大门4底图已补回中央长平台西侧的湖泊；修正构建 `921d14b` 的本地实机测试已完成。
+
+罗马主地图聚焦城墙内的镇区与农田，并在城墙外保留余量；大门、商队与矿洞继续使用各自的区域地图。本次主城范围收紧与统一缩放步长仍待实机验收。
 
 个人标记按存档和区域分别保存，不会分享给其他玩家。加入好友房间时，默认只保留本次连接中的标记。如果想下次继续使用，请为每位好友的存档设置不同的 `Markers.RemoteProfile` 名称。复制或重建存档文件夹后，旧标记可能暂时找不到。当前选中的目标不会在重启后保留。
 

@@ -197,6 +197,14 @@ def map_resources(c):
                 or not isinstance(m.get("SceneName"), str) or not m["SceneName"]):
             raise ValueError("Invalid or duplicate map metadata")
         ids.add(m["Id"])
+        if "TextureBounds" in m and m["TextureBounds"] is not None:
+            texture_bounds = m["TextureBounds"]
+            keys = ("MinX", "MaxX", "MinZ", "MaxZ")
+            if (not isinstance(texture_bounds, dict) or not all(k in texture_bounds for k in keys)
+                    or not all(type(texture_bounds[k]) in (int, float) and math.isfinite(texture_bounds[k]) for k in keys)
+                    or not texture_bounds["MinX"] <= bounds[0] < bounds[1] <= texture_bounds["MaxX"]
+                    or not texture_bounds["MinZ"] <= bounds[2] < bounds[3] <= texture_bounds["MaxZ"]):
+                raise ValueError("Map texture bounds invalid")
         for key in ("Texture", "OverlayTexture", "DetailTexture"):
             texture = m.get(key)
             if key != "Texture" and not texture:

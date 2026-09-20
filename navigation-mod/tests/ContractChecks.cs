@@ -189,4 +189,10 @@ Check(baseEvent.Properties.Single(x=>x.Name=="currentInputModule").GetMethod.IsP
 var mapWindow=All(plugin).Single(x=>x.Name=="MapWindow");
 var wheelZoom=mapWindow.Methods.Single(x=>x.Name=="WheelZoom");
 Check(Calls(wheelZoom,"get_currentInputModule") && Calls(wheelZoom,"get_scrollDeltaPerTick") && Calls(wheelZoom,"Factor"),"map wheel normalizes the emitting UI module scale");
+Check(Calls(mapWindow.Methods.Single(x=>x.Name=="Zoom"),"Factor"),"map buttons use the same normalized zoom step as the wheel");
+foreach(string typeName in new[]{"MapWindow","NavigationHud"})
+{
+    var methods=All(plugin).Single(x=>x.Name==typeName).Methods.Where(x=>x.HasBody);
+    Check(methods.Any(x=>UsesField(x,"MapDefinition","TextureUv")&&Calls(x,"set_uvRect")),typeName+" applies the calibrated texture crop");
+}
 Console.WriteLine($"Passed {checks} Navigation installed-assembly contract checks; metadata/IL only, no Unity execution.");

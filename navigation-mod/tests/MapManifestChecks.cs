@@ -15,6 +15,21 @@ static class MapManifestChecks
         check(legacy.Pois.Length==0&&legacy.ExcludedExpansions.Length==0,"omitted legacy arrays normalize to empty");
         check(legacy.North=="+Z","omitted north keeps original default");
         check(legacy.Areas.Length==0,"legacy maps have no conditional areas");
+        check(legacy.TextureUvMin.X==0&&legacy.TextureUvMin.Y==0&&legacy.TextureUvMax.X==1&&legacy.TextureUvMax.Y==1,"legacy maps use the full texture");
+        const string textureBounds="\"TextureBounds\":{\"MinX\":-10,\"MaxX\":30,\"MinZ\":-20,\"MaxZ\":60}";
+        var cropped=MapManifestReader.Read("{"+header+","+textureBounds+",\"Pois\":["+point+"]}");
+        check(cropped.TextureUvMin.X==.25f&&cropped.TextureUvMin.Y==.25f&&cropped.TextureUvMax.X==.5f&&cropped.TextureUvMax.Y==.375f,"crop retains calibrated texture rectangle");
+        foreach(var position in new[]{new MapPoint(0,0),new MapPoint(10,10),new MapPoint(2.5f,7.25f)})
+        {
+            var uv=NavMath.WorldToUv(position.X,position.Y,cropped.MinX,cropped.MaxX,cropped.MinZ,cropped.MaxZ);
+            var original=cropped.TextureBounds.Project(position.X,position.Y);
+            float u=cropped.TextureUvMin.X+uv.X*(cropped.TextureUvMax.X-cropped.TextureUvMin.X);
+            float v=cropped.TextureUvMin.Y+uv.Y*(cropped.TextureUvMax.Y-cropped.TextureUvMin.Y);
+            check(Math.Abs(u-original.X)<.00001f&&Math.Abs(v-original.Y)<.00001f,"cropped corners and POI sample the original artwork coordinates");
+        }
+        reject(()=>MapManifestReader.Read("{"+header+",\"TextureBounds\":{}}"),"incomplete texture bounds rejected");
+        reject(()=>MapManifestReader.Read("{"+header+","+textureBounds.Replace("\"MinX\":-10","\"MinX\":1")+"}"),"crop outside texture rejected");
+        reject(()=>MapManifestReader.Read("{"+header+","+textureBounds.Replace("\"MaxZ\":60","\"MaxZ\":-30")+"}"),"inverted texture bounds rejected");
         const string area="{\"Id\":\"street\",\"MinX\":1,\"MaxX\":4,\"MinZ\":2,\"MaxZ\":6,\"RequiredExpansions\":[9007199254740993]}";
         var staged=MapManifestReader.Read("{"+header+",\"Areas\":["+area+"]}");
         check(staged.Areas[0].IsLocked(new long[0]),"new save masks locked district");
