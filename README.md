@@ -18,7 +18,7 @@ A collection of unofficial Mods to make running your Old Market Simulator shop a
 | [Tree Harvest Helper](tree-info-mod/README.md) | Fruit-tree production seasons and harvest estimates | [0.1.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.0) |
 | [Map & Compass](navigation-mod/README.md) | Minimap, large map, compass and personal markers | [0.2.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.0) |
 
-The Mod pages explain upcoming changes as well as the version currently available to download. Stack All’s G empty-container action uses game 2.1.6 / SDK r11; local hold-guidance/font testing is confirmed. Navigation includes Eastern Town, an Island preview and Rome with seven travel regions and dynamic unlock areas; Eastern Town outer terrain is not yet bundled. The Gate 4 lake correction has local in-game confirmation; remaining map, POI and zoom test scope is recorded separately; see the [validation scope](releases/validation.md).
+The Mod pages explain upcoming changes as well as the version currently available to download. Navigation 0.2.1 is the next prerelease, retaining game 2.1.6 / SDK r7; its Rome town crop and unified zoom steps await in-game acceptance. Stack All’s G empty-container action uses game 2.1.6 / SDK r11; local hold-guidance/font testing is confirmed. Navigation includes Eastern Town, an Island preview and Rome with seven travel regions and dynamic unlock areas; Eastern Town outer terrain is not yet bundled. The Gate 4 lake correction has local in-game confirmation; remaining map, POI and zoom test scope is recorded separately; see the [validation scope](releases/validation.md).
 
 ### Getting started
 
@@ -61,7 +61,7 @@ Want to contribute? Start with [CONTRIBUTING](CONTRIBUTING.md) or the [developme
 | [Tree Harvest Helper](tree-info-mod/README.md) | 果树生产季节和成熟预测 | [0.1.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.0) |
 | [Map & Compass](navigation-mod/README.md) | 小地图、大地图、罗盘和个人标记 | [0.2.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.0) |
 
-各 Mod 页面会说明当前可下载的版本和即将更新的内容。Stack All 的 G 空盒操作使用游戏 2.1.6 / SDK r11，长按说明及字体已有本地测试确认。Navigation 插件 ZIP 包含东方小镇、海岛预览图，以及带七个传送区域和动态解锁区块的罗马地图；东方小镇外围地形尚未打包。大门4湖泊修正已获本地实机确认，其他地图、POI 与缩放的测试范围分别记录，详见[验证范围](releases/validation.md)。
+各 Mod 页面会说明当前可下载的版本和即将更新的内容。Navigation 下一预发布版本为 0.2.1，保持游戏 2.1.6 / SDK r7，罗马主城范围收紧与统一缩放步长仍待实机验收。Stack All 的 G 空盒操作使用游戏 2.1.6 / SDK r11，长按说明及字体已有本地测试确认。Navigation 插件 ZIP 包含东方小镇、海岛预览图，以及带七个传送区域和动态解锁区块的罗马地图；东方小镇外围地形尚未打包。大门4湖泊修正已获本地实机确认，其他地图、POI 与缩放的测试范围分别记录，详见[验证范围](releases/validation.md)。
 
 ### 开始使用
 

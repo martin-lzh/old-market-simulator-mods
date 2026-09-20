@@ -4,12 +4,14 @@
 
 ### Unreleased
 
+### 0.2.1 — 2026-09-20 (prerelease)
+
 - Reduce Rome's main-map coverage from 1005 × 1005 to 180 × 175 world units around the scene-reviewed castle walls, retaining all 59 unlock areas, 46 conditional POIs and seven separate travel maps. Crop base/overlay UVs against optional texture bounds so the existing artwork and detail patch keep their world alignment in both maps.
-- Make one wheel notch and one + / − click use the same adaptive zoom factor (1.25 at the base range), retaining fractional scrolling, pointer anchoring, reversal and zoom limits. Keep Mod 0.2.0 and game 2.1.6 / SDK r7; these changes await in-game acceptance.
+- Make one wheel notch and one + / − click use the same adaptive zoom factor (1.25 at the base range), retaining fractional scrolling, pointer anchoring, reversal and zoom limits. Advance to Mod 0.2.1 on game 2.1.6 / SDK r7; keep prerelease status pending in-game acceptance of this patch.
 
-- Add in-game compass, minimap, Rome map, marker editor and target-tracking screenshots to both README languages. Exclude README cover/screenshots from embedded plugin resources; gameplay, version and SDK are unchanged.
+- Add in-game compass, minimap, Rome map, marker editor and target-tracking screenshots to both README languages. Exclude README cover/screenshots from embedded plugin resources; gameplay and SDK are unchanged.
 
-- Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
+- Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime and SDK are unchanged.
 
 ### 0.2.0 — 2026-09-18 (stable release)
 
@@ -120,12 +122,14 @@ Experimental initial build; not installed or verified in game.
 
 ### 未发布
 
+### 0.2.1 — 2026-09-20（预发布）
+
 - 将罗马主地图从 1005 × 1005 世界单位收紧至场景核对的城墙周边 180 × 175，保留全部 59 个解锁区、46 条条件 POI 和七张独立传送区域地图。通过可选贴图边界裁剪底图/覆盖层 UV，让大小地图中的原有插画及细节图保持世界坐标对齐。
-- 滚轮一格与 + / − 按钮一次点击使用相同的自适应缩放倍率（基础范围放大 1.25 倍），保留小数滚动、鼠标锚点、反向取消和缩放边界。保持 Mod 0.2.0 与游戏 2.1.6 / SDK r7，本次改动仍待实机验收。
+- 滚轮一格与 + / − 按钮一次点击使用相同的自适应缩放倍率（基础范围放大 1.25 倍），保留小数滚动、鼠标锚点、反向取消和缩放边界。版本推进至 Mod 0.2.1，保持游戏 2.1.6 / SDK r7；本次修复仍待实机验收，标记为预发布。
 
-- 在双语 README 中加入罗盘轴、小地图、罗马大地图、标记编辑及目标跟踪实机截图；将 README 封面及截图排除出插件嵌入资源，玩法、版本及 SDK 不变。
+- 在双语 README 中加入罗盘轴、小地图、罗马大地图、标记编辑及目标跟踪实机截图；将 README 封面及截图排除出插件嵌入资源，玩法及 SDK 不变。
 
-- 将 Nexus 封面移入 assets/cover.png，并作为 README 首图展示。仅文档改动，运行时、版本和 SDK 不变。
+- 将 Nexus 封面移入 assets/cover.png，并作为 README 首图展示。仅文档改动，运行时和 SDK 不变。
 
 ### 0.2.0 — 2026-09-18（正式发布）
 
