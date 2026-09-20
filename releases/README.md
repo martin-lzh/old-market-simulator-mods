@@ -12,7 +12,7 @@ See [SDK maintenance](../sdk/README.md) for game-free builds and game-version up
 
 ### English
 
-1. Work on `dev` and open a PR into protected `main`. Only after the maintainer explicitly requests version advancement, update the affected Mod’s assembly/plugin version and move its pending changes into matching numbered entries in both CHANGELOG languages. Otherwise retain the existing version and record changes under Unreleased. During PR review, inspect every Mod CHANGELOG against the diff and list all Mods still awaiting version assignment; do not assign versions automatically. Record game/SDK versions, loader, risks, save/multiplayer constraints and actual validation. Unreleased entries are ignored.
+1. Work on `dev` and open a PR into protected `main`. Only after the maintainer explicitly requests version advancement, update the affected Mod’s assembly/plugin version and move its pending changes into matching numbered entries in both CHANGELOG languages. Otherwise retain the existing version and record changes under Unreleased. During PR review, inspect every Mod CHANGELOG against the diff: use `Unchanged (current version)` when preserving a version, give the target version for an authorized bump, and reserve `**UNASSIGNED**` for a planned release whose target is undecided. Describe Unreleased content separately and never assign versions automatically. Record game/SDK versions, loader, risks, save/multiplayer constraints and actual validation. Unreleased entries are ignored.
 2. Each Mod pins an SDK and prerelease status in its own `release.json`. Keep `prerelease: true` until in-game acceptance is complete. Existing SDK revisions remain immutable.
 3. PR CI compiles all seven Mods (eight loader variants), runs pure logic/localization tests and verifies package allowlists on a GitHub-hosted Windows runner. It uses compiler-only API declarations; original game files and self-hosted runners are unnecessary.
 4. A push to `main` after merge automatically publishes new CHANGELOG versions at that exact commit. Already-public versions are skipped without replacing assets or moving tags. Documentation/SDK changes without a new Mod version never republish old binaries.
@@ -28,7 +28,7 @@ The existing catalog.json and tag markdown files remain the historical manual re
 
 ### 中文
 
-1. 在 `dev` 开发，通过 PR 合并受保护的 `main`。只有维护者明确要求推进版本后，才更新对应 Mod 的程序集/插件版本，并将待发布改动移入 CHANGELOG 中英文区段对应的新编号条目；否则保持现有版本，改动暂归 Unreleased / 未发布。PR 检查须对照差异检查所有 Mod 的 CHANGELOG，列出尚未指定版本的 Mod，不自行补定版本。注明游戏/SDK 版本、加载器、风险、存档/联机约束和实际验证。“未发布”不参与版本选择。
+1. 在 `dev` 开发，通过 PR 合并受保护的 `main`。只有维护者明确要求推进版本后，才更新对应 Mod 的程序集/插件版本，并将待发布改动移入 CHANGELOG 中英文区段对应的新编号条目；否则保持现有版本，改动暂归 Unreleased / 未发布。PR 检查须对照差异检查所有 Mod 的 CHANGELOG：本次保持版本的标为 `Unchanged (现有版本)`，已授权升级的列出目标版本，只有计划发布但目标版本待定的才标为 `**UNASSIGNED**`；另行说明 Unreleased 内容，不自行补定版本。注明游戏/SDK 版本、加载器、风险、存档/联机约束和实际验证。“未发布”不参与版本选择。
 2. 各 Mod 在自己的 `release.json` 固定 SDK 并选择预发布状态。未完成实机验收时保留 `prerelease: true`；已有 SDK 修订保持不变。
 3. PR CI 在 GitHub 托管 Windows Runner 上编译七个 Mod（八个加载器变体），运行纯逻辑/本地化测试并检查包清单。引用来自仅含接口声明的 SDK，无需原始游戏文件或自托管 Runner。
 4. PR 合并后 main 的 push 自动按 CHANGELOG 新版本发布，标签指向此次准确提交。已公开版本直接跳过，不覆盖附件、不移动标签；仅修改文档/SDK 而不增加 Mod 编号，不会重新发布旧包。
