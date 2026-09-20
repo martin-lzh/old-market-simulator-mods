@@ -4,6 +4,8 @@ Player information: [README](README.md). Contribution setup and branch rules: [C
 
 玩家介绍见 [README](README.md)，开发环境和分支规则见 [CONTRIBUTING](CONTRIBUTING.md)，引用与编译见 [SDK](sdk/README.md)，版本与发行见 [发布规则](releases/README.md)，测试范围见 [验证记录](releases/validation.md)。
 
+Official game build changes: [Steam build monitoring](docs/game-build-monitor.md). / 官方游戏构建变化：[Steam 构建监测](docs/game-build-monitor.md)。
+
 | Mod | Development notes / 开发说明 |
 | --- | --- |
 | Map & Compass | [DEVELOPMENT](navigation-mod/DEVELOPMENT.md) |
