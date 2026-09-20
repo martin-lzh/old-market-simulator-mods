@@ -225,3 +225,13 @@ The display-name/README follow-up changes release inputs within the already assi
 Naming verification: all seven display-name declarations and README headings match; BepInEx/MelonLoader names agree. Feature/control sections precede installation in both languages, original DLL/config paths are retained, and local Markdown links resolve. All 67 tooling tests, eight SDK builds/package checks and real-reference IL/resource/game-contract checks passed. No new game API or SDK revision is needed.
 
 命名验证：七个显示名与 README 标题一致，BepInEx／MelonLoader 名称一致；两种语言均先介绍功能与操作，再说明安装，原 DLL／配置路径保留，本地 Markdown 链接有效。67 项工具测试、八种 SDK 构建及包校验、真实引用 IL／资源／游戏契约检查通过，不需要新游戏 API 或 SDK 修订。
+
+## Navigation 0.2.1 patch verification — 2026-09-20 / 导航补丁验证
+
+Source `538024f` assigns Navigation 0.2.1 to the Rome main-town crop and matching wheel/button zoom steps from `0154694`, together with the pending README artwork notes. Game 2.1.6 / SDK r7 is unchanged. Version and syntax checks, 69 CI tooling tests, 1820 navigation checks, all eight SDK builds/package validations and all eight real-reference IL/resource comparisons passed. The real-reference pass verified original dependency hashes and passed 674 Navigation metadata/IL contracts. The Navigation ZIP contains the original plugin, README, CHANGELOG, LICENSE and all 28 allowlisted map files.
+
+In-game map alignment, town-edge movement, zoom feel, save/reload and host/client acceptance were not performed for this patch. Navigation 0.2.1 remains a prerelease; prior 0.2.0 acceptance does not extend to these fixes. No game installation or save was modified. The [authorization record](approvals/navigation-v0.2.1.json) binds the reviewed source inputs. Other Mods retain their published versions and pending documentation-only Unreleased notes; no new target versions are assigned to them.
+
+源码 `538024f` 将 `0154694` 的罗马主城范围与滚轮／按钮缩放步长修复，以及现有 README 配图说明归入 Navigation 0.2.1。游戏 2.1.6 / SDK r7 不变。版本与语法检查、69 项 CI 工具测试、1820 项导航检查、八种 SDK 构建／包校验和八种真实引用 IL／资源比对全部通过；真实依赖哈希已核对，674 项 Navigation 元数据／IL 契约通过。Navigation ZIP 包含原创插件、README、CHANGELOG、LICENSE 和白名单内全部 28 个地图文件。
+
+本补丁未执行实机地图对齐、城墙边缘行走、缩放手感、存档重载及房主／客人验收，因此 0.2.1 保持预发布；旧版 0.2.0 验收不覆盖本次修复。未修改游戏安装或存档。[授权记录](approvals/navigation-v0.2.1.json)绑定已审查源码输入。其他 Mod 保留已发布版本和文档类未发布记录，本次不为它们指定新版本。
