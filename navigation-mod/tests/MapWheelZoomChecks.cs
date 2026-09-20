@@ -7,9 +7,18 @@ internal static class MapWheelZoomChecks
     {
         void Near(float a,float b,string name)=>check(Math.Abs(a-b)<.0001f,name);
         Near(MapWheelZoom.Factor(6,6),1.25f,"UI-scaled wheel notch matches the button step");
-        Near(MapWheelZoom.Factor(720,6*MapWheelZoom.PlatformScale(true,true)),1.25f,"Windows platform-range wheel normalizes 120 before zoom");
-        Near(MapWheelZoom.Factor(6,6*MapWheelZoom.PlatformScale(false,true)),1.25f,"uniform Windows wheel is not divided by 120");
+        Near(MapWheelZoom.Factor(720,6*MapWheelZoom.PlatformScale(true,true)),1.25f,"game 2.1.6 Windows UI wheel normalizes 120 regardless of its inert range setting");
+        Near(MapWheelZoom.Factor(1,MapWheelZoom.PlatformScale(false,true)),1.25f,"Windows legacy UI events retain unit ticks");
         Near(MapWheelZoom.PlatformScale(true,false),1,"other supported platform native units remain one");
+        foreach(float scale in new[]{1f,2.5f,6f})
+        {
+            float units=scale*MapWheelZoom.PlatformScale(true,true);
+            foreach(float ticks in new[]{-2f,-1f,-.1f,.1f,1f,2f})
+                Near(MapWheelZoom.Factor(120*scale*ticks,units),MapWheelZoom.Factor(ticks,1),"native Windows wheel travel equals button ticks at any UI scale");
+            float split=1;for(int i=0;i<10;i++)split*=MapWheelZoom.Factor(12*scale,units);
+            Near(split,MapWheelZoom.Factor(1,1),"ten fractional Windows events equal one button click");
+        }
+        Near(MapWheelZoom.Factor(720,6),(float)Math.Pow(1.25,8),"missing Windows conversion reproduces the reported eight-step jump");
         Near(MapWheelZoom.Factor(2.5f,2.5f),1.25f,"custom UI scroll scale preserves map sensitivity");
         Near(MapWheelZoom.Factor(1,1),1.25f,"legacy module notch uses unscaled wheel units");
         Near(MapWheelZoom.Factor(.6f,6), (float)Math.Pow(1.25,.1),"fractional wheel motion is not rounded");

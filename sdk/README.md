@@ -143,6 +143,6 @@ Current release assignment (2026-09-18): Stack All 0.3.0 / r11, Navigation 0.2.0
 
 当前发行指定（2026-09-18）：Stack All 0.3.0 / r11、Navigation 0.2.0 / r7、Tree Info 0.1.0 / r8；仅修改 Mod 版本声明与发行说明，历史 SDK 源码／版本记录保持不变。
 
-Navigation 0.2.1 (2026-09-20) retains game 2.1.6 / SDK r7. The Rome main-town crop, shared wheel/button zoom factor and existing README artwork changes require no new game APIs or SDK snapshot. This patch is a prerelease pending in-game acceptance; historical release evidence remains unchanged.
+Navigation 0.2.1 (2026-09-20) retains game 2.1.6 / SDK r7. The Rome main-town crop, shared wheel/button zoom factor and existing README artwork changes require no new game APIs or SDK snapshot. Local feedback confirms the map update. Read-only inspection of the actual Input System assembly found that the scroll-range setter only stores its value and the UI callback divides by a constant one; Windows therefore still requires 120-unit conversion regardless of that setting. The correction removes the unreliable settings dependency and adds native contract checks. Wheel acceptance remains pending and the patch stays prerelease; historical release evidence remains unchanged.
 
-Navigation 0.2.1（2026-09-20）保持游戏 2.1.6 / SDK r7。罗马主城范围、滚轮与按钮共用缩放倍率及现有 README 配图改动不增加游戏接口或 SDK 快照。本次修复实机验收待完成，标记为预发布；历史发行证据保留原样。
+Navigation 0.2.1（2026-09-20）保持游戏 2.1.6 / SDK r7。罗马主城范围、滚轮与按钮共用缩放倍率及现有 README 配图改动不增加游戏接口或 SDK 快照。地图更新已获本地实机确认；只读核对实际 Input System 程序集发现滚轮范围 setter 仅存储枚举，UI 回调除数固定为 1，因此 Windows 无论此设置为何值都仍需进行 120 单位换算。本次修正移除对该设置的依赖并增加原生契约检查。滚轮验收待完成，保持预发布；历史发行证据保留原样。

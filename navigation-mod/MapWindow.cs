@@ -191,11 +191,9 @@ namespace OldMarket.Navigation
             if(state.Map==null||!state.Map.Valid||viewport.rect.width<=0||viewport.rect.height<=0)return;
             var module=e.currentInputModule as UnityEngine.InputSystem.UI.InputSystemUIInputModule;
             float uiScale=module!=null?module.scrollDeltaPerTick:1;
-            var settings=UnityEngine.InputSystem.InputSystem.settings;
-            bool platformRange=module!=null&&settings!=null&&settings.scrollDeltaBehavior==UnityEngine.InputSystem.InputSettings.ScrollDeltaBehavior.KeepPlatformSpecificInputRange;
             bool windows=Application.platform==RuntimePlatform.WindowsPlayer||Application.platform==RuntimePlatform.WindowsEditor;
             float maximum=MaximumZoom;
-            float factor=MapWheelZoom.Factor(e.scrollDelta.y,uiScale*MapWheelZoom.PlatformScale(platformRange,windows),maximum);
+            float factor=MapWheelZoom.Factor(e.scrollDelta.y,uiScale*MapWheelZoom.PlatformScale(module!=null,windows),maximum);
             if(factor==1)return;
             targetZoom=MapWheelZoom.Target(zoom,targetZoom,factor,maximum);zoomAnchor=anchor;
         }

@@ -8,7 +8,7 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 ## English
 
-Version **0.2.1** is a prerelease with a smaller Rome main map and matching wheel/button zoom steps. This patch awaits in-game acceptance; see the [validation record](../releases/validation.md).
+Version **0.2.1** is a prerelease with a smaller Rome main map and matching wheel/button zoom steps. The map update has local in-game confirmation; corrected Windows wheel input still awaits acceptance. See the [validation record](../releases/validation.md).
 
 Find your way around town with a minimap, a compass and your own map markers. Map & Compass works independently of the Coordinates HUD Mod.
 
@@ -106,7 +106,7 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 
 ## 中文
 
-**0.2.1** 为预发布版本，收紧罗马主地图范围并统一滚轮与按钮缩放步长。本次修复仍待实机验收，详见[验证记录](../releases/validation.md)。
+**0.2.1** 为预发布版本，收紧罗马主地图范围并统一滚轮与按钮缩放步长。地图更新已获本地实机确认，修正后的 Windows 滚轮输入仍待验收，详见[验证记录](../releases/validation.md)。
 
 用小地图、罗盘和自己的标记点，轻松找到镇上的目的地。Map & Compass 可以独立使用，不需要安装 Coordinates HUD。
 
