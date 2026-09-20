@@ -46,12 +46,19 @@ jobs:
           Invoke-WebRequest 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip' -OutFile $archive -TimeoutSec 60
           Expand-Archive -LiteralPath $archive -DestinationPath $steamcmdDir
           $exe = Join-Path $steamcmdDir 'steamcmd.exe'
-          $signature = Get-AuthenticodeSignature -LiteralPath $exe
-          if ($signature.Status -ne 'Valid' -or $signature.SignerCertificate.Subject -notmatch '(^|,\s*)O=Valve( Corp\.)?(,|$)') {
-            throw 'SteamCMD must have a valid Valve signature'
+          for ($attempt = 1; $attempt -le 2; $attempt++) {
+            $signature = Get-AuthenticodeSignature -LiteralPath $exe
+            if ($signature.Status -ne 'Valid' -or $signature.SignerCertificate.Subject -notmatch '(^|,\s*)O=Valve( Corp\.)?(,|$)') {
+              throw 'SteamCMD must have a valid Valve signature'
+            }
+            & $exe +quit
+            if ($LASTEXITCODE -eq 0) { break }
+            if ($LASTEXITCODE -ne 1 -or $attempt -eq 2) {
+              throw "SteamCMD initialization failed with exit code $LASTEXITCODE"
+            }
+            # The Windows bootstrap returns 1 after replacing itself during an update.
+            Write-Host 'Retrying the signed SteamCMD executable after its bootstrap update.'
           }
-          & $exe +quit
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
       - name: Check the public build (notify only from main)
         shell: pwsh
         env:
