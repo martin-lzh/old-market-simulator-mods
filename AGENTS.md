@@ -9,7 +9,7 @@
 1. 只有维护者明确要求“推进版本”或明确指定本次版本升级时，才推进对应 Mod 的版本。开发、修复、构建、安装、提交、推送或创建/合并 PR 本身均不代表版本推进授权。
 2. 未获明确指令的改动，全部暂记入对应 Mod CHANGELOG 的 `Unreleased` / `未发布` 中英文区段；保持现有程序集、插件和包版本号，不擅自新增编号版本条目，也不把新改动补写进已有编号的历史记录。本地构建用提交号和 SHA256 区分，不能因安装测试需要自行加版本。
 3. 维护者明确要求推进后，按其指定范围统一落实版本号、插件声明、包名、README 与中英文 CHANGELOG，将相应 Unreleased 内容移入编号版本。必要的不可变 SDK 接口快照修订按下文维护，但不自动推进 Mod 版本。
-4. 创建、更新或审查 PR 时，必须检查所有 Mod 的 CHANGELOG，并对照 PR 差异，列出有改动但尚未指定版本的 Mod（包括仍有 Unreleased 内容者）。PR 中逐项记录“已明确指定的目标版本”或“Unreleased，待维护者指定版本”；没有则明确写“无”。不得为了让检查通过自行分配版本，也不得仅凭已有旧版本号认定本轮改动已指定版本。
+4. 创建、更新或审查 PR 时，必须检查所有 Mod 的 CHANGELOG，并对照 PR 差异记录版本状态：已明确授权升级的填写目标版本；本次保持版本的填写 `Unchanged (现有版本)`；只有本次计划发布新版本、但目标版本确实待定时才填写 `**UNASSIGNED**`。另行说明 Unreleased 内容及其是否属于本次改动，不因存在未发布条目就认定版本待指定。明确列出待指定版本的 Mod，没有则写“无”；不得自行分配版本，也不得把保持现有版本当作新版本发布授权。
 
 5. 发布还须检查对应 `<mod>-mod/` 目录相对该 Mod 最近已发布版本标签的净差异；目录未变默认跳过。共享 SDK、CI 或根目录文档改动可以触发验证，但不能单独触发未改动 Mod 的 Release。首次发布须有已跟踪的 Mod 文件；目录变化也不能替代维护者的版本推进授权。
 
@@ -32,7 +32,7 @@
 
 为小红书、Steam 等社交或社区平台制作的宣传素材（宣传图、生成原图、文案、导出脚本及打包文件）只保存在被忽略的 `outputs/` 或已忽略的宣传目录中，不提交或推送到 GitHub。此规则不影响已跟踪的 Mod 运行时资源和 README 功能截图。
 
-PR 版本表中，尚未明确指定的目标版本必须醒目标为 `**UNASSIGNED**`；不得用旧版本、当前源码版本或 Unreleased 代替目标版本。Unreleased 状态放在改动说明中。
+PR 版本表使用“版本状态 / Version status”列。文档修正、不涉及发布的改动，以及本次未改动的 Mod，填写 `Unchanged (现有版本)`；已授权升级的填写目标版本；仅对计划发布但目标版本待定的 Mod 使用 `**UNASSIGNED**`。Unreleased 状态放在改动说明中，不代替版本状态。
 
 PR 标题和正文使用英语，以维护者的口吻面向其他开发者撰写。说明最终问题、行为变化、验证和发布状态；不写 Agent 向用户汇报的语气，不叙述对话、用户指令或执行过程。版本推进由维护者决定，终端用户不需要创建 PR。
 
@@ -47,7 +47,7 @@ This is the public repository for original Mod source, the compilation SDK and r
 1. Advance a Mod version only when the maintainer explicitly requests version advancement or explicitly specifies the version upgrade. Development, fixes, builds, installation, commits, pushes, and creating or merging a PR do not themselves authorize a version bump.
 2. Otherwise, record all pending changes in that Mod's bilingual `Unreleased` / `未发布` CHANGELOG sections. Preserve existing assembly, plugin and package versions; do not create numbered entries or append new changes to numbered historical entries. Identify local builds by commit and SHA256 instead of inventing a version for installation tests.
 3. After an explicit request, synchronize the authorized version scope across assembly/plugin declarations, package names, README and both CHANGELOG languages, moving the relevant Unreleased entries into the numbered release. Maintain required immutable SDK API revisions under the rules below; this does not automatically advance any Mod version.
-4. When creating, updating or reviewing a PR, inspect every Mod CHANGELOG and compare the PR diff. List Mods with changes that have not yet been assigned a version, including those with pending Unreleased entries. Record each as an explicitly assigned target version or “Unreleased, awaiting a maintainer-assigned version”; state “none” if there are none. Never assign versions just to pass this check or treat an existing old version number as an assignment for the new changes.
+4. When creating, updating or reviewing a PR, inspect every Mod CHANGELOG against the PR diff and record its version status: the target version for an explicitly authorized bump, `Unchanged (current version)` when this PR preserves the version, or `**UNASSIGNED**` only when a new release is planned in this PR but its target version is undecided. Describe Unreleased content and whether it belongs to this PR separately; pending entries alone do not imply a missing version assignment. List Mods awaiting a target version, or state “none”. Never assign versions automatically or treat an unchanged version as authorization for a new release.
 
 5. Publishing additionally requires a net change in the corresponding `<mod>-mod/` directory since that Mod's latest published version tag. Skip unchanged directories. Shared SDK, CI and root documentation changes may trigger validation, but cannot alone trigger a Release for an unchanged Mod. A first release requires tracked Mod files; directory changes do not replace explicit version-advancement authorization.
 
@@ -70,7 +70,7 @@ Bind release authorization to exact source inputs using the [release record work
 
 Keep promotional materials made for social or community platforms such as Xiaohongshu and Steam (posters, generated source art, copy, export scripts and archives) only in ignored `outputs/` or an already-ignored promotional directory. Do not commit or push them to GitHub. This does not change the treatment of existing tracked Mod runtime assets or README feature screenshots.
 
-In PR version tables, display an unassigned target version as `**UNASSIGNED**`. Never substitute an old release, current source version or Unreleased for a target version; describe Unreleased changes in the scope/status column.
+Use a “Version status” column in PR version tables. For documentation corrections, changes outside a release scope, and Mods untouched by this PR, use `Unchanged (current version)`. For an authorized bump, give the target version. Reserve `**UNASSIGNED**` for a planned release whose target version is undecided. Describe Unreleased content in the scope/status column, separately from version status.
 
 Write PR titles and bodies in English, in the maintainer's voice for other developers. Explain the final problem, behavior changes, validation and release status. Do not frame the PR as an agent's report to a user or recount conversation history, user instructions or execution steps. Maintainers decide version advancement; end users are not required to open PRs.
 
