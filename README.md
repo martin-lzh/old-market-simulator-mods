@@ -1,5 +1,7 @@
 # Old Market Simulator Mods
 
+![LZH's OMS Mods — Old Market Simulator; AI-generated cover / AI 生成封面](assets/cover.png)
+
 [English](#english) · [中文](#中文)
 
 ## English
