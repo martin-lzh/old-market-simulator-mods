@@ -1,10 +1,10 @@
 # Development notes / 开发说明
 
-**2026-09-14 — maintainer confirmation:** Visual and other local in-game testing is complete; multiplayer testing is the only remaining test area. This records manual testing feedback; it is not an automated test result.
+**Current acceptance — 2026-09-19:** Profit Insights 0.5.2 is a stable release with maintainer-confirmed in-game acceptance. The earlier `e23f986` bundle also has reported local and two-computer multiplayer acceptance. These are manual reports, not new automated test runs or exhaustive scenario measurements.
 
-**2026-09-14 — 维护者确认：**视觉及其他本地实机测试已完成，目前只剩多人游戏测试。这是人工测试反馈，不是自动测试结果。
+**当前验收 — 2026-09-19：**Profit Insights 0.5.2 已获维护者实机验收确认，为正式发布版；此前 `e23f986` 合集也已有本地及双实机联机确认。这是人工反馈，不代表新运行了自动检查或完成所有场景测量。
 
-Player instructions: [README](README.md). Repository workflow: [CONTRIBUTING](../CONTRIBUTING.md), [SDK](../sdk/README.md), [releases](../releases/README.md). Earlier unchecked-scenario descriptions below are superseded by the confirmation above. Current test scope: [validation record](../releases/validation.md).
+Player instructions: [README](README.md). Repository workflow: [CONTRIBUTING](../CONTRIBUTING.md), [SDK](../sdk/README.md), [releases](../releases/README.md). Earlier pending-acceptance descriptions are historical. Current test scope: [validation record](../releases/validation.md).
 
 玩家用法见 [README](README.md)。本文保留构建、接口与历史测试资料；下方早期待测列表已由上述最新确认更新，当前实机范围以[验证记录](../releases/validation.md)为准。
 
@@ -35,7 +35,7 @@ The scripts run checks, download pinned loader references when needed, verify th
 
 Version 0.5.2 compiles for BepInEx, MelonLoader, and the source-retained standalone target. Automated verification passes 40 accounting checks, 27 runtime cache and rule checks, and 11 localization suites. Coverage includes recipe and case conversion, current-day prices, losses, zero-cost and unknown-rule behavior, on-demand caching and invalidation, native-term lookup, locale fallback, and placeholder parity.
 
-Automated checks are not in-game acceptance. Layout across resolutions, controller selection, all-language fonts and wrapping, day changes, multiplayer, and runtime performance have not been fully validated. Game updates and Mods that patch the same screens may require renewed testing.
+Automated checks are not in-game acceptance. The manual acceptance record does not supply an exhaustive matrix for resolutions, controller selection, all-language fonts and wrapping, day changes, host/client combinations or measured runtime performance. Game updates and Mods that patch the same screens may require renewed testing.
 
 ## 计算口径
 
@@ -64,10 +64,16 @@ Automated checks are not in-game acceptance. Layout across resolutions, controll
 
 0.5.2 已为 BepInEx、MelonLoader 和保留源码的独立目标完成编译。自动化验证通过 40 项会计检查、27 项运行时缓存与规则检查，以及 11 组本地化测试，覆盖配方与箱件换算、当天价格、亏损、零成本、未知规则、按需缓存与失效、原生词条、语言回退和占位符一致性。
 
-自动化检查不等同于游戏内验收。不同分辨率的布局、手柄选择、所有语言的字体与换行、换日、多人和运行时性能尚未完整验证。游戏更新或其他修改相同界面的 Mod 可能需要重新测试。
+自动化检查不等同于游戏内验收。人工验收记录未提供不同分辨率、手柄选择、所有语言的字体与换行、换日、房主／客人组合及量化性能的完整场景矩阵。游戏更新或其他修改相同界面的 Mod 可能需要重新测试。
 
 ## SDK and automated builds / SDK 与自动构建
 
 This Mod pins its compilation SDK in [release.json](release.json). Current baseline: game 2.1.6 / SDK r1. Run `python tools/ci.py build` from the repository root for a game-free build. See [SDK maintenance](../sdk/README.md) and [CI releases](../releases/README.md). Compilation does not replace in-game compatibility checks.
 
 本 Mod 在 [release.json](release.json) 固定编译 SDK，当前基线为游戏 2.1.6 / SDK r1。从仓库根目录运行 `python tools/ci.py build` 可无游戏文件构建。见 [SDK 维护](../sdk/README.md)和 [CI 发布](../releases/README.md)；编译不能代替实机兼容验证。
+
+## Local media archive / 本地素材归档
+
+The local index at `outputs/media/README.md` lists reusable Xiaohongshu, Steam, Nexus and gameplay media with source records. This ignored archive is absent from clones and release packages; archived media alone does not establish in-game acceptance.
+
+本地 `outputs/media/README.md` 索引可复用的小红书、Steam、Nexus 与实机素材及来源记录。归档被 Git 忽略，不随克隆或发行包提供；素材本身不代表已通过实机验收。

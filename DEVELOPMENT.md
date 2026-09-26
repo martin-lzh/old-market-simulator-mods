@@ -6,6 +6,16 @@ Player information: [README](README.md). Contribution setup and branch rules: [C
 
 Official game build changes: [Steam build monitoring](docs/game-build-monitor.md). / 官方游戏构建变化：[Steam 构建监测](docs/game-build-monitor.md)。
 
+### Media archive / 素材归档
+
+Each Mod keeps its local media archive at `<mod>-mod/outputs/media/`. Open its `README.md` for Xiaohongshu posters, Steam images, Nexus covers and gameplay screenshots; `manifest.json` records source paths, known provenance, dimensions and SHA256 hashes. The local cross-Mod index is `outputs/media-library/README.md`. Shared campaign exports and their editing sources remain under the original ignored output directories, with references from each Mod archive.
+
+These archives are ignored by Git and excluded from Mod packages; cloning this repository does not restore them. Back them up separately. Preserve original images and distinguish generated artwork, gameplay captures and platform exports. Record unknown capture versions as unknown, and consult the [validation record](releases/validation.md) before making testing or compatibility claims. Existing tracked README images and runtime assets remain in `assets/` and `maps/`.
+
+各 Mod 的本地素材归档位于 `<mod>-mod/outputs/media/`，通过其中的 `README.md` 查找小红书宣传图、Steam 图片、Nexus 封面和实机截图；`manifest.json` 记录来源路径、已知出处、尺寸和 SHA256。本地跨 Mod 索引为 `outputs/media-library/README.md`。合集导出文件和编辑源文件保留在原有忽略目录中，由各 Mod 归档引用。
+
+这些归档被 Git 忽略，不进入 Mod 安装包，克隆仓库不会恢复，请另行备份。保留原图，区分生成插画、实机截图与平台导出图；无法确认拍摄版本时标明未知，测试与兼容性声明以[验证记录](releases/validation.md)为准。已有跟踪的 README 配图和运行时资源继续放在 `assets/`、`maps/`。
+
 | Mod | Development notes / 开发说明 |
 | --- | --- |
 | Map & Compass | [DEVELOPMENT](navigation-mod/DEVELOPMENT.md) |

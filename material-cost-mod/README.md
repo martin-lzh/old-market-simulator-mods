@@ -58,14 +58,26 @@ Use **one** edition to match your loader: BepInEx 5 or MelonLoader 0.7.3. Do not
 
 Download the matching ZIP from the release page and extract it into the game folder. The loader itself is not included. If you are changing loaders, follow their installation/removal guides first.
 
-#
-
 ### Settings and removal
 
-The report's switch is the easiest way to change the calculation display. BepInEx settings are in `BepInEx/config/local.oldmarket.materialcost.cfg`; MelonLoader settings are in `UserData/OldMarket.MaterialCost.cfg`. `MaterialsOnly` starts off. Leave diagnostics off unless you are investigating a problem.
+The report's switch is the easiest way to change the calculation display. After the first launch, close the game before editing settings. BepInEx settings are in `BepInEx/config/local.oldmarket.materialcost.cfg`; MelonLoader settings are in `UserData/OldMarket.MaterialCost.cfg`.
 
-To update, close the game and back up the old DLL before replacing it. To remove the Mod, delete only `OldMarket.MaterialCost.dll` from the location above; your saves need no conversion. Other Mods changing the same screens may overlap the text.
-[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [License](LICENSE)
+| Setting | BepInEx section/key | MelonLoader category/key | Default |
+| --- | --- | --- | --- |
+| Estimate report material costs | `Report.MaterialsOnly` | `OldMarketMaterialCost.MaterialsOnly` | false |
+| Diagnostic logging | `Diagnostics.Enabled` | `OldMarketMaterialCost.Diagnostics` | false |
+
+Leave diagnostics off unless you are investigating a problem; changes to diagnostics require a restart.
+
+To update, close the game and back up the old DLL and settings before replacing the DLL. Keep only one active copy. To roll back, close the game and restore those backups. To remove the Mod, close the game and delete only `OldMarket.MaterialCost.dll` from the location above; your saves need no conversion. Keep the configuration if you want your settings available after reinstalling.
+
+### Compatibility
+
+Display text follows all 13 game languages, with English fallback for unsupported locales. Native terms such as profit and recommended price use the game's translations.
+
+Only players who want these displays need the Mod. It adds no multiplayer protocol or game-save fields; the recorded host/client test scope is in the [validation record](../releases/validation.md). Other Mods changing the same screens may overlap the text. Support for game versions other than 2.1.6 has not been established.
+
+[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development notes](DEVELOPMENT.md) · [License](LICENSE)
 
 ## 中文
 
@@ -119,11 +131,23 @@ To update, close the game and back up the old DLL before replacing it. To remove
 
 从发布页下载对应 ZIP，解压到游戏目录。包内不含加载器；如果要换加载器，请先按各自的安装和卸载说明处理。
 
-#
-
 ### 设置与卸载
 
-平时直接使用日报里的开关即可。BepInEx 设置位于 `BepInEx/config/local.oldmarket.materialcost.cfg`，MelonLoader 设置位于 `UserData/OldMarket.MaterialCost.cfg`，`MaterialsOnly` 默认关闭。不排查问题时，诊断选项保持关闭即可。
+平时直接使用日报里的开关即可。首次运行后，退出游戏再编辑配置：BepInEx 设置位于 `BepInEx/config/local.oldmarket.materialcost.cfg`，MelonLoader 设置位于 `UserData/OldMarket.MaterialCost.cfg`。
 
-更新前退出游戏、备份并替换旧 DLL。卸载时只删除上表位置的 `OldMarket.MaterialCost.dll`，存档不用转换。其他修改同一界面的 Mod 可能造成文字重叠。
-[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [许可证](LICENSE)
+| 设置 | BepInEx 分组/键名 | MelonLoader 分类/键名 | 默认值 |
+| --- | --- | --- | --- |
+| 日报按原料估算成本 | `Report.MaterialsOnly` | `OldMarketMaterialCost.MaterialsOnly` | false |
+| 诊断日志 | `Diagnostics.Enabled` | `OldMarketMaterialCost.Diagnostics` | false |
+
+不排查问题时，诊断选项保持关闭；修改诊断设置后需要重启游戏。
+
+更新前退出游戏，备份旧 DLL 和配置后替换 DLL，只保留一个启用副本。回退时退出游戏并还原这些备份。卸载时退出游戏，只删除上表位置的 `OldMarket.MaterialCost.dll`，存档不用转换。保留配置文件即可在重新安装时继续使用原设置。
+
+### 兼容说明
+
+显示文字跟随游戏全部 13 种语言，未支持的语言回退英语；利润、建议售价等原生词条使用游戏译文。
+
+只有需要查看这些信息的玩家才需安装，不新增联机协议或游戏存档字段；已记录的房主／客人测试范围见[验证记录](../releases/validation.md)。其他修改同一界面的 Mod 可能造成文字重叠，尚未确认 2.1.6 以外的游戏版本兼容性。
+
+[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发说明](DEVELOPMENT.md) · [许可证](LICENSE)

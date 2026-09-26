@@ -2,6 +2,7 @@
 **/obj/
 /work/
 /outputs/
+/*-mod/outputs/
 /docs/steam/
 *.dll
 *.exe

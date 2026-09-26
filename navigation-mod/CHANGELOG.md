@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Document marker storage, local multiplayer scope, input restrictions and rollback of matching DLL/maps/settings; update development acceptance and package-version references and index local reusable media. Documentation only; runtime, version and SDK are unchanged.
+
 - Correct the published 0.2.1 status and current download links. Existing release assets, runtime and SDK are unchanged.
 
 ### 0.2.1 — 2026-09-20 (stable release)
@@ -126,6 +128,8 @@ Experimental initial build; not installed or verified in game.
 ## 中文
 
 ### 未发布
+
+- 补齐标记存储、联机本地作用范围、输入限制及配套 DLL／地图／设置回退说明；更新开发说明中的验收和包版本引用，并加入本地复用素材索引。仅文档改动，运行时、版本和 SDK 不变。
 
 - 修正 0.2.1 已正式发布的状态说明及当前下载链接；已发布附件、运行时和 SDK 不变。
 
