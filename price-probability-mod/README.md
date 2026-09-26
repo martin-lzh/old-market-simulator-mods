@@ -45,6 +45,8 @@ For Old Market Simulator **2.1.6 on Windows**, with **BepInEx 5** installed.
 
 Choose the Mod ZIP on the release page, not GitHub's **Source code** download. The loader is not included.
 
+Keep only one copy of this plugin DLL under `BepInEx/plugins`, including any older copy installed directly in that folder. Other game versions and platforms have not been confirmed compatible.
+
 ### Multiplayer
 
 Only the host can keep and apply automatic pricing rules. Other players can preview prices if they have the Mod; they can still use the normal pricing screen without it. A host's active rule takes precedence over a guest's price change, and guests without the Mod cannot see that rule. Reopen a price panel to see changes made by someone else.
@@ -55,9 +57,11 @@ Rules stay on the host's computer. Avoid using another automatic-pricing Mod at 
 
 Manage rules in the price panel. They are saved by game save slot in `BepInEx/config/local.oldmarket.priceprobability.cfg`. If you replace a save with a different one in the same slot, clear its old rules first so they do not carry over unexpectedly.
 
+To clear one product's rule, select **Off** in its price panel and press **Confirm**. To reset rules for every slot, close the game, back up the configuration file and move it out of `BepInEx/config`; the Mod recreates it without rules when needed. Configuration changes do not restore earlier selling prices. When transferring a world to another host or computer, the rules do not travel with the game save; set them up again or deliberately transfer the matching configuration as well.
+
 To update, close the game and back up the old DLL and settings before replacing the plugin. To uninstall, close the game and remove `OldMarket.PriceProbability.dll`. Automatic changes stop, but prices already set remain until you change them. Keep your loader and other plugins.
 
-[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [License](LICENSE)
+[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development and validation](DEVELOPMENT.md) · [Translations](localization/README.md) · [License](LICENSE)
 
 ## 中文
 
@@ -98,6 +102,8 @@ To update, close the game and back up the old DLL and settings before replacing 
 
 请选发布页里的 Mod ZIP，不要下载 **Source code** 当作插件安装。安装包不含加载器。
 
+`BepInEx/plugins` 下只保留一份本插件 DLL，包括以前直接放在该目录里的旧副本。其他游戏版本和平台尚未确认兼容。
+
 ### 和朋友一起玩
 
 只有房主能保存和执行自动定价规则。客人安装后可以查看概率，不安装也能使用游戏原有定价页。房主开启的规则会优先于客人的改价；未安装的客人看不到规则状态。别人改价后，重新打开定价页即可查看。
@@ -108,6 +114,8 @@ To update, close the game and back up the old DLL and settings before replacing 
 
 平时直接在定价页管理规则即可。规则按存档槽保存在 `BepInEx/config/local.oldmarket.priceprobability.cfg`；如果把同一个槽换成另一份存档，请先清除旧规则，避免意外沿用。
 
+清除单个商品规则时，在其定价页选择**关闭**并点击**确认**。若要重置所有存档槽的规则，请退出游戏，备份配置文件后将它移出 `BepInEx/config`；Mod 会在需要时重新生成不含规则的配置。修改配置不会恢复此前的售价。将世界转给另一位房主或另一台电脑时，规则不会随游戏存档迁移；需要重新设置，或同时迁移与该存档匹配的配置。
+
 更新前退出游戏，备份旧 DLL 和设置后替换插件。卸载时退出游戏并删除 `OldMarket.PriceProbability.dll`，自动调价会停止，但已经设置的售价会保留，需要时可自行修改。保留加载器和其他插件。
 
-[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [许可证](LICENSE)
+[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发与验证](DEVELOPMENT.md) · [翻译说明](localization/README.md) · [许可证](LICENSE)

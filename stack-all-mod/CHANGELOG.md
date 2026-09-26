@@ -6,6 +6,8 @@
 
 ### Unreleased
 
+- Document duplicate-plugin cleanup and game-update compatibility refusal, complete Chinese collectible guidance and link development/localization help. Refresh the current acceptance summary, align localization notes with the two native-row captions and document the ignored local media index. Documentation only; version and SDK remain unchanged.
+
 - Add in-game screenshots illustrating separate goods/container counts, the G empty-container action and hold-to-repeat controls to both README languages. Documentation only.
 
 - Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
@@ -46,6 +48,8 @@ Older development versions mentioned in the README are not verified downloadable
 ## 中文
 
 ### 未发布
+
+- 补充重复插件清理及游戏更新后的兼容拒绝说明，补齐中文收集品说明并链接开发／翻译资料；更新当前验收摘要，使本地化说明对应两条原生布局文字，并说明被忽略的本地素材索引。仅文档改动，版本和 SDK 不变。
 
 - 在双语 README 中加入商品／容器数量、G 丢空盒及长按连续操作的实机截图，仅更新文档。
 

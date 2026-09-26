@@ -1,8 +1,8 @@
 # Development notes / 开发说明
 
-**Validation scope, 2026-09-15:** The maintainer confirmed visual, local and two-computer multiplayer testing for bundle `e23f986`. Later zoom, Island, Eastern Town POI and Rome changes are Unreleased and still require in-game acceptance. Automated results below identify their source; retaining version 0.2.0 does not extend the earlier manual test coverage.
+**Current acceptance — 2026-09-20:** Map & Compass 0.2.1 is a stable release. The maintainer confirmed the Rome map and Windows wheel/button zoom correction on source `0c5b952`, following the 2026-09-19 stable acceptance of 0.2.0. Earlier visual, local and two-computer multiplayer testing applies to bundle `e23f986`; later acceptance does not add an exhaustive map-edge, save/reload or host/client scenario matrix. Automated results below retain their original source scope.
 
-**验证范围，2026-09-15：**维护者已确认 `e23f986` 合集的视觉、本地实机和双实机联机测试。后续缩放、海岛、东方小镇 POI 与罗马改动记入未发布，仍待实机验收。下方自动验证结果注明对应源码；保留 0.2.0 版本号不代表后续改动已被此前人工测试覆盖。
+**当前验收 — 2026-09-20：**Map & Compass 0.2.1 为正式发布版。继 2026-09-19 对 0.2.0 的正式发布验收后，维护者确认源码 `0c5b952` 的罗马地图及 Windows 滚轮／按钮缩放修正通过本地实机验收。更早的视觉、本地及双实机联机确认仍限定于 `e23f986` 合集；后续验收不新增逐边地图、存档重载或房主／客人完整场景矩阵。下方自动验证保留原源码范围。
 
 Player instructions: [README](README.md). Repository workflow: [CONTRIBUTING](../CONTRIBUTING.md), [SDK](../sdk/README.md), [releases](../releases/README.md). Historical confirmations apply only to the tested source. Current test scope: [validation record](../releases/validation.md).
 
@@ -38,7 +38,7 @@ Layout units use a 1920×1080 reference canvas. `MinimapRange` is the radius in 
 
 ## Map data and expansion states
 
-Local companion metadata matches map ID, scene, region and expansion IDs; each image includes explicit X/Z bounds and `North: "+Z"`. Unlock variants can share one painted base image and supply exact obstacle overlays; they are not four independently invented terrain layouts. Ambiguous matching metadata is rejected instead of choosing an arbitrary map. Map geometry is never inferred from decorative artwork alone. The reviewed map pack is tracked under `maps/` and ships in the public ZIP; `map-pack.json` pins every allowed JSON/PNG and SHA256. Original game assemblies, raw assets and extraction snapshots remain excluded. The pack contains Eastern Town with four central-market states, the Island static surface overview, and Rome with eight region maps. See the [map inventory and coverage limits](maps/README.md). Eastern Town still uses X [-120,220], Z [40,300]; the expanded outer-terrain render is not bundled. Image Gen alignment remains approximate until checked in-game.
+Local companion metadata matches map ID, scene, region and expansion IDs; each image includes explicit X/Z bounds and `North: "+Z"`. Unlock variants can share one painted base image and supply exact obstacle overlays; they are not four independently invented terrain layouts. Ambiguous matching metadata is rejected instead of choosing an arbitrary map. Map geometry is never inferred from decorative artwork alone. The reviewed map pack is tracked under `maps/` and ships in the public ZIP; `map-pack.json` pins every allowed JSON/PNG and SHA256. Original game assemblies, raw assets and extraction snapshots remain excluded. The pack contains Eastern Town with four central-market states, the Island static surface overview, and Rome with eight region maps. See the [map inventory and coverage limits](maps/README.md). Eastern Town still uses X [-120,220], Z [40,300]; the expanded outer-terrain render is not bundled. Artwork registration is approximate; the acceptance record does not establish exhaustive map-edge alignment.
 
 The runtime reads the replicated unlock set and selects matching variants after unlock or scene events, with a short delay for game activation. Eastern Town switches market obstacle layers. Rome selects the exact local-player region, filters conditional POIs and removes hatched unlock-area rectangles as their IDs unlock; overlapping pending areas remain shaded. Its town detail patch has its own world bounds. Invalidated POI targets are cleared, while expansion changes preserve personal-marker storage scope. These overlays indicate affected surface extents, not intermediate building models, walking routes or arbitrary player placements. Map files load at plugin startup; restart after changing them.
 
@@ -54,7 +54,7 @@ Requirements for the local build below: Windows, Python 3.12, .NET SDK (tests ta
 dotnet run --project navigation-mod/tests/Navigation.Tests.csproj
 ```
 
-Build output: `outputs/OldMarket.Navigation-0.2.0.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist contains the plugin DLL, README, CHANGELOG, LICENSE and the 28 map files (13 JSON and 15 PNG) named in `map-pack.json`. Local and CI builds use `tools/ci.py package` / `write_package` for identical packaging. Validation checks resource hashes, PNG integrity, map bounds and texture references; the plugin's own metadata reader validates each packaged map and its POIs. Game assemblies, loaders, saves, logs and backups remain excluded.
+Build output: `outputs/OldMarket.Navigation-0.2.1.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist contains the plugin DLL, README, CHANGELOG, LICENSE and the 28 map files (13 JSON and 15 PNG) named in `map-pack.json`. Local and CI builds use `tools/ci.py package` / `write_package` for identical packaging. Validation checks resource hashes, PNG integrity, map bounds and texture references; the plugin's own metadata reader validates each packaged map and its POIs. Game assemblies, loaders, saves, logs and backups remain excluded.
 
 Verified for source `db03d32` on game 2.1.6 / SDK r7: version validation, all SDK builds, 64 CI tooling tests, 1291 navigation checks, 22 native-name checks and 659 Navigation installed-assembly contracts passed. Navigation real-reference and SDK builds matched after all 15 dependency hashes were verified. The repository-wide real-reference run stopped at Stack All differences; Navigation was verified independently. See the [Rome audit](maps/rome-audit.md). These are recorded results, not new checks run by this documentation update; no Unity game code was executed.
 
@@ -62,7 +62,7 @@ Automated coverage exercises coordinate conversion/rotation boundaries, marker s
 
 ### 地图状态与存储
 
-本地地图按地图 ID、场景、区域和解锁集合匹配，显式保存 X/Z 边界及北向。解锁变体可共用同一绘画底图，并叠加准确障碍层，并非四幅各自编造地形的地图；匹配条件有歧义时拒绝选图。不能仅凭装饰画推断几何。经核对的地图包纳入 `maps/` 并随公开 ZIP 发行；`map-pack.json` 逐项固定 JSON/PNG 文件及 SHA256。原始游戏程序集、资源和提取快照仍不入包。当前地图包包含东方小镇中央市场四态、海岛静态地表概览和罗马八个区域地图，详见[地图清单与覆盖边界](maps/README.md)。东方小镇仍使用 X [-120,220]、Z [40,300]，外围完整地形渲染尚未打包；Image Gen 对齐仍待实机验证。
+本地地图按地图 ID、场景、区域和解锁集合匹配，显式保存 X/Z 边界及北向。解锁变体可共用同一绘画底图，并叠加准确障碍层，并非四幅各自编造地形的地图；匹配条件有歧义时拒绝选图。不能仅凭装饰画推断几何。经核对的地图包纳入 `maps/` 并随公开 ZIP 发行；`map-pack.json` 逐项固定 JSON/PNG 文件及 SHA256。原始游戏程序集、资源和提取快照仍不入包。当前地图包包含东方小镇中央市场四态、海岛静态地表概览和罗马八个区域地图，详见[地图清单与覆盖边界](maps/README.md)。东方小镇仍使用 X [-120,220]、Z [40,300]，外围完整地形渲染尚未打包；生成图对齐存在近似误差，验收记录不代表逐边地图对齐已全部核验。
 
 读取原生同步的解锁集合，在解锁或场景事件后稍作延迟，等待游戏激活状态更新，再切换匹配地图。东方小镇切换市场障碍层；罗马按本地玩家的精确区域名选图，筛选条件 POI，并移除已解锁 ID 的斜线矩形，重叠的未解锁范围仍保留阴影。主城细节图使用独立世界边界。失效 POI 目标会清除，解锁变化不改变个人标记的存储范围。区块仅提示受影响地表范围，不重建中间阶段建筑、可行走路线或玩家摆放物。地图文件在插件启动时加载，修改后需重启。
 
@@ -74,9 +74,9 @@ Automated coverage exercises coordinate conversion/rotation boundaries, marker s
 
 跟随游戏选定语言及金钱栏 TMP 字体，提供 13 种原创翻译：简中、繁中、英语、德语、法语、意大利语、日语、韩语、葡萄牙语、俄语、西班牙语、土耳其语、乌克兰语；未知语言回退英语。尚未经母语审校和所有字体实机检查。已确认的 POI NameKey 使用游戏原生本地化；休息处、市场、补水处、日历和返回入口使用 Mod 原创功能标签。地图元数据可通过 NameTextKey 使用 Mod 的 13 语种标题，语言切换即时更新；未设置或无法识别的键保留自定义 Name，空名称使用本地化的“地图”。个人标记和自定义字面名称保留原文。
 
-固定游戏 **2.1.6**、Unity Mono **2022.3.62f3** 与编译 SDK **2.1.6/r7**，既有 Mod 保留 r1。CI 使用官方固定哈希的 BepInEx 5.4.23.5 引用；反射使用的存档槽、区域与扩建成员纳入 SDK 和真实程序集契约检查。无游戏环境可运行上文 `ci.py validate`、CI 工具测试和 `ci.py build`；匹配的本机安装可用 `ci.py verify-game --game-dir <path>` 核对真实引用符号 IL/资源与契约，不启动游戏。
+固定游戏 **2.1.6**、Unity Mono **2022.3.62f3** 与编译 SDK **2.1.6/r7**，其他 Mod 使用各自 `release.json` 指定的修订。CI 使用官方固定哈希的 BepInEx 5.4.23.5 引用；反射使用的存档槽、区域与扩建成员纳入 SDK 和真实程序集契约检查。无游戏环境可运行上文 `ci.py validate`、CI 工具测试和 `ci.py build`；匹配的本机安装可用 `ci.py verify-game --game-dir <path>` 核对真实引用符号 IL/资源与契约，不启动游戏。
 
-构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.2.0.zip`，打印 SHA256，不自动安装，包含 DLL、README、CHANGELOG、LICENSE 及 `map-pack.json` 列出的 28 个地图文件（13 份 JSON、15 张 PNG）。本地脚本和 CI 共用 Python 打包器；校验哈希、PNG 完整性、地图边界和贴图引用，并使用插件自身的读取器检查地图及 POI。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
+构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.2.1.zip`，打印 SHA256，不自动安装，包含 DLL、README、CHANGELOG、LICENSE 及 `map-pack.json` 列出的 28 个地图文件（13 份 JSON、15 张 PNG）。本地脚本和 CI 共用 Python 打包器；校验哈希、PNG 完整性、地图边界和贴图引用，并使用插件自身的读取器检查地图及 POI。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
 
 源码 `db03d32` 在游戏 2.1.6 / SDK r7 基线上通过版本验证、全部 SDK 构建、64 项 CI 工具测试、1291 项导航检查、22 项原生名称检查和 659 项 Navigation 原生契约检查。核对 15 个依赖哈希后，Navigation 的真实引用与 SDK 构建一致。全仓真实引用检查先在 Stack All 差异处停止，随后独立验证 Navigation，详见[罗马审计](maps/rome-audit.md)。这是已记录结果，不是本次文档修改重新运行的检查；不执行 Unity 游戏代码。
 
@@ -98,9 +98,9 @@ Compass and 3D target guidance reuse the selected POI icon or personal marker sh
 
 ## Island map preview / 海岛地图预览
 
-The first map is BazaarIsland, ID 0. See [POI coordinates and evidence](maps/island-pois.md) for its 16 fixed anchors, native keys, categories and icons. The full-terrain illustration is a static surface overview; it is not an expansion-state or underground-floor map. Game 2.1.6 / SDK r7 stays unchanged: no new game, Unity or network interfaces are called. Image Gen registration is approximate and requires in-game acceptance.
+The first map is BazaarIsland, ID 0. See [POI coordinates and evidence](maps/island-pois.md) for its 16 fixed anchors, native keys, categories and icons. The full-terrain illustration is a static surface overview; it is not an expansion-state or underground-floor map. Game 2.1.6 / SDK r7 stays unchanged: no new game, Unity or network interfaces are called. Artwork registration remains approximate; current acceptance and its scenario limits are recorded above.
 
-第一张地图为 BazaarIsland、ID 0；[POI 坐标记录](maps/island-pois.md)列出 16 个固定锚点及类别图标。新增的是完整地形范围的静态地表图，不是全部扩建或地下楼层图。沿用游戏 2.1.6 / SDK r7，没有新增游戏、Unity 或网络接口调用；生成图对齐仍需实机验收。
+第一张地图为 BazaarIsland、ID 0；[POI 坐标记录](maps/island-pois.md)列出 16 个固定锚点及类别图标。新增的是完整地形范围的静态地表图，不是全部扩建或地下楼层图。沿用游戏 2.1.6 / SDK r7，没有新增游戏、Unity 或网络接口调用；生成图对齐仍有近似误差，当前验收及场景范围见上方记录。
 
 Historical Island introduction (`5d328aa`, 2026-09-15): version/map-hash validation, 61 CI tooling tests, all SDK builds and 1263 Navigation checks passed (including five packaged manifests). Icon generation verified 72 category variants and 18 distinct silhouettes. No new SDK snapshot, game installation changes, in-game tests or multiplayer tests were performed.
 
@@ -114,6 +114,12 @@ Rome uses a town map plus two caravan regions, an engineer mine and four gate re
 
 ## Localization / 本地化
 
-Game 2.1.6 has 13 locale assets: `en`, `zh`, `zh-Hant`, `de`, `fr`, `it`, `ja`, `ko`, `pt`, `ru`, `es`, `tr`, `uk`. Navigation supplies every UI and built-in map-title key in each locale. `NameTextKey` in map metadata selects an original Mod translation; absent or unknown keys preserve a custom `Name`, with a localized generic map title when empty. Functional POI aliases for rest, market, water, calendar and return use original translations; verified native POI keys continue through the asynchronous game table. Personal names are preserved. Language changes require no map reload. Unknown Mod locales fall back to English; native text remains icon-only while unavailable. Traditional Chinese regional aliases include Taiwan, Hong Kong and Macau. No new game, Unity or networking API is required; SDK 2.1.6/r7 and version 0.2.0 remain unchanged. In-game font and overflow acceptance remains pending.
+Game 2.1.6 has 13 locale assets: `en`, `zh`, `zh-Hant`, `de`, `fr`, `it`, `ja`, `ko`, `pt`, `ru`, `es`, `tr`, `uk`. Navigation supplies every UI and built-in map-title key in each locale. `NameTextKey` in map metadata selects an original Mod translation; absent or unknown keys preserve a custom `Name`, with a localized generic map title when empty. Functional POI aliases for rest, market, water, calendar and return use original translations; verified native POI keys continue through the asynchronous game table. Personal names are preserved. Language changes require no map reload. Unknown Mod locales fall back to English; native text remains icon-only while unavailable. Traditional Chinese regional aliases include Taiwan, Hong Kong and Macau. This localization work was introduced at version 0.2.0 on SDK 2.1.6/r7 without adding game, Unity or networking APIs. The current stable acceptance does not supply an exhaustive font and long-text scenario matrix.
 
-已按游戏 2.1.6 的语言资源核对全部 13 种语言。界面和内置地图标题均提供完整译文；功能地点使用原创标签，已确认的地点名继续异步查询游戏翻译表，原生表未就绪时保留图标。切换语言无需重载地图；未知语言的 Mod 文字回退英语，繁中地区别名包括台湾、香港和澳门。无新增游戏、Unity 或网络 API，继续使用 SDK 2.1.6/r7 和 0.2.0，字体与长文本仍待实机验收。
+已按游戏 2.1.6 的语言资源核对全部 13 种语言。界面和内置地图标题均提供完整译文；功能地点使用原创标签，已确认的地点名继续异步查询游戏翻译表，原生表未就绪时保留图标。切换语言无需重载地图；未知语言的 Mod 文字回退英语，繁中地区别名包括台湾、香港和澳门。这次本地化在 0.2.0 / SDK 2.1.6/r7 时纳入，未新增游戏、Unity 或网络 API；当前正式发布验收未提供字体与长文本的逐场景完整矩阵。
+
+## Local media archive / 本地素材归档
+
+The local index at `outputs/media/README.md` lists reusable Xiaohongshu, Steam, Nexus and gameplay media with source records. This ignored archive is absent from clones and release packages; archived media alone does not establish in-game acceptance.
+
+本地 `outputs/media/README.md` 索引可复用的小红书、Steam、Nexus 与实机素材及来源记录。归档被 Git 忽略，不随克隆或发行包提供；素材本身不代表已通过实机验收。

@@ -1,12 +1,12 @@
 # Development notes / 开发说明
 
-**2026-09-14 — maintainer confirmation:** Visual and other local in-game testing is complete; multiplayer testing is the only remaining test area. This records manual testing feedback; it is not an automated test result.
+**2026-09-19 — current acceptance:** The maintainer confirms in-game acceptance of Auto Checkout 0.1.5; this is a stable release on game 2.1.6. The earlier `e23f986` bundle also has a two-computer multiplayer report. These are reported manual results, not a new automated game run or a complete scenario matrix; see the [validation record](../releases/validation.md).
 
-**2026-09-14 — 维护者确认：**视觉及其他本地实机测试已完成，目前只剩多人游戏测试。这是人工测试反馈，不是自动测试结果。
+**2026-09-19 — 当前验收：**维护者已确认 Auto Checkout 0.1.5 的实机验收，当前为游戏 2.1.6 的正式发布版；此前 `e23f986` 合集另有双实机联机报告。这是人工测试反馈，不代表新执行了自动化游戏测试或补齐完整场景矩阵，详见[验证记录](../releases/validation.md)。
 
 Player instructions: [README](README.md). Repository workflow: [CONTRIBUTING](../CONTRIBUTING.md), [SDK](../sdk/README.md), [releases](../releases/README.md). Earlier unchecked-scenario descriptions below are superseded by the confirmation above. Current test scope: [validation record](../releases/validation.md).
 
-玩家用法见 [README](README.md)。本文保留构建、接口与历史测试资料；下方早期待测列表已由上述最新确认更新，当前实机范围以[验证记录](../releases/validation.md)为准。
+玩家用法见 [README](README.md)。本文保留构建、接口与历史测试资料；下方早期待测列表已由上述确认更新，当前实机范围以[验证记录](../releases/validation.md)为准。
 
 ## Processing and safeguards
 
@@ -34,6 +34,8 @@ The plugin targets `netstandard2.1`; state tests target `net8.0`. Local game and
 
 ## Earlier validation notes
 
+The following notes describe the pre-acceptance build checks and outstanding scenarios at that time. They do not override the current acceptance summary above.
+
 All current automated tests pass. They cover short presses, hold start and release, toggle start and stop, hold-to-toggle conversion, suppression until `E` is released, refusal to pre-enable without a target, cancellation on checkout changes, menus, focus loss and errors, indefinite empty-checkout waiting, confirmation timeout, and timer reset after confirmation. Builds and checks use Old Market Simulator 2.1.6.
 
 Actual UI and multiplayer behavior have not yet been verified for this prerelease. In-game testing is still needed for the `F9` prompt and toggle, three or more consecutive customers, an initial direct payment followed by a continued hold, idle waits longer than 10 seconds, adjacent checkouts, simultaneous employee or player checkout, menu cancellation, disconnects, and confirmation that money and sales increase exactly once. Client-only installation does not require the host by design, but remains unverified. Other game versions may change interaction APIs.
@@ -58,6 +60,8 @@ Actual UI and multiplayer behavior have not yet been verified for this prereleas
 
 ## 早期验证记录
 
+以下保留验收前的构建检查及当时待测场景，不取代上方当前验收摘要。
+
 当前所有自动化测试均已通过，覆盖短按、长按启动与松手停止、切换模式启停、长按转切换、关闭后等待 `E` 松开、未对准目标时拒绝预开启、切换结账台、菜单、失去焦点和错误取消，以及空台无限等待、交互确认超时和确认后重新计时。构建和检查以 Old Market Simulator 2.1.6 为依据。
 
 此预发布版本尚未实机验证界面和联机行为。仍需测试 `F9` 提示与启停、连续处理至少三位顾客、首次按键直接收钱后继续长按、空台等待超过 10 秒、相邻结账台、员工或其他玩家同时结账、菜单取消、断线，以及金币和销量是否只增加一次。设计上仅客户端安装不要求房主安装，但尚未验证。其他游戏版本可能改变本插件使用的交互 API。
@@ -67,3 +71,9 @@ Actual UI and multiplayer behavior have not yet been verified for this prereleas
 This Mod pins its compilation SDK in [release.json](release.json). Current baseline: game 2.1.6 / SDK r1. Run `python tools/ci.py build` from the repository root for a game-free build. See [SDK maintenance](../sdk/README.md) and [CI releases](../releases/README.md). Compilation does not replace in-game compatibility checks.
 
 本 Mod 在 [release.json](release.json) 固定编译 SDK，当前基线为游戏 2.1.6 / SDK r1。从仓库根目录运行 `python tools/ci.py build` 可无游戏文件构建。见 [SDK 维护](../sdk/README.md)和 [CI 发布](../releases/README.md)；编译不能代替实机兼容验证。
+
+## Local media archive / 本地素材归档
+
+The local reuse index is `outputs/media/README.md`, with provenance and hashes in `outputs/media/manifest.json`. This ignored archive is absent from clones and release packages; promotional material does not establish in-game acceptance.
+
+本地复用入口为 `outputs/media/README.md`，来源与哈希记录在 `outputs/media/manifest.json`。此归档被 Git 忽略，不随克隆或发行包分发；宣发素材不构成实机验收证据。

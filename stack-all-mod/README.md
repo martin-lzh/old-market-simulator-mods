@@ -42,6 +42,8 @@ For Old Market Simulator **2.1.6 on Windows**, with **BepInEx 5** installed.
 
 Choose the Mod ZIP on the release page, not GitHub's **Source code** download. The loader is not included.
 
+Keep only one copy of this plugin DLL under `BepInEx/plugins`, including any older copy installed directly in that folder. Other game versions and platforms have not been confirmed compatible. If the game assembly changes, Better Stacking disables itself and reports the compatibility error in `BepInEx/LogOutput.log`. Preserve your backup and check for a compatible release before loading a save that needs the Mod.
+
 ### How stacks work
 
 The bottom-left number is the amount of goods; the bottom-right is the number of containers. Two baskets with 24 goods each show **48 goods / 2 containers**. Empty baskets still count as containers. Whole fish and other single-use, one-unit products show only their quantity on the right. One- and two-digit quantities keep the native font size; larger goods totals fit in the left half.
@@ -74,7 +76,7 @@ Old 0.1.0 overfilled baskets still count as one basket. Empty them or use the ga
 
 For a compatible update, close the game and back up your save and old DLL before replacing the plugin. Leave your loader and other plugins in place.
 
-[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [License](LICENSE)
+[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development and validation](DEVELOPMENT.md) · [Translations](localization/README.md) · [License](LICENSE)
 
 ## 中文
 
@@ -112,6 +114,8 @@ For a compatible update, close the game and back up your save and old DLL before
 
 请选发布页里的 Mod ZIP，不要下载 **Source code** 当作插件安装。安装包不含加载器。
 
+`BepInEx/plugins` 下只保留一份本插件 DLL，包括以前直接放在该目录里的旧副本。其他游戏版本和平台尚未确认兼容。游戏程序集变化时，Better Stacking 会停用自身，并在 `BepInEx/LogOutput.log` 记录兼容错误；请保留备份，确认有兼容版本后再加载依赖本 Mod 的存档。
+
 ### 数量怎么看
 
 格子左下角是商品总数，右下角是容器数。例如两个各装 24 件商品的篮子，会显示 **48 件商品 / 2 个容器**。空篮子也会计入容器数。整条鱼等容量为 1、用完消失的单件商品只显示右侧数量；一位数和两位数保持原生字号，更大的商品总量会在左半格内缩放。
@@ -121,6 +125,8 @@ For a compatible update, close the game and back up your save and old DLL before
 每个容器保留自己的内容、成本和保鲜信息，兼容商品按游戏原有的合并与过期规则处理。其他非工具物品最多堆叠 64 个。第 65 个容器会放到其他空格；没有空间时会留在玩家附近。
 
 种子每格最多堆叠 64 包，左侧显示种子总数，右侧显示包数。丢下、投掷和放置每次移动完整一包，包括已经用掉部分种子的包；播种仍只消耗一粒。各包保留自己的数量和成本，不在包之间转移种子。旧构建已经合并的种子会按存档数量保留为一包，无法还原原来的包数。
+
+薄荷、花等普通收集品丢下后再捡起，即使在地面经过的天数不同，也能回到同类堆叠。动物和鱼笼仍要求年龄／使用状态匹配，食品继续遵循保鲜规则。
 
 ### 和朋友一起玩
 
@@ -142,4 +148,4 @@ For a compatible update, close the game and back up your save and old DLL before
 
 更新到兼容版本时，也请退出游戏，备份存档和旧 DLL 后再替换插件，保留加载器及其他插件。
 
-[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [许可证](LICENSE)
+[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发与验证](DEVELOPMENT.md) · [翻译说明](localization/README.md) · [许可证](LICENSE)

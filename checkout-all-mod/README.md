@@ -48,6 +48,8 @@ For Old Market Simulator **2.1.6 on Windows**, with **BepInEx 5** installed.
 
 Choose the Mod ZIP on the release page, not GitHub's **Source code** download. The loader is not included.
 
+Keep only one copy of this plugin DLL under `BepInEx/plugins`, including any older copy installed directly in that folder. Other game versions and platforms have not been confirmed compatible.
+
 ### Settings
 
 Close the game before editing `BepInEx/config/local.oldmarket.checkoutall.cfg`, created on first launch.
@@ -65,11 +67,15 @@ Aim at the checkout again, then release and hold E or press F9. Slow multiplayer
 
 These are real sales: completed transactions and collected money stay completed when you stop or remove the Mod. Prices and customer behavior remain as in the game. Tested multiplayer coverage is recorded in the [validation record](../releases/validation.md).
 
+### Multiplayer
+
+Install the Mod on each player's computer that needs automatic checkout. It uses the game's normal interactions and does not require the host or other players to install it by design. The recorded multiplayer report does not enumerate every installation combination. Avoid having another player or employee process the same checkout at the same time: local duplicate-request protection cannot coordinate their actions.
+
 ### Updating or removing
 
 Close the game, back up the old DLL and replace it to update. Delete `OldMarket.CheckoutAll.dll` from its plugin folder to uninstall, leaving other plugins and the loader in place. Returning to an older version does not undo sales.
 
-[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [License](LICENSE)
+[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development and validation](DEVELOPMENT.md) · [Translations](localization/README.md) · [License](LICENSE)
 
 ## 中文
 
@@ -113,6 +119,8 @@ Close the game, back up the old DLL and replace it to update. Delete `OldMarket.
 
 请选发布页里的 Mod ZIP，不要下载 **Source code** 当作插件安装。安装包不含加载器。
 
+`BepInEx/plugins` 下只保留一份本插件 DLL，包括以前直接放在该目录里的旧副本。其他游戏版本和平台尚未确认兼容。
+
 ### 调整设置
 
 首次运行会生成 `BepInEx/config/local.oldmarket.checkoutall.cfg`，请退出游戏后编辑。
@@ -130,8 +138,12 @@ Close the game, back up the old DLL and replace it to update. Delete `OldMarket.
 
 自动结账完成的交易和金币收入会照常保留，停止或卸载不会撤销。商品价格和顾客行为保持游戏原有规则；已测试联机组合见[验证记录](../releases/validation.md)。
 
+### 和朋友一起玩
+
+需要自动结账的玩家各自在自己的电脑安装即可；Mod 使用游戏原有交互，设计上不要求房主或其他玩家安装。已有联机报告没有逐一列出所有安装组合。请避免其他玩家或员工同时处理同一个结账台，本地重复请求保护无法协调他们的操作。
+
 ### 更新与卸载
 
 更新前退出游戏、备份并替换旧 DLL。卸载时删除插件文件夹中的 `OldMarket.CheckoutAll.dll`，保留加载器和其他插件。退回旧版也不会撤销已经完成的交易。
 
-[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [许可证](LICENSE)
+[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发与验证](DEVELOPMENT.md) · [翻译说明](localization/README.md) · [许可证](LICENSE)

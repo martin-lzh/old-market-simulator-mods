@@ -6,6 +6,8 @@
 
 ### Unreleased
 
+- Clarify multiplayer installation scope, concurrent-checkout limits, duplicate-plugin removal and unsupported game baselines; link development/localization help. Refresh the current acceptance summary, correct the four-message localization inventory and document the ignored local media index. Documentation only; version and SDK remain unchanged.
+
 - Add in-game screenshots of hold instructions and both enabled/disabled continuous checkout hints to both README languages. Documentation only.
 
 - Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
@@ -42,6 +44,8 @@ Older development versions mentioned in the README are not verified downloadable
 ## 中文
 
 ### 未发布
+
+- 补充联机安装范围、同时结账限制、重复插件清理和未确认的游戏基线，并链接开发／翻译说明；更新当前验收摘要、修正四条本地化消息清单并说明被忽略的本地素材索引。仅文档改动，版本和 SDK 不变。
 
 - 在双语 README 中加入长按提示及连续结账开启／关闭状态的实机截图，仅更新文档。
 

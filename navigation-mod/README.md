@@ -73,7 +73,7 @@ Extract the complete ZIP into the game folder, retaining `BepInEx/plugins/OldMar
 
 Rome's main map focuses on the walled town and farms, with a margin around the walls. Gates, caravans and the mine retain their separate region maps. The reduced town coverage and unified zoom steps have passed local in-game acceptance.
 
-Your markers are personal and kept separately for each save and area. They are not shared with other players. When joining someone else's game, markers last for that connection by default. To keep them between visits, use a different `Markers.RemoteProfile` name for each host's save. Copying or recreating a save folder may make your old markers appear missing. Your selected target is not remembered after restarting.
+Your markers are personal and kept separately for each save and area in `BepInEx/config/OldMarket.Navigation/markers/` XML files. They are not shared with other players or written into the game's save files. When joining someone else's game, markers last for that connection by default. To keep them between visits, use a different `Markers.RemoteProfile` name for each host's save. Copying or recreating a save folder may make your old markers appear missing. Your selected target is not remembered after restarting.
 
 ### Settings
 
@@ -98,11 +98,13 @@ The interface, built-in map titles and functional place labels follow all 13 gam
 
 Target icons show a direction, not a walking route. They may appear through buildings or over a roof. Map north is a consistent Mod convention and may differ from other maps. Overlays from Steam or performance tools may still cover the display.
 
+The map and minimap shortcuts use the keyboard. They are ignored while typing or when native menus/loading screens block gameplay; close those screens before using M. Only players who want navigation need the Mod. It reads synchronized world state without changing unlocks, movement or the multiplayer protocol. Support for game versions other than 2.1.6 has not been established.
+
 ### Updating or removing
 
-Close the game and back up the plugin before replacing its DLL and bundled maps. Keep `BepInEx/config/OldMarket.Navigation/` and `BepInEx/config/local.oldmarket.navigation.cfg` to preserve your markers and settings. To remove the Mod, delete its DLL; you can also remove its map folder if you no longer need it. Restore your backed-up DLL and settings to go back to an earlier version.
+Close the game and back up the plugin directory, including its DLL and bundled maps, plus `BepInEx/config/OldMarket.Navigation/` and `BepInEx/config/local.oldmarket.navigation.cfg`. Replace the DLL and maps together, keep only one active plugin copy, and retain the configuration directory and file to preserve your markers and settings. To remove the Mod, close the game and delete its DLL; you can also remove its map folder if you no longer need it. To return to an earlier version, restore that version's DLL and maps together with the corresponding backed-up markers and settings.
 
-[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [License](LICENSE)
+[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development notes](DEVELOPMENT.md) · [License](LICENSE)
 
 ## 中文
 
@@ -171,7 +173,7 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 
 罗马主地图聚焦城墙内的镇区与农田，并在城墙外保留余量；大门、商队与矿洞继续使用各自的区域地图。本次主城范围收紧与统一缩放步长已通过本地实机验收。
 
-个人标记按存档和区域分别保存，不会分享给其他玩家。加入好友房间时，默认只保留本次连接中的标记。如果想下次继续使用，请为每位好友的存档设置不同的 `Markers.RemoteProfile` 名称。复制或重建存档文件夹后，旧标记可能暂时找不到。当前选中的目标不会在重启后保留。
+个人标记以 XML 文件保存在 `BepInEx/config/OldMarket.Navigation/markers/`，按存档和区域分别存储，不会分享给其他玩家或写入游戏存档。加入好友房间时，默认只保留本次连接中的标记。如果想下次继续使用，请为每位好友的存档设置不同的 `Markers.RemoteProfile` 名称。复制或重建存档文件夹后，旧标记可能暂时找不到。当前选中的目标不会在重启后保留。
 
 ### 调整设置
 
@@ -196,10 +198,12 @@ Close the game and back up the plugin before replacing its DLL and bundled maps.
 
 目标图标提供方向，不是可行走路线；可能透过建筑显示，也可能落在屋顶上。地图北向使用本 Mod 的统一约定，可能与其他地图不同。Steam 或性能工具的覆盖层仍可能挡住界面。
 
+大地图和小地图快捷键使用键盘；输入文字，或原生菜单、加载画面阻止正常操作时不会触发，使用 M 前请先关闭这些界面。只有需要导航的玩家才需安装；插件读取同步的世界状态，不改变解锁、移动或联机协议。尚未确认 2.1.6 以外的游戏版本兼容性。
+
 ### 更新与卸载
 
-退出游戏并备份旧插件后，替换本 Mod 的 DLL 和随包地图。保留 `BepInEx/config/OldMarket.Navigation/` 和 `BepInEx/config/local.oldmarket.navigation.cfg`，就能留下标记和设置。卸载时删除 DLL；地图文件不用了也可以移除。需要退回旧版时，还原备份的 DLL 和设置即可。
+退出游戏，备份含 DLL 和地图的插件目录，以及 `BepInEx/config/OldMarket.Navigation/` 和 `BepInEx/config/local.oldmarket.navigation.cfg`。一起替换 DLL 和随包地图，只保留一个启用副本；保留配置目录和文件，就能留下标记和设置。卸载时退出游戏并删除 DLL；地图文件不用了也可以移除。需要退回旧版时，一起还原该版本的 DLL、地图及对应备份的标记和设置。
 
-[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [许可证](LICENSE)
+[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发说明](DEVELOPMENT.md) · [许可证](LICENSE)
 
 Map icons / 地图图标：[Phosphor](assets/phosphor/README.md)，MIT。

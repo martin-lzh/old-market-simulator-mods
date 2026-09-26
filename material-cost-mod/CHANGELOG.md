@@ -6,6 +6,8 @@
 
 ### Unreleased
 
+- Clarify loader-specific configuration keys, local multiplayer display scope, update/rollback steps and compatibility limits; correct development acceptance status, link developer guidance and index local reusable media. Documentation only; version and SDK are unchanged.
+
 - Add in-game screenshots of the material-cost report, recipe cost/profit details and dock order purchase costs/profits to both README languages. Documentation only.
 
 - Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
@@ -38,6 +40,8 @@ Older development versions mentioned in the README are not verified downloadable
 ## 中文
 
 ### 未发布
+
+- 补齐各加载器配置键、联机本地显示范围、更新／回退及兼容说明；修正开发说明中的验收状态，补充开发入口与本地复用素材索引。仅文档改动，版本和 SDK 不变。
 
 - 在双语 README 中加入原料成本报表、配方页成本／利润详情及订单页进货成本／利润的实机截图，仅更新文档。
 

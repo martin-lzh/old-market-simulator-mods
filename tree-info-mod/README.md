@@ -33,13 +33,13 @@ Purchased saplings and wild timber trees are excluded. Ripe fruit remains harves
 
 [Download 0.1.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.0). For Old Market Simulator **2.1.6**, Windows x64 / Unity Mono, with **BepInEx 5**. Build and SDK details: [development notes](DEVELOPMENT.md). Changes: [CHANGELOG](CHANGELOG.md).
 
-Exit the game, back up the existing plugin, and put the package's DLL in `BepInEx/plugins/OldMarket.TreeInfo/`. Keep only one active copy. Restart to load it. To roll back, exit and restore the backed-up DLL; to uninstall, remove this plugin's DLL. Keep other plugins, the loader and saves intact. Packages contain only the original DLL, README, CHANGELOG and MIT license.
+Download the Mod ZIP, rather than GitHub's **Source code** archive; the loader is not included. Exit the game, back up the existing plugin, and place the DLL at `BepInEx/plugins/OldMarket.TreeInfo/OldMarket.TreeInfo.dll`. Keep only one active copy. Restart to load it. To roll back, exit and restore the backed-up DLL; to uninstall, exit and remove this plugin's DLL. Keep other plugins, the loader and saves intact. Packages contain only the original DLL, README, CHANGELOG and MIT license.
 
 ### Compatibility and testing
 
 The plugin appends local UI text; it does not change saves, watering, harvesting, growth or RPCs. Other players need not install it by design. Missing glyphs, long translated text and competing subtitle changes may affect display. No support for other game versions is established.
 
-Detailed validation and language coverage: [development notes](DEVELOPMENT.md) and [validation record](../releases/validation.md). [MIT License](LICENSE).
+Detailed validation and language coverage: [development notes](DEVELOPMENT.md) and [validation record](../releases/validation.md). [Help and feedback](../SUPPORT.md) · [MIT License](LICENSE).
 
 ## 中文
 
@@ -68,10 +68,10 @@ Detailed validation and language coverage: [development notes](DEVELOPMENT.md) a
 
 [下载 0.1.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.0)。适用于 Old Market Simulator **2.1.6**、Windows x64 / Unity Mono、**BepInEx 5**。构建与 SDK 见[开发说明](DEVELOPMENT.md)，改动见[版本记录](CHANGELOG.md)。
 
-退出游戏，备份旧插件，将包内 DLL 放入 `BepInEx/plugins/OldMarket.TreeInfo/`，只保留一个启用副本，重新启动游戏加载。回退时退出游戏并恢复备份 DLL；卸载仅删除本插件 DLL，保留其他插件、加载器及存档。包内只含原创 DLL、README、CHANGELOG 和 MIT 许可证。
+请下载 Mod ZIP，不要把 GitHub 的 **Source code** 当作插件安装；包内不含加载器。退出游戏，备份旧插件，将 DLL 放到 `BepInEx/plugins/OldMarket.TreeInfo/OldMarket.TreeInfo.dll`，只保留一个启用副本，重新启动游戏加载。回退时退出游戏并恢复备份 DLL；卸载时退出游戏并仅删除本插件 DLL，保留其他插件、加载器及存档。包内只含原创 DLL、README、CHANGELOG 和 MIT 许可证。
 
 ### 兼容与测试
 
 插件仅追加本地 UI，不修改存档、浇水、采收、生长或 RPC；设计上其他玩家无需安装。可能出现缺字、长译文换行及提示争用，尚未确认其他游戏版本兼容性。
 
-详细测试与语言覆盖见[开发说明](DEVELOPMENT.md)和[验证记录](../releases/validation.md)。[MIT 许可证](LICENSE)。
+详细测试与语言覆盖见[开发说明](DEVELOPMENT.md)和[验证记录](../releases/validation.md)。[问题反馈](../SUPPORT.md) · [MIT 许可证](LICENSE)。

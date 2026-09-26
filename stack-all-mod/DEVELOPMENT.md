@@ -1,12 +1,12 @@
 # Development notes / 开发说明
 
-**2026-09-14 — maintainer confirmation:** Visual, local in-game and two-computer multiplayer testing of the preceding build is complete. The subsequent quantity-display fix awaits in-game visual confirmation. This records manual testing feedback; it is not an automated test result.
+**2026-09-19 — current acceptance:** The maintainer confirms in-game acceptance of Better Stacking 0.3.0; this is a stable release on game 2.1.6. The earlier `e23f986` bundle multiplayer report covers its preceding Stack All build, while the later release acceptance supersedes pending status for 0.3.0. These are reported manual results, not a new automated game run or a complete scenario matrix; see the [validation record](../releases/validation.md).
 
-**2026-09-14 — 维护者确认：**修复前构建的视觉、本地实机及双实机联机测试已完成；后续数量显示修复仍待实机视觉确认。这是人工测试反馈，不是自动测试结果。
+**2026-09-19 — 当前验收：**维护者已确认 Better Stacking 0.3.0 的实机验收，当前为游戏 2.1.6 的正式发布版。此前 `e23f986` 合集联机报告对应更早的 Stack All 构建；后续发行验收已取代 0.3.0 的待测状态。这是人工测试反馈，不代表新执行了自动化游戏测试或补齐完整场景矩阵，详见[验证记录](../releases/validation.md)。
 
-Player instructions: [README](README.md). Repository workflow: [CONTRIBUTING](../CONTRIBUTING.md), [SDK](../sdk/README.md), [releases](../releases/README.md). Earlier unchecked-scenario descriptions below are superseded by the confirmation above. Current test scope: [validation record](../releases/validation.md).
+Player instructions: [README](README.md). Repository workflow: [CONTRIBUTING](../CONTRIBUTING.md), [SDK](../sdk/README.md), [releases](../releases/README.md). Earlier unchecked-scenario descriptions below are superseded by the confirmation above. The collectible and empty-container sections retain development-time evidence, including the versions and SDK revisions used then; the current pin is game 2.1.6 / SDK r11. Current test scope: [validation record](../releases/validation.md).
 
-玩家用法见 [README](README.md)。本文保留构建、接口与历史测试资料；下方早期待测列表已由上述最新确认更新，当前实机范围以[验证记录](../releases/validation.md)为准。
+玩家用法见 [README](README.md)。本文保留构建、接口与历史测试资料；下方早期待测列表已由上述确认更新。收集品及空盒操作章节保留开发时的证据、版本与 SDK 修订，当前固定游戏 2.1.6 / SDK r11。当前实机范围以[验证记录](../releases/validation.md)为准。
 
 ## Configuration and build
 
@@ -21,6 +21,8 @@ The build uses local game/BepInEx assemblies as read-only references, runs check
 
 ## Earlier validation notes
 
+The following notes describe the pre-acceptance build checks and outstanding scenarios at that time. They do not override the current acceptance summary above.
+
 The original stack/container/input tests, game IL contract checks, and the Mod-local localization checks pass. They cover conservation, empty containers, merges, 64-container overflow, removal, save-array reload, tool durability, hold cancellation, translations, formatting, and native action lookup.
 
 In-game UI, normal save/load, and real multiplayer have not been verified for this release. Back up important saves. Inventory Mods patching the same operations may conflict.
@@ -34,7 +36,7 @@ In-game UI, normal save/load, and real multiplayer have not been verified for th
 ./stack-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
-构建只读引用本机程序集，运行检查并生成 `outputs/OldMarket.StackAll-0.3.0.zip`，不会安装。所需本地化源码、资源和测试均位于 `stack-all-mod/localization/`，因此本 Mod 目录可以独立构建。原有功能测试、IL 契约检查和 Mod 自带本地化检查均通过；尚未验证游戏内 UI、正常保存/读取和真实多人联机。首次使用前请备份重要存档。
+构建只读引用本机程序集，运行检查并生成 `outputs/OldMarket.StackAll-0.3.0.zip`，不会安装。所需本地化源码、资源和测试均位于 `stack-all-mod/localization/`，因此本 Mod 目录可以独立构建。原有功能测试、IL 契约检查和 Mod 自带本地化检查均通过；早期检查时尚未验证游戏内 UI、正常保存/读取和真实多人联机，当前验收状态以上方摘要为准。首次使用前请备份重要存档。
 
 ## SDK and automated builds / SDK 与自动构建
 
@@ -72,6 +74,12 @@ The hold caption clones a native row without its keycap and uses Transform.SetAs
 
 长按说明复制原生行并隐藏键帽，通过 Transform.SetAsFirstSibling 排在操作上方；字体、字体材质和字号跟随游戏，仅剩余多个物品时显示。SDK r11 增加经真实引用核对的 Transform 方法，其他 Mod 固定修订不变。
 
-Current release target: **0.3.0**; game/SDK pin is unchanged. This version assignment does not alter runtime behavior or extend the recorded test scope.
+The feature work above was assigned to release **0.3.0** with game 2.1.6 / SDK r11. The version assignment itself did not extend the test scope; subsequent acceptance is recorded at the top of this document.
 
-当前发行目标：**0.3.0**，游戏／SDK 固定修订不变；版本指定不改变运行时行为，也不扩展已记录测试范围。
+上述功能已归入 **0.3.0**，固定游戏 2.1.6 / SDK r11；版本指定本身不扩展测试范围，后续验收见本文顶部摘要。
+
+## Local media archive / 本地素材归档
+
+The local reuse index is `outputs/media/README.md`, with provenance and hashes in `outputs/media/manifest.json`. This ignored archive is absent from clones and release packages; promotional material does not establish in-game acceptance.
+
+本地复用入口为 `outputs/media/README.md`，来源与哈希记录在 `outputs/media/manifest.json`。此归档被 Git 忽略，不随克隆或发行包分发；宣发素材不构成实机验收证据。

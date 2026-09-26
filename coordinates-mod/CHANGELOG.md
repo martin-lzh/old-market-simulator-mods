@@ -6,6 +6,8 @@
 
 ### Unreleased
 
+- Clarify keyboard controls, update/rollback and configuration retention; correct development acceptance status, link developer guidance and index local reusable media. Documentation only; version and SDK are unchanged.
+
 - Add an in-game screenshot of the coordinate display to both README languages. Documentation only.
 
 - Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
@@ -38,6 +40,8 @@ Older development versions mentioned in the README are not verified downloadable
 ## 中文
 
 ### 未发布
+
+- 补充键盘操作、更新／回退与配置保留说明；修正开发说明中的验收状态，补充开发入口与本地复用素材索引。仅文档改动，版本和 SDK 不变。
 
 - 在双语 README 中加入坐标显示的实机截图，仅更新文档。
 
