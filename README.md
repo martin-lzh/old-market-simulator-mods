@@ -86,7 +86,7 @@ Want to contribute? Start with [CONTRIBUTING](CONTRIBUTING.md) or the [developme
 
 ### 开始使用
 
-**选择下载方式：**从上表进入单个 Mod 的 Nexus 页面或 GitHub Release，也可以通过 [Nexus 七款合集](https://www.nexusmods.com/games/oldmarketsimulator/collections/d8iufz)使用 Vortex。合集固定使用 BepInEx 版本，请单独安装 BepInEx，并按合集页面的说明操作。
+**选择下载方式：** 从上表进入单个 Mod 的 Nexus 页面或 GitHub Release，也可以通过 [Nexus 七款合集](https://www.nexusmods.com/games/oldmarketsimulator/collections/d8iufz)使用 Vortex。合集固定使用 BepInEx 版本，请单独安装 BepInEx，并按合集页面的说明操作。
 
 适用于 **Windows 版 Old Market Simulator 2.1.6**。多数 Mod 使用 **BepInEx 5**；Material Cost 还提供 **MelonLoader 0.7.3** 版本。加载器二选一，不要同时启用，Mod 下载包也不包含加载器。
 
