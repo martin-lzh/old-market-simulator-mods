@@ -6,11 +6,9 @@
 
 ### Unreleased
 
-- Clarify multiplayer installation scope, concurrent-checkout limits, duplicate-plugin removal and unsupported game baselines; link development/localization help. Refresh the current acceptance summary, correct the four-message localization inventory and document the ignored local media index. Documentation only; version and SDK remain unchanged.
-
-- Add in-game screenshots of hold instructions and both enabled/disabled continuous checkout hints to both README languages. Documentation only.
-
-- Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
+- Rewrite the README in plainer language, focusing on what the Mod does and how to use it, with clearer installation, multiplayer and removal steps.
+- Add in-game screenshots of the hold hint and both continuous-checkout states, and show the Nexus cover at the top of the README.
+- Refresh the development and translation notes and link them from the README.
 
 ### 0.1.5 — 2026-09-19 (stable release)
 
@@ -45,11 +43,9 @@ Older development versions mentioned in the README are not verified downloadable
 
 ### 未发布
 
-- 补充联机安装范围、同时结账限制、重复插件清理和未确认的游戏基线，并链接开发／翻译说明；更新当前验收摘要、修正四条本地化消息清单并说明被忽略的本地素材索引。仅文档改动，版本和 SDK 不变。
-
-- 在双语 README 中加入长按提示及连续结账开启／关闭状态的实机截图，仅更新文档。
-
-- 将 Nexus 封面移入 assets/cover.png，并作为 README 首图展示。仅文档改动，运行时、版本和 SDK 不变。
+- 用更直白的语言重写 README，聚焦功能和用法，并理清安装、联机与卸载步骤。
+- README 加入长按提示及连续结账开启／关闭状态的实机截图，并以 Nexus 封面作为首图。
+- 更新开发与翻译说明，并在 README 中提供链接。
 
 ### 0.1.5 — 2026-09-19（正式发布）
 
@@ -84,7 +80,3 @@ README 提到的更早开发版本不是本公开仓库已确认的可下载发�
 | File / 文件 | SHA256 |
 | --- | --- |
 | [OldMarket.CheckoutAll-0.1.4.zip](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/checkout-all-v0.1.4/OldMarket.CheckoutAll-0.1.4.zip) | 4e1db143c08467d53fa10801da86aeb5d21eba378ab45b912845f677cb11525f |
-
-Future entries must record changes, actual date/downloads, game/hash, loader, save/multiplayer/rollback requirements and test scope. Publish package hashes externally in the release checksums; preserve old releases/tags.
-
-后续条目必须记录变化、真实日期/下载定位、游戏/哈希、加载器、存档/联机/回退要求及验证范围。包哈希放发布页外部校验文件，保留历史发布/标签。

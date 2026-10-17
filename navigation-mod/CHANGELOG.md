@@ -4,9 +4,9 @@
 
 ### Unreleased
 
-- Document marker storage, local multiplayer scope, input restrictions and rollback of matching DLL/maps/settings; update development acceptance and package-version references and index local reusable media. Documentation only; runtime, version and SDK are unchanged.
-
-- Correct the published 0.2.1 status and current download links. Existing release assets, runtime and SDK are unchanged.
+- Rewrite the README in plainer language, focusing on what the Mod does and how to use it, with clearer installation, multiplayer and removal steps.
+- Point the README download link at the 0.2.1 release.
+- Refresh the development notes and link them from the README.
 
 ### 0.2.1 — 2026-09-20 (stable release)
 
@@ -129,9 +129,9 @@ Experimental initial build; not installed or verified in game.
 
 ### 未发布
 
-- 补齐标记存储、联机本地作用范围、输入限制及配套 DLL／地图／设置回退说明；更新开发说明中的验收和包版本引用，并加入本地复用素材索引。仅文档改动，运行时、版本和 SDK 不变。
-
-- 修正 0.2.1 已正式发布的状态说明及当前下载链接；已发布附件、运行时和 SDK 不变。
+- 用更直白的语言重写 README，聚焦功能和用法，并理清安装、联机与卸载步骤。
+- README 下载链接指向 0.2.1 正式版。
+- 更新开发说明，并在 README 中提供链接。
 
 ### 0.2.1 — 2026-09-20（正式发布）
 

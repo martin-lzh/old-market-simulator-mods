@@ -6,11 +6,9 @@
 
 ### Unreleased
 
-- Explain clearing product/all-slot rules, transferring host configuration, duplicate-plugin cleanup and unsupported game baselines; link development/localization help. Refresh the current acceptance summary, add Chinese localization guidance and document the ignored local media index. Documentation only; version and SDK remain unchanged.
-
-- Add in-game pricing panel and fixed-probability screenshots to both README languages, illustrating slider-driven price changes and probability anchoring. Documentation only.
-
-- Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
+- Rewrite the README in plainer language, focusing on what the Mod does and how to use it, with clearer installation, multiplayer and removal steps.
+- Add in-game screenshots of the pricing panel and fixed-probability mode, and show the Nexus cover at the top of the README.
+- Refresh the development and translation notes and link them from the README.
 
 ### 0.1.2 — 2026-09-19 (stable release)
 
@@ -41,11 +39,9 @@ Older development versions mentioned in the README are not verified downloadable
 
 ### 未发布
 
-- 说明清除单个商品／全部存档槽规则、迁移房主配置、清理重复插件及未确认的游戏基线，并链接开发／翻译资料；更新当前验收摘要、补充中文本地化说明并说明被忽略的本地素材索引。仅文档改动，版本和 SDK 不变。
-
-- 在双语 README 中加入智能定价面板及固定概率模式的实机截图，说明滑条联动售价与概率锚定操作，仅更新文档。
-
-- 将 Nexus 封面移入 assets/cover.png，并作为 README 首图展示。仅文档改动，运行时、版本和 SDK 不变。
+- 用更直白的语言重写 README，聚焦功能和用法，并理清安装、联机与卸载步骤。
+- README 加入定价面板和固定概率模式的实机截图，并以 Nexus 封面作为首图。
+- 更新开发与翻译说明，并在 README 中提供链接。
 
 ### 0.1.2 — 2026-09-19（正式发布）
 
@@ -76,7 +72,3 @@ README 提到的更早开发版本不是本公开仓库已确认的可下载发�
 | File / 文件 | SHA256 |
 | --- | --- |
 | [OldMarket.PriceProbability-0.1.1.zip](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/price-probability-v0.1.1/OldMarket.PriceProbability-0.1.1.zip) | 38469d8cedf6730a8361fb3c956bf346a6024ae57abc71d6fc81a92e756d3f09 |
-
-Future entries must record changes, actual date/downloads, game/hash, loader, save/multiplayer/rollback requirements and test scope. Publish package hashes externally in the release checksums; preserve old releases/tags.
-
-后续条目必须记录变化、真实日期/下载定位、游戏/哈希、加载器、存档/联机/回退要求及验证范围。包哈希放发布页外部校验文件，保留历史发布/标签。

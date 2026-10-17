@@ -8,8 +8,6 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 ## English
 
-In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
-
 Let checkout handle the whole table while you hold a key—or keep it running with a toggle. Products are processed one by one, followed by the payment pouch.
 
 [Download 0.1.5](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.5)
@@ -32,23 +30,19 @@ Let checkout handle the whole table while you hold a key—or keep it running wi
 
 ![In-game continuous checkout enabled, with F9 to turn it off](assets/continuous-checkout-on-gameplay.png)
 
-Keep looking at the checkout body and stay within reach. When the table is empty, continuous mode waits for the next customer. It does not ring the bell for you. A short E press still does the game's normal action before the hold starts.
+Aim at the checkout and stay within reach. When the table is empty, continuous mode waits for the next customer; ringing the bell is still up to you. Tapping E still does the game's normal action.
 
-Looking away, leaving reach, opening a menu, switching windows or disconnecting stops checkout. In hold mode, releasing E also stops it. If you press F9 during a hold, it switches to toggle mode and keeps going after you release E. Press F9 again to stop; release E before starting another hold.
+Checkout stops when you look away, step out of reach, open a menu, switch windows or disconnect. In hold mode, releasing E also stops it. Pressing F9 during a hold switches to toggle mode, so checkout keeps going after you release E. Press F9 again to stop, and release E before starting a new hold.
 
-The 0.1.5 hint uses white for hold instructions; toggle status is white when on and red when off. This hint change is not in the older 0.1.4 download.
+The hold hint is white. The toggle status is white when on and red when off.
 
 ### Install
 
-For Old Market Simulator **2.1.6 on Windows**, with **BepInEx 5** installed.
+Requires Old Market Simulator **2.1.6 on Windows** with **BepInEx 5** installed.
 
-1. Close the game and back up your save and any older plugin.
-2. Extract the Mod ZIP into the game folder. The plugin belongs at `BepInEx/plugins/OldMarket.CheckoutAll/OldMarket.CheckoutAll.dll`.
-3. Start the game and enter your town.
-
-Choose the Mod ZIP on the release page, not GitHub's **Source code** download. The loader is not included.
-
-Keep only one copy of this plugin DLL under `BepInEx/plugins`, including any older copy installed directly in that folder. Other game versions and platforms have not been confirmed compatible.
+1. Close the game and back up your save and any older copy of this plugin.
+2. Download the Mod ZIP from the release page (not GitHub's **Source code**) and extract it into the game folder. The plugin should end up at `BepInEx/plugins/OldMarket.CheckoutAll/OldMarket.CheckoutAll.dll`.
+3. Make sure that is the only copy of the DLL under `BepInEx/plugins`, then start the game.
 
 ### Settings
 
@@ -59,27 +53,23 @@ Close the game before editing `BepInEx/config/local.oldmarket.checkoutall.cfg`, 
 | `Checkout.HoldSeconds` | 0.6 | Hold delay in seconds, from 0.3 to 2.0 |
 | `Checkout.ToggleKey` | F9 | Toggle key; None disables toggle mode and its hint |
 
-Holding is fixed to keyboard E and does not follow game rebinding. Controllers are not supported. Toggle mode starts off each time you launch.
+Holding always uses keyboard E, regardless of the game's key bindings. Toggle mode starts off each time you launch.
 
 ### If checkout stops
 
-Aim at the checkout again, then release and hold E or press F9. Slow multiplayer responses can stop the sequence after about 10 seconds; it will not repeatedly retry the same action. If nearby checkouts or payment pouches cannot be distinguished safely, collect the pouch manually.
-
-These are real sales: completed transactions and collected money stay completed when you stop or remove the Mod. Prices and customer behavior remain as in the game. Tested multiplayer coverage is recorded in the [validation record](../releases/validation.md).
+Aim at the checkout again, then hold E or press F9. On a slow multiplayer connection, checkout stops after about 10 seconds without a response instead of retrying. If several checkouts or pouches are close together, collect the pouch by hand.
 
 ### Multiplayer
 
-Install the Mod on each player's computer that needs automatic checkout. It uses the game's normal interactions and does not require the host or other players to install it by design. The recorded multiplayer report does not enumerate every installation combination. Avoid having another player or employee process the same checkout at the same time: local duplicate-request protection cannot coordinate their actions.
+Only players who want automatic checkout need to install it; the host and other players don't. Don't have another player or an employee work the same checkout at the same time.
 
 ### Updating or removing
 
-Close the game, back up the old DLL and replace it to update. Delete `OldMarket.CheckoutAll.dll` from its plugin folder to uninstall, leaving other plugins and the loader in place. Returning to an older version does not undo sales.
+To update, close the game, back up the old DLL and replace it. To uninstall, delete `OldMarket.CheckoutAll.dll` from its plugin folder.
 
-[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development and validation](DEVELOPMENT.md) · [Translations](localization/README.md) · [License](LICENSE)
+[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development notes](DEVELOPMENT.md) · [Translations](localization/README.md) · [License](LICENSE)
 
 ## 中文
-
-维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](../releases/validation.md)。
 
 长按一个键，就能依次结算桌上的商品并收取钱袋；也可以打开连续结账，不用一直按住。
 
@@ -103,23 +93,19 @@ Close the game, back up the old DLL and replace it to update. Delete `OldMarket.
 
 ![实机画面：连续结账已开启，按 F9 关闭](assets/continuous-checkout-on-gameplay.png)
 
-请让准星对着结账台本体，并保持在可交互距离内。桌上没有商品时会等待下一位顾客，不会自动摇铃。长按开始前，第一次按下 E 仍可能执行原版交互，例如处理一件商品或摇铃。
+准星对着结账台，站在可交互距离内即可。桌上没有商品时会等待下一位顾客，摇铃仍由你自己操作。短按 E 仍是游戏原本的交互。
 
-看向别处、离开交互范围、打开菜单、切换窗口或断线都会停止结账。长按模式下松开 E 也会停止；长按时按 F9 则转为开关模式，松开 E 后继续结账。再次按 F9 停止后，请先松开 E，再开始下一次长按。
+看向别处、走出交互范围、打开菜单、切换窗口或断线时会停止结账；长按模式下松开 E 也会停止。长按时按 F9 会切换为开关模式，松开 E 后继续结账。再按一次 F9 停止，然后先松开 E 再开始下一次长按。
 
-0.1.5 的长按提示为白色，连续结账状态开启时为白色、关闭时为红色；旧的 0.1.4 下载包尚不包含这项提示调整。
+长按提示为白色；连续结账状态开启时为白色，关闭时为红色。
 
 ### 安装
 
-适用于 **Windows 版 Old Market Simulator 2.1.6**，需要先安装 **BepInEx 5**。
+需要 **Windows 版 Old Market Simulator 2.1.6**，并已安装 **BepInEx 5**。
 
-1. 退出游戏，备份存档和已有的旧插件。
-2. 将 Mod ZIP 解压到游戏目录，确认插件位于 `BepInEx/plugins/OldMarket.CheckoutAll/OldMarket.CheckoutAll.dll`。
-3. 启动游戏并进入小镇。
-
-请选发布页里的 Mod ZIP，不要下载 **Source code** 当作插件安装。安装包不含加载器。
-
-`BepInEx/plugins` 下只保留一份本插件 DLL，包括以前直接放在该目录里的旧副本。其他游戏版本和平台尚未确认兼容。
+1. 退出游戏，备份存档和旧版插件。
+2. 从发布页下载 Mod ZIP（不是 GitHub 的 **Source code**），解压到游戏目录，插件应位于 `BepInEx/plugins/OldMarket.CheckoutAll/OldMarket.CheckoutAll.dll`。
+3. 确认 `BepInEx/plugins` 下只有这一份 DLL，然后启动游戏。
 
 ### 调整设置
 
@@ -128,22 +114,20 @@ Close the game, back up the old DLL and replace it to update. Delete `OldMarket.
 | 设置 | 默认值 | 用途 |
 | --- | --- | --- |
 | `Checkout.HoldSeconds` | 0.6 | 开始结账前需要按住的秒数，可设 0.3–2.0 |
-| `Checkout.ToggleKey` | F9 | 连续结账开关键；None 表示关闭该功能和状态提示 |
+| `Checkout.ToggleKey` | F9 | 连续结账开关键；设为 None 可关闭该功能和状态提示 |
 
-长按键固定为键盘 E，不跟随游戏改键，也暂不支持手柄。每次启动时连续结账默认关闭。
+长按键固定为键盘 E，不跟随游戏改键。每次启动时连续结账默认关闭。
 
 ### 如果结账停了
 
-重新对准结账台，松开后再次长按 E，或按 F9 即可。联机响应过慢时，等待约 10 秒后可能停止，不会反复重试同一件商品。附近结账台或钱袋挤在一起、无法确认归属时，请手动收取钱袋。
-
-自动结账完成的交易和金币收入会照常保留，停止或卸载不会撤销。商品价格和顾客行为保持游戏原有规则；已测试联机组合见[验证记录](../releases/validation.md)。
+重新对准结账台，再长按 E 或按 F9 即可。联机网络较慢时，约 10 秒没有响应会自动停下，不会反复重试。附近有多个结账台或钱袋挤在一起时，请手动收取钱袋。
 
 ### 和朋友一起玩
 
-需要自动结账的玩家各自在自己的电脑安装即可；Mod 使用游戏原有交互，设计上不要求房主或其他玩家安装。已有联机报告没有逐一列出所有安装组合。请避免其他玩家或员工同时处理同一个结账台，本地重复请求保护无法协调他们的操作。
+想用自动结账的玩家自己安装即可，房主和其他玩家不需要安装。请不要让其他玩家或员工同时操作同一个结账台。
 
 ### 更新与卸载
 
-更新前退出游戏、备份并替换旧 DLL。卸载时删除插件文件夹中的 `OldMarket.CheckoutAll.dll`，保留加载器和其他插件。退回旧版也不会撤销已经完成的交易。
+更新时退出游戏，备份旧 DLL 后替换。卸载时删除插件文件夹中的 `OldMarket.CheckoutAll.dll`。
 
-[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发与验证](DEVELOPMENT.md) · [翻译说明](localization/README.md) · [许可证](LICENSE)
+[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发说明](DEVELOPMENT.md) · [翻译说明](localization/README.md) · [许可证](LICENSE)

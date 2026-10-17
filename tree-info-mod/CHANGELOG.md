@@ -4,11 +4,9 @@
 
 ### Unreleased
 
-- Clarify the exact installation path, download selection and support route; reconcile migration history with public version 0.1.0 and completed acceptance, and index local reusable media. Documentation only; version and SDK are unchanged.
-
-- Add an in-game production-season and harvest-readiness screenshot to both README languages. Documentation only.
-
-- Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
+- Rewrite the README in plainer language, focusing on what the Mod does and how to use it, with clearer installation, multiplayer and removal steps.
+- Add an in-game screenshot of the harvest hint, and show the Nexus cover at the top of the README.
+- Refresh the development notes and link them from the README.
 
 ### 0.1.0 — 2026-09-18 (stable release)
 
@@ -30,11 +28,9 @@ In-game acceptance is confirmed by the maintainer. This version is a stable rele
 
 ### 未发布
 
-- 补齐准确安装路径、安装包选择及反馈入口；厘清迁移历史、公开版本 0.1.0 与已完成验收的关系，并加入本地复用素材索引。仅文档改动，版本和 SDK 不变。
-
-- 在双语 README 中加入果树生产季节与成熟采收状态的实机截图，仅更新文档。
-
-- 将 Nexus 封面移入 assets/cover.png，并作为 README 首图展示。仅文档改动，运行时、版本和 SDK 不变。
+- 用更直白的语言重写 README，聚焦功能和用法，并理清安装、联机与卸载步骤。
+- README 加入果树成熟提示的实机截图，并以 Nexus 封面作为首图。
+- 更新开发说明，并在 README 中提供链接。
 
 ### 0.1.0 — 2026-09-18（正式发布）
 

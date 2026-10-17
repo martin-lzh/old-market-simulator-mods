@@ -14,7 +14,7 @@ dotnet run --project localization/tests/Localization.Tests.csproj -c Release
 
 The checks validate the exact locale and message sets, placeholder parity, formatting, locale normalization, asynchronous native-term loading, and the four supported native terms. They use local API substitutes and do not load game files.
 
-Automated checks cannot verify Unity layout, glyph coverage, line wrapping, or live language switching. Those remain in-game validation items. Supplemental translations have not been reviewed by native speakers of every language.
+Check layout, glyph coverage, line wrapping and live language switching in game. Corrections from native speakers are welcome.
 
 ## License
 
@@ -26,6 +26,6 @@ Copyright © 2026 Zhaohan Liu. The original files in this directory are availabl
 
 `messages.txt` 保存 Auto Checkout 自有的四条提示：长按提示、切换模式开启／关闭提示和长按模式提示，覆盖 Old Market Simulator 2.1.6 配置的 13 种语言。游戏已有的 `put_to_bag`、`take_pouch`、`turn_on`、`turn_off` 动作词会在运行时从当前 `Translations` 表读取；语言表尚不可用时使用英文回退，切换语言后会重新加载。
 
-资源和辅助源码直接嵌入 `OldMarket.CheckoutAll.dll`，安装时不需要额外语言文件或共享 DLL。在 `checkout-all-mod/` 运行上方命令可执行独立 .NET 8 检查。测试不读取游戏文件；Unity 中的布局、字形、换行和实时切换仍需实机验证。补充译文未经所有语言的母语者审校。
+资源和辅助源码直接嵌入 `OldMarket.CheckoutAll.dll`，安装时不需要额外语言文件或共享 DLL。在 `checkout-all-mod/` 运行上方命令可执行独立 .NET 8 检查。测试不读取游戏文件；布局、字形、换行和实时切换请在游戏中检查。欢迎母语使用者提交译文修正。
 
 本目录原创文件版权归 Zhaohan Liu 所有，并采用 [MIT License](LICENSE)。游戏原生翻译及其他游戏资源只在运行时读取，不包含在本目录中。

@@ -8,8 +8,6 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 ## English
 
-In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
-
 See how likely customers are to accept a price, then choose whether to keep a fixed price or a fixed acceptance chance.
 
 [Download 0.1.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.2)
@@ -24,48 +22,44 @@ See how likely customers are to accept a price, then choose whether to keep a fi
 
 ### How to use
 
-- Open the game's price panel. Changing the price updates the chance; moving the chance slider suggests a matching price.
-- Choose **Off**, **Fixed price** or **Fixed probability**. Fixed probability adjusts prices when the game's wholesale prices change.
-- A 100% target uses the game's suggested price for that day.
-- Use the game's **Confirm** button to save. Closing the panel without confirming discards your unsaved rule changes.
+1. Open the game's price panel. Changing the price updates the chance; dragging the chance slider fills in a matching price.
+2. Choose a rule: **Off**, **Fixed price** or **Fixed probability**. Fixed probability re-prices the product whenever wholesale prices change. A 100% target uses the game's suggested price for the day.
+3. Press the game's **Confirm** button to save. Closing the panel without confirming discards the changes.
 
 ![In-game fixed-probability pricing: an 86.2% target corresponds to a selling price of 73 C](assets/fixed-probability-gameplay.png)
 
-Drag the acceptance slider to update the selling-price field, then choose **Fixed probability** to maintain that target as wholesale prices change. Press the game's confirmation button to save.
-
-The percentage means a customer who has found the product will not reject it for being too expensive. **It is not the chance of selling all your stock.** Demand, customer traffic, freshness and stock still matter. Prices use whole numbers, so the actual estimate can differ from the requested chance, especially for cheap products.
+The percentage is the chance that a customer who has found the product accepts the price. How much you sell still depends on demand, customer traffic, freshness and stock. Prices are whole numbers, so the actual chance can land slightly off the target, most noticeably on cheap products.
 
 ### Install
 
-For Old Market Simulator **2.1.6 on Windows**, with **BepInEx 5** installed.
+Requires Old Market Simulator **2.1.6 on Windows** with **BepInEx 5** installed.
 
-1. Close the game and back up your save and any older plugin.
-2. Extract the Mod ZIP into the game folder. The plugin belongs at `BepInEx/plugins/OldMarket.PriceProbability/OldMarket.PriceProbability.dll`.
-3. Start the game and enter your town.
-
-Choose the Mod ZIP on the release page, not GitHub's **Source code** download. The loader is not included.
-
-Keep only one copy of this plugin DLL under `BepInEx/plugins`, including any older copy installed directly in that folder. Other game versions and platforms have not been confirmed compatible.
+1. Close the game and back up your save and any older copy of this plugin.
+2. Download the Mod ZIP from the release page (not GitHub's **Source code**) and extract it into the game folder. The plugin should end up at `BepInEx/plugins/OldMarket.PriceProbability/OldMarket.PriceProbability.dll`.
+3. Make sure that is the only copy of the DLL under `BepInEx/plugins`, then start the game.
 
 ### Multiplayer
 
-Only the host can keep and apply automatic pricing rules. Other players can preview prices if they have the Mod; they can still use the normal pricing screen without it. A host's active rule takes precedence over a guest's price change, and guests without the Mod cannot see that rule. Reopen a price panel to see changes made by someone else.
+Pricing rules are saved and applied by the host. Guests with the Mod can preview chances; guests without it use the normal pricing screen. The host's rules win over a guest's price change. Reopen a price panel to see changes made by someone else.
 
-Rules stay on the host's computer. Avoid using another automatic-pricing Mod at the same time.
+Don't run another automatic-pricing Mod at the same time.
 
-### Settings and removal
+### Managing rules
 
-Manage rules in the price panel. They are saved by game save slot in `BepInEx/config/local.oldmarket.priceprobability.cfg`. If you replace a save with a different one in the same slot, clear its old rules first so they do not carry over unexpectedly.
+Rules are set in the price panel and saved per save slot in `BepInEx/config/local.oldmarket.priceprobability.cfg`.
 
-To clear one product's rule, select **Off** in its price panel and press **Confirm**. To reset rules for every slot, close the game, back up the configuration file and move it out of `BepInEx/config`; the Mod recreates it without rules when needed. Configuration changes do not restore earlier selling prices. When transferring a world to another host or computer, the rules do not travel with the game save; set them up again or deliberately transfer the matching configuration as well.
+- **Clear one product's rule:** select **Off** in its price panel and press **Confirm**.
+- **Reuse a save slot for a different save:** clear the old rules first so they don't carry over.
+- **Reset all rules:** close the game and move the configuration file out of `BepInEx/config` (keep it as a backup). A fresh one is created when needed.
+- **Move a world to another host or computer:** set the rules up again there, or copy this configuration file along with the save.
 
-To update, close the game and back up the old DLL and settings before replacing the plugin. To uninstall, close the game and remove `OldMarket.PriceProbability.dll`. Automatic changes stop, but prices already set remain until you change them. Keep your loader and other plugins.
+### Updating or removing
 
-[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development and validation](DEVELOPMENT.md) · [Translations](localization/README.md) · [License](LICENSE)
+To update, close the game, back up the old DLL and settings, then replace the plugin. To uninstall, delete `OldMarket.PriceProbability.dll`. Automatic re-pricing stops, and products keep their current prices.
+
+[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development notes](DEVELOPMENT.md) · [Translations](localization/README.md) · [License](LICENSE)
 
 ## 中文
-
-维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](../releases/validation.md)。
 
 定价时直接看看顾客愿不愿意买，还可以选择固定售价或固定接受概率，让价格随行情调整。
 
@@ -81,41 +75,39 @@ To update, close the game and back up the old DLL and settings before replacing 
 
 ### 怎么操作
 
-- 打开游戏的定价页，修改售价会更新概率，拖动概率滑条则会给出相应售价。
-- 可选“关闭”“固定售价”或“固定概率”；固定概率会在批发价格变化时重新调整售价。
-- 100% 目标使用游戏当天的建议售价。
-- 点击游戏原有的**确认按钮**保存；直接关闭页面会丢弃尚未确认的规则修改。
+1. 打开游戏的定价页。修改售价会更新概率，拖动概率滑条会自动填入对应售价。
+2. 选择规则：“关闭”“固定售价”或“固定概率”。固定概率会在批发价变化时自动重新定价；目标为 100% 时使用游戏当天的建议售价。
+3. 点击游戏原有的**确认**按钮保存。不确认直接关闭会放弃本次修改。
 
 ![实机画面：固定概率模式下，86.2% 目标接受率对应 73 C 售价](assets/fixed-probability-gameplay.png)
 
-拖动接受概率滑条会同步更新售价输入框，再选择“固定概率”，即可随批发价变化维持目标接受率。最后点击游戏原有的确认按钮保存。
-
-这里的概率指顾客已经找到商品后，不会因为太贵而放弃购买的可能性，**不是当天卖光库存的概率**。需求、客流、保鲜和库存依然影响销量。售价只能是整数，因此实际概率可能与目标略有差异，低价商品尤其明显。
+这里的概率是顾客找到商品后愿意接受这个价格的可能性。实际卖出多少，还取决于需求、客流、保鲜和库存。售价只能是整数，所以实际概率会与目标略有出入，低价商品更明显。
 
 ### 安装
 
-适用于 **Windows 版 Old Market Simulator 2.1.6**，需要先安装 **BepInEx 5**。
+需要 **Windows 版 Old Market Simulator 2.1.6**，并已安装 **BepInEx 5**。
 
-1. 退出游戏，备份存档和已有的旧插件。
-2. 将 Mod ZIP 解压到游戏目录，确认插件位于 `BepInEx/plugins/OldMarket.PriceProbability/OldMarket.PriceProbability.dll`。
-3. 启动游戏并进入小镇。
-
-请选发布页里的 Mod ZIP，不要下载 **Source code** 当作插件安装。安装包不含加载器。
-
-`BepInEx/plugins` 下只保留一份本插件 DLL，包括以前直接放在该目录里的旧副本。其他游戏版本和平台尚未确认兼容。
+1. 退出游戏，备份存档和旧版插件。
+2. 从发布页下载 Mod ZIP（不是 GitHub 的 **Source code**），解压到游戏目录，插件应位于 `BepInEx/plugins/OldMarket.PriceProbability/OldMarket.PriceProbability.dll`。
+3. 确认 `BepInEx/plugins` 下只有这一份 DLL，然后启动游戏。
 
 ### 和朋友一起玩
 
-只有房主能保存和执行自动定价规则。客人安装后可以查看概率，不安装也能使用游戏原有定价页。房主开启的规则会优先于客人的改价；未安装的客人看不到规则状态。别人改价后，重新打开定价页即可查看。
+定价规则由房主保存和执行。安装了 Mod 的客人可以查看概率，没安装的客人照常使用游戏定价页。房主的规则优先于客人的改价。别人改价后，重新打开定价页即可看到。
 
-规则保存在房主电脑上，尽量不要同时使用其他自动定价 Mod。
+请不要同时使用其他自动定价 Mod。
 
-### 设置与卸载
+### 管理规则
 
-平时直接在定价页管理规则即可。规则按存档槽保存在 `BepInEx/config/local.oldmarket.priceprobability.cfg`；如果把同一个槽换成另一份存档，请先清除旧规则，避免意外沿用。
+规则在定价页设置，按存档槽保存在 `BepInEx/config/local.oldmarket.priceprobability.cfg`。
 
-清除单个商品规则时，在其定价页选择**关闭**并点击**确认**。若要重置所有存档槽的规则，请退出游戏，备份配置文件后将它移出 `BepInEx/config`；Mod 会在需要时重新生成不含规则的配置。修改配置不会恢复此前的售价。将世界转给另一位房主或另一台电脑时，规则不会随游戏存档迁移；需要重新设置，或同时迁移与该存档匹配的配置。
+- **清除单个商品的规则：**在其定价页选择**关闭**并点击**确认**。
+- **同一存档槽换成另一份存档：**先清除旧规则，避免沿用。
+- **重置全部规则：**退出游戏，把配置文件移出 `BepInEx/config`（留作备份），需要时会自动生成新文件。
+- **把世界转给另一位房主或另一台电脑：**在新位置重新设置规则，或连同存档一起复制这个配置文件。
 
-更新前退出游戏，备份旧 DLL 和设置后替换插件。卸载时退出游戏并删除 `OldMarket.PriceProbability.dll`，自动调价会停止，但已经设置的售价会保留，需要时可自行修改。保留加载器和其他插件。
+### 更新与卸载
 
-[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发与验证](DEVELOPMENT.md) · [翻译说明](localization/README.md) · [许可证](LICENSE)
+更新时退出游戏，备份旧 DLL 和设置后替换插件。卸载时删除 `OldMarket.PriceProbability.dll`；自动调价随之停止，商品保持当前售价。
+
+[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发说明](DEVELOPMENT.md) · [翻译说明](localization/README.md) · [许可证](LICENSE)

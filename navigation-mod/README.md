@@ -8,20 +8,18 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 ## English
 
-Version **0.2.1** includes a smaller Rome main map and matching wheel/button zoom steps. Both fixes have passed local in-game acceptance; 0.2.1 was published as a stable release on 2026-09-20. See the [validation record](../releases/validation.md).
-
-Find your way around town with a minimap, a compass and your own map markers. Map & Compass works independently of the Coordinates HUD Mod.
+Find your way around town with a minimap, a compass and your own map markers. Map & Compass works on its own; you don't need the Coordinates HUD Mod.
 
 **Maps: Eastern Town, Island and Rome with seven separate travel regions.**
 
-[Stable download 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.1)
+[Download 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.1)
 
 ### Core features
 
 - Use a minimap, a zoomable large map, a compass and in-world target guidance.
 - Explore bundled Eastern Town, Island and Rome maps, including Rome’s seven travel regions.
 - Create personal markers with names, colors and icons; navigate to markers or map POIs.
-- See supported unlock-area overlays and keep your markers separate for each save and region.
+- See unlockable areas on the map and keep your markers separate for each save and region.
 
 ![In-game compass showing directions and a 71-degree heading](assets/compass-gameplay.png)
 
@@ -43,41 +41,43 @@ Find your way around town with a minimap, a compass and your own map markers. Ma
 | Remove a personal marker | Right-click it, or use Delete in the editor |
 | Navigate to a place | Left- or right-click its icon or name |
 
-The minimap starts in the bottom-left corner. Use the map window's orientation button to switch between north-up and following your view; your choice is remembered. The large map stays north-up. Shop names appear as you zoom in when there is enough room.
+The minimap sits in the bottom-left corner. The orientation button in the map window switches it between north-up and following your view, and your choice is remembered. The large map is always north-up, and shop names appear as you zoom in.
 
-One mouse-wheel notch changes the large-map zoom by the same amount as one + / − click. Fractional trackpad movement is preserved. Zoom steps and the closest zoom level adapt to the loaded map's world coverage.
-
-Select a personal marker to change its name, color or shape in the right sidebar. Color and shape buttons open a grid below them—click the one you want. Choose **Set target** to follow it. The compass and in-world guide use the same icon and color as the map. Guides hide while a menu is open and return when it closes.
+Select a personal marker to change its name, color or shape in the right sidebar; the color and shape buttons open a grid to pick from. Choose **Set target** to follow it: the compass and an in-world icon point the way, using the same icon and color as on the map. Target icons point straight at the target rather than along a walking route. They hide while a menu is open.
 
 ![In-game personal marker editor with name, color, icon and target controls](assets/marker-editor-gameplay.png)
 
 ![In-game target guidance showing Gate 4 at a distance of 84 metres](assets/target-tracking-gameplay.png)
 
-Opening the map frees the mouse but **does not pause the game**. M is a separate Mod setting; changing the game's map binding does not change this shortcut.
+Opening the map frees the mouse, but **the game keeps running**. M is set in this Mod's settings, separately from the game's own map key. It doesn't respond while you're typing or a game menu or loading screen is open.
 
 ### Install
 
-For Old Market Simulator **2.1.6 on Windows**, with **BepInEx 5** installed.
+Requires Old Market Simulator **2.1.6 on Windows** with **BepInEx 5** installed.
 
-1. Close the game and back up your save and any older plugin.
-2. Extract the Mod ZIP into the game folder. The plugin belongs at `BepInEx/plugins/OldMarket.Navigation/OldMarket.Navigation.dll`.
-3. Start the game and enter your town.
+1. Close the game and back up your save and any older copy of this plugin.
+2. Download the Mod ZIP from the release page (not GitHub's **Source code**) and extract the whole ZIP into the game folder. The plugin should end up at `BepInEx/plugins/OldMarket.Navigation/OldMarket.Navigation.dll`, with its `maps/` folder next to it.
+3. Start the game.
 
-Choose the Mod ZIP on the release page, not GitHub's **Source code** download. The loader is not included.
+### Maps
 
-### Map files and saved markers
+The ZIP includes maps for all three towns:
 
-**The plugin ZIP includes Eastern Town, Island and Rome maps.** Artwork, overlays and map metadata install together with the plugin.
+- **Eastern Town:** the central town, showing the central market as you unlock and clear it.
+- **Island:** an overview of the island.
+- **Rome:** the walled town and farms, plus separate maps for the gates, caravans and mine. The map switches automatically when you travel through a gate, take a caravan or enter the mine.
 
-Extract the complete ZIP into the game folder, retaining `BepInEx/plugins/OldMarket.Navigation/maps/`, and restart the game. Eastern Town currently covers the central town and four central-market unlock states, showing cleared market clutter; its outer terrain is not yet bundled. Island is a static surface overview; it does not switch through all market, farm, greenhouse or underground expansions. Rome switches to the local player’s current region after travelling through a gate, caravan or mine entrance. Hatched areas mark pending expansions and clear when their unlock is synchronized. Gate symbols change from a lock to an open door. Shops and facilities appear or move with their unlock state. The mine has two additional stages controlled from the main town. These are surface-area indicators, not a reconstruction of every intermediate building model. Maps do not automatically redraw player placements. Gate 4 now shows the lake west of its central terrace; local in-game testing of the correction in build `921d14b` is complete.
+Hatched areas are expansions you haven't unlocked yet and clear once you do. Gate icons change from a lock to an open door, and shops and facilities appear as they unlock.
 
-Rome's main map focuses on the walled town and farms, with a margin around the walls. Gates, caravans and the mine retain their separate region maps. The reduced town coverage and unified zoom steps have passed local in-game acceptance.
+### Markers
 
-Your markers are personal and kept separately for each save and area in `BepInEx/config/OldMarket.Navigation/markers/` XML files. They are not shared with other players or written into the game's save files. When joining someone else's game, markers last for that connection by default. To keep them between visits, use a different `Markers.RemoteProfile` name for each host's save. Copying or recreating a save folder may make your old markers appear missing. Your selected target is not remembered after restarting.
+Markers are personal: each save and area keeps its own set in `BepInEx/config/OldMarket.Navigation/markers/`. Other players don't see them.
+
+When you join someone else's game, markers last until you disconnect. To keep them for next time, give each friend's save its own `Markers.RemoteProfile` name in the settings. Your selected target resets when you restart the game.
 
 ### Settings
 
-After the first launch, close the game and edit `BepInEx/config/local.oldmarket.navigation.cfg` if you want to change these options.
+After the first launch, close the game and edit `BepInEx/config/local.oldmarket.navigation.cfg`.
 
 | Option | Default | What it does |
 | --- | --- | --- |
@@ -90,38 +90,34 @@ After the first launch, close the game and edit `BepInEx/config/local.oldmarket.
 | `Input.MapKey` | M | Change the map key; None turns the shortcut off |
 | `Markers.RemoteProfile` | empty | Keep markers for a particular friend's save |
 
-To adjust size or position, edit `BepInEx/config/OldMarket.Navigation/layout.json`. Changes appear while you play. `MinimapSize` changes the frame size; `MinimapRange` changes how much ground it shows (default 75; smaller means closer). `MinimapLeft` and `MinimapBottom` move it away from the left and bottom edges. Back up the file before editing so you can easily undo a change.
+To change the minimap's size or position, edit `BepInEx/config/OldMarket.Navigation/layout.json`; changes show up while you play. `MinimapSize` sets the frame size, `MinimapRange` how much ground it shows (default 75; smaller is closer), and `MinimapLeft` / `MinimapBottom` the distance from the screen edges. Keep a copy of the file so you can undo changes.
 
-### A few things to know
+### Languages and multiplayer
 
-The interface, built-in map titles and functional place labels follow all 13 game languages: English, Simplified Chinese, Traditional Chinese, German, French, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Turkish and Ukrainian. Verified place names use the game's translations; rest areas, markets, water refill, calendars and return entrances use original Mod translations. Unknown languages fall back to English for Mod text. Your own marker names stay as written.
-
-Target icons show a direction, not a walking route. They may appear through buildings or over a roof. Map north is a consistent Mod convention and may differ from other maps. Overlays from Steam or performance tools may still cover the display.
-
-The map and minimap shortcuts use the keyboard. They are ignored while typing or when native menus/loading screens block gameplay; close those screens before using M. Only players who want navigation need the Mod. It reads synchronized world state without changing unlocks, movement or the multiplayer protocol. Support for game versions other than 2.1.6 has not been established.
+The interface and place names follow the game's 13 languages; your own marker names stay as you wrote them. Only players who want the map need to install the Mod.
 
 ### Updating or removing
 
-Close the game and back up the plugin directory, including its DLL and bundled maps, plus `BepInEx/config/OldMarket.Navigation/` and `BepInEx/config/local.oldmarket.navigation.cfg`. Replace the DLL and maps together, keep only one active plugin copy, and retain the configuration directory and file to preserve your markers and settings. To remove the Mod, close the game and delete its DLL; you can also remove its map folder if you no longer need it. To return to an earlier version, restore that version's DLL and maps together with the corresponding backed-up markers and settings.
+Before updating, close the game and back up the plugin folder `BepInEx/plugins/OldMarket.Navigation/` and your markers and settings in `BepInEx/config/OldMarket.Navigation/` and `BepInEx/config/local.oldmarket.navigation.cfg`. Then replace the whole plugin folder, so the DLL and maps stay in step.
+
+To uninstall, delete the plugin folder. Keep the config files if you want your markers back after reinstalling.
 
 [What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development notes](DEVELOPMENT.md) · [License](LICENSE)
 
 ## 中文
 
-**0.2.1** 收紧罗马主地图范围并统一滚轮与按钮缩放步长。两项修复均已通过本地实机验收，0.2.1 已于 2026-09-20 正式发布，详见[验证记录](../releases/validation.md)。
-
-用小地图、罗盘和自己的标记点，轻松找到镇上的目的地。Map & Compass 可以独立使用，不需要安装 Coordinates HUD。
+用小地图、罗盘和自己的标记点，轻松找到镇上的目的地。Map & Compass 可以单独使用，不需要安装 Coordinates HUD。
 
 **地图：东方小镇、海岛，以及包含七个独立传送区域的罗马小镇。**
 
-[正式版下载 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.1)
+[下载 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.1)
 
 ### 核心功能
 
 - 提供小地图、可缩放大地图、罗盘和场景内目标指引。
 - 内置东方小镇、海岛及罗马地图，包含罗马七个传送区域。
 - 创建带名称、颜色和图标的个人标记，或直接前往地图地点。
-- 显示受支持的解锁区域覆盖层，标记按存档和区域分别保存。
+- 在地图上显示可解锁区域，标记按存档和区域分别保存。
 
 ![实机画面：罗盘轴显示方位与 71° 朝向](assets/compass-gameplay.png)
 
@@ -143,37 +139,39 @@ Close the game and back up the plugin directory, including its DLL and bundled m
 | 删除个人标记 | 右键标记，或点击编辑区的删除按钮 |
 | 前往店铺等地点 | 左键或右键它的图标或名称 |
 
-小地图默认在左下角。大地图窗口中的朝向按钮可以切换“固定正北”和“随视角转动”，下次进入也会记住选择。大地图始终保持正北朝上。放大地图后，空间足够的地点会显示名称。
+小地图在左下角。大地图窗口中的朝向按钮可以切换“固定正北”和“随视角转动”，并会记住你的选择。大地图始终正北朝上，放大后会显示店铺名称。
 
-大地图滚轮每滚动一格，与点击一次 + / − 按钮的缩放幅度相同；触控板的小数滚动仍然有效。缩放步长与放大上限会适应所加载地图的世界覆盖范围。
-
-选中个人标记后，可以在右侧改名称、颜色和图标。点击颜色或图标按钮，下方会展开选择格，点哪个就用哪个。点击“设为目标”即可跟随指引，罗盘和场景内会显示与地图相同的图标和颜色。打开菜单时指引会暂时隐藏，关闭后恢复。
+选中个人标记后，可以在右侧修改名称、颜色和图标，点击颜色或图标按钮会展开选择格。点击“设为目标”后，罗盘和场景内的图标会为你指路，图标和颜色与地图上一致。目标图标直接指向目标位置，而不是沿着可行走的路线。打开菜单时指引会暂时隐藏。
 
 ![实机画面：编辑个人标记名称、颜色和图标，并设为目标](assets/marker-editor-gameplay.png)
 
 ![实机画面：场景内目标指引显示大门4及 84 米距离](assets/target-tracking-gameplay.png)
 
-打开地图后可以自由使用鼠标，但**游戏不会暂停**。M 是本 Mod 的独立设置，不会跟随游戏里的地图改键。
+打开地图后可以自由使用鼠标，但**游戏会继续运行**。M 键在本 Mod 的设置中修改，与游戏自带的地图按键分开。输入文字、打开游戏菜单或加载画面时，M 键不会响应。
 
 ### 安装
 
-适用于 **Windows 版 Old Market Simulator 2.1.6**，需要先安装 **BepInEx 5**。
+需要 **Windows 版 Old Market Simulator 2.1.6**，并已安装 **BepInEx 5**。
 
-1. 退出游戏，备份存档和已有的旧插件。
-2. 将 Mod ZIP 解压到游戏目录，确认插件位于 `BepInEx/plugins/OldMarket.Navigation/OldMarket.Navigation.dll`。
-3. 启动游戏并进入小镇。
+1. 退出游戏，备份存档和旧版插件。
+2. 从发布页下载 Mod ZIP（不是 GitHub 的 **Source code**），把整个 ZIP 解压到游戏目录。插件应位于 `BepInEx/plugins/OldMarket.Navigation/OldMarket.Navigation.dll`，旁边有 `maps/` 文件夹。
+3. 启动游戏。
 
-请选发布页里的 Mod ZIP，不要下载 **Source code** 当作插件安装。安装包不含加载器。
+### 地图
 
-### 地图文件与标记保存
+ZIP 内已包含三张城镇地图：
 
-**插件 ZIP 已包含东方小镇、海岛与罗马地图。**底图、覆盖层和地图元数据会随插件一起安装。
+- **东方小镇：**镇中心区域，中央市场会随解锁和清理进度变化。
+- **海岛：**整座岛的概览图。
+- **罗马：**城墙内的镇区与农田，另有大门、商队和矿洞各自的区域地图。穿过大门、乘坐商队或进入矿洞时会自动切换。
 
-将整个 ZIP 解压到游戏目录，保留 `BepInEx/plugins/OldMarket.Navigation/maps/`，再重启游戏。东方小镇目前覆盖镇区及中央市场四种解锁状态，可反映市场垃圾清理，外围地形尚未打包；海岛是静态地表概览，不随市场、农场、温室或地下扩建的全部状态切换。罗马会在穿过大门、乘坐商队或进入矿洞后，切换到本地玩家所在区域的地图。斜线阴影表示待解锁扩建范围，同步解锁后消失；大门图标由锁变为开放入口，店铺和设施图标随启停状态出现或移动。矿洞另含由主城控制的两个扩建阶段。这些是地表范围提示，不逐一重建各阶段建筑模型；地图不会自动重画玩家摆放物。大门4底图已补回中央长平台西侧的湖泊；修正构建 `921d14b` 的本地实机测试已完成。
+斜线阴影是尚未解锁的扩建区域，解锁后消失。大门图标会从锁变为敞开的门，店铺和设施会随解锁出现在地图上。
 
-罗马主地图聚焦城墙内的镇区与农田，并在城墙外保留余量；大门、商队与矿洞继续使用各自的区域地图。本次主城范围收紧与统一缩放步长已通过本地实机验收。
+### 标记
 
-个人标记以 XML 文件保存在 `BepInEx/config/OldMarket.Navigation/markers/`，按存档和区域分别存储，不会分享给其他玩家或写入游戏存档。加入好友房间时，默认只保留本次连接中的标记。如果想下次继续使用，请为每位好友的存档设置不同的 `Markers.RemoteProfile` 名称。复制或重建存档文件夹后，旧标记可能暂时找不到。当前选中的目标不会在重启后保留。
+标记只属于你自己：每个存档、每个区域分别保存在 `BepInEx/config/OldMarket.Navigation/markers/`，其他玩家看不到。
+
+加入别人的房间时，标记保留到断开连接为止。想下次继续使用，请在设置中为每位好友的存档分别设置 `Markers.RemoteProfile` 名称。当前选中的目标在重启游戏后会清空。
 
 ### 调整设置
 
@@ -190,19 +188,17 @@ Close the game and back up the plugin directory, including its DLL and bundled m
 | `Input.MapKey` | M | 地图快捷键；None 表示关闭快捷键 |
 | `Markers.RemoteProfile` | 留空 | 为某个好友存档保留标记 |
 
-位置和大小可在 `BepInEx/config/OldMarket.Navigation/layout.json` 中调整，游玩时也能看到变化。`MinimapSize` 调整外框大小，`MinimapRange` 调整显示范围（默认 75，越小看得越近），`MinimapLeft` 和 `MinimapBottom` 调整与屏幕左边、底边的距离。修改前留一份备份，方便还原。
+小地图的大小和位置可在 `BepInEx/config/OldMarket.Navigation/layout.json` 中调整，游玩时即可看到变化。`MinimapSize` 调整外框大小，`MinimapRange` 调整显示范围（默认 75，越小看得越近），`MinimapLeft` 和 `MinimapBottom` 调整与屏幕左边、底边的距离。修改前留一份备份，方便还原。
 
-### 使用时留意
+### 语言与联机
 
-界面、内置地图标题及功能地点标签支持游戏全部 13 种语言：英语、简中、繁中、德语、法语、意大利语、日语、韩语、葡萄牙语、俄语、西班牙语、土耳其语和乌克兰语。已确认的地点名使用游戏译文，休息处、市场、补水处、日历及返回入口使用 Mod 原创翻译；未知语言的 Mod 文字回退英语。自己填写的标记名称保持原样。
-
-目标图标提供方向，不是可行走路线；可能透过建筑显示，也可能落在屋顶上。地图北向使用本 Mod 的统一约定，可能与其他地图不同。Steam 或性能工具的覆盖层仍可能挡住界面。
-
-大地图和小地图快捷键使用键盘；输入文字，或原生菜单、加载画面阻止正常操作时不会触发，使用 M 前请先关闭这些界面。只有需要导航的玩家才需安装；插件读取同步的世界状态，不改变解锁、移动或联机协议。尚未确认 2.1.6 以外的游戏版本兼容性。
+界面和地点名称跟随游戏的 13 种语言，自己填写的标记名称保持原样。想用地图的玩家自己安装即可。
 
 ### 更新与卸载
 
-退出游戏，备份含 DLL 和地图的插件目录，以及 `BepInEx/config/OldMarket.Navigation/` 和 `BepInEx/config/local.oldmarket.navigation.cfg`。一起替换 DLL 和随包地图，只保留一个启用副本；保留配置目录和文件，就能留下标记和设置。卸载时退出游戏并删除 DLL；地图文件不用了也可以移除。需要退回旧版时，一起还原该版本的 DLL、地图及对应备份的标记和设置。
+更新前退出游戏，备份插件文件夹 `BepInEx/plugins/OldMarket.Navigation/`，以及保存标记和设置的 `BepInEx/config/OldMarket.Navigation/` 和 `BepInEx/config/local.oldmarket.navigation.cfg`。然后整体替换插件文件夹，让 DLL 和地图保持同一版本。
+
+卸载时删除插件文件夹即可。保留配置文件，重新安装后标记仍在。
 
 [版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发说明](DEVELOPMENT.md) · [许可证](LICENSE)
 
