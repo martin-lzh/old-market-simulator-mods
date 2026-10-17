@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import patch
 import zipfile
 
-from test_ci import ci, FakeGitHub
+from test_ci import ci
 
 
 class MapPackageTests(unittest.TestCase):
@@ -227,19 +227,15 @@ class MapPackageTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     ci.validate_package(self.c, "BepInEx", buffer.getvalue())
 
-    def test_release_upload_contains_maps_and_evidence(self):
+    def test_release_assets_contain_maps_and_evidence(self):
         data = self.build()
-        with patch.object(ci, "ROOT", self.root), patch.object(ci, "MODS", {"navigation": "Navigation"}), \
-                patch.object(ci, "config", return_value=self.c), \
-                patch.object(ci.subprocess, "check_output", return_value="a" * 40), \
-                patch.object(ci, "release_authorized", return_value=True):
+        with patch.object(ci, "ROOT", self.root), patch.object(ci, "MODS", {"navigation": "Navigation"}),                 patch.object(ci, "config", return_value=self.c),                 patch.object(ci.subprocess, "check_output", return_value="a" * 40):
             ci.write_evidence(self.c, self.output)
             evidence = json.loads((self.output / "build-info.json").read_text(encoding="utf-8"))
             self.assertEqual(len(evidence["mapFiles"]), len(json.loads(self.manifest.read_text())["files"]))
-            api = FakeGitHub()
-            ci.publish("owner/repo", "a" * 40, api)
-            self.assertIn(data, api.assets.values())
-            self.assertEqual(api.calls[-1], ("/releases/1", "PATCH"))
+            ci.verify_artifacts(self.c, "a" * 40)
+            mod = ci.release_mods("owner/repo")[0]
+            self.assertIn(data, [path.read_bytes() for path in mod.assets])
 
 
 if __name__ == "__main__":

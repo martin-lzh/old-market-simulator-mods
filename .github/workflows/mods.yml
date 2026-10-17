@@ -1,5 +1,9 @@
 name: Mod CI and releases
 
+# Pull requests into main are version updates. After the maintainer merges one,
+# the release job publishes every new CHANGELOG version and promotes betas
+# whose release.json says "prerelease": false (tools/modrelease.py).
+
 on:
   pull_request:
     branches: [main]
@@ -75,11 +79,12 @@ jobs:
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
       - name: Build all eight variants and run logic/localization tests
         run: python tools/ci.py build
-      - name: Check release eligibility without publishing
+      - name: Release plan (read-only)
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_REPOSITORY: ${{ github.repository }}
-        run: python tools/ci.py check-releases --repository "$env:RELEASE_REPOSITORY"
+          PYTHONUTF8: '1'
+        run: python tools/ci.py release-plan --repository "$env:RELEASE_REPOSITORY"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: mod-packages
@@ -88,7 +93,7 @@ jobs:
           retention-days: 14
 
   release:
-    name: Publish new CHANGELOG versions
+    name: Publish new versions and promote betas
     needs: [syntax, build]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -107,9 +112,10 @@ jobs:
         with:
           name: mod-packages
           path: outputs/ci/
-      - name: Verify assets and publish (existing releases are skipped)
+      - name: Verify packages, publish and promote
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_REPOSITORY: ${{ github.repository }}
           RELEASE_COMMIT: ${{ github.sha }}
+          PYTHONUTF8: '1'
         run: python tools/ci.py publish --repository "$RELEASE_REPOSITORY" --commit "$RELEASE_COMMIT"
