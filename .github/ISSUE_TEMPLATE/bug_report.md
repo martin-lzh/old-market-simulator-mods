@@ -6,18 +6,16 @@ labels: ""
 assignees: ""
 ---
 
-<!-- 中英文均可。安全漏洞请遵循 SECURITY.md，不要公开利用细节。
-不要上传游戏 DLL、存档、原始资源、反编译代码或未经脱敏的日志。
-Chinese or English is welcome. Follow SECURITY.md for vulnerabilities; do not disclose exploit details.
-Do not upload game DLLs, saves, original assets, decompiled code, or unredacted logs. -->
+<!-- 中英文均可。安全漏洞请按 SECURITY.md 私下报告。请不要上传完整存档或游戏文件。
+Chinese or English is welcome. Report security issues privately as described in SECURITY.md. Please don't upload complete saves or game files. -->
 
 ## 环境 / Environment
 
 - Mod 名称与版本 / Mod name and version:
-- 游戏版本与程序集哈希（可获取时）/ Game version and Assembly-CSharp.dll SHA256 (if available):
-- 加载器、版本及系统 / Loader, version, and operating system:
-- 单机、房主或客人；双方版本与 Mod 组合 / Single-player, host, or client; both sides' versions and Mod combinations:
-- 旧存档、升级来源及相关配置 / Existing save, previous version, and relevant configuration:
+- 游戏版本 / Game version:
+- 加载器及版本（BepInEx 或 MelonLoader）/ Loader and version (BepInEx or MelonLoader):
+- 单机、房主或客人；联机时各玩家的 Mod 与版本 / Single-player, host or guest; for multiplayer, each player's Mods and versions:
+- 是否刚升级、是否改过配置 / Just upgraded? Changed any configuration?
 
 ## 复现步骤 / Steps to reproduce
 
@@ -26,12 +24,12 @@ Do not upload game DLLs, saves, original assets, decompiled code, or unredacted 
 
 ## 预期结果与实际结果 / Expected and actual results
 
-## 已做的对照与验证 / Comparison tests and validation
+## 已经尝试过的办法 / What you've tried
 
-<!-- 注明未执行的检查。含额外容器记录的 Stack All 存档不要直接停用插件测试。
-List checks not run. Do not test a Stack All save containing extra container records by simply disabling the plugin. -->
+<!-- 例如：只保留这一个 Mod 时是否仍会出现？用了 Better Stacking 的话，请先按它的卸载步骤整理库存，或用存档副本测试。
+For example: does it still happen with only this Mod installed? If you use Better Stacking, follow its removal steps first or test with a copy of your save. -->
 
-## 脱敏错误片段或截图 / Redacted error excerpts or screenshots
+## 报错片段或截图 / Error lines or screenshots
 
-<!-- 隐去用户名、私人路径、房间码、凭据等。
-Remove usernames, private paths, room codes, credentials, and other private information. -->
+<!-- 粘贴前请删掉用户名、文件路径、房间码等个人信息。
+Remove usernames, file paths, room codes and other personal details before posting. -->
