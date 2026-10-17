@@ -1,6 +1,6 @@
 # Auto Checkout
 
-![Auto Checkout](assets/cover.png)
+![Auto Checkout](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/checkout-all-mod/assets/cover.png?raw=1)
 
 A mod for Old Market Simulator / Old Market Simulator 模组
 
@@ -26,9 +26,9 @@ Let checkout handle the whole table while you hold a key—or keep it running wi
 | Turn continuous checkout on/off | Aim at the checkout and press F9 |
 | Use the normal game interaction | Tap E |
 
-![In-game checkout hints for holding E and toggling with F9; toggle mode is off](assets/auto-checkout-gameplay.png)
+![In-game checkout hints for holding E and toggling with F9; toggle mode is off](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/checkout-all-mod/assets/auto-checkout-gameplay.png?raw=1)
 
-![In-game continuous checkout enabled, with F9 to turn it off](assets/continuous-checkout-on-gameplay.png)
+![In-game continuous checkout enabled, with F9 to turn it off](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/checkout-all-mod/assets/continuous-checkout-on-gameplay.png?raw=1)
 
 Aim at the checkout and stay within reach. When the table is empty, continuous mode waits for the next customer; ringing the bell is still up to you. Tapping E still does the game's normal action.
 
@@ -67,7 +67,7 @@ Only players who want automatic checkout need to install it; the host and other 
 
 To update, close the game, back up the old DLL and replace it. To uninstall, delete `OldMarket.CheckoutAll.dll` from its plugin folder.
 
-[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development notes](DEVELOPMENT.md) · [Translations](localization/README.md) · [License](LICENSE)
+[What changed](CHANGELOG.md) · [Help and feedback](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/SUPPORT.md) · [Development notes](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/checkout-all-mod/DEVELOPMENT.md) · [Translations](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/checkout-all-mod/localization/README.md) · [License](LICENSE)
 
 ## 中文
 
@@ -89,9 +89,9 @@ To update, close the game, back up the old DLL and replace it. To uninstall, del
 | 开启/关闭连续结账 | 对准结账台按 F9 |
 | 保持原版单次交互 | 短按 E |
 
-![实机画面：长按 E 连续结账及 F9 开关提示，当前连续结账关闭](assets/auto-checkout-gameplay.png)
+![实机画面：长按 E 连续结账及 F9 开关提示，当前连续结账关闭](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/checkout-all-mod/assets/auto-checkout-gameplay.png?raw=1)
 
-![实机画面：连续结账已开启，按 F9 关闭](assets/continuous-checkout-on-gameplay.png)
+![实机画面：连续结账已开启，按 F9 关闭](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/checkout-all-mod/assets/continuous-checkout-on-gameplay.png?raw=1)
 
 准星对着结账台，站在可交互距离内即可。桌上没有商品时会等待下一位顾客，摇铃仍由你自己操作。短按 E 仍是游戏原本的交互。
 
@@ -130,4 +130,4 @@ To update, close the game, back up the old DLL and replace it. To uninstall, del
 
 更新时退出游戏，备份旧 DLL 后替换。卸载时删除插件文件夹中的 `OldMarket.CheckoutAll.dll`。
 
-[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发说明](DEVELOPMENT.md) · [翻译说明](localization/README.md) · [许可证](LICENSE)
+[版本变化](CHANGELOG.md) · [问题反馈](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/SUPPORT.md) · [开发说明](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/checkout-all-mod/DEVELOPMENT.md) · [翻译说明](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/checkout-all-mod/localization/README.md) · [许可证](LICENSE)

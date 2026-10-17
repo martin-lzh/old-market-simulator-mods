@@ -1,6 +1,6 @@
 # Better Stacking
 
-![Better Stacking](assets/cover.png)
+![Better Stacking](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/stack-all-mod/assets/cover.png?raw=1)
 
 A mod for Old Market Simulator / Old Market Simulator 模组
 
@@ -35,7 +35,7 @@ Carry more without losing track of your baskets and boxes. Each product slot can
 - Q and F follow your game key bindings; G is fixed, so don't bind another inventory action to G.
 - Switching slots or items, opening a menu, pausing, switching windows or pressing two actions at once stops the repeat.
 
-![In-game controls showing HOLD TO REPEAT, Q to drop, F to throw and G to drop empty containers](assets/stack-controls-gameplay.png)
+![In-game controls showing HOLD TO REPEAT, Q to drop, F to throw and G to drop empty containers](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/stack-all-mod/assets/stack-controls-gameplay.png?raw=1)
 
 There are no settings to adjust.
 
@@ -53,7 +53,7 @@ Requires Old Market Simulator **2.1.6 on Windows** with **BepInEx 5** installed.
 
 The bottom-left number is the amount of goods; the bottom-right is the number of containers. Two baskets with 24 goods each show **48 goods / 2 containers**. Empty baskets count as containers too. Single-unit products such as whole fish show only their quantity on the right.
 
-![In-game inventory slot showing 2640 goods and 46 containers](assets/stack-counts-gameplay.png)
+![In-game inventory slot showing 2640 goods and 46 containers](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/stack-all-mod/assets/stack-counts-gameplay.png?raw=1)
 
 Each container keeps its own contents, cost and freshness, and goods merge and expire by the game's usual rules. Other non-tool items stack up to 64. A 65th container goes into another free slot, or stays near you if your inventory is full.
 
@@ -78,7 +78,7 @@ Follow the same steps before switching back to an older version that doesn't sup
 
 To update, close the game, back up your save and the old DLL, then replace the plugin.
 
-[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development notes](DEVELOPMENT.md) · [Translations](localization/README.md) · [License](LICENSE)
+[What changed](CHANGELOG.md) · [Help and feedback](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/SUPPORT.md) · [Development notes](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/stack-all-mod/DEVELOPMENT.md) · [Translations](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/stack-all-mod/localization/README.md) · [License](LICENSE)
 
 ## 中文
 
@@ -109,7 +109,7 @@ To update, close the game, back up your save and the old DLL, then replace the p
 - Q/F 跟随游戏按键设置，G 为固定键，请不要把其他库存操作绑定到 G。
 - 切换格子或物品、打开菜单、暂停、切换窗口或同时按两个动作键时，连续操作会停止。
 
-![实机画面：长按连续操作、Q 丢下、F 投掷及 G 丢空盒提示](assets/stack-controls-gameplay.png)
+![实机画面：长按连续操作、Q 丢下、F 投掷及 G 丢空盒提示](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/stack-all-mod/assets/stack-controls-gameplay.png?raw=1)
 
 无需调整设置，安装后即可使用。
 
@@ -127,7 +127,7 @@ To update, close the game, back up your save and the old DLL, then replace the p
 
 格子左下角是商品总数，右下角是容器数。例如两个各装 24 件商品的篮子，会显示 **48 件商品 / 2 个容器**。空篮子也计入容器数。整条鱼这类单件商品只在右侧显示数量。
 
-![实机画面：同一格显示 2640 件商品与 46 个容器](assets/stack-counts-gameplay.png)
+![实机画面：同一格显示 2640 件商品与 46 个容器](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/stack-all-mod/assets/stack-counts-gameplay.png?raw=1)
 
 每个容器保留自己的内容、成本和保鲜信息，商品按游戏原有规则合并和过期。其他非工具物品最多堆叠 64 个。第 65 个容器会放进其他空格；背包满了就留在你身边。
 
@@ -152,4 +152,4 @@ To update, close the game, back up your save and the old DLL, then replace the p
 
 更新时退出游戏，备份存档和旧 DLL 后替换插件。
 
-[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发说明](DEVELOPMENT.md) · [翻译说明](localization/README.md) · [许可证](LICENSE)
+[版本变化](CHANGELOG.md) · [问题反馈](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/SUPPORT.md) · [开发说明](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/stack-all-mod/DEVELOPMENT.md) · [翻译说明](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/stack-all-mod/localization/README.md) · [许可证](LICENSE)

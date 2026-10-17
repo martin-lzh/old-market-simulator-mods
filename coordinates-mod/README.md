@@ -1,6 +1,6 @@
 # Coordinates HUD
 
-![Coordinates HUD](assets/cover.png)
+![Coordinates HUD](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/coordinates-mod/assets/cover.png?raw=1)
 
 A mod for Old Market Simulator / Old Market Simulator 模组
 
@@ -18,7 +18,7 @@ See your XYZ position just below the money display, in the same style as the gam
 - Keep the readout updated while walking or travelling aboard a ship.
 - Toggle the display with F8; hide it automatically when your character is unavailable.
 
-![XYZ coordinates displayed beneath the money bar in game](assets/coordinates-hud-gameplay.png)
+![XYZ coordinates displayed beneath the money bar in game](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/coordinates-mod/assets/coordinates-hud-gameplay.png?raw=1)
 
 ### How to use
 
@@ -54,7 +54,7 @@ Only players who want to see their coordinates need to install it.
 
 To update, close the game, back up the old DLL and replace it. To uninstall, delete `OldMarket.Coordinates.dll` from its plugin folder. Keep the configuration file if you want your shortcut back after reinstalling.
 
-[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development notes](DEVELOPMENT.md) · [License](LICENSE)
+[What changed](CHANGELOG.md) · [Help and feedback](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/SUPPORT.md) · [Development notes](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/coordinates-mod/DEVELOPMENT.md) · [License](LICENSE)
 
 ## 中文
 
@@ -68,7 +68,7 @@ To update, close the game, back up the old DLL and replace it. To uninstall, del
 - 步行或乘船时持续更新位置。
 - 按 F8 显示／隐藏；角色尚未生成或断线后自动隐藏。
 
-![实机画面：金钱栏下方显示 XYZ 坐标](assets/coordinates-hud-gameplay.png)
+![实机画面：金钱栏下方显示 XYZ 坐标](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/coordinates-mod/assets/coordinates-hud-gameplay.png?raw=1)
 
 ### 怎么操作
 
@@ -104,4 +104,4 @@ To update, close the game, back up the old DLL and replace it. To uninstall, del
 
 更新时退出游戏，备份旧 DLL 后替换。卸载时删除插件文件夹中的 `OldMarket.Coordinates.dll`；保留配置文件，重新安装后会沿用原来的快捷键。
 
-[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发说明](DEVELOPMENT.md) · [许可证](LICENSE)
+[版本变化](CHANGELOG.md) · [问题反馈](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/SUPPORT.md) · [开发说明](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/coordinates-mod/DEVELOPMENT.md) · [许可证](LICENSE)

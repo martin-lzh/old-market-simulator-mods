@@ -7,12 +7,13 @@
 ### Unreleased
 
 - Rewrite the README in plainer language, focusing on what the Mod does and how to use it, with clearer installation, multiplayer and removal steps.
+- Links and images in the README and CHANGELOG now use full GitHub addresses, so they also work when opened from the downloaded ZIP.
 - Add in-game screenshots of the hold hint and both continuous-checkout states, and show the Nexus cover at the top of the README.
 - Refresh the development and translation notes and link them from the README.
 
 ### 0.1.5 — 2026-09-19 (stable release)
 
-In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
+In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/validation.md).
 
 - Rename the plugin display name to **Auto Checkout** and reorganize the bilingual README around core features and controls, with insertion points for gameplay media. Plugin ID, assembly/configuration paths, gameplay and version are unchanged.
 
@@ -28,7 +29,7 @@ In-game acceptance is confirmed by the maintainer. This version is a stable rele
 
 ### 0.1.4 — 2026-09-12 (prerelease)
 
-First public release in this repository: original Mod features with independent localization (Coordinates uses universal axis labels). Detailed features and changes: [release notes](../releases/checkout-all-v0.1.4.md).
+First public release in this repository: original Mod features with independent localization (Coordinates uses universal axis labels). Detailed features and changes: [release notes](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/checkout-all-v0.1.4.md).
 
 - Build/reference baseline: Old Market Simulator 2.1.6, Windows x64 / Unity Mono. BepInEx 5; Material Cost also offers MelonLoader 0.7.3. Standalone remains source-only for local testing.
 - Game assembly SHA256: FA6CE6B89AEBDF50DD46FF9C857650DB0E9CC618B1CE939F58501E0DC59C6296.
@@ -44,12 +45,13 @@ Older development versions mentioned in the README are not verified downloadable
 ### 未发布
 
 - 用更直白的语言重写 README，聚焦功能和用法，并理清安装、联机与卸载步骤。
+- README 和 CHANGELOG 中的链接与图片改用完整 GitHub 地址，从下载的 ZIP 中打开也能正常访问。
 - README 加入长按提示及连续结账开启／关闭状态的实机截图，并以 Nexus 封面作为首图。
 - 更新开发与翻译说明，并在 README 中提供链接。
 
 ### 0.1.5 — 2026-09-19（正式发布）
 
-维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](../releases/validation.md)。
+维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/validation.md)。
 
 - 插件显示名改为 **Auto Checkout**，双语 README 按核心功能和操作方式组织，并保留实机素材插入位置。插件 ID、程序集／配置路径、玩法及版本不变。
 
@@ -65,7 +67,7 @@ Older development versions mentioned in the README are not verified downloadable
 
 ### 0.1.4 — 2026-09-12（预发布）
 
-本仓库首次公开发布：原创功能与独立本地化（坐标使用通用轴标记）。详细功能与变化见[发布说明](../releases/checkout-all-v0.1.4.md)。
+本仓库首次公开发布：原创功能与独立本地化（坐标使用通用轴标记）。详细功能与变化见[发布说明](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/checkout-all-v0.1.4.md)。
 
 - 构建/引用基线：Old Market Simulator 2.1.6，Windows x64 / Unity Mono，BepInEx 5；成本插件另有 MelonLoader 0.7.3，Standalone 仅源码本地测试。
 - 游戏程序集 SHA256 同上；自动检查通过，实机 UI、存档及多人验收未完成。

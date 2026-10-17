@@ -1,6 +1,6 @@
 # Profit Insights
 
-![Profit Insights](assets/cover.png)
+![Profit Insights](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/material-cost-mod/assets/cover.png?raw=1)
 
 A mod for Old Market Simulator / Old Market Simulator 模组
 
@@ -18,11 +18,11 @@ Get a clearer view of material costs and possible profit while making, ordering 
 - Switch the daily report between material estimates and the game’s usual figures.
 - See per-item and whole-batch costs, output quantities and suggested-price profit.
 
-![In-game daily report showing material costs, average prices, estimated profits and the Materials only switch](assets/material-cost-report-gameplay.png)
+![In-game daily report showing material costs, average prices, estimated profits and the Materials only switch](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/material-cost-mod/assets/material-cost-report-gameplay.png?raw=1)
 
-![In-game recipe details showing batch and unit material costs, recommended price and estimated profit](assets/recipe-cost-profit-gameplay.png)
+![In-game recipe details showing batch and unit material costs, recommended price and estimated profit](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/material-cost-mod/assets/recipe-cost-profit-gameplay.png?raw=1)
 
-![In-game dock order showing purchase cost per pack, recommended unit price and estimated profit](assets/order-cost-profit-gameplay.png)
+![In-game dock order showing purchase cost per pack, recommended unit price and estimated profit](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/material-cost-mod/assets/order-cost-profit-gameplay.png?raw=1)
 
 ### How to use
 
@@ -75,7 +75,7 @@ Text follows the game's 13 languages and reuses the game's own words for terms s
 
 To update, close the game, back up the old DLL and replace it. To uninstall, delete `OldMarket.MaterialCost.dll` from the location above; your saves keep working as they are. Keep the configuration file if you want your settings back after reinstalling.
 
-[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development notes](DEVELOPMENT.md) · [License](LICENSE)
+[What changed](CHANGELOG.md) · [Help and feedback](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/SUPPORT.md) · [Development notes](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/material-cost-mod/DEVELOPMENT.md) · [License](LICENSE)
 
 ## 中文
 
@@ -89,11 +89,11 @@ To update, close the game, back up the old DLL and replace it. To uninstall, del
 - 日报可切换原料估算与游戏原有统计，并记住选择。
 - 同时查看单件与整批成本、产出数量及按建议售价计算的利润。
 
-![实机画面：日报中的原料成本、平均售价、预计利润及仅计原料开关](assets/material-cost-report-gameplay.png)
+![实机画面：日报中的原料成本、平均售价、预计利润及仅计原料开关](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/material-cost-mod/assets/material-cost-report-gameplay.png?raw=1)
 
-![实机画面：配方页显示整批及单件原料成本、建议售价与预计利润](assets/recipe-cost-profit-gameplay.png)
+![实机画面：配方页显示整批及单件原料成本、建议售价与预计利润](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/material-cost-mod/assets/recipe-cost-profit-gameplay.png?raw=1)
 
-![实机画面：订单页显示整包进货成本、单件建议售价与预计利润](assets/order-cost-profit-gameplay.png)
+![实机画面：订单页显示整包进货成本、单件建议售价与预计利润](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/material-cost-mod/assets/order-cost-profit-gameplay.png?raw=1)
 
 ### 怎么操作
 
@@ -146,4 +146,4 @@ Mod 只在界面上增加这些数字，金币、库存和售价都保持原样�
 
 更新时退出游戏，备份旧 DLL 后替换。卸载时删除上表位置的 `OldMarket.MaterialCost.dll`，存档照常可用。保留配置文件，重新安装后会沿用原来的设置。
 
-[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发说明](DEVELOPMENT.md) · [许可证](LICENSE)
+[版本变化](CHANGELOG.md) · [问题反馈](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/SUPPORT.md) · [开发说明](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/material-cost-mod/DEVELOPMENT.md) · [许可证](LICENSE)

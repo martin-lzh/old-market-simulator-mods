@@ -1,6 +1,6 @@
 # Tree Harvest Helper
 
-![Tree Harvest Helper](assets/cover.png)
+![Tree Harvest Helper](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/tree-info-mod/assets/cover.png?raw=1)
 
 A mod for Old Market Simulator / Old Market Simulator 模组
 
@@ -19,7 +19,7 @@ See when your fruit trees are ready to harvest, directly in the interaction hint
 - Flag missing watering, inactive seasons and insufficient time before season end.
 - Follow all 13 game languages and reuse native season names.
 
-![In-game fruit-tree hint showing all-season production and fruit ready to harvest](assets/tree-harvest-gameplay.png)
+![In-game fruit-tree hint showing all-season production and fruit ready to harvest](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/tree-info-mod/assets/tree-harvest-gameplay.png?raw=1)
 
 ### How to use
 
@@ -45,7 +45,7 @@ Only players who want to see tree info need to install it.
 
 To update, close the game, back up the old DLL and replace it. To uninstall, delete `OldMarket.TreeInfo.dll` from its plugin folder.
 
-[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development notes](DEVELOPMENT.md) · [License](LICENSE)
+[What changed](CHANGELOG.md) · [Help and feedback](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/SUPPORT.md) · [Development notes](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/tree-info-mod/DEVELOPMENT.md) · [License](LICENSE)
 
 ## 中文
 
@@ -60,7 +60,7 @@ To update, close the game, back up the old DLL and replace it. To uninstall, del
 - 提示今日未浇水、本季不生产及季末时间不足。
 - 跟随游戏全部 13 种语言，季节名复用原生翻译。
 
-![实机画面：果树提示全年生产，果实已成熟可采收](assets/tree-harvest-gameplay.png)
+![实机画面：果树提示全年生产，果实已成熟可采收](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/tree-info-mod/assets/tree-harvest-gameplay.png?raw=1)
 
 ### 怎么操作
 
@@ -86,4 +86,4 @@ To update, close the game, back up the old DLL and replace it. To uninstall, del
 
 更新时退出游戏，备份旧 DLL 后替换。卸载时删除插件文件夹中的 `OldMarket.TreeInfo.dll`。
 
-[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发说明](DEVELOPMENT.md) · [许可证](LICENSE)
+[版本变化](CHANGELOG.md) · [问题反馈](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/SUPPORT.md) · [开发说明](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/tree-info-mod/DEVELOPMENT.md) · [许可证](LICENSE)

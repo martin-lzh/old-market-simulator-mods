@@ -1,6 +1,6 @@
 # Map & Compass
 
-![Map & Compass](assets/cover.png)
+![Map & Compass](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/navigation-mod/assets/cover.png?raw=1)
 
 A mod for Old Market Simulator / Old Market Simulator 模组
 
@@ -21,11 +21,11 @@ Find your way around town with a minimap, a compass and your own map markers. Ma
 - Create personal markers with names, colors and icons; navigate to markers or map POIs.
 - See unlockable areas on the map and keep your markers separate for each save and region.
 
-![In-game compass showing directions and a 71-degree heading](assets/compass-gameplay.png)
+![In-game compass showing directions and a 71-degree heading](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/navigation-mod/assets/compass-gameplay.png?raw=1)
 
-![In-game minimap with place icons and camera-up orientation](assets/minimap-gameplay.png)
+![In-game minimap with place icons and camera-up orientation](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/navigation-mod/assets/minimap-gameplay.png?raw=1)
 
-![In-game Rome map with place labels and the marker editor](assets/rome-map-gameplay.png)
+![In-game Rome map with place labels and the marker editor](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/navigation-mod/assets/rome-map-gameplay.png?raw=1)
 
 ### How to use
 
@@ -45,9 +45,9 @@ The minimap sits in the bottom-left corner. The orientation button in the map wi
 
 Select a personal marker to change its name, color or shape in the right sidebar; the color and shape buttons open a grid to pick from. Choose **Set target** to follow it: the compass and an in-world icon point the way, using the same icon and color as on the map. Target icons point straight at the target rather than along a walking route. They hide while a menu is open.
 
-![In-game personal marker editor with name, color, icon and target controls](assets/marker-editor-gameplay.png)
+![In-game personal marker editor with name, color, icon and target controls](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/navigation-mod/assets/marker-editor-gameplay.png?raw=1)
 
-![In-game target guidance showing Gate 4 at a distance of 84 metres](assets/target-tracking-gameplay.png)
+![In-game target guidance showing Gate 4 at a distance of 84 metres](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/navigation-mod/assets/target-tracking-gameplay.png?raw=1)
 
 Opening the map frees the mouse, but **the game keeps running**. M is set in this Mod's settings, separately from the game's own map key. It doesn't respond while you're typing or a game menu or loading screen is open.
 
@@ -102,7 +102,7 @@ Before updating, close the game and back up the plugin folder `BepInEx/plugins/O
 
 To uninstall, delete the plugin folder. Keep the config files if you want your markers back after reinstalling.
 
-[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development notes](DEVELOPMENT.md) · [License](LICENSE)
+[What changed](CHANGELOG.md) · [Help and feedback](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/SUPPORT.md) · [Development notes](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/navigation-mod/DEVELOPMENT.md) · [License](LICENSE)
 
 ## 中文
 
@@ -119,11 +119,11 @@ To uninstall, delete the plugin folder. Keep the config files if you want your m
 - 创建带名称、颜色和图标的个人标记，或直接前往地图地点。
 - 在地图上显示可解锁区域，标记按存档和区域分别保存。
 
-![实机画面：罗盘轴显示方位与 71° 朝向](assets/compass-gameplay.png)
+![实机画面：罗盘轴显示方位与 71° 朝向](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/navigation-mod/assets/compass-gameplay.png?raw=1)
 
-![实机画面：小地图显示地点图标，朝向跟随视角](assets/minimap-gameplay.png)
+![实机画面：小地图显示地点图标，朝向跟随视角](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/navigation-mod/assets/minimap-gameplay.png?raw=1)
 
-![实机画面：罗马大地图、地点名称与标记编辑区](assets/rome-map-gameplay.png)
+![实机画面：罗马大地图、地点名称与标记编辑区](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/navigation-mod/assets/rome-map-gameplay.png?raw=1)
 
 ### 怎么操作
 
@@ -143,9 +143,9 @@ To uninstall, delete the plugin folder. Keep the config files if you want your m
 
 选中个人标记后，可以在右侧修改名称、颜色和图标，点击颜色或图标按钮会展开选择格。点击“设为目标”后，罗盘和场景内的图标会为你指路，图标和颜色与地图上一致。目标图标直接指向目标位置，而不是沿着可行走的路线。打开菜单时指引会暂时隐藏。
 
-![实机画面：编辑个人标记名称、颜色和图标，并设为目标](assets/marker-editor-gameplay.png)
+![实机画面：编辑个人标记名称、颜色和图标，并设为目标](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/navigation-mod/assets/marker-editor-gameplay.png?raw=1)
 
-![实机画面：场景内目标指引显示大门4及 84 米距离](assets/target-tracking-gameplay.png)
+![实机画面：场景内目标指引显示大门4及 84 米距离](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/navigation-mod/assets/target-tracking-gameplay.png?raw=1)
 
 打开地图后可以自由使用鼠标，但**游戏会继续运行**。M 键在本 Mod 的设置中修改，与游戏自带的地图按键分开。输入文字、打开游戏菜单或加载画面时，M 键不会响应。
 
@@ -200,6 +200,6 @@ ZIP 内已包含三张城镇地图：
 
 卸载时删除插件文件夹即可。保留配置文件，重新安装后标记仍在。
 
-[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发说明](DEVELOPMENT.md) · [许可证](LICENSE)
+[版本变化](CHANGELOG.md) · [问题反馈](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/SUPPORT.md) · [开发说明](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/navigation-mod/DEVELOPMENT.md) · [许可证](LICENSE)
 
-Map icons / 地图图标：[Phosphor](assets/phosphor/README.md)，MIT。
+Map icons / 地图图标：[Phosphor](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/navigation-mod/assets/phosphor/README.md)，MIT。

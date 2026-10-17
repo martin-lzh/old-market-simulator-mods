@@ -1,6 +1,6 @@
 # Smart Pricing
 
-![Smart Pricing](assets/cover.png)
+![Smart Pricing](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/price-probability-mod/assets/cover.png?raw=1)
 
 A mod for Old Market Simulator / Old Market Simulator 模组
 
@@ -18,7 +18,7 @@ See how likely customers are to accept a price, then choose whether to keep a fi
 - Adjust the price or target acceptance chance and see the corresponding estimate.
 - Let the host keep a fixed price or automatically maintain a target acceptance chance as wholesale prices change.
 
-![In-game pricing panel with price acceptance estimate, target slider and pricing-rule control](assets/smart-pricing-gameplay.png)
+![In-game pricing panel with price acceptance estimate, target slider and pricing-rule control](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/price-probability-mod/assets/smart-pricing-gameplay.png?raw=1)
 
 ### How to use
 
@@ -26,7 +26,7 @@ See how likely customers are to accept a price, then choose whether to keep a fi
 2. Choose a rule: **Off**, **Fixed price** or **Fixed probability**. Fixed probability re-prices the product whenever wholesale prices change. A 100% target uses the game's suggested price for the day.
 3. Press the game's **Confirm** button to save. Closing the panel without confirming discards the changes.
 
-![In-game fixed-probability pricing: an 86.2% target corresponds to a selling price of 73 C](assets/fixed-probability-gameplay.png)
+![In-game fixed-probability pricing: an 86.2% target corresponds to a selling price of 73 C](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/price-probability-mod/assets/fixed-probability-gameplay.png?raw=1)
 
 The percentage is the chance that a customer who has found the product accepts the price. How much you sell still depends on demand, customer traffic, freshness and stock. Prices are whole numbers, so the actual chance can land slightly off the target, most noticeably on cheap products.
 
@@ -57,7 +57,7 @@ Rules are set in the price panel and saved per save slot in `BepInEx/config/loca
 
 To update, close the game, back up the old DLL and settings, then replace the plugin. To uninstall, delete `OldMarket.PriceProbability.dll`. Automatic re-pricing stops, and products keep their current prices.
 
-[What changed](CHANGELOG.md) · [Help and feedback](../SUPPORT.md) · [Development notes](DEVELOPMENT.md) · [Translations](localization/README.md) · [License](LICENSE)
+[What changed](CHANGELOG.md) · [Help and feedback](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/SUPPORT.md) · [Development notes](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/price-probability-mod/DEVELOPMENT.md) · [Translations](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/price-probability-mod/localization/README.md) · [License](LICENSE)
 
 ## 中文
 
@@ -71,7 +71,7 @@ To update, close the game, back up the old DLL and settings, then replace the pl
 - 调整价格或目标接受率，查看对应估算。
 - 房主可设置固定价格，或随批发价变化自动维持目标接受率。
 
-![实机画面：定价面板中的价格接受概率、目标滑条与定价规则控件](assets/smart-pricing-gameplay.png)
+![实机画面：定价面板中的价格接受概率、目标滑条与定价规则控件](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/price-probability-mod/assets/smart-pricing-gameplay.png?raw=1)
 
 ### 怎么操作
 
@@ -79,7 +79,7 @@ To update, close the game, back up the old DLL and settings, then replace the pl
 2. 选择规则：“关闭”“固定售价”或“固定概率”。固定概率会在批发价变化时自动重新定价；目标为 100% 时使用游戏当天的建议售价。
 3. 点击游戏原有的**确认**按钮保存。不确认直接关闭会放弃本次修改。
 
-![实机画面：固定概率模式下，86.2% 目标接受率对应 73 C 售价](assets/fixed-probability-gameplay.png)
+![实机画面：固定概率模式下，86.2% 目标接受率对应 73 C 售价](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/price-probability-mod/assets/fixed-probability-gameplay.png?raw=1)
 
 这里的概率是顾客找到商品后愿意接受这个价格的可能性。实际卖出多少，还取决于需求、客流、保鲜和库存。售价只能是整数，所以实际概率会与目标略有出入，低价商品更明显。
 
@@ -110,4 +110,4 @@ To update, close the game, back up the old DLL and settings, then replace the pl
 
 更新时退出游戏，备份旧 DLL 和设置后替换插件。卸载时删除 `OldMarket.PriceProbability.dll`；自动调价随之停止，商品保持当前售价。
 
-[版本变化](CHANGELOG.md) · [问题反馈](../SUPPORT.md) · [开发说明](DEVELOPMENT.md) · [翻译说明](localization/README.md) · [许可证](LICENSE)
+[版本变化](CHANGELOG.md) · [问题反馈](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/SUPPORT.md) · [开发说明](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/price-probability-mod/DEVELOPMENT.md) · [翻译说明](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/price-probability-mod/localization/README.md) · [许可证](LICENSE)
