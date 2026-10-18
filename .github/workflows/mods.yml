@@ -48,7 +48,7 @@ jobs:
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
 
   build:
-    name: SDK build and tests
+    name: Build and test
     runs-on: windows-latest
     timeout-minutes: 25
     steps:
