@@ -96,6 +96,38 @@ ZIPs appear in `outputs/`. Each mod with translatable UI runs its own localizati
 
 ### 从源码构建
 
-可以克隆仓库，也可以单独取出所需 Mod 的目录；各 Mod 独立构建，不依赖其他 Mod 或仓库级本地化工程。需要 PowerShell、支持 .NET 8 工程的 .NET SDK、本机游戏和相应加载器的引用程序集。构建只读取游戏文件，产物写入项目 `work/`、`outputs/` 和构建缓存目录，不自动安装。
+可以克隆仓库，也可以单独取出所需 Mod 的目录；各 Mod 独立构建，不依赖其他 Mod 或仓库级本地化工程。需要 PowerShell、支持 .NET 8 工程的 .NET SDK、本机游戏和相应加载器的引用程序集。构建只读取游戏文件，产物写入项目 `work/`、`outputs/` 和构建缓存目录，不自动安装；维护者明确要求时，代理可在游戏关闭后把指定构建复制到 Mod 目录，只替换同一 Mod 的旧文件，并报告替换内容和 SHA256。
 
 在仓库根目录运行前面英文部分的构建命令，将示例游戏路径换为你的安装位置。ZIP 输出至 `outputs/`。有可翻译界面的 Mod 执行自己的本地化及功能测试；坐标没有可翻译文案，不依赖本地化工程。编译和测试通过不等于游戏内界面、保存或联机已验证。独立标签、发布说明和产物核验流程见[版本发布规则](releases/README.md)。
+
+### License / 许可
+
+On 2026-10-18 the maintainer decided to switch the project's original code, documentation and assets from the MIT License to the [PolyForm Noncommercial License 1.0.0](LICENSE) for all future versions. The root `LICENSE` and every Mod's `LICENSE` (including the Mod-private `localization/LICENSE` files) now carry the PolyForm text with the required copyright notice, and Mod packages ship that file. Versions released before this change, and their tags and GitHub releases, stay under MIT. Third-party files keep their own licenses: the Phosphor icons in `navigation-mod/assets/phosphor/` keep their MIT `LICENSE`, and their notice stays appended to `navigation-mod/LICENSE`; components listed in `material-cost-mod/STANDALONE.md` keep their upstream licenses.
+
+维护者于 2026-10-18 决定：项目原创代码、文档和素材自后续版本起由 MIT 许可改为 [PolyForm Noncommercial 1.0.0 许可](LICENSE)。根目录 `LICENSE` 和各 Mod 的 `LICENSE`（包括 Mod 内部的 `localization/LICENSE`）现为附带版权声明的 PolyForm 原文，Mod 安装包随附该文件。此前已发布的版本及其标签和 GitHub Release 仍为 MIT 许可。第三方文件保留各自许可证：`navigation-mod/assets/phosphor/` 中的 Phosphor 图标保留其 MIT `LICENSE`，其声明继续附在 `navigation-mod/LICENSE` 末尾；`material-cost-mod/STANDALONE.md` 列出的组件继续适用上游许可证。
+
+#### License-only patch versions — 2026-10-18 / 仅许可补丁版本
+
+On the maintainer's instruction every Mod has a new patch version so that its downloads carry the PolyForm license. Compared with each published release, these versions change only the license, README/CHANGELOG text and the version number; gameplay code, SDK pins and package layout are unchanged, and all are marked stable in `release.json`. **The maintainer waived in-game testing of these builds on 2026-10-19 because gameplay code is unchanged**; they ship after the maintainer's merge into `main`. Details: [validation record](releases/validation.md).
+
+| Mod | Released | Patch | Changes | In-game testing of the patch |
+| --- | --- | --- | --- | --- |
+| Auto Checkout | 0.1.5 | 0.1.6 | License, README/CHANGELOG, version | Waived by maintainer |
+| Coordinates HUD | 0.1.4 | 0.1.5 | License, README/CHANGELOG, version | Waived by maintainer |
+| Profit Insights (BepInEx and MelonLoader) | 0.5.2 | 0.5.3 | License, README/CHANGELOG, version | Waived by maintainer |
+| Map & Compass | 0.2.1 | 0.2.2 | License, README/CHANGELOG, version | Waived by maintainer |
+| Smart Pricing | 0.1.2 | 0.1.3 | License, README/CHANGELOG, version | Waived by maintainer |
+| Better Stacking | 0.3.0 | 0.3.1 | License, README/CHANGELOG, version | Waived by maintainer |
+| Tree Harvest Helper | 0.1.0 | 0.1.1 | License, README/CHANGELOG, version | Waived by maintainer |
+
+按维护者要求，每个 Mod 新增一个补丁版本，使下载文件附带 PolyForm 许可。与各自已发布版本相比，这些版本只改了许可、README/CHANGELOG 文字和版本号；玩法代码、SDK 固定修订和安装包结构不变，`release.json` 均标记为正式发布。**维护者尚未对这些构建进行实机测试**；只有完成测试并由维护者合并到 `main` 后才会发布。详见[验证记录](releases/validation.md)。
+
+| Mod | 已发布 | 补丁 | 改动 | 补丁实机测试 |
+| --- | --- | --- | --- | --- |
+| Auto Checkout | 0.1.5 | 0.1.6 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Coordinates HUD | 0.1.4 | 0.1.5 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Profit Insights（BepInEx 与 MelonLoader） | 0.5.2 | 0.5.3 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Map & Compass | 0.2.1 | 0.2.2 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Smart Pricing | 0.1.2 | 0.1.3 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Better Stacking | 0.3.0 | 0.3.1 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Tree Harvest Helper | 0.1.0 | 0.1.1 | 许可、README/CHANGELOG、版本号 | 维护者免除 |

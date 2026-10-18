@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <strong>Windows</strong> · <strong>7 Mods</strong> · <a href="LICENSE">MIT License</a>
+  <strong>Windows</strong> · <strong>7 Mods</strong> · <a href="LICENSE">PolyForm Noncommercial 1.0.0</a>
 </p>
 
 <p align="center">
@@ -25,13 +25,13 @@
 
 | Mod | What it does | GitHub download / changes | Nexus |
 | --- | --- | --- | --- |
-| [Profit Insights](material-cost-mod/README.md) | Material costs and estimated profit in reports, recipes and orders | [0.5.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.2) · [Changes](material-cost-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/45) |
-| [Coordinates HUD](coordinates-mod/README.md) | Your XYZ position below the money bar; F8 to show/hide | [0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.4) · [Changes](coordinates-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/44) |
-| [Auto Checkout](checkout-all-mod/README.md) | Hold E or toggle F9 to process products and collect payment | [0.1.5](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.5) · [Changes](checkout-all-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/46) |
-| [Better Stacking](stack-all-mod/README.md) | Up to 64 containers per slot, repeated drop/throw and empty-container disposal | [0.3.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.3.0) · [Changes](stack-all-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/47) |
-| [Smart Pricing](price-probability-mod/README.md) | Price acceptance preview and automatic pricing rules | [0.1.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.2) · [Changes](price-probability-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/48) |
-| [Tree Harvest Helper](tree-info-mod/README.md) | Fruit-tree production seasons and harvest estimates | [0.1.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.0) · [Changes](tree-info-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/50) |
-| [Map & Compass](navigation-mod/README.md) | Minimap, large map, compass and personal markers | [0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.1) · [Changes](navigation-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/49) |
+| [Profit Insights](material-cost-mod/README.md) | Material costs and estimated profit in reports, recipes and orders | [0.5.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.3) · [Changes](material-cost-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/45) |
+| [Coordinates HUD](coordinates-mod/README.md) | Your XYZ position below the money bar; F8 to show/hide | [0.1.5](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.5) · [Changes](coordinates-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/44) |
+| [Auto Checkout](checkout-all-mod/README.md) | Hold E or toggle F9 to process products and collect payment | [0.1.6](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.6) · [Changes](checkout-all-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/46) |
+| [Better Stacking](stack-all-mod/README.md) | Up to 64 containers per slot, repeated drop/throw and empty-container disposal | [0.3.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.3.1) · [Changes](stack-all-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/47) |
+| [Smart Pricing](price-probability-mod/README.md) | Price acceptance preview and automatic pricing rules | [0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.3) · [Changes](price-probability-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/48) |
+| [Tree Harvest Helper](tree-info-mod/README.md) | Fruit-tree production seasons and harvest estimates | [0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.1) · [Changes](tree-info-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/50) |
+| [Map & Compass](navigation-mod/README.md) | Minimap, large map, compass and personal markers | [0.2.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.2) · [Changes](navigation-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/49) |
 
 Click a Mod name for its controls, settings and removal steps.
 
@@ -62,7 +62,7 @@ Also running a restaurant? Explore [Parisian Bistro Simulator Mods](https://gith
 
 ### About the project
 
-Made by Zhaohan Liu as an unofficial fan project. Code and documentation use the [MIT License](LICENSE). If you share it in a guide or video, a link back is appreciated.
+Made by Zhaohan Liu as an unofficial fan project. License: PolyForm Noncommercial License 1.0.0, see [LICENSE](LICENSE). Free for non-commercial use; commercial use is not allowed. If you share it in a guide or video, a link back is appreciated.
 
 Want to contribute? Start with [CONTRIBUTING](CONTRIBUTING.md), the [development guide](DEVELOPMENT.md) and the [validation record](releases/validation.md). Please follow the [Code of conduct](CODE_OF_CONDUCT.md).
 
@@ -74,13 +74,13 @@ Want to contribute? Start with [CONTRIBUTING](CONTRIBUTING.md), the [development
 
 | Mod | 功能 | GitHub 下载 / 更新 | Nexus |
 | --- | --- | --- | --- |
-| [Profit Insights](material-cost-mod/README.md) | 在日报、配方和订购页查看原料成本与预计利润 | [0.5.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.2) · [更新记录](material-cost-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/45) |
-| [Coordinates HUD](coordinates-mod/README.md) | 金钱栏下显示 XYZ 坐标，F8 显示/隐藏 | [0.1.4](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.4) · [更新记录](coordinates-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/44) |
-| [Auto Checkout](checkout-all-mod/README.md) | 长按 E 或按 F9 连续结算商品、收取钱袋 | [0.1.5](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.5) · [更新记录](checkout-all-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/46) |
-| [Better Stacking](stack-all-mod/README.md) | 每格最多放 64 个容器，并支持连续丢下/投掷 | [0.3.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.3.0) · [更新记录](stack-all-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/47) |
-| [Smart Pricing](price-probability-mod/README.md) | 查看价格接受概率，设置自动定价规则 | [0.1.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.2) · [更新记录](price-probability-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/48) |
-| [Tree Harvest Helper](tree-info-mod/README.md) | 果树生产季节和成熟预测 | [0.1.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.0) · [更新记录](tree-info-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/50) |
-| [Map & Compass](navigation-mod/README.md) | 小地图、大地图、罗盘和个人标记 | [0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.1) · [更新记录](navigation-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/49) |
+| [Profit Insights](material-cost-mod/README.md) | 在日报、配方和订购页查看原料成本与预计利润 | [0.5.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.3) · [更新记录](material-cost-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/45) |
+| [Coordinates HUD](coordinates-mod/README.md) | 金钱栏下显示 XYZ 坐标，F8 显示/隐藏 | [0.1.5](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/coordinates-v0.1.5) · [更新记录](coordinates-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/44) |
+| [Auto Checkout](checkout-all-mod/README.md) | 长按 E 或按 F9 连续结算商品、收取钱袋 | [0.1.6](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/checkout-all-v0.1.6) · [更新记录](checkout-all-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/46) |
+| [Better Stacking](stack-all-mod/README.md) | 每格最多放 64 个容器，并支持连续丢下/投掷 | [0.3.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.3.1) · [更新记录](stack-all-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/47) |
+| [Smart Pricing](price-probability-mod/README.md) | 查看价格接受概率，设置自动定价规则 | [0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.3) · [更新记录](price-probability-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/48) |
+| [Tree Harvest Helper](tree-info-mod/README.md) | 果树生产季节和成熟预测 | [0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.1) · [更新记录](tree-info-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/50) |
+| [Map & Compass](navigation-mod/README.md) | 小地图、大地图、罗盘和个人标记 | [0.2.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.2) · [更新记录](navigation-mod/CHANGELOG.md) | [Nexus](https://www.nexusmods.com/oldmarketsimulator/mods/49) |
 
 点击 Mod 名称可查看操作、设置与卸载说明。
 
@@ -111,6 +111,6 @@ Want to contribute? Start with [CONTRIBUTING](CONTRIBUTING.md), the [development
 
 ### 关于项目
 
-作者：Zhaohan Liu，非官方玩家作品。代码和文档使用 [MIT 许可证](LICENSE)。如果在攻略或视频里分享，欢迎附上项目链接。
+作者：Zhaohan Liu，非官方玩家作品。许可：PolyForm Noncommercial 1.0.0 许可，见 [LICENSE](LICENSE)。可免费用于非商业用途，不允许商用。如果在攻略或视频里分享，欢迎附上项目链接。
 
 想参与开发，可以从[贡献指南](CONTRIBUTING.md)、[开发说明](DEVELOPMENT.md)和[验证记录](releases/validation.md)开始。交流时请遵守[行为准则](CODE_OF_CONDUCT.md)。

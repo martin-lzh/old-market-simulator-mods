@@ -4,7 +4,7 @@ This directory retains the source for an experimental managed bootstrap for Old 
 
 The bootstrap targets Old Market Simulator 2.1.6 on Windows x64 with Unity Mono. It enters the game's Mono runtime through an unmodified Unity Doorstop 4.5.0 binary and loads only the listed patch dependencies and Material Cost. It does not load the BepInEx or MelonLoader frameworks or scan their plugin directories. Doorstop is also part of the BepInEx bootstrap path, so this design does not establish that it resolves stalls or overlay waits.
 
-The feature set comes from the same version 0.5.2 source: the end-of-day materials-only switch, recipe cost and recommended-price profit estimates, dock-order purchase-cost and profit estimates, and the shared 13-locale UI. The bootstrap does not intentionally alter number culture, Mono debugging, networking, EOS, Steam, overlays, graphics, frame rate, garbage collection, game assemblies, or saves.
+The feature set comes from the same version 0.5.3 source: the end-of-day materials-only switch, recipe cost and recommended-price profit estimates, dock-order purchase-cost and profit estimates, and the shared 13-locale UI. The bootstrap does not intentionally alter number culture, Mono debugging, networking, EOS, Steam, overlays, graphics, frame rate, garbage collection, game assemblies, or saves.
 
 ## Source build
 
@@ -35,7 +35,7 @@ The local build allowlist copies these components from the verified BepInEx 5.4.
 - [MonoMod 22.1.29.1](https://github.com/MonoMod/MonoMod), MIT
 - [Mono.Cecil 0.10.4](https://github.com/jbevain/cecil/tree/0.10.4), MIT
 
-The package allowlist excludes game assemblies, assets, saves, decompiled code, BepInEx framework files, and MelonLoader files. Third-party components retain their licenses. Original project code and documentation use the [MIT License](LICENSE), Copyright (c) 2026 Zhaohan Liu.
+The package allowlist excludes game assemblies, assets, saves, decompiled code, BepInEx framework files, and MelonLoader files. Third-party components retain their licenses. Original project code and documentation use the [PolyForm Noncommercial License 1.0.0](LICENSE), Copyright (c) 2026 Zhaohan Liu.
 
 ## Validation status
 
@@ -51,7 +51,7 @@ Runtime initialization, UI layout, locale switching, old-save behavior, multipla
 
 该入口面向 Windows x64、Unity Mono 的 Old Market Simulator 2.1.6，通过未经修改的 Unity Doorstop 4.5.0 进入游戏 Mono 运行时，只加载清单中的补丁依赖和 Material Cost。它不加载 BepInEx 或 MelonLoader 框架，也不扫描这些加载器的插件目录。Doorstop 同样属于 BepInEx 启动路径，因此此设计不能证明已经解决卡顿或覆盖层等待。
 
-功能来自 0.5.2 的同一份源码，包括日报“仅计原料”开关、配方成本与建议售价利润估算、码头订购页进货成本与利润估算，以及共用的 13 种语言界面。启动入口不会主动修改数字区域格式、Mono 调试、网络、EOS、Steam、覆盖层、画质、帧率、垃圾回收、游戏程序集或存档。
+功能来自 0.5.3 的同一份源码，包括日报“仅计原料”开关、配方成本与建议售价利润估算、码头订购页进货成本与利润估算，以及共用的 13 种语言界面。启动入口不会主动修改数字区域格式、Mono 调试、网络、EOS、Steam、覆盖层、画质、帧率、垃圾回收、游戏程序集或存档。
 
 ## 源码构建
 
@@ -82,7 +82,7 @@ Runtime initialization, UI layout, locale switching, old-save behavior, multipla
 - [MonoMod 22.1.29.1](https://github.com/MonoMod/MonoMod)，MIT
 - [Mono.Cecil 0.10.4](https://github.com/jbevain/cecil/tree/0.10.4)，MIT
 
-安装包白名单排除游戏程序集、资源、存档、反编译代码、BepInEx 框架文件和 MelonLoader 文件。各第三方组件继续适用各自许可证。项目原创代码和文档采用 [MIT License](LICENSE)，Copyright (c) 2026 Zhaohan Liu。
+安装包白名单排除游戏程序集、资源、存档、反编译代码、BepInEx 框架文件和 MelonLoader 文件。各第三方组件继续适用各自许可证。项目原创代码和文档采用 [PolyForm Noncommercial 1.0.0 许可](LICENSE)，Copyright (c) 2026 Zhaohan Liu。
 
 ## 验证状态
 

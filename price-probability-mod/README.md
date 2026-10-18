@@ -10,7 +10,7 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 See how likely customers are to accept a price, then choose whether to keep a fixed price or a fixed acceptance chance.
 
-[Download 0.1.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.2)
+[Download 0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.3)
 
 ### Core features
 
@@ -63,7 +63,7 @@ To update, close the game, back up the old DLL and settings, then replace the pl
 
 定价时直接看看顾客愿不愿意买，还可以选择固定售价或固定接受概率，让价格随行情调整。
 
-[下载 0.1.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.2)
+[下载 0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.3)
 
 ### 核心功能
 

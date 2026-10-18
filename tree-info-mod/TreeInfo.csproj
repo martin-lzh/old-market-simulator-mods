@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>OldMarket.TreeInfo</AssemblyName>
-    <Version>0.1.0</Version>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>0.1.1</Version>
+    <PackageLicenseExpression>PolyForm-Noncommercial-1.0.0</PackageLicenseExpression>
     <GameDir Condition="'$(GameDir)' == ''">F:\SteamLibrary\steamapps\common\Old Market Simulator</GameDir>
     <ManagedDir Condition="'$(ManagedDir)' == ''">$(GameDir)\Old Market Simulator_Data\Managed</ManagedDir>
     <BepInExDir Condition="'$(BepInExDir)' == ''">$(GameDir)\BepInEx\core</BepInExDir>

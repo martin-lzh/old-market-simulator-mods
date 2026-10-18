@@ -1,5 +1,9 @@
 # Development notes / 开发说明
 
+**2026-10-18 — license patch 0.1.3, in-game testing waived:** Smart Pricing 0.1.3 differs from the released 0.1.2 only in the license (PolyForm Noncommercial 1.0.0), README/CHANGELOG text and the version number (plugin attribute and project version); gameplay code, SDK pin (`2.1.6/r1`) and package layout are unchanged. In-game testing of the 0.1.3 build was waived by the maintainer on 2026-10-19 because gameplay code is unchanged; the acceptance below applies to 0.1.2.
+
+**2026-10-18 — 许可补丁 0.1.3，实机测试已免除：**Smart Pricing 0.1.3 与已发布的 0.1.2 相比，只改了许可（PolyForm Noncommercial 1.0.0）、README/CHANGELOG 文字和版本号（插件属性和项目版本）；玩法代码、SDK 固定修订（`2.1.6/r1`）和安装包结构不变。维护者于 2026-10-19 以玩法代码未改为由免除 0.1.3 构建的实机测试；下方验收针对 0.1.2。
+
 **2026-09-19 — current acceptance:** The maintainer confirms in-game acceptance of Smart Pricing 0.1.2; this is a stable release on game 2.1.6. The earlier `e23f986` bundle also has a two-computer multiplayer report. These are reported manual results, not a new automated game run or a complete scenario matrix; see the [validation record](../releases/validation.md).
 
 **2026-09-19 — 当前验收：**维护者已确认 Smart Pricing 0.1.2 的实机验收，当前为游戏 2.1.6 的正式发布版；此前 `e23f986` 合集另有双实机联机报告。这是人工测试反馈，不代表新执行了自动化游戏测试或补齐完整场景矩阵，详见[验证记录](../releases/validation.md)。
@@ -15,7 +19,7 @@ Player instructions: [README](README.md). Repository workflow: [CONTRIBUTING](..
 ./price-probability-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
-The build requires the .NET 8 SDK and uses local assemblies as read-only references, runs checks, and produces `outputs/OldMarket.PriceProbability-0.1.2.zip`; it does not install. Earlier automated evidence records passing pricing/math and multiplayer-policy tests, IL contract checks, and 11 localization test groups covering 13 languages. At that stage, in-game UI, native save behavior and real multiplayer were not yet verified; current acceptance is summarized above.
+The build requires the .NET 8 SDK and uses local assemblies as read-only references, runs checks, and produces `outputs/OldMarket.PriceProbability-0.1.3.zip`; it does not install. Earlier automated evidence records passing pricing/math and multiplayer-policy tests, IL contract checks, and 11 localization test groups covering 13 languages. At that stage, in-game UI, native save behavior and real multiplayer were not yet verified; current acceptance is summarized above.
 
 ## 构建与验证
 
@@ -24,7 +28,7 @@ The build requires the .NET 8 SDK and uses local assemblies as read-only referen
 ./price-probability-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
-构建需要 .NET 8 SDK，只读引用本机程序集，运行检查并生成 `outputs/OldMarket.PriceProbability-0.1.2.zip`，不会安装。早期自动化记录中的定价/数学、多人权限、IL 契约检查和覆盖 13 种语言的 11 组本地化测试均通过；当时尚未验证游戏内 UI、原生保存行为和真实多人联机，当前验收状态以上方摘要为准。
+构建需要 .NET 8 SDK，只读引用本机程序集，运行检查并生成 `outputs/OldMarket.PriceProbability-0.1.3.zip`，不会安装。早期自动化记录中的定价/数学、多人权限、IL 契约检查和覆盖 13 种语言的 11 组本地化测试均通过；当时尚未验证游戏内 UI、原生保存行为和真实多人联机，当前验收状态以上方摘要为准。
 
 ## SDK and automated builds / SDK 与自动构建
 

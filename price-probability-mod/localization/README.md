@@ -12,7 +12,7 @@ dotnet run --project localization/tests/Localization.Tests.csproj
 
 The tests use small fakes and do not access game files. They cover messages, placeholders, formatting, locale normalization, startup loading, failure fallback, cache invalidation, and reselection recovery. Check layout, glyphs, live language switching and multiplayer in game.
 
-Original localization files use the [MIT License](LICENSE). Game translation tables are read at runtime and are not bundled.
+Original localization files use the [PolyForm Noncommercial License 1.0.0](LICENSE). Game translation tables are read at runtime and are not bundled.
 
 ## 中文
 
@@ -20,4 +20,4 @@ Original localization files use the [MIT License](LICENSE). Game translation tab
 
 原生 `recommended`、`wholesale` 和 `turn_off` 词条从游戏的 `Translations` 表异步读取，尚未加载或不可用时回退英语。在 `price-probability-mod/` 目录使用 .NET 8 SDK 运行上方命令即可执行独立检查。
 
-测试不读取游戏文件，覆盖消息、占位符、格式化、语言归一化、启动加载、失败回退、缓存失效和重选恢复；布局、字形、实时语言切换及联机请在游戏中检查。原创本地化文件采用 [MIT License](LICENSE)，游戏翻译表仅在运行时读取，不随 Mod 分发。
+测试不读取游戏文件，覆盖消息、占位符、格式化、语言归一化、启动加载、失败回退、缓存失效和重选恢复；布局、字形、实时语言切换及联机请在游戏中检查。原创本地化文件采用 [PolyForm Noncommercial 1.0.0 许可](LICENSE)，游戏翻译表仅在运行时读取，不随 Mod 分发。

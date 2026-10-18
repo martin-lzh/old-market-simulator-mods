@@ -10,7 +10,7 @@ Source, build tooling and release automation for the Old Market Simulator Mods (
 
 ## Hard rules
 
-1. **The game install is read-only.** Builds may read game assemblies, but never install Mods, edit saves, or start or stop the game. The maintainer installs builds and does the in-game testing.
+1. **The game install is read-only.** Builds may read game assemblies, but never install Mods, edit saves, or start or stop the game. The maintainer installs builds and does the in-game testing. When the maintainer explicitly asks, the agent may install a build: with the game closed, copy only that Mod's package into the game's Mods folder, replacing only that Mod's old files, then report what it replaced and the SHA256.
 2. **No game content in git.** Original DLLs/EXEs, assets, translation tables, decompiled code, saves, logs and credentials stay in the ignored `work/` folder; never `git add -f`. Packages contain only original files, chosen by explicit allowlists in `tools/ci.py`.
 3. **Check game APIs against the real game.** Never invent signatures, add empty stubs or bypass a check to make code compile. SDK snapshots in `sdk/<game version>/r<n>/` never change once merged; add a new revision instead (see below).
 4. **Versions change only when the maintainer says so.** Until then, record every change under `Unreleased` / `未发布` in that Mod's `CHANGELOG.md` and keep all version numbers. Identify test builds by commit and SHA256, not by a made-up version.

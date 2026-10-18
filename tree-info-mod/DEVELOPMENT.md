@@ -1,5 +1,9 @@
 # Tree Info development / 开发说明
 
+**2026-10-18 — license patch 0.1.1, in-game testing waived:** Tree Harvest Helper 0.1.1 differs from the released 0.1.0 only in the license (PolyForm Noncommercial 1.0.0), README/CHANGELOG text and the version number (plugin attribute, project version and version in log text); gameplay code, SDK pin (`2.1.6/r8`) and package layout are unchanged. In-game testing of the 0.1.1 build was waived by the maintainer on 2026-10-19 because gameplay code is unchanged; the acceptance below applies to 0.1.0.
+
+**2026-10-18 — 许可补丁 0.1.1，实机测试已免除：**Tree Harvest Helper 0.1.1 与已发布的 0.1.0 相比，只改了许可（PolyForm Noncommercial 1.0.0）、README/CHANGELOG 文字和版本号（插件属性、项目版本及日志中的版本）；玩法代码、SDK 固定修订（`2.1.6/r8`）和安装包结构不变。维护者于 2026-10-19 以玩法代码未改为由免除 0.1.1 构建的实机测试；下方验收针对 0.1.0。
+
 **Current acceptance — 2026-09-19:** Tree Harvest Helper 0.1.0 is a stable release with maintainer-confirmed in-game acceptance. See the [validation record](../releases/validation.md) for the dated migration checks and later acceptance; this documentation update performs no new game run or scenario measurements.
 
 **当前验收 — 2026-09-19：**Tree Harvest Helper 0.1.0 已获维护者实机验收确认，为正式发布版。迁移检查及后续验收范围见[验证记录](../releases/validation.md)；本次文档更新未重新运行游戏或测量场景。
@@ -22,7 +26,7 @@ python tools/ci.py build
 python tools/ci.py verify-game --game-dir 'F:\SteamLibrary\steamapps\common\Old Market Simulator'
 ```
 
-Local package: `outputs/OldMarket.TreeInfo-0.1.0.zip`; CI package: `outputs/ci/tree-info/`. Package allowlists exclude game, loader and SDK assemblies. Tests cover harvest boundaries and all 13 locales. Read-only Cecil contracts check the actual game hash, reflected `BlockTree.dayCounter` / `isWatered`, Harmony `PlayerInteraction.InteractionRay` and injected fields, native ray selection, and absence of game-state writes in the plugin. SDK export includes these reflection-only members in supplemental metadata.
+Local package: `outputs/OldMarket.TreeInfo-0.1.1.zip`; CI package: `outputs/ci/tree-info/`. Package allowlists exclude game, loader and SDK assemblies. Tests cover harvest boundaries and all 13 locales. Read-only Cecil contracts check the actual game hash, reflected `BlockTree.dayCounter` / `isWatered`, Harmony `PlayerInteraction.InteractionRay` and injected fields, native ray selection, and absence of game-state writes in the plugin. SDK export includes these reflection-only members in supplemental metadata.
 
 本地包和 CI 包位置同上，白名单排除游戏、加载器及 SDK DLL。测试覆盖成熟边界及 13 语种；Cecil 只读检查真实游戏哈希、树木反射字段、Harmony 目标和注入字段、原生射线选择及插件不写游戏状态。SDK supplemental 明确纳入只通过反射引用的成员。
 
@@ -30,9 +34,9 @@ Historical 2026-09-12 analysis checked 25 TreeSO resources against this game bas
 
 2026-09-12 的历史分析已核对此基线的 25 个 TreeSO 资源；运行时读取实际阈值和季节，不复制静态资源表。迁移时未重新提取或打包这些资源，当时实机 UI、语言和联机验收尚待完成；上方后续正式发布验收已取代该状态，但未提供逐场景完整测试矩阵。玩家用法见 [README](README.md)。
 
-Current public version: **0.1.0**; game/SDK pin is unchanged. The initial public numbering did not alter runtime behavior or extend the recorded test scope.
+Current version: **0.1.1**, a license and documentation patch over the published 0.1.0; game/SDK pin is unchanged. The initial public numbering did not alter runtime behavior or extend the recorded test scope.
 
-当前公开版本：**0.1.0**，游戏／SDK 固定修订不变；首次公开编号本身不改变运行时行为，也不扩展已记录测试范围。
+当前版本：**0.1.1**，是在已发布 0.1.0 基础上的许可与文档补丁，游戏／SDK 固定修订不变；首次公开编号本身不改变运行时行为，也不扩展已记录测试范围。
 
 ## Local media archive / 本地素材归档
 

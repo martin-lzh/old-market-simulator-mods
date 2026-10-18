@@ -18,7 +18,7 @@
 
 ### 项目边界与许可
 
-只提交你有权贡献的原创内容，并保留来源和所需第三方声明。本项目原创代码、测试、脚本、译文和文档采用根目录 MIT 许可证；各 Mod 也附有许可证，贡献应可按该许可分发；具体范围见 [MIT 许可证](LICENSE)。不要提交无法确认授权的代码或素材。
+只提交你有权贡献的原创内容，并保留来源和所需第三方声明。本项目原创代码、测试、脚本、译文和文档采用根目录 PolyForm Noncommercial 1.0.0 许可；各 Mod 也附有许可证，贡献应可按该许可分发；具体范围见 [许可证](LICENSE)。不要提交无法确认授权的代码或素材。
 
 游戏安装目录作为只读构建依赖。不得提交原始游戏 DLL/EXE、资源包、翻译表、反编译快照、存档、凭据或未经脱敏的日志，也不得用反编译源码替换游戏组件。本项目接受按功能范围开发的原创运行时插件；安装和实机测试与构建分开，不在运行中替换 DLL。构建脚本不得自动修改贡献者的游戏安装。
 
@@ -117,7 +117,7 @@ The [repository](https://github.com/martin-lzh/old-market-simulator-mods), [Issu
 
 ### Scope and licensing
 
-Submit only original material you have the right to contribute, and retain required attribution and third-party notices. Original code, tests, scripts, translations, and documentation use the root MIT license; each Mod also includes a license. Contributions must be distributable under that license. See the [license scope](LICENSE). Do not submit code or assets with unverified permissions.
+Submit only original material you have the right to contribute, and retain required attribution and third-party notices. Original code, tests, scripts, translations, and documentation use the root PolyForm Noncommercial License 1.0.0; each Mod also includes a license. Contributions must be distributable under that license. See the [license scope](LICENSE). Do not submit code or assets with unverified permissions.
 
 Treat the game installation as a read-only build dependency. Do not commit original game DLLs/EXEs, asset bundles, translation tables, decompiled snapshots, saves, credentials, or unredacted logs. Do not replace game components with compiled decompiled code. This project accepts original runtime plugins within each feature's scope. Keep installation and in-game testing separate from builds, and never replace a DLL while the game is running. Build scripts must not automatically modify contributors' game installations.
 

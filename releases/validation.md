@@ -1,5 +1,31 @@
 # Validation record / 验证记录
 
+## License-only patch versions — 2026-10-18 / 仅许可补丁版本
+
+The maintainer asked for a patch version of every Mod so that its downloads carry the PolyForm Noncommercial 1.0.0 license. Against each published release the source differs only in `LICENSE` (and the Mod-private `localization/LICENSE`), README/CHANGELOG/DEVELOPMENT text, README images that are not packaged, and the version number in the project file, plugin attribute and, where present, the startup log line. SDK pins are unchanged. Automated validation, CI tooling tests, the CI build and read-only `verify-game` against the local 2.1.6 install passed on the preparing commit; package SHA256 values identify the test builds. **The maintainer waived in-game testing of these builds on 2026-10-19 because gameplay code is unchanged**, so the earlier acceptance below covers the previous versions only.
+
+| Mod | Released | Patch | Changes | In-game testing of the patch |
+| --- | --- | --- | --- | --- |
+| Auto Checkout | 0.1.5 | 0.1.6 | License, README/CHANGELOG, version | Waived by maintainer |
+| Coordinates HUD | 0.1.4 | 0.1.5 | License, README/CHANGELOG, version | Waived by maintainer |
+| Profit Insights (BepInEx and MelonLoader) | 0.5.2 | 0.5.3 | License, README/CHANGELOG, version | Waived by maintainer |
+| Map & Compass | 0.2.1 | 0.2.2 | License, README/CHANGELOG, version | Waived by maintainer |
+| Smart Pricing | 0.1.2 | 0.1.3 | License, README/CHANGELOG, version | Waived by maintainer |
+| Better Stacking | 0.3.0 | 0.3.1 | License, README/CHANGELOG, version | Waived by maintainer |
+| Tree Harvest Helper | 0.1.0 | 0.1.1 | License, README/CHANGELOG, version | Waived by maintainer |
+
+维护者要求为每个 Mod 发布一个补丁版本，使下载文件附带 PolyForm Noncommercial 1.0.0 许可。与各自已发布版本相比，源码只改了 `LICENSE`（及 Mod 内部的 `localization/LICENSE`）、README/CHANGELOG/DEVELOPMENT 文字、不进入安装包的 README 图片，以及项目文件、插件属性和启动日志（如有）中的版本号；SDK 固定修订不变。准备提交已通过自动校验、CI 工具测试、CI 构建及针对本机 2.1.6 安装的只读 `verify-game`，测试构建以安装包 SHA256 识别。**维护者于 2026-10-19 以玩法代码未改为由免除这些构建的实机测试**，下方此前的验收仅适用于上一版本。
+
+| Mod | 已发布 | 补丁 | 改动 | 补丁实机测试 |
+| --- | --- | --- | --- | --- |
+| Auto Checkout | 0.1.5 | 0.1.6 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Coordinates HUD | 0.1.4 | 0.1.5 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Profit Insights（BepInEx 与 MelonLoader） | 0.5.2 | 0.5.3 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Map & Compass | 0.2.1 | 0.2.2 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Smart Pricing | 0.1.2 | 0.1.3 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Better Stacking | 0.3.0 | 0.3.1 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Tree Harvest Helper | 0.1.0 | 0.1.1 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+
 ## Stable release acceptance — 2026-09-19 / 正式发布验收
 
 The maintainer confirms that in-game acceptance was already completed for Profit Insights 0.5.2, Coordinates HUD 0.1.4, Auto Checkout 0.1.5, Better Stacking 0.3.0, Smart Pricing 0.1.2, Map & Compass 0.2.0 and Tree Harvest Helper 0.1.0. These current releases are designated stable. This supersedes earlier pending-acceptance and prerelease status below; dated development evidence remains historical. This records maintainer-reported acceptance, not a new automated game run or newly measured scenario results.
@@ -62,12 +88,12 @@ The maintainer confirmed that visual testing and all other local in-game testing
 
 | Mod | Version | Visual and local in-game tests | Multiplayer |
 | --- | --- | --- | --- |
-| Navigation | 0.2.0 | Complete | Pending |
-| Coordinates | 0.1.4 | Complete | Pending |
-| Checkout All | 0.1.5 | Complete | Pending |
-| Material Cost | 0.5.2 | Complete | Pending |
-| Stack All | 0.2.2 | Complete | Pending |
-| Price Probability | 0.1.2 | Complete | Pending |
+| Navigation | 0.2.0 | Complete | Waived by maintainer |
+| Coordinates | 0.1.4 | Complete | Waived by maintainer |
+| Checkout All | 0.1.5 | Complete | Waived by maintainer |
+| Material Cost | 0.5.2 | Complete | Waived by maintainer |
+| Stack All | 0.2.2 | Complete | Waived by maintainer |
+| Price Probability | 0.1.2 | Complete | Waived by maintainer |
 
 The version column identifies the PR's target versions; this confirmation does not create new installation or binary-hash records. Multiplayer follow-up should cover host/client installation combinations, synchronized actions, reconnects and concurrent interactions. Existing same-version requirements and save rollback instructions remain in effect.
 
@@ -134,12 +160,12 @@ Tree Info 0.1.1 从本地分析项目纳入公开源码仓库，保留既有版�
 
 | Mod | 版本 | 视觉及本地实机测试 | 多人游戏 |
 | --- | --- | --- | --- |
-| Navigation | 0.2.0 | 已完成 | 待完成 |
-| Coordinates | 0.1.4 | 已完成 | 待完成 |
-| Checkout All | 0.1.5 | 已完成 | 待完成 |
-| Material Cost | 0.5.2 | 已完成 | 待完成 |
-| Stack All | 0.2.2 | 已完成 | 待完成 |
-| Price Probability | 0.1.2 | 已完成 | 待完成 |
+| Navigation | 0.2.0 | 已完成 | 维护者免除 |
+| Coordinates | 0.1.4 | 已完成 | 维护者免除 |
+| Checkout All | 0.1.5 | 已完成 | 维护者免除 |
+| Material Cost | 0.5.2 | 已完成 | 维护者免除 |
+| Stack All | 0.2.2 | 已完成 | 维护者免除 |
+| Price Probability | 0.1.2 | 已完成 | 维护者免除 |
 
 版本栏表示本 PR 的目标版本，本次确认不新增安装或二进制哈希记录。后续多人测试重点为房主/客人安装组合、动作同步、断线重连与同时交互；既有同版本要求及存档回退步骤继续适用。
 

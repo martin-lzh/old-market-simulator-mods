@@ -10,7 +10,7 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 Carry more without losing track of your baskets and boxes. Each product slot can hold up to 64 containers; tools stay separate.
 
-[Download 0.3.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.3.0)
+[Download 0.3.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.3.1)
 
 ### Core features
 
@@ -84,7 +84,7 @@ To update, close the game, back up your save and the old DLL, then replace the p
 
 让一个格子装下更多篮子和箱子，又能清楚看见实际数量。每个商品格最多容纳 64 个容器，工具仍然单独放置。
 
-[下载 0.3.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.3.0)
+[下载 0.3.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/stack-all-v0.3.1)
 
 ### 核心功能
 
