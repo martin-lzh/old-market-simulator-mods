@@ -6,15 +6,14 @@
 
 ### Unreleased
 
-- Explain clearing product/all-slot rules, transferring host configuration, duplicate-plugin cleanup and unsupported game baselines; link development/localization help. Refresh the current acceptance summary, add Chinese localization guidance and document the ignored local media index. Documentation only; version and SDK remain unchanged.
-
-- Add in-game pricing panel and fixed-probability screenshots to both README languages, illustrating slider-driven price changes and probability anchoring. Documentation only.
-
-- Move the Nexus cover into assets/cover.png and display it at the top of the README. Documentation only; runtime, version and SDK are unchanged.
+- Rewrite the README in plainer language, focusing on what the Mod does and how to use it, with clearer installation, multiplayer and removal steps.
+- Links and images in the README and CHANGELOG now use full GitHub addresses, so they also work when opened from the downloaded ZIP.
+- Add in-game screenshots of the pricing panel and fixed-probability mode, and show the Nexus cover at the top of the README.
+- Refresh the development and translation notes and link them from the README.
 
 ### 0.1.2 — 2026-09-19 (stable release)
 
-In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
+In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/validation.md).
 
 - Rename the plugin display name to **Smart Pricing** and reorganize the bilingual README around core features and controls, with insertion points for gameplay media. Plugin ID, assembly/configuration paths, gameplay and version are unchanged.
 
@@ -26,7 +25,7 @@ In-game acceptance is confirmed by the maintainer. This version is a stable rele
 
 ### 0.1.1 — 2026-09-12 (prerelease)
 
-First public release in this repository: original Mod features with independent localization (Coordinates uses universal axis labels). Detailed features and changes: [release notes](../releases/price-probability-v0.1.1.md).
+First public release in this repository: original Mod features with independent localization (Coordinates uses universal axis labels). Detailed features and changes: [release notes](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/price-probability-v0.1.1.md).
 
 - Build/reference baseline: Old Market Simulator 2.1.6, Windows x64 / Unity Mono. BepInEx 5; Material Cost also offers MelonLoader 0.7.3. Standalone remains source-only for local testing.
 - Game assembly SHA256: FA6CE6B89AEBDF50DD46FF9C857650DB0E9CC618B1CE939F58501E0DC59C6296.
@@ -41,15 +40,14 @@ Older development versions mentioned in the README are not verified downloadable
 
 ### 未发布
 
-- 说明清除单个商品／全部存档槽规则、迁移房主配置、清理重复插件及未确认的游戏基线，并链接开发／翻译资料；更新当前验收摘要、补充中文本地化说明并说明被忽略的本地素材索引。仅文档改动，版本和 SDK 不变。
-
-- 在双语 README 中加入智能定价面板及固定概率模式的实机截图，说明滑条联动售价与概率锚定操作，仅更新文档。
-
-- 将 Nexus 封面移入 assets/cover.png，并作为 README 首图展示。仅文档改动，运行时、版本和 SDK 不变。
+- 用更直白的语言重写 README，聚焦功能和用法，并理清安装、联机与卸载步骤。
+- README 和 CHANGELOG 中的链接与图片改用完整 GitHub 地址，从下载的 ZIP 中打开也能正常访问。
+- README 加入定价面板和固定概率模式的实机截图，并以 Nexus 封面作为首图。
+- 更新开发与翻译说明，并在 README 中提供链接。
 
 ### 0.1.2 — 2026-09-19（正式发布）
 
-维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](../releases/validation.md)。
+维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/validation.md)。
 
 - 插件显示名改为 **Smart Pricing**，双语 README 按核心功能和操作方式组织，并保留实机素材插入位置。插件 ID、程序集／配置路径、玩法及版本不变。
 
@@ -61,7 +59,7 @@ Older development versions mentioned in the README are not verified downloadable
 
 ### 0.1.1 — 2026-09-12（预发布）
 
-本仓库首次公开发布：原创功能与独立本地化（坐标使用通用轴标记）。详细功能与变化见[发布说明](../releases/price-probability-v0.1.1.md)。
+本仓库首次公开发布：原创功能与独立本地化（坐标使用通用轴标记）。详细功能与变化见[发布说明](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/price-probability-v0.1.1.md)。
 
 - 构建/引用基线：Old Market Simulator 2.1.6，Windows x64 / Unity Mono，BepInEx 5；成本插件另有 MelonLoader 0.7.3，Standalone 仅源码本地测试。
 - 游戏程序集 SHA256 同上；自动检查通过，实机 UI、存档及多人验收未完成。
@@ -76,7 +74,3 @@ README 提到的更早开发版本不是本公开仓库已确认的可下载发�
 | File / 文件 | SHA256 |
 | --- | --- |
 | [OldMarket.PriceProbability-0.1.1.zip](https://github.com/martin-lzh/old-market-simulator-mods/releases/download/price-probability-v0.1.1/OldMarket.PriceProbability-0.1.1.zip) | 38469d8cedf6730a8361fb3c956bf346a6024ae57abc71d6fc81a92e756d3f09 |
-
-Future entries must record changes, actual date/downloads, game/hash, loader, save/multiplayer/rollback requirements and test scope. Publish package hashes externally in the release checksums; preserve old releases/tags.
-
-后续条目必须记录变化、真实日期/下载定位、游戏/哈希、加载器、存档/联机/回退要求及验证范围。包哈希放发布页外部校验文件，保留历史发布/标签。

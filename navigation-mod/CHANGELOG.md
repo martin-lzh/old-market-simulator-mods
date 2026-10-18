@@ -4,13 +4,14 @@
 
 ### Unreleased
 
-- Document marker storage, local multiplayer scope, input restrictions and rollback of matching DLL/maps/settings; update development acceptance and package-version references and index local reusable media. Documentation only; runtime, version and SDK are unchanged.
-
-- Correct the published 0.2.1 status and current download links. Existing release assets, runtime and SDK are unchanged.
+- Rewrite the README in plainer language, focusing on what the Mod does and how to use it, with clearer installation, multiplayer and removal steps.
+- Links and images in the README and CHANGELOG now use full GitHub addresses, so they also work when opened from the downloaded ZIP.
+- Point the README download link at the 0.2.1 release.
+- Refresh the development notes and link them from the README.
 
 ### 0.2.1 — 2026-09-20 (stable release)
 
-Local in-game acceptance of the Rome map update and corrected Windows wheel zoom is confirmed on build `0c5b952`. This patch was published as a stable release on 2026-09-20; see the [validation record](../releases/validation.md).
+Local in-game acceptance of the Rome map update and corrected Windows wheel zoom is confirmed on build `0c5b952`. This patch was published as a stable release on 2026-09-20; see the [validation record](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/validation.md).
 
 - Reduce Rome's main-map coverage from 1005 × 1005 to 180 × 175 world units around the scene-reviewed castle walls, retaining all 59 unlock areas, 46 conditional POIs and seven separate travel maps. Crop base/overlay UVs against optional texture bounds so the existing artwork and detail patch keep their world alignment in both maps.
 - Make one wheel notch and one + / − click use the same adaptive zoom factor (1.25 at the base range), retaining fractional scrolling, pointer anchoring, reversal and zoom limits. Advance to Mod 0.2.1 on game 2.1.6 / SDK r7.
@@ -22,7 +23,7 @@ Local in-game acceptance of the Rome map update and corrected Windows wheel zoom
 
 ### 0.2.0 — 2026-09-18 (stable release)
 
-In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](../releases/validation.md).
+In-game acceptance is confirmed by the maintainer. This version is a stable release; see the [validation record](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/validation.md).
 
 - Rename the plugin display name to **Map & Compass** and reorganize the bilingual README around core features and controls, with insertion points for gameplay media. Plugin ID, assembly/configuration paths, gameplay and version are unchanged.
 
@@ -66,11 +67,11 @@ In-game acceptance is confirmed by the maintainer. This version is a stable rele
 
 - Remove the player position nameplate and use a narrow, outlined direction arrow in both maps. Color POI sprites by category with dark outlines and transparent backgrounds, including the large map. Resolve built-in POI labels from native game text instead of Mod translations.
 
-- Add the missing minimap POI layer with upright semantic icons and collision-aware labels in both rotation modes; resolve POI targets for compass guidance. Share icons with the large map. Verify nested POI metadata with the same .NET reader used by the plugin and log loaded/rendered counts for diagnosis. Local in-game testing is confirmed; see [validation scope](../releases/validation.md).
+- Add the missing minimap POI layer with upright semantic icons and collision-aware labels in both rotation modes; resolve POI targets for compass guidance. Share icons with the large map. Verify nested POI metadata with the same .NET reader used by the plugin and log loaded/rendered counts for diagnosis. Local in-game testing is confirmed; see [validation scope](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/validation.md).
 
 - Right-click a personal marker icon or label to remove it; left-click to edit. Remove the icon backdrop and overview list; place current target above the marker editor. Pair minimap action labels individually with their minus/equals keycaps.
 
-- Pin game 2.1.6 SDK r7 for the actual UI scroll multiplier, runtime input range and platform APIs. Version 0.2.0 passes 1225 navigation checks, 19 native-name checks, 635 metadata/IL contracts, 48 CI tooling tests and real-reference/SDK builds; local in-game testing is confirmed, with scenario limits recorded in [validation scope](../releases/validation.md).
+- Pin game 2.1.6 SDK r7 for the actual UI scroll multiplier, runtime input range and platform APIs. Version 0.2.0 passes 1225 navigation checks, 19 native-name checks, 635 metadata/IL contracts, 48 CI tooling tests and real-reference/SDK builds; local in-game testing is confirmed, with scenario limits recorded in [validation scope](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/validation.md).
 
 - Normalize wheel input by the active UI module scale, preserve fractional movement and cancel pending opposite zoom; +/- button behavior is unchanged.
 - Read optional validated local POIs and render semantic shop/home/dock icons. Labels expand with zoom when space permits, avoid overlaps and prioritize the selected target; POIs can be navigation targets without entering personal marker files.
@@ -129,13 +130,14 @@ Experimental initial build; not installed or verified in game.
 
 ### 未发布
 
-- 补齐标记存储、联机本地作用范围、输入限制及配套 DLL／地图／设置回退说明；更新开发说明中的验收和包版本引用，并加入本地复用素材索引。仅文档改动，运行时、版本和 SDK 不变。
-
-- 修正 0.2.1 已正式发布的状态说明及当前下载链接；已发布附件、运行时和 SDK 不变。
+- 用更直白的语言重写 README，聚焦功能和用法，并理清安装、联机与卸载步骤。
+- README 和 CHANGELOG 中的链接与图片改用完整 GitHub 地址，从下载的 ZIP 中打开也能正常访问。
+- README 下载链接指向 0.2.1 正式版。
+- 更新开发说明，并在 README 中提供链接。
 
 ### 0.2.1 — 2026-09-20（正式发布）
 
-构建 `0c5b952` 的罗马地图更新及 Windows 滚轮缩放修正已获本地实机验收确认，本补丁已于 2026-09-20 正式发布，详见[验证记录](../releases/validation.md)。
+构建 `0c5b952` 的罗马地图更新及 Windows 滚轮缩放修正已获本地实机验收确认，本补丁已于 2026-09-20 正式发布，详见[验证记录](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/validation.md)。
 
 - 将罗马主地图从 1005 × 1005 世界单位收紧至场景核对的城墙周边 180 × 175，保留全部 59 个解锁区、46 条条件 POI 和七张独立传送区域地图。通过可选贴图边界裁剪底图/覆盖层 UV，让大小地图中的原有插画及细节图保持世界坐标对齐。
 - 滚轮一格与 + / − 按钮一次点击使用相同的自适应缩放倍率（基础范围放大 1.25 倍），保留小数滚动、鼠标锚点、反向取消和缩放边界。版本推进至 Mod 0.2.1，保持游戏 2.1.6 / SDK r7。
@@ -147,7 +149,7 @@ Experimental initial build; not installed or verified in game.
 
 ### 0.2.0 — 2026-09-18（正式发布）
 
-维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](../releases/validation.md)。
+维护者已确认实机验收完成，本版本为正式发布版，详见[验证记录](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/validation.md)。
 
 - 插件显示名改为 **Map & Compass**，双语 README 按核心功能和操作方式组织，并保留实机素材插入位置。插件 ID、程序集／配置路径、玩法及版本不变。
 
@@ -191,11 +193,11 @@ Experimental initial build; not installed or verified in game.
 
 - 移除玩家位置文字，两张地图改用细长描边方向箭头。POI 图标按类别着色并加深色描边，大地图也去除图标底板。内置地点标签改从游戏原生文本读取，不再使用 Mod 自译名称。
 
-- 补齐小地图 POI 图层，两种朝向模式下语义图标和名称保持正立并按空间避让；罗盘指引支持 POI 目标。大小地图共用图标，通过插件实际使用的 .NET 读取器验证嵌套 POI 数据，并记录读取与绘制数量用于排查。本地实机测试已确认，范围见[验证记录](../releases/validation.md)。
+- 补齐小地图 POI 图层，两种朝向模式下语义图标和名称保持正立并按空间避让；罗盘指引支持 POI 目标。大小地图共用图标，通过插件实际使用的 .NET 读取器验证嵌套 POI 数据，并记录读取与绘制数量用于排查。本地实机测试已确认，范围见[验证记录](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/validation.md)。
 
 - 右键个人标记图标或名称即可删除，左键选中编辑；去掉图标底色和标记总览，将当前目标放在编辑区上方。小地图缩放提示改为“缩小 [-]　放大 [=]”两组动作与键帽。
 
-- 固定游戏 2.1.6 SDK r7，覆盖实际 UI 滚轮倍率、运行时输入范围与平台接口。0.2.0 通过 1225 项导航检查、19 项原生名称检查、635 项元数据/IL 契约、48 项 CI 工具测试及真实引用/SDK 构建；本地实机测试已确认，场景覆盖限制见[验证记录](../releases/validation.md)。
+- 固定游戏 2.1.6 SDK r7，覆盖实际 UI 滚轮倍率、运行时输入范围与平台接口。0.2.0 通过 1225 项导航检查、19 项原生名称检查、635 项元数据/IL 契约、48 项 CI 工具测试及真实引用/SDK 构建；本地实机测试已确认，场景覆盖限制见[验证记录](https://github.com/martin-lzh/old-market-simulator-mods/blob/main/releases/validation.md)。
 
 - 按当前 UI 模块系数还原滚轮输入，保留小数滚动并取消反方向的剩余缩放；加减按钮行为不变。
 - 读取经校验的本地 POI，绘制商店、房屋、码头等语义图标；放大且空间足够时展开名称，避让重叠并优先显示目标。POI 可设为导航目标，不写入个人标记文件。

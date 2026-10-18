@@ -1,21 +1,20 @@
-"""Build with versioned API references and publish independent immutable releases."""
+"""Build Mods against versioned API references; release them through tools/modrelease.py."""
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
 import math
-import os
 from pathlib import Path
 import re
 import subprocess
 import struct
-import urllib.error
-import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 import zipfile
 import zlib
+
+import modrelease
 
 ROOT = Path(__file__).resolve().parents[1]
 MODS = {
@@ -68,9 +67,10 @@ def config(slug):
     project = directory / f"{name}.csproj"
     if ET.parse(project).findtext(".//Version") != version:
         raise ValueError(f"{slug}: CHANGELOG and project version disagree")
-    settings = json.loads((directory / "release.json").read_text())
-    if set(settings) != {"sdk", "prerelease"} or type(settings["prerelease"]) is not bool:
-        raise ValueError("Invalid release.json")
+    settings = json.loads((directory / "release.json").read_text(encoding="utf-8"))
+    if (set(settings) != {"displayName", "sdk", "prerelease"} or type(settings["prerelease"]) is not bool
+            or not isinstance(settings["displayName"], str) or not settings["displayName"].strip()):
+        raise ValueError(f"{slug}: release.json needs displayName, sdk and prerelease")
     if not re.fullmatch(VERSION + r"/r[1-9][0-9]*", settings["sdk"]):
         raise ValueError("Invalid SDK identifier")
     sdk = ROOT / "sdk" / settings["sdk"]
@@ -361,83 +361,10 @@ def write_evidence(c, directory):
     commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     evidence = dict(source=commit, mod=c["slug"], version=c["version"], sdk=c["sdk"],
                     gameVersion=c["manifest"]["gameVersion"], gameAssemblySha256=c["manifest"]["gameAssemblySha256"],
-                    apiSha256=c["manifest"]["apiSha256"],
-                    validation="SDK compilation and pure logic/localization tests; in-game validation not performed / SDK 编译与纯逻辑、本地化测试，未执行实机验证")
+                    apiSha256=c["manifest"]["apiSha256"])
     if c["slug"] == "navigation":
         evidence["mapFiles"] = {name: sha(data) for name, data in map_resources(c).items()}
     (directory / "build-info.json").write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
-    files = [archive_name(c, v) for v in variants(c["slug"])] + ["build-info.json"]
-    (directory / "SHA256SUMS.txt").write_text("".join(f'{sha((directory / name).read_bytes())}  {name}\n' for name in files), encoding="utf-8", newline="\n")
-
-
-class GitHub:
-    def __init__(self, repository):
-        if not re.fullmatch(r"[\w.-]+/[\w.-]+", repository):
-            raise ValueError("Invalid repository")
-        self.base = f"https://api.github.com/repos/{repository}"
-        self.token = os.environ["GH_TOKEN"]
-        class AssetRedirect(urllib.request.HTTPRedirectHandler):
-            def redirect_request(self, req, fp, code, msg, headers, newurl):
-                result = super().redirect_request(req, fp, code, msg, headers, newurl)
-                if result is not None and urllib.parse.urlparse(req.full_url).hostname != urllib.parse.urlparse(newurl).hostname:
-                    result.remove_header("Authorization")
-                return result
-        self.opener = urllib.request.build_opener(AssetRedirect())
-
-    def request(self, path, method="GET", payload=None, raw=False):
-        url = path if path.startswith("https://") else self.base + path
-        if urllib.parse.urlparse(url).hostname not in ("api.github.com", "uploads.github.com"):
-            raise ValueError("Unexpected GitHub endpoint")
-        data = payload if isinstance(payload, bytes) else None if payload is None else json.dumps(payload).encode()
-        headers = {"Authorization": f"Bearer {self.token}", "Accept": "application/octet-stream" if raw else "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"}
-        if data is not None:
-            headers["Content-Type"] = "application/octet-stream" if isinstance(payload, bytes) else "application/json"
-        try:
-            with self.opener.open(urllib.request.Request(url, data, headers, method=method), timeout=120) as r:
-                content = r.read()
-                return content if raw else json.loads(content) if content else None
-        except urllib.error.HTTPError as error:
-            if error.code == 404 and method == "GET":
-                return None
-            raise
-
-    def releases(self):
-        releases = []
-        for page in range(1, 100):
-            batch = self.request(f"/releases?per_page=100&page={page}")
-            releases.extend(batch)
-            if len(batch) < 100:
-                return releases
-        raise ValueError("Release pagination limit exceeded")
-
-
-def mod_changed_since_release(slug, commit, releases):
-    """Compare committed directory contents with this Mod's highest published version."""
-    if slug not in MODS or not re.fullmatch(r"[0-9a-f]{40}", commit):
-        raise ValueError("Directory comparison requires a known Mod and exact commit")
-    prefix = slug + "-v"
-    tags = [r["tag_name"] for r in releases if not r["draft"]
-            and r["tag_name"].startswith(prefix)
-            and re.fullmatch(VERSION, r["tag_name"][len(prefix):])]
-    directory = f"{slug}-mod/"
-    if not tags:
-        # First release: require tracked files at the exact release commit.
-        return bool(subprocess.check_output(
-            ["git", "ls-tree", "-r", "--name-only", commit, "--", directory], cwd=ROOT, text=True).strip())
-    tag = max(tags, key=lambda t: tuple(map(int, t[len(prefix):].split('.'))))
-    try:
-        # Peel annotated tags; target_commitish may be a branch name and is not evidence.
-        baseline = subprocess.check_output(
-            ["git", "rev-parse", "--verify", f"refs/tags/{tag}^{{commit}}"], cwd=ROOT, text=True).strip()
-    except subprocess.CalledProcessError as error:
-        raise ValueError(f"Cannot resolve published tag {tag}; fetch complete history and tags") from error
-    if not re.fullmatch(r"[0-9a-f]{40}", baseline):
-        raise ValueError(f"Invalid published tag commit: {tag}")
-    result = subprocess.run(["git", "diff", "--quiet", "--no-ext-diff", "--no-textconv",
-                             baseline, commit, "--", directory], cwd=ROOT)
-    if result.returncode not in (0, 1):
-        raise ValueError(f"Cannot compare {directory} with published tag {tag}")
-    return result.returncode == 1
 
 
 def pending_changes(c):
@@ -449,139 +376,47 @@ def pending_changes(c):
     return False
 
 
-def release_inputs(c, commit):
-    """Bind tracked source and build inputs, independently of merge/squash commit IDs."""
-    if not re.fullmatch(r"[0-9a-f]{40}", commit):
-        raise ValueError("Release inputs require an exact source commit")
-    paths = [f'{c["slug"]}-mod/', f'sdk/{c["sdk"]}/', 'tools/', '.github/workflows/',
-             'Directory.Build.props', 'Directory.Build.targets', 'global.json', 'NuGet.config', '.gitattributes']
-    tree = subprocess.check_output(["git", "ls-tree", "-r", "-z", commit, "--", *paths], cwd=ROOT)
-    if not tree:
-        raise ValueError("No tracked release inputs")
-    return sha(tree)
+def release_assets(c):
+    directory = ROOT / "outputs/ci" / c["slug"]
+    return tuple(directory / name for name in [archive_name(c, v) for v in variants(c["slug"])] + ["build-info.json"])
 
 
-def approval_path(c):
-    return ROOT / "releases/approvals" / f'{c["slug"]}-v{c["version"]}.json'
+def verify_artifacts(c, commit):
+    """Check one Mod's CI packages before anything is uploaded."""
+    files = {path.name: path.read_bytes() for path in release_assets(c)}
+    for variant in variants(c["slug"]):
+        validate_package(c, variant, files[archive_name(c, variant)])
+    evidence = json.loads(files["build-info.json"])
+    if (evidence["source"] != commit or evidence["sdk"] != c["sdk"] or evidence["version"] != c["version"]
+            or evidence["mod"] != c["slug"] or evidence["apiSha256"] != c["manifest"]["apiSha256"]):
+        raise ValueError(f'{c["slug"]}: build evidence does not match the release source')
 
 
-def release_authorized(c, commit):
-    path = approval_path(c)
-    if not path.exists():
-        return False
-    approval = json.loads(path.read_text(encoding="utf-8"))
-    expected = {"schema", "mod", "version", "sdk", "prerelease", "sourceCommit", "inputsSha256", "authorization"}
-    if (set(approval) != expected or type(approval["schema"]) is not int or approval["schema"] != 1
-            or type(approval["prerelease"]) is not bool
-            or any(approval[key] != c[key] for key in ("version", "sdk", "prerelease"))
-            or approval["mod"] != c["slug"] or not isinstance(approval["authorization"], str)
-            or not approval["authorization"].strip()
-            or not re.fullmatch(r"[0-9a-f]{40}", approval["sourceCommit"])
-            or not re.fullmatch(r"[0-9a-f]{64}", approval["inputsSha256"])):
-        raise ValueError("Invalid release approval record")
-    if pending_changes(c):
-        raise ValueError(f'{c["slug"]}: approved release still contains Unreleased changes')
-    if release_inputs(c, commit) != approval["inputsSha256"]:
-        raise ValueError(f'{c["slug"]}: release inputs changed after approval; review and renew authorization')
-    return True
-
-
-def record_approval(slug, authorization):
-    if slug not in MODS or not authorization or not authorization.strip():
-        raise ValueError("Provide a known --mod and the explicit user --authorization")
-    if subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip():
-        raise ValueError("Commit source changes before recording approval")
-    c = config(slug)
-    if pending_changes(c):
-        raise ValueError("Move only the user-authorized changes into a numbered release before approval")
-    path = approval_path(c)
-    if path.exists():
-        raise ValueError("Approval already exists; review/remove the stale record in a separate commit first")
-    commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
-    record = dict(schema=1, mod=slug, version=c["version"], sdk=c["sdk"], prerelease=c["prerelease"],
-                  sourceCommit=commit, inputsSha256=release_inputs(c, commit), authorization=authorization.strip())
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
-    print(f"Review and commit {path.relative_to(ROOT)}. This command does not publish or grant authorization.")
-
-
-def release_candidates(commit, published):
+def release_mods(repository):
+    mods = []
     for slug in MODS:
         c = config(slug)
-        tag = f'{slug}-v{c["version"]}'
-        existing = published.get(tag)
-        if existing and not existing["draft"]:
-            print(f"Skip published {tag}; assets and tag remain unchanged.")
-            continue
-        if not release_authorized(c, commit):
-            print(f"Skip {tag}; no explicit release approval record.")
-            continue
-        newer = [r for t, r in published.items() if t.startswith(slug + "-v") and not r["draft"]
-                 and re.fullmatch(VERSION, t[len(slug) + 2:])
-                 and tuple(map(int, t[len(slug) + 2:].split('.'))) > tuple(map(int, c["version"].split('.')))]
-        if newer:
-            raise ValueError(f"Refusing a new release older than an existing version: {tag}")
-        if not mod_changed_since_release(slug, commit, published.values()):
-            print(f"Skip {tag}; {slug}-mod/ is unchanged since its last published version (or has no tracked files).")
-            continue
-        yield c, existing
+        loaders = "BepInEx 5 or MelonLoader 0.7.3" if len(variants(slug)) > 1 else "BepInEx 5"
+        mods.append(modrelease.ModRelease(
+            slug=slug, display_name=c["displayName"], version=c["version"], prerelease=c["prerelease"],
+            notes=c["notes"], unreleased=pending_changes(c), assets=release_assets(c),
+            summary=f'Old Market Simulator {c["manifest"]["gameVersion"]} (Windows) · {loaders}',
+            readme_url=f"https://github.com/{repository}/blob/main/{slug}-mod/README.md"))
+    return mods
 
 
 def publish(repository, commit, api=None):
-    if not re.fullmatch(r"[0-9a-f]{40}", commit):
-        raise ValueError("Publish requires an exact commit SHA")
     actual = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     if actual != commit:
         raise ValueError("Checkout differs from release commit")
-    api = api or GitHub(repository)
-    published = {r["tag_name"]: r for r in api.releases()}
-    for c, existing in release_candidates(commit, published):
-        slug = c["slug"]
-        tag = f'{slug}-v{c["version"]}'
-        directory = ROOT / "outputs/ci" / slug
-        names = [archive_name(c, v) for v in variants(slug)] + ["build-info.json", "SHA256SUMS.txt"]
-        files = {name: (directory / name).read_bytes() for name in names}
-        for variant in variants(slug):
-            validate_package(c, variant, files[archive_name(c, variant)])
-        evidence = json.loads(files["build-info.json"])
-        if (evidence["source"] != commit or evidence["sdk"] != c["sdk"] or evidence["version"] != c["version"]
-                or evidence["mod"] != slug or evidence["apiSha256"] != c["manifest"]["apiSha256"]):
-            raise ValueError("Build evidence mismatch")
-        expected_sums = "".join(f'{sha(files[name])}  {name}\n' for name in names[:-1]).encode()
-        if files["SHA256SUMS.txt"] != expected_sums:
-            raise ValueError("Artifact checksum mismatch")
-        body = (f'Game / 游戏: {c["manifest"]["gameVersion"]}; SDK: `{c["sdk"]}`\n\n'
-                f'Source / 源码: `{commit}`\n\n'
-                'Built with API references; in-game validation is not implied.\n'
-                '使用接口 SDK 编译；不代表已通过实机验证。\n\n' + c["notes"])
-        # A draft can be resumed only for the same commit. Never overwrite an existing asset.
-        if existing:
-            if existing["target_commitish"] != commit or existing["body"] != body or existing["prerelease"] != c["prerelease"]:
-                raise ValueError(f"Draft belongs to different source/metadata: {tag}")
-        else:
-            if api.request(f"/git/ref/tags/{tag}") is not None:
-                raise ValueError(f"Tag already exists without a published release: {tag}")
-            existing = api.request("/releases", "POST", dict(tag_name=tag, target_commitish=commit,
-                name=f'{c["name"]} {c["version"]} (game {c["manifest"]["gameVersion"]})', body=body,
-                draft=True, prerelease=c["prerelease"], make_latest="false"))
-        assets = {a["name"]: a for a in existing["assets"]}
-        if set(assets) - set(files):
-            raise ValueError("Unexpected assets in release draft")
-        for name, data in files.items():
-            asset = assets.get(name)
-            if asset is None:
-                url = existing["upload_url"].split("{")[0] + "?name=" + urllib.parse.quote(name)
-                asset = api.request(url, "POST", data)
-            remote = api.request(f'/releases/assets/{asset["id"]}', raw=True)
-            if remote != data:
-                raise ValueError(f"Uploaded asset differs: {name}. Draft preserved for inspection.")
-        api.request(f'/releases/{existing["id"]}', "PATCH", dict(draft=False, make_latest="false"))
-        print(f"Published {tag} at {commit}.")
+    for slug in MODS:
+        verify_artifacts(config(slug), commit)
+    modrelease.publish(api or modrelease.GitHub(repository), release_mods(repository), commit)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=["validate", "build", "package", "publish", "verify-game", "export-sdk", "record-approval", "check-releases"])
+    parser.add_argument("command", choices=["validate", "build", "package", "release-plan", "publish", "verify-game", "export-sdk"])
     parser.add_argument("--dll")
     parser.add_argument("--output")
     parser.add_argument("--variant", default="BepInEx")
@@ -593,7 +428,6 @@ if __name__ == "__main__":
     parser.add_argument("--revision", type=int)
     parser.add_argument("--supplemental")
     parser.add_argument("--mod")
-    parser.add_argument("--authorization")
     args = parser.parse_args()
     if args.command == "validate":
         for slug in MODS:
@@ -614,12 +448,11 @@ if __name__ == "__main__":
         local_verify(args.game_dir)
     elif args.command == "export-sdk":
         export_sdk(args.game_dir, args.game_version, args.revision, args.supplemental)
-    elif args.command == "check-releases":
-        commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
-        published = {r["tag_name"]: r for r in GitHub(args.repository).releases()}
-        for c, _ in release_candidates(commit, published):
-            print(f'Ready: {c["slug"]} {c["version"]} at {commit} (read-only check)')
-    elif args.command == "record-approval":
-        record_approval(args.mod, args.authorization)
+    elif args.command == "release-plan":
+        if not args.repository:
+            parser.error("release-plan requires --repository")
+        modrelease.check(modrelease.GitHub(args.repository), release_mods(args.repository))
     else:
+        if not args.repository or not args.commit:
+            parser.error("publish requires --repository and --commit")
         publish(args.repository, args.commit)

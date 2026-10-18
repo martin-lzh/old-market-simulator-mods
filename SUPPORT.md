@@ -4,40 +4,36 @@
 
 ## 中文
 
-先查 [总说明](README.md) 中的当前支持版本，以及对应 Mod 的 README 风险提示、安装和回退步骤、CHANGELOG 兼容记录。当前没有承诺适配所有旧版游戏或所有 Mod 组合。
+遇到问题时，先看看对应 Mod 页面里的安装、设置和卸载说明，很多常见情况都写在那里。
 
-普通问题使用 Bug report 模板，功能建议使用 Feature request 模板；中英文均可。问题追踪：[GitHub Issues](https://github.com/martin-lzh/old-market-simulator-mods/issues)。安全漏洞不要使用公开 Bug 模板，见 [SECURITY.md](SECURITY.md)。
+还没解决的话，欢迎在 [GitHub Issues](https://github.com/martin-lzh/old-market-simulator-mods/issues) 提交：问题用 Bug report 模板，想法用 Feature request 模板，中英文均可。安全漏洞请按 [SECURITY.md](SECURITY.md) 私下报告。
 
-报告问题时提供：
+报告问题时，下面这些信息能帮我们更快定位：
 
-- Mod 名称和版本、游戏版本及可获取的程序集 SHA256、加载器和版本、系统环境。
-- 单机/房主/客人身份；联机时双方的版本与安装组合。
-- 从哪个版本升级、是否使用旧存档、是否改过插件配置。
-- 可重复的操作步骤、预期和实际结果，以及相关的脱敏错误片段。
-- 是否做过对照，以及哪些验证没有执行。
+- Mod 名称和版本、游戏版本、加载器（BepInEx 或 MelonLoader）及版本。
+- 单机，还是联机中的房主或客人；联机时各玩家装了哪些 Mod、什么版本。
+- 是否刚从旧版本升级、是否改过配置文件。
+- 怎么操作能重现问题，你期望发生什么，实际发生了什么。
+- 日志中相关的报错片段（`BepInEx/LogOutput.log` 或 `MelonLoader/Latest.log`）。
 
-日志可能包含用户名、绝对路径、房间码或其他隐私，粘贴前先检查。不要上传完整存档、游戏 DLL、原始资源或反编译源码。
+日志里可能有用户名、文件路径或房间码，粘贴前请先删掉。不要上传完整存档或游戏文件。
 
-测试时先备份，退出游戏后只调整需要对照的插件。Stack All 含额外容器记录的存档不能直接停用插件后读取；使用备份副本或遵循其拆分回退步骤。不要通过删除整个加载器或其他插件来代替单项排查。
-
-维护者可能需要更多信息，也可能无法复现。提供了构建或测试结果不代表已经完成游戏内验收，当前没有固定支持时限。
+排查时可以先备份，然后只移除怀疑有问题的那一个 Mod 再试。如果用了 Better Stacking，请先按它的[卸载步骤](stack-all-mod/README.md#备份与卸载)整理库存，或者用存档副本测试。
 
 ## English
 
-First check the supported versions in the [main README](README.md), and the relevant Mod's README risks, installation/rollback steps, and CHANGELOG compatibility records. Compatibility with every older game version or Mod combination is not promised.
+Start with the Mod's own page: installation, settings and removal steps cover most common questions.
 
-Use the Bug report template for problems and Feature request for suggestions. Chinese and English are welcome. Use [GitHub Issues](https://github.com/martin-lzh/old-market-simulator-mods/issues). Do not use public bug reports for vulnerabilities; see [security reporting](SECURITY.md#english).
+Still stuck? Open a [GitHub Issue](https://github.com/martin-lzh/old-market-simulator-mods/issues) using the Bug report template for problems or Feature request for ideas. Chinese and English are both welcome. Report security issues privately as described in [SECURITY.md](SECURITY.md#english).
 
-Include:
+These details help us find the problem faster:
 
-- Mod name/version, game version and assembly SHA256 if available, loader/version, and operating environment.
-- Single-player/host/client role; both sides' versions and installed Mod combinations for multiplayer.
-- The version you upgraded from, whether you use an existing save, and any plugin configuration changes.
-- Reproducible steps, expected and actual results, and relevant redacted error excerpts.
-- Any comparison tests performed and checks not run.
+- Mod name and version, game version, and loader (BepInEx or MelonLoader) with its version.
+- Single-player, or host/guest in multiplayer; for multiplayer, which Mods and versions each player has.
+- Whether you just upgraded from an older version or changed a configuration file.
+- Steps to reproduce, what you expected and what happened instead.
+- The relevant error lines from your log (`BepInEx/LogOutput.log` or `MelonLoader/Latest.log`).
 
-Inspect logs before posting: they may include usernames, absolute paths, room codes, or other private information. Do not upload complete saves, game DLLs, original assets, or decompiled source.
+Logs can contain your username, file paths or room codes, so remove those before posting. Please don't upload complete saves or game files.
 
-Back up before testing, exit the game, and adjust only the plugin needed for the comparison. Do not load a Stack All save containing extra container records with the plugin simply disabled; use a backup copy or follow its unpacking/rollback steps. Do not delete an entire loader or other plugins as a substitute for isolating one issue.
-
-Maintainers may need more information or may be unable to reproduce the issue. Build/test results do not constitute in-game acceptance testing. There is no fixed support response time.
+To narrow things down, back up and then remove just the Mod you suspect. If you use Better Stacking, tidy your inventory first by following its [removal steps](stack-all-mod/README.md#backups-and-removal), or test with a copy of your save.

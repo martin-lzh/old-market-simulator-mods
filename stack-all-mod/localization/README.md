@@ -14,7 +14,7 @@ dotnet run --project localization/tests/Localization.Tests.csproj -c Release
 
 The checks validate the exact locale and message sets, the absence of positional key markup, nonempty captions, locale normalization, native-term lookup and cache invalidation. Tests use local API substitutes and do not load game files.
 
-Automated checks cannot verify Unity layout, glyph coverage, line wrapping, input-binding labels, or live language switching. Those remain in-game validation items. Supplemental translations have not been reviewed by native speakers of every language.
+Check layout, glyph coverage, line wrapping, key labels and live language switching in game. Corrections from native speakers are welcome.
 
 ## License
 
@@ -28,6 +28,6 @@ Copyright © 2026 Zhaohan Liu. The original files in this directory are availabl
 
 两条说明均不包含按键名称或格式占位符。`ActionHint` 将 G 显示在独立的原生键帽内，保留游戏原有 Q/F 行；长按说明单独显示为不带键帽的原生样式行。`GameText.cs` 仍保留原生 `drop` 和 `throw` 动作词的运行时读取及英文回退，但当前说明不再插入这些词条。
 
-资源和辅助源码直接嵌入 `OldMarket.StackAll.dll`，安装时不需要额外语言文件或共享 DLL。在 `stack-all-mod/` 运行上方命令可执行独立 .NET 8 检查，覆盖语言和消息集合、无按键位置占位符、非空说明、语言代码归一化、原生词条读取和缓存失效。测试不读取游戏文件；Unity 中的布局、字形、换行、键位文字和实时切换仍需实机验证。补充译文未经所有语言的母语者审校。
+资源和辅助源码直接嵌入 `OldMarket.StackAll.dll`，安装时不需要额外语言文件或共享 DLL。在 `stack-all-mod/` 运行上方命令可执行独立 .NET 8 检查，覆盖语言和消息集合、无按键位置占位符、非空说明、语言代码归一化、原生词条读取和缓存失效。测试不读取游戏文件；布局、字形、换行、键位文字和实时切换请在游戏中检查。欢迎母语使用者提交译文修正。
 
 本目录原创文件版权归 Zhaohan Liu 所有，并采用 [MIT License](LICENSE)。游戏原生翻译及其他游戏资源只在运行时读取，不包含在本目录中。

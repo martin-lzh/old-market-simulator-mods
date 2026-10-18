@@ -14,7 +14,7 @@ dotnet run --project tests/Localization.Tests.csproj
 
 Its 11 suites verify the exact locale set, key and placeholder parity, formatting, regional normalization, English fallback, asynchronous native-table loading, failure recovery, and cache invalidation after a language change. Test doubles do not load or modify game files.
 
-Automated checks cannot verify Unity layout, font glyph coverage, wrapping, or whether every label fits at each resolution and UI scale. The supplemental translations have not been reviewed by native speakers of every supported language.
+Check layout, glyph coverage, wrapping and label fit at different resolutions and UI scales in game. Corrections from native speakers are welcome.
 
 These original localization sources and translations use the [MIT License](LICENSE), Copyright (c) 2026 Zhaohan Liu. The game's native string tables are neither copied nor redistributed.
 
@@ -36,6 +36,6 @@ dotnet run --project tests/Localization.Tests.csproj
 
 11 组测试核对准确的语言集合、词条与占位符一致性、格式化、地区代码规范化、英语回退、异步原生词表加载、失败恢复，以及切换语言后的缓存失效。测试使用替身，不读取或修改游戏文件。
 
-自动化检查无法验证 Unity 布局、字体字形、换行，以及不同分辨率和 UI 缩放下的文字容纳情况。补充译文尚未全部经过对应语言母语者审校。
+布局、字体字形、换行，以及不同分辨率和 UI 缩放下的文字容纳请在游戏中检查。欢迎母语使用者提交译文修正。
 
 这些原创本地化源码和译文采用 [MIT License](LICENSE)，Copyright (c) 2026 Zhaohan Liu。游戏原生词表不会被复制或再分发。
