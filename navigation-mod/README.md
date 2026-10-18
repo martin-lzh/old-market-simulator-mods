@@ -12,7 +12,7 @@ Find your way around town with a minimap, a compass and your own map markers. Ma
 
 **Maps: Eastern Town, Island and Rome with seven separate travel regions.**
 
-[Download 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.1)
+[Download 0.2.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.2)
 
 ### Core features
 
@@ -110,7 +110,7 @@ To uninstall, delete the plugin folder. Keep the config files if you want your m
 
 **地图：东方小镇、海岛，以及包含七个独立传送区域的罗马小镇。**
 
-[下载 0.2.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.1)
+[下载 0.2.2](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/navigation-v0.2.2)
 
 ### 核心功能
 

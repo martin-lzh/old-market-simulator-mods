@@ -10,7 +10,7 @@ A mod for Old Market Simulator / Old Market Simulator 模组
 
 See when your fruit trees are ready to harvest, directly in the interaction hint.
 
-[Download 0.1.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.0)
+[Download 0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.1)
 
 ### Core features
 
@@ -51,7 +51,7 @@ To update, close the game, back up the old DLL and replace it. To uninstall, del
 
 准星对准果树，就能在交互提示中查看生产季节与成熟时间。
 
-[下载 0.1.0](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.0)
+[下载 0.1.1](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/tree-info-v0.1.1)
 
 ### 核心功能
 

@@ -1,5 +1,9 @@
 # Development notes / 开发说明
 
+**2026-10-18 — license patch 0.3.1, in-game testing pending:** Better Stacking 0.3.1 differs from the released 0.3.0 only in the license (PolyForm Noncommercial 1.0.0), README/CHANGELOG text and the version number (plugin attribute, project version and version in log text); gameplay code, SDK pin (`2.1.6/r11`) and package layout are unchanged. The README rule that everyone in a multiplayer game uses the same Better Stacking version still applies. In-game testing of the 0.3.1 build by the maintainer is still pending; the acceptance below applies to 0.3.0.
+
+**2026-10-18 — 许可补丁 0.3.1，实机测试待完成：**Better Stacking 0.3.1 与已发布的 0.3.0 相比，只改了许可（PolyForm Noncommercial 1.0.0）、README/CHANGELOG 文字和版本号（插件属性、项目版本及日志中的版本）；玩法代码、SDK 固定修订（`2.1.6/r11`）和安装包结构不变。README 中联机时所有玩家使用相同 Better Stacking 版本的要求仍然适用。维护者尚未对 0.3.1 构建进行实机测试；下方验收针对 0.3.0。
+
 **2026-09-19 — current acceptance:** The maintainer confirms in-game acceptance of Better Stacking 0.3.0; this is a stable release on game 2.1.6. The earlier `e23f986` bundle multiplayer report covers its preceding Stack All build, while the later release acceptance supersedes pending status for 0.3.0. These are reported manual results, not a new automated game run or a complete scenario matrix; see the [validation record](../releases/validation.md).
 
 **2026-09-19 — 当前验收：**维护者已确认 Better Stacking 0.3.0 的实机验收，当前为游戏 2.1.6 的正式发布版。此前 `e23f986` 合集联机报告对应更早的 Stack All 构建；后续发行验收已取代 0.3.0 的待测状态。这是人工测试反馈，不代表新执行了自动化游戏测试或补齐完整场景矩阵，详见[验证记录](../releases/validation.md)。
@@ -17,7 +21,7 @@ There are no user options; capacity and save representation are compatibility ru
 ./stack-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
-The build uses local game/BepInEx assemblies as read-only references, runs checks, and creates `outputs/OldMarket.StackAll-0.3.0.zip`; it does not install. All required localization source, resources, and tests are contained in `stack-all-mod/localization/`, so this Mod directory builds independently. Startup rejects an unreviewed game assembly or patch surface.
+The build uses local game/BepInEx assemblies as read-only references, runs checks, and creates `outputs/OldMarket.StackAll-0.3.1.zip`; it does not install. All required localization source, resources, and tests are contained in `stack-all-mod/localization/`, so this Mod directory builds independently. Startup rejects an unreviewed game assembly or patch surface.
 
 ## Earlier validation notes
 
@@ -36,7 +40,7 @@ In-game UI, normal save/load, and real multiplayer have not been verified for th
 ./stack-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
 ```
 
-构建只读引用本机程序集，运行检查并生成 `outputs/OldMarket.StackAll-0.3.0.zip`，不会安装。所需本地化源码、资源和测试均位于 `stack-all-mod/localization/`，因此本 Mod 目录可以独立构建。原有功能测试、IL 契约检查和 Mod 自带本地化检查均通过；早期检查时尚未验证游戏内 UI、正常保存/读取和真实多人联机，当前验收状态以上方摘要为准。首次使用前请备份重要存档。
+构建只读引用本机程序集，运行检查并生成 `outputs/OldMarket.StackAll-0.3.1.zip`，不会安装。所需本地化源码、资源和测试均位于 `stack-all-mod/localization/`，因此本 Mod 目录可以独立构建。原有功能测试、IL 契约检查和 Mod 自带本地化检查均通过；早期检查时尚未验证游戏内 UI、正常保存/读取和真实多人联机，当前验收状态以上方摘要为准。首次使用前请备份重要存档。
 
 ## SDK and automated builds / SDK 与自动构建
 

@@ -1,5 +1,9 @@
 # Development notes / 开发说明
 
+**2026-10-18 — license patch 0.1.5, in-game testing pending:** Coordinates HUD 0.1.5 differs from the released 0.1.4 only in the license (PolyForm Noncommercial 1.0.0), README/CHANGELOG text and the version number (plugin attribute, project version and version in log text); gameplay code, SDK pin (`2.1.6/r1`) and package layout are unchanged. In-game testing of the 0.1.5 build by the maintainer is still pending; the acceptance below applies to 0.1.4.
+
+**2026-10-18 — 许可补丁 0.1.5，实机测试待完成：**Coordinates HUD 0.1.5 与已发布的 0.1.4 相比，只改了许可（PolyForm Noncommercial 1.0.0）、README/CHANGELOG 文字和版本号（插件属性、项目版本及日志中的版本）；玩法代码、SDK 固定修订（`2.1.6/r1`）和安装包结构不变。维护者尚未对 0.1.5 构建进行实机测试；下方验收针对 0.1.4。
+
 **Current acceptance — 2026-09-19:** Coordinates HUD 0.1.4 is a stable release with maintainer-confirmed in-game acceptance. The earlier `e23f986` bundle also has reported local and two-computer multiplayer acceptance. These are manual reports, not new automated test runs or exhaustive scenario measurements.
 
 **当前验收 — 2026-09-19：**Coordinates HUD 0.1.4 已获维护者实机验收确认，为正式发布版；此前 `e23f986` 合集也已有本地及双实机联机确认。这是人工反馈，不代表新运行了自动检查或完成所有场景测量。
@@ -24,7 +28,7 @@ For a nondefault game location:
 ./coordinates-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
 ```
 
-The project targets `netstandard2.1` and uses local game and BepInEx assemblies as read-only references. The script builds this mod independently and creates `outputs/OldMarket.Coordinates-0.1.4.zip`. The package contains only the original DLL, README, CHANGELOG, and license text; it includes no game or loader files and installs nothing.
+The project targets `netstandard2.1` and uses local game and BepInEx assemblies as read-only references. The script builds this mod independently and creates `outputs/OldMarket.Coordinates-0.1.5.zip`. The package contains only the original DLL, README, CHANGELOG, and license text; it includes no game or loader files and installs nothing.
 
 ## Earlier validation notes
 
@@ -48,7 +52,7 @@ Other game versions may change the player or HUD APIs. Coordinate orientation ha
 ./coordinates-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
 ```
 
-项目以 `netstandard2.1` 为目标框架，将本机游戏和 BepInEx 程序集作为只读引用。脚本独立构建插件并生成 `outputs/OldMarket.Coordinates-0.1.4.zip`。压缩包只包含原创 DLL、本说明、CHANGELOG 和许可证文本，不包含游戏或加载器文件，也不会自动安装。
+项目以 `netstandard2.1` 为目标框架，将本机游戏和 BepInEx 程序集作为只读引用。脚本独立构建插件并生成 `outputs/OldMarket.Coordinates-0.1.5.zip`。压缩包只包含原创 DLL、本说明、CHANGELOG 和许可证文本，不包含游戏或加载器文件，也不会自动安装。
 
 ## 早期验证记录
 

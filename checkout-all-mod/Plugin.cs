@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace OldMarket.CheckoutAll
 {
-    [BepInPlugin(Id, "Auto Checkout", "0.1.5")]
+    [BepInPlugin(Id, "Auto Checkout", "0.1.6")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {

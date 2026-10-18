@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace OldMarket.PriceProbability
 {
-    [BepInPlugin(Id, "Smart Pricing", "0.1.2")]
+    [BepInPlugin(Id, "Smart Pricing", "0.1.3")]
     [BepInProcess("Old Market Simulator.exe")]
     public sealed class Plugin : BaseUnityPlugin
     {

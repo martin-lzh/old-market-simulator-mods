@@ -1,5 +1,31 @@
 # Validation record / 验证记录
 
+## License-only patch versions — 2026-10-18 / 仅许可补丁版本
+
+The maintainer asked for a patch version of every Mod so that its downloads carry the PolyForm Noncommercial 1.0.0 license. Against each published release the source differs only in `LICENSE` (and the Mod-private `localization/LICENSE`), README/CHANGELOG/DEVELOPMENT text, README images that are not packaged, and the version number in the project file, plugin attribute and, where present, the startup log line. SDK pins are unchanged. Automated validation, CI tooling tests, the CI build and read-only `verify-game` against the local 2.1.6 install passed on the preparing commit; package SHA256 values identify the test builds. **The maintainer's in-game testing of these builds is pending**, so the earlier acceptance below covers the previous versions only.
+
+| Mod | Released | Patch | Changes | In-game testing of the patch |
+| --- | --- | --- | --- | --- |
+| Auto Checkout | 0.1.5 | 0.1.6 | License, README/CHANGELOG, version | Pending |
+| Coordinates HUD | 0.1.4 | 0.1.5 | License, README/CHANGELOG, version | Pending |
+| Profit Insights (BepInEx and MelonLoader) | 0.5.2 | 0.5.3 | License, README/CHANGELOG, version | Pending |
+| Map & Compass | 0.2.1 | 0.2.2 | License, README/CHANGELOG, version | Pending |
+| Smart Pricing | 0.1.2 | 0.1.3 | License, README/CHANGELOG, version | Pending |
+| Better Stacking | 0.3.0 | 0.3.1 | License, README/CHANGELOG, version | Pending |
+| Tree Harvest Helper | 0.1.0 | 0.1.1 | License, README/CHANGELOG, version | Pending |
+
+维护者要求为每个 Mod 发布一个补丁版本，使下载文件附带 PolyForm Noncommercial 1.0.0 许可。与各自已发布版本相比，源码只改了 `LICENSE`（及 Mod 内部的 `localization/LICENSE`）、README/CHANGELOG/DEVELOPMENT 文字、不进入安装包的 README 图片，以及项目文件、插件属性和启动日志（如有）中的版本号；SDK 固定修订不变。准备提交已通过自动校验、CI 工具测试、CI 构建及针对本机 2.1.6 安装的只读 `verify-game`，测试构建以安装包 SHA256 识别。**维护者对这些构建的实机测试尚待完成**，下方此前的验收仅适用于上一版本。
+
+| Mod | 已发布 | 补丁 | 改动 | 补丁实机测试 |
+| --- | --- | --- | --- | --- |
+| Auto Checkout | 0.1.5 | 0.1.6 | 许可、README/CHANGELOG、版本号 | 待完成 |
+| Coordinates HUD | 0.1.4 | 0.1.5 | 许可、README/CHANGELOG、版本号 | 待完成 |
+| Profit Insights（BepInEx 与 MelonLoader） | 0.5.2 | 0.5.3 | 许可、README/CHANGELOG、版本号 | 待完成 |
+| Map & Compass | 0.2.1 | 0.2.2 | 许可、README/CHANGELOG、版本号 | 待完成 |
+| Smart Pricing | 0.1.2 | 0.1.3 | 许可、README/CHANGELOG、版本号 | 待完成 |
+| Better Stacking | 0.3.0 | 0.3.1 | 许可、README/CHANGELOG、版本号 | 待完成 |
+| Tree Harvest Helper | 0.1.0 | 0.1.1 | 许可、README/CHANGELOG、版本号 | 待完成 |
+
 ## Stable release acceptance — 2026-09-19 / 正式发布验收
 
 The maintainer confirms that in-game acceptance was already completed for Profit Insights 0.5.2, Coordinates HUD 0.1.4, Auto Checkout 0.1.5, Better Stacking 0.3.0, Smart Pricing 0.1.2, Map & Compass 0.2.0 and Tree Harvest Helper 0.1.0. These current releases are designated stable. This supersedes earlier pending-acceptance and prerelease status below; dated development evidence remains historical. This records maintainer-reported acceptance, not a new automated game run or newly measured scenario results.

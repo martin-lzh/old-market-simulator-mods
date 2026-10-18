@@ -1,5 +1,9 @@
 # Development notes / 开发说明
 
+**2026-10-18 — license patch 0.1.6, in-game testing pending:** Auto Checkout 0.1.6 differs from the released 0.1.5 only in the license (PolyForm Noncommercial 1.0.0), README/CHANGELOG text and the version number (plugin attribute and project version); gameplay code, SDK pin (`2.1.6/r1`) and package layout are unchanged. In-game testing of the 0.1.6 build by the maintainer is still pending; the acceptance below applies to 0.1.5.
+
+**2026-10-18 — 许可补丁 0.1.6，实机测试待完成：**Auto Checkout 0.1.6 与已发布的 0.1.5 相比，只改了许可（PolyForm Noncommercial 1.0.0）、README/CHANGELOG 文字和版本号（插件属性和项目版本）；玩法代码、SDK 固定修订（`2.1.6/r1`）和安装包结构不变。维护者尚未对 0.1.6 构建进行实机测试；下方验收针对 0.1.5。
+
 **2026-09-19 — current acceptance:** The maintainer confirms in-game acceptance of Auto Checkout 0.1.5; this is a stable release on game 2.1.6. The earlier `e23f986` bundle also has a two-computer multiplayer report. These are reported manual results, not a new automated game run or a complete scenario matrix; see the [validation record](../releases/validation.md).
 
 **2026-09-19 — 当前验收：**维护者已确认 Auto Checkout 0.1.5 的实机验收，当前为游戏 2.1.6 的正式发布版；此前 `e23f986` 合集另有双实机联机报告。这是人工测试反馈，不代表新执行了自动化游戏测试或补齐完整场景矩阵，详见[验证记录](../releases/validation.md)。
@@ -30,7 +34,7 @@ For a nondefault game location:
 ./checkout-all-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
 ```
 
-The plugin targets `netstandard2.1`; state tests target `net8.0`. Local game and BepInEx assemblies are read-only references. The script runs localization and checkout-state tests, builds the plugin, and creates `outputs/OldMarket.CheckoutAll-0.1.5.zip`. The package contains only the original DLL, README, CHANGELOG, and license text; it includes no game or loader files and installs nothing.
+The plugin targets `netstandard2.1`; state tests target `net8.0`. Local game and BepInEx assemblies are read-only references. The script runs localization and checkout-state tests, builds the plugin, and creates `outputs/OldMarket.CheckoutAll-0.1.6.zip`. The package contains only the original DLL, README, CHANGELOG, and license text; it includes no game or loader files and installs nothing.
 
 ## Earlier validation notes
 
@@ -56,7 +60,7 @@ Actual UI and multiplayer behavior have not yet been verified for this prereleas
 ./checkout-all-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
 ```
 
-插件以 `netstandard2.1` 为目标框架，状态测试以 `net8.0` 为目标框架。本机游戏和 BepInEx 程序集仅作为只读引用。脚本运行本地化和结账状态测试，再构建插件并生成 `outputs/OldMarket.CheckoutAll-0.1.5.zip`。压缩包只包含原创 DLL、本说明、CHANGELOG 和许可证文本，不包含游戏或加载器文件，也不会自动安装。
+插件以 `netstandard2.1` 为目标框架，状态测试以 `net8.0` 为目标框架。本机游戏和 BepInEx 程序集仅作为只读引用。脚本运行本地化和结账状态测试，再构建插件并生成 `outputs/OldMarket.CheckoutAll-0.1.6.zip`。压缩包只包含原创 DLL、本说明、CHANGELOG 和许可证文本，不包含游戏或加载器文件，也不会自动安装。
 
 ## 早期验证记录
 

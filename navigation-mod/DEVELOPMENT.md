@@ -1,5 +1,9 @@
 # Development notes / 开发说明
 
+**2026-10-18 — license patch 0.2.2, in-game testing pending:** Map & Compass 0.2.2 differs from the released 0.2.1 only in the license (PolyForm Noncommercial 1.0.0), README/CHANGELOG text and the version number (plugin attribute, project version and version in log text); gameplay code, SDK pin (`2.1.6/r7`) and package layout are unchanged. In-game testing of the 0.2.2 build by the maintainer is still pending; the acceptance below applies to 0.2.1.
+
+**2026-10-18 — 许可补丁 0.2.2，实机测试待完成：**Map & Compass 0.2.2 与已发布的 0.2.1 相比，只改了许可（PolyForm Noncommercial 1.0.0）、README/CHANGELOG 文字和版本号（插件属性、项目版本及日志中的版本）；玩法代码、SDK 固定修订（`2.1.6/r7`）和安装包结构不变。维护者尚未对 0.2.2 构建进行实机测试；下方验收针对 0.2.1。
+
 **Current acceptance — 2026-09-20:** Map & Compass 0.2.1 is a stable release. The maintainer confirmed the Rome map and Windows wheel/button zoom correction on source `0c5b952`, following the 2026-09-19 stable acceptance of 0.2.0. Earlier visual, local and two-computer multiplayer testing applies to bundle `e23f986`; later acceptance does not add an exhaustive map-edge, save/reload or host/client scenario matrix. Automated results below retain their original source scope.
 
 **当前验收 — 2026-09-20：**Map & Compass 0.2.1 为正式发布版。继 2026-09-19 对 0.2.0 的正式发布验收后，维护者确认源码 `0c5b952` 的罗马地图及 Windows 滚轮／按钮缩放修正通过本地实机验收。更早的视觉、本地及双实机联机确认仍限定于 `e23f986` 合集；后续验收不新增逐边地图、存档重载或房主／客人完整场景矩阵。下方自动验证保留原源码范围。
@@ -54,7 +58,7 @@ Requirements for the local build below: Windows, Python 3.12, .NET SDK (tests ta
 dotnet run --project navigation-mod/tests/Navigation.Tests.csproj
 ```
 
-Build output: `outputs/OldMarket.Navigation-0.2.1.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist contains the plugin DLL, README, CHANGELOG, LICENSE and the 28 map files (13 JSON and 15 PNG) named in `map-pack.json`. Local and CI builds use `tools/ci.py package` / `write_package` for identical packaging. Validation checks resource hashes, PNG integrity, map bounds and texture references; the plugin's own metadata reader validates each packaged map and its POIs. Game assemblies, loaders, saves, logs and backups remain excluded.
+Build output: `outputs/OldMarket.Navigation-0.2.2.zip`. The script runs the Release checks before building, prints the package SHA256 and installs nothing. The archive allowlist contains the plugin DLL, README, CHANGELOG, LICENSE and the 28 map files (13 JSON and 15 PNG) named in `map-pack.json`. Local and CI builds use `tools/ci.py package` / `write_package` for identical packaging. Validation checks resource hashes, PNG integrity, map bounds and texture references; the plugin's own metadata reader validates each packaged map and its POIs. Game assemblies, loaders, saves, logs and backups remain excluded.
 
 Verified for source `db03d32` on game 2.1.6 / SDK r7: version validation, all SDK builds, 64 CI tooling tests, 1291 navigation checks, 22 native-name checks and 659 Navigation installed-assembly contracts passed. Navigation real-reference and SDK builds matched after all 15 dependency hashes were verified. The repository-wide real-reference run stopped at Stack All differences; Navigation was verified independently. See the [Rome audit](maps/rome-audit.md). These are recorded results, not new checks run by this documentation update; no Unity game code was executed.
 
@@ -76,7 +80,7 @@ Automated coverage exercises coordinate conversion/rotation boundaries, marker s
 
 固定游戏 **2.1.6**、Unity Mono **2022.3.62f3** 与编译 SDK **2.1.6/r7**，其他 Mod 使用各自 `release.json` 指定的修订。CI 使用官方固定哈希的 BepInEx 5.4.23.5 引用；反射使用的存档槽、区域与扩建成员纳入 SDK 和真实程序集契约检查。无游戏环境可运行上文 `ci.py validate`、CI 工具测试和 `ci.py build`；匹配的本机安装可用 `ci.py verify-game --game-dir <path>` 核对真实引用符号 IL/资源与契约，不启动游戏。
 
-构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.2.1.zip`，打印 SHA256，不自动安装，包含 DLL、README、CHANGELOG、LICENSE 及 `map-pack.json` 列出的 28 个地图文件（13 份 JSON、15 张 PNG）。本地脚本和 CI 共用 Python 打包器；校验哈希、PNG 完整性、地图边界和贴图引用，并使用插件自身的读取器检查地图及 POI。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
+构建命令见上文，测试需要 .NET 8 SDK，并只读引用游戏的 UnityEngine.PhysicsModule.dll。构建脚本先运行 Release 检查，通过后才打包。包输出为 `outputs/OldMarket.Navigation-0.2.2.zip`，打印 SHA256，不自动安装，包含 DLL、README、CHANGELOG、LICENSE 及 `map-pack.json` 列出的 28 个地图文件（13 份 JSON、15 张 PNG）。本地脚本和 CI 共用 Python 打包器；校验哈希、PNG 完整性、地图边界和贴图引用，并使用插件自身的读取器检查地图及 POI。自动检查覆盖坐标转换/旋转边界、标记读写与隔离/异常、语言回退。编译成功不代表游戏内效果或无卡顿。
 
 源码 `db03d32` 在游戏 2.1.6 / SDK r7 基线上通过版本验证、全部 SDK 构建、64 项 CI 工具测试、1291 项导航检查、22 项原生名称检查和 659 项 Navigation 原生契约检查。核对 15 个依赖哈希后，Navigation 的真实引用与 SDK 构建一致。全仓真实引用检查先在 Stack All 差异处停止，随后独立验证 Navigation，详见[罗马审计](maps/rome-audit.md)。这是已记录结果，不是本次文档修改重新运行的检查；不执行 Unity 游戏代码。
 

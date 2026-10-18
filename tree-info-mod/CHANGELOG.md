@@ -4,10 +4,12 @@
 
 ### Unreleased
 
+### 0.1.1 — 2026-10-18
+
 - Rewrite the README in plainer language, focusing on what the Mod does and how to use it, with clearer installation, multiplayer and removal steps.
 - Links and images in the README and CHANGELOG now use full GitHub addresses, so they also work when opened from the downloaded ZIP.
 - Add an in-game screenshot of the harvest hint, and show the Nexus cover at the top of the README.
-- Refresh the development notes and link them from the README.
+- Update the guide for building the Mod yourself, linked from the README.
 - The Mod is now licensed under the PolyForm Noncommercial License 1.0.0: free to use, share and modify for non-commercial purposes; commercial use is not allowed. Versions released before this stay under MIT.
 
 ### 0.1.0 — 2026-09-18 (stable release)
@@ -30,10 +32,12 @@ In-game acceptance is confirmed by the maintainer. This version is a stable rele
 
 ### 未发布
 
+### 0.1.1 — 2026-10-18
+
 - 用更直白的语言重写 README，聚焦功能和用法，并理清安装、联机与卸载步骤。
 - README 和 CHANGELOG 中的链接与图片改用完整 GitHub 地址，从下载的 ZIP 中打开也能正常访问。
 - README 加入果树成熟提示的实机截图，并以 Nexus 封面作为首图。
-- 更新开发说明，并在 README 中提供链接。
+- 更新 README 中链接的自行构建说明。
 - 本 Mod 改用 PolyForm Noncommercial 1.0.0 许可：可免费用于非商业用途的使用、分享和修改，不允许商用。此前已发布的版本仍为 MIT 许可。
 
 ### 0.1.0 — 2026-09-18（正式发布）
