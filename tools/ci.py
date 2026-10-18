@@ -9,6 +9,7 @@ from pathlib import Path
 import re
 import subprocess
 import struct
+import urllib.request
 import xml.etree.ElementTree as ET
 import zipfile
 import zlib
