@@ -135,7 +135,7 @@ class ReleaseAdapterTests(unittest.TestCase):
         self.c["directory"].mkdir()
         for name in ("README.md", "LICENSE"):
             (self.c["directory"] / name).write_text(name)
-        (self.c["directory"] / "CHANGELOG.md").write_text("## English\n### Unreleased\n\n### 1.0.0 — 2026-10-18\nRelease\n")
+        (self.c["directory"] / "CHANGELOG.md").write_text("## English\n### Unreleased\n\n### 1.0.0 — 2026-10-18\nRelease\n", encoding="utf-8")
         self.output = self.root / "outputs/ci/coordinates"
         self.output.mkdir(parents=True)
         self.package = self.output / ci.archive_name(self.c, "BepInEx")
@@ -168,7 +168,7 @@ class ReleaseAdapterTests(unittest.TestCase):
         self.assertIn("Old Market Simulator 2.1.6", mod.summary)
 
     def test_unreleased_entries_are_detected(self):
-        (self.c["directory"] / "CHANGELOG.md").write_text("## English\n### Unreleased\n- Pending\n### 1.0.0 — x\n")
+        (self.c["directory"] / "CHANGELOG.md").write_text("## English\n### Unreleased\n- Pending\n### 1.0.0 — x\n", encoding="utf-8")
         self.assertTrue(ci.release_mods("owner/repo")[0].unreleased)
 
     def test_build_evidence_has_no_validation_disclaimer(self):
