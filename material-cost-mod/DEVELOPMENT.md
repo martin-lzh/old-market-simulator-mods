@@ -1,8 +1,8 @@
 # Development notes / 开发说明
 
-**2026-10-18 — license patch 0.5.3, in-game testing pending:** Profit Insights 0.5.3 differs from the released 0.5.2 only in the license (PolyForm Noncommercial 1.0.0), README/CHANGELOG text and the version number (plugin attributes and project version); gameplay code, SDK pin (`2.1.6/r1`) and package layout are unchanged. The MelonLoader edition carries the same change. In-game testing of the 0.5.3 build by the maintainer is still pending; the acceptance below applies to 0.5.2.
+**2026-10-18 — license patch 0.5.3, in-game testing waived:** Profit Insights 0.5.3 differs from the released 0.5.2 only in the license (PolyForm Noncommercial 1.0.0), README/CHANGELOG text and the version number (plugin attributes and project version); gameplay code, SDK pin (`2.1.6/r1`) and package layout are unchanged. The MelonLoader edition carries the same change. In-game testing of the 0.5.3 build was waived by the maintainer on 2026-10-19 because gameplay code is unchanged; the acceptance below applies to 0.5.2.
 
-**2026-10-18 — 许可补丁 0.5.3，实机测试待完成：**Profit Insights 0.5.3 与已发布的 0.5.2 相比，只改了许可（PolyForm Noncommercial 1.0.0）、README/CHANGELOG 文字和版本号（插件属性和项目版本）；玩法代码、SDK 固定修订（`2.1.6/r1`）和安装包结构不变。MelonLoader 版同样如此。维护者尚未对 0.5.3 构建进行实机测试；下方验收针对 0.5.2。
+**2026-10-18 — 许可补丁 0.5.3，实机测试已免除：**Profit Insights 0.5.3 与已发布的 0.5.2 相比，只改了许可（PolyForm Noncommercial 1.0.0）、README/CHANGELOG 文字和版本号（插件属性和项目版本）；玩法代码、SDK 固定修订（`2.1.6/r1`）和安装包结构不变。MelonLoader 版同样如此。维护者于 2026-10-19 以玩法代码未改为由免除 0.5.3 构建的实机测试；下方验收针对 0.5.2。
 
 **Current acceptance — 2026-09-19:** Profit Insights 0.5.2 is a stable release with maintainer-confirmed in-game acceptance. The earlier `e23f986` bundle also has reported local and two-computer multiplayer acceptance. These are manual reports, not new automated test runs or exhaustive scenario measurements.
 

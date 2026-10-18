@@ -1,8 +1,8 @@
 # Development notes / 开发说明
 
-**2026-10-18 — license patch 0.2.2, in-game testing pending:** Map & Compass 0.2.2 differs from the released 0.2.1 only in the license (PolyForm Noncommercial 1.0.0), README/CHANGELOG text and the version number (plugin attribute, project version and version in log text); gameplay code, SDK pin (`2.1.6/r7`) and package layout are unchanged. In-game testing of the 0.2.2 build by the maintainer is still pending; the acceptance below applies to 0.2.1.
+**2026-10-18 — license patch 0.2.2, in-game testing waived:** Map & Compass 0.2.2 differs from the released 0.2.1 only in the license (PolyForm Noncommercial 1.0.0), README/CHANGELOG text and the version number (plugin attribute, project version and version in log text); gameplay code, SDK pin (`2.1.6/r7`) and package layout are unchanged. In-game testing of the 0.2.2 build was waived by the maintainer on 2026-10-19 because gameplay code is unchanged; the acceptance below applies to 0.2.1.
 
-**2026-10-18 — 许可补丁 0.2.2，实机测试待完成：**Map & Compass 0.2.2 与已发布的 0.2.1 相比，只改了许可（PolyForm Noncommercial 1.0.0）、README/CHANGELOG 文字和版本号（插件属性、项目版本及日志中的版本）；玩法代码、SDK 固定修订（`2.1.6/r7`）和安装包结构不变。维护者尚未对 0.2.2 构建进行实机测试；下方验收针对 0.2.1。
+**2026-10-18 — 许可补丁 0.2.2，实机测试已免除：**Map & Compass 0.2.2 与已发布的 0.2.1 相比，只改了许可（PolyForm Noncommercial 1.0.0）、README/CHANGELOG 文字和版本号（插件属性、项目版本及日志中的版本）；玩法代码、SDK 固定修订（`2.1.6/r7`）和安装包结构不变。维护者于 2026-10-19 以玩法代码未改为由免除 0.2.2 构建的实机测试；下方验收针对 0.2.1。
 
 **Current acceptance — 2026-09-20:** Map & Compass 0.2.1 is a stable release. The maintainer confirmed the Rome map and Windows wheel/button zoom correction on source `0c5b952`, following the 2026-09-19 stable acceptance of 0.2.0. Earlier visual, local and two-computer multiplayer testing applies to bundle `e23f986`; later acceptance does not add an exhaustive map-edge, save/reload or host/client scenario matrix. Automated results below retain their original source scope.
 

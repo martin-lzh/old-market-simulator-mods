@@ -108,26 +108,26 @@ On 2026-10-18 the maintainer decided to switch the project's original code, docu
 
 #### License-only patch versions — 2026-10-18 / 仅许可补丁版本
 
-On the maintainer's instruction every Mod has a new patch version so that its downloads carry the PolyForm license. Compared with each published release, these versions change only the license, README/CHANGELOG text and the version number; gameplay code, SDK pins and package layout are unchanged, and all are marked stable in `release.json`. **In-game testing of these builds by the maintainer is still pending**; they ship only after that testing and the maintainer's merge into `main`. Details: [validation record](releases/validation.md).
+On the maintainer's instruction every Mod has a new patch version so that its downloads carry the PolyForm license. Compared with each published release, these versions change only the license, README/CHANGELOG text and the version number; gameplay code, SDK pins and package layout are unchanged, and all are marked stable in `release.json`. **The maintainer waived in-game testing of these builds on 2026-10-19 because gameplay code is unchanged**; they ship after the maintainer's merge into `main`. Details: [validation record](releases/validation.md).
 
 | Mod | Released | Patch | Changes | In-game testing of the patch |
 | --- | --- | --- | --- | --- |
-| Auto Checkout | 0.1.5 | 0.1.6 | License, README/CHANGELOG, version | Pending |
-| Coordinates HUD | 0.1.4 | 0.1.5 | License, README/CHANGELOG, version | Pending |
-| Profit Insights (BepInEx and MelonLoader) | 0.5.2 | 0.5.3 | License, README/CHANGELOG, version | Pending |
-| Map & Compass | 0.2.1 | 0.2.2 | License, README/CHANGELOG, version | Pending |
-| Smart Pricing | 0.1.2 | 0.1.3 | License, README/CHANGELOG, version | Pending |
-| Better Stacking | 0.3.0 | 0.3.1 | License, README/CHANGELOG, version | Pending |
-| Tree Harvest Helper | 0.1.0 | 0.1.1 | License, README/CHANGELOG, version | Pending |
+| Auto Checkout | 0.1.5 | 0.1.6 | License, README/CHANGELOG, version | Waived by maintainer |
+| Coordinates HUD | 0.1.4 | 0.1.5 | License, README/CHANGELOG, version | Waived by maintainer |
+| Profit Insights (BepInEx and MelonLoader) | 0.5.2 | 0.5.3 | License, README/CHANGELOG, version | Waived by maintainer |
+| Map & Compass | 0.2.1 | 0.2.2 | License, README/CHANGELOG, version | Waived by maintainer |
+| Smart Pricing | 0.1.2 | 0.1.3 | License, README/CHANGELOG, version | Waived by maintainer |
+| Better Stacking | 0.3.0 | 0.3.1 | License, README/CHANGELOG, version | Waived by maintainer |
+| Tree Harvest Helper | 0.1.0 | 0.1.1 | License, README/CHANGELOG, version | Waived by maintainer |
 
 按维护者要求，每个 Mod 新增一个补丁版本，使下载文件附带 PolyForm 许可。与各自已发布版本相比，这些版本只改了许可、README/CHANGELOG 文字和版本号；玩法代码、SDK 固定修订和安装包结构不变，`release.json` 均标记为正式发布。**维护者尚未对这些构建进行实机测试**；只有完成测试并由维护者合并到 `main` 后才会发布。详见[验证记录](releases/validation.md)。
 
 | Mod | 已发布 | 补丁 | 改动 | 补丁实机测试 |
 | --- | --- | --- | --- | --- |
-| Auto Checkout | 0.1.5 | 0.1.6 | 许可、README/CHANGELOG、版本号 | 待完成 |
-| Coordinates HUD | 0.1.4 | 0.1.5 | 许可、README/CHANGELOG、版本号 | 待完成 |
-| Profit Insights（BepInEx 与 MelonLoader） | 0.5.2 | 0.5.3 | 许可、README/CHANGELOG、版本号 | 待完成 |
-| Map & Compass | 0.2.1 | 0.2.2 | 许可、README/CHANGELOG、版本号 | 待完成 |
-| Smart Pricing | 0.1.2 | 0.1.3 | 许可、README/CHANGELOG、版本号 | 待完成 |
-| Better Stacking | 0.3.0 | 0.3.1 | 许可、README/CHANGELOG、版本号 | 待完成 |
-| Tree Harvest Helper | 0.1.0 | 0.1.1 | 许可、README/CHANGELOG、版本号 | 待完成 |
+| Auto Checkout | 0.1.5 | 0.1.6 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Coordinates HUD | 0.1.4 | 0.1.5 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Profit Insights（BepInEx 与 MelonLoader） | 0.5.2 | 0.5.3 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Map & Compass | 0.2.1 | 0.2.2 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Smart Pricing | 0.1.2 | 0.1.3 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Better Stacking | 0.3.0 | 0.3.1 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
+| Tree Harvest Helper | 0.1.0 | 0.1.1 | 许可、README/CHANGELOG、版本号 | 维护者免除 |
