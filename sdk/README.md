@@ -26,7 +26,7 @@
 
 每个 Mod 在自己的 `release.json` 中固定 SDK，例如 `"sdk": "2.1.6/r1"`。不自动选择“最新”SDK。目录 `sdk/<游戏版本>/r<修订号>/` 一旦合并就保留原样；同一游戏版本补充接口时新建 `r2`，游戏升级时新建对应游戏版本目录。旧 Mod 发布、SDK 和 CHANGELOG 都保留，下载前仍须确认存档、加载器与联机要求。
 
-`manifest.json` 记录游戏版本、源码提交、游戏程序集 SHA256 和接口快照 SHA256；`api.json` 另记录各修订实际涉及的依赖程序集身份与本机文件哈希。SDK 没有重新实现游戏；类型和成员标识用于兼容。原创工具遵循根目录 MIT 许可证，游戏、Unity 和加载器的名称及 API 标识仍属于各自权利人，本项目不声称授予其实现或资源的再分发许可。
+`manifest.json` 记录游戏版本、源码提交、游戏程序集 SHA256 和接口快照 SHA256；`api.json` 另记录各修订实际涉及的依赖程序集身份与本机文件哈希。SDK 没有重新实现游戏；类型和成员标识用于兼容。原创工具遵循根目录 PolyForm Noncommercial 1.0.0 许可，游戏、Unity 和加载器的名称及 API 标识仍属于各自权利人，本项目不声称授予其实现或资源的再分发许可。
 
 ### 无游戏文件的构建
 
@@ -79,7 +79,7 @@ The table records game 2.1.6 on Windows x64 / Unity Mono 2022.3.62f3. Material C
 
 Each Mod pins an SDK in its own `release.json`, for example `"sdk": "2.1.6/r1"`. There is no implicit latest SDK. Merged `sdk/<game-version>/r<revision>/` snapshots are immutable. Add a new revision to extend the same game baseline, or a new game-version directory after a game update. Preserve old SDKs, Mod releases and CHANGELOG records; users must still check save, loader and multiplayer requirements.
 
-The manifest records game version, source commit, game assembly hash and API snapshot hash. API metadata records the identities and local hashes of each revision’s required dependency assemblies. Original tools use the root MIT license. Game, Unity and loader names/API identifiers belong to their respective owners; this project does not grant redistribution rights to their implementations or resources.
+The manifest records game version, source commit, game assembly hash and API snapshot hash. API metadata records the identities and local hashes of each revision’s required dependency assemblies. Original tools use the root PolyForm Noncommercial License 1.0.0. Game, Unity and loader names/API identifiers belong to their respective owners; this project does not grant redistribution rights to their implementations or resources.
 
 ### Building and updating
 

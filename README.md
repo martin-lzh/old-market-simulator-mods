@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <strong>Windows</strong> · <strong>7 Mods</strong> · <a href="LICENSE">MIT License</a>
+  <strong>Windows</strong> · <strong>7 Mods</strong> · <a href="LICENSE">PolyForm Noncommercial 1.0.0</a>
 </p>
 
 <p align="center">
@@ -62,7 +62,7 @@ Also running a restaurant? Explore [Parisian Bistro Simulator Mods](https://gith
 
 ### About the project
 
-Made by Zhaohan Liu as an unofficial fan project. Code and documentation use the [MIT License](LICENSE). If you share it in a guide or video, a link back is appreciated.
+Made by Zhaohan Liu as an unofficial fan project. License: PolyForm Noncommercial License 1.0.0, see [LICENSE](LICENSE). Free for non-commercial use; commercial use is not allowed. If you share it in a guide or video, a link back is appreciated.
 
 Want to contribute? Start with [CONTRIBUTING](CONTRIBUTING.md), the [development guide](DEVELOPMENT.md) and the [validation record](releases/validation.md). Please follow the [Code of conduct](CODE_OF_CONDUCT.md).
 
@@ -111,6 +111,6 @@ Want to contribute? Start with [CONTRIBUTING](CONTRIBUTING.md), the [development
 
 ### 关于项目
 
-作者：Zhaohan Liu，非官方玩家作品。代码和文档使用 [MIT 许可证](LICENSE)。如果在攻略或视频里分享，欢迎附上项目链接。
+作者：Zhaohan Liu，非官方玩家作品。许可：PolyForm Noncommercial 1.0.0 许可，见 [LICENSE](LICENSE)。可免费用于非商业用途，不允许商用。如果在攻略或视频里分享，欢迎附上项目链接。
 
 想参与开发，可以从[贡献指南](CONTRIBUTING.md)、[开发说明](DEVELOPMENT.md)和[验证记录](releases/validation.md)开始。交流时请遵守[行为准则](CODE_OF_CONDUCT.md)。

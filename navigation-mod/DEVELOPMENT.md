@@ -82,7 +82,7 @@ Automated coverage exercises coordinate conversion/rotation boundaries, marker s
 
 维护者已确认 `e23f986` 的本地实机和双实机联机测试，但不涵盖后续地图及缩放改动。尚未提供所有语言/分辨率、断线与区域旅行、各解锁阶段、量化帧耗时及房主/客户端组合的逐项记录，因此不将本次确认扩大为全部场景覆盖。详见[验证记录](../releases/validation.md)。
 
-原创代码、文档、UI 装饰素材及随包地图的原创部分采用 [MIT](LICENSE)，版本记录见 [CHANGELOG](CHANGELOG.md)。许可不覆盖游戏组件、原始资源、商标或其他 Mod。未打包游戏或第三方运行库。
+原创代码、文档、UI 装饰素材及随包地图的原创部分采用 [PolyForm Noncommercial 1.0.0 许可](LICENSE)，版本记录见 [CHANGELOG](CHANGELOG.md)。许可不覆盖游戏组件、原始资源、商标或其他 Mod。未打包游戏或第三方运行库。
 
 Phosphor POI icons: upstream MIT notices are included in [LICENSE](LICENSE); sources and regeneration instructions are included alongside the icon assets. No game artwork is included in these icon sources.
 

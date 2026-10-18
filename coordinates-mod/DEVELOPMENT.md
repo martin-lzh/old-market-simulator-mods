@@ -24,7 +24,7 @@ For a nondefault game location:
 ./coordinates-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
 ```
 
-The project targets `netstandard2.1` and uses local game and BepInEx assemblies as read-only references. The script builds this mod independently and creates `outputs/OldMarket.Coordinates-0.1.4.zip`. The package contains only the original DLL, README, CHANGELOG, and MIT license; it includes no game or loader files and installs nothing.
+The project targets `netstandard2.1` and uses local game and BepInEx assemblies as read-only references. The script builds this mod independently and creates `outputs/OldMarket.Coordinates-0.1.4.zip`. The package contains only the original DLL, README, CHANGELOG, and license text; it includes no game or loader files and installs nothing.
 
 ## Earlier validation notes
 
@@ -48,7 +48,7 @@ Other game versions may change the player or HUD APIs. Coordinate orientation ha
 ./coordinates-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
 ```
 
-项目以 `netstandard2.1` 为目标框架，将本机游戏和 BepInEx 程序集作为只读引用。脚本独立构建插件并生成 `outputs/OldMarket.Coordinates-0.1.4.zip`。压缩包只包含原创 DLL、本说明、CHANGELOG 和 MIT 许可证，不包含游戏或加载器文件，也不会自动安装。
+项目以 `netstandard2.1` 为目标框架，将本机游戏和 BepInEx 程序集作为只读引用。脚本独立构建插件并生成 `outputs/OldMarket.Coordinates-0.1.4.zip`。压缩包只包含原创 DLL、本说明、CHANGELOG 和许可证文本，不包含游戏或加载器文件，也不会自动安装。
 
 ## 早期验证记录
 

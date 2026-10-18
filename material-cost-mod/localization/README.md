@@ -16,7 +16,7 @@ Its 11 suites verify the exact locale set, key and placeholder parity, formattin
 
 Check layout, glyph coverage, wrapping and label fit at different resolutions and UI scales in game. Corrections from native speakers are welcome.
 
-These original localization sources and translations use the [MIT License](LICENSE), Copyright (c) 2026 Zhaohan Liu. The game's native string tables are neither copied nor redistributed.
+These original localization sources and translations use the [PolyForm Noncommercial License 1.0.0](LICENSE), Copyright (c) 2026 Zhaohan Liu. The game's native string tables are neither copied nor redistributed.
 
 ---
 
@@ -38,4 +38,4 @@ dotnet run --project tests/Localization.Tests.csproj
 
 布局、字体字形、换行，以及不同分辨率和 UI 缩放下的文字容纳请在游戏中检查。欢迎母语使用者提交译文修正。
 
-这些原创本地化源码和译文采用 [MIT License](LICENSE)，Copyright (c) 2026 Zhaohan Liu。游戏原生词表不会被复制或再分发。
+这些原创本地化源码和译文采用 [PolyForm Noncommercial 1.0.0 许可](LICENSE)，Copyright (c) 2026 Zhaohan Liu。游戏原生词表不会被复制或再分发。

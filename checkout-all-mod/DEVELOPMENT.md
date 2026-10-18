@@ -30,7 +30,7 @@ For a nondefault game location:
 ./checkout-all-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
 ```
 
-The plugin targets `netstandard2.1`; state tests target `net8.0`. Local game and BepInEx assemblies are read-only references. The script runs localization and checkout-state tests, builds the plugin, and creates `outputs/OldMarket.CheckoutAll-0.1.5.zip`. The package contains only the original DLL, README, CHANGELOG, and MIT license; it includes no game or loader files and installs nothing.
+The plugin targets `netstandard2.1`; state tests target `net8.0`. Local game and BepInEx assemblies are read-only references. The script runs localization and checkout-state tests, builds the plugin, and creates `outputs/OldMarket.CheckoutAll-0.1.5.zip`. The package contains only the original DLL, README, CHANGELOG, and license text; it includes no game or loader files and installs nothing.
 
 ## Earlier validation notes
 
@@ -56,7 +56,7 @@ Actual UI and multiplayer behavior have not yet been verified for this prereleas
 ./checkout-all-mod/build.ps1 -GameDir 'D:\Path\To\Old Market Simulator'
 ```
 
-插件以 `netstandard2.1` 为目标框架，状态测试以 `net8.0` 为目标框架。本机游戏和 BepInEx 程序集仅作为只读引用。脚本运行本地化和结账状态测试，再构建插件并生成 `outputs/OldMarket.CheckoutAll-0.1.5.zip`。压缩包只包含原创 DLL、本说明、CHANGELOG 和 MIT 许可证，不包含游戏或加载器文件，也不会自动安装。
+插件以 `netstandard2.1` 为目标框架，状态测试以 `net8.0` 为目标框架。本机游戏和 BepInEx 程序集仅作为只读引用。脚本运行本地化和结账状态测试，再构建插件并生成 `outputs/OldMarket.CheckoutAll-0.1.5.zip`。压缩包只包含原创 DLL、本说明、CHANGELOG 和许可证文本，不包含游戏或加载器文件，也不会自动安装。
 
 ## 早期验证记录
 

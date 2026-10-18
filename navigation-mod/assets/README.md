@@ -1,8 +1,8 @@
 # Navigation artwork / 导航美术资源
 
-These three original UI textures were generated with the built-in Image Gen tool on 2026-09-13 from text prompts, without game screenshots or game assets as image inputs. They are embedded in the DLL and covered by this project's MIT license. Labels, coordinates, markers, directions and controls are rendered by code with the native game font, not painted into these textures.
+These three original UI textures were generated with the built-in Image Gen tool on 2026-09-13 from text prompts, without game screenshots or game assets as image inputs. They are embedded in the DLL and covered by this project's PolyForm Noncommercial License 1.0.0. Labels, coordinates, markers, directions and controls are rendered by code with the native game font, not painted into these textures.
 
-这三张原创 UI 纹理由内置 Image Gen 工具于 2026-09-13 按文字提示生成，没有输入游戏截图或游戏资源。纹理嵌入 DLL，适用本项目 MIT 许可。文字、坐标、标记、方向与控件由程序使用游戏字体绘制，不烘焙进图片。
+这三张原创 UI 纹理由内置 Image Gen 工具于 2026-09-13 按文字提示生成，没有输入游戏截图或游戏资源。纹理嵌入 DLL，适用本项目 PolyForm Noncommercial 1.0.0 许可。文字、坐标、标记、方向与控件由程序使用游戏字体绘制，不烘焙进图片。
 
 | File / 文件 | Purpose / 用途 | Format / 格式 |
 | --- | --- | --- |

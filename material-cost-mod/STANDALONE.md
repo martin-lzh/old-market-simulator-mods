@@ -35,7 +35,7 @@ The local build allowlist copies these components from the verified BepInEx 5.4.
 - [MonoMod 22.1.29.1](https://github.com/MonoMod/MonoMod), MIT
 - [Mono.Cecil 0.10.4](https://github.com/jbevain/cecil/tree/0.10.4), MIT
 
-The package allowlist excludes game assemblies, assets, saves, decompiled code, BepInEx framework files, and MelonLoader files. Third-party components retain their licenses. Original project code and documentation use the [MIT License](LICENSE), Copyright (c) 2026 Zhaohan Liu.
+The package allowlist excludes game assemblies, assets, saves, decompiled code, BepInEx framework files, and MelonLoader files. Third-party components retain their licenses. Original project code and documentation use the [PolyForm Noncommercial License 1.0.0](LICENSE), Copyright (c) 2026 Zhaohan Liu.
 
 ## Validation status
 
@@ -82,7 +82,7 @@ Runtime initialization, UI layout, locale switching, old-save behavior, multipla
 - [MonoMod 22.1.29.1](https://github.com/MonoMod/MonoMod)，MIT
 - [Mono.Cecil 0.10.4](https://github.com/jbevain/cecil/tree/0.10.4)，MIT
 
-安装包白名单排除游戏程序集、资源、存档、反编译代码、BepInEx 框架文件和 MelonLoader 文件。各第三方组件继续适用各自许可证。项目原创代码和文档采用 [MIT License](LICENSE)，Copyright (c) 2026 Zhaohan Liu。
+安装包白名单排除游戏程序集、资源、存档、反编译代码、BepInEx 框架文件和 MelonLoader 文件。各第三方组件继续适用各自许可证。项目原创代码和文档采用 [PolyForm Noncommercial 1.0.0 许可](LICENSE)，Copyright (c) 2026 Zhaohan Liu。
 
 ## 验证状态
 

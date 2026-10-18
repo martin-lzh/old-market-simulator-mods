@@ -99,3 +99,9 @@ ZIPs appear in `outputs/`. Each mod with translatable UI runs its own localizati
 可以克隆仓库，也可以单独取出所需 Mod 的目录；各 Mod 独立构建，不依赖其他 Mod 或仓库级本地化工程。需要 PowerShell、支持 .NET 8 工程的 .NET SDK、本机游戏和相应加载器的引用程序集。构建只读取游戏文件，产物写入项目 `work/`、`outputs/` 和构建缓存目录，不自动安装；维护者明确要求时，代理可在游戏关闭后把指定构建复制到 Mod 目录，只替换同一 Mod 的旧文件，并报告替换内容和 SHA256。
 
 在仓库根目录运行前面英文部分的构建命令，将示例游戏路径换为你的安装位置。ZIP 输出至 `outputs/`。有可翻译界面的 Mod 执行自己的本地化及功能测试；坐标没有可翻译文案，不依赖本地化工程。编译和测试通过不等于游戏内界面、保存或联机已验证。独立标签、发布说明和产物核验流程见[版本发布规则](releases/README.md)。
+
+### License / 许可
+
+On 2026-10-18 the maintainer decided to switch the project's original code, documentation and assets from the MIT License to the [PolyForm Noncommercial License 1.0.0](LICENSE) for all future versions. The root `LICENSE` and every Mod's `LICENSE` (including the Mod-private `localization/LICENSE` files) now carry the PolyForm text with the required copyright notice, and Mod packages ship that file. Versions released before this change, and their tags and GitHub releases, stay under MIT. Third-party files keep their own licenses: the Phosphor icons in `navigation-mod/assets/phosphor/` keep their MIT `LICENSE`, and their notice stays appended to `navigation-mod/LICENSE`; components listed in `material-cost-mod/STANDALONE.md` keep their upstream licenses.
+
+维护者于 2026-10-18 决定：项目原创代码、文档和素材自后续版本起由 MIT 许可改为 [PolyForm Noncommercial 1.0.0 许可](LICENSE)。根目录 `LICENSE` 和各 Mod 的 `LICENSE`（包括 Mod 内部的 `localization/LICENSE`）现为附带版权声明的 PolyForm 原文，Mod 安装包随附该文件。此前已发布的版本及其标签和 GitHub Release 仍为 MIT 许可。第三方文件保留各自许可证：`navigation-mod/assets/phosphor/` 中的 Phosphor 图标保留其 MIT `LICENSE`，其声明继续附在 `navigation-mod/LICENSE` 末尾；`material-cost-mod/STANDALONE.md` 列出的组件继续适用上游许可证。

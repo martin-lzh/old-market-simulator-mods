@@ -10,6 +10,7 @@
 - Links and images in the README and CHANGELOG now use full GitHub addresses, so they also work when opened from the downloaded ZIP.
 - Add in-game screenshots of the goods/container counts and the hold-to-repeat and G controls, and show the Nexus cover at the top of the README.
 - Refresh the development and translation notes and link them from the README.
+- The Mod is now licensed under the PolyForm Noncommercial License 1.0.0: free to use, share and modify for non-commercial purposes; commercial use is not allowed. Versions released before this stay under MIT.
 
 ### 0.3.0 — 2026-09-18 (stable release)
 
@@ -52,6 +53,7 @@ Older development versions mentioned in the README are not verified downloadable
 - README 和 CHANGELOG 中的链接与图片改用完整 GitHub 地址，从下载的 ZIP 中打开也能正常访问。
 - README 加入商品／容器数量、长按连续操作及 G 键的实机截图，并以 Nexus 封面作为首图。
 - 更新开发与翻译说明，并在 README 中提供链接。
+- 本 Mod 改用 PolyForm Noncommercial 1.0.0 许可：可免费用于非商业用途的使用、分享和修改，不允许商用。此前已发布的版本仍为 MIT 许可。
 
 ### 0.3.0 — 2026-09-18（正式发布）
 

@@ -18,7 +18,7 @@ Check layout, glyph coverage, line wrapping and live language switching in game.
 
 ## License
 
-Copyright © 2026 Zhaohan Liu. The original files in this directory are available under the [MIT License](LICENSE). Old Market Simulator translations and other game assets are read at runtime and are not included here.
+Copyright © 2026 Zhaohan Liu. The original files in this directory are available under the [PolyForm Noncommercial License 1.0.0](LICENSE). Old Market Simulator translations and other game assets are read at runtime and are not included here.
 
 ## 中文
 
@@ -28,4 +28,4 @@ Copyright © 2026 Zhaohan Liu. The original files in this directory are availabl
 
 资源和辅助源码直接嵌入 `OldMarket.CheckoutAll.dll`，安装时不需要额外语言文件或共享 DLL。在 `checkout-all-mod/` 运行上方命令可执行独立 .NET 8 检查。测试不读取游戏文件；布局、字形、换行和实时切换请在游戏中检查。欢迎母语使用者提交译文修正。
 
-本目录原创文件版权归 Zhaohan Liu 所有，并采用 [MIT License](LICENSE)。游戏原生翻译及其他游戏资源只在运行时读取，不包含在本目录中。
+本目录原创文件版权归 Zhaohan Liu 所有，并采用 [PolyForm Noncommercial 1.0.0 许可](LICENSE)。游戏原生翻译及其他游戏资源只在运行时读取，不包含在本目录中。
