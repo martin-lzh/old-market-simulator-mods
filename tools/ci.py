@@ -14,9 +14,18 @@ import xml.etree.ElementTree as ET
 import zipfile
 import zlib
 
+import changes
 import modrelease
 
 ROOT = Path(__file__).resolve().parents[1]
+# Files that never enter a package and never affect validation or tests; CI skips
+# build and test when a change touches only these (tools/changes.py). Mod assets
+# stay core because projects can embed them (Navigation embeds assets/*.png), and
+# each Mod's README, CHANGELOG and LICENSE are packaged.
+NON_CORE = (
+    "README.md", "AGENTS.md", "DEVELOPMENT.md", "CODE_OF_CONDUCT.md", "CONTRIBUTING.md",
+    "SECURITY.md", "SUPPORT.md", "docs/**", "assets/**", "releases/**", "*-mod/DEVELOPMENT.md",
+)
 MODS = {
     "material-cost": "MaterialCost", "coordinates": "Coordinates",
     "checkout-all": "CheckoutAll", "stack-all": "StackAll",
@@ -416,11 +425,13 @@ def publish(repository, commit, api=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=["validate", "build", "package", "release-plan", "publish", "verify-game", "export-sdk"])
+    parser.add_argument("command", choices=["validate", "build", "package", "changes", "release-plan", "publish", "verify-game", "export-sdk"])
     parser.add_argument("--dll")
     parser.add_argument("--output")
     parser.add_argument("--variant", default="BepInEx")
-    parser.add_argument("--base")
+    parser.add_argument("--base", help="validate: check SDK immutability since this commit; changes: commit to compare from")
+    parser.add_argument("--head", help="changes: commit to compare to")
+    parser.add_argument("--merge-base", action="store_true", help="changes: compare from the merge base (pull requests)")
     parser.add_argument("--repository")
     parser.add_argument("--commit")
     parser.add_argument("--game-dir")
@@ -448,10 +459,13 @@ if __name__ == "__main__":
         local_verify(args.game_dir)
     elif args.command == "export-sdk":
         export_sdk(args.game_dir, args.game_version, args.revision, args.supplemental)
+    elif args.command == "changes":
+        changes.main(ROOT, NON_CORE, args.base, args.head, args.merge_base)
     elif args.command == "release-plan":
         if not args.repository:
             parser.error("release-plan requires --repository")
-        modrelease.check(modrelease.GitHub(args.repository), release_mods(args.repository))
+        decisions = modrelease.check(modrelease.GitHub(args.repository), release_mods(args.repository))
+        changes.write_outputs({"release": any(d.action in ("publish", "promote") for d in decisions)})
     else:
         if not args.repository or not args.commit:
             parser.error("publish requires --repository and --commit")

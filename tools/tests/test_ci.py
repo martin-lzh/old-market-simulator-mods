@@ -1,6 +1,7 @@
 import importlib.util
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -190,6 +191,40 @@ class ReleaseAdapterTests(unittest.TestCase):
     def test_publish_refuses_other_checkout(self):
         with self.assertRaises(ValueError):
             ci.publish("owner/repo", "b" * 40, api=object())
+
+
+class ChangeTests(unittest.TestCase):
+    """CI skips build and test only for files that never reach a package, validation or tests."""
+
+    def test_examples(self):
+        core = ["navigation-mod/Navigation.csproj", "navigation-mod/Plugin.cs", "navigation-mod/README.md",
+                "navigation-mod/CHANGELOG.md", "navigation-mod/LICENSE", "navigation-mod/release.json",
+                "navigation-mod/map-pack.json", "navigation-mod/maps/town.png", "navigation-mod/assets/parchment.png",
+                "navigation-mod/assets/cover.png", "navigation-mod/assets/README.md", "navigation-mod/tests/Program.cs",
+                "material-cost-mod/localization/Catalog.cs", "sdk/2.1.6/r1/api.json", "sdk/README.md",
+                "tools/ci.py", "tools/Sdk/Sdk.csproj", "tools/tests/test_ci.py", ".github/workflows/mods.yml",
+                ".github/ISSUE_TEMPLATE/bug.yml", "Directory.Build.props", ".gitattributes", ".gitignore", "LICENSE",
+                "docs.cs", "new-mod/New.csproj"]
+        non_core = ["README.md", "AGENTS.md", "DEVELOPMENT.md", "CODE_OF_CONDUCT.md", "CONTRIBUTING.md",
+                    "SECURITY.md", "SUPPORT.md", "docs/game-build-monitor.md", "docs/nexus/covers/prompts.json",
+                    "assets/cover.png", "releases/validation.md", "releases/approvals/navigation-v0.2.1.json",
+                    "navigation-mod/DEVELOPMENT.md"]
+        for path in core:
+            with self.subTest(core=path):
+                self.assertTrue(ci.changes.is_core(path, ci.NON_CORE))
+        for path in non_core:
+            with self.subTest(non_core=path):
+                self.assertFalse(ci.changes.is_core(path, ci.NON_CORE))
+
+    def test_mod_and_build_files_are_core(self):
+        root = Path(__file__).resolve().parents[2]
+        names = subprocess.check_output(["git", "ls-files", "-z"], cwd=root).decode("utf-8").split("\0")
+        for name in filter(None, names):
+            path = PurePosixPath(name)
+            mod_file = path.parts[0].endswith("-mod") and path.name != "DEVELOPMENT.md"
+            if mod_file or path.parts[0] in {"sdk", "tools", ".github"} or path.suffix in {".cs", ".csproj", ".props"}:
+                with self.subTest(name=name):
+                    self.assertTrue(ci.changes.is_core(name, ci.NON_CORE))
 
 
 if __name__ == "__main__":

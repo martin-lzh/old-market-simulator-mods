@@ -196,9 +196,9 @@ See [security reporting](SECURITY.md#english) for vulnerabilities and [support](
 
 ## CI and SDK contributions / CI 与 SDK 贡献
 
-CI runs on pushes to `dev`/`main`, PRs targeting `main`, and manual dispatch. The syntax job parses tracked Python, PowerShell, JSON and XML/MSBuild files without executing scripts; ignored dependencies and build outputs are excluded. GitHub Actions YAML, expressions and job dependencies are checked with [actionlint](https://github.com/rhysd/actionlint) 1.7.12 (SHA256-verified download). C# compilation remains covered by the SDK build job. Both jobs must pass before publication. No formatter is applied.
+CI runs on PRs targeting `main`, pushes to `main` and manual dispatch; pushes to `dev` alone don't start it. The syntax job runs on Linux and parses tracked Python, PowerShell, JSON and XML/MSBuild files without executing scripts; ignored dependencies and build outputs are excluded. When files under `.github/` change, or on a manual run, GitHub Actions YAML, expressions and job dependencies are checked with [actionlint](https://github.com/rhysd/actionlint) 1.7.12 (SHA256-verified download). C# compilation remains covered by the Windows SDK build job, which is skipped when a change touches only documentation that never enters a package (see [when CI runs](releases/README.md#when-ci-runs)). Both jobs must pass, or be skipped on purpose, before publication; the **CI result** check sums this up. No formatter is applied.
 
-CI 在推送到 `dev`/`main`、面向 `main` 的 PR 及手动触发时运行。语法任务只解析 Git 已跟踪的 Python、PowerShell、JSON 和 XML/MSBuild 文件，不执行脚本；忽略目录中的依赖和构建产物不参与检查。GitHub Actions YAML、表达式和任务依赖使用 actionlint 1.7.12 检查，下载包校验 SHA256。C# 继续由 SDK 构建任务编译检查；发布前两项任务都必须通过，不自动格式化源码。
+CI 在面向 `main` 的 PR、推送到 `main` 及手动触发时运行；只推送到 `dev` 不会触发。语法任务在 Linux 上运行，只解析 Git 已跟踪的 Python、PowerShell、JSON 和 XML/MSBuild 文件，不执行脚本；忽略目录中的依赖和构建产物不参与检查。`.github/` 下的文件有改动或手动触发时，使用 actionlint 1.7.12 检查 GitHub Actions YAML、表达式和任务依赖，下载包校验 SHA256。C# 继续由 Windows 上的 SDK 构建任务编译检查；改动只涉及不会进入安装包的文档时跳过该任务（见[CI 何时运行](releases/README.md#when-ci-runs)）。发布前两项任务都必须通过或按规则跳过，**CI result** 检查汇总结果。不自动格式化源码。
 
 Local syntax checks require Python 3.12, Git and PowerShell 7 (`pwsh` on PATH). Stage new files first so they are included. Run actionlint 1.7.12 separately for workflows:
 
