@@ -100,7 +100,8 @@ def query_steam(steamcmd, config):
     executable = steamcmd.resolve(strict=True)
     command = [str(executable), "+login", "anonymous", "+app_info_update", "1",
                "+app_info_print", config["appid"], "+quit"]
-    for attempt in range(2):
+    for attempt in range(1, 3):
+        result = None
         try:
             result = subprocess.run(command, cwd=executable.parent, capture_output=True,
                                     timeout=180, check=True)
@@ -109,10 +110,25 @@ def query_steam(steamcmd, config):
                 raise ValueError("SteamCMD did not confirm an anonymous connection; cached data is insufficient")
             return extract_snapshot(output, config)
         except (subprocess.SubprocessError, ValueError) as error:
-            if attempt:
+            # A failed run carries its own output; a run that exited 0 but was rejected keeps it in result.
+            report_query_failure(attempt, error, result or error)
+            if attempt == 2:
                 raise RuntimeError("SteamCMD query failed; no monitoring state was advanced") from error
             time.sleep(5)
     raise AssertionError("Unreachable")
+
+
+def report_query_failure(attempt, error, process, lines=25):
+    """Log SteamCMD's exit status and output tail, the only evidence of why Steam refused a query."""
+    if isinstance(error, subprocess.TimeoutExpired):
+        status = f"timed out after {error.timeout:g} s"
+    else:
+        status = f"exit code {process.returncode}"
+    log = "".join((stream or b"").decode("utf-8", errors="replace")
+                  for stream in (process.stdout, process.stderr))
+    tail = [line.rstrip() for line in log.splitlines() if line.strip()][-lines:]
+    print(f"SteamCMD attempt {attempt} failed ({status}): {error}", file=sys.stderr)
+    print("\n".join(f"  | {line}" for line in tail) or "  | (no output)", file=sys.stderr)
 
 
 def previous_build(github, config):

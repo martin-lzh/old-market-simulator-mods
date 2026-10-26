@@ -1,3 +1,5 @@
+from contextlib import redirect_stderr
+import io
 from pathlib import Path
 import subprocess
 import sys
@@ -93,7 +95,8 @@ class AppInfoTests(unittest.TestCase):
     def test_query_retries_a_failed_connection_and_uses_anonymous_metadata_only(self, run, sleep):
         run.side_effect = [subprocess.TimeoutExpired("steamcmd", 180),
                            subprocess.CompletedProcess([], 0, app_info().encode())]
-        result = monitor.query_steam(Path(__file__), config())
+        with redirect_stderr(io.StringIO()):
+            result = monitor.query_steam(Path(__file__), config())
         self.assertEqual(result, config()["initialBuild"])
         self.assertEqual(run.call_args.args[0][1:],
                          ["+login", "anonymous", "+app_info_update", "1", "+app_info_print", "2878420", "+quit"])
@@ -103,7 +106,7 @@ class AppInfoTests(unittest.TestCase):
     @patch.object(monitor.subprocess, "run")
     def test_query_fails_after_bounded_retries(self, run, sleep):
         run.return_value = subprocess.CompletedProcess([], 0, b"No app info")
-        with self.assertRaises(RuntimeError):
+        with redirect_stderr(io.StringIO()), self.assertRaises(RuntimeError):
             monitor.query_steam(Path(__file__), config())
         self.assertEqual(run.call_count, 2)
 
@@ -112,8 +115,27 @@ class AppInfoTests(unittest.TestCase):
     def test_cached_metadata_after_failed_login_is_not_accepted(self, run, sleep):
         cached = app_info().replace("Connecting anonymously to Steam Public...OK", "Login FAILED")
         run.return_value = subprocess.CompletedProcess([], 0, cached.encode())
-        with self.assertRaises(RuntimeError):
+        stderr = io.StringIO()
+        with redirect_stderr(stderr), self.assertRaises(RuntimeError):
             monitor.query_steam(Path(__file__), config())
+        self.assertIn("SteamCMD attempt 2 failed (exit code 0): SteamCMD did not confirm", stderr.getvalue())
+
+    @patch.object(monitor.time, "sleep")
+    @patch.object(monitor.subprocess, "run")
+    def test_failed_queries_log_exit_status_and_output_tail(self, run, sleep):
+        log = "".join(f"line {n}\n" for n in range(40)).encode()
+        run.side_effect = [subprocess.CalledProcessError(8, "steamcmd", log, b"Steam error\n"),
+                           subprocess.TimeoutExpired("steamcmd", 180, b"Connecting anonymously to Steam Public...")]
+        stderr = io.StringIO()
+        with redirect_stderr(stderr), self.assertRaises(RuntimeError):
+            monitor.query_steam(Path(__file__), config())
+        text = stderr.getvalue()
+        self.assertIn("SteamCMD attempt 1 failed (exit code 8)", text)
+        self.assertIn("  | line 39\n  | Steam error\n", text)
+        self.assertIn("  | line 16\n", text)
+        self.assertNotIn("  | line 15\n", text)
+        self.assertIn("SteamCMD attempt 2 failed (timed out after 180 s)", text)
+        self.assertIn("  | Connecting anonymously to Steam Public...\n", text)
 
 
 class NotificationTests(unittest.TestCase):
