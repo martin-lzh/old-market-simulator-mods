@@ -1,4 +1,11 @@
+from contextlib import redirect_stderr
+import io
 from pathlib import Path
+from contextlib import redirect_stdout, redirect_stderr
+import io
+import json
+import os
+import tempfile
 import subprocess
 import sys
 import unittest
@@ -93,7 +100,8 @@ class AppInfoTests(unittest.TestCase):
     def test_query_retries_a_failed_connection_and_uses_anonymous_metadata_only(self, run, sleep):
         run.side_effect = [subprocess.TimeoutExpired("steamcmd", 180),
                            subprocess.CompletedProcess([], 0, app_info().encode())]
-        result = monitor.query_steam(Path(__file__), config())
+        with redirect_stderr(io.StringIO()):
+            result = monitor.query_steam(Path(__file__), config())
         self.assertEqual(result, config()["initialBuild"])
         self.assertEqual(run.call_args.args[0][1:],
                          ["+login", "anonymous", "+app_info_update", "1", "+app_info_print", "2878420", "+quit"])
@@ -103,7 +111,7 @@ class AppInfoTests(unittest.TestCase):
     @patch.object(monitor.subprocess, "run")
     def test_query_fails_after_bounded_retries(self, run, sleep):
         run.return_value = subprocess.CompletedProcess([], 0, b"No app info")
-        with self.assertRaises(RuntimeError):
+        with redirect_stderr(io.StringIO()), self.assertRaises(RuntimeError):
             monitor.query_steam(Path(__file__), config())
         self.assertEqual(run.call_count, 2)
 
@@ -112,8 +120,27 @@ class AppInfoTests(unittest.TestCase):
     def test_cached_metadata_after_failed_login_is_not_accepted(self, run, sleep):
         cached = app_info().replace("Connecting anonymously to Steam Public...OK", "Login FAILED")
         run.return_value = subprocess.CompletedProcess([], 0, cached.encode())
-        with self.assertRaises(RuntimeError):
+        stderr = io.StringIO()
+        with redirect_stderr(stderr), self.assertRaises(RuntimeError):
             monitor.query_steam(Path(__file__), config())
+        self.assertIn("SteamCMD attempt 2 failed (exit code 0): SteamCMD did not confirm", stderr.getvalue())
+
+    @patch.object(monitor.time, "sleep")
+    @patch.object(monitor.subprocess, "run")
+    def test_failed_queries_log_exit_status_and_output_tail(self, run, sleep):
+        log = "".join(f"line {n}\n" for n in range(40)).encode()
+        run.side_effect = [subprocess.CalledProcessError(8, "steamcmd", log, b"Steam error\n"),
+                           subprocess.TimeoutExpired("steamcmd", 180, b"Connecting anonymously to Steam Public...")]
+        stderr = io.StringIO()
+        with redirect_stderr(stderr), self.assertRaises(RuntimeError):
+            monitor.query_steam(Path(__file__), config())
+        text = stderr.getvalue()
+        self.assertIn("SteamCMD attempt 1 failed (exit code 8)", text)
+        self.assertIn("  | line 39\n  | Steam error\n", text)
+        self.assertIn("  | line 16\n", text)
+        self.assertNotIn("  | line 15\n", text)
+        self.assertIn("SteamCMD attempt 2 failed (timed out after 180 s)", text)
+        self.assertIn("  | Connecting anonymously to Steam Public...\n", text)
 
 
 class NotificationTests(unittest.TestCase):
@@ -206,6 +233,56 @@ class NotificationTests(unittest.TestCase):
             monitor.check_build(snapshot(), config(), notify=True)
         with self.assertRaises(ValueError):
             monitor.check_build(dict(buildid="1"), config(), History(), True)
+
+
+class ConfigurationAndCliTests(unittest.TestCase):
+    def test_wrong_game_or_repository_baseline_is_rejected(self):
+        for key, value in (("appid", "3058360"), ("name", "Parisian Bistro Simulator"),
+                           ("repository", "someone/another-repository"), ("branch", "beta")):
+            with self.subTest(key=key), tempfile.TemporaryDirectory() as folder:
+                path = Path(folder) / "baseline.json"
+                settings = dict(config(), **{key: value})
+                path.write_text(json.dumps(settings), encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    monitor.load_baseline(path)
+
+    @patch.object(monitor, "GitHub")
+    @patch.object(monitor, "query_steam")
+    def test_notify_refuses_non_main_or_foreign_actions_before_network_calls(self, query, github):
+        valid = {"GITHUB_ACTIONS": "true", "GITHUB_REF": "refs/heads/main",
+                 "GITHUB_REPOSITORY": config()["repository"]}
+        argv = ["monitor", "--steamcmd", __file__, "--repository", config()["repository"], "--notify"]
+        for env in ({}, dict(valid, GITHUB_REF="refs/heads/dev"),
+                    dict(valid, GITHUB_REPOSITORY="someone/fork"),
+                    dict(valid, GITHUB_REF="refs/pull/7/merge")):
+            with self.subTest(env=env), patch.dict(os.environ, env, clear=True), \
+                    patch.object(sys, "argv", argv), redirect_stderr(io.StringIO()):
+                with self.assertRaises(SystemExit) as error:
+                    monitor.main()
+                self.assertEqual(error.exception.code, 2)
+        query.assert_not_called()
+        github.assert_not_called()
+
+    @patch.object(monitor, "GitHub")
+    @patch.object(monitor, "query_steam")
+    def test_main_cli_notifies_and_read_only_cli_does_not(self, query, github):
+        query.return_value = snapshot()
+        env = {"GITHUB_ACTIONS": "true", "GITHUB_REF": "refs/heads/main",
+               "GITHUB_REPOSITORY": config()["repository"]}
+        argv = ["monitor", "--steamcmd", __file__, "--repository", config()["repository"]]
+        for notify in (False, True):
+            history = History()
+            github.return_value = history
+            output = io.StringIO()
+            with self.subTest(notify=notify), patch.dict(os.environ, env, clear=True), \
+                    patch.object(sys, "argv", argv + (["--notify"] if notify else [])), redirect_stdout(output):
+                self.assertEqual(monitor.main(), 0)
+            self.assertEqual(len(history.posts), int(notify))
+            self.assertEqual(json.loads(output.getvalue())["notified"], notify)
+            if notify:
+                self.assertIn("Old Market Simulator", history.posts[0]["body"])
+                self.assertIn("Harmony", history.posts[0]["body"])
+                self.assertNotIn("Unreal", history.posts[0]["body"])
 
 
 if __name__ == "__main__":

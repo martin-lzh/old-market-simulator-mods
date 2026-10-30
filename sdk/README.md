@@ -1,72 +1,5 @@
 # Mod compilation SDK / Mod 编译 SDK
 
-## 中文
-
-本 SDK 让 GitHub 托管 Runner 在没有安装游戏的情况下编译 Mod。使用标准 .NET 编译器；`api.json` 保存 Mod 用到的类型、字段、方法签名、泛型约束、枚举值及必要的编译元数据。没有原始游戏 DLL、游戏方法实现、资源、存档或反编译源码。
-
-`tools/Sdk` 用 Mono.Cecil 将声明重建为带 `ReferenceAssemblyAttribute` 的编译引用，所有非抽象方法都是工具生成的 `throw null` 占位体。SDK 不是游戏运行库，不能运行游戏，也不能安装到游戏或放进 Mod 下载包。发布脚本打包原创 Mod DLL、README、CHANGELOG 和 LICENSE；Navigation 另包含明确列入清单并校验哈希的地图 JSON/PNG。加载器从官方固定版本下载并校验 SHA256。
-
-### 版本与支持范围
-
-| 游戏版本 | SDK | 平台 | 说明 |
-| --- | --- | --- | --- |
-| 2.1.6 | [2.1.6/r1](2.1.6/r1/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | 原有五个 Mod 的六种发行构建；实机确认按源码记录，见下方说明 |
-| 2.1.6 | [2.1.6/r2](2.1.6/r2/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.0 固定此修订；增加地图 UI、物理投影、输入、区域与反射依赖，实机验收未完成 |
-| 2.1.6 | [2.1.6/r3](2.1.6/r3/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.1 固定此修订；增加原生 HUD 容器、补间端点与跨画布屏幕坐标接口，实机验收未完成 |
-| 2.1.6 | [2.1.6/r4](2.1.6/r4/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.2 固定此修订；增加原生按键提示预制体与布局接口，实机验收未完成 |
-| 2.1.6 | [2.1.6/r5](2.1.6/r5/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.3 固定此修订；增加输入框焦点、原生提示子控件与独立布局接口，实机验收未完成 |
-| 2.1.6 | [2.1.6/r6](2.1.6/r6/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.4 固定此修订；增加地图控件查找与输入编辑结束接口，实机验收未完成 |
-| 2.1.6 | [2.1.6/r7](2.1.6/r7/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.2.1 继续固定此修订；罗马主城范围与滚轮缩放修复不增加接口，已通过本地实机验收。此前测试见 [验证记录](../releases/validation.md) |
-| 2.1.6 | [2.1.6/r8](2.1.6/r8/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Tree Info 0.1.0 首次公开版本固定此修订；增加树木状态、季节和交互反射声明，实机验收待完成 |
-| 2.1.6 | [2.1.6/r9](2.1.6/r9/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 0.2.2 未发布空盒操作，增加原生输入门控和当前格 Harmony 字段；实机验收待完成 |
-| 2.1.6 | [2.1.6/r10](2.1.6/r10/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 原生按钮行及键帽提示，保留变暗透明度；实机验收待完成 |
-| 2.1.6 | [2.1.6/r11](2.1.6/r11/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 原生字体长按说明及行排序；当前固定修订，本地 UI 已确认，后续联机场景待确认 |
-
-表中 r2–r6 的验收描述保留各快照建立时的历史状态。`e23f986` 合集已获视觉、本地实机与双实机联机确认；大门4修正已获本地确认，其余 Navigation 地图、POI 与缩放场景仍按记录区分测试范围，详见[验证记录](../releases/validation.md)。
-
-每个 Mod 在自己的 `release.json` 中固定 SDK，例如 `"sdk": "2.1.6/r1"`。不自动选择“最新”SDK。目录 `sdk/<游戏版本>/r<修订号>/` 一旦合并就保留原样；同一游戏版本补充接口时新建 `r2`，游戏升级时新建对应游戏版本目录。旧 Mod 发布、SDK 和 CHANGELOG 都保留，下载前仍须确认存档、加载器与联机要求。
-
-`manifest.json` 记录游戏版本、源码提交、游戏程序集 SHA256 和接口快照 SHA256；`api.json` 另记录各修订实际涉及的依赖程序集身份与本机文件哈希。SDK 没有重新实现游戏；类型和成员标识用于兼容。原创工具遵循根目录 PolyForm Noncommercial 1.0.0 许可，游戏、Unity 和加载器的名称及 API 标识仍属于各自权利人，本项目不声称授予其实现或资源的再分发许可。
-
-### 无游戏文件的构建
-
-需要 Python 3.12、.NET 8 和 .NET 10 SDK；自动化环境使用 Windows。从仓库根目录运行：
-
-```powershell
-python tools/ci.py validate
-python -m unittest discover -s tools/tests -v
-python tools/ci.py build
-```
-
-产物在 `outputs/ci/<mod>/`；引用在被忽略的 `work/ci-sdk/`。构建显式指定所有引用目录，不退回本机游戏目录。新增 API 调用若超出当前 SDK，会编译失败；先使用真实游戏引用核对，再增加 SDK 修订，不用随意填空的接口绕过错误。
-
-### 游戏更新后的维护
-
-1. 在本机合法取得新版游戏，只读检查版本和接口。用真实游戏引用调整 Mod；记录未验证的玩法、UI、存档及网络变化。先提交源码，SDK 导出要求工作区干净，以记录准确源码提交。
-2. 准备 `supplemental.json`：列出只出现在 `nameof` 中、不会生成成员引用的游戏方法。可在 `work/` 下复制旧文件再调整。反射方法同样列出；反射字段使用显式 `field:字段名`，如 `field:currentSlot` 和 `field:activeExpansions`。跨程序集类型使用 `程序集简单名::类型全名`；编译内联的数值/布尔常量使用 `constant:字段名`，显式审核真实值，拒绝字符串或非字面量。所有名称必须来自真实程序集。导出工具自动从已注册七个 Mod 的八个发行构建读取其他依赖声明，不读取游戏方法体或资源。
-3. 用实际确认的游戏版本导出新目录。例如同一 2.1.6 基线新增接口时：
-
-```powershell
-python tools/ci.py export-sdk --game-dir 'F:\SteamLibrary\steamapps\common\Old Market Simulator' --game-version 2.1.6 --revision 2 --supplemental sdk/2.1.6/r1/supplemental.json
-```
-
-4. 审查声明差异和哈希，将需要迁移的 Mod 的 `release.json` 指向新 SDK。更新双语 CHANGELOG 的 Unreleased / 未发布条目（包含游戏/SDK 版本）、README 兼容与风险说明、总 README 支持版本和本表；只有维护者明确要求推进版本时才升级 Mod 版本并将相应内容移入编号条目。未迁移的 Mod 保留自己的旧 SDK。
-5. 重新执行 SDK 构建，再在持有匹配游戏版本的电脑执行：
-
-```powershell
-python tools/ci.py verify-game --game-dir 'F:\SteamLibrary\steamapps\common\Old Market Simulator'
-```
-
-该命令核对原始依赖哈希、以真实引用编译并对比 Mod 的符号化 IL 和嵌入资源，随后运行现有堆叠/定价游戏方法契约检查。不执行游戏、不安装 DLL、不写存档。当前命令验证全部 Mod；如果它们选择不同游戏基线，需分别保留相应游戏安装并按各 Mod 构建/契约检查命令验证，不能把哈希失败跳过。
-
-6. 游戏更新可能保持接口不变却改变行为。重新审查 Harmony 目标、RPC、存档及 IL 检查；完成与风险匹配的实机测试。CI 编译通过不等于通过这些检查。未完成实机验收时保留 `"prerelease": true`。提交到 `dev`，通过 PR 合并 `main`。
-
-SDK 随维护者确认的游戏版本更新，不会监测到一次游戏更新就自动覆盖已验证的接口快照。
-
-2026-09-13：r2 从源码提交 `135eb89` 导出，共 15 个程序集、255 个类型、641 个方法、469 个字段，仅含声明。原 r1 全部类型/方法/字段保留，原 13 个程序集身份与哈希不变；r1 文件及旧 Mod pin 未修改。六个 Mod 的七个构建均通过 SDK 编译与真实引用符号 IL/嵌入资源比对；Navigation 511 项逻辑/本地化检查、318 项只读原生契约、22 项 CI 工具测试通过。实机验收未执行，Navigation 保持预发布。
-
-2026-09-13：r3 从源码提交 `b038bf0` 导出，共 15 个程序集、257 个类型、652 个方法、476 个字段，仅含声明。全部 r2 声明及 15 个程序集身份/哈希保留；新增 `Screen` 的 UnityEngine 类型转发与真实组件一致。仅 Navigation 0.1.1 改用 r3，旧快照与其他 Mod pin 不变。左下默认布局使用相同 API；最终版本通过七个构建的 SDK/真实引用符号 IL 和资源比对、564 项导航检查、400 项只读原生契约及 22 项 CI 工具测试。实机 UI 与动画验收未执行。
-
 ## English
 
 This SDK lets GitHub-hosted runners compile Mods without a game installation. The standard .NET compiler consumes references reconstructed from `api.json`: the types, fields, method signatures, generic constraints, enum values and compiler metadata used by these Mods. No original game DLLs, game method implementations, resources, saves or decompiled source are included.
@@ -146,3 +79,70 @@ Current release assignment (2026-09-18): Stack All 0.3.0 / r11, Navigation 0.2.0
 Navigation 0.2.1 (2026-09-20) retains game 2.1.6 / SDK r7. The Rome main-town crop, shared wheel/button zoom factor and existing README artwork changes require no new game APIs or SDK snapshot. Local feedback confirms the map update. Read-only inspection of the actual Input System assembly found that the scroll-range setter only stores its value and the UI callback divides by a constant one; Windows therefore still requires 120-unit conversion regardless of that setting. The correction removes the unreliable settings dependency and adds native contract checks. Local in-game acceptance of the map and corrected wheel input is confirmed on build `0c5b952`; 0.2.1 was published as a stable release on 2026-09-20. Historical release evidence remains unchanged.
 
 Navigation 0.2.1（2026-09-20）保持游戏 2.1.6 / SDK r7。罗马主城范围、滚轮与按钮共用缩放倍率及现有 README 配图改动不增加游戏接口或 SDK 快照。地图更新已获本地实机确认；只读核对实际 Input System 程序集发现滚轮范围 setter 仅存储枚举，UI 回调除数固定为 1，因此 Windows 无论此设置为何值都仍需进行 120 单位换算。本次修正移除对该设置的依赖并增加原生契约检查。构建 `0c5b952` 的地图及滚轮修正已通过本地实机验收，0.2.1 已于 2026-09-20 正式发布；历史发行证据保留原样。
+
+## 中文
+
+本 SDK 让 GitHub 托管 Runner 在没有安装游戏的情况下编译 Mod。使用标准 .NET 编译器；`api.json` 保存 Mod 用到的类型、字段、方法签名、泛型约束、枚举值及必要的编译元数据。没有原始游戏 DLL、游戏方法实现、资源、存档或反编译源码。
+
+`tools/Sdk` 用 Mono.Cecil 将声明重建为带 `ReferenceAssemblyAttribute` 的编译引用，所有非抽象方法都是工具生成的 `throw null` 占位体。SDK 不是游戏运行库，不能运行游戏，也不能安装到游戏或放进 Mod 下载包。发布脚本打包原创 Mod DLL、README、CHANGELOG 和 LICENSE；Navigation 另包含明确列入清单并校验哈希的地图 JSON/PNG。加载器从官方固定版本下载并校验 SHA256。
+
+### 版本与支持范围
+
+| 游戏版本 | SDK | 平台 | 说明 |
+| --- | --- | --- | --- |
+| 2.1.6 | [2.1.6/r1](2.1.6/r1/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | 原有五个 Mod 的六种发行构建；实机确认按源码记录，见下方说明 |
+| 2.1.6 | [2.1.6/r2](2.1.6/r2/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.0 固定此修订；增加地图 UI、物理投影、输入、区域与反射依赖，实机验收未完成 |
+| 2.1.6 | [2.1.6/r3](2.1.6/r3/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.1 固定此修订；增加原生 HUD 容器、补间端点与跨画布屏幕坐标接口，实机验收未完成 |
+| 2.1.6 | [2.1.6/r4](2.1.6/r4/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.2 固定此修订；增加原生按键提示预制体与布局接口，实机验收未完成 |
+| 2.1.6 | [2.1.6/r5](2.1.6/r5/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.3 固定此修订；增加输入框焦点、原生提示子控件与独立布局接口，实机验收未完成 |
+| 2.1.6 | [2.1.6/r6](2.1.6/r6/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.1.4 固定此修订；增加地图控件查找与输入编辑结束接口，实机验收未完成 |
+| 2.1.6 | [2.1.6/r7](2.1.6/r7/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Navigation 0.2.1 继续固定此修订；罗马主城范围与滚轮缩放修复不增加接口，已通过本地实机验收。此前测试见 [验证记录](../releases/validation.md) |
+| 2.1.6 | [2.1.6/r8](2.1.6/r8/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Tree Info 0.1.0 首次公开版本固定此修订；增加树木状态、季节和交互反射声明，实机验收待完成 |
+| 2.1.6 | [2.1.6/r9](2.1.6/r9/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 0.2.2 未发布空盒操作，增加原生输入门控和当前格 Harmony 字段；实机验收待完成 |
+| 2.1.6 | [2.1.6/r10](2.1.6/r10/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 原生按钮行及键帽提示，保留变暗透明度；实机验收待完成 |
+| 2.1.6 | [2.1.6/r11](2.1.6/r11/manifest.json) | Windows x64，Unity Mono 2022.3.62f3 | Stack All 原生字体长按说明及行排序；当前固定修订，本地 UI 已确认，后续联机场景待确认 |
+
+表中 r2–r6 的验收描述保留各快照建立时的历史状态。`e23f986` 合集已获视觉、本地实机与双实机联机确认；大门4修正已获本地确认，其余 Navigation 地图、POI 与缩放场景仍按记录区分测试范围，详见[验证记录](../releases/validation.md)。
+
+每个 Mod 在自己的 `release.json` 中固定 SDK，例如 `"sdk": "2.1.6/r1"`。不自动选择“最新”SDK。目录 `sdk/<游戏版本>/r<修订号>/` 一旦合并就保留原样；同一游戏版本补充接口时新建 `r2`，游戏升级时新建对应游戏版本目录。旧 Mod 发布、SDK 和 CHANGELOG 都保留，下载前仍须确认存档、加载器与联机要求。
+
+`manifest.json` 记录游戏版本、源码提交、游戏程序集 SHA256 和接口快照 SHA256；`api.json` 另记录各修订实际涉及的依赖程序集身份与本机文件哈希。SDK 没有重新实现游戏；类型和成员标识用于兼容。原创工具遵循根目录 PolyForm Noncommercial 1.0.0 许可，游戏、Unity 和加载器的名称及 API 标识仍属于各自权利人，本项目不声称授予其实现或资源的再分发许可。
+
+### 无游戏文件的构建
+
+需要 Python 3.12、.NET 8 和 .NET 10 SDK；自动化环境使用 Windows。从仓库根目录运行：
+
+```powershell
+python tools/ci.py validate
+python -m unittest discover -s tools/tests -v
+python tools/ci.py build
+```
+
+产物在 `outputs/ci/<mod>/`；引用在被忽略的 `work/ci-sdk/`。构建显式指定所有引用目录，不退回本机游戏目录。新增 API 调用若超出当前 SDK，会编译失败；先使用真实游戏引用核对，再增加 SDK 修订，不用随意填空的接口绕过错误。
+
+### 游戏更新后的维护
+
+1. 在本机合法取得新版游戏，只读检查版本和接口。用真实游戏引用调整 Mod；记录未验证的玩法、UI、存档及网络变化。先提交源码，SDK 导出要求工作区干净，以记录准确源码提交。
+2. 准备 `supplemental.json`：列出只出现在 `nameof` 中、不会生成成员引用的游戏方法。可在 `work/` 下复制旧文件再调整。反射方法同样列出；反射字段使用显式 `field:字段名`，如 `field:currentSlot` 和 `field:activeExpansions`。跨程序集类型使用 `程序集简单名::类型全名`；编译内联的数值/布尔常量使用 `constant:字段名`，显式审核真实值，拒绝字符串或非字面量。所有名称必须来自真实程序集。导出工具自动从已注册七个 Mod 的八个发行构建读取其他依赖声明，不读取游戏方法体或资源。
+3. 用实际确认的游戏版本导出新目录。例如同一 2.1.6 基线新增接口时：
+
+```powershell
+python tools/ci.py export-sdk --game-dir 'F:\SteamLibrary\steamapps\common\Old Market Simulator' --game-version 2.1.6 --revision 2 --supplemental sdk/2.1.6/r1/supplemental.json
+```
+
+4. 审查声明差异和哈希，将需要迁移的 Mod 的 `release.json` 指向新 SDK。更新双语 CHANGELOG 的 Unreleased / 未发布条目（包含游戏/SDK 版本）、README 兼容与风险说明、总 README 支持版本和本表；只有维护者明确要求推进版本时才升级 Mod 版本并将相应内容移入编号条目。未迁移的 Mod 保留自己的旧 SDK。
+5. 重新执行 SDK 构建，再在持有匹配游戏版本的电脑执行：
+
+```powershell
+python tools/ci.py verify-game --game-dir 'F:\SteamLibrary\steamapps\common\Old Market Simulator'
+```
+
+该命令核对原始依赖哈希、以真实引用编译并对比 Mod 的符号化 IL 和嵌入资源，随后运行现有堆叠/定价游戏方法契约检查。不执行游戏、不安装 DLL、不写存档。当前命令验证全部 Mod；如果它们选择不同游戏基线，需分别保留相应游戏安装并按各 Mod 构建/契约检查命令验证，不能把哈希失败跳过。
+
+6. 游戏更新可能保持接口不变却改变行为。重新审查 Harmony 目标、RPC、存档及 IL 检查；完成与风险匹配的实机测试。CI 编译通过不等于通过这些检查。未完成实机验收时保留 `"prerelease": true`。提交到 `dev`，通过 PR 合并 `main`。
+
+SDK 随维护者确认的游戏版本更新，不会监测到一次游戏更新就自动覆盖已验证的接口快照。
+
+2026-09-13：r2 从源码提交 `135eb89` 导出，共 15 个程序集、255 个类型、641 个方法、469 个字段，仅含声明。原 r1 全部类型/方法/字段保留，原 13 个程序集身份与哈希不变；r1 文件及旧 Mod pin 未修改。六个 Mod 的七个构建均通过 SDK 编译与真实引用符号 IL/嵌入资源比对；Navigation 511 项逻辑/本地化检查、318 项只读原生契约、22 项 CI 工具测试通过。实机验收未执行，Navigation 保持预发布。
+
+2026-09-13：r3 从源码提交 `b038bf0` 导出，共 15 个程序集、257 个类型、652 个方法、476 个字段，仅含声明。全部 r2 声明及 15 个程序集身份/哈希保留；新增 `Screen` 的 UnityEngine 类型转发与真实组件一致。仅 Navigation 0.1.1 改用 r3，旧快照与其他 Mod pin 不变。左下默认布局使用相同 API；最终版本通过七个构建的 SDK/真实引用符号 IL 和资源比对、564 项导航检查、400 项只读原生契约及 22 项 CI 工具测试。实机 UI 与动画验收未执行。

@@ -1,5 +1,21 @@
 # Steam game build monitoring / Steam 游戏构建监测
 
+## English
+
+The [Steam game build monitor](../.github/workflows/game-build-monitor.yml) queries Valve directly using anonymous SteamCMD for Old Market Simulator (`2878420`), selecting `depots.branches.public.buildid`. It needs no Steam API key or account credentials and never downloads, updates or launches the game. The Valve HTTPS bootstrap is checked for a valid Valve Authenticode signature before execution, then SteamCMD updates itself. No third-party metadata service is used.
+
+After merging into default branch `main`, checks run at 00:23, 06:23, 12:23 and 18:23 UTC, with manual dispatch available in Actions. Relevant pushes on `dev` perform a live read-only check. One concurrency group serializes checks. Only `main` can create notifications, using the automatically supplied `GITHUB_TOKEN` with `contents: read` and `issues: write`; no extra Secrets are needed.
+
+The [initial baseline](../tools/game-build-baseline.json) was queried directly on 2026-09-21: build `25102733`, branch updated 2026-09-03 13:30:20 UTC. The local game assembly hash matched the repository's game 2.1.6 SDK baseline. Build IDs are not game version numbers or proof of compatibility.
+
+A changed Build ID creates a bilingual compatibility issue with old/new builds, timestamps and verification tasks. Any different ID counts, including rollbacks and later returns to previously observed builds. Timestamp-only changes and other branches do not notify. The most recently created monitor issue authored by `github-actions[bot]`, including closed issues, is durable state. Preserve these issues and their hidden metadata; deleting them loses history. With no history, the committed initial baseline is used. No cache or Git writeback is involved. Unchanged builds produce no issue writes.
+
+Local usage is shown above. Without `--repository`, the script only queries Steam and compares the committed baseline. With the repository and `GH_TOKEN` environment variable, it also reads issue history; it remains read-only unless `--notify` is supplied. Leave notification writes to the serialized `main` workflow so author identity remains consistent. Never place tokens in command arguments or repository files.
+
+Steam query failures, malformed/missing data and GitHub read failures fail the run without advancing state. Issue creation is not blindly retried; subsequent runs recover a successful but uncertain creation from history. GitHub delivery depends on the user's Issues and Actions notification settings.
+
+Follow [SDK maintenance](../sdk/README.md) before claiming compatibility. Monitoring changes no SDK pins, Mod versions, release authorizations or local installations, and cannot publish a Mod. Polling can miss changes that revert between checks. GitHub schedules may be delayed, and public repositories with 60 days of inactivity have schedules disabled; re-enable the workflow in Actions when needed. See [GitHub schedule documentation](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
+
 ## 中文
 
 [Steam game build monitor](../.github/workflows/game-build-monitor.yml) 使用 Valve SteamCMD 匿名查询 Old Market Simulator（App ID `2878420`）的 `depots.branches.public.buildid`。不需要 Steam API Key、账号密码或购买凭据，也不下载、更新、启动游戏。
@@ -32,19 +48,3 @@ python tools/game_build_monitor.py --steamcmd work/steamcmd-monitor/steamcmd.exe
 提醒只表示构建变化。按 [SDK 维护流程](../sdk/README.md#游戏更新后的维护)确认游戏版本、哈希、接口和行为后再决定是否适配。此工作流不修改 SDK、Mod 版本、发布授权或游戏安装；不会自动发布 Mod。
 
 每六小时轮询可能遗漏两次检查之间发生且已恢复的短暂切换；SteamCMD 也不是历史构建档案。GitHub 定时任务可能延迟，公开仓库连续 60 天没有活动时会自动禁用定时任务，届时需在 Actions 页面重新启用。见 [GitHub schedule 规则](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)。
-
-## English
-
-The [Steam game build monitor](../.github/workflows/game-build-monitor.yml) queries Valve directly using anonymous SteamCMD for Old Market Simulator (`2878420`), selecting `depots.branches.public.buildid`. It needs no Steam API key or account credentials and never downloads, updates or launches the game. The Valve HTTPS bootstrap is checked for a valid Valve Authenticode signature before execution, then SteamCMD updates itself. No third-party metadata service is used.
-
-After merging into default branch `main`, checks run at 00:23, 06:23, 12:23 and 18:23 UTC, with manual dispatch available in Actions. Relevant pushes on `dev` perform a live read-only check. One concurrency group serializes checks. Only `main` can create notifications, using the automatically supplied `GITHUB_TOKEN` with `contents: read` and `issues: write`; no extra Secrets are needed.
-
-The [initial baseline](../tools/game-build-baseline.json) was queried directly on 2026-09-21: build `25102733`, branch updated 2026-09-03 13:30:20 UTC. The local game assembly hash matched the repository's game 2.1.6 SDK baseline. Build IDs are not game version numbers or proof of compatibility.
-
-A changed Build ID creates a bilingual compatibility issue with old/new builds, timestamps and verification tasks. Any different ID counts, including rollbacks and later returns to previously observed builds. Timestamp-only changes and other branches do not notify. The most recently created monitor issue authored by `github-actions[bot]`, including closed issues, is durable state. Preserve these issues and their hidden metadata; deleting them loses history. With no history, the committed initial baseline is used. No cache or Git writeback is involved. Unchanged builds produce no issue writes.
-
-Local usage is shown above. Without `--repository`, the script only queries Steam and compares the committed baseline. With the repository and `GH_TOKEN` environment variable, it also reads issue history; it remains read-only unless `--notify` is supplied. Leave notification writes to the serialized `main` workflow so author identity remains consistent. Never place tokens in command arguments or repository files.
-
-Steam query failures, malformed/missing data and GitHub read failures fail the run without advancing state. Issue creation is not blindly retried; subsequent runs recover a successful but uncertain creation from history. GitHub delivery depends on the user's Issues and Actions notification settings.
-
-Follow [SDK maintenance](../sdk/README.md) before claiming compatibility. Monitoring changes no SDK pins, Mod versions, release authorizations or local installations, and cannot publish a Mod. Polling can miss changes that revert between checks. GitHub schedules may be delayed, and public repositories with 60 days of inactivity have schedules disabled; re-enable the workflow in Actions when needed. See [GitHub schedule documentation](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
