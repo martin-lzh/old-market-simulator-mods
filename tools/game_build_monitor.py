@@ -40,7 +40,9 @@ def utc(timestamp):
 
 def load_baseline(path):
     config = json.loads(path.read_text(encoding="utf-8"))
-    if config["schema"] != 1 or config["appid"] != "2878420" or config["branch"] != "public":
+    if (config["schema"] != 1 or config["appid"] != "2878420" or config["branch"] != "public"
+            or config["name"] != "Old Market Simulator"
+            or config["repository"] != "martin-lzh/old-market-simulator-mods"):
         raise ValueError("Expected Old Market Simulator's public branch baseline")
     validate_snapshot(config["initialBuild"])
     return config
@@ -212,6 +214,10 @@ def main():
     config = load_baseline(BASELINE)
     if args.repository and args.repository != config["repository"]:
         parser.error("Repository does not match the reviewed monitor configuration")
+    if args.notify and (os.environ.get("GITHUB_ACTIONS") != "true"
+                        or os.environ.get("GITHUB_REF") != "refs/heads/main"
+                        or os.environ.get("GITHUB_REPOSITORY") != config["repository"]):
+        parser.error("Notifications must run in this repository's main-branch GitHub Actions workflow")
     github = GitHub(args.repository) if args.repository else None
     current = query_steam(args.steamcmd, config)
     report = check_build(current, config, github, args.notify)
