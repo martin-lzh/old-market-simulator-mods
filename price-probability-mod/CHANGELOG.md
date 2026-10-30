@@ -6,6 +6,8 @@
 
 ### Unreleased
 
+- Expand both installation guides from the loader download through the first launch, and clarify log access and historical testing.
+
 ### 0.1.3 — 2026-10-18
 
 - Rewrite the README in plainer language, focusing on what the Mod does and how to use it, with clearer installation, multiplayer and removal steps.
@@ -42,6 +44,8 @@ Older development versions mentioned in the README are not verified downloadable
 ## 中文
 
 ### 未发布
+
+- 补全中英文安装教程，从加载器下载到首次启动，并说明日志打开方法及历史测试记录。
 
 ### 0.1.3 — 2026-10-18
 

@@ -12,6 +12,12 @@ Get a clearer view of material costs and possible profit while making, ordering 
 
 [Download 0.5.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.3)
 
+### Game compatibility and testing
+
+Supports **Old Market Simulator 2.1.6 on Windows**.
+
+2026-09-14: Profit Insights 0.5.2 completed local and two-computer multiplayer testing on Old Market Simulator 2.1.6. Version 0.5.3 retains that gameplay and updates the licence and documentation.
+
 ### Core features
 
 - Compare ingredient costs and estimated profit in daily reports, recipe details and dock orders.
@@ -45,16 +51,27 @@ Costs use today's prices and production rules, so bought and crafted stock are v
 
 ### Install
 
-Requires Old Market Simulator **2.1.6 on Windows**. Pick the edition that matches your loader—**BepInEx 5** or **MelonLoader 0.7.3**—and use only one loader.
+Requires **Old Market Simulator 2.1.6 on Windows x64**. **BepInEx 5** is a free loader that runs Mods when the game starts. Install it once; it is not included in the Mod ZIP.
 
-1. Close the game and back up any older copy of this plugin.
-2. Download the matching Mod ZIP from the release page (not GitHub's **Source code**) and extract it into the game folder.
-3. Check the plugin is in the right place, then start the game.
+1. Exit the game. In **Steam → Library**, right-click **Old Market Simulator → Manage → Browse local files**. Keep this game folder open; it contains the game program and its `_Data` folder.
+2. Open the [official BepInEx 5.4.23.5 release](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.5), expand **Assets** and click **BepInEx_win_x64_5.4.23.5.zip**. If BepInEx 5 already runs your Mods, skip to step 5.
+3. Open **Downloads** in File Explorer, right-click the loader ZIP and choose **Extract All → Extract**. Copy the extracted `BepInEx` folder, `winhttp.dll` and `doorstop_config.ini` into the game folder, next to the game program. Do not put them inside another BepInEx folder.
+4. Start the game from Steam, wait for the main menu, then exit. The game folder's `BepInEx` folder now contains `plugins` and `config`.
+5. Open [this Mod's Nexus Files page](https://www.nexusmods.com/oldmarketsimulator/mods/45?tab=files), choose **Main files → Manual download**, then **Slow download** with a free account. Alternatively, open [GitHub 0.5.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.3) and under **Assets** download **OldMarket.MaterialCost-0.5.3-BepInEx.zip**, not **Source code**.
+6. In **Downloads**, right-click the Mod ZIP → **Extract All → Extract**. Copy its entire `BepInEx` folder into the game folder and allow Windows to merge the folders. The final plugin path is `BepInEx/plugins/OldMarket.MaterialCost/OldMarket.MaterialCost.dll`. Keep only one copy of this DLL under `BepInEx/plugins`.
+7. Start the game from Steam and load your town. Open a recipe or dock order to see material cost and estimated profit.
 
-| Edition | Where the plugin goes |
-| --- | --- |
-| BepInEx | `BepInEx/plugins/OldMarket.MaterialCost/OldMarket.MaterialCost.dll` |
-| MelonLoader | `Mods/OldMarket.MaterialCost.dll` |
+If it does not appear, exit the game and check the path in step 6. From the game folder, open **BepInEx**, right-click **LogOutput.log → Open with → Notepad**, and find the error or this Mod's name. Include the relevant lines with [your report](https://github.com/martin-lzh/old-market-simulator-mods/issues).
+
+#### MelonLoader edition
+
+Choose either BepInEx or MelonLoader, not both. The steps above are the BepInEx route. If you already use MelonLoader 0.7.3, start at step 4 below. Do not add MelonLoader on top of an active BepInEx installation.
+
+1. Exit the game and open its folder through **Steam → Library → Old Market Simulator → Manage → Browse local files**.
+2. Open the [official MelonLoader 0.7.3 release](https://github.com/LavaGang/MelonLoader/releases/tag/v0.7.3). Under **Assets**, download **MelonLoader.x64.zip**, not an x86, Linux, macOS or source archive. In File Explorer's **Downloads**, right-click it → **Extract All → Extract**.
+3. Copy the extracted `MelonLoader` folder and `version.dll` into the game folder, next to the game program. Start the game from Steam, wait for the main menu, then exit; the loader creates `Mods` and `UserData` folders.
+4. On this Mod's **Files** page choose the **MelonLoader** main file → **Manual download → Slow download**, or get **OldMarket.MaterialCost-0.5.3-MelonLoader.zip** from GitHub **Assets**. Extract it with **Extract All**, then copy its `Mods` folder into the game folder. The final path is `Mods/OldMarket.MaterialCost.dll`.
+5. Start the game and open a recipe or dock order to see the added costs and profit. If missing, exit and check the DLL path. From the game folder open **MelonLoader**, right-click **Latest.log → Open with → Notepad** and include the relevant error lines in your report.
 
 ### Settings
 
@@ -82,6 +99,12 @@ To update, close the game, back up the old DLL and replace it. To uninstall, del
 制作、订货和查看日报时，多一份原料成本与预计利润参考，定价心里更有数。
 
 [下载 0.5.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.3)
+
+### 游戏兼容性与测试
+
+支持 **Windows 版 Old Market Simulator 2.1.6**。
+
+2026-09-14：Profit Insights 0.5.2 在 Old Market Simulator 2.1.6 完成本地及双电脑联机测试；0.5.3 沿用该版本玩法，更新许可和文档。
 
 ### 核心功能
 
@@ -116,16 +139,27 @@ Mod 只在界面上增加这些数字，金币、库存和售价都保持原样�
 
 ### 安装
 
-需要 **Windows 版 Old Market Simulator 2.1.6**。按已有加载器选择 **BepInEx 5** 或 **MelonLoader 0.7.3** 版本，两个加载器只用一个。
+需要 **Windows x64 版 Old Market Simulator 2.1.6**。**BepInEx 5** 是在游戏启动时运行 Mod 的免费加载器，只需安装一次，Mod ZIP 不包含加载器。
 
-1. 退出游戏，备份旧版插件。
-2. 从发布页下载对应的 Mod ZIP（不是 GitHub 的 **Source code**），解压到游戏目录。
-3. 确认插件位置正确，然后启动游戏。
+1. 退出游戏。在 **Steam → 库** 中右键 **Old Market Simulator → 管理 → 浏览本地文件**。保持此游戏文件夹打开，里面应有游戏程序及其 `_Data` 文件夹。
+2. 打开 [BepInEx 5.4.23.5 官方发布页](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.5)，展开 **Assets（附件）**，点击 **BepInEx_win_x64_5.4.23.5.zip**。如果 BepInEx 5 已能运行 Mod，从第 5 步开始。
+3. 在资源管理器中打开 **下载**，右键加载器 ZIP → **全部解压缩 → 提取**。把解压后的 `BepInEx` 文件夹、`winhttp.dll` 和 `doorstop_config.ini` 复制到游戏文件夹，与游戏程序同层。不要再多套一层 BepInEx 文件夹。
+4. 从 Steam 启动游戏，等到主菜单后退出。此时游戏文件夹中的 `BepInEx` 下会出现 `plugins` 和 `config` 文件夹。
+5. 打开 [本 Mod 的 Nexus 文件页](https://www.nexusmods.com/oldmarketsimulator/mods/45?tab=files)，选择 **Main files（主要文件）→ Manual download（手动下载）**；免费账号选择 **Slow download（慢速下载）**。也可打开 [GitHub 0.5.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/material-cost-v0.5.3)，在 **Assets（附件）** 下载 **OldMarket.MaterialCost-0.5.3-BepInEx.zip**，不要选 **Source code（源码）**。
+6. 在 **下载** 中右键 Mod ZIP → **全部解压缩 → 提取**。把里面的整个 `BepInEx` 文件夹复制到游戏文件夹，让 Windows 合并目录。插件最终应位于 `BepInEx/plugins/OldMarket.MaterialCost/OldMarket.MaterialCost.dll`，`BepInEx/plugins` 下只保留一份此 DLL。
+7. 从 Steam 启动游戏并载入城镇。打开配方或码头订单，可看到原料成本和预计利润。
 
-| 安装包 | 插件位置 |
-| --- | --- |
-| BepInEx | `BepInEx/plugins/OldMarket.MaterialCost/OldMarket.MaterialCost.dll` |
-| MelonLoader | `Mods/OldMarket.MaterialCost.dll` |
+不生效时先退出游戏，检查第 6 步的路径。从游戏文件夹进入 **BepInEx**，右键 **LogOutput.log → 打开方式 → 记事本**，查找报错或 Mod 名称。将相关日志行附在[问题反馈](https://github.com/martin-lzh/old-market-simulator-mods/issues)中。
+
+#### MelonLoader 版本
+
+BepInEx 和 MelonLoader 二选一，不要同时启用。上方步骤是 BepInEx 路线；已安装 MelonLoader 0.7.3 时从下方第 4 步开始。不要在启用 BepInEx 的安装中再加入 MelonLoader。
+
+1. 退出游戏，通过 **Steam → 库 → Old Market Simulator → 管理 → 浏览本地文件** 打开游戏文件夹。
+2. 打开 [MelonLoader 0.7.3 官方发布页](https://github.com/LavaGang/MelonLoader/releases/tag/v0.7.3)，在 **Assets（附件）** 下载 **MelonLoader.x64.zip**，不要选 x86、Linux、macOS 或源码包。在资源管理器的 **下载** 中右键此 ZIP → **全部解压缩 → 提取**。
+3. 把解压后的 `MelonLoader` 文件夹和 `version.dll` 复制到游戏文件夹，与游戏程序同层。从 Steam 启动，等到主菜单后退出；加载器会创建 `Mods` 和 `UserData` 文件夹。
+4. 在本 Mod 的 **Files（文件）** 页选择 **MelonLoader** 主文件 → **Manual download（手动下载）→ Slow download（慢速下载）**，或在 GitHub **Assets（附件）** 下载 **OldMarket.MaterialCost-0.5.3-MelonLoader.zip**。使用 **全部解压缩**，把里面的 `Mods` 文件夹复制到游戏文件夹，最终应为 `Mods/OldMarket.MaterialCost.dll`。
+5. 启动游戏，打开配方或码头订单，应能看到新增成本和利润。不显示时退出并检查 DLL 路径。从游戏文件夹进入 **MelonLoader**，右键 **Latest.log → 打开方式 → 记事本**，将相关报错行附在问题反馈中。
 
 ### 调整设置
 

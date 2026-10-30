@@ -12,6 +12,12 @@ See how likely customers are to accept a price, then choose whether to keep a fi
 
 [Download 0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.3)
 
+### Game compatibility and testing
+
+Supports **Old Market Simulator 2.1.6 on Windows**.
+
+2026-09-14: Smart Pricing 0.1.2 completed local and two-computer multiplayer testing on Old Market Simulator 2.1.6. Version 0.1.3 retains that gameplay and updates the licence and documentation.
+
 ### Core features
 
 - Preview the chance that a customer accepts a price in the normal pricing panel.
@@ -32,11 +38,17 @@ The percentage is the chance that a customer who has found the product accepts t
 
 ### Install
 
-Requires Old Market Simulator **2.1.6 on Windows** with **BepInEx 5** installed.
+Requires **Old Market Simulator 2.1.6 on Windows x64**. **BepInEx 5** is a free loader that runs Mods when the game starts. Install it once; it is not included in the Mod ZIP.
 
-1. Close the game and back up your save and any older copy of this plugin.
-2. Download the Mod ZIP from the release page (not GitHub's **Source code**) and extract it into the game folder. The plugin should end up at `BepInEx/plugins/OldMarket.PriceProbability/OldMarket.PriceProbability.dll`.
-3. Make sure that is the only copy of the DLL under `BepInEx/plugins`, then start the game.
+1. Exit the game. In **Steam → Library**, right-click **Old Market Simulator → Manage → Browse local files**. Keep this game folder open; it contains the game program and its `_Data` folder.
+2. Open the [official BepInEx 5.4.23.5 release](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.5), expand **Assets** and click **BepInEx_win_x64_5.4.23.5.zip**. If BepInEx 5 already runs your Mods, skip to step 5.
+3. Open **Downloads** in File Explorer, right-click the loader ZIP and choose **Extract All → Extract**. Copy the extracted `BepInEx` folder, `winhttp.dll` and `doorstop_config.ini` into the game folder, next to the game program. Do not put them inside another BepInEx folder.
+4. Start the game from Steam, wait for the main menu, then exit. The game folder's `BepInEx` folder now contains `plugins` and `config`.
+5. Open [this Mod's Nexus Files page](https://www.nexusmods.com/oldmarketsimulator/mods/48?tab=files), choose **Main files → Manual download**, then **Slow download** with a free account. Alternatively, open [GitHub 0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.3) and under **Assets** download **OldMarket.PriceProbability-0.1.3.zip**, not **Source code**.
+6. In **Downloads**, right-click the Mod ZIP → **Extract All → Extract**. Copy its entire `BepInEx` folder into the game folder and allow Windows to merge the folders. The final plugin path is `BepInEx/plugins/OldMarket.PriceProbability/OldMarket.PriceProbability.dll`. Keep only one copy of this DLL under `BepInEx/plugins`.
+7. Start the game from Steam and load your town. Open a product price label and check the displayed acceptance chance.
+
+If it does not appear, exit the game and check the path in step 6. From the game folder, open **BepInEx**, right-click **LogOutput.log → Open with → Notepad**, and find the error or this Mod's name. Include the relevant lines with [your report](https://github.com/martin-lzh/old-market-simulator-mods/issues).
 
 ### Multiplayer
 
@@ -65,6 +77,12 @@ To update, close the game, back up the old DLL and settings, then replace the pl
 
 [下载 0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.3)
 
+### 游戏兼容性与测试
+
+支持 **Windows 版 Old Market Simulator 2.1.6**。
+
+2026-09-14：Smart Pricing 0.1.2 在 Old Market Simulator 2.1.6 完成本地及双电脑联机测试；0.1.3 沿用该版本玩法，更新许可和文档。
+
 ### 核心功能
 
 - 在原生定价面板预览顾客接受该价格的概率。
@@ -85,11 +103,17 @@ To update, close the game, back up the old DLL and settings, then replace the pl
 
 ### 安装
 
-需要 **Windows 版 Old Market Simulator 2.1.6**，并已安装 **BepInEx 5**。
+需要 **Windows x64 版 Old Market Simulator 2.1.6**。**BepInEx 5** 是在游戏启动时运行 Mod 的免费加载器，只需安装一次，Mod ZIP 不包含加载器。
 
-1. 退出游戏，备份存档和旧版插件。
-2. 从发布页下载 Mod ZIP（不是 GitHub 的 **Source code**），解压到游戏目录，插件应位于 `BepInEx/plugins/OldMarket.PriceProbability/OldMarket.PriceProbability.dll`。
-3. 确认 `BepInEx/plugins` 下只有这一份 DLL，然后启动游戏。
+1. 退出游戏。在 **Steam → 库** 中右键 **Old Market Simulator → 管理 → 浏览本地文件**。保持此游戏文件夹打开，里面应有游戏程序及其 `_Data` 文件夹。
+2. 打开 [BepInEx 5.4.23.5 官方发布页](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.5)，展开 **Assets（附件）**，点击 **BepInEx_win_x64_5.4.23.5.zip**。如果 BepInEx 5 已能运行 Mod，从第 5 步开始。
+3. 在资源管理器中打开 **下载**，右键加载器 ZIP → **全部解压缩 → 提取**。把解压后的 `BepInEx` 文件夹、`winhttp.dll` 和 `doorstop_config.ini` 复制到游戏文件夹，与游戏程序同层。不要再多套一层 BepInEx 文件夹。
+4. 从 Steam 启动游戏，等到主菜单后退出。此时游戏文件夹中的 `BepInEx` 下会出现 `plugins` 和 `config` 文件夹。
+5. 打开 [本 Mod 的 Nexus 文件页](https://www.nexusmods.com/oldmarketsimulator/mods/48?tab=files)，选择 **Main files（主要文件）→ Manual download（手动下载）**；免费账号选择 **Slow download（慢速下载）**。也可打开 [GitHub 0.1.3](https://github.com/martin-lzh/old-market-simulator-mods/releases/tag/price-probability-v0.1.3)，在 **Assets（附件）** 下载 **OldMarket.PriceProbability-0.1.3.zip**，不要选 **Source code（源码）**。
+6. 在 **下载** 中右键 Mod ZIP → **全部解压缩 → 提取**。把里面的整个 `BepInEx` 文件夹复制到游戏文件夹，让 Windows 合并目录。插件最终应位于 `BepInEx/plugins/OldMarket.PriceProbability/OldMarket.PriceProbability.dll`，`BepInEx/plugins` 下只保留一份此 DLL。
+7. 从 Steam 启动游戏并载入城镇。打开商品价格标签，查看显示的价格接受概率。
+
+不生效时先退出游戏，检查第 6 步的路径。从游戏文件夹进入 **BepInEx**，右键 **LogOutput.log → 打开方式 → 记事本**，查找报错或 Mod 名称。将相关日志行附在[问题反馈](https://github.com/martin-lzh/old-market-simulator-mods/issues)中。
 
 ### 和朋友一起玩
 
