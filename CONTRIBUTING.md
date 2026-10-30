@@ -1,6 +1,99 @@
 # 贡献指南 / Contributing
 
-[中文](#中文) | [English](#english)
+[English](#english) | [中文](#中文)
+
+## English
+
+Contributions can include reproducible bug reports, mechanics research, translations, documentation, tests, and original Mod improvements. Issues and pull requests in Chinese or English are welcome. Start with the [project README](README.md), the relevant Mod's README and CHANGELOG, and the [release standard](releases/README.md).
+
+### Getting started
+
+- Documentation, translations, and pure logic tests usually do not require game files. The Checkout All test below is a starting point.
+- For fixes, describe the trigger, expected and actual behavior, and reproducible steps.
+- Discuss substantial features, save format changes, or multiplayer changes in an Issue before implementing them.
+- Verify mechanics against both code paths and actual serialized resources. State the map, season, rounding, and assumptions; field defaults are not evidence of actual configuration.
+- Record compatibility with older game versions only when supported by evidence for those versions, not by the Mod version number.
+
+The [repository](https://github.com/martin-lzh/old-market-simulator-mods), [Issues](https://github.com/martin-lzh/old-market-simulator-mods/issues), and [Releases](https://github.com/martin-lzh/old-market-simulator-mods/releases) are available. See SECURITY.md for private reporting.
+
+### Scope and licensing
+
+Submit only original material you have the right to contribute, and retain required attribution and third-party notices. Original code, tests, scripts, translations, and documentation use the root PolyForm Noncommercial License 1.0.0; each Mod also includes a license. Contributions must be distributable under that license. See the [license scope](LICENSE). Do not submit code or assets with unverified permissions.
+
+Treat the game installation as a read-only build dependency. Do not commit original game DLLs/EXEs, asset bundles, translation tables, decompiled snapshots, saves, credentials, or unredacted logs. Do not replace game components with compiled decompiled code. This project accepts original runtime plugins within each feature's scope. Keep installation and in-game testing separate from builds, and never replace a DLL while the game is running. Build scripts must not automatically modify contributors' game installations.
+
+### Source and branches
+
+Fork the repository and clone your fork. Create an ordinary contribution branch from upstream `main` and submit a PR targeting upstream `main`, rather than pushing directly upstream. Do not create temporary worktrees.
+
+After cloning, entering the directory, and ensuring your local main branch is synchronized:
+
+```powershell
+git switch main
+git switch -c fix/checkout-hint
+```
+
+Name the branch for your change. Inspect the working tree before switching branches or discarding changes.
+
+### Environment
+
+Full builds use Windows, PowerShell, Git, an SDK supporting .NET 8, and the .NET 8 runtime for existing net8.0 tests. Some projects only need .NET 8; see their READMEs. Python tools use uv. There are no frontend dependencies to install.
+
+```powershell
+dotnet --list-sdks
+dotnet --list-runtimes
+uv --version
+```
+
+For game-free compilation, use the [versioned SDK](sdk/README.md) and `python tools/ci.py build` with Python 3.12 and .NET 8/10 SDKs. Real game contract validation and SDK updates still require a legally obtained game installation and appropriate loader references. The [development guide](DEVELOPMENT.md) lists the game baseline, assembly hash, and loader versions. Game assemblies are not included: missing root-level decompiled snapshots and local evidence after cloning are expected. Do not obtain unknown DLLs from Issues or bypass hash/interface checks to resolve missing dependencies.
+
+Most Mods read existing loader references from `GameDir/BepInEx/core`. Material Cost's build script can download pinned official loader dependencies into `work/` and verify their hashes. Builds do not launch or install the game.
+
+### Building and validation
+
+Run commands from the repository root. This pure logic test does not reference game assemblies:
+
+```powershell
+dotnet run --project checkout-all-mod/tests/Tests.csproj -c Release
+```
+
+For a full build, replace the example path with your installation, including the read-only dependencies listed in the Mod README:
+
+```powershell
+./checkout-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
+```
+
+Other Mods use their own `build.ps1`. Follow Material Cost's README for its loader variants. Outputs go into `outputs/`, and temporary dependencies into `work/`; neither belongs in commits.
+
+Run the relevant build/tests and inspect the ZIP file list. Before release, follow releases/README.md for the packages actually being published; Standalone is for local validation, not a public asset. Documentation changes need link, command, and diff checks, not new tests.
+
+For quantity, pricing, save, or network changes, add tests covering real failures and boundaries. Report the game version, loader, Mod combination, and single-player/host/client role. Distinguish compilation, pure logic tests, interface checks, in-game UI tests, and two-machine multiplayer verification. Mark anything not run as “not run,” not passed.
+
+### Code, localization, and compatibility
+
+Follow the target directory's C# style, namespace, and structure; avoid unrelated refactoring. Each original Mod belongs in its own `*-mod/` directory with its own localization and tests. Do not add dependencies on the neighboring analysis repository. Release records belong in `releases/`. Do not use `git add -f` to upload ignored dependencies or evidence.
+
+Centralize user-facing text in Texts/Localization or language resources, follow the game locale, and fall back to English for unknown languages. Reuse native translation keys where possible. Translation contributions should identify the locale, original text, reason for the change, and in-game verification status. Preserve format placeholders and report untested fonts or long text.
+
+For behavior changes, update README usage, risks, and uninstall instructions, plus the independent CHANGELOG's “Unreleased” section with compatibility effects. Do not invent release dates, older-game support, or upgrade safety claims. Advance a version only on an explicit maintainer request; otherwise keep all changes in Unreleased. Development, fixes, installation, and creating or merging PRs do not authorize a bump. Merging into main publishes new versions automatically, so only the maintainer merges; fill in the PR template's version table and see [releases](releases/README.md). Changes involving extra inventory records need an old-save loading plan, normal save/reload verification, multiplayer version requirements, and rollback instructions.
+
+Maintainers manage version and release PRs. End users can report issues or request features without opening a PR; code contributors may still submit PRs through the contribution workflow.
+
+### Pull requests
+
+Keep each PR focused on one problem and use commit prefixes such as `fix:`, `feat:`, or `docs:`. Follow the PR template: explain the problem, behavior changes, validation commands/results, and save/multiplayer effects. UI screenshots must exclude private information; do not attach full game assets or saves.
+
+Before committing:
+
+```powershell
+git status --short
+git diff --check
+git diff
+```
+
+Stage only related files, then inspect `git diff --cached`. Check especially for game assets, build outputs, logs, backups, and sensitive data. Push to your fork and open a PR for review. Maintainers may request reproduction details, tests, compatibility documentation, or separation of unrelated changes. Keep uncompleted in-game checks documented in the PR.
+
+See [security reporting](SECURITY.md#english) for vulnerabilities and [support](SUPPORT.md#english) for general questions. Follow the [code of conduct](CODE_OF_CONDUCT.md#english).
 
 ## 中文
 
@@ -101,99 +194,6 @@ git diff
 
 安全漏洞见 [SECURITY.md](SECURITY.md)，一般问题见 [SUPPORT.md](SUPPORT.md)。参与讨论请遵守 [行为准则](CODE_OF_CONDUCT.md)。
 
-## English
-
-Contributions can include reproducible bug reports, mechanics research, translations, documentation, tests, and original Mod improvements. Issues and pull requests in Chinese or English are welcome. Start with the [project README](README.md), the relevant Mod's README and CHANGELOG, and the [release standard](releases/README.md).
-
-### Getting started
-
-- Documentation, translations, and pure logic tests usually do not require game files. The Checkout All test below is a starting point.
-- For fixes, describe the trigger, expected and actual behavior, and reproducible steps.
-- Discuss substantial features, save format changes, or multiplayer changes in an Issue before implementing them.
-- Verify mechanics against both code paths and actual serialized resources. State the map, season, rounding, and assumptions; field defaults are not evidence of actual configuration.
-- Record compatibility with older game versions only when supported by evidence for those versions, not by the Mod version number.
-
-The [repository](https://github.com/martin-lzh/old-market-simulator-mods), [Issues](https://github.com/martin-lzh/old-market-simulator-mods/issues), and [Releases](https://github.com/martin-lzh/old-market-simulator-mods/releases) are available. See SECURITY.md for private reporting.
-
-### Scope and licensing
-
-Submit only original material you have the right to contribute, and retain required attribution and third-party notices. Original code, tests, scripts, translations, and documentation use the root PolyForm Noncommercial License 1.0.0; each Mod also includes a license. Contributions must be distributable under that license. See the [license scope](LICENSE). Do not submit code or assets with unverified permissions.
-
-Treat the game installation as a read-only build dependency. Do not commit original game DLLs/EXEs, asset bundles, translation tables, decompiled snapshots, saves, credentials, or unredacted logs. Do not replace game components with compiled decompiled code. This project accepts original runtime plugins within each feature's scope. Keep installation and in-game testing separate from builds, and never replace a DLL while the game is running. Build scripts must not automatically modify contributors' game installations.
-
-### Source and branches
-
-Fork the repository and clone your fork. Create an ordinary contribution branch from upstream `main` and submit a PR targeting upstream `main`, rather than pushing directly upstream. Do not create temporary worktrees.
-
-After cloning, entering the directory, and ensuring your local main branch is synchronized:
-
-```powershell
-git switch main
-git switch -c fix/checkout-hint
-```
-
-Name the branch for your change. Inspect the working tree before switching branches or discarding changes.
-
-### Environment
-
-Full builds use Windows, PowerShell, Git, an SDK supporting .NET 8, and the .NET 8 runtime for existing net8.0 tests. Some projects only need .NET 8; see their READMEs. Python tools use uv. There are no frontend dependencies to install.
-
-```powershell
-dotnet --list-sdks
-dotnet --list-runtimes
-uv --version
-```
-
-For game-free compilation, use the [versioned SDK](sdk/README.md) and `python tools/ci.py build` with Python 3.12 and .NET 8/10 SDKs. Real game contract validation and SDK updates still require a legally obtained game installation and appropriate loader references. The [development guide](DEVELOPMENT.md) lists the game baseline, assembly hash, and loader versions. Game assemblies are not included: missing root-level decompiled snapshots and local evidence after cloning are expected. Do not obtain unknown DLLs from Issues or bypass hash/interface checks to resolve missing dependencies.
-
-Most Mods read existing loader references from `GameDir/BepInEx/core`. Material Cost's build script can download pinned official loader dependencies into `work/` and verify their hashes. Builds do not launch or install the game.
-
-### Building and validation
-
-Run commands from the repository root. This pure logic test does not reference game assemblies:
-
-```powershell
-dotnet run --project checkout-all-mod/tests/Tests.csproj -c Release
-```
-
-For a full build, replace the example path with your installation, including the read-only dependencies listed in the Mod README:
-
-```powershell
-./checkout-all-mod/build.ps1 -GameDir 'D:\Games\Old Market Simulator'
-```
-
-Other Mods use their own `build.ps1`. Follow Material Cost's README for its loader variants. Outputs go into `outputs/`, and temporary dependencies into `work/`; neither belongs in commits.
-
-Run the relevant build/tests and inspect the ZIP file list. Before release, follow releases/README.md for the packages actually being published; Standalone is for local validation, not a public asset. Documentation changes need link, command, and diff checks, not new tests.
-
-For quantity, pricing, save, or network changes, add tests covering real failures and boundaries. Report the game version, loader, Mod combination, and single-player/host/client role. Distinguish compilation, pure logic tests, interface checks, in-game UI tests, and two-machine multiplayer verification. Mark anything not run as “not run,” not passed.
-
-### Code, localization, and compatibility
-
-Follow the target directory's C# style, namespace, and structure; avoid unrelated refactoring. Each original Mod belongs in its own `*-mod/` directory with its own localization and tests. Do not add dependencies on the neighboring analysis repository. Release records belong in `releases/`. Do not use `git add -f` to upload ignored dependencies or evidence.
-
-Centralize user-facing text in Texts/Localization or language resources, follow the game locale, and fall back to English for unknown languages. Reuse native translation keys where possible. Translation contributions should identify the locale, original text, reason for the change, and in-game verification status. Preserve format placeholders and report untested fonts or long text.
-
-For behavior changes, update README usage, risks, and uninstall instructions, plus the independent CHANGELOG's “Unreleased” section with compatibility effects. Do not invent release dates, older-game support, or upgrade safety claims. Advance a version only on an explicit maintainer request; otherwise keep all changes in Unreleased. Development, fixes, installation, and creating or merging PRs do not authorize a bump. Merging into main publishes new versions automatically, so only the maintainer merges; fill in the PR template's version table and see [releases](releases/README.md). Changes involving extra inventory records need an old-save loading plan, normal save/reload verification, multiplayer version requirements, and rollback instructions.
-
-Maintainers manage version and release PRs. End users can report issues or request features without opening a PR; code contributors may still submit PRs through the contribution workflow.
-
-### Pull requests
-
-Keep each PR focused on one problem and use commit prefixes such as `fix:`, `feat:`, or `docs:`. Follow the PR template: explain the problem, behavior changes, validation commands/results, and save/multiplayer effects. UI screenshots must exclude private information; do not attach full game assets or saves.
-
-Before committing:
-
-```powershell
-git status --short
-git diff --check
-git diff
-```
-
-Stage only related files, then inspect `git diff --cached`. Check especially for game assets, build outputs, logs, backups, and sensitive data. Push to your fork and open a PR for review. Maintainers may request reproduction details, tests, compatibility documentation, or separation of unrelated changes. Keep uncompleted in-game checks documented in the PR.
-
-See [security reporting](SECURITY.md#english) for vulnerabilities and [support](SUPPORT.md#english) for general questions. Follow the [code of conduct](CODE_OF_CONDUCT.md#english).
-
 ## CI and SDK contributions / CI 与 SDK 贡献
 
 CI runs on PRs targeting `main`, pushes to `main` and manual dispatch; pushes to `dev` alone don't start it. The syntax job runs on Linux and parses tracked Python, PowerShell, JSON and XML/MSBuild files without executing scripts; ignored dependencies and build outputs are excluded. When files under `.github/` change, or on a manual run, GitHub Actions YAML, expressions and job dependencies are checked with [actionlint](https://github.com/rhysd/actionlint) 1.7.12 (SHA256-verified download). C# compilation remains covered by the Windows SDK build job, which is skipped when a change touches only documentation that never enters a package (see [when CI runs](releases/README.md#when-ci-runs)). Both jobs must pass, or be skipped on purpose, before publication; the **CI result** check sums this up. No formatter is applied.
@@ -205,6 +205,7 @@ Local syntax checks require Python 3.12, Git and PowerShell 7 (`pwsh` on PATH). 
 本地语法检查需要 Python 3.12、Git 和 PowerShell 7（`pwsh` 在 PATH 中）。新增文件先暂存才会纳入检查；工作流另行使用 actionlint 1.7.12：
 
 ```powershell
+python tools/check_repository.py
 python tools/check_syntax.py
 python -m unittest discover -s tools/tests -p test_syntax.py -v
 actionlint -shellcheck= -pyflakes=
